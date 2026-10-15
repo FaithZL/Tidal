@@ -1,0 +1,156 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/carryRecognizer.test.ts tests/unit/carryTiming.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/carryRecognizer.test.ts (9 tests | 8 failed) 12ms
+   × hold requires 500ms continuous observations; release is immediate and reentry is fresh 6ms
+   × identical or insufficiently separated prototypes cannot enable hold 1ms
+   × holding exits on missing and does not bridge history 1ms
+   × holding exits on gap and does not bridge history 1ms
+   × holding exits on duplicate and does not bridge history 1ms
+   × holding exits on reset and does not bridge history 0ms
+   × holding exits on future and does not bridge history 1ms
+   × holding exits on stale and does not bridge history 0ms
+ ❯ tests/unit/carryTiming.test.ts (6 tests | 6 failed) 13ms
+   × 10 seconds valid + 5 released + 50 valid credits exactly 60, once; entry delay is not credited 8ms
+   × valid 5 Hz observations have the same effective elapsed time 2ms
+   × valid 10 Hz observations have the same effective elapsed time 1ms
+   × valid 15 Hz observations have the same effective elapsed time 1ms
+   × valid 30 Hz observations have the same effective elapsed time 1ms
+   × gap, duplicate/old epoch and independent pauses do not fill unobserved time 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/carryRecognizer.test.ts > hold requires 500ms continuous observations; release is immediate and reentry is fresh
+AssertionError: expected undefined to match object { kind: 'hold-sample', …(2) }
+
+- Expected:
+{
+  "holding": true,
+  "kind": "hold-sample",
+  "valid": true,
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/carryRecognizer.test.ts:8:46
+      6|   const r=new CarryRecognizer(syntheticProfile()),p=new PoseReplay(r);…
+      7|   expect(p.events.some(e=>e.kind==='hold-sample'&&e.holding)).toBe(fal…
+      8|   p.pose('hold',100);expect(p.events.at(-1)).toMatchObject({kind:'hold…
+       |                                              ^
+      9|   p.pose('standing',50);expect(p.events.at(-1)).toMatchObject({kind:'h…
+     10|   p.pose('hold',400);expect(p.events.at(-1)).toMatchObject({holding:fa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/unit/carryRecognizer.test.ts > identical or insufficiently separated prototypes cannot enable hold
+AssertionError: expected [Function] to throw an error
+ ❯ tests/unit/carryRecognizer.test.ts:14:38
+     12| test('identical or insufficiently separated prototypes cannot enable h…
+     13|   const p=syntheticProfile();p.examples['carry-release']=p.examples['c…
+     14|   expect(()=>new CarryRecognizer(p)).toThrow();
+       |                                      ^
+     15| });
+     16| test.each(['missing','gap','duplicate','reset','future','stale'] as co…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on missing and does not bridge history
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on gap and does not bridge history
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on duplicate and does not bridge history
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on reset and does not bridge history
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on future and does not bridge history
+ FAIL  tests/unit/carryRecognizer.test.ts > holding exits on stale and does not bridge history
+AssertionError: expected undefined to match object { holding: true }
+
+- Expected:
+{
+  "holding": true,
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/carryRecognizer.test.ts:18:27
+     16| test.each(['missing','gap','duplicate','reset','future','stale'] as co…
+     17|   const r=new CarryRecognizer(syntheticProfile()),p=new PoseReplay(r);…
+     18|   expect(p.events.at(-1)).toMatchObject({holding:true});
+       |                           ^
+     19|   let frame=syntheticFrame(p.time+50,'hold'),now=frame.capturedAtMs;
+     20|   if(kind==='missing')frame=replacePoint(frame,16,{visibility:.1});
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/unit/carryTiming.test.ts > 10 seconds valid + 5 released + 50 valid credits exactly 60, once; entry delay is not credited
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ Object.warm tests/unit/carryTiming.test.ts:10:102
+      8|   const h=sessionHarness();h.carry();const r=new CarryRecognizer(synth…
+      9|   function sample(pose:SyntheticPose='hold'){const events=r.update(syn…
+     10|   function warm(){let held=false;for(let i=0;i<60&&!held;i++){h.tick(d…
+       |                                                                                                      ^
+     11|   function run(ms:number,pose:SyntheticPose='hold'){const origin=h.clo…
+     12|   return {...h,r,dt,sample,warm,run};
+ ❯ tests/unit/carryTiming.test.ts:15:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/unit/carryTiming.test.ts > valid 5 Hz observations have the same effective elapsed time
+ FAIL  tests/unit/carryTiming.test.ts > valid 10 Hz observations have the same effective elapsed time
+ FAIL  tests/unit/carryTiming.test.ts > valid 15 Hz observations have the same effective elapsed time
+ FAIL  tests/unit/carryTiming.test.ts > valid 30 Hz observations have the same effective elapsed time
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ Object.warm tests/unit/carryTiming.test.ts:10:102
+      8|   const h=sessionHarness();h.carry();const r=new CarryRecognizer(synth…
+      9|   function sample(pose:SyntheticPose='hold'){const events=r.update(syn…
+     10|   function warm(){let held=false;for(let i=0;i<60&&!held;i++){h.tick(d…
+       |                                                                                                      ^
+     11|   function run(ms:number,pose:SyntheticPose='hold'){const origin=h.clo…
+     12|   return {...h,r,dt,sample,warm,run};
+ ❯ tests/unit/carryTiming.test.ts:24:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  tests/unit/carryTiming.test.ts > gap, duplicate/old epoch and independent pauses do not fill unobserved time
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ Object.warm tests/unit/carryTiming.test.ts:10:102
+      8|   const h=sessionHarness();h.carry();const r=new CarryRecognizer(synth…
+      9|   function sample(pose:SyntheticPose='hold'){const events=r.update(syn…
+     10|   function warm(){let held=false;for(let i=0;i<60&&!held;i++){h.tick(d…
+       |                                                                                                      ^
+     11|   function run(ms:number,pose:SyntheticPose='hold'){const origin=h.clo…
+     12|   return {...h,r,dt,sample,warm,run};
+ ❯ tests/unit/carryTiming.test.ts:28:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  14 failed | 1 passed (15)
+   Start at  02:54:46
+   Duration  175ms (transform 51%, tests 24%, import 20%, worker 5%)
+

@@ -99,7 +99,7 @@ export class CalibrationSession {
     if (step === 'load-return' && Math.hypot(sample.values[0] - p['load-stand']!.values[0], wristY - p['load-stand']!.values[1]) > c.returnWristTolerance) return 'not-returned';
     if (step === 'carry-release') {
       const hold = p['carry-hold']!;
-      if (vectorDistance(sample.values, hold.values) <= Math.max(c.minCarrySeparation, c.carryNoiseMultiplier * (sample.radius + hold.radius))) return 'carry-not-separable';
+      if (vectorDistance(sample.values, hold.values) <= Math.max(c.minCarrySeparation, c.minPoseSeparation * Math.sqrt(sample.values.length), c.carryNoiseMultiplier * (sample.radius + hold.radius))) return 'carry-not-separable';
     }
     return null;
   }

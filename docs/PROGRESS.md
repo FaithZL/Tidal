@@ -2,6 +2,16 @@
 
 ## 当前阶段：T07 识别器实现与验证
 
+### T08 已追加完成（下一步 T09）
+
+T07提交 `98aaba9` 已成功push到 `origin/feature/t07-t11-completion`（同时带上此前T06提交）。本次继续T08：
+
+- 新增 `carryRecognizer.ts`：沿用T06主手可见侧5维原型（相对腕位置、肘/膝角、髋高），RMS距离分类；500ms连续进入确认，0.35D进入/0.55D退出。原始帧已放下时立即退出，不让低通延迟继续计入；只输出hold-sample，权威时间仍在原SessionController。
+- `recognitionConfig.ts`集中新增实验配置；`calibrationSession.ts`与识别器共享RMS最小可分门限，避免准备页通过而Carry拒绝。这里只是姿态代理，单侧特征不证明双手持物/实际重量，真实动作可分性manual_pending。
+- 新增 `carryRecognizer.test.ts`、`carryTiming.test.ts`、`sessionHarness.ts`，追加一项标定门限一致性测试。初始空实现14失败/1通过；准备门限回归先1失败/18通过，然后修复。
+- 实际 `npm run typecheck`、`lint`、`test:unit` **137/137**、`test:e2e -- tests/e2e/calibration.spec.ts` **3/3**、`build`通过；日志 `artifacts/qa/t08/verify.log`，构建 `index-BU-pHBOW.js`，体积警告保留。
+- 覆盖有效10秒+放下5秒+有效50秒=60秒、进入延迟不倒填、5/10/15/30Hz有效计时一致、长gap/旧epoch/重复帧/多暂停原因和奖励一次性。原domain未修改；没有真机尝试。
+
 用户最新授权每阶段验证后commit/push，连续推进到T11；采用分支 `feature/t07-t11-completion`，不合并main、不部署。当前完成T07软件部分，接下来T08。真机继续manual_pending，不能据合成回放声称真实识别准确。
 
 - 新增 `src/pose/recognizers/{types,featureStream,repRecognizer,chopRecognizer,loadRecognizer}.ts`：复用T06标定/几何/低通，按观察顺序产生阶段、impact、rep-completed；完整复位才提交。共享输入检查与确认窗口，异常帧取消半次，周期超时拒绝。

@@ -25,8 +25,8 @@
 
 文件：carryRecognizer.ts、recognitionConfig.ts、carryRecognizer.test.ts、carryTiming.test.ts。
 接口：同Recognizer，只发hold-sample；500ms进入、0.35D进入/0.55D退出，当前T06选侧特征原型，未证明真实持握。
-- [ ] RED：不可分拒绝、抖动/无效/长gap退出、500ms不倒填；10+5+50秒、5/10/15/30Hz、暂停/代次/重复/60秒钳位。
-- [ ] GREEN及unit/type/lint/build，文档/commit/push。
+- [x] RED：不可分拒绝、抖动/无效/长gap退出、500ms不倒填；10+5+50秒、5/10/15/30Hz、暂停/代次/重复/60秒钳位。
+- [x] GREEN及unit/type/lint/build，标定3项E2E回归，文档/commit/push。
 
 ## T09 输入接线与资源生命周期
 
@@ -62,3 +62,5 @@
 
 - 2026-10-16：基线typecheck、98/98单测通过；远端origin核实为FaithZL/Tidal.git，fetch成功。新分支从T06提交创建。
 - T07：初始5失败/16通过；连续站起的一帧举手回归先失败后修复。最终120/120单测、typecheck/lint/build通过；未接浏览器游戏，E2E留T09。真人仍manual_pending。
+- T07 commit/push成功：98aaba9，origin/feature/t07-t11-completion，main未改变。
+- T08：初始14失败/1通过，RMS门限一致性回归1失败；修复后137/137单测、3/3标定E2E、type/lint/build通过。采用与T06一致的选侧5维原型，而非未标定的双侧特征；真机适用性仍manual_pending。

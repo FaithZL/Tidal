@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest';
 import { CalibrationSession } from '../../src/pose/calibrationSession.js';
 import { syntheticFrame, replacePoint, type SyntheticPose } from '../helpers/syntheticPose.js';
+import { createRecognitionConfig } from '../../src/config/recognitionConfig.js';
 function capture(session: CalibrationSession, pose: SyntheticPose, start: number, duration: number): number {
   session.ingest(syntheticFrame(start, pose), start);expect(session.beginCapture()).toBe(true);
   for (let t = start + 100; t <= start + duration + 100; t += 100) session.ingest(syntheticFrame(t, pose), t);
@@ -21,6 +22,11 @@ test('guided calibration collects all examples, reports per-task readiness and n
 test('identical carry hold/release is refused without discarding successful chop/load calibration', () => {
   const session = new CalibrationSession();const time = allExamples(session);capture(session, 'hold', time, 2000);
   expect(session.getSnapshot()).toMatchObject({ step: 'carry-release', reason: 'carry-not-separable', readyFor: { chop: true, load: true, carry: false } });
+});
+test('preparation and Carry use the same configured RMS separation gate',()=>{
+  const session=new CalibrationSession(createRecognitionConfig({minPoseSeparation:1.5}));const time=allExamples(session);
+  capture(session,'standing',time,2000);expect(session.getSnapshot().readyFor.carry).toBe(false);
+  expect(session.getSnapshot().reason).toBe('carry-not-separable');
 });
 test('a no-motion chop example cannot become ready', () => {
   const session = new CalibrationSession();let time = capture(session, 'standing', 0, 2000);

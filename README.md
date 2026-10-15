@@ -1,6 +1,6 @@
-# Tidal · 映动农场（T07 识别器 + 可开关自动模拟）
+# Tidal · 映动农场（T08 识别器 + 可开关自动模拟）
 
-当前连续推进T07–T11：T07砍树/装车识别器已通过合成回放验证（全套120/120单测、类型/lint/build通过），摄像头游戏接线仍待T09。使用 `feature/t07-t11-completion`，按用户最新授权逐阶段提交并push，不合并主分支或部署；后文T06检查点记录为此前结果。真机保持manual_pending。
+当前连续推进T07–T11：T07砍树/装车与T08持姿代理已通过合成回放验证（全套137/137单测、标定3/3 E2E、类型/lint/build通过），摄像头游戏接线仍待T09。Carry按可区分姿态计时，500ms确认不倒填，不证明真实持握。使用 `feature/t07-t11-completion`，按用户最新授权逐阶段提交并push，不合并主分支或部署；后文T06检查点记录为此前结果。真机保持manual_pending。
 
 项目仓库：[FaithZL/Tidal](https://github.com/FaithZL/Tidal)。本轮在本地 `feature/t06-pose-calibration` 分支增量开发，基线 `9932e0a`；不推送、不合并、不部署。`main` 的首次提交为 T05 与自动模拟功能，进度/测试文档中的“无 Git”属于此前轮次的历史记录。
 
