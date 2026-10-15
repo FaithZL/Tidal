@@ -1,0 +1,24 @@
+{
+  "gpu": [
+    {
+      "Name": "OrayIddDriver Device"
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics"
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 3070 Ti"
+    }
+  ],
+  "os": {
+    "Caption": "Microsoft Windows 11 专业版",
+    "Version": "10.0.26300"
+  },
+  "date": "2026-10-16T03:30:43.2647939+08:00",
+  "camera": "none; manual_pending",
+  "cpu": {
+    "Name": "AMD Ryzen 9 7950X 16-Core Processor            "
+  },
+  "npm": "11.9.0",
+  "node": "v24.14.0"
+}

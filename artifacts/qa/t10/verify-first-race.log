@@ -1,0 +1,147 @@
+
+> tidal-farm-motion-demo@0.1.0 verify
+> npm run typecheck && npm run lint && npm run test:unit && npm run test:e2e && npm run build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  22 passed (22)
+      Tests  153 passed (153)
+   Start at  03:31:19
+   Duration  1.30s (transform 48%, tests 39%, import 11%, worker 2%)
+
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test
+
+[WebServer] (node:41184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:37420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:54248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 35 tests using 1 worker
+
+(node:51132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\boot.spec.ts:3:1 › Phaser farm boots, plan cancels and reopens without starting a session (2.1s)
+  ok  2 tests\e2e\boot.spec.ts:19:1 › ordinary builds ignore URL acceleration flags (999ms)
+  ok  3 tests\e2e\demo-toggle.spec.ts:6:1 › no-camera demo is explicit, completes the full farm flow and resets off without camera requests (9.7s)
+  ok  4 tests\e2e\demo-toggle.spec.ts:38:1 › turning demo off cancels partial input and pauses; manual mode can resume (5.5s)
+  ok  5 tests\e2e\demo-toggle.spec.ts:50:1 › real camera stays separate after demo and errors never turn simulation back on (2.8s)
+  x   6 tests\e2e\demo-toggle.spec.ts:63:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off (1.0m)
+(node:40756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 tests\e2e\demo-toggle.spec.ts:78:1 › enabling simulation cancels a pending camera request and releases the late stream (2.8s)
+  ok  8 tests\e2e\keyboard-flow.spec.ts:19:1 › two complete keyboard sessions with pauses, conserved inventory and reset (40.6s)
+  ok  9 tests\e2e\keyboard-flow.spec.ts:52:1 › repeat keys, control focus and a reset during animation cannot add an extra rep (4.0s)
+  ok 10 tests\e2e\keyboard-flow.spec.ts:68:1 › pointer cancel and blur release carry; returning requires explicit continue (18.8s)
+  ok 11 tests\e2e\keyboard-flow.spec.ts:82:1 › Escape opens an exit confirmation; cancel preserves progress and existing pause (4.2s)
+  ok 12 tests\e2e\keyboard-flow.spec.ts:95:1 › P works after clicking pause but cannot resume behind the exit dialog (2.6s)
+  ok 13 tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (1.1m)
+(node:52760) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 14 tests\e2e\calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate (2.8s)
+  ok 15 tests\e2e\calibration.spec.ts:46:1 › synthetic Worker fixture traverses real UI calibration, then invalidation clears readiness without counting (19.0s)
+  ok 16 tests\e2e\calibration.spec.ts:63:1 › leaving setup, changing source or hiding the page cancels calibration sampling (8.1s)
+(node:49444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 tests\e2e\camera-errors.spec.ts:11:1 › denied permission is explicit and does not silently start keyboard (1.4s)
+  ok 18 tests\e2e\camera-errors.spec.ts:22:1 › missing model is visible and closes the video tracks (1.4s)
+  ok 19 tests\e2e\camera-errors.spec.ts:30:1 › local Worker model performs inference on synthetic camera; reset releases capture (2.4s)
+  ok 20 tests\e2e\camera-errors.spec.ts:44:1 › immediate cancel never opens a late camera and retry remains possible (2.1s)
+  ok 21 tests\e2e\camera-errors.spec.ts:57:3 › camera NotFoundError has an actionable device error (1.4s)
+  ok 22 tests\e2e\camera-errors.spec.ts:57:3 › camera NotReadableError has an actionable device error (1.4s)
+  ok 23 tests\e2e\camera-errors.spec.ts:57:3 › camera NotSupportedError has an actionable device error (1.7s)
+(node:13356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 24 tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session (12.8s)
+  ok 25 tests\e2e\deployment.spec.ts:15:64 › desktop 1366x768 keeps controls visible through a complete simulated session (12.4s)
+  ok 26 tests\e2e\deployment.spec.ts:15:64 › desktop 1920x1080 keeps controls visible through a complete simulated session (11.0s)
+  ok 27 tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (3.6s)
+  ok 28 tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (8.6s)
+  ok 29 tests\e2e\deployment.spec.ts:90:3 › production under /tidal/ › all local assets and real MediaPipe inference work with external requests blocked (1.8s)
+  ok 30 tests\e2e\deployment.spec.ts:100:83 › production under /tidal/ › models/pose_landmarker_lite.task 404 reports failure and releases capture (1.0s)
+  ok 31 tests\e2e\deployment.spec.ts:100:83 › production under /tidal/ › mediapipe/wasm/*.wasm 404 reports failure and releases capture (1.1s)
+(node:35124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 32 tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it (1.3s)
+  ok 33 tests\e2e\source-lifecycle.spec.ts:9:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.5m)
+  ok 34 tests\e2e\source-lifecycle.spec.ts:29:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (28.4s)
+  ok 35 tests\e2e\source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation (47.7s)
+
+
+  1) tests\e2e\demo-toggle.spec.ts:63:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for locator('#demoToggle')
+        - locator resolved to <button role="switch" id="demoToggle" aria-checked="true" class="secondary demo-toggle">无摄像头测试：开</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div id="resultsModal" class="modal-backdrop">…</div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div id="resultsModal" class="modal-backdrop">…</div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        86 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div id="resultsModal" class="modal-backdrop">…</div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+
+
+      70 |   await page.waitForTimeout(400);await expect(page.locator('#carryValue')).toHaveText(stopped!);
+      71 |   await page.locator('#pauseBtn').click();await expect(page.locator('#carryValue')).not.toHaveText(stopped!);
+    > 72 |   await page.locator('#demoToggle').click();await expect(page.locator('#statusTag')).toHaveText('已暂停');
+         |                                     ^
+      73 |   const off = await page.locator('#carryValue').textContent();
+      74 |   await page.locator('#pauseBtn').click();await page.waitForTimeout(400);await expect(page.locator('#carryValue')).toHaveText(off!);
+      75 |   await expect(page.locator('#resultsModal')).toBeHidden();
+        at D:\work\corona\Tidal\tests\e2e\demo-toggle.spec.ts:72:37
+
+    Error Context: test-results\demo-toggle-automatic-carr-49861--and-stops-when-toggled-off\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\demo-toggle-automatic-carr-49861--and-stops-when-toggled-off\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\demo-toggle-automatic-carr-49861--and-stops-when-toggled-off\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\demo-toggle.spec.ts:63:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off
+  34 passed (8.3m)

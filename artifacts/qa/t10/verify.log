@@ -1,0 +1,122 @@
+
+> tidal-farm-motion-demo@0.1.0 verify
+> npm run typecheck && npm run lint && npm run test:unit && npm run test:e2e && npm run build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  22 passed (22)
+      Tests  155 passed (155)
+   Start at  03:44:08
+   Duration  1.21s (tests 73%, import 14%, transform 8%, worker 4%)
+
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test
+
+[WebServer] (node:52492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52088) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:47980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 35 tests using 1 worker
+
+(node:8288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\boot.spec.ts:3:1 › Phaser farm boots, plan cancels and reopens without starting a session (1.9s)
+  ok  2 tests\e2e\boot.spec.ts:19:1 › ordinary builds ignore URL acceleration flags (1.0s)
+  ok  3 tests\e2e\demo-toggle.spec.ts:6:1 › no-camera demo is explicit, completes the full farm flow and resets off without camera requests (9.7s)
+  ok  4 tests\e2e\demo-toggle.spec.ts:38:1 › turning demo off cancels partial input and pauses; manual mode can resume (4.8s)
+  ok  5 tests\e2e\demo-toggle.spec.ts:50:1 › real camera stays separate after demo and errors never turn simulation back on (2.5s)
+  ok  6 tests\e2e\demo-toggle.spec.ts:63:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off (8.9s)
+  ok  7 tests\e2e\demo-toggle.spec.ts:85:1 › enabling simulation cancels a pending camera request and releases the late stream (2.9s)
+  ok  8 tests\e2e\keyboard-flow.spec.ts:19:1 › two complete keyboard sessions with pauses, conserved inventory and reset (41.6s)
+  ok  9 tests\e2e\keyboard-flow.spec.ts:52:1 › repeat keys, control focus and a reset during animation cannot add an extra rep (4.2s)
+  ok 10 tests\e2e\keyboard-flow.spec.ts:68:1 › pointer cancel and blur release carry; returning requires explicit continue (18.9s)
+  ok 11 tests\e2e\keyboard-flow.spec.ts:82:1 › Escape opens an exit confirmation; cancel preserves progress and existing pause (4.0s)
+  ok 12 tests\e2e\keyboard-flow.spec.ts:95:1 › P works after clicking pause but cannot resume behind the exit dialog (2.4s)
+  ok 13 tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (1.1m)
+(node:52100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 14 tests\e2e\calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate (2.7s)
+  ok 15 tests\e2e\calibration.spec.ts:46:1 › synthetic Worker fixture traverses real UI calibration, then invalidation clears readiness without counting (19.4s)
+  ok 16 tests\e2e\calibration.spec.ts:63:1 › leaving setup, changing source or hiding the page cancels calibration sampling (7.2s)
+(node:42692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 tests\e2e\camera-errors.spec.ts:11:1 › denied permission is explicit and does not silently start keyboard (1.7s)
+  ok 18 tests\e2e\camera-errors.spec.ts:22:1 › missing model is visible and closes the video tracks (1.7s)
+  ok 19 tests\e2e\camera-errors.spec.ts:30:1 › local Worker model performs inference on synthetic camera; reset releases capture (2.3s)
+  ok 20 tests\e2e\camera-errors.spec.ts:44:1 › immediate cancel never opens a late camera and retry remains possible (2.2s)
+  ok 21 tests\e2e\camera-errors.spec.ts:57:3 › camera NotFoundError has an actionable device error (1.7s)
+  ok 22 tests\e2e\camera-errors.spec.ts:57:3 › camera NotReadableError has an actionable device error (1.4s)
+  ok 23 tests\e2e\camera-errors.spec.ts:57:3 › camera NotSupportedError has an actionable device error (1.8s)
+(node:41756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 24 tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session (12.8s)
+  ok 25 tests\e2e\deployment.spec.ts:15:64 › desktop 1366x768 keeps controls visible through a complete simulated session (12.9s)
+  ok 26 tests\e2e\deployment.spec.ts:15:64 › desktop 1920x1080 keeps controls visible through a complete simulated session (10.3s)
+  ok 27 tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (4.1s)
+  ok 28 tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (10.8s)
+  ok 29 tests\e2e\deployment.spec.ts:90:3 › production under /tidal/ › all local assets and real MediaPipe inference work with external requests blocked (2.2s)
+  ok 30 tests\e2e\deployment.spec.ts:100:83 › production under /tidal/ › models/pose_landmarker_lite.task 404 reports failure and releases capture (1.4s)
+  ok 31 tests\e2e\deployment.spec.ts:100:83 › production under /tidal/ › mediapipe/wasm/*.wasm 404 reports failure and releases capture (1.3s)
+(node:52444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 32 tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it (1.3s)
+  ok 33 tests\e2e\source-lifecycle.spec.ts:9:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.5m)
+  ok 34 tests\e2e\source-lifecycle.spec.ts:29:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (27.8s)
+  ok 35 tests\e2e\source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation (47.5s)
+
+  35 passed (7.4m)
+
+> tidal-farm-motion-demo@0.1.0 build
+> npm run typecheck && npm run build:worker && vite build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 build:worker
+> vite build --config vite.worker.config.ts
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3 modules transformed.
+rendering chunks...
+computing gzip size...
+public/worker/pose.js  135.84 kB │ gzip: 40.48 kB
+
+✓ built in 35ms
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 36 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                    11.85 kB │ gzip:   4.52 kB
+dist/assets/index-wx6M6ltW.css     12.50 kB │ gzip:   3.65 kB
+dist/assets/index-CFBWu24Q.js   1,274.60 kB │ gzip: 345.59 kB
+
+✓ built in 416ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

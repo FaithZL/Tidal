@@ -3,6 +3,7 @@ import { calibrate, mean, type Calibration, type BodySide } from './calibration.
 import { extractFeatures, inspectPose, type PoseFeatures } from './features.js';
 import { PoseSmoother } from './smoothing.js';
 import { recognitionConfig, type RecognitionConfig } from '../config/recognitionConfig.js';
+import { loadSquatIssue } from './loadCalibrationValidation.js';
 export const calibrationSteps = ['standing', 'chop-raised', 'chop-down', 'load-squat', 'load-stand', 'load-press', 'load-return', 'carry-hold', 'carry-release'] as const;
 export type CalibrationStep = typeof calibrationSteps[number];
 export interface CalibrationExample {
@@ -28,6 +29,7 @@ export class CalibrationSession {
   private samples: PoseFrame[] = [];
   private progress = 0;
   private calibration: Calibration | null = null;
+  private standingHipHeight = 0;
   private features: PoseFeatures | null = null;
   private reason: string | null = null;
   private prototypes: Partial<Record<CalibrationStep, Prototype>> = {};
@@ -66,13 +68,16 @@ export class CalibrationSession {
   reset(): void { this.invalidate(null);this.lastSeen = null; }
   private invalidate(reason: string | null): void {
     this.stepIndex = 0;this.capturing = false;this.samples = [];this.progress = 0;
-    this.calibration = null;this.prototypes = {};this.features = null;this.reason = reason;this.smoother.reset();
+    this.calibration = null;this.standingHipHeight = 0;this.prototypes = {};this.features = null;this.reason = reason;this.smoother.reset();
   }
   private finishCapture(step: CalibrationStep): void {
     this.capturing = false;
     if (step === 'standing') {
       const result = calibrate(this.samples, this.config, this.primarySide);
-      if (result.ok) this.calibration = result.calibration;
+      if (result.ok) {
+        this.calibration = result.calibration;
+        this.standingHipHeight = mean(this.samples.map(f => extractFeatures(f, result.calibration, this.config)!.hipHeight));
+      }
       else this.reason = result.reason;
     } else if (this.calibration) {
       const features = this.samples.map(f => extractFeatures(f, this.calibration!, this.config));
@@ -93,8 +98,10 @@ export class CalibrationSession {
     const p = this.prototypes, c = this.config, natural = this.calibration!.standingKnee[this.primarySide]!;
     const knee = sample.values[3] * 180, wristY = sample.values[1];
     if (step === 'chop-down' && wristY - p['chop-raised']!.values[1] < c.minChopTravelTorso) return 'insufficient-chop-range';
-    if (step === 'load-squat' && natural - knee < c.minSquatFlexionDeg) return 'insufficient-squat-range';
+    if (step === 'load-squat') return loadSquatIssue({ kneeDeg: natural, hipHeight: this.standingHipHeight }, { kneeDeg: knee, hipHeight: sample.values[4] }, c);
     if ((step === 'load-stand' || step === 'load-return') && Math.abs(knee - natural) > c.standToleranceDeg) return 'not-returned';
+    if (step === 'load-stand') return loadSquatIssue({ kneeDeg: knee, hipHeight: sample.values[4] },
+      { kneeDeg: p['load-squat']!.values[3] * 180, hipHeight: p['load-squat']!.values[4] }, c);
     if (step === 'load-press' && p['load-stand']!.values[1] - wristY < c.minPressTravelTorso) return 'insufficient-press-range';
     if (step === 'load-return' && Math.hypot(sample.values[0] - p['load-stand']!.values[0], wristY - p['load-stand']!.values[1]) > c.returnWristTolerance) return 'not-returned';
     if (step === 'carry-release') {

@@ -63,8 +63,15 @@ test('real camera stays separate after demo and errors never turn simulation bac
 test('automatic carry freezes on blur, resumes with fresh samples and stops when toggled off', async ({ page }) => {
   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await page.locator('#setupDemoToggle').click();
   await page.locator('#beginDemo').click();
-  await expect.poll(async () => parseFloat((await page.locator('#carryValue').textContent())!), { timeout: 20000 }).toBeGreaterThan(0);
-  await page.evaluate(() => window.dispatchEvent(new Event('blur')));
+  // Pause on the first sample. Backoff polling can consume most of the 1.3s test target,
+  // letting results cover the switch before the test reaches its toggle-off assertion.
+  await page.evaluate(()=>new Promise<void>(resolve=>{
+    const value=document.getElementById('carryValue')!;
+    const observer=new MutationObserver(()=>{
+      if(parseFloat(value.textContent!)>0){observer.disconnect();window.dispatchEvent(new Event('blur'));resolve();}
+    });
+    observer.observe(value,{childList:true});
+  }));
   await expect(page.locator('#statusTag')).toHaveText('已暂停');
   const stopped = await page.locator('#carryValue').textContent();
   await page.waitForTimeout(400);await expect(page.locator('#carryValue')).toHaveText(stopped!);

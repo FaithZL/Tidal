@@ -1,0 +1,29 @@
+Automatic chop: 15 complete, real 15-second rest
+Automatic load: 15 complete, real 15-second rest
+Automatic carry: normal 60-second target, adjacent hold samples
+{
+  date: '2026-10-15T19:54:12.096Z',
+  browser: '156.0.8078.4',
+  platform: 'win32',
+  bundles: [ 'http://127.0.0.1:4175/assets/index-CFBWu24Q.js' ],
+  input: 'explicit automatic simulation + authored skeleton; no camera',
+  timing: 'production 5s countdown / 15s rests / 60s effective carry; real wall clock',
+  network: 'all non-localhost origins blocked by browser routing; not a physical network disconnect',
+  rendering: {
+    method: 'requestAnimationFrame intervals after 10s warmup; headless Chromium, automatic simulation, not physical-camera performance',
+    samples: 5296,
+    spanMs: 132211.30000000002,
+    fps: 40.0570904302431,
+    p50Ms: 16.80000000000291,
+    p95Ms: 33.400000000001455,
+    maxMs: 50.10000000000582,
+    over50Ms: 1
+  },
+  durationSeconds: 142.983,
+  metrics: '挥砍 15 次 · 装车 15 次 · 有效持姿 60.0 秒 · 任务有效时间 94.9 秒 · 本局经过时间（含休息/暂停）140.0 秒 · 输入：含自动模拟（复用键盘模拟协议）',
+  errors: [],
+  external: [],
+  poseRequests: [],
+  reset: 'pass',
+  result: 'pass'
+}

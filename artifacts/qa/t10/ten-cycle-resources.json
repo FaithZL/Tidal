@@ -1,0 +1,156 @@
+{
+  "input": "fake video + synthetic Worker; actual UI/camera lifecycle",
+  "method": "ended tracks, live worker/interval counts, Chromium CDP after forced GC; 5MB trend guard",
+  "samples": [
+    {
+      "cycle": 1,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 22715472,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 2,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23423856,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 3,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 22592820,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 4,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23566584,
+      "documents": 3,
+      "nodes": 1351,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 5,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23381344,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 6,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23478612,
+      "documents": 3,
+      "nodes": 1326,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 7,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23434148,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 8,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23680288,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 9,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23674276,
+      "documents": 3,
+      "nodes": 1325,
+      "jsEventListeners": 90
+    },
+    {
+      "cycle": 10,
+      "tracks": [
+        "ended"
+      ],
+      "workers": 0,
+      "maxWorkers": 1,
+      "intervals": 1,
+      "timeouts": 0,
+      "endedTrackListeners": [],
+      "usedHeap": 23713964,
+      "documents": 3,
+      "nodes": 1326,
+      "jsEventListeners": 90
+    }
+  ]
+}

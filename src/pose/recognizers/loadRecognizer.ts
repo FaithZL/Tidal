@@ -3,6 +3,7 @@ import type { PoseFeatures } from '../features.js';
 import type { LoadPhase } from '../../domain/types.js';
 import { RepRecognizer } from './repRecognizer.js';
 import { recognitionConfig, type RecognitionConfig } from '../../config/recognitionConfig.js';
+import { loadSquatIssue } from '../loadCalibrationValidation.js';
 export class LoadRecognizer extends RepRecognizer {
   private readonly stand;
   private readonly kneeTravel: number;
@@ -12,7 +13,7 @@ export class LoadRecognizer extends RepRecognizer {
     super(profile,config);this.stand=this.example('load-stand');const squat=this.example('load-squat');this.example('load-return');
     this.kneeTravel=this.stand.kneeDeg-squat.kneeDeg;this.hipTravel=this.stand.hipHeight-squat.hipHeight;
     this.pressTravel=this.stand.wrist.y-this.example('load-press').wrist.y;
-    if(this.kneeTravel<config.minSquatFlexionDeg||this.hipTravel<config.minSquatHipTravel||this.pressTravel<config.minPressTravelTorso)throw new Error('Load calibration is not separable');
+    if(loadSquatIssue(this.stand,squat,config)||this.pressTravel<config.minPressTravelTorso)throw new Error('Load calibration is not separable');
   }
   private transition(phase:LoadPhase,progress:number):void {this.phase=phase;this.events.push({kind:'phase',task:'load',repId:this.repId,phase,progress});}
   protected advance(f:PoseFeatures,time:number):void {

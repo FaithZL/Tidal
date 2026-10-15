@@ -1,6 +1,24 @@
 # Tidal 开发进度（2026-10-16，连续推进 T07–T11）
 
-## 当前阶段：T09 软件联调完成，继续 T10
+## 当前阶段：T10 软件交付验证完成，继续 T11 证据整理
+
+T07 `98aaba9`、T08 `85df391`、T09 `872b34c` 均已按授权push到 `feature/t07-t11-completion`。本轮保持原领域逻辑与模拟开关；无物理摄像头，真机和产品签字继续 `manual_pending`。
+
+- `src/ui/audioFeedback.ts`、`browser.ts`、`index.html`：默认静音、点击解锁的原创正弦反馈音，失败不阻断游戏，静音/页面释放清理节点；4项单测先失败后通过，浏览器验证真实Web Audio开关。
+- `web/style.css`：1280×720、1366×768紧凑桌面布局，保留1920×1080比例；首次720高度动作按钮超屏测试失败，修复后三尺寸完整流程、暂停、结果返回通过；截图已实际查看。
+- `tests/e2e/deployment.spec.ts`：三尺寸、音频、十轮退出重置、实际`/tidal/`生产构建、本地MediaPipe合成视频推理、模型/WASM404共8项。子路径Vite本已正确重写图片，不做猜测性路径修改。
+- 十轮资源测试定位`SetupPanel`每轮遗留`ended`事件监听器；用AbortController在停源时移除。CDP观察track全ended、Worker归零/峰值1、interval稳定1、timeout0、轨道监听0、全局监听90；堆只报告预热后趋势，不承诺精确内存。
+- 输入诊断补最近120游戏帧p95、识别阶段/拒绝原因、摄像头指标；明确不是端到端延迟。`scripts/verify-auto-demo.mjs`补外源请求阻断与预热后至少60秒rAF采样，正式生产验证待下方最终结果。
+- 全分支一次独立只读审查发现1个P2：准备页与Load识别器髋高门限不一致。先复现2项失败，再用`src/pose/loadCalibrationValidation.ts`共享门禁，标定当场提示重采，正常就绪能构造摄像头输入；相关32项通过，审查无其他发现。记录`artifacts/qa/t10/review.md`。
+- 第一轮全套回归153单测通过、E2E34/35通过；旧自动Carry测试因退避轮询到0.9秒才暂停，1.3秒测试目标过快结束遮挡开关。用首样本MutationObserver同步失焦，保留全部负例/暂停断言，定向重复3次通过。失败trace摘要与SHA保留在`carry-polling-race.json`，未提交62MB原始trace。
+- 干净安装首次被旧Vite进程占用原生DLL阻止；核实进程属于本仓库后停止，重新`npm ci`成功（137包、0漏洞），`assets:sync`/`assets:verify`通过。隔离错版本fixture验证JS/WASM错配会失败，见`version-mismatch.log`。没有修改依赖或锁文件。
+- 本轮最终`npm run verify`退出0：**155/155单测、35/35 E2E（7.4分钟）、typecheck/lint/build全部通过**。生产包`index-CFBWu24Q.js`，1,274.60KB/gzip345.59KB；保留500KB体积警告。完整证据在`artifacts/qa/t10/verify.log`。本次生成的旧轮次截图恢复原版本，保留历史证据。
+- 新增`docs/DEMO_RUNBOOK.md`，更新README、依赖/来源说明。T11将按49个验收ID交付证据表；物理断网、真实识别/端到端延迟、扬声器与美术批准仍待人工设备条件。
+- 真实生产验证：`npm run preview -- --port 4175 --strictPort`，另终端`$env:TIDAL_QA_DIR='artifacts/qa/t10'; $env:TIDAL_BLOCK_EXTERNAL='1'; node scripts/verify-auto-demo.mjs`退出0。正式5秒准备/15秒休息/60秒有效Carry，**142.983秒墙钟**完成结算重置，15单位到家、100/100游戏奖励，0页面异常/外源/姿态资源请求；结果明确含自动模拟。实际三张截图与JSON均已产生，结算截图已查看。
+- 性能实测：预热10秒后132.211秒、5296个rAF样本，平均**40.06fps**、p50 **16.8ms**、p95 **33.4ms**、最大**50.1ms**、>50ms一次。达到建议候选30fps底线，但不把约60fps目标写成通过；这是无头Chromium自动模拟，不是摄像头推理/端到端测量。物理断网与真人性能仍`manual_pending`。
+- 性能诊断对照（`node artifacts/qa/t10/performance-probe.mjs`）：同一无头浏览器、2秒预热+各10秒观察，空白页60.00fps/主线程任务0.057秒，农场静态页39.54fps/主线程任务10.089秒。实际WebGL报告**SwiftShader软件渲染**，没有采用系统列出的RTX GPU；定位到当前农场软件渲染路径负载，未证明真实硬件GPU表现。P01按60fps目标保留`fail`，候选30fps是否接受与有设备后的硬件加速复测另行确认，不降阈值伪装达标。
+
+## T09 软件联调历史记录
 
 T08提交 `85df391` 已push；本阶段在同一分支增量接入摄像头语义输入，领域计数/计时/库存/奖励仍只由原控制器维护。用户无摄像头，T09真人整局仍 **manual_pending**，下面证据均明确区分模拟来源。
 

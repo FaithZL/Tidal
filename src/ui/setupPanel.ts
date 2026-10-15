@@ -16,6 +16,7 @@ export class SetupPanel {
   private frameCount = 0;
   private sampleStart = 0;
   private timings: number[] = [];
+  private trackEvents: AbortController | null = null;
   private readonly suspendCalibration = (): void => { this.calibration.reset();this.events.onSuspend?.(); };
   constructor(video: HTMLVideoElement, private readonly overlay: HTMLCanvasElement,
     private readonly status: HTMLElement, private readonly metrics: HTMLElement, private readonly frames: HTMLElement,
@@ -38,8 +39,9 @@ export class SetupPanel {
       if (!navigator.mediaDevices?.getUserMedia) throw new Error('浏览器不支持摄像头：请使用 localhost 或 HTTPS');
       const video = await this.camera.start();
       if (epoch !== this.epoch) return;
+      this.trackEvents = new AbortController();
       (video.srcObject as MediaStream).getTracks().forEach(track => {
-        track.addEventListener('ended', () => { if (epoch === this.epoch) this.fail('摄像头已断开，请重试'); }, { once: true });
+        track.addEventListener('ended', () => { if (epoch === this.epoch) this.fail('摄像头已断开，请重试'); }, { once: true, signal: this.trackEvents!.signal });
       });
       this.status.textContent = '摄像头已打开，正在加载本地模型与 WASM…';
       await this.client.start(frame => { if (epoch === this.epoch && !document.hidden) this.draw(frame); }, message => {
@@ -94,6 +96,7 @@ export class SetupPanel {
   }
   async stop(): Promise<void> {
     this.epoch++; clearInterval(this.timer); clearTimeout(this.slowTimer); clearTimeout(this.timeout);
+    this.trackEvents?.abort(); this.trackEvents = null;
     this.camera.stop(); this.lastVideoTime = -1; this.frameCount = 0; this.timings = [];
     this.calibration.reset(true);
     this.events.onStop?.();

@@ -8,6 +8,10 @@
 
 T06 特征/标定、T07 砍树/装车识别、T08 持姿代理、T09 摄像头输入接线已实现。当前使用人工编写的关键点回放和浏览器合成视频验证软件路径；**没有物理摄像头，真人准确率、标定可用性和完整真人流程仍为 manual_pending。** 接上摄像头后须先标定，再手动选择摄像头训练；不会静默切换模拟。持姿代理不能证明器械重量或真实持握。
 
+T10 增加可静音的原创反馈音、720/768高度桌面紧凑布局、输入诊断和资源释放回归。音效默认关闭，点击顶栏启用；失败可继续无声演示。三种桌面尺寸、实际`/tidal/`子路径构建和本地模型推理均有浏览器测试。操作步骤见 [路演手册](docs/DEMO_RUNBOOK.md)，逐项证据和人工待办见 [验收报告](docs/TEST_REPORT.md)。
+
+2026-10-16最终软件验证：155项单测、35项浏览器E2E、类型/lint/build通过；干净`npm ci`与本地资源校验通过。生产正常时长自动整局142.983秒，浏览器阻断外部来源请求后结算重置正常。无头Chromium预热后132秒平均40.06fps、帧间隔p95 33.4ms，达到候选30fps底线但尚未证明约60fps目标或真人性能。
+
 ## 安装与启动
 
 实际环境：Windows、Node 24.14.0、npm 11.9.0。重新安装前停止本项目 Vite 服务，避免原生模块被占用。
@@ -75,6 +79,8 @@ npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts
 
 正式时长自动整局验证：保持4175预览服务，在另一终端执行 `node scripts/verify-auto-demo.mjs`；默认输出 `artifacts/qa/demo-toggle/`，可用 `TIDAL_QA_DIR` 与 `TIDAL_PREVIEW_URL` 改路径。使用真实墙钟，仍为明确模拟输入。
 
+T10生产验证可设置 `$env:TIDAL_BLOCK_EXTERNAL='1'`、`$env:TIDAL_QA_DIR='artifacts/qa/t10'` 后执行该脚本：浏览器阻断非本地来源，实际完成正式时长流程，并在预热10秒后记录至少60秒rAF帧间隔。该方法不等于物理断网，也不测真人动作端到端延迟。
+
 最新实际命令、结果、截图及待办见 [PROGRESS](docs/PROGRESS.md)、[TEST_REPORT](docs/TEST_REPORT.md)。依赖与许可见 [DEPENDENCIES](docs/DEPENDENCIES.md)、[SOURCES](docs/SOURCES.md)、[原创素材](public/assets/README.md)。旧轮次证据保留在 `artifacts/qa/`，不能代替最新复测或真机验收。
 
 ## 主要模块
@@ -88,4 +94,4 @@ npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts
 | `src/ui`、`src/browser.ts` | DOM、诊断、准备、输入装配、暂停及释放 |
 | `tests/helpers`、`tests/fixtures` | 明确来源的测试专用合成数据，不进入生产摄像头入口 |
 
-`node_modules/`、`dist/`、Worker构建产物和临时测试目录不入库；模型/WASM与已记录QA证据入库。下一步按连续实施计划完成 T10 打磨与 T11 证据化交付，硬件部分继续 manual_pending。
+`node_modules/`、`dist/`、Worker构建产物和临时测试目录不入库；模型/WASM与已记录QA证据入库。本轮按连续实施计划推进至 T11 证据化交付，硬件与产品签字部分继续 manual_pending，不自动合并或部署。

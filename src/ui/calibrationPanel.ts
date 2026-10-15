@@ -23,6 +23,7 @@ const reasons: Record<string, string> = {
   'insufficient-samples': '连续样本不足，请重新采集', 'insufficient-duration': '观察时长不足，请重新采集', unstable: '姿态不够稳定，请重采当前步骤',
   'insufficient-chop-range': '上肩与下挥示例差异不足，请检查主手和机位后重采',
   'insufficient-squat-range': '蹲下示例未形成可用差异；请调整机位，不要强行加深',
+  'insufficient-hip-travel': '髋部下降与站立的差异不足；请检查机位、重采当前步骤，必要时重新标定。不要强行加深下蹲',
   'insufficient-press-range': '举手示例差异不足，请确认手部可见', 'not-returned': '复位示例与自然站立不一致，请重采',
   'carry-not-separable': '持姿与放下不可区分：不能启用 Carry 姿态代理，请调整机位后重新采集',
 };
@@ -63,7 +64,7 @@ export class CalibrationPanel {
     this.node('calibrationStatus').textContent = !s.available ? '等待全身有效关键点；开启摄像头后开始标定。'
       : s.complete ? '标定完成 · 可手动选择摄像头姿态代理训练。'
       : `第 ${calibrationSteps.indexOf(step!) + 1}/9 步 · ${name}${s.capturing ? '：采集中，请保持稳定' : ''}`;
-    this.node('calibrationInstruction').textContent = step ? steps[step][1] : '标定只存在本次内存。离开准备页、切换来源或失去跟踪后需要重新采集。';
+    this.node('calibrationInstruction').textContent = step ? steps[step][1] : '标定只存在本次内存。停止摄像头、切换来源或失去跟踪后需要重新采集。';
     this.node('calibrationReason').textContent = s.reason ? `最近拒绝：${reasons[s.reason] ?? s.reason}` : '';
     const ready = (yes: boolean) => yes ? '已标定' : '未标定';
     this.node('calibrationReadiness').textContent = `砍树：${ready(s.readyFor.chop)} · 装车：${ready(s.readyFor.load)} · Carry：${ready(s.readyFor.carry)}`;

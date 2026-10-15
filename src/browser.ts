@@ -8,6 +8,7 @@ import { createGame } from './game/createGame.js';
 import { SetupPanel } from './ui/setupPanel.js';
 import { CalibrationPanel } from './ui/calibrationPanel.js';
 import { SyntheticPreview } from './ui/syntheticPreview.js';
+import { AudioFeedback } from './ui/audioFeedback.js';
 import type { SessionSnapshot, TaskKind } from './domain/types.js';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
@@ -29,6 +30,7 @@ const input = new KeyboardActionSource(isTestMode ? .085 : 1);
 const autoInput = new AutoDemoSource(isTestMode ? .085 : 1);
 const cameraInput = new CameraActionSource();
 const sourceManager = new SourceManager();
+const audio = new AudioFeedback();
 const calibrationPanel = new CalibrationPanel($<HTMLDetailsElement>('calibrationPanel'));
 const preview = new SyntheticPreview([
   { canvas: $<HTMLCanvasElement>('demoSetupCanvas'), label: $('demoSetupPhase') },
@@ -57,6 +59,8 @@ let planDismissed = false;
 let exitWasUserPaused = false;
 let demoEnabled = false;
 let demoUsed = false;
+let previousFrameMs=0,diagnosticAtMs=0;
+const frameIntervals:number[]=[];
 
 const instructions: Record<TaskKind, string> = {
   chop: '空格触发一次“上举 → 下挥 → 复位”，完整循环后记数。',
@@ -114,6 +118,8 @@ function niceTask(task: TaskKind | null): string {
 }
 function panel(s: Readonly<SessionSnapshot>): void {
   current = s;
+  $('audioToggle').textContent=audio.error||(audio.enabled?'音效：开 · 点击静音':'开启音效');
+  $('audioToggle').setAttribute('aria-pressed',String(audio.enabled));
   void syncSource(s);
   const phase = s.phase;
   $('modeBadge').textContent = demoEnabled ? '▶ 自动模拟 · 非真实动作识别'
@@ -207,6 +213,7 @@ controller.subscribe(panel);
 controller.onEffect(e => {
   // Effects precede subscriptions; resource callbacks must see the authoritative phase.
   current = controller.getSnapshot();
+  audio.handle(e);
   preview.apply(e);
   if (e.kind === 'session-reset') {
     cameraPreparation=false;displayError='';cameraInput.clearProfile();sourceManager.resetHistory();
@@ -225,6 +232,7 @@ $('cancelPlan').addEventListener('click', () => {
   panel(current);
 });
 $('acceptPlan').addEventListener('click', () => controller.command({kind:'open-setup',mode:'keyboard'}));
+$('audioToggle').addEventListener('click',async()=>{await audio.setEnabled(!audio.enabled);panel(controller.getSnapshot());});
 $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
 for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));
 $('cameraStart').addEventListener('click', () => { setDemo(false);controller.command({ kind: 'switch-source', mode: 'camera' }); void cameraPanel.start(); });
@@ -303,10 +311,14 @@ function animate(now:number):void {
   }
   controller.tick(now);
   cameraInput.tick(now);
-  const debug = cameraInput.getDebug();
-  $('inputDebug').textContent = `${current.inputMode} · ${current.taskRunId ?? '无任务实例'} · epoch ${current.sourceEpoch} · ${debug.phase} · ${debug.reason}`;
+  if(previousFrameMs&&now>previousFrameMs){frameIntervals.push(now-previousFrameMs);if(frameIntervals.length>120)frameIntervals.shift();}previousFrameMs=now;
+  if(now-diagnosticAtMs>=500){
+    diagnosticAtMs=now;const debug=cameraInput.getDebug(),sorted=[...frameIntervals].sort((a,b)=>a-b);
+    const p95=sorted[Math.floor(sorted.length*.95)]??0;
+    $('inputDebug').textContent=`${current.inputMode} · ${current.taskRunId??'无任务实例'} · epoch ${current.sourceEpoch} · ${debug.phase} · ${debug.reason??'等待/有效输入'}\n游戏帧间隔 p95 ${p95.toFixed(1)}ms（最近120帧，非端到端延迟）${current.inputMode==='camera'?`\n${$('cameraMetrics').textContent}\n${$('calibrationFeatures').textContent}`:''}`;
+  }
   preview.update(now, current);
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-window.addEventListener('pagehide', () => { void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+window.addEventListener('pagehide', () => { void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });

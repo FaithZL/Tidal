@@ -1,0 +1,10 @@
+{
+  "events": [
+    "{\"type\":\"before\",\"callId\":\"ypli@667\",\"startTime\":32091.383,\"class\":\"Test\",\"method\":\"expect\",\"title\":\"Expect \\\"toHaveText\\\"\",\"subtitle\":\"locator('#carryValue')\",\"params\":{\"locator\":\"locator('#carryValue')\",\"expected\":\"0.9/2s\"},\"stack\":[{\"file\":\"D:\\\\work\\\\corona\\\\Tidal\\\\tests\\\\e2e\\\\demo-toggle.spec.ts\",\"line\":70,\"column\":76}]}",
+    "{\"type\":\"before\",\"callId\":\"ypli@671\",\"startTime\":32525.469,\"class\":\"Test\",\"method\":\"expect\",\"title\":\"Expect \\\"not toHaveText\\\"\",\"subtitle\":\"locator('#carryValue')\",\"params\":{\"locator\":\"locator('#carryValue')\",\"expected\":\"0.9/2s\"},\"stack\":[{\"file\":\"D:\\\\work\\\\corona\\\\Tidal\\\\tests\\\\e2e\\\\demo-toggle.spec.ts\",\"line\":71,\"column\":89}]}",
+    "{\"type\":\"before\",\"callId\":\"ypli@667\",\"startTime\":32091.882,\"title\":\"Expect \\\"toHaveText\\\"\",\"class\":\"Frame\",\"method\":\"expect\",\"params\":{\"selector\":\"#carryValue\",\"expression\":\"to.have.text\",\"expectedText\":[{\"string\":\"0.9/2s\",\"normalizeWhiteSpace\":true}],\"expectedValue\":{\"value\":{\"v\":\"undefined\"},\"handles\":[]},\"isNot\":false,\"timeout\":7000}}",
+    "{\"type\":\"before\",\"callId\":\"ypli@671\",\"startTime\":32525.963,\"title\":\"Expect \\\"not toHaveText\\\"\",\"class\":\"Frame\",\"method\":\"expect\",\"params\":{\"selector\":\"#carryValue\",\"expression\":\"to.have.text\",\"expectedText\":[{\"string\":\"0.9/2s\",\"normalizeWhiteSpace\":true}],\"expectedValue\":{\"value\":{\"v\":\"undefined\"},\"handles\":[]},\"isNot\":true,\"timeout\":7000}}"
+  ],
+  "observation": "First paused value was 0.9/2s against the 1300ms test target. After resume results covered demoToggle before click. Poll synchronization issue, not paused time credited.",
+  "traceSHA256": "6DFD23890D90D3FBC3B9E4AD0E23EF87D998ADDAA2A9E432C18CCC567FF69993"
+}

@@ -1,0 +1,70 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/calibrationSession.test.ts (21 tests | 2 failed) 35ms
+   × knee flexion without hip descent is rejected during the squat capture, and can be recaptured 6ms
+   × preparation applies the configured minimum hip travel 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/calibrationSession.test.ts > knee flexion without hip descent is rejected during the squat capture, and can be recaptured
+AssertionError: expected { step: 'load-stand', …(10) } to match object { step: 'load-squat', …(3) }
+(20 matching properties omitted from actual)
+
+- Expected
++ Received
+
+@@ -3,8 +3,8 @@
+    "readyFor": {
+      "carry": false,
+      "chop": true,
+      "load": false,
+    },
+-   "reason": "insufficient-hip-travel",
+-   "step": "load-squat",
++   "reason": null,
++   "step": "load-stand",
+  }
+
+ ❯ tests/unit/calibrationSession.test.ts:31:33
+     29|   expect(session.beginCapture()).toBe(true);
+     30|   for (let t = time + 100; t <= time + 700; t += 100) session.ingest(r…
+     31|   expect(session.getSnapshot()).toMatchObject({ step: 'load-squat', re…
+       |                                 ^
+     32|   capture(session, 'squat', time + 800, 600);
+     33|   expect(session.getSnapshot()).toMatchObject({ step: 'load-stand', re…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/calibrationSession.test.ts > preparation applies the configured minimum hip travel
+AssertionError: expected { step: 'load-stand', …(10) } to match object { step: 'load-squat', …(2) }
+(21 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "readyFor": {
+      "load": false,
+    },
+-   "reason": "insufficient-hip-travel",
+-   "step": "load-squat",
++   "reason": null,
++   "step": "load-stand",
+  }
+
+ ❯ tests/unit/calibrationSession.test.ts:40:33
+     38|   time = capture(session, 'raised', time, 600);time = capture(session,…
+     39|   capture(session, 'squat', time, 600);
+     40|   expect(session.getSnapshot()).toMatchObject({ step: 'load-squat', re…
+       |                                 ^
+     41| });
+     42| test('identical carry hold/release is refused without discarding succe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 19 passed (21)
+   Start at  03:43:36
+   Duration  166ms (tests 46%, transform 34%, import 16%, worker 3%)

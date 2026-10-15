@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 import { CalibrationSession } from '../../src/pose/calibrationSession.js';
 import { syntheticFrame, replacePoint, type SyntheticPose } from '../helpers/syntheticPose.js';
 import { createRecognitionConfig } from '../../src/config/recognitionConfig.js';
+import { CameraActionSource } from '../../src/input/cameraActionSource.js';
 function capture(session: CalibrationSession, pose: SyntheticPose, start: number, duration: number): number {
   session.ingest(syntheticFrame(start, pose), start);expect(session.beginCapture()).toBe(true);
   for (let t = start + 100; t <= start + duration + 100; t += 100) session.ingest(syntheticFrame(t, pose), t);
@@ -18,6 +19,25 @@ test('guided calibration collects all examples, reports per-task readiness and n
   capture(session, 'standing', time, 2000);
   expect(session.getSnapshot()).toMatchObject({ complete: true, readyFor: { chop: true, load: true, carry: true }, capturing: false });
   expect(session.getSnapshot().calibration?.primarySide).toBe('right');
+  const snapshot = session.getSnapshot();
+  expect(() => new CameraActionSource().setProfile({ calibration: snapshot.calibration!, examples: snapshot.examples })).not.toThrow();
+});
+test('knee flexion without hip descent is rejected during the squat capture, and can be recaptured', () => {
+  const session = new CalibrationSession();let time = capture(session, 'standing', 0, 2000);
+  time = capture(session, 'raised', time, 600);time = capture(session, 'down', time, 600);
+  session.ingest(replacePoint(syntheticFrame(time), 26, { x: 415 / 640 }), time);
+  expect(session.beginCapture()).toBe(true);
+  for (let t = time + 100; t <= time + 700; t += 100) session.ingest(replacePoint(syntheticFrame(t), 26, { x: 415 / 640 }), t);
+  expect(session.getSnapshot()).toMatchObject({ step: 'load-squat', reason: 'insufficient-hip-travel', capturing: false, readyFor: { chop: true, load: false, carry: false } });
+  capture(session, 'squat', time + 800, 600);
+  expect(session.getSnapshot()).toMatchObject({ step: 'load-stand', reason: null });
+});
+test('preparation applies the configured minimum hip travel', () => {
+  const session = new CalibrationSession(createRecognitionConfig({ minSquatHipTravel: 2 }));
+  let time = capture(session, 'standing', 0, 2000);
+  time = capture(session, 'raised', time, 600);time = capture(session, 'down', time, 600);
+  capture(session, 'squat', time, 600);
+  expect(session.getSnapshot()).toMatchObject({ step: 'load-squat', reason: 'insufficient-hip-travel', readyFor: { load: false } });
 });
 test('identical carry hold/release is refused without discarding successful chop/load calibration', () => {
   const session = new CalibrationSession();const time = allExamples(session);capture(session, 'hold', time, 2000);
