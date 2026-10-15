@@ -1,0 +1,9 @@
+
+Path                              Unchanged
+----                              ---------
+src/config\demoConfig.ts               True
+src/domain\types.ts                    True
+src/domain\sessionController.ts        True
+src/input/keyboardActionSource.ts      True
+src/input/types.ts                     True
+

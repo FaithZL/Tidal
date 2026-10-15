@@ -1,0 +1,701 @@
+diff --git a/.handoff-baseline/src/browser.ts b/src/browser.ts
+index 14f6de0..9b54ca2 100644
+--- a/.handoff-baseline/src/browser.ts
++++ b/src/browser.ts
+@@ -1,7 +1,8 @@
+ import { createDemoConfig } from './config/demoConfig.js';
+ import { createSessionController, inputContext } from './domain/sessionController.js';
+ import { KeyboardActionSource } from './input/keyboardActionSource.js';
+-import { drawFarm, type VisualState } from './game/drawFarm.js';
++import { createGame } from './game/createGame.js';
++import { SetupPanel } from './ui/setupPanel.js';
+ import type { SessionSnapshot, TaskKind } from './domain/types.js';
+ 
+ const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
+@@ -9,7 +10,7 @@ const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
+   if (!element) throw new Error(`Missing element ${id}`);
+   return element as T;
+ };
+-const isTestMode = new URLSearchParams(location.search).has('e2e') &&
++const isTestMode = import.meta.env.MODE === 'e2e' && new URLSearchParams(location.search).has('e2e') &&
+   (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+ const config = createDemoConfig(isTestMode ? {
+   startCountdownMs: 180, restMs: 230, carryTargetMs: 1300,
+@@ -20,15 +21,17 @@ $('planLoad').textContent = `深蹲推举 ${config.loadRepTarget} 次 · 装车
+ $('planCarry').textContent = `持续持姿 ${Math.ceil(config.carryTargetMs / 1000)} 秒 · 返回农场`;
+ const controller = createSessionController(config, { nowMs: () => performance.now() });
+ const input = new KeyboardActionSource(isTestMode ? .085 : 1);
+-const visual: VisualState = { action: 'ready', impactUntil: 0, lastEffect: '' };
+-const canvas = $('worldCanvas') as HTMLCanvasElement;
++const game = createGame($('worldCanvas'), controller, config);
++const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
++  $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'));
+ let current = controller.getSnapshot();
+ let boundInputKey = '';
+ let bindingGeneration = 0;
+ let heldKeyboard = false;
+ let heldPointer = false;
+-let displayError = '';
++const displayError = '';
+ let planDismissed = false;
++let exitWasUserPaused = false;
+ 
+ const instructions: Record<TaskKind, string> = {
+   chop: '空格触发一次“上举 → 下挥 → 复位”，完整循环后记数。',
+@@ -55,6 +58,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   current = s;
+   void syncSource(s);
+   const phase = s.phase;
++  $('modeBadge').textContent = s.inputMode === 'camera' ? '📷 摄像头关键点诊断 · 不计运动成果' : '⌨ 键盘演示 · 非真实动作识别';
+   $('chopValue').textContent = `${s.chopReps}/${config.chopRepTarget}`;
+   $('loadValue').textContent = `${s.loadReps}/${config.loadRepTarget}`;
+   $('carryValue').textContent = `${(s.carryActiveMs / 1000).toFixed(1)}/${Math.ceil(config.carryTargetMs / 1000)}s`;
+@@ -72,7 +76,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   $('setupModal').hidden = phase !== 'setup';
+   $('resultsModal').hidden = phase !== 'results';
+   $('pauseBtn').hidden = !(['countdown', 'active', 'rest'] as string[]).includes(phase);
+-  $('pauseBtn').textContent = s.pauseReasons.includes('user') ? '继续' : '暂停';
++  $('pauseBtn').textContent = s.pauseReasons.length ? '继续' : '暂停';
+   const status = s.pauseReasons.length ? '已暂停' : phase === 'home' ? '未开始'
+     : phase === 'setup' ? '设备准备' : phase === 'active' ? '训练中'
+     : phase === 'countdown' ? '倒计时' : phase === 'rest' ? '休息时间' : '已完成';
+@@ -109,16 +113,12 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   $('rewardLogs').textContent = String(s.deliveredLogs);
+   $('rewardCoins').textContent = String(s.rewardsGranted ? config.coinReward : 0);
+   $('rewardStamina').textContent = String(s.rewardsGranted ? config.staminaReward : 0);
+-  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 输入：键盘模拟`;
++  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：键盘模拟`;
+   $('systemStatus').textContent = displayError || `会话 ${s.sessionId} · ${status}`;
+ }
+ controller.subscribe(panel);
+ controller.onEffect(e => {
+-  if (e.kind === 'session-reset') planDismissed = false;
+-  visual.lastEffect = e.kind;
+-  if (e.kind === 'action-phase') visual.action = e.phase;
+-  if (e.kind === 'action-impact') visual.impactUntil = performance.now()+250;
+-  if (e.kind === 'session-reset' || e.kind === 'task-changed') { visual.action = 'ready'; visual.impactUntil = 0; }
++  if (e.kind === 'session-reset') { planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop(); }
+ });
+ function doAction(): void {
+   if (!active(current)) return;
+@@ -131,7 +131,12 @@ $('cancelPlan').addEventListener('click', () => {
+ });
+ $('acceptPlan').addEventListener('click', () => controller.command({kind:'open-setup',mode:'keyboard'}));
+ $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
+-$('beginDemo').addEventListener('click', () => controller.command({kind:'setup-ready'}));
++$('cameraStart').addEventListener('click', () => { controller.command({ kind: 'switch-source', mode: 'camera' }); void cameraPanel.start(); });
++$('cameraStop').addEventListener('click', () => { void cameraPanel.stop(); });
++$('beginDemo').addEventListener('click', () => {
++  void cameraPanel.stop(); controller.command({kind:'switch-source',mode:'keyboard'});
++  controller.command({kind:'setup-ready'});
++});
+ $('resetBtn').addEventListener('click', () => {stopHold();controller.command({kind:'reset'});});
+ $('resultsHome').addEventListener('click',()=>{stopHold();controller.command({kind:'reset'});});
+ $('pauseBtn').addEventListener('click',()=>{
+@@ -140,6 +145,12 @@ $('pauseBtn').addEventListener('click',()=>{
+   else controller.command(current.pauseReasons.includes('user')?{kind:'resume',reason:'user'}:{kind:'pause',reason:'user'});
+ });
+ const actionBtn=$('actionBtn') as HTMLButtonElement;
++$('cancelExit').addEventListener('click', () => {
++  $('exitModal').hidden = true;
++  if (!exitWasUserPaused) controller.command({ kind: 'resume', reason: 'user' });
++  actionBtn.focus();
++});
++$('confirmExit').addEventListener('click', () => { stopHold(); controller.command({ kind: 'reset' }); });
+ actionBtn.addEventListener('click',()=>{
+   if (current.phase === 'home' && planDismissed) { planDismissed = false; panel(current); return; }
+   if(current.task !== 'carry') doAction();
+@@ -152,17 +163,27 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture']) {
+   actionBtn.addEventListener(eventName,()=>{ if(heldPointer){heldPointer=false;input.holdEnd();} });
+ }
+ window.addEventListener('keydown',e=>{
++  if (e.code === 'Escape' && !e.repeat && ['active', 'countdown', 'rest'].includes(current.phase)) {
++    e.preventDefault();
++    if (!$('exitModal').hidden) return;
++    exitWasUserPaused = current.pauseReasons.includes('user');
++    stopHold(); controller.command({ kind: 'pause', reason: 'user' });
++    $('exitModal').hidden = false; $('cancelExit').focus(); return;
++  }
++  const target=e.target;
++  if (!$('exitModal').hidden) return;
++  if(target instanceof HTMLElement && (target.isContentEditable || target.matches('input, textarea, select'))) return;
+   if(e.code==='KeyP'&&!e.repeat&&(['active','countdown','rest'] as string[]).includes(current.phase)){
+     e.preventDefault();($('pauseBtn') as HTMLButtonElement).click();return;
+   }
+-  if(e.code!=='Space'||e.repeat)return;
+-  const target=e.target;
+-  if(target instanceof HTMLInputElement||target instanceof HTMLTextAreaElement||(target instanceof HTMLButtonElement && target!==actionBtn))return;
++  if(e.code!=='Space')return;
++  if(target instanceof HTMLButtonElement && target !== actionBtn) return;
++  if(e.repeat){ if(active(current)) e.preventDefault(); return; }
+   if(!active(current))return;
+   e.preventDefault();heldKeyboard=true;doAction();
+ });
+ window.addEventListener('keyup',e=>{
+-  if(e.code==='Space'&&heldKeyboard){heldKeyboard=false;if(!heldPointer)input.holdEnd();}
++  if(e.code==='Space'&&heldKeyboard){e.preventDefault();heldKeyboard=false;if(!heldPointer)input.holdEnd();}
+ });
+ window.addEventListener('blur',()=>{stopHold();controller.command({kind:'pause',reason:'visibility'});});
+ document.addEventListener('visibilitychange',()=>{
+@@ -170,7 +191,7 @@ document.addEventListener('visibilitychange',()=>{
+ });
+ function animate(now:number):void {
+   controller.tick(now);
+-  drawFarm(canvas,current,config,visual);
+   requestAnimationFrame(animate);
+ }
+ requestAnimationFrame(animate);
++window.addEventListener('pagehide', () => { void cameraPanel.stop(); void input.dispose(); controller.dispose(); game.destroy(true); });
+diff --git a/.handoff-baseline/src/config/demoConfig.ts b/src/config/demoConfig.ts
+index 68f1b04..1fdbe9c 100644
+--- a/.handoff-baseline/src/config/demoConfig.ts
++++ b/src/config/demoConfig.ts
+@@ -1,4 +1,4 @@
+-/** Demo requirements are derived from one config; see docs/ASSUMPTIONS.md. */
++/** Demo requirements are derived from one config; see docs/DEVELOPMENT_GUIDE.md §2. */
+ export interface DemoConfig {
+   treeCount: number;
+   repsPerTree: number;
+diff --git a/.handoff-baseline/src/domain/sessionController.ts b/src/domain/sessionController.ts
+index 82c82b5..5b086e9 100644
+--- a/.handoff-baseline/src/domain/sessionController.ts
++++ b/src/domain/sessionController.ts
+@@ -20,9 +20,10 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+   const effects = new Set<(e: GameEffect) => void>();
+   let disposed = false;
+   let seq = -1;
+-  let seenReps = new Set<number>();
+-  let seenImpacts = new Set<number>();
+-  let phaseProgress = new Map<number, number>();
++  let lastCapturedAtMs = -Infinity;
++  const seenReps = new Set<number>();
++  const seenImpacts = new Set<number>();
++  const phaseProgress = new Map<number, number>();
+   let lastCarryHoldSampleMs: number | null = null;
+   let carryHolding = false;
+   let carrySampleAtMs = -Infinity;
+@@ -47,6 +48,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+   }
+   function resetInputs(): void {
+     seq = -1;
++    lastCapturedAtMs = -Infinity;
+     seenReps.clear();
+     seenImpacts.clear();
+     phaseProgress.clear();
+@@ -84,6 +86,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+   }
+   function finish(): void {
+     if (snapshot.rewardsGranted) return;
++    if (snapshot.sessionStartedAtMs !== null) snapshot.sessionElapsedMs = Math.max(0, clock.nowMs() - snapshot.sessionStartedAtMs);
+     snapshot.deliveredLogs += snapshot.cartLogs;
+     snapshot.cartLogs = 0;
+     snapshot.rewardsGranted = true;
+@@ -140,8 +143,9 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+     if (sig.sessionId !== snapshot.sessionId || sig.taskRunId !== snapshot.taskRunId || sig.sourceEpoch !== snapshot.sourceEpoch) return;
+     const now = clock.nowMs();
+     if (!Number.isFinite(sig.capturedAtMs) || !Number.isSafeInteger(sig.seq) || sig.seq <= seq) return;
+-    if (sig.capturedAtMs > now + 50 || now - sig.capturedAtMs > config.trackingMaxAgeMs) return;
++    if (sig.capturedAtMs < 0 || sig.capturedAtMs < lastCapturedAtMs || sig.capturedAtMs > now + 50 || now - sig.capturedAtMs > config.trackingMaxAgeMs) return;
+     seq = sig.seq;
++    lastCapturedAtMs = sig.capturedAtMs;
+     if (sig.kind === 'tracking') {
+       if (snapshot.inputMode === 'camera' && sig.status !== 'ready') command({ kind: 'pause', reason: 'tracking' });
+       return;
+@@ -152,8 +156,9 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+       if (validHold && carryHolding && lastCarryHoldSampleMs !== null) {
+         const gap = sig.capturedAtMs - lastCarryHoldSampleMs;
+         if (gap > 0 && gap <= config.maxPoseGapMs) {
+-          snapshot.carryActiveMs += gap;
+-          snapshot.exerciseActiveMs += gap;
++          const credited = Math.min(gap, config.carryTargetMs - snapshot.carryActiveMs);
++          snapshot.carryActiveMs += credited;
++          snapshot.exerciseActiveMs += credited;
+           if (snapshot.carryActiveMs >= config.carryTargetMs) {
+             snapshot.carryActiveMs = config.carryTargetMs;
+             finish();
+@@ -170,6 +175,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+     if (!Number.isSafeInteger(sig.repId) || sig.repId < 0) return;
+     const context = { taskRunId: sig.taskRunId, sourceEpoch: sig.sourceEpoch, repId: sig.repId };
+     if (sig.kind === 'phase') {
++      if (!Number.isFinite(sig.progress)) return;
+       const phases: readonly string[] = sig.task === 'chop'
+         ? ['ready', 'chop-down', 'chop-return']
+         : ['ready', 'squat-down', 'stand-up', 'press-up', 'load-return'];
+@@ -208,7 +214,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
+     emit();
+   }
+   function tick(nowMs: number): void {
+-    if (disposed || !Number.isFinite(nowMs)) return;
++    if (disposed || !Number.isFinite(nowMs) || nowMs < lastTickMs) return;
+     const delta = Math.max(0, nowMs - lastTickMs);
+     lastTickMs = nowMs;
+     if (snapshot.sessionStartedAtMs !== null && snapshot.phase !== 'results') {
+diff --git a/src/game/FarmScene.ts b/src/game/FarmScene.ts
+new file mode 100644
+index 0000000..a90ed30
+--- /dev/null
++++ b/src/game/FarmScene.ts
+@@ -0,0 +1,91 @@
++import Phaser from 'phaser';
++import type { DemoConfig } from '../config/demoConfig.js';
++import type { ActionPhase, SessionController, SessionSnapshot } from '../domain/types.js';
++
++/** T04 greybox: geometry follows snapshots/effects, never mutates inventory. */
++export class FarmScene extends Phaser.Scene {
++  private snapshot: Readonly<SessionSnapshot>;
++  private action: ActionPhase = 'ready';
++  private ink!: Phaser.GameObjects.Graphics;
++  private caption!: Phaser.GameObjects.Text;
++  private impactUntil = 0;
++
++  constructor(private readonly controller: SessionController, private readonly config: Readonly<DemoConfig>) {
++    super('Farm');
++    this.snapshot = controller.getSnapshot();
++  }
++  create(): void {
++    this.ink = this.add.graphics();
++    this.caption = this.add.text(40, 32, '', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '22px', color: '#264a36' });
++    const unsubscribe = this.controller.subscribe(s => { this.snapshot = s; });
++    const uneffect = this.controller.onEffect(e => {
++      if (e.sessionId !== this.controller.getSnapshot().sessionId) return;
++      if (e.kind === 'action-phase') this.action = e.phase;
++      if (e.kind === 'action-impact') this.impactUntil = this.time.now + 160;
++      if (e.kind === 'task-changed' || e.kind === 'session-reset') { this.action = 'ready'; this.impactUntil = 0; }
++    });
++    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { unsubscribe(); uneffect(); });
++  }
++  update(): void {
++    const g = this.ink, s = this.snapshot;
++    g.clear();
++    g.fillStyle(0xc9e1bf).fillRect(0, 0, 1280, 720);
++    g.fillStyle(0x8bb779).fillEllipse(300, 390, 1100, 650);
++    g.fillStyle(0xa6c58c).fillEllipse(1080, 450, 900, 650);
++    g.lineStyle(100, 0xd5bf8b).lineBetween(140, 560, 1130, 290);
++    g.lineStyle(3, 0xbba16f).lineBetween(140, 605, 1130, 335);
++    // Home, fencing and garden.
++    g.fillStyle(0xf3d7a3).fillRoundedRect(990, 200, 190, 155, 7);
++    g.fillStyle(0xa56348).fillTriangle(965, 210, 1085, 115, 1200, 210);
++    g.fillStyle(0x654738).fillRect(1060, 265, 48, 90);
++    g.fillStyle(0x82b8bf).fillRect(1125, 238, 33, 40);
++    for (let i = 0; i < 7; i++) g.fillStyle(0xf1ddb2).fillRoundedRect(890 + i * 47, 390, 11, 60, 3);
++    g.fillStyle(0xf1ddb2).fillRect(890, 408, 294, 8);
++    for (let i = 0; i < this.config.treeCount; i++) {
++      const x = 180 + (i % 5) * 138, y = 245 + Math.floor(i / 5) * 100;
++      g.fillStyle(0x886043).fillRect(x - 13, y + 65, 26, i < s.choppedTrees ? 20 : 100);
++      if (i >= s.choppedTrees) {
++        g.fillStyle(0x387858).fillTriangle(x, y - 115, x - 72, y + 105, x + 72, y + 105);
++        g.fillStyle(0x49956b).fillTriangle(x, y - 130, x - 58, y + 30, x + 58, y + 30);
++      }
++    }
++    for (let i = 0; i < s.groundLogs; i++) this.log(170 + (i % 6) * 38, 470 + Math.floor(i / 6) * 20);
++    const carry = s.task === 'carry' || s.phase === 'results';
++    const progress = s.phase === 'results' ? 1 : s.carryActiveMs / this.config.carryTargetMs;
++    const cartX = carry ? 600 + progress * 320 : 680;
++    const cartY = carry ? 505 - progress * 130 : 470;
++    g.fillStyle(0x865c3f).fillRoundedRect(cartX, cartY, 140, 65, 8);
++    g.lineStyle(8, 0x634a37).lineBetween(cartX + 140, cartY + 20, cartX + 190, cartY + 4);
++    g.fillStyle(0x334740).fillCircle(cartX + 28, cartY + 70, 19).fillCircle(cartX + 115, cartY + 70, 19);
++    for (let i = 0; i < s.cartLogs; i++) this.log(cartX + 12 + (i % 4) * 31, cartY - 10 - Math.floor(i / 4) * 16);
++    const playerX = carry ? cartX + 190 : s.task === 'load' ? 570 : 500;
++    const playerY = carry ? cartY + 10 : 407;
++    this.person(playerX, playerY, false);
++    this.person(800, 330, true);
++    if (this.time.now < this.impactUntil) {
++      g.lineStyle(5, 0xffdd77).strokeCircle(playerX + 60, playerY - 20, 35);
++    }
++    this.caption.setText(`地面木材 ${s.groundLogs}    车上 ${s.cartLogs}    到家 ${s.deliveredLogs}\n几何占位 · 阶段：${this.action}`);
++  }
++  private log(x: number, y: number): void {
++    this.ink.fillStyle(0xb27d4e).fillRoundedRect(x, y, 32, 16, 6);
++    this.ink.fillStyle(0xe2b87e).fillCircle(x + 5, y + 8, 6);
++  }
++  private person(x: number, y: number, npc: boolean): void {
++    const g = this.ink;
++    const squat = !npc && this.action === 'squat-down';
++    y += squat ? 23 : 0;
++    g.fillStyle(0x476444, .18).fillEllipse(x, y + 65, 92, 25);
++    g.lineStyle(14, 0x405965).lineBetween(x - 12, y + 20, x - 22, y + 60).lineBetween(x + 12, y + 20, x + 24, y + 60);
++    g.fillStyle(npc ? 0xc8b5d4 : 0xe5ad59).fillRoundedRect(x - 25, y - 38, 50, 66, 10);
++    g.fillStyle(npc ? 0x729db0 : 0xf5d1a0).fillCircle(x, y - 63, 25);
++    g.fillStyle(0x8e633c).fillRoundedRect(x - 35, y - 87, 70, 12, 4);
++    const raised = !npc && (this.action === 'press-up' || this.action === 'ready' || this.action === 'chop-return');
++    const handY = raised ? y - 85 : y;
++    g.lineStyle(12, npc ? 0x729db0 : 0xf5d1a0).lineBetween(x + 21, y - 27, x + 52, handY);
++    if (!npc && this.snapshot.task === 'chop') {
++      g.lineStyle(6, 0x745036).lineBetween(x + 52, handY + 8, x + 68, handY - 42);
++      g.fillStyle(0xdbe3d9).fillTriangle(x + 65, handY - 45, x + 92, handY - 48, x + 86, handY - 22);
++    }
++  }
++}
+diff --git a/src/game/createGame.ts b/src/game/createGame.ts
+new file mode 100644
+index 0000000..5fef5cd
+--- /dev/null
++++ b/src/game/createGame.ts
+@@ -0,0 +1,15 @@
++import Phaser from 'phaser';
++import type { DemoConfig } from '../config/demoConfig.js';
++import type { SessionController } from '../domain/types.js';
++import { FarmScene } from './FarmScene.js';
++
++/** Rendering subscribes to authority; it never advances the session clock. */
++export function createGame(parent: HTMLElement, controller: SessionController, config: Readonly<DemoConfig>): Phaser.Game {
++  return new Phaser.Game({
++    type: Phaser.AUTO, parent, width: 1280, height: 720, backgroundColor: '#95c6ac',
++    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
++    scene: [new FarmScene(controller, config)],
++    audio: { noAudio: true },
++    callbacks: { postBoot: () => { parent.dataset.renderer = `Phaser ${Phaser.VERSION}`; } },
++  });
++}
+diff --git a/.handoff-baseline/src/input/keyboardActionSource.ts b/src/input/keyboardActionSource.ts
+index 1de4232..a89dab3 100644
+--- a/.handoff-baseline/src/input/keyboardActionSource.ts
++++ b/src/input/keyboardActionSource.ts
+@@ -1,9 +1,10 @@
+ import type { ExerciseSignal, InputContext, TaskKind } from '../domain/types.js';
++import type { ActionSource } from './types.js';
+ 
+ /** Produces semantic exercise signals; never changes inventory itself. */
+ type Strip<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
+ type LocalSignal = Strip<ExerciseSignal, 'seq' | 'capturedAtMs' | 'sessionId' | 'taskRunId' | 'sourceEpoch'>;
+-export class KeyboardActionSource {
++export class KeyboardActionSource implements ActionSource {
+   constructor(private readonly speed = 1) {}
+   readonly mode = 'keyboard' as const;
+   private context: InputContext | null = null;
+@@ -17,7 +18,10 @@ export class KeyboardActionSource {
+   private generation = 0;
+ 
+   async start(context: InputContext, emit: (e: ExerciseSignal) => void): Promise<void> {
+-    await this.stop();
++    const stopping = this.stop();
++    const generation = this.generation;
++    await stopping;
++    if (generation !== this.generation) return;
+     this.context = context;
+     this.emit = emit;
+   }
+diff --git a/src/input/types.ts b/src/input/types.ts
+new file mode 100644
+index 0000000..a486c6d
+--- /dev/null
++++ b/src/input/types.ts
+@@ -0,0 +1,7 @@
++import type { ExerciseSignal, InputContext, InputMode } from '../domain/types.js';
++export interface ActionSource {
++  readonly mode: InputMode;
++  start(context: InputContext, emit: (event: ExerciseSignal) => void): Promise<void>;
++  stop(): Promise<void>;
++  dispose(): Promise<void>;
++}
+diff --git a/src/pose/cameraService.ts b/src/pose/cameraService.ts
+new file mode 100644
+index 0000000..f495703
+--- /dev/null
++++ b/src/pose/cameraService.ts
+@@ -0,0 +1,32 @@
++export class CameraService {
++  private epoch = 0;
++  private stream: MediaStream | null = null;
++  constructor(private readonly video: HTMLVideoElement,
++    private readonly getMedia = (constraints: MediaStreamConstraints) => navigator.mediaDevices.getUserMedia(constraints)) {}
++  async start(): Promise<HTMLVideoElement> {
++    this.stop();
++    const epoch = this.epoch;
++    const stream = await this.getMedia({ audio: false, video: { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 30 } } });
++    if (epoch !== this.epoch) {
++      stream.getTracks().forEach(track => track.stop());
++      throw new DOMException('Camera initialization cancelled', 'AbortError');
++    }
++    this.stream = stream;
++    this.video.srcObject = stream;
++    try {
++      await this.video.play();
++      if (epoch !== this.epoch) throw new DOMException('Camera initialization cancelled', 'AbortError');
++      return this.video;
++    } catch (error) {
++      if (epoch === this.epoch) this.stop();
++      throw error;
++    }
++  }
++  stop(): void {
++    this.epoch++;
++    this.stream?.getTracks().forEach(track => track.stop());
++    this.stream = null;
++    this.video.pause();
++    this.video.srcObject = null;
++  }
++}
+diff --git a/src/pose/pose.worker.ts b/src/pose/pose.worker.ts
+new file mode 100644
+index 0000000..bd3a13f
+--- /dev/null
++++ b/src/pose/pose.worker.ts
+@@ -0,0 +1,45 @@
++import { FilesetResolver, PoseLandmarker } from '@mediapipe/tasks-vision';
++import type { WorkerRequest, WorkerResponse } from './types.js';
++
++let landmarker: PoseLandmarker | null = null;
++let epoch = 0;
++let disposed = false;
++const reply = (message: WorkerResponse): void => self.postMessage(message);
++self.onmessage = async ({ data }: MessageEvent<WorkerRequest>): Promise<void> => {
++  if (data.kind === 'dispose') {
++    disposed = true; landmarker?.close(); landmarker = null;
++    reply({ kind: 'disposed' }); return;
++  }
++  try {
++    if (data.kind === 'init') {
++      epoch = data.sourceEpoch;
++      const modelUrl = new URL('models/pose_landmarker_lite.task', data.baseUrl).href;
++      const response = await fetch(modelUrl);
++      if (!response.ok) throw new Error(`模型资源加载失败（HTTP ${response.status}），请运行 npm run assets:sync`);
++      const modelAssetBuffer = new Uint8Array(await response.arrayBuffer());
++      const files = await FilesetResolver.forVisionTasks(new URL('mediapipe/wasm', data.baseUrl).href);
++      const model = await PoseLandmarker.createFromOptions(files, {
++        baseOptions: { modelAssetBuffer, delegate: 'CPU' },
++        runningMode: 'VIDEO', numPoses: 1,
++        outputSegmentationMasks: false,
++      });
++      if (disposed) { model.close(); return; }
++      landmarker = model;
++      reply({ kind: 'ready', sourceEpoch: epoch });
++    } else {
++      try {
++        if (!landmarker || disposed || data.sourceEpoch !== epoch) return;
++        const start = performance.now();
++        const result = landmarker.detectForVideo(data.bitmap, data.capturedAtMs);
++        const landmarks = result.landmarks[0] ?? [];
++        reply({ kind: 'frame', sourceEpoch: epoch, requestId: data.requestId, frame: {
++          frameId: data.requestId, capturedAtMs: data.capturedAtMs, width: data.width, height: data.height,
++          landmarks, valid: landmarks.length === 33 && landmarks.every(p => [p.x, p.y, p.z].every(Number.isFinite)),
++          inferenceMs: performance.now() - start,
++        } });
++      } finally { data.bitmap.close(); }
++    }
++  } catch (error) {
++    if (!disposed) reply({ kind: 'error', sourceEpoch: epoch, message: `模型/推理失败：${error instanceof Error ? error.message : String(error)}` });
++  }
++};
+diff --git a/src/pose/poseWorkerClient.ts b/src/pose/poseWorkerClient.ts
+new file mode 100644
+index 0000000..52a8b9c
+--- /dev/null
++++ b/src/pose/poseWorkerClient.ts
+@@ -0,0 +1,87 @@
++import type { PoseFrame, WorkerRequest, WorkerResponse } from './types.js';
++export interface WorkerPort {
++  onmessage: ((event: MessageEvent<WorkerResponse>) => void) | null;
++  onerror: ((event: ErrorEvent) => void) | null;
++  postMessage(message: WorkerRequest, transfer?: Transferable[]): void;
++  terminate(): void;
++}
++export class PoseWorkerClient {
++  private worker: WorkerPort | null = null;
++  private epoch = 0;
++  private nextId = 0;
++  private pending: { id: number; capturedAtMs: number } | null = null;
++  private ready = false;
++  private rejectStart: ((error: Error) => void) | null = null;
++  private initTimer: ReturnType<typeof setTimeout> | undefined;
++  private frameTimer: ReturnType<typeof setTimeout> | undefined;
++  constructor(
++    private readonly factory: () => WorkerPort = () => new Worker(new URL('worker/pose.js', this.baseUrl)),
++    private readonly bitmap = (video: HTMLVideoElement) => createImageBitmap(video),
++    private readonly baseUrl = new URL(import.meta.env.BASE_URL, location.href).href,
++  ) {}
++  async start(onFrame: (frame: PoseFrame) => void, onError: (message: string) => void = () => {}): Promise<void> {
++    const stopping = this.stop();
++    const epoch = this.epoch;
++    await stopping;
++    if (epoch !== this.epoch) throw new DOMException('Cancelled', 'AbortError');
++    const worker = this.factory(); this.worker = worker;
++    return new Promise<void>((resolve, reject) => {
++      this.rejectStart = reject;
++      const fail = (message: string): void => {
++        if (epoch !== this.epoch) return;
++        reject(new Error(message)); this.rejectStart = null;
++        void this.stop(); onError(message);
++      };
++      this.initTimer = setTimeout(() => fail('模型初始化超时（30 秒），请重试'), 30_000);
++      worker.onerror = () => fail('推理 Worker 失败，请重试或选择键盘演示');
++      worker.onmessage = ({ data }) => {
++        if (epoch !== this.epoch || data.kind === 'disposed' || data.sourceEpoch !== epoch) return;
++        if (data.kind === 'ready') {
++          clearTimeout(this.initTimer); this.ready = true; this.rejectStart = null; resolve();
++        } else if (data.kind === 'error') fail(data.message);
++        else if (data.kind === 'frame' && this.pending?.id === data.requestId && data.frame.capturedAtMs === this.pending.capturedAtMs) {
++          clearTimeout(this.frameTimer); this.pending = null; onFrame(data.frame);
++        }
++      };
++      worker.postMessage({ kind: 'init', sourceEpoch: epoch, baseUrl: this.baseUrl });
++    });
++  }
++  submit(video: HTMLVideoElement, capturedAtMs: number): void {
++    const worker = this.worker, epoch = this.epoch;
++    if (!worker || !this.ready || this.pending || video.readyState < 2 || !Number.isFinite(capturedAtMs)) return;
++    const requestId = ++this.nextId;
++    this.pending = { id: requestId, capturedAtMs };
++    this.frameTimer = setTimeout(() => {
++      if (epoch === this.epoch) worker.onmessage?.({ data: { kind: 'error', sourceEpoch: epoch, message: '推理超时，请重试' } } as MessageEvent<WorkerResponse>);
++    }, 10_000);
++    void this.bitmap(video).then(bitmap => {
++      if (epoch !== this.epoch) { bitmap.close(); return; }
++      try {
++        worker.postMessage({ kind: 'frame', sourceEpoch: epoch, requestId, capturedAtMs,
++          width: video.videoWidth, height: video.videoHeight, bitmap }, [bitmap]);
++      } catch (error) {
++        bitmap.close(); throw error;
++      }
++    }).catch(error => {
++      if (epoch === this.epoch) worker.onmessage?.({ data: { kind: 'error', sourceEpoch: epoch, message: `视频帧读取失败：${String(error)}` } } as MessageEvent<WorkerResponse>);
++    });
++  }
++  async stop(): Promise<void> {
++    this.epoch++; this.ready = false; this.pending = null;
++    clearTimeout(this.initTimer); clearTimeout(this.frameTimer);
++    this.rejectStart?.(new DOMException('Cancelled', 'AbortError')); this.rejectStart = null;
++    const worker = this.worker; this.worker = null;
++    if (!worker) return;
++    await new Promise<void>(resolve => {
++      let done = false;
++      const finish = (): void => {
++        if (done) return; done = true; clearTimeout(timer);
++        worker.onmessage = null; worker.onerror = null; worker.terminate(); resolve();
++      };
++      const timer = setTimeout(finish, 300);
++      worker.onmessage = ({ data }) => { if (data.kind === 'disposed') finish(); };
++      worker.onerror = finish;
++      worker.postMessage({ kind: 'dispose' });
++    });
++  }
++}
+diff --git a/src/pose/types.ts b/src/pose/types.ts
+new file mode 100644
+index 0000000..f0fe98d
+--- /dev/null
++++ b/src/pose/types.ts
+@@ -0,0 +1,14 @@
++export interface Landmark { x: number; y: number; z: number; visibility?: number; presence?: number }
++export interface PoseFrame {
++  frameId: number; capturedAtMs: number; width: number; height: number;
++  landmarks: readonly Landmark[]; valid: boolean; inferenceMs: number;
++}
++export type WorkerRequest =
++  | { kind: 'init'; sourceEpoch: number; baseUrl: string }
++  | { kind: 'frame'; sourceEpoch: number; requestId: number; capturedAtMs: number; width: number; height: number; bitmap: ImageBitmap }
++  | { kind: 'dispose' };
++export type WorkerResponse =
++  | { kind: 'ready'; sourceEpoch: number }
++  | { kind: 'frame'; sourceEpoch: number; requestId: number; frame: PoseFrame }
++  | { kind: 'error'; sourceEpoch: number; message: string }
++  | { kind: 'disposed' };
+diff --git a/src/ui/setupPanel.ts b/src/ui/setupPanel.ts
+new file mode 100644
+index 0000000..d63e3dd
+--- /dev/null
++++ b/src/ui/setupPanel.ts
+@@ -0,0 +1,95 @@
++import { CameraService } from '../pose/cameraService.js';
++import { PoseWorkerClient } from '../pose/poseWorkerClient.js';
++import type { PoseFrame } from '../pose/types.js';
++
++const links = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24], [23, 25], [25, 27], [24, 26], [26, 28]];
++export class SetupPanel {
++  private readonly camera: CameraService;
++  private readonly client = new PoseWorkerClient();
++  private epoch = 0;
++  private timer: ReturnType<typeof setInterval> | undefined;
++  private slowTimer: ReturnType<typeof setTimeout> | undefined;
++  private timeout: ReturnType<typeof setTimeout> | undefined;
++  private lastVideoTime = -1;
++  private frameCount = 0;
++  private sampleStart = 0;
++  private timings: number[] = [];
++  constructor(video: HTMLVideoElement, private readonly overlay: HTMLCanvasElement,
++    private readonly status: HTMLElement, private readonly metrics: HTMLElement, private readonly frames: HTMLElement,
++    private readonly startButton: HTMLButtonElement) {
++    this.camera = new CameraService(video);
++  }
++  async start(): Promise<void> {
++    const stopping = this.stop();
++    const epoch = this.epoch;
++    await stopping;
++    if (epoch !== this.epoch) return;
++    this.startButton.disabled = true;
++    this.status.textContent = '正在请求摄像头权限（仅视频）…';
++    this.slowTimer = setTimeout(() => { if (epoch === this.epoch) this.status.textContent = '摄像头/模型加载较慢，可取消或重试'; }, 10_000);
++    this.timeout = setTimeout(() => { if (epoch === this.epoch) this.fail('初始化超时（30 秒），请重试或选择键盘演示'); }, 30_000);
++    try {
++      if (!navigator.mediaDevices?.getUserMedia) throw new Error('浏览器不支持摄像头：请使用 localhost 或 HTTPS');
++      const video = await this.camera.start();
++      if (epoch !== this.epoch) return;
++      (video.srcObject as MediaStream).getTracks().forEach(track => {
++        track.addEventListener('ended', () => { if (epoch === this.epoch) this.fail('摄像头已断开，请重试'); }, { once: true });
++      });
++      this.status.textContent = '摄像头已打开，正在加载本地模型与 WASM…';
++      await this.client.start(frame => { if (epoch === this.epoch) this.draw(frame); }, message => {
++        if (epoch === this.epoch) this.fail(message);
++      });
++      if (epoch !== this.epoch) return;
++      clearTimeout(this.slowTimer); clearTimeout(this.timeout);
++      this.status.textContent = '推理中 · Worker / CPU · 仅关键点诊断，尚未接入运动识别';
++      this.sampleStart = performance.now();
++      this.timer = setInterval(() => {
++        if (document.hidden || video.currentTime === this.lastVideoTime) return;
++        this.lastVideoTime = video.currentTime;
++        this.client.submit(video, performance.now());
++      }, 1000 / 15);
++    } catch (error) {
++      if (epoch !== this.epoch) return;
++      const name = error instanceof Error ? error.name : '';
++      const messages: Record<string, string> = {
++        NotAllowedError: '摄像头权限被拒绝，请在浏览器允许视频权限后重试',
++        NotFoundError: '未找到摄像头，请连接设备后重试',
++        NotReadableError: '摄像头被占用或无法读取，请关闭其他占用程序后重试',
++        NotSupportedError: '当前浏览器或摄像头设备不支持视频读取，请换用桌面 Chrome/Edge 或检查设备后重试',
++      };
++      this.fail(messages[name] ?? (error instanceof Error ? error.message : String(error)));
++    }
++  }
++  private fail(message: string): void {
++    void this.stop(); this.status.textContent = message;
++  }
++  private draw(frame: PoseFrame): void {
++    this.frames.textContent = String(++this.frameCount);
++    this.timings.push(frame.inferenceMs); if (this.timings.length > 120) this.timings.shift();
++    const times = [...this.timings].sort((a, b) => a - b);
++    const p50 = times[Math.floor((times.length - 1) * .5)];
++    const p95 = times[Math.floor((times.length - 1) * .95)];
++    const hz = this.frameCount * 1000 / Math.max(1, performance.now() - this.sampleStart);
++    this.metrics.textContent = `${frame.width}×${frame.height} · ${frame.landmarks.length} 个关键点 · ${hz.toFixed(1)} Hz · 推理 p50/p95 ${p50.toFixed(0)}/${p95.toFixed(0)}ms · 样本年龄 ${(performance.now() - frame.capturedAtMs).toFixed(0)}ms · ${frame.valid ? '人体关键点可用' : '未检测到人体'}`;
++    this.overlay.width = frame.width; this.overlay.height = frame.height;
++    const ctx = this.overlay.getContext('2d'); if (!ctx) return;
++    ctx.clearRect(0, 0, frame.width, frame.height);
++    ctx.strokeStyle = '#93ffb4'; ctx.fillStyle = '#ffe59b'; ctx.lineWidth = 3;
++    const visible = (i: number) => (frame.landmarks[i]?.visibility ?? 0) >= .6;
++    for (const [a, b] of links) {
++      if (!visible(a) || !visible(b)) continue;
++      const p = frame.landmarks[a], q = frame.landmarks[b];
++      ctx.beginPath(); ctx.moveTo(p.x * frame.width, p.y * frame.height); ctx.lineTo(q.x * frame.width, q.y * frame.height); ctx.stroke();
++    }
++    frame.landmarks.forEach((p, i) => { if (visible(i)) { ctx.beginPath(); ctx.arc(p.x * frame.width, p.y * frame.height, 4, 0, Math.PI * 2); ctx.fill(); } });
++  }
++  async stop(): Promise<void> {
++    this.epoch++; clearInterval(this.timer); clearTimeout(this.slowTimer); clearTimeout(this.timeout);
++    this.camera.stop(); this.lastVideoTime = -1; this.frameCount = 0; this.timings = [];
++    this.frames.textContent = '0'; this.metrics.textContent = '';
++    this.overlay.getContext('2d')?.clearRect(0, 0, this.overlay.width, this.overlay.height);
++    this.startButton.disabled = false;
++    this.status.textContent = '摄像头已关闭；点击开始诊断才请求视频权限';
++    await this.client.stop();
++  }
++}
+diff --git a/src/vite-env.d.ts b/src/vite-env.d.ts
+new file mode 100644
+index 0000000..11f02fe
+--- /dev/null
++++ b/src/vite-env.d.ts
+@@ -0,0 +1 @@
++/// <reference types="vite/client" />

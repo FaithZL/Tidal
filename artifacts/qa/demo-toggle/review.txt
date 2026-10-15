@@ -1,0 +1,7 @@
+Read-only independent review: review_demo_toggle
+Scope: T05 + explicit switchable no-camera skeleton and automatic farm demonstration.
+Verdict: No Critical, Important or Minor issues reported.
+Checked: semantic source reuse; generation/epoch isolation; partial cancellation; carry pause/resume; provenance; reset; pending camera release; explicit simulation labels; setup/running screenshots.
+At review time 44 unit tests and 5 added E2E tests passed; full suite still running. Final verification is recorded separately.
+Not claimed: physical camera accuracy, real workout recognition, T06-T09, full T10/T11 layout/performance/release matrix. These exclusions match this task scope.
+Docs were still being updated and excluded from that review.

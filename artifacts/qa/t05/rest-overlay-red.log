@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/visual-states.spec.ts
+
+[WebServer] (node:16232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:26316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:46732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (22.8s)
+
+
+  1) tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 376.2703125
+    Received:   516.671875
+
+      43 |   await expect(world).toHaveAttribute('data-npc', 'gather');await page.clock.fastForward(7200);await advance(page, 20);await frame(page, '06-rest-gather');
+      44 |   const overlay = await page.locator('#countdown').boundingBox(), bounds = await world.boundingBox();
+    > 45 |   expect(overlay!.y + overlay!.height).toBeLessThan(bounds!.y + bounds!.height * .35);
+         |                                        ^
+      46 |   await expect(world).toHaveAttribute('data-inventory', '15/0/0');
+      47 |   await page.clock.fastForward(8000);await page.clock.fastForward(5100);await advance(page, 20);await expect(page.locator('#statusTag')).toHaveText('训练中');
+      48 |   await page.locator('#actionBtn').click();await advance(page, 170);
+        at D:\work\corona\Tidal\tests\e2e\visual-states.spec.ts:45:40
+
+    Error Context: test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset 

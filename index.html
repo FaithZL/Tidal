@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#142e2f" />
+  <title>TIDAL · 映动农场 | Web Demo</title>
+  <link rel="stylesheet" href="/web/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="identity">
+        <div class="brand-symbol">T<span>✦</span></div>
+        <div><div class="brand-name">TIDAL <span>FARM</span></div><div class="tagline">每一次运动，都让世界生长</div></div>
+      </div>
+      <div class="top-actions">
+        <div id="testModeBadge" class="pill warn" hidden>本地测试加速模式</div>
+        <div id="modeBadge" class="pill">⌨ 键盘演示 · 非真实动作识别</div>
+        <button id="demoToggle" class="secondary demo-toggle" role="switch" aria-checked="false">无摄像头测试：关</button>
+        <button id="pauseBtn" class="secondary" hidden>暂停</button>
+        <button id="resetBtn" class="secondary">重新开始</button>
+      </div>
+    </header>
+    <main class="layout">
+      <section class="stage">
+        <div class="scene-head">
+          <div><div class="eyebrow">YOUR LITTLE WORLD</div><h1 id="stageTitle">一座农场，等待你的第一步</h1></div>
+          <span id="sceneTag" class="scene-tag">今日劳作 · 体验计划</span>
+        </div>
+        <div class="canvas-shell">
+          <div id="worldCanvas" role="img" aria-label="森林、农场、人物、机器人和运木推车的游戏示意场景"></div>
+          <div id="countdown" class="countdown" hidden></div>
+          <div class="canvas-bottom">
+            <div class="live-note"><span class="live-dot"></span><span id="sceneHint">从一件小事开始，让这座农场苏醒。</span></div>
+            <div class="small-progress"><span id="scenePercent">0%</span><div class="progress-track"><span id="progressFill"></span></div></div>
+          </div>
+        </div>
+        <div class="timeline" aria-label="训练任务阶段">
+          <div id="step-chop" class="timeline-item"><span class="step-icon">🪓</span><span><b>砍伐杉树</b><small>壶铃挥砍</small></span></div>
+          <div class="timeline-line"></div>
+          <div id="step-load" class="timeline-item"><span class="step-icon">🪵</span><span><b>木材装车</b><small>深蹲推举</small></span></div>
+          <div class="timeline-line"></div>
+          <div id="step-carry" class="timeline-item"><span class="step-icon">🛒</span><span><b>运输木材</b><small>持续持姿</small></span></div>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <div class="side-heading"><span class="eyebrow">MISSION CONTROL</span><span id="statusTag" class="subtag">未开始</span></div>
+        <h2 id="missionTitle">今日农场计划</h2>
+        <p id="missionText" class="mission-copy">欢迎回来。运动不再只是一组枯燥的数字，而是一份看得见的收获。</p>
+        <div class="metric-boxes">
+          <div class="metric"><span>🪓 已完成挥砍</span><strong id="chopValue">0/15</strong></div>
+          <div class="metric"><span>🪵 已装车木材</span><strong id="loadValue">0/15</strong></div>
+          <div class="metric"><span>⏱ 有效拉车</span><strong id="carryValue">0/60s</strong></div>
+          <div class="metric"><span>🌲 砍倒树木</span><strong id="treeValue">0/3</strong></div>
+        </div>
+        <div id="demoPreviewGame" class="synthetic-preview mini-preview" hidden>
+          <canvas id="demoGameCanvas" width="280" height="240" aria-label="脚本合成骨架，非摄像头识别"></canvas>
+          <div><b>合成骨架</b><span id="demoGamePhase"></span><small>自动模拟 · 非运动识别<br>随时关闭测试可改用键盘</small></div>
+        </div>
+        <div id="rewardNote" class="reward-note"><span class="reward-icon">✧</span><div><b>将运动变成资产</b><small>收集资源 · 升级农场 · 获得正反馈</small></div></div>
+        <div class="action-zone">
+          <div id="actionPrompt" class="action-prompt">确认训练计划，开始今天的劳作。</div>
+          <button id="actionBtn" class="primary" disabled>等待开始</button>
+          <p class="keyboard-hint" id="keyboardHint">可按 <kbd>Space</kbd> 完成一次动作</p>
+        </div>
+        <div class="developer-note">键盘 / 自动模拟可完整演示。摄像头仅做关键点诊断，不计运动次数；视频仅本机内存处理，不上传、不录像。</div>
+      </aside>
+    </main>
+    <footer class="site-footer"><span>ENGINEERING PROTOTYPE · 无服务端 · 无真实健康指标</span><span id="systemStatus" role="status">准备就绪</span></footer>
+  </div>
+  <div class="modal-backdrop" id="planModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="planHeading">
+      <div class="modal-eyebrow">A NEW DAY ON THE FARM</div>
+      <h2 id="planHeading">农场今日劳作</h2>
+      <p>从砍树到装车，把运动转化为真实可见的农场变化。</p>
+      <div class="plan-card"><span class="plan-number">01</span><div><b>砍伐杉树</b><small id="planChop">挥砍 15 次 · 砍倒 3 棵杉树</small></div></div>
+      <div class="plan-card"><span class="plan-number">02</span><div><b>收集木材</b><small id="planLoad">深蹲推举 15 次 · 装车 15 份木材</small></div></div>
+      <div class="plan-card"><span class="plan-number">03</span><div><b>推车回家</b><small id="planCarry">持续持姿 60 秒 · 返回农场</small></div></div>
+      <div class="modal-info">提示：当前为预设训练计划（概念演示），不是真实 AI 自动规划。</div>
+      <div class="modal-actions"><button class="secondary" id="cancelPlan">稍后再说</button><button class="primary" id="acceptPlan">接受今天的任务 <span>→</span></button></div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="setupModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="setupHeading">
+      <div class="modal-eyebrow">CHOOSE YOUR INPUT</div>
+      <h2 id="setupHeading">选择演示输入方式</h2>
+      <p>键盘可完整演示。摄像头仅供关键点诊断，三种运动识别将在后续任务接入。</p>
+      <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
+      <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
+      <div class="camera-actions"><button class="secondary" id="cameraStart">开启摄像头诊断</button><button class="secondary" id="cameraStop">停止 / 取消</button></div>
+      <div id="demoPreviewSetup" class="synthetic-preview" hidden>
+        <canvas id="demoSetupCanvas" width="360" height="240" aria-label="脚本合成骨架动作预览"></canvas>
+        <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头；准备页不计成果。</small></div>
+      </div>
+      <div id="cameraDiagnostics">
+      <div class="camera-preview"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体骨架诊断"></canvas></div>
+      <p id="cameraStatus" role="status">点击开启诊断才请求视频权限；仅在本机处理。</p>
+      <small id="cameraMetrics"></small><small>已返回推理帧：<span id="cameraFrames">0</span></small>
+      </div>
+      <div id="cameraLimitNote" class="modal-info">人体关键点不能确认器械重量、真实持握、心率或卡路里。请保持全身可见，本轮不做动作标定或计数。</div>
+      <div class="modal-actions"><button class="secondary" id="backHome">返回首页</button><button class="primary" id="beginDemo">关闭摄像头并开始键盘演示 →</button></div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="resultsModal" hidden>
+    <div class="modal results-modal" role="dialog" aria-modal="true" aria-labelledby="resultsHeading">
+      <div class="result-star">✦</div><div class="modal-eyebrow">THE HARVEST IS HERE</div>
+      <h2 id="resultsHeading">恭喜！今天的农场劳作完成</h2>
+      <p>你的每一次付出，都留下了实实在在的痕迹。</p>
+      <div class="result-stats">
+        <div><span>🪵 木材到家</span><strong id="rewardLogs">15</strong></div>
+        <div><span>🪙 游戏金币</span><strong id="rewardCoins">100</strong></div>
+        <div><span>⚡ 游戏体力</span><strong id="rewardStamina">100</strong></div>
+      </div>
+      <div class="prize"><img src="/assets/harvest-shirt.svg" alt="农场叶芽徽章 T 恤" /><span>盲盒奖励：<b>限定 T 恤</b></span></div>
+      <div class="actual-metrics"><b>本次演示记录（模拟流程，非真实运动成果）</b><div id="actualMetrics">完成 15 次砍伐，15 次装车</div><small>心率和卡路里：未接入测量设备，无法提供真实数据。66 天连续打卡与 500 卡等数据仅为原方案示意。</small></div>
+      <button id="resultsHome" class="primary full-width">返回农场首页</button>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="exitModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="exitHeading">
+      <h2 id="exitHeading">结束本局并返回首页？</h2>
+      <p>本局进度将重置。选择继续训练可保留当前进度。</p>
+      <div class="modal-actions"><button class="secondary" id="cancelExit">继续训练</button><button class="primary" id="confirmExit">结束并重置</button></div>
+    </div>
+  </div>
+  <script type="module" src="/src/browser.ts"></script>
+</body>
+</html>

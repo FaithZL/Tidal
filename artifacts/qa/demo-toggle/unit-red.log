@@ -1,0 +1,76 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/autoDemoSource.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/autoDemoSource.test.ts (4 tests | 3 failed) 9ms
+   × automatic demo emits complete keyboard semantics, not direct resource changes 6ms
+   × stopping during a partial action prevents completion and restarting uses the new epoch 2ms
+   × automatic carry sends adjacent hold samples and stops immediately when disabled 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/autoDemoSource.test.ts > automatic demo emits complete keyboard semantics, not direct resource changes
+AssertionError: expected [] to deeply equal [ 'phase', 'phase', 'impact', …(2) ]
+
+- Expected
++ Received
+
+- [
+-   "phase",
+-   "phase",
+-   "impact",
+-   "phase",
+-   "rep-completed",
+- ]
++ []
+
+ ❯ tests/unit/autoDemoSource.test.ts:11:35
+      9|   vi.useFakeTimers();const events: ExerciseSignal[] = [];const source …
+     10|   await source.start(context('chop'), e => events.push(e));await vi.ad…
+     11|   expect(events.map(e => e.kind)).toEqual(['phase', 'phase', 'impact',…
+       |                                   ^
+     12|   expect(events.every(e => e.sessionId === 's1' && e.sourceEpoch === 1…
+     13|   await source.stop();const count = events.length;await vi.advanceTime…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/autoDemoSource.test.ts > stopping during a partial action prevents completion and restarting uses the new epoch
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/autoDemoSource.test.ts:20:58
+     18|   await vi.advanceTimersByTimeAsync(2000);expect(events.some(e => e.ki…
+     19|   events.length = 0;await source.start({ ...context('load'), sourceEpo…
+     20|   expect(events.filter(e => e.kind === 'rep-completed')).toHaveLength(…
+       |                                                          ^
+     21|   expect(events.filter(e => e.kind === 'phase').map(e => e.phase)).toE…
+     22|   expect(events.every(e => e.sourceEpoch === 2)).toBe(true);await sour…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/autoDemoSource.test.ts > automatic carry sends adjacent hold samples and stops immediately when disabled
+AssertionError: expected 0 to be greater than 3
+ ❯ tests/unit/autoDemoSource.test.ts:27:76
+     25|   vi.useFakeTimers();const events: ExerciseSignal[] = [];const source …
+     26|   await source.start(context('carry'), e => events.push(e));await vi.a…
+     27|   expect(events.filter(e => e.kind === 'hold-sample' && e.holding).len…
+       |                                                                            ^
+     28|   await source.stop();expect(events.at(-1)).toMatchObject({ kind: 'hol…
+     29|   const count = events.length;await vi.advanceTimersByTimeAsync(2000);…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  23:33:48
+   Duration  121ms (transform 48%, tests 26%, import 18%, worker 8%)
+

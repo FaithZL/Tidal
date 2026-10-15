@@ -1,0 +1,543 @@
+diff --git a/.t04-baseline/src/browser.ts b/src/browser.ts
+index 9b54ca2..81125c7 100644
+--- a/.t04-baseline/src/browser.ts
++++ b/src/browser.ts
+@@ -96,9 +96,10 @@ function panel(s: Readonly<SessionSnapshot>): void {
+     : phase === 'active' && s.task ? instructions[s.task]
+     : '从一件小事开始，让这座农场苏醒。';
+   const countdown = $('countdown');
++  countdown.classList.toggle('compact', phase === 'rest' || s.pauseReasons.length > 0);
+   countdown.hidden = phase !== 'rest' && phase !== 'countdown' && !s.pauseReasons.length;
+   if(s.pauseReasons.length) countdown.innerHTML = '已暂停<small>点击继续后恢复</small>';
+-  else if(phase === 'rest') countdown.innerHTML = `${Math.ceil(s.remainingMs/1000)}<small>休息时间 · 游戏角色整理木材</small>`;
++  else if(phase === 'rest') countdown.innerHTML = `${Math.ceil(s.remainingMs/1000)}s<small>休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}</small>`;
+   else if(phase === 'countdown') countdown.innerHTML = `${Math.ceil(s.remainingMs/1000)}<small>做好准备，即将开始</small>`;
+   const idx = s.task === 'chop' ? 0 : s.task === 'load' ? 1 : s.task === 'carry' ? 2 : phase === 'results' ? 3 : -1;
+   (['chop','load','carry'] as TaskKind[]).forEach((t,i) => {
+diff --git a/src/game/ActionAnimator.ts b/src/game/ActionAnimator.ts
+new file mode 100644
+index 0000000..1ba29db
+--- /dev/null
++++ b/src/game/ActionAnimator.ts
+@@ -0,0 +1,95 @@
++import type { DemoConfig } from '../config/demoConfig.js';
++import type { ActionPhase, GameEffect, SessionSnapshot } from '../domain/types.js';
++
++export interface VisualEffect { kind: 'impact' | 'tree' | 'log'; id: string; index: number; progress: number }
++export interface FarmFrame {
++  action: ActionPhase;
++  effects: readonly VisualEffect[];
++  player: { x: number; y: number; facing: number; walking: number };
++  cart: { x: number; y: number };
++  npc: { x: number; y: number; mode: 'idle' | 'gather' | 'secure' | 'guide' | 'celebrate'; progress: number };
++  cartVisibleLogs: number; flyingLogs: number; groundVisibleLogs: number; handLog: boolean;
++  deliveredLogs: number; carryProgress: number;
++}
++export class ActionAnimator {
++  private snapshot: Readonly<SessionSnapshot> | null = null;
++  private action: ActionPhase = 'ready';
++  private effects: (VisualEffect & { elapsed: number; duration: number })[] = [];
++  private seen = new Set<string>();
++  private disposed = false;
++  constructor(private readonly config: Readonly<DemoConfig>) {}
++  sync(snapshot: Readonly<SessionSnapshot>): void {
++    if (this.disposed) return;
++    const previous = this.snapshot;
++    if (previous?.sessionId !== snapshot.sessionId) this.clear();
++    else if (previous.sourceEpoch !== snapshot.sourceEpoch || previous.taskRunId !== snapshot.taskRunId) {
++      this.action = 'ready';
++      // Committed arrivals/falls can finish across a task boundary; a resumed partial action cannot.
++      this.effects = previous.taskRunId === snapshot.taskRunId ? [] : this.effects.filter(e => e.kind !== 'impact');
++    }
++    this.snapshot = snapshot;
++  }
++  apply(effect: GameEffect): void {
++    const s = this.snapshot;
++    if (this.disposed || !s || effect.sessionId !== s.sessionId) return;
++    if (effect.kind === 'session-reset') { this.clear(); return; }
++    if (s.pauseReasons.length || s.phase !== 'active') return;
++    if (effect.taskRunId !== s.taskRunId || effect.sourceEpoch !== s.sourceEpoch) return;
++    if ('task' in effect && effect.task !== s.task) return;
++    if (effect.kind === 'action-phase') { this.action = effect.phase; return; }
++    const id = `${effect.kind}:${effect.taskRunId}:${effect.sourceEpoch}:${effect.repId}`;
++    if (this.seen.has(id)) return;
++    let kind: VisualEffect['kind']; let index: number; let duration: number;
++    if (effect.kind === 'action-impact') { kind = 'impact'; index = effect.task === 'chop' ? s.choppedTrees : -1; duration = 320; }
++    else if (effect.kind === 'tree-felled') { kind = 'tree'; index = effect.choppedTrees - 1; duration = 1000; }
++    else if (effect.kind === 'log-loaded') { kind = 'log'; index = effect.cartLogs - 1; duration = 540; }
++    else return;
++    this.seen.add(id);
++    this.effects.push({ kind, id, index, elapsed: 0, progress: 0, duration });
++  }
++  advance(deltaMs: number): void {
++    if (this.disposed || this.snapshot?.pauseReasons.length || !Number.isFinite(deltaMs) || deltaMs < 0) return;
++    for (const e of this.effects) { e.elapsed += deltaMs; e.progress = Math.min(1, e.elapsed / e.duration); }
++    this.effects = this.effects.filter(e => e.progress < 1);
++  }
++  private clear(): void { this.action = 'ready'; this.effects = []; this.seen.clear(); }
++  dispose(): void { this.clear(); this.snapshot = null; this.disposed = true; }
++  get frame(): FarmFrame {
++    const s = this.snapshot;
++    const f: FarmFrame = { action: this.action, effects: this.effects.map(({ kind, id, index, progress }) => ({ kind, id, index, progress })),
++      cart: { x: 790, y: 540 }, player: { x: 365, y: 495, facing: -1, walking: 0 },
++      npc: { x: 730, y: 475, mode: 'idle', progress: 0 }, cartVisibleLogs: s?.cartLogs ?? 0, flyingLogs: 0,
++      groundVisibleLogs: s?.groundLogs ?? 0, handLog: false, deliveredLogs: s?.deliveredLogs ?? 0, carryProgress: 0 };
++    if (!s) return f;
++    const rest = Math.max(0, Math.min(1, 1 - s.remainingMs / this.config.restMs));
++    if (s.task === 'chop') {
++      const tree = treePosition(Math.min(s.choppedTrees, this.config.treeCount - 1));
++      f.player = { x: tree.x + 105, y: tree.y + 45, facing: -1, walking: 0 };
++    }
++    if (s.task === 'load') {
++      const gathering = s.phase === 'rest';
++      f.cart = { x: gathering ? 790 - 140 * rest : 650, y: 540 };
++      f.player = { x: gathering ? 515 + 33 * rest : 548, y: gathering ? 415 + 140 * rest : 555, facing: 1, walking: gathering ? rest * 24 : 0 };
++      f.npc = gathering ? { x: 710 - 240 * Math.sin(rest * Math.PI), y: 500, mode: 'gather', progress: rest }
++        : { x: 750, y: 470, mode: 'idle', progress: 0 };
++      f.handLog = s.phase === 'active' && s.groundLogs > 0 && ['squat-down', 'stand-up', 'press-up'].includes(this.action);
++      if (f.handLog) f.groundVisibleLogs--;
++    }
++    if (s.task === 'carry' || s.phase === 'results') {
++      f.carryProgress = s.phase === 'results' ? 1 : Math.max(0, Math.min(1, s.carryActiveMs / this.config.carryTargetMs));
++      f.cart = { x: 650 + f.carryProgress * 340, y: 540 - f.carryProgress * 130 };
++      f.player = { x: f.cart.x + 130, y: f.cart.y + 5, facing: 1, walking: f.carryProgress * 60 };
++      f.npc = { x: f.cart.x - 95, y: f.cart.y - 25, mode: s.phase === 'rest' ? 'secure' : s.phase === 'results' ? 'celebrate' : 'guide', progress: s.phase === 'rest' ? rest : f.carryProgress };
++    }
++    f.flyingLogs = Math.min(f.cartVisibleLogs, this.effects.filter(e => e.kind === 'log').length);
++    f.cartVisibleLogs -= f.flyingLogs;
++    return f;
++  }
++}
++
++/** Stable layout shared by trees, player and impact rendering; no domain coordinates. */
++export function treePosition(index: number): { x: number; y: number } {
++  const positions = [{ x: 260, y: 450 }, { x: 140, y: 370 }, { x: 410, y: 370 }];
++  const p = positions[index % positions.length]!;
++  return { x: p.x + Math.floor(index / positions.length) * 32, y: p.y - Math.floor(index / positions.length) * 40 };
++}
+diff --git a/.t04-baseline/src/game/FarmScene.ts b/src/game/FarmScene.ts
+index a90ed30..8f544b4 100644
+--- a/.t04-baseline/src/game/FarmScene.ts
++++ b/src/game/FarmScene.ts
+@@ -1,91 +1,128 @@
+ import Phaser from 'phaser';
+ import type { DemoConfig } from '../config/demoConfig.js';
+ import type { ActionPhase, SessionController, SessionSnapshot } from '../domain/types.js';
++import { ActionAnimator, treePosition, type FarmFrame } from './ActionAnimator.js';
++import { farmAssets, palette as p } from './assets.js';
++import { FarmerActor } from './actors/FarmerActor.js';
++import { HelperActor } from './actors/HelperActor.js';
++import { CartActor, drawLog, TreeActor } from './actors/props.js';
+ 
+-/** T04 greybox: geometry follows snapshots/effects, never mutates inventory. */
++const phaseNames: Record<ActionPhase, string> = {
++  ready: '准备 · 上肩蓄力', 'chop-down': '下挥 · 击中树干', 'chop-return': '复位 · 收回斧头',
++  'squat-down': '下蹲 · 拾起木材', 'stand-up': '站起 · 抬至胸前', 'press-up': '上举 · 举过头顶', 'load-return': '复位 · 等待装车提交',
++};
++
++/** Scene owns every actor/subscription, and only reads the domain's authoritative state. */
+ export class FarmScene extends Phaser.Scene {
+   private snapshot: Readonly<SessionSnapshot>;
+-  private action: ActionPhase = 'ready';
+-  private ink!: Phaser.GameObjects.Graphics;
++  private animator: ActionAnimator;
++  private farmer!: FarmerActor;
++  private helper!: HelperActor;
++  private cart!: CartActor;
++  private trees: TreeActor[] = [];
++  private wood!: Phaser.GameObjects.Graphics;
++  private particles!: Phaser.GameObjects.Graphics;
+   private caption!: Phaser.GameObjects.Text;
+-  private impactUntil = 0;
++  private stock!: Phaser.GameObjects.Text;
++  private host: HTMLElement | null = null;
++  private lastPaint = '';
+ 
+   constructor(private readonly controller: SessionController, private readonly config: Readonly<DemoConfig>) {
+-    super('Farm');
+-    this.snapshot = controller.getSnapshot();
++    super('Farm');this.snapshot = controller.getSnapshot();this.animator = new ActionAnimator(config);
+   }
++  preload(): void { this.load.svg('farm-landscape', farmAssets.landscape, { width: 1280, height: 720 }); }
+   create(): void {
+-    this.ink = this.add.graphics();
+-    this.caption = this.add.text(40, 32, '', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '22px', color: '#264a36' });
+-    const unsubscribe = this.controller.subscribe(s => { this.snapshot = s; });
++    this.lastPaint = '';
++    this.animator = new ActionAnimator(this.config);
++    this.host = this.game.canvas.parentElement;
++    if (this.textures.exists('farm-landscape')) {
++      this.add.image(0, 0, 'farm-landscape').setOrigin(0);
++      if (this.host) this.host.dataset.art = 'tidal-farm-v1';
++    } else this.add.text(30, 250, '农场背景资源加载失败，请刷新检查本地 assets。', { color: '#842e22', fontSize: '24px' });
++    this.add.text(36, 30, 'TIDAL  /  A LITTLE EVERY DAY', { fontFamily: 'sans-serif', fontSize: '15px', color: '#6c7957', letterSpacing: 3 });
++    this.add.text(34, 56, '林间农场', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '34px', fontStyle: 'bold', color: '#3d5944' });
++    this.caption = this.add.text(36, 106, '', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '20px', color: '#4c6249' }).setDepth(1100);
++    this.stock = this.add.text(1244, 33, '', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '19px', color: '#4c6249', align: 'right', lineSpacing: 9 }).setOrigin(1, 0).setDepth(1100);
++    this.add.text(985, 367, '农舍 · 今日收获', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '17px', color: '#5f6a47' });
++    this.trees = Array.from({ length: this.config.treeCount }, (_, index) => { const pos = treePosition(index);return new TreeActor(this, pos.x, pos.y); });
++    this.wood = this.add.graphics().setDepth(530);
++    this.particles = this.add.graphics().setDepth(1000);
++    this.farmer = new FarmerActor(this);this.helper = new HelperActor(this);this.cart = new CartActor(this);
++    const unsubscribe = this.controller.subscribe(s => { this.snapshot = s;this.animator.sync(s); });
++    this.snapshot = this.controller.getSnapshot();this.animator.sync(this.snapshot);
+     const uneffect = this.controller.onEffect(e => {
+-      if (e.sessionId !== this.controller.getSnapshot().sessionId) return;
+-      if (e.kind === 'action-phase') this.action = e.phase;
+-      if (e.kind === 'action-impact') this.impactUntil = this.time.now + 160;
+-      if (e.kind === 'task-changed' || e.kind === 'session-reset') { this.action = 'ready'; this.impactUntil = 0; }
++      // Controller emits effects before notifying snapshot subscribers; read the committed state first.
++      this.snapshot = this.controller.getSnapshot();this.animator.sync(this.snapshot);this.animator.apply(e);
++    });
++    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
++      unsubscribe();uneffect();this.animator.dispose();
++      this.farmer.destroy();this.helper.destroy();this.cart.destroy();this.trees.forEach(t => t.destroy());this.trees = [];
+     });
+-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => { unsubscribe(); uneffect(); });
+   }
+-  update(): void {
+-    const g = this.ink, s = this.snapshot;
+-    g.clear();
+-    g.fillStyle(0xc9e1bf).fillRect(0, 0, 1280, 720);
+-    g.fillStyle(0x8bb779).fillEllipse(300, 390, 1100, 650);
+-    g.fillStyle(0xa6c58c).fillEllipse(1080, 450, 900, 650);
+-    g.lineStyle(100, 0xd5bf8b).lineBetween(140, 560, 1130, 290);
+-    g.lineStyle(3, 0xbba16f).lineBetween(140, 605, 1130, 335);
+-    // Home, fencing and garden.
+-    g.fillStyle(0xf3d7a3).fillRoundedRect(990, 200, 190, 155, 7);
+-    g.fillStyle(0xa56348).fillTriangle(965, 210, 1085, 115, 1200, 210);
+-    g.fillStyle(0x654738).fillRect(1060, 265, 48, 90);
+-    g.fillStyle(0x82b8bf).fillRect(1125, 238, 33, 40);
+-    for (let i = 0; i < 7; i++) g.fillStyle(0xf1ddb2).fillRoundedRect(890 + i * 47, 390, 11, 60, 3);
+-    g.fillStyle(0xf1ddb2).fillRect(890, 408, 294, 8);
+-    for (let i = 0; i < this.config.treeCount; i++) {
+-      const x = 180 + (i % 5) * 138, y = 245 + Math.floor(i / 5) * 100;
+-      g.fillStyle(0x886043).fillRect(x - 13, y + 65, 26, i < s.choppedTrees ? 20 : 100);
+-      if (i >= s.choppedTrees) {
+-        g.fillStyle(0x387858).fillTriangle(x, y - 115, x - 72, y + 105, x + 72, y + 105);
+-        g.fillStyle(0x49956b).fillTriangle(x, y - 130, x - 58, y + 30, x + 58, y + 30);
++  update(_time: number, delta: number): void {
++    if (!this.farmer) return;
++    this.animator.advance(delta);
++    const s = this.snapshot, f = this.animator.frame;
++    const paint = JSON.stringify([f, s.phase, s.task, s.pauseReasons, s.choppedTrees, s.chopReps, s.groundLogs, s.cartLogs, s.deliveredLogs]);
++    if (paint === this.lastPaint) return;
++    this.lastPaint = paint;
++    const impact = f.effects.find(e => e.kind === 'impact');
++    for (let i = 0; i < this.trees.length; i++) this.trees[i]!.sync(i < s.choppedTrees,
++      f.effects.find(e => e.kind === 'tree' && e.index === i)?.progress,
++      s.task === 'chop' && i === impact?.index ? impact.progress : undefined);
++    const actorTask = s.phase === 'active' || s.phase === 'countdown' ? s.task : null;
++    this.farmer.sync(f.player.x, f.player.y, f.player.facing, f.action, actorTask, f.handLog, f.player.walking);
++    this.helper.sync(f.npc);
++    this.cart.sync(f.cart.x, f.cart.y, f.cartVisibleLogs, s.task === 'carry' && s.phase !== 'rest', f.carryProgress * 30);
++    this.drawWood(f);this.drawEffects(f);
++    const description = s.phase === 'rest' ? (s.task === 'load' ? '休息 · 归拢现有木材，推车靠近' : '休息 · 整理场地，固定车上货物')
++      : s.phase === 'results' ? '已到家 · 今天的收获入库' : s.task === 'carry' ? '拉车 · 只随有效持姿时间前进'
++      : s.phase === 'home' || s.phase === 'setup' ? '一片林地，一段属于你的好时光' : f.action === 'ready' && s.task === 'load' ? '准备 · 等待下蹲拾木' : phaseNames[f.action];
++    this.caption.setText(`${s.pauseReasons.length ? '已暂停 / ' : ''}${description}`);
++    this.stock.setText(`地面 ${s.groundLogs}    车上 ${s.cartLogs}    到家 ${s.deliveredLogs}\n禾禾是预设协作伙伴 · 阶段同步演示`);
++    if (this.host) {
++      const values = { action: f.action, fallen: String(s.choppedTrees), effects: f.effects.map(e => e.kind).join(','), npc: f.npc.mode,
++        inventory: `${s.groundLogs}/${s.cartLogs}/${s.deliveredLogs}`, cartPosition: `${f.cart.x.toFixed(2)},${f.cart.y.toFixed(2)}` };
++      for (const [key, value] of Object.entries(values)) if (this.host.dataset[key] !== value) this.host.dataset[key] = value;
++      const label = `林间农场。${description}。地面木材${s.groundLogs}，车上${s.cartLogs}，到家${s.deliveredLogs}。NPC预设协作。`;
++      if (this.host.getAttribute('aria-label') !== label) this.host.setAttribute('aria-label', label);
++    }
++  }
++  private drawWood(f: FarmFrame): void {
++    const g = this.wood;g.clear();
++    const s = this.snapshot;
++    if (s.task === 'chop' && s.phase === 'active') {
++      const tree = treePosition(s.choppedTrees);
++      for (let i = 0; i < this.config.repsPerTree; i++) {
++        const x = tree.x - (this.config.repsPerTree - 1) * 7 + i * 14;
++        g.fillStyle(i < s.chopReps % this.config.repsPerTree ? p.gold : 0x658057).fillCircle(x, tree.y + 26, 4);
+       }
+     }
+-    for (let i = 0; i < s.groundLogs; i++) this.log(170 + (i % 6) * 38, 470 + Math.floor(i / 6) * 20);
+-    const carry = s.task === 'carry' || s.phase === 'results';
+-    const progress = s.phase === 'results' ? 1 : s.carryActiveMs / this.config.carryTargetMs;
+-    const cartX = carry ? 600 + progress * 320 : 680;
+-    const cartY = carry ? 505 - progress * 130 : 470;
+-    g.fillStyle(0x865c3f).fillRoundedRect(cartX, cartY, 140, 65, 8);
+-    g.lineStyle(8, 0x634a37).lineBetween(cartX + 140, cartY + 20, cartX + 190, cartY + 4);
+-    g.fillStyle(0x334740).fillCircle(cartX + 28, cartY + 70, 19).fillCircle(cartX + 115, cartY + 70, 19);
+-    for (let i = 0; i < s.cartLogs; i++) this.log(cartX + 12 + (i % 4) * 31, cartY - 10 - Math.floor(i / 4) * 16);
+-    const playerX = carry ? cartX + 190 : s.task === 'load' ? 570 : 500;
+-    const playerY = carry ? cartY + 10 : 407;
+-    this.person(playerX, playerY, false);
+-    this.person(800, 330, true);
+-    if (this.time.now < this.impactUntil) {
+-      g.lineStyle(5, 0xffdd77).strokeCircle(playerX + 60, playerY - 20, 35);
++    for (let i = 0; i < f.groundVisibleLogs; i++) {
++      let x = 433 + i % 4 * 29, y = 551 - Math.floor(i / 4) * 15;
++      if (i >= this.config.initialLogs && (s.task === 'chop' || (s.phase === 'rest' && s.task === 'load'))) {
++        const origin = treePosition(Math.floor((i - this.config.initialLogs) / this.config.logsPerTree));
++        const t = s.phase === 'rest' ? 1 - s.remainingMs / this.config.restMs : 0;
++        x = origin.x + (x - origin.x) * t;y = origin.y + 5 + (y - origin.y - 5) * t;
++      }
++      drawLog(g, x, y, .85);
+     }
+-    this.caption.setText(`地面木材 ${s.groundLogs}    车上 ${s.cartLogs}    到家 ${s.deliveredLogs}\n几何占位 · 阶段：${this.action}`);
+-  }
+-  private log(x: number, y: number): void {
+-    this.ink.fillStyle(0xb27d4e).fillRoundedRect(x, y, 32, 16, 6);
+-    this.ink.fillStyle(0xe2b87e).fillCircle(x + 5, y + 8, 6);
++    for (let i = 0; i < f.deliveredLogs; i++) drawLog(g, 1080 + i % 4 * 29, 370 - Math.floor(i / 4) * 14, .8);
+   }
+-  private person(x: number, y: number, npc: boolean): void {
+-    const g = this.ink;
+-    const squat = !npc && this.action === 'squat-down';
+-    y += squat ? 23 : 0;
+-    g.fillStyle(0x476444, .18).fillEllipse(x, y + 65, 92, 25);
+-    g.lineStyle(14, 0x405965).lineBetween(x - 12, y + 20, x - 22, y + 60).lineBetween(x + 12, y + 20, x + 24, y + 60);
+-    g.fillStyle(npc ? 0xc8b5d4 : 0xe5ad59).fillRoundedRect(x - 25, y - 38, 50, 66, 10);
+-    g.fillStyle(npc ? 0x729db0 : 0xf5d1a0).fillCircle(x, y - 63, 25);
+-    g.fillStyle(0x8e633c).fillRoundedRect(x - 35, y - 87, 70, 12, 4);
+-    const raised = !npc && (this.action === 'press-up' || this.action === 'ready' || this.action === 'chop-return');
+-    const handY = raised ? y - 85 : y;
+-    g.lineStyle(12, npc ? 0x729db0 : 0xf5d1a0).lineBetween(x + 21, y - 27, x + 52, handY);
+-    if (!npc && this.snapshot.task === 'chop') {
+-      g.lineStyle(6, 0x745036).lineBetween(x + 52, handY + 8, x + 68, handY - 42);
+-      g.fillStyle(0xdbe3d9).fillTriangle(x + 65, handY - 45, x + 92, handY - 48, x + 86, handY - 22);
++  private drawEffects(f: FarmFrame): void {
++    const g = this.particles;g.clear();
++    for (const e of f.effects) {
++      if (e.kind === 'impact') {
++        const target = e.index >= 0 ? treePosition(e.index) : { x: f.player.x + f.player.facing * 103, y: f.player.y - 45 };
++        const x = target.x, y = target.y - 13;
++        for (let i = 0; i < 7; i++) {
++          const a = i * Math.PI * 2 / 7, r = 12 + e.progress * 42;
++          g.fillStyle(i % 2 ? p.gold : p.cream, 1 - e.progress).fillRect(x + Math.cos(a) * r, y + Math.sin(a) * r, 5, 9);
++        }
++      } else if (e.kind === 'log') {
++        const t = e.progress, x = 570 + (f.cart.x - 570) * t, y = 410 + (f.cart.y - 110 - 410) * t - Math.sin(t * Math.PI) * 90;
++        drawLog(g, x - 15, y, 1);
++      }
+     }
+   }
+ }
+diff --git a/src/game/actors/FarmerActor.ts b/src/game/actors/FarmerActor.ts
+new file mode 100644
+index 0000000..1bafd55
+--- /dev/null
++++ b/src/game/actors/FarmerActor.ts
+@@ -0,0 +1,75 @@
++import Phaser from 'phaser';
++import type { ActionPhase, TaskKind } from '../../domain/types.js';
++import { palette as p } from '../assets.js';
++import { drawLog } from './props.js';
++
++/** A small articulated illustration. Only the requested pose is drawn; no chained action tween. */
++export class FarmerActor {
++  readonly body: Phaser.GameObjects.Graphics;
++  constructor(scene: Phaser.Scene) { this.body = scene.add.graphics(); }
++  sync(x: number, y: number, facing: number, phase: ActionPhase, task: TaskKind | null, handLog: boolean, walking: number): void {
++    const g = this.body.setPosition(x, y).setScale(facing, 1).setDepth(y + 2);g.clear();
++    const squat = task === 'load' && phase === 'squat-down';
++    const hip = squat ? -32 : -55, head = squat ? -99 : -132;
++    const stride = Math.sin(walking) * 8;
++    g.fillStyle(0x3b5a3e, .22).fillEllipse(0, 3, 90, 22);
++    // Boots and bent knees remain planted during squats.
++    this.limb(-13, hip, squat ? -33 : -16 + stride, -23, -23 + stride, -7, p.denim, 18);
++    this.limb(13, hip, squat ? 32 : 17 - stride, -23, 22 - stride, -7, p.denim, 18);
++    g.fillStyle(p.boot).fillRoundedRect(-36 + stride, -12, 31, 14, 5).fillRoundedRect(9 - stride, -12, 32, 14, 5);
++    g.lineStyle(3, p.outline).lineBetween(-34 + stride, 0, -9 + stride, 0).lineBetween(13 - stride, 0, 38 - stride, 0);
++    // Shirt, overall bib and buttons.
++    const shoulder = head + 32;
++    g.fillStyle(p.shirt).fillRoundedRect(-25, shoulder, 50, hip - shoulder + 10, 11);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-25, shoulder, 50, hip - shoulder + 10, 11);
++    g.fillStyle(p.denim).fillRoundedRect(-20, shoulder + 24, 40, hip - shoulder - 10, 5);
++    g.lineStyle(7, p.denim).lineBetween(-15, shoulder + 4, -15, shoulder + 28).lineBetween(15, shoulder + 4, 15, shoulder + 28);
++    g.fillStyle(p.cream).fillCircle(-15, shoulder + 25, 3).fillCircle(15, shoulder + 25, 3);
++    g.lineStyle(2, 0x91b0a0).strokeRoundedRect(-10, shoulder + 31, 20, 12, 3);
++    // Back arm, neck and face.
++    this.limb(-22, shoulder + 8, -31, shoulder + 25, -25, shoulder + 42, p.skin, 12);
++    g.fillStyle(p.skin).fillRoundedRect(-7, head + 14, 19, 25, 5);
++    g.fillStyle(p.bark).fillRoundedRect(-24, head - 17, 46, 42, 15);
++    g.fillStyle(p.skin).fillRoundedRect(-19, head - 17, 45, 40, 17).fillCircle(25, head + 4, 7);
++    g.lineStyle(2, p.outline).lineBetween(11, head + 16, 18, head + 17);
++    g.fillStyle(p.outline).fillCircle(16, head - 1, 2.7);
++    g.fillStyle(0xd8966b, .65).fillEllipse(11, head + 10, 10, 6);
++    // Straw hat with dark band and leaf.
++    g.fillStyle(p.gold).fillRoundedRect(-25, head - 42, 49, 29, 10);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-25, head - 42, 49, 29, 10);
++    g.fillStyle(p.bark).fillRect(-25, head - 24, 49, 9);
++    g.fillStyle(0xe8cb84).fillRoundedRect(-39, head - 18, 81, 11, 5);
++    g.lineStyle(2, p.outline).strokeRoundedRect(-39, head - 18, 81, 11, 5);
++    g.fillStyle(p.pineLight).fillEllipse(-19, head - 28, 9, 18);
++    // Pose endpoints are deliberate holds, not a time-based cycle.
++    let hx = 34, hy = shoulder + 40;
++    if (task === 'chop') {
++      if (phase === 'chop-down') { hx = 60;hy = -61; }
++      else if (phase === 'chop-return') { hx = 15;hy = -112; }
++      else { hx = 32;hy = -145; }
++    } else if (task === 'load') {
++      hx = 45;
++      hy = phase === 'squat-down' ? -25 : phase === 'stand-up' ? -86 : phase === 'press-up' ? -161 : -64;
++    } else if (task === 'carry') { hx = -8;hy = -50; }
++    const elbowX = task === 'carry' ? -34 : Math.max(29, hx - 13);
++    this.limb(22, shoulder + 10, elbowX, (shoulder + hy) / 2 + 15, hx, hy, p.skin, 13);
++    g.fillStyle(p.shirt).fillCircle(23, shoulder + 12, 10);
++    if (handLog) drawLog(g, hx - 28, hy - 19, 1.3);
++    if (task === 'chop') {
++      const angle = phase === 'chop-down' ? .22 : phase === 'chop-return' ? -1.65 : -1.95;
++      const ax = hx + Math.cos(angle) * 63, ay = hy + Math.sin(angle) * 63;
++      g.lineStyle(8, p.outline).lineBetween(hx - Math.cos(angle) * 14, hy - Math.sin(angle) * 14, ax, ay);
++      g.lineStyle(5, 0xb58b54).lineBetween(hx - Math.cos(angle) * 14, hy - Math.sin(angle) * 14, ax, ay);
++      const nx = -Math.sin(angle), ny = Math.cos(angle);
++      const blade = [{ x: ax - 8, y: ay - 8 }, { x: ax + nx * 27, y: ay + ny * 27 }, { x: ax + nx * 24 + 17, y: ay + ny * 24 - 9 }, { x: ax + 8, y: ay - 17 }];
++      g.fillStyle(0xc4d7c8).fillPoints(blade, true);g.lineStyle(3, p.outline).strokePoints(blade, true);
++    }
++    g.fillStyle(p.skin).fillCircle(hx, hy, 7);
++  }
++  private limb(x: number, y: number, mx: number, my: number, ex: number, ey: number, color: number, width: number): void {
++    const points = [{ x, y }, { x: mx, y: my }, { x: ex, y: ey }];
++    this.body.lineStyle(width + 4, p.outline).strokePoints(points).fillStyle(p.outline).fillCircle(mx, my, (width + 4) / 2);
++    this.body.lineStyle(width, color).strokePoints(points).fillStyle(color).fillCircle(mx, my, width / 2);
++  }
++  destroy(): void { this.body.destroy(); }
++}
+diff --git a/src/game/actors/HelperActor.ts b/src/game/actors/HelperActor.ts
+new file mode 100644
+index 0000000..610ca68
+--- /dev/null
++++ b/src/game/actors/HelperActor.ts
+@@ -0,0 +1,45 @@
++import Phaser from 'phaser';
++import type { FarmFrame } from '../ActionAnimator.js';
++import { palette as p } from '../assets.js';
++
++/** Scripted helper has no controller, input emitter, inventory or independent timer. */
++export class HelperActor {
++  readonly body: Phaser.GameObjects.Graphics;
++  readonly label: Phaser.GameObjects.Text;
++  constructor(scene: Phaser.Scene) {
++    this.body = scene.add.graphics();
++    this.label = scene.add.text(0, 0, '', { fontFamily: 'Microsoft YaHei, sans-serif', fontSize: '16px', color: '#405641', backgroundColor: '#f3e8bf', padding: { x: 10, y: 6 } }).setOrigin(.5, 1);
++  }
++  sync(npc: FarmFrame['npc']): void {
++    const { x, y, mode, progress } = npc;
++    const g = this.body.setPosition(x, y).setDepth(y + 1);g.clear();
++    g.fillStyle(0x3b5a3e, .2).fillEllipse(0, 4, 76, 22);
++    for (const dx of [-21, 16]) {
++      g.fillStyle(p.outline).fillRoundedRect(dx - 10, -18, 24, 20, 7);
++      g.lineStyle(2, 0x8c9c79).lineBetween(dx - 5, -14, dx - 5, -4).lineBetween(dx + 3, -14, dx + 3, -4);
++    }
++    g.fillStyle(p.denim).fillRoundedRect(-26, -66, 53, 52, 12);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-26, -66, 53, 52, 12);
++    g.fillStyle(p.gold).fillRoundedRect(-16, -52, 33, 24, 5);
++    g.lineStyle(3, p.cream).lineBetween(-4, -35, 7, -45).lineBetween(-4, -35, -10, -41);
++    const lift = mode === 'celebrate' ? -75 : mode === 'secure' ? -32 + Math.sin(progress * 18) * 12 : mode === 'gather' ? -27 : -38;
++    g.lineStyle(10, p.outline).lineBetween(-26, -56, -40, lift).lineBetween(27, -56, 43, lift);
++    g.lineStyle(6, p.robot).lineBetween(-26, -56, -40, lift).lineBetween(27, -56, 43, lift);
++    g.fillStyle(p.gold).fillCircle(-40, lift, 7).fillCircle(43, lift, 7);
++    g.fillStyle(p.robot).fillRoundedRect(-32, -112, 65, 49, 14);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-32, -112, 65, 49, 14);
++    g.fillStyle(p.outline).fillRoundedRect(-23, -101, 48, 26, 8);
++    g.fillStyle(p.eye).fillRoundedRect(-15, -94, 8, 11, 4).fillRoundedRect(9, -94, 8, 11, 4);
++    g.lineStyle(3, p.outline).lineBetween(0, -112, 5, -126);
++    g.fillStyle(p.gold).fillCircle(5, -128, 6);
++    if (mode === 'gather') {
++      g.lineStyle(5, p.bark).lineBetween(43, lift, 62, 3);
++      g.lineStyle(3, p.cream).lineBetween(51, 2, 77, 2);
++      for (let i = 0; i < 5; i++) g.lineBetween(51 + i * 6, 2, 51 + i * 6, 11);
++    }
++    if (mode === 'secure') g.lineStyle(3, p.cream).strokeEllipse(43, lift - 2, 22, 31);
++    const labels = { idle: '禾禾 · 预设协作', gather: '禾禾 · 归拢木材', secure: '禾禾 · 固定货物', guide: '禾禾 · 结伴回家', celebrate: '禾禾 · 欢迎回家' };
++    this.label.setText(labels[mode]).setPosition(x, y - 143).setDepth(1100);
++  }
++  destroy(): void { this.body.destroy();this.label.destroy(); }
++}
+diff --git a/src/game/actors/props.ts b/src/game/actors/props.ts
+new file mode 100644
+index 0000000..c5a93c8
+--- /dev/null
++++ b/src/game/actors/props.ts
+@@ -0,0 +1,71 @@
++import Phaser from 'phaser';
++import { palette as p } from '../assets.js';
++
++export function drawLog(g: Phaser.GameObjects.Graphics, x: number, y: number, scale = 1): void {
++  const w = 43 * scale, h = 19 * scale;
++  g.fillStyle(p.wood).fillRoundedRect(x, y, w, h, 5 * scale);
++  g.lineStyle(2 * scale, p.outline).strokeRoundedRect(x, y, w, h, 5 * scale);
++  g.lineStyle(2 * scale, p.bark).lineBetween(x + 12 * scale, y + h * .35, x + w - 4 * scale, y + h * .35);
++  g.fillStyle(p.cut).fillEllipse(x + 5 * scale, y + h / 2, 14 * scale, h);
++  g.lineStyle(2 * scale, p.bark).strokeEllipse(x + 5 * scale, y + h / 2, 14 * scale, h);
++  g.lineStyle(scale, p.bark).strokeEllipse(x + 5 * scale, y + h / 2, 6 * scale, 10 * scale);
++}
++
++export class TreeActor {
++  private stump: Phaser.GameObjects.Graphics;
++  private crown: Phaser.GameObjects.Graphics;
++  constructor(scene: Phaser.Scene, x: number, y: number) {
++    this.stump = scene.add.graphics({ x, y }).setDepth(y);
++    const g = this.stump;
++    g.fillStyle(0x385d3e, .18).fillEllipse(2, 8, 96, 25);
++    g.fillStyle(p.bark).fillRoundedRect(-20, -23, 40, 27, 5);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-20, -23, 40, 27, 5);
++    g.fillStyle(p.cut).fillEllipse(0, -22, 41, 18);
++    g.lineStyle(2, p.bark).strokeEllipse(0, -22, 41, 18).strokeEllipse(0, -22, 22, 9);
++    this.crown = scene.add.graphics({ x, y }).setDepth(y + 1);
++    const t = this.crown;
++    t.fillStyle(p.bark).fillRoundedRect(-13, -125, 26, 110, 4);
++    t.lineStyle(3, p.outline).strokeRoundedRect(-13, -125, 26, 110, 4);
++    t.lineStyle(3, 0xb18a5b).lineBetween(-4, -110, -4, -30);
++    for (const [top, bottom, width, color] of [[-193, -65, 82, p.pine], [-235, -115, 67, p.pineLight], [-265, -166, 49, p.pineBright]]) {
++      t.fillStyle(color!).fillPoints([{ x: 0, y: top! }, { x: width!, y: bottom! - 9 }, { x: width! - 24, y: bottom! - 9 }, { x: width! - 16, y: bottom! + 2 }, { x: -width!, y: bottom! - 5 }], true);
++      t.lineStyle(3, p.outline, .6).lineBetween(0, top!, -width!, bottom! - 5);
++      t.lineStyle(3, 0xb5bf80, .3).lineBetween(6, top! + 26, width! - 14, bottom! - 15);
++    }
++  }
++  sync(felled: boolean, fall: number | undefined, hit: number | undefined): void {
++    this.crown.setVisible(!felled || fall !== undefined);
++    this.crown.setRotation(fall === undefined ? (hit === undefined ? 0 : Math.sin(hit * Math.PI * 4) * .035) : -fall * 1.1);
++    this.crown.setAlpha(fall === undefined ? 1 : Math.min(1, (1 - fall) * 3));
++  }
++  destroy(): void { this.stump.destroy();this.crown.destroy(); }
++}
++
++export class CartActor {
++  readonly body: Phaser.GameObjects.Graphics;
++  constructor(scene: Phaser.Scene) { this.body = scene.add.graphics(); }
++  sync(x: number, y: number, logs: number, secured: boolean, wheelTurn: number): void {
++    const g = this.body.setPosition(x, y).setDepth(y + 1);g.clear();
++    g.fillStyle(0x3b5a3e, .2).fillEllipse(10, 2, 184, 32);
++    g.lineStyle(9, p.outline).lineBetween(-35, -38, 125, -48);
++    g.lineStyle(5, p.wood).lineBetween(-35, -38, 125, -48);
++    g.fillStyle(0x775b43).fillRoundedRect(-67, -75, 137, 58, 7);
++    for (let i = 0; i < logs; i++) drawLog(g, -60 + i % 3 * 40, -77 - Math.floor(i / 3) * 15, .9);
++    g.fillStyle(0xbb8a54).fillRoundedRect(-74, -48, 151, 27, 5);
++    g.lineStyle(3, p.outline).strokeRoundedRect(-74, -48, 151, 27, 5);
++    g.lineStyle(3, 0xe1ba7b).lineBetween(-65, -39, 65, -39);
++    for (const px of [-56, 57]) {
++      g.fillStyle(p.outline).fillRoundedRect(px, -64, 7, 49, 2);
++      g.fillStyle(p.cream).fillCircle(px + 3, -32, 2);
++    }
++    for (const wx of [-46, 50]) {
++      g.fillStyle(p.outline).fillCircle(wx, -9, 23);
++      g.fillStyle(0xd3b77e).fillCircle(wx, -9, 16);
++      g.lineStyle(3, p.bark);
++      for (let i = 0; i < 4; i++) { const a = wheelTurn + i * Math.PI / 2;g.lineBetween(wx, -9, wx + Math.cos(a) * 14, -9 + Math.sin(a) * 14); }
++      g.fillStyle(p.outline).fillCircle(wx, -9, 5);
++    }
++    if (secured && logs) g.lineStyle(4, p.cream).lineBetween(-27, -48, -27, -142).lineBetween(-27, -142, 36, -142).lineBetween(36, -142, 36, -48);
++  }
++  destroy(): void { this.body.destroy(); }
++}
+diff --git a/src/game/assets.ts b/src/game/assets.ts
+new file mode 100644
+index 0000000..40bcfc6
+--- /dev/null
++++ b/src/game/assets.ts
+@@ -0,0 +1,8 @@
++/** Original local vector art; no remote textures or reference-image cutouts. */
++export const farmAssets = { landscape: `${import.meta.env.BASE_URL}assets/farm-landscape.svg` } as const;
++export const palette = {
++  outline: 0x4c5943, bark: 0x936b48, cut: 0xe9c78c, wood: 0xb78650,
++  pine: 0x436e51, pineLight: 0x628555, pineBright: 0x7d9a60,
++  cream: 0xf4e7bd, gold: 0xe8b662, skin: 0xeac18c, shirt: 0xd89b51,
++  denim: 0x4e7373, boot: 0x625143, robot: 0xe4dfba, eye: 0xa5dec6,
++} as const;

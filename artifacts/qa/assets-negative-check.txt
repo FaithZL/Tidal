@@ -1,0 +1,9 @@
+Corrupted WASM loader was rejected with nonzero exit; original bytes restored.
+file:///D:/work/corona/Tidal/scripts/verify-assets.mjs:10
+  if (actual !== manifest.files[name] || actual !== hash(await readFile(`node_modules/@mediapipe/tasks-vision/wasm/${name}`))) throw new Error(`Missing/mismatched WASM asset: ${name}`);
+                                                                                                                                     ^
+
+Error: Missing/mismatched WASM asset: vision_wasm_internal.js
+    at file:///D:/work/corona/Tidal/scripts/verify-assets.mjs:10:134
+
+Node.js v24.14.0

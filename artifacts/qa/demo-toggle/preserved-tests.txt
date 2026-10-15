@@ -1,0 +1,15 @@
+
+Path                                Unchanged
+----                                ---------
+tests\unit\session.test.mjs              True
+tests\unit\poseWorkerClient.test.ts      True
+tests\unit\input.test.mjs                True
+tests\unit\config.test.mjs               True
+tests\unit\cameraService.test.ts         True
+tests\unit\actionAnimator.test.ts        True
+tests\e2e\visual-states.spec.ts          True
+tests\e2e\keyboard_flow.py               True
+tests\e2e\keyboard-flow.spec.ts          True
+tests\e2e\camera-errors.spec.ts          True
+tests\e2e\boot.spec.ts                   True
+

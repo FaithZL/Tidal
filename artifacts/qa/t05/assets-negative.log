@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 assets:verify
+> node scripts/verify-assets.mjs
+
+Verified model and 4 MediaPipe 0.10.32 runtime files
+file:///D:/work/corona/Tidal/scripts/verify-assets.mjs:15
+  if (hash(await readFile(`public/assets/${name}`)) !== art.files[name]) throw new Error(`Missing/mismatched farm asset: ${name}`);
+                                                                               ^
+
+Error: Missing/mismatched farm asset: farm-landscape.svg
+    at file:///D:/work/corona/Tidal/scripts/verify-assets.mjs:15:80
+
+Node.js v24.14.0

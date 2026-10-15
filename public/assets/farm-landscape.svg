@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#f8ebc8"/><stop offset="1" stop-color="#e8e9c8"/></linearGradient>
+    <linearGradient id="meadow" x2="0" y2="1"><stop stop-color="#b9ce91"/><stop offset="1" stop-color="#89ae70"/></linearGradient>
+    <pattern id="grass" width="86" height="71" patternUnits="userSpaceOnUse"><path d="M12 44l-3-7m3 7l4-5M61 15l-2-5m2 5l4-4" fill="none" stroke="#789860" stroke-width="2" opacity=".35"/><ellipse cx="35" cy="60" rx="2" ry="1.5" fill="#efe6ae"/></pattern>
+    <pattern id="planks" width="21" height="90" patternUnits="userSpaceOnUse"><path d="M0 0V90" stroke="#ad624e" stroke-width="3"/></pattern>
+    <g id="pine"><path d="M0 0v45" stroke="#708b65" stroke-width="9"/><path d="M0-85L-34-16h16L-44 17H44L18-16h16Z" fill="#71956e"/></g>
+    <g id="fence"><path d="M0 0V-38L5-44l5 6V0M62 0V-38l5-6 5 6V0" fill="#f1e2b8" stroke="#9c986f" stroke-width="2"/><path d="M7-30h60M7-13h60" stroke="#f1e2b8" stroke-width="8"/></g>
+    <g id="carrot"><path d="M0 0l-5-10M0 0l5-13M0 0V-14" stroke="#557d4d" stroke-width="4" stroke-linecap="round"/><ellipse cy="1" rx="5" ry="3" fill="#d49655"/></g>
+    <g id="flower"><path d="M0 0v-12" stroke="#557d4d" stroke-width="2"/><circle cy="-14" r="5" fill="#f9edc6"/><circle cy="-14" r="2" fill="#d6a752"/></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1280v720H0z"/>
+  <circle cx="1000" cy="95" r="50" fill="#f5d47d" opacity=".65"/>
+  <g fill="#fff7df" opacity=".8"><path d="M94 97c-12-22 14-35 32-18 5-25 44-26 49 1 29-7 37 16 24 21H95Z"/><path d="M604 80c-7-18 16-27 29-16 12-26 44-21 47 2 19-7 30 6 27 14Z"/></g>
+  <path d="M0 212Q140 122 295 191T605 179T930 181T1280 140V370H0Z" fill="#c1cf9c"/>
+  <path d="M0 252Q170 166 340 244T730 210T1100 221T1280 197V390H0Z" fill="#9db98a"/>
+  <g opacity=".6"><use href="#pine" x="20" y="230"/><use href="#pine" x="70" y="211"/><use href="#pine" x="115" y="246"/><use href="#pine" x="490" y="240"/><use href="#pine" x="548" y="225"/><use href="#pine" x="608" y="250"/><use href="#pine" x="1208" y="219"/><use href="#pine" x="1261" y="239"/></g>
+  <path d="M0 304Q280 236 566 309T1000 284T1280 311V720H0Z" fill="url(#meadow)"/>
+  <path d="M0 304Q280 236 566 309T1000 284T1280 311V720H0Z" fill="url(#grass)"/>
+  <ellipse cx="276" cy="427" rx="255" ry="134" fill="#8ba971" opacity=".5"/>
+  <path d="M358 720Q312 626 520 586T804 496T1090 338" fill="none" stroke="#a89b6b" stroke-width="112" opacity=".35"/>
+  <path d="M358 720Q312 626 520 586T804 496T1090 338" fill="none" stroke="#e0c68f" stroke-width="96"/>
+  <path d="M353 717Q317 630 528 590T810 499T1093 345" fill="none" stroke="#ecd7a7" stroke-width="64"/>
+  <path d="M525 586l75-20m89-28l40-18m128-66l50-29m89-45l31-23" stroke="#c7b180" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+  <!-- Orchard and vegetable beds, all original vector geometry. -->
+  <g transform="translate(925 559) rotate(-9)">
+    <rect x="-7" y="-7" width="245" height="116" rx="20" fill="#7f9965"/>
+    <rect width="230" height="100" rx="13" fill="#9d7651" stroke="#b89360" stroke-width="5"/>
+    <path d="M12 24H218M12 52H218M12 80H218" stroke="#725c44" stroke-width="8" stroke-linecap="round"/>
+    <g transform="translate(30 23)"><use href="#carrot"/><use href="#carrot" x="40"/><use href="#carrot" x="80"/><use href="#carrot" x="120"/><use href="#carrot" x="160"/></g>
+    <g transform="translate(30 51)"><use href="#carrot"/><use href="#carrot" x="40"/><use href="#carrot" x="80"/><use href="#carrot" x="120"/><use href="#carrot" x="160"/></g>
+    <g transform="translate(30 79)"><use href="#carrot"/><use href="#carrot" x="40"/><use href="#carrot" x="80"/><use href="#carrot" x="120"/><use href="#carrot" x="160"/></g>
+  </g>
+  <g transform="translate(920 470)"><use href="#fence"/><use href="#fence" x="68"/><use href="#fence" x="136"/><use href="#fence" x="204"/><use href="#fence" x="272"/></g>
+  <g transform="translate(980 343)">
+    <ellipse cx="85" cy="9" rx="151" ry="27" fill="#607d50" opacity=".22"/>
+    <path d="M0 0V-138l82-65 105 65V0Z" fill="#cf805d" stroke="#635945" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M0-135h185V0H0Z" fill="url(#planks)"/>
+    <path d="M-20-135l100-87 125 87-10 13-111-73-91 73Z" fill="#596b59" stroke="#475647" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M-4-149l84-71 108 73M12-149l69-58 88 59" fill="none" stroke="#7e8c6a" stroke-width="3"/>
+    <path d="M48 0V-97h83V0" fill="#6a6951" stroke="#f3dab0" stroke-width="7"/>
+    <path d="M51-91l75 85M127-91L53-5M89-96V0" stroke="#e5c69a" stroke-width="5"/>
+    <rect x="69" y="-158" width="37" height="33" rx="14" fill="#b8d4bb" stroke="#f3dab0" stroke-width="6"/>
+    <path d="M88-154v25M72-141h30" stroke="#f3dab0" stroke-width="4"/>
+    <rect x="8" y="-77" width="25" height="34" rx="3" fill="#a6c8b8" stroke="#f3dab0" stroke-width="5"/>
+    <rect x="150" y="-77" width="25" height="34" rx="3" fill="#a6c8b8" stroke="#f3dab0" stroke-width="5"/>
+    <rect x="-11" y="-4" width="212" height="10" rx="4" fill="#ede0b7"/>
+  </g>
+  <g transform="translate(1216 354)"><path d="M0 0v-60" stroke="#856c49" stroke-width="17"/><circle cy="-90" r="45" fill="#668b56"/><circle cx="-24" cy="-72" r="31" fill="#71965d"/><circle cx="25" cy="-67" r="33" fill="#7d9d60"/><g fill="#d99858"><circle cx="-17" cy="-87" r="6"/><circle cx="23" cy="-74" r="6"/><circle cy="-113" r="6"/></g></g>
+  <g transform="translate(821 310)"><ellipse cy="4" rx="51" ry="13" fill="#69835a" opacity=".25"/><path d="M-35 0v-57h70V0" fill="#c2a677" stroke="#7c7255" stroke-width="4"/><path d="M-43-55L0-86l43 31Z" fill="#738264" stroke="#52684f" stroke-width="4"/><path d="M-14 0v-31h28V0" fill="#64795c"/><path d="M-3-76v-23" stroke="#7a694d" stroke-width="5"/><path d="M0-98l25 7-25 7" fill="#e8bc67"/></g>
+  <g fill="#6f955e" opacity=".65"><ellipse cx="50" cy="600" rx="90" ry="58"/><ellipse cx="158" cy="658" rx="90" ry="55"/><ellipse cx="1240" cy="680" rx="105" ry="78"/></g>
+  <g stroke="#5f8756" stroke-width="4" stroke-linecap="round"><path d="M65 575l-9-20m9 20l7-16M130 625l-8-18m8 18l9-22M1160 680l-7-18m7 18l8-14M784 637l-7-14m7 14l9-12"/></g>
+  <g><use href="#flower" x="88" y="595"/><use href="#flower" x="105" y="610"/><use href="#flower" x="185" y="650"/><use href="#flower" x="202" y="643"/><use href="#flower" x="1187" y="651"/><use href="#flower" x="1205" y="663"/></g>
+  <g fill="#d7d1ad" stroke="#919c77" stroke-width="2"><ellipse cx="589" cy="400" rx="19" ry="10"/><ellipse cx="614" cy="405" rx="11" ry="7"/><ellipse cx="847" cy="596" rx="14" ry="9"/></g>
+</svg>

@@ -1,0 +1,17 @@
+Production chop: 15 complete, real 15-second rest
+Production load: 15 complete, real 15-second rest
+Production carry: holding for the normal 60-second target
+{
+  date: '2026-10-15',
+  browser: '156.0.8078.4',
+  platform: 'win32',
+  bundles: [ 'http://127.0.0.1:4175/assets/index-DMFeJS_M.js' ],
+  input: 'keyboard simulation; no camera',
+  timing: 'production 5s countdown / 15s rests / 60s effective carry',
+  durationSeconds: 143.097,
+  metrics: '挥砍 15 次 · 装车 15 次 · 有效持姿 60.0 秒 · 任务有效时间 95.2 秒 · 本局经过时间（含休息/暂停）140.9 秒 · 输入：键盘模拟',
+  errors: [],
+  external: [],
+  reset: 'pass',
+  result: 'pass'
+}

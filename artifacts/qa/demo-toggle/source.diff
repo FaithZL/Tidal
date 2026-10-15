@@ -1,0 +1,290 @@
+warning: in the working copy of '.demo-toggle-baseline/src/game/FarmScene.ts', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'src/game/FarmScene.ts', CRLF will be replaced by LF the next time Git touches it
+diff --git a/.demo-toggle-baseline/src/browser.ts b/src/browser.ts
+index 81125c7..c0a092d 100644
+--- a/.demo-toggle-baseline/src/browser.ts
++++ b/src/browser.ts
+@@ -1,8 +1,10 @@
+ import { createDemoConfig } from './config/demoConfig.js';
+ import { createSessionController, inputContext } from './domain/sessionController.js';
+ import { KeyboardActionSource } from './input/keyboardActionSource.js';
++import { AutoDemoSource } from './input/autoDemoSource.js';
+ import { createGame } from './game/createGame.js';
+ import { SetupPanel } from './ui/setupPanel.js';
++import { SyntheticPreview } from './ui/syntheticPreview.js';
+ import type { SessionSnapshot, TaskKind } from './domain/types.js';
+ 
+ const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
+@@ -21,6 +23,11 @@ $('planLoad').textContent = `深蹲推举 ${config.loadRepTarget} 次 · 装车
+ $('planCarry').textContent = `持续持姿 ${Math.ceil(config.carryTargetMs / 1000)} 秒 · 返回农场`;
+ const controller = createSessionController(config, { nowMs: () => performance.now() });
+ const input = new KeyboardActionSource(isTestMode ? .085 : 1);
++const autoInput = new AutoDemoSource(isTestMode ? .085 : 1);
++const preview = new SyntheticPreview([
++  { canvas: $<HTMLCanvasElement>('demoSetupCanvas'), label: $('demoSetupPhase') },
++  { canvas: $<HTMLCanvasElement>('demoGameCanvas'), label: $('demoGamePhase') },
++]);
+ const game = createGame($('worldCanvas'), controller, config);
+ const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
+   $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'));
+@@ -32,6 +39,8 @@ let heldPointer = false;
+ const displayError = '';
+ let planDismissed = false;
+ let exitWasUserPaused = false;
++let demoEnabled = false;
++let demoUsed = false;
+ 
+ const instructions: Record<TaskKind, string> = {
+   chop: '空格触发一次“上举 → 下挥 → 复位”，完整循环后记数。',
+@@ -44,12 +53,24 @@ function active(s: Readonly<SessionSnapshot>): boolean {
+ function stopHold(): void { heldKeyboard = false; heldPointer = false; input.holdEnd(); }
+ async function syncSource(s: Readonly<SessionSnapshot>): Promise<void> {
+   const context = active(s) ? inputContext(s) : null;
+-  const key = context ? `${context.sessionId}:${context.taskRunId}:${context.sourceEpoch}` : '';
++  const key = context ? `${context.sessionId}:${context.taskRunId}:${context.sourceEpoch}:${demoEnabled}` : '';
+   if (key === boundInputKey) return;
+   boundInputKey = key;
+   const gen = ++bindingGeneration;
+-  await input.stop();
+-  if (context && gen === bindingGeneration) await input.start(context, e => controller.accept(e));
++  await Promise.all([input.stop(), autoInput.stop()]);
++  if (context && gen === bindingGeneration) {
++    if (demoEnabled) demoUsed = true;
++    await (demoEnabled ? autoInput : input).start(context, e => controller.accept(e));
++  }
++}
++function setDemo(enabled: boolean): void {
++  if (demoEnabled === enabled) return;
++  stopHold();
++  // Cancel a partial cycle before changing source, then invalidate its context.
++  if (['countdown', 'active', 'rest'].includes(current.phase)) controller.command({ kind: 'pause', reason: 'user' });
++  demoEnabled = enabled;preview.setEnabled(enabled);
++  if (enabled) void cameraPanel.stop();
++  controller.command({ kind: 'switch-source', mode: 'keyboard' });
+ }
+ function niceTask(task: TaskKind | null): string {
+   return task === 'chop' ? '砍伐杉树' : task === 'load' ? '把木材装上手推车' : task === 'carry' ? '推车返回农场' : '农场计划';
+@@ -58,7 +79,20 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   current = s;
+   void syncSource(s);
+   const phase = s.phase;
+-  $('modeBadge').textContent = s.inputMode === 'camera' ? '📷 摄像头关键点诊断 · 不计运动成果' : '⌨ 键盘演示 · 非真实动作识别';
++  $('modeBadge').textContent = demoEnabled ? '▶ 自动模拟 · 非真实动作识别'
++    : s.inputMode === 'camera' ? '📷 摄像头关键点诊断 · 不计运动成果' : '⌨ 键盘演示 · 非真实动作识别';
++  for (const id of ['demoToggle', 'setupDemoToggle']) {
++    $(id).setAttribute('aria-checked', String(demoEnabled));
++    $(id).textContent = `无摄像头测试：${demoEnabled ? '开' : '关'}`;
++  }
++  $('demoPreviewSetup').hidden = !demoEnabled;
++  $('demoPreviewGame').hidden = !demoEnabled || !['countdown', 'active', 'rest'].includes(phase);
++  $('rewardNote').hidden = !$('demoPreviewGame').hidden;
++  $('cameraDiagnostics').hidden = demoEnabled;
++  $('keyboardChoice').hidden = demoEnabled;
++  $('cameraLimitNote').hidden = demoEnabled;
++  $('cameraStop').hidden = demoEnabled;
++  $('beginDemo').textContent = demoEnabled ? '开始自动模拟演示 →' : '关闭摄像头并开始键盘演示 →';
+   $('chopValue').textContent = `${s.chopReps}/${config.chopRepTarget}`;
+   $('loadValue').textContent = `${s.loadReps}/${config.loadRepTarget}`;
+   $('carryValue').textContent = `${(s.carryActiveMs / 1000).toFixed(1)}/${Math.ceil(config.carryTargetMs / 1000)}s`;
+@@ -70,6 +104,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   $('missionText').textContent = phase === 'home' || phase === 'setup'
+     ? '运动与经营结合的概念验证：把日常动作转化为农场资源。'
+     : phase === 'results' ? '所有奖励均已结算。你可以返回首页重置并再次体验。'
++    : demoEnabled ? '脚本自动完成动作循环，合成骨架同步展示阶段。进度和奖励均为演示数据。'
+     : s.task ? instructions[s.task] : '';
+   $('sceneTag').textContent = phase === 'results' ? '今日收获 · 已完成' : '今日劳作 · 体验计划';
+   $('planModal').hidden = phase !== 'home' || planDismissed;
+@@ -81,18 +116,21 @@ function panel(s: Readonly<SessionSnapshot>): void {
+     : phase === 'setup' ? '设备准备' : phase === 'active' ? '训练中'
+     : phase === 'countdown' ? '倒计时' : phase === 'rest' ? '休息时间' : '已完成';
+   $('statusTag').textContent = status;
+-  const usable = active(s);
++  const usable = active(s) && !demoEnabled;
+   const action = $('actionBtn') as HTMLButtonElement;
+   action.disabled = !usable && !(phase === 'home' && planDismissed);
+   action.textContent = phase === 'home' && planDismissed ? '查看今日计划' : s.task === 'carry' ? '按住拉车' : s.task === 'chop' ? '🪓 模拟一次挥砍' : s.task === 'load' ? '🪵 模拟一次装车' : '等待任务开始';
+   $('actionPrompt').textContent = phase === 'countdown' ? `即将开始：${niceTask(s.task)}`
+     : phase === 'rest' ? `休息 ${Math.ceil(s.remainingMs/1000)} 秒 · 下一个任务：${niceTask(s.task)}`
+     : s.pauseReasons.length ? '当前已暂停，按继续按钮恢复。'
++    : demoEnabled ? '自动演示中，可随时暂停或关闭无摄像头测试。'
+     : usable && s.task ? instructions[s.task] : '准备开始今天的劳作。';
+-  $('keyboardHint').textContent = s.task === 'carry' ? '长按 Space 持续拉车，松开停止' : '按 Space 完成一次动作循环（禁用自动重复）';
++  if (demoEnabled && phase !== 'home') action.textContent = '自动模拟已开启';
++  $('keyboardHint').textContent = demoEnabled ? '关闭测试后点继续，即可使用键盘' : s.task === 'carry' ? '长按 Space 持续拉车，松开停止' : '按 Space 完成一次动作循环（禁用自动重复）';
+   $('sceneHint').textContent = phase === 'rest' ? '农场机器人正在协助整理木材……'
+     : s.pauseReasons.length ? '计时与运动进度均已暂停。'
+     : phase === 'countdown' ? '即将进入下一轮挑战。'
++    : phase === 'active' && demoEnabled ? '自动模拟正在演示农场劳作，非真实运动成果。'
+     : phase === 'active' && s.task ? instructions[s.task]
+     : '从一件小事开始，让这座农场苏醒。';
+   const countdown = $('countdown');
+@@ -114,15 +152,19 @@ function panel(s: Readonly<SessionSnapshot>): void {
+   $('rewardLogs').textContent = String(s.deliveredLogs);
+   $('rewardCoins').textContent = String(s.rewardsGranted ? config.coinReward : 0);
+   $('rewardStamina').textContent = String(s.rewardsGranted ? config.staminaReward : 0);
+-  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：键盘模拟`;
++  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：${demoUsed ? '含自动模拟（复用键盘模拟协议）' : '键盘模拟'}`;
+   $('systemStatus').textContent = displayError || `会话 ${s.sessionId} · ${status}`;
+ }
+ controller.subscribe(panel);
+ controller.onEffect(e => {
+-  if (e.kind === 'session-reset') { planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop(); }
++  preview.apply(e);
++  if (e.kind === 'session-reset') {
++    demoEnabled = false;demoUsed = false;preview.setEnabled(false);void autoInput.stop();
++    planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop();
++  }
+ });
+ function doAction(): void {
+-  if (!active(current)) return;
++  if (!active(current) || demoEnabled) return;
+   if (current.task === 'carry') input.holdStart();
+   else input.doRep();
+ }
+@@ -132,7 +174,8 @@ $('cancelPlan').addEventListener('click', () => {
+ });
+ $('acceptPlan').addEventListener('click', () => controller.command({kind:'open-setup',mode:'keyboard'}));
+ $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
+-$('cameraStart').addEventListener('click', () => { controller.command({ kind: 'switch-source', mode: 'camera' }); void cameraPanel.start(); });
++for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));
++$('cameraStart').addEventListener('click', () => { setDemo(false);controller.command({ kind: 'switch-source', mode: 'camera' }); void cameraPanel.start(); });
+ $('cameraStop').addEventListener('click', () => { void cameraPanel.stop(); });
+ $('beginDemo').addEventListener('click', () => {
+   void cameraPanel.stop(); controller.command({kind:'switch-source',mode:'keyboard'});
+@@ -157,7 +200,7 @@ actionBtn.addEventListener('click',()=>{
+   if(current.task !== 'carry') doAction();
+ });
+ actionBtn.addEventListener('pointerdown',e=>{
+-  if(e.button!==0||current.task!=='carry'||!active(current))return;
++  if(e.button!==0||current.task!=='carry'||!active(current)||demoEnabled)return;
+   heldPointer=true;actionBtn.setPointerCapture(e.pointerId);input.holdStart();
+ });
+ for(const eventName of ['pointerup','pointercancel','lostpointercapture']) {
+@@ -192,7 +235,8 @@ document.addEventListener('visibilitychange',()=>{
+ });
+ function animate(now:number):void {
+   controller.tick(now);
++  preview.update(now, current);
+   requestAnimationFrame(animate);
+ }
+ requestAnimationFrame(animate);
+-window.addEventListener('pagehide', () => { void cameraPanel.stop(); void input.dispose(); controller.dispose(); game.destroy(true); });
++window.addEventListener('pagehide', () => { void cameraPanel.stop(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+diff --git a/src/input/autoDemoSource.ts b/src/input/autoDemoSource.ts
+new file mode 100644
+index 0000000..8da8eb3
+--- /dev/null
++++ b/src/input/autoDemoSource.ts
+@@ -0,0 +1,26 @@
++import type { ExerciseSignal, InputContext } from '../domain/types.js';
++import type { ActionSource } from './types.js';
++import { KeyboardActionSource } from './keyboardActionSource.js';
++
++/** Explicit synthetic playback. Reuses complete semantic cycles; never accesses the session. */
++export class AutoDemoSource implements ActionSource {
++  readonly mode = 'keyboard' as const;
++  private readonly keyboard: KeyboardActionSource;
++  private timer: ReturnType<typeof setInterval> | undefined;
++  private generation = 0;
++  constructor(private readonly speed = 1) { this.keyboard = new KeyboardActionSource(speed); }
++  async start(context: InputContext, emit: (e: ExerciseSignal) => void): Promise<void> {
++    const stopping = this.stop(), generation = this.generation;
++    await stopping;if (generation !== this.generation) return;
++    await this.keyboard.start(context, emit);if (generation !== this.generation) return;
++    if (context.task === 'carry') this.keyboard.holdStart();
++    else {
++      this.keyboard.doRep();
++      this.timer = setInterval(() => { if (generation === this.generation) this.keyboard.doRep(); }, 1200 * this.speed);
++    }
++  }
++  async stop(): Promise<void> {
++    this.generation++;clearInterval(this.timer);this.timer = undefined;await this.keyboard.stop();
++  }
++  async dispose(): Promise<void> { await this.stop(); }
++}
+diff --git a/src/ui/syntheticPreview.ts b/src/ui/syntheticPreview.ts
+new file mode 100644
+index 0000000..c0f53f5
+--- /dev/null
++++ b/src/ui/syntheticPreview.ts
+@@ -0,0 +1,80 @@
++import type { ActionPhase, GameEffect, SessionSnapshot, TaskKind } from '../domain/types.js';
++
++type PoseName = ActionPhase | 'hold' | 'rest';
++type Point = [number, number];
++const links = [[0, 1], [1, 2], [2, 3], [3, 4], [1, 5], [5, 6], [6, 7], [2, 8], [5, 9], [8, 9], [8, 10], [10, 11], [9, 12], [12, 13]];
++const names: Record<PoseName, string> = { ready: '准备', 'chop-down': '下挥', 'chop-return': '挥砍复位',
++  'squat-down': '下蹲', 'stand-up': '站起', 'press-up': '上举', 'load-return': '装车复位', hold: '持姿拉车', rest: '休息 / 整理' };
++const sample: readonly [TaskKind, PoseName][] = [
++  ['chop', 'ready'], ['chop', 'chop-down'], ['chop', 'chop-return'], ['load', 'ready'],
++  ['load', 'squat-down'], ['load', 'stand-up'], ['load', 'press-up'], ['load', 'load-return'], ['carry', 'hold'], ['carry', 'hold'],
++];
++
++/** Decorative, authored skeleton poses. These never enter MediaPipe or any recognizer. */
++function points(task: TaskKind, phase: PoseName): Point[] {
++  const p: Point[] = [[.5, .16], [.5, .29], [.39, .31], [.32, .46], [.31, .63], [.61, .31], [.68, .46], [.69, .63],
++    [.43, .58], [.57, .58], [.41, .75], [.4, .92], [.59, .75], [.6, .92]];
++  if (task === 'chop' && phase !== 'rest') {
++    const hands: Point = phase === 'chop-down' ? [.52, .68] : phase === 'chop-return' ? [.5, .29] : [.5, .09];
++    p[3] = [.33, hands[1] + .13];p[6] = [.67, hands[1] + .13];
++    p[4] = [hands[0] - .035, hands[1]];p[7] = [hands[0] + .035, hands[1]];
++  }
++  if (phase === 'squat-down') {
++    for (const i of [0, 1, 2, 5, 8, 9]) p[i]![1] += .17;
++    p[3] = [.32, .65];p[6] = [.68, .65];p[4] = [.4, .8];p[7] = [.6, .8];p[10] = [.28, .78];p[12] = [.72, .78];
++  } else if (phase === 'stand-up' || phase === 'press-up') {
++    const y = phase === 'press-up' ? .08 : .43;
++    p[3] = [.3, y + .14];p[6] = [.7, y + .14];p[4] = [.46, y];p[7] = [.54, y];
++  }
++  return p;
++}
++
++export class SyntheticPreview {
++  private enabled = false;
++  private elapsed = 0;
++  private lastTime: number | null = null;
++  private painted = '';
++  private action: { key: string; phase: ActionPhase } | null = null;
++  constructor(private readonly targets: readonly { canvas: HTMLCanvasElement; label: HTMLElement }[]) {}
++  setEnabled(enabled: boolean): void {
++    this.enabled = enabled;this.elapsed = 0;this.lastTime = null;this.painted = '';this.action = null;
++    if (!enabled) for (const { canvas, label } of this.targets) {
++      canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);label.textContent = '';
++    }
++  }
++  apply(effect: GameEffect): void {
++    if (this.enabled && effect.kind === 'action-phase') this.action = { key: `${effect.sessionId}/${effect.taskRunId}/${effect.sourceEpoch}`, phase: effect.phase };
++  }
++  update(now: number, s: Readonly<SessionSnapshot>): void {
++    if (!this.enabled) return;
++    const delta = this.lastTime === null ? 0 : now - this.lastTime;this.lastTime = now;
++    if (document.hidden || s.pauseReasons.length) return;
++    if (delta >= 0 && delta < 200) this.elapsed += delta;
++    const tutorial = s.phase === 'setup' || s.phase === 'home';
++    const [task, phase] = tutorial ? sample[Math.floor(this.elapsed / 700) % sample.length]!
++      : [s.task ?? 'carry', s.phase === 'rest' || s.phase === 'results' ? 'rest' : s.task === 'carry' ? 'hold'
++        : this.action?.key === `${s.sessionId}/${s.taskRunId}/${s.sourceEpoch}` ? this.action.phase : 'ready'] as const;
++    const key = `${task}/${phase}`;if (this.painted === key) return;this.painted = key;
++    for (const { canvas, label } of this.targets) {
++      this.draw(canvas, task, phase);label.textContent = `${names[phase]} · 脚本姿态`;
++    }
++  }
++  private draw(canvas: HTMLCanvasElement, task: TaskKind, phase: PoseName): void {
++    const ctx = canvas.getContext('2d');if (!ctx) return;
++    const w = canvas.width, h = canvas.height, pose = points(task, phase);
++    ctx.fillStyle = '#143737';ctx.fillRect(0, 0, w, h);
++    ctx.strokeStyle = '#28504c';ctx.lineWidth = 1;
++    for (let x = 0; x < w; x += w / 10) { ctx.beginPath();ctx.moveTo(x, 0);ctx.lineTo(x, h);ctx.stroke(); }
++    for (let y = 0; y < h; y += h / 8) { ctx.beginPath();ctx.moveTo(0, y);ctx.lineTo(w, y);ctx.stroke(); }
++    ctx.strokeStyle = '#8bdcb1';ctx.lineWidth = 5;ctx.lineCap = 'round';
++    for (const [a, b] of links) {
++      const from = pose[a!]!, to = pose[b!]!;
++      ctx.beginPath();ctx.moveTo(from[0] * w, from[1] * h);ctx.lineTo(to[0] * w, to[1] * h);ctx.stroke();
++    }
++    ctx.fillStyle = '#efd28f';
++    for (const [x, y] of pose) { ctx.beginPath();ctx.arc(x * w, y * h, 4, 0, Math.PI * 2);ctx.fill(); }
++    ctx.beginPath();ctx.arc(pose[0]![0] * w, pose[0]![1] * h, 13, 0, Math.PI * 2);ctx.stroke();
++    ctx.fillStyle = '#efd28f';ctx.font = 'bold 13px sans-serif';ctx.fillText('DEMO / SYNTHETIC', 9, h - 9);
++  }
++  dispose(): void { this.setEnabled(false); }
++}

@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-15",
+  "browser": "156.0.8078.4",
+  "scripts": [
+    "http://127.0.0.1:4175/assets/index-W_CbjmMk.js"
+  ],
+  "input": "Chromium synthetic video; not real-person acceptance",
+  "metrics": "640×480 · 0 个关键点 · 11.6 Hz · 推理 p50/p95 18/19ms · 样本年龄 26ms · 未检测到人体",
+  "errors": [],
+  "external": [],
+  "result": "pass"
+}

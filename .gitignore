@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.handoff-baseline/
+.t04-baseline/
+.demo-toggle-baseline/
+test-results/
+playwright-report/
+web/js/
+public/worker/
+.env
+.env.*
+!.env.example

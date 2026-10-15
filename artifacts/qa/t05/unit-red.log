@@ -1,0 +1,190 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/actionAnimator.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/actionAnimator.test.ts (13 tests | 10 failed) 10ms
+   ❯ presentation consumes snapshots; never completes a business action (13)
+     × chop-down enters independently and stays until another effect 3ms
+     × chop-return enters independently and stays until another effect 0ms
+     × squat-down enters independently and stays until another effect 0ms
+     × stand-up enters independently and stays until another effect 0ms
+     × press-up enters independently and stays until another effect 0ms
+     × load-return enters independently and stays until another effect 0ms
+     × one impact per rep, even after its particles expire 1ms
+     × committed tree/log effects survive the transition to rest, without multiplying or changing inventory 0ms
+     × carry position has no easing or wall-clock drift; only snapshot progress moves the cart 0ms
+     × both NPC scripts follow rest progress without mutating the supplied snapshot 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > chop-down enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'chop-down' // Object.is equality
+
+Expected: "chop-down"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > chop-return enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'chop-return' // Object.is equality
+
+Expected: "chop-return"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > squat-down enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'squat-down' // Object.is equality
+
+Expected: "squat-down"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > stand-up enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'stand-up' // Object.is equality
+
+Expected: "stand-up"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > press-up enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'press-up' // Object.is equality
+
+Expected: "press-up"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > load-return enters independently and stays until another effect
+AssertionError: expected 'ready' to be 'load-return' // Object.is equality
+
+Expected: "load-return"
+Received: "ready"
+
+ ❯ tests/unit/actionAnimator.test.ts:23:28
+     21|     const task = ['squat-down', 'stand-up', 'press-up', 'load-return']…
+     22|     const a = setup({ ...base, task }); a.apply(effect(phase, task)); …
+     23|     expect(a.frame.action).toBe(phase); expect(a.frame.effects).toEqua…
+       |                            ^
+     24|   });
+     25|   it('one impact per rep, even after its particles expire', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > one impact per rep, even after its particles expire
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/actionAnimator.test.ts:27:62
+     25|   it('one impact per rep, even after its particles expire', () => {
+     26|     const a = setup(); a.apply(impact); a.apply(impact);
+     27|     expect(a.frame.effects.filter(e => e.kind === 'impact')).toHaveLen…
+       |                                                              ^
+     28|     a.advance(5000); a.apply(impact); expect(a.frame.effects).toHaveLe…
+     29|     a.apply({ ...impact, repId: 2 }); expect(a.frame.effects).toHaveLe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > committed tree/log effects survive the transition to rest, without multiplying or changing inventory
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/actionAnimator.test.ts:53:60
+     51|     const a = setup(s);const felled: GameEffect = { ...impact, kind: '…
+     52|     a.apply(felled);a.apply(felled);a.sync({ ...s, task: 'load', taskR…
+     53|     expect(a.frame.effects.filter(e => e.kind === 'tree')).toHaveLengt…
+       |                                                            ^
+     54|     a.advance(5000);expect(a.frame.effects).toHaveLength(0);expect(s.g…
+     55|     a.sync({ ...base, task: 'load', cartLogs: 1, groundLogs: 14 });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > carry position has no easing or wall-clock drift; only snapshot progress moves the cart
+AssertionError: expected 790 to be greater than 790
+ ❯ tests/unit/actionAnimator.test.ts:66:67
+     64|     const a = setup(s);const position = a.frame.cart;
+     65|     a.advance(30000);expect(a.frame.cart).toEqual(position);
+     66|     a.sync({ ...s, carryActiveMs: 60000 });expect(a.frame.cart.x).toBe…
+       |                                                                   ^
+     67|     a.sync({ ...s, phase: 'results', task: null, deliveredLogs: 15, ca…
+     68|     expect(a.frame.cartVisibleLogs).toBe(0);expect(a.frame.deliveredLo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  tests/unit/actionAnimator.test.ts > presentation consumes snapshots; never completes a business action > both NPC scripts follow rest progress without mutating the supplied snapshot
+AssertionError: expected 'idle' to be 'gather' // Object.is equality
+
+Expected: "gather"
+Received: "idle"
+
+ ❯ tests/unit/actionAnimator.test.ts:72:49
+     70|   it('both NPC scripts follow rest progress without mutating the suppl…
+     71|     const s = Object.freeze({ ...base, phase: 'rest' as const, taskRun…
+     72|     const a = setup(s);expect(a.frame.npc.mode).toBe('gather');const s…
+       |                                                 ^
+     73|     a.sync({ ...s, remainingMs: 7500 });expect(a.frame.npc.x).not.toBe…
+     74|     const middle = a.frame;a.advance(5000);expect(a.frame.npc).toEqual…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  10 failed | 3 passed (13)
+   Start at  22:54:01
+   Duration  141ms (transform 39%, tests 30%, import 23%, worker 8%)
+
