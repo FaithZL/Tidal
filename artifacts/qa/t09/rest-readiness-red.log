@@ -1,0 +1,58 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/cameraReadiness.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/cameraReadiness.test.ts (2 tests | 2 failed) 7ms
+   × lost tracking does not freeze a rest, but the next countdown waits for fresh readiness 6ms
+   × readiness cannot clear user/background pauses, and an invalid countdown restarts in full 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/cameraReadiness.test.ts > lost tracking does not freeze a rest, but the next countdown waits for fresh readiness
+AssertionError: expected { sessionId: 'session-1', …(18) } to match object { Object (phase, remainingMs, ...) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "pauseReasons": [],
++   "pauseReasons": [
++     "tracking",
++   ],
+    "phase": "rest",
+-   "remainingMs": 0,
++   "remainingMs": 1,
+  }
+
+ ❯ tests/unit/cameraReadiness.test.ts:12:49
+     10|   h.emit({kind:'rep-completed',task:'chop',repId:1});
+     11|   h.controller.command({kind:'camera-readiness',ready:false});h.contro…
+     12|   h.tick(10);expect(h.controller.getSnapshot()).toMatchObject({phase:'…
+       |                                                 ^
+     13|   h.controller.command({kind:'camera-readiness',ready:true});h.tick(0);
+     14|   expect(h.controller.getSnapshot()).toMatchObject({phase:'countdown',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/cameraReadiness.test.ts > readiness cannot clear user/background pauses, and an invalid countdown restarts in full
+AssertionError: expected [ 'user', 'visibility' ] to include 'tracking'
+ ❯ tests/unit/cameraReadiness.test.ts:21:107
+     19|   h.controller.command({kind:'pause',reason:'user'});h.controller.comm…
+     20|   h.controller.command({kind:'camera-readiness',ready:false});h.contro…
+     21|   h.controller.command({kind:'resume',reason:'tracking'});expect(h.con…
+       |                                                                                                           ^
+     22|   h.controller.command({kind:'camera-readiness',ready:true});h.control…
+     23|   expect(h.controller.getSnapshot()).toMatchObject({phase:'countdown',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  03:09:36
+   Duration  122ms (transform 48%, tests 22%, import 22%, worker 8%)
+

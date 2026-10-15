@@ -1,0 +1,22 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts
+
+[WebServer] (node:40444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:46392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:50732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it (1.5s)
+  ok 2 tests\e2e\source-lifecycle.spec.ts:9:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.5m)
+  ok 3 tests\e2e\source-lifecycle.spec.ts:28:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (28.4s)
+
+  3 passed (2.1m)

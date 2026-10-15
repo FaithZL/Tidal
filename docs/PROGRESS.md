@@ -1,6 +1,20 @@
 # Tidal 开发进度（2026-10-16，连续推进 T07–T11）
 
-## 当前阶段：T07 识别器实现与验证
+## 当前阶段：T09 软件联调完成，继续 T10
+
+T08提交 `85df391` 已push；本阶段在同一分支增量接入摄像头语义输入，领域计数/计时/库存/奖励仍只由原控制器维护。用户无摄像头，T09真人整局仍 **manual_pending**，下面证据均明确区分模拟来源。
+
+- 新增 `src/input/cameraActionSource.ts`、`sourceManager.ts`：标定门禁、三类识别器装配、任务/epoch/seq隔离、串行停旧源、取消迟到start、输入来源集合与无帧看门狗。
+- 修改 `src/ui/{setupPanel,calibrationPanel}.ts`、`src/browser.ts`、`index.html`：有效标定后显式开始/恢复摄像头、失败重新准备、显式切键盘、混合来源结算、输入阶段诊断；保留自动模拟开关。
+- `src/domain/{types,sessionController}.ts`增加准备状态命令与门禁，不重写原领域规则。休息不因跟踪丢失无限冻结，下一项等待就绪；多个暂停原因独立。`poseWorkerClient.ts`处理dispose端口抛错，保证终止。
+- 新增单测4文件12项、`tests/helpers/browserPoseFixture.ts`、`source-lifecycle.spec.ts`4项。合成33点+模拟Worker驱动真实标定/识别器/领域整局；另有真实MediaPipe处理合成视频的旧测试，均不是真机。
+- RED/GREEN：适配器空实现失败；无摄像头启动门禁失败；结算时误弹准备页、dispose抛错、休息准备门禁各先复现再修复。无帧休息回归用MutationObserver记录完整状态迁移，确实抓到“休息→倒计时→训练中→暂停”，修复后不再短暂进入活动任务。初版只检查最终状态未抓到此瞬态，已加强断言，没有删除负例。
+- `npm run verify`通过：**149/149单测、26/26 E2E（5.9分钟）、typecheck/lint/build**。随后新增停帧回归先失败再1/1通过，并重跑typecheck/lint/149单测/build。最终共有27项E2E；没有把分开执行写成一次27项全套运行。下一阶段干净安装后全量复测。
+- `npm run assets:verify`通过；最终构建`index-BMaraPft.js`，1,271.57KB/gzip344.55KB，既有体积警告保留。日志、合成整局JSON与已查看的结算截图在`artifacts/qa/t09/`；截图带测试输入横幅，无虚构真机证据。
+- README已清理过期“摄像头只能诊断/停T06”描述。未改锁文件/Phaser表现/键盘输入及原测试。无新后端/服务/上传。继续T10本地交付与T11证据化验收，不合并main、不对外部署。
+- 实际dist检查：`$env:TIDAL_QA_DIR='artifacts/qa/t09'; node scripts/verify-t06-production.mjs`通过（既有4175预览服务），无摄像头不能标定、自动模拟启动与暂停，无pageerror/外部来源/姿态资源请求。见`production-smoke.json`和对应截图；范围是冒烟检查，正式墙钟整局留T10。
+
+## T07 / T08 历史阶段记录
 
 ### T08 已追加完成（下一步 T09）
 

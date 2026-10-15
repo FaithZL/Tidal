@@ -1,0 +1,12 @@
+{
+  date: '2026-10-15T19:24:05.676Z',
+  browser: '156.0.8078.4',
+  platform: 'win32',
+  bundles: [ 'http://127.0.0.1:4175/assets/index-BMaraPft.js' ],
+  scope: 'production UI smoke: calibration disabled without camera; automatic demo starts and pauses; not a full session',
+  physicalCamera: 'manual_pending; no camera requested',
+  errors: [],
+  external: [],
+  poseRequests: [],
+  result: 'pass'
+}

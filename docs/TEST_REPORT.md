@@ -1,4 +1,15 @@
-# T06 测试与标定检查报告
+# Tidal 测试报告
+
+## 当前：T09 软件联调（2026-10-16）
+
+分支`feature/t07-t11-completion`；环境Windows / Node24.14.0 / npm11.9.0 / Chromium156.0.8078.4，MediaPipe0.10.32 / Phaser3.90.0。T07/T08已推送；T09验证后提交推送。当前没有摄像头，所有C类真人验收与L2/L3继续manual_pending。
+
+- `npm run verify`：149/149单测、26/26 E2E、type/lint/build通过；后续新增停帧阶段过渡测试先失败再1/1通过，并重跑149单测/type/lint/build。最终27项E2E将在T10干净验证中一起执行。
+- `npm run assets:verify`通过。生产`index-BMaraPft.js`经`verify-t06-production.mjs`实际打开，准备门禁/模拟首个动作/暂停通过；不是整局生产验收。
+- 输入适配、重复/旧上下文、后台/多暂停原因、有效样本计时、资源超时/释放均有自动证据。完整摄像头业务路径使用**人工33点+合成视频+模拟Worker**，真实识别器与领域执行15次Chop/15次Load/加速Carry；不能证明物理摄像头识别精度。
+- T09证据：`artifacts/qa/t09/verify.log`、`stalled-rest-{red,green}.log`、`settlement-red.log`、`worker-dispose-red.log`、`camera-flow.json`、`synthetic-camera-results.png`、`production-smoke.json`。最新进度与逐项文件见PROGRESS；逐ID最终表在T11填写。
+
+## 以下为 T06 历史报告
 
 ## 最新验证：T06（2026-10-16，Asia/Shanghai）
 

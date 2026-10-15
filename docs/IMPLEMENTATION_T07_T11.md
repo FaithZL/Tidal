@@ -32,9 +32,9 @@
 
 文件：input/{cameraActionSource,sourceManager}.ts、ui/{setupPanel,calibrationPanel}.ts、browser.ts、index.html；unit/sourceManager、cameraActionSource与e2e/source-lifecycle。
 接口：CameraActionSource.start/stop/dispose、accept(frame,now)、setProfile；SourceManager切换按generation串行stop→start，旧回调不外发；SetupPanel提供有效标定与受epoch保护的帧订阅。
-- [ ] RED：输入适配得相同权威结果；旧回调/异步切源/多暂停原因/重置隔离，摄像头模式无键盘自动成果；混合来源保留。
-- [ ] GREEN：准备完成显式启动camera；训练丢跟踪暂停并要求重新准备，不静默切模拟；停止/重置/结束释放；提供摄像头→键盘显式切换。
-- [ ] unit、目标与完整E2E/build、生产检查；文档/commit/push。真人整局manual_pending。
+- [x] RED：输入适配得相同权威结果；旧回调/异步切源/多暂停原因/重置隔离，摄像头模式无键盘自动成果；混合来源保留。
+- [x] GREEN：准备完成显式启动camera；训练丢跟踪暂停并要求重新准备，不静默切模拟；停止/重置/结束释放；提供摄像头→键盘显式切换。
+- [x] unit、目标与完整E2E/build；追加停帧回归RED/GREEN。文档完成后commit/push；真人整局manual_pending。
 
 ## T10 打磨与本地交付
 
@@ -64,3 +64,5 @@
 - T07：初始5失败/16通过；连续站起的一帧举手回归先失败后修复。最终120/120单测、typecheck/lint/build通过；未接浏览器游戏，E2E留T09。真人仍manual_pending。
 - T07 commit/push成功：98aaba9，origin/feature/t07-t11-completion，main未改变。
 - T08：初始14失败/1通过，RMS门限一致性回归1失败；修复后137/137单测、3/3标定E2E、type/lint/build通过。采用与T06一致的选侧5维原型，而非未标定的双侧特征；真机适用性仍manual_pending。
+- T08 commit/push成功：85df391。
+- T09：149/149单测、26/26全套E2E、type/lint/build通过；新增第27项停帧过渡用例先失败再通过，随后149单测/type/lint/build再通过。重置/结算资源回调改读权威快照，避免上一帧状态触发误准备。没有真机，T09软件接线通过，真人检查保留manual_pending。

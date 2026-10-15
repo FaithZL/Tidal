@@ -4,6 +4,7 @@ import type { PoseFrame } from '../pose/types.js';
 import type { CalibrationPanel } from './calibrationPanel.js';
 
 const links = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24], [23, 25], [25, 27], [24, 26], [26, 28]];
+interface SetupEvents { onFrame?:(frame:PoseFrame)=>void; onError?:(message:string)=>void; onSuspend?:()=>void; onStop?:()=>void }
 export class SetupPanel {
   private readonly camera: CameraService;
   private readonly client = new PoseWorkerClient();
@@ -15,10 +16,10 @@ export class SetupPanel {
   private frameCount = 0;
   private sampleStart = 0;
   private timings: number[] = [];
-  private readonly suspendCalibration = (): void => { this.calibration.reset(); };
+  private readonly suspendCalibration = (): void => { this.calibration.reset();this.events.onSuspend?.(); };
   constructor(video: HTMLVideoElement, private readonly overlay: HTMLCanvasElement,
     private readonly status: HTMLElement, private readonly metrics: HTMLElement, private readonly frames: HTMLElement,
-    private readonly startButton: HTMLButtonElement, private readonly calibration: CalibrationPanel) {
+    private readonly startButton: HTMLButtonElement, private readonly calibration: CalibrationPanel,private readonly events:SetupEvents={}) {
     this.camera = new CameraService(video);
     document.addEventListener('visibilitychange', this.suspendCalibration);
     window.addEventListener('blur', this.suspendCalibration);
@@ -46,7 +47,7 @@ export class SetupPanel {
       });
       if (epoch !== this.epoch) return;
       clearTimeout(this.slowTimer); clearTimeout(this.timeout);
-      this.status.textContent = '推理中 · Worker / CPU · 仅关键点诊断，尚未接入运动识别';
+      this.status.textContent = '推理中 · Worker / CPU · 完成标定后可选择姿态代理训练';
       this.sampleStart = performance.now();
       this.timer = setInterval(() => {
         this.calibration.tick(performance.now());
@@ -67,10 +68,11 @@ export class SetupPanel {
     }
   }
   private fail(message: string): void {
-    void this.stop(); this.status.textContent = message;
+    void this.stop(); this.status.textContent = message;this.events.onError?.(message);
   }
   private draw(frame: PoseFrame): void {
     this.calibration.accept(frame);
+    this.events.onFrame?.(frame);
     this.frames.textContent = String(++this.frameCount);
     this.timings.push(frame.inferenceMs); if (this.timings.length > 120) this.timings.shift();
     const times = [...this.timings].sort((a, b) => a - b);
@@ -94,6 +96,7 @@ export class SetupPanel {
     this.epoch++; clearInterval(this.timer); clearTimeout(this.slowTimer); clearTimeout(this.timeout);
     this.camera.stop(); this.lastVideoTime = -1; this.frameCount = 0; this.timings = [];
     this.calibration.reset(true);
+    this.events.onStop?.();
     this.frames.textContent = '0'; this.metrics.textContent = '';
     this.overlay.getContext('2d')?.clearRect(0, 0, this.overlay.width, this.overlay.height);
     this.startButton.disabled = false;

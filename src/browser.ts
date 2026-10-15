@@ -2,6 +2,8 @@ import { createDemoConfig } from './config/demoConfig.js';
 import { createSessionController, inputContext } from './domain/sessionController.js';
 import { KeyboardActionSource } from './input/keyboardActionSource.js';
 import { AutoDemoSource } from './input/autoDemoSource.js';
+import { CameraActionSource } from './input/cameraActionSource.js';
+import { SourceManager } from './input/sourceManager.js';
 import { createGame } from './game/createGame.js';
 import { SetupPanel } from './ui/setupPanel.js';
 import { CalibrationPanel } from './ui/calibrationPanel.js';
@@ -25,6 +27,9 @@ $('planCarry').textContent = `持续持姿 ${Math.ceil(config.carryTargetMs / 10
 const controller = createSessionController(config, { nowMs: () => performance.now() });
 const input = new KeyboardActionSource(isTestMode ? .085 : 1);
 const autoInput = new AutoDemoSource(isTestMode ? .085 : 1);
+const cameraInput = new CameraActionSource();
+const sourceManager = new SourceManager();
+const calibrationPanel = new CalibrationPanel($<HTMLDetailsElement>('calibrationPanel'));
 const preview = new SyntheticPreview([
   { canvas: $<HTMLCanvasElement>('demoSetupCanvas'), label: $('demoSetupPhase') },
   { canvas: $<HTMLCanvasElement>('demoGameCanvas'), label: $('demoGamePhase') },
@@ -32,13 +37,22 @@ const preview = new SyntheticPreview([
 const game = createGame($('worldCanvas'), controller, config);
 const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
   $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'),
-  new CalibrationPanel($<HTMLDetailsElement>('calibrationPanel')));
+  calibrationPanel, {
+    onFrame: frame => {
+      updateCameraButton();
+      if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!calibrationPanel.getProfile())requireCameraPreparation('跟踪或标定已失效，请重新准备');
+      cameraInput.accept(frame);
+    },
+    onError: message => requireCameraPreparation(message,'source-error'),
+    onSuspend: () => {cameraInput.clearProfile();if(current.inputMode==='camera'&&running(current))requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');},
+    onStop: () => {cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
+  });
 let current = controller.getSnapshot();
 let boundInputKey = '';
-let bindingGeneration = 0;
 let heldKeyboard = false;
 let heldPointer = false;
-const displayError = '';
+let displayError = '';
+let cameraPreparation = false;
 let planDismissed = false;
 let exitWasUserPaused = false;
 let demoEnabled = false;
@@ -53,17 +67,38 @@ function active(s: Readonly<SessionSnapshot>): boolean {
   return s.phase === 'active' && s.pauseReasons.length === 0 && s.inputMode === 'keyboard';
 }
 function stopHold(): void { heldKeyboard = false; heldPointer = false; input.holdEnd(); }
+function running(s:Readonly<SessionSnapshot>):boolean{return ['countdown','active','rest'].includes(s.phase);}
+function updateCameraButton():void {
+  $<HTMLButtonElement>('beginCamera').disabled=calibrationPanel.getProfile()===null;
+}
+function requireCameraPreparation(message:string,reason:'tracking'|'source-error'|'visibility'='tracking'):void{
+  displayError=message;cameraInput.clearProfile();
+  if(current.inputMode==='camera'&&running(current)){
+    cameraPreparation=true;calibrationPanel.reset();
+    controller.command({kind:'camera-readiness',ready:false});controller.command({kind:'pause',reason});
+  }
+  updateCameraButton();
+}
 async function syncSource(s: Readonly<SessionSnapshot>): Promise<void> {
-  const context = active(s) ? inputContext(s) : null;
-  const key = context ? `${context.sessionId}:${context.taskRunId}:${context.sourceEpoch}:${demoEnabled}` : '';
+  const context = s.phase==='active'&&!s.pauseReasons.length ? inputContext(s) : null;
+  const key = context ? `${context.sessionId}:${context.taskRunId}:${context.sourceEpoch}:${s.inputMode}:${demoEnabled}` : '';
   if (key === boundInputKey) return;
   boundInputKey = key;
-  const gen = ++bindingGeneration;
-  await Promise.all([input.stop(), autoInput.stop()]);
-  if (context && gen === bindingGeneration) {
-    if (demoEnabled) demoUsed = true;
-    await (demoEnabled ? autoInput : input).start(context, e => controller.accept(e));
+  if(context&&demoEnabled)demoUsed=true;
+  try {
+    await sourceManager.switchTo(context ? s.inputMode==='camera'?cameraInput:demoEnabled?autoInput:input : null,context,e=>{
+      controller.accept(e);
+      if(e.kind==='tracking'&&e.status!=='ready'&&s.inputMode==='camera')requireCameraPreparation(e.message??'跟踪丢失，请重新准备');
+    });
+  }catch(error){
+    requireCameraPreparation(error instanceof Error?error.message:String(error),'source-error');
   }
+}
+function switchKeyboard():void{
+  stopHold();if(running(current))controller.command({kind:'pause',reason:'user'});
+  cameraPreparation=false;displayError='';controller.command({kind:'switch-source',mode:'keyboard'});
+  controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});
+  void cameraPanel.stop();
 }
 function setDemo(enabled: boolean): void {
   if (demoEnabled === enabled) return;
@@ -71,8 +106,8 @@ function setDemo(enabled: boolean): void {
   // Cancel a partial cycle before changing source, then invalidate its context.
   if (['countdown', 'active', 'rest'].includes(current.phase)) controller.command({ kind: 'pause', reason: 'user' });
   demoEnabled = enabled;preview.setEnabled(enabled);
-  if (enabled) void cameraPanel.stop();
-  controller.command({ kind: 'switch-source', mode: 'keyboard' });
+  if(enabled||current.inputMode==='camera')switchKeyboard();
+  else controller.command({ kind: 'switch-source', mode: 'keyboard' });
 }
 function niceTask(task: TaskKind | null): string {
   return task === 'chop' ? '砍伐杉树' : task === 'load' ? '把木材装上手推车' : task === 'carry' ? '推车返回农场' : '农场计划';
@@ -82,7 +117,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   void syncSource(s);
   const phase = s.phase;
   $('modeBadge').textContent = demoEnabled ? '▶ 自动模拟 · 非真实动作识别'
-    : s.inputMode === 'camera' ? '📷 摄像头关键点诊断 · 不计运动成果' : '⌨ 键盘演示 · 非真实动作识别';
+    : s.inputMode === 'camera' ? '📷 摄像头姿态代理 · 真机待验证' : '⌨ 键盘演示 · 非真实动作识别';
   for (const id of ['demoToggle', 'setupDemoToggle']) {
     $(id).setAttribute('aria-checked', String(demoEnabled));
     $(id).textContent = `无摄像头测试：${demoEnabled ? '开' : '关'}`;
@@ -95,6 +130,11 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('cameraLimitNote').hidden = demoEnabled;
   $('cameraStop').hidden = demoEnabled;
   $('beginDemo').textContent = demoEnabled ? '开始自动模拟演示 →' : '关闭摄像头并开始键盘演示 →';
+  if(cameraPreparation)$('beginDemo').textContent='关闭摄像头并切换键盘';
+  $('beginCamera').hidden=demoEnabled;
+  $('beginCamera').textContent=cameraPreparation?'使用标定恢复摄像头训练':'完成标定后开始摄像头训练';
+  $('useKeyboard').hidden=$('recalibrate').hidden=s.inputMode!=='camera'||!running(s);
+  updateCameraButton();
   $('chopValue').textContent = `${s.chopReps}/${config.chopRepTarget}`;
   $('loadValue').textContent = `${s.loadReps}/${config.loadRepTarget}`;
   $('carryValue').textContent = `${(s.carryActiveMs / 1000).toFixed(1)}/${Math.ceil(config.carryTargetMs / 1000)}s`;
@@ -107,10 +147,11 @@ function panel(s: Readonly<SessionSnapshot>): void {
     ? '运动与经营结合的概念验证：把日常动作转化为农场资源。'
     : phase === 'results' ? '所有奖励均已结算。你可以返回首页重置并再次体验。'
     : demoEnabled ? '脚本自动完成动作循环，合成骨架同步展示阶段。进度和奖励均为演示数据。'
+    : s.inputMode==='camera'?'按照标定动作完成完整循环；拉车只检测姿态持续性，不能证明实际持握。'
     : s.task ? instructions[s.task] : '';
   $('sceneTag').textContent = phase === 'results' ? '今日收获 · 已完成' : '今日劳作 · 体验计划';
   $('planModal').hidden = phase !== 'home' || planDismissed;
-  $('setupModal').hidden = phase !== 'setup';
+  $('setupModal').hidden = phase !== 'setup'&&!cameraPreparation;
   $('resultsModal').hidden = phase !== 'results';
   $('pauseBtn').hidden = !(['countdown', 'active', 'rest'] as string[]).includes(phase);
   $('pauseBtn').textContent = s.pauseReasons.length ? '继续' : '暂停';
@@ -128,11 +169,14 @@ function panel(s: Readonly<SessionSnapshot>): void {
     : demoEnabled ? '自动演示中，可随时暂停或关闭无摄像头测试。'
     : usable && s.task ? instructions[s.task] : '准备开始今天的劳作。';
   if (demoEnabled && phase !== 'home') action.textContent = '自动模拟已开启';
+  if(s.inputMode==='camera'&&running(s))action.textContent='由摄像头姿态控制';
   $('keyboardHint').textContent = demoEnabled ? '关闭测试后点继续，即可使用键盘' : s.task === 'carry' ? '长按 Space 持续拉车，松开停止' : '按 Space 完成一次动作循环（禁用自动重复）';
+  if(s.inputMode==='camera'&&running(s))$('keyboardHint').textContent='Space不产生运动成果；可明确切换键盘';
   $('sceneHint').textContent = phase === 'rest' ? '农场机器人正在协助整理木材……'
     : s.pauseReasons.length ? '计时与运动进度均已暂停。'
     : phase === 'countdown' ? '即将进入下一轮挑战。'
     : phase === 'active' && demoEnabled ? '自动模拟正在演示农场劳作，非真实运动成果。'
+    : phase === 'active' && s.inputMode==='camera'?'保持全身可见；停止持姿或跟踪失效时不推进。'
     : phase === 'active' && s.task ? instructions[s.task]
     : '从一件小事开始，让这座农场苏醒。';
   const countdown = $('countdown');
@@ -154,16 +198,22 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('rewardLogs').textContent = String(s.deliveredLogs);
   $('rewardCoins').textContent = String(s.rewardsGranted ? config.coinReward : 0);
   $('rewardStamina').textContent = String(s.rewardsGranted ? config.staminaReward : 0);
-  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：${demoUsed ? '含自动模拟（复用键盘模拟协议）' : '键盘模拟'}`;
+  const cameraUsed=sourceManager.usedModes.has('camera'),keyboardUsed=sourceManager.usedModes.has('keyboard');
+  const provenance=cameraUsed?(keyboardUsed?`混合输入：摄像头姿态代理 + ${demoUsed?'自动模拟':'键盘演示输入'}`:'摄像头姿态代理（非负载/健康测量）'):demoUsed?'含自动模拟（复用键盘模拟协议）':'键盘模拟';
+  $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：${provenance}`;
   $('systemStatus').textContent = displayError || `会话 ${s.sessionId} · ${status}`;
 }
 controller.subscribe(panel);
 controller.onEffect(e => {
+  // Effects precede subscriptions; resource callbacks must see the authoritative phase.
+  current = controller.getSnapshot();
   preview.apply(e);
   if (e.kind === 'session-reset') {
+    cameraPreparation=false;displayError='';cameraInput.clearProfile();sourceManager.resetHistory();
     demoEnabled = false;demoUsed = false;preview.setEnabled(false);void autoInput.stop();
     planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop();
   }
+  if(e.kind==='rewards-granted'){cameraPreparation=false;void cameraPanel.stop();}
 });
 function doAction(): void {
   if (!active(current) || demoEnabled) return;
@@ -180,8 +230,19 @@ for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('clic
 $('cameraStart').addEventListener('click', () => { setDemo(false);controller.command({ kind: 'switch-source', mode: 'camera' }); void cameraPanel.start(); });
 $('cameraStop').addEventListener('click', () => { void cameraPanel.stop(); });
 $('beginDemo').addEventListener('click', () => {
-  void cameraPanel.stop(); controller.command({kind:'switch-source',mode:'keyboard'});
-  controller.command({kind:'setup-ready'});
+  switchKeyboard();if(current.phase==='setup')controller.command({kind:'setup-ready'});
+});
+$('useKeyboard').addEventListener('click',switchKeyboard);
+$('recalibrate').addEventListener('click',()=>requireCameraPreparation('请重新采集标定'));
+$('beginCamera').addEventListener('click',()=>{
+  const profile=calibrationPanel.getProfile();if(!profile)return;
+  try{
+    cameraInput.setProfile(profile);cameraPreparation=false;displayError='';
+    controller.command({kind:'switch-source',mode:'camera'});
+    controller.command({kind:'camera-readiness',ready:true});
+    if(current.phase==='setup')controller.command({kind:'setup-ready',calibrated:{chop:true,load:true,carry:true}});
+    else{controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});}
+  }catch(error){displayError=`标定不可用：${error instanceof Error?error.message:String(error)}。请重做标定或切换键盘。`;$('cameraStatus').textContent=displayError;}
 });
 $('resetBtn').addEventListener('click', () => {stopHold();controller.command({kind:'reset'});});
 $('resultsHome').addEventListener('click',()=>{stopHold();controller.command({kind:'reset'});});
@@ -236,9 +297,16 @@ document.addEventListener('visibilitychange',()=>{
   if(document.hidden){stopHold();controller.command({kind:'pause',reason:'visibility'});}
 });
 function animate(now:number):void {
+  // Readiness can expire without another frame, including during rest/countdown.
+  if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!calibrationPanel.getProfile()){
+    requireCameraPreparation('关键点或标定已失效，请重新准备');
+  }
   controller.tick(now);
+  cameraInput.tick(now);
+  const debug = cameraInput.getDebug();
+  $('inputDebug').textContent = `${current.inputMode} · ${current.taskRunId ?? '无任务实例'} · epoch ${current.sourceEpoch} · ${debug.phase} · ${debug.reason}`;
   preview.update(now, current);
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-window.addEventListener('pagehide', () => { void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+window.addEventListener('pagehide', () => { void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });

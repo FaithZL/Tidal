@@ -1,6 +1,7 @@
 import { CalibrationSession, calibrationSteps, type CalibrationStep } from '../pose/calibrationSession.js';
 import { recognitionConfig } from '../config/recognitionConfig.js';
 import type { PoseFrame } from '../pose/types.js';
+import type { RecognitionProfile } from '../pose/recognizers/types.js';
 
 const steps: Record<CalibrationStep, [string, string]> = {
   standing: ['自然站立', '全身入镜、相机固定，自然站立保持稳定。'],
@@ -43,6 +44,10 @@ export class CalibrationPanel {
     const element = this.root.querySelector<T>(`#${id}`);if (!element) throw new Error(`Missing calibration element ${id}`);return element;
   }
   activate(): void { this.root.open = true; }
+  getProfile():RecognitionProfile|null {
+    const s=this.session.getSnapshot();
+    return s.calibration&&s.readyFor.chop&&s.readyFor.load&&s.readyFor.carry?{calibration:s.calibration,examples:s.examples}:null;
+  }
   accept(frame: PoseFrame): void { this.session.ingest(frame, performance.now());this.render(); }
   tick(nowMs: number): void { this.session.tick(nowMs);this.render(); }
   reset(close = false): void { this.session.reset();if (close) this.root.open = false;this.render(); }
@@ -56,7 +61,7 @@ export class CalibrationPanel {
     button.textContent = s.capturing ? `采集中 ${Math.round(s.progress * 100)}%` : step ? `采集${name} · ${duration / 1000}秒` : '标定完成';
     this.node<HTMLProgressElement>('calibrationProgress').value = s.progress;
     this.node('calibrationStatus').textContent = !s.available ? '等待全身有效关键点；开启摄像头后开始标定。'
-      : s.complete ? '标定完成 · 仅本次准备有效；摄像头动作计数尚未接入。'
+      : s.complete ? '标定完成 · 可手动选择摄像头姿态代理训练。'
       : `第 ${calibrationSteps.indexOf(step!) + 1}/9 步 · ${name}${s.capturing ? '：采集中，请保持稳定' : ''}`;
     this.node('calibrationInstruction').textContent = step ? steps[step][1] : '标定只存在本次内存。离开准备页、切换来源或失去跟踪后需要重新采集。';
     this.node('calibrationReason').textContent = s.reason ? `最近拒绝：${reasons[s.reason] ?? s.reason}` : '';
