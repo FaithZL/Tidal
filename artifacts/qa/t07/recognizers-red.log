@@ -1,0 +1,86 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/chopRecognizer.test.ts tests/unit/loadRecognizer.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/chopRecognizer.test.ts (11 tests | 2 failed) 13ms
+   × three full chop cycles emit ordered phases, one impact and one rep each 6ms
+   × chop needs usable calibration and rejects stale/future arrivals 1ms
+ ❯ tests/unit/loadRecognizer.test.ts (10 tests | 3 failed) 13ms
+   × load completes with continuous stand/press=false, ordered phases and single impact 6ms
+   × load completes with continuous stand/press=true, ordered phases and single impact 1ms
+   × load refuses missing example calibration 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/chopRecognizer.test.ts > three full chop cycles emit ordered phases, one impact and one rep each
+AssertionError: expected [] to have a length of 3 but got +0
+
+- Expected
++ Received
+
+- 3
++ 0
+
+ ❯ tests/unit/chopRecognizer.test.ts:8:18
+      6|   const p = new PoseReplay(new ChopRecognizer(syntheticProfile()));
+      7|   for (let i = 0; i < 3; i++) p.pose('raised').pose('down').pose('rais…
+      8|   expect(p.reps).toHaveLength(3);
+       |                  ^
+      9|   for (const rep of p.reps) {
+     10|     const events = p.events.filter(e => 'repId' in e && e.repId === re…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/chopRecognizer.test.ts > chop needs usable calibration and rejects stale/future arrivals
+AssertionError: expected [Function] to throw an error
+ ❯ tests/unit/chopRecognizer.test.ts:34:77
+     32| });
+     33| test('chop needs usable calibration and rejects stale/future arrivals'…
+     34|   expect(() => new ChopRecognizer({ ...syntheticProfile(), examples: {…
+       |                                                                             ^
+     35|   const r = new ChopRecognizer(syntheticProfile());
+     36|   expect(r.update(syntheticFrame(10,'raised'),400)).toContainEqual(exp…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/loadRecognizer.test.ts > load completes with continuous stand/press=false, ordered phases and single impact
+ FAIL  tests/unit/loadRecognizer.test.ts > load completes with continuous stand/press=true, ordered phases and single impact
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/loadRecognizer.test.ts:8:18
+      6|   const p = new PoseReplay(new LoadRecognizer(syntheticProfile()));
+      7|   p.pose('standing').pose('squat');if (!continuous) p.pose('standing')…
+      8|   expect(p.reps).toHaveLength(1);
+       |                  ^
+      9|   const events=p.events.filter(e=>'repId' in e && e.repId===p.reps[0].…
+     10|   expect(events.filter(e=>e.kind==='phase').map(e=>e.phase)).toEqual([…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/loadRecognizer.test.ts > load refuses missing example calibration
+AssertionError: expected [Function] to throw an error
+ ❯ tests/unit/loadRecognizer.test.ts:29:71
+     27| });
+     28| test('load refuses missing example calibration',()=>{
+     29|   expect(()=>new LoadRecognizer({...syntheticProfile(),examples:{}})).…
+       |                                                                       ^
+     30| });
+     31|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 16 passed (21)
+   Start at  02:48:27
+   Duration  159ms (transform 55%, tests 23%, import 17%, worker 5%)
+

@@ -1,4 +1,17 @@
-# Tidal 开发进度（2026-10-16，T06 检查点）
+# Tidal 开发进度（2026-10-16，连续推进 T07–T11）
+
+## 当前阶段：T07 识别器实现与验证
+
+用户最新授权每阶段验证后commit/push，连续推进到T11；采用分支 `feature/t07-t11-completion`，不合并main、不部署。当前完成T07软件部分，接下来T08。真机继续manual_pending，不能据合成回放声称真实识别准确。
+
+- 新增 `src/pose/recognizers/{types,featureStream,repRecognizer,chopRecognizer,loadRecognizer}.ts`：复用T06标定/几何/低通，按观察顺序产生阶段、impact、rep-completed；完整复位才提交。共享输入检查与确认窗口，异常帧取消半次，周期超时拒绝。
+- 扩展 `recognitionConfig.ts` 实验值：120ms确认、Chop0.4–6秒/Load0.8–10秒、相对示例差值门限。Load确认膝角与髋部下移；站起和举手可连续，但短暂一帧举手不能绕过确认时间。
+- 新增 `tests/helpers/recognizerReplay.ts`、`chopRecognizer.test.ts`、`loadRecognizer.test.ts`，共22项；全部是明确合成33点输入。`getDebug()`返回阶段/拒绝原因，准备页业务接线留T09；当前没有真实运动游戏入口。
+- 实际红→绿：两个空识别器5失败/16通过；追加“站起确认时只有一帧举手”先失败，再用独立确认窗口修复。日志在 `artifacts/qa/t07/`。
+- 实际验证：`npm run typecheck`、`npm run lint`、`npm run test:unit` **120/120**、`npm run build`通过。构建 `index-mYnvI7-W.js`，保留已有体积警告。本阶段没有改浏览器交互，未重跑E2E或npm ci/assets:sync；T09/T10运行浏览器联调与完整回归。
+- 原domain、键盘/自动输入、Phaser与全部旧测试未改；没有保存/上传真人数据。安装启动仍 `npm ci` → `npm run assets:sync` → `npm run dev`。后续执行清单见 `IMPLEMENTATION_T07_T11.md`。
+
+## 此前 T06 检查点（历史记录）
 
 ## 本轮 T06：特征、标定与测试回放
 

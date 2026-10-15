@@ -1,0 +1,6 @@
+2026-10-16 Asia/Shanghai, Windows, baseline e8f129a
+Observed commands: npm run typecheck; npm run lint; npm run test:unit; npm run build
+All exit 0. Vitest: 15 files, 120/120 tests, 1.21s.
+Targeted red: initial 5 failed / 16 passed; one-frame press regression 1 failed / 10 passed.
+Build: index-mYnvI7-W.js (1257.81 KB, gzip340.60 KB); existing >500KB warning retained.
+Inputs: authored synthetic 33-point fixtures, no physical camera. No E2E or clean install rerun in T07.

@@ -10,6 +10,8 @@ const defaults = {
   stableKneeSpreadDeg: 8, stableFeatureRadius: .15,
   minChopTravelTorso: .35, minSquatFlexionDeg: 15, standToleranceDeg: 12,
   minPressTravelTorso: .3, returnWristTolerance: .3, minCarrySeparation: .2, carryNoiseMultiplier: 3,
+  phaseConfirmMs: 120, chopMinCycleMs: 400, chopMaxCycleMs: 6000, loadMinCycleMs: 800, loadMaxCycleMs: 10000,
+  repEnterRatio: .7, repReturnRatio: .3, minSquatHipTravel: .1,
 };
 export type RecognitionConfig = Readonly<typeof defaults>;
 export function createRecognitionConfig(overrides: Partial<RecognitionConfig> = {}): RecognitionConfig {
@@ -18,7 +20,9 @@ export function createRecognitionConfig(overrides: Partial<RecognitionConfig> = 
     if (!Number.isFinite(value) || value <= 0) throw new RangeError(`Invalid recognition parameter: ${key}`);
   }
   if (config.minConfidence > 1 || config.framingMargin >= .5 || config.minTorsoHeightFraction >= 1 ||
-      config.maxScaleRatio <= 1 || config.stableScaleRatio <= 1 || !Number.isSafeInteger(config.minStandingSamples) || config.minStandingSamples < 2) {
+      config.maxScaleRatio <= 1 || config.stableScaleRatio <= 1 || !Number.isSafeInteger(config.minStandingSamples) || config.minStandingSamples < 2 ||
+      config.repReturnRatio >= config.repEnterRatio || config.repEnterRatio >= 1 ||
+      config.chopMinCycleMs >= config.chopMaxCycleMs || config.loadMinCycleMs >= config.loadMaxCycleMs) {
     throw new RangeError('Invalid recognition range');
   }
   return Object.freeze(config);
