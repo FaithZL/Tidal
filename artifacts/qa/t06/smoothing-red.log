@@ -1,0 +1,109 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/smoothing.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/smoothing.test.ts (6 tests | 5 failed) 6ms
+   × low-pass alpha depends on elapsed time and never changes confidence 3ms
+   × invalid and out-of-order samples clear history, recovery starts from observed points 1ms
+   × gap reinitializes without interpolating old subject 0ms
+   × resized reinitializes without interpolating old subject 0ms
+   × person-moved reinitializes without interpolating old subject 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/smoothing.test.ts > low-pass alpha depends on elapsed time and never changes confidence
+AssertionError: expected 0.7 to be close to 0.666660925643838, received difference is 0.0333390743561619, but expected 0.005
+ ❯ tests/unit/smoothing.test.ts:9:41
+      7|   const next = replacePoint(syntheticFrame(60), 16, { x: .7, visibilit…
+      8|   const result = filter.update(next);
+      9|   expect(result.frame?.landmarks[16].x).toBeCloseTo(first.landmarks[16…
+       |                                         ^
+     10|   expect(result.frame?.landmarks[16].visibility).toBe(.7);
+     11| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/smoothing.test.ts > invalid and out-of-order samples clear history, recovery starts from observed points
+AssertionError: expected null to be 'out-of-order' // Object.is equality
+
+- Expected:
+"out-of-order"
+
++ Received:
+null
+
+ ❯ tests/unit/smoothing.test.ts:14:52
+     12| test('invalid and out-of-order samples clear history, recovery starts …
+     13|   const filter = new PoseSmoother();filter.update(syntheticFrame(100));
+     14|   expect(filter.update(syntheticFrame(99)).reason).toBe('out-of-order'…
+       |                                                    ^
+     15|   expect(filter.update({ ...syntheticFrame(200), valid: false }).frame…
+     16|   const recovered = syntheticFrame(300, 'raised');expect(filter.update…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/smoothing.test.ts > gap reinitializes without interpolating old subject
+AssertionError: expected null to be 'gap' // Object.is equality
+
+- Expected:
+"gap"
+
++ Received:
+null
+
+ ❯ tests/unit/smoothing.test.ts:22:60
+     20|   let next = syntheticFrame(kind === 'gap' ? 201 : 100, 'raised', kind…
+     21|   if (kind === 'person-moved') next = { ...next, landmarks: next.landm…
+     22|   const result = filter.update(next);expect(result.reason).toBe(kind);…
+       |                                                            ^
+     23|   expect(result.frame).toEqual(next);
+     24| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/smoothing.test.ts > resized reinitializes without interpolating old subject
+AssertionError: expected null to be 'resized' // Object.is equality
+
+- Expected:
+"resized"
+
++ Received:
+null
+
+ ❯ tests/unit/smoothing.test.ts:22:60
+     20|   let next = syntheticFrame(kind === 'gap' ? 201 : 100, 'raised', kind…
+     21|   if (kind === 'person-moved') next = { ...next, landmarks: next.landm…
+     22|   const result = filter.update(next);expect(result.reason).toBe(kind);…
+       |                                                            ^
+     23|   expect(result.frame).toEqual(next);
+     24| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/smoothing.test.ts > person-moved reinitializes without interpolating old subject
+AssertionError: expected null to be 'person-moved' // Object.is equality
+
+- Expected:
+"person-moved"
+
++ Received:
+null
+
+ ❯ tests/unit/smoothing.test.ts:22:60
+     20|   let next = syntheticFrame(kind === 'gap' ? 201 : 100, 'raised', kind…
+     21|   if (kind === 'person-moved') next = { ...next, landmarks: next.landm…
+     22|   const result = filter.update(next);expect(result.reason).toBe(kind);…
+       |                                                            ^
+     23|   expect(result.frame).toEqual(next);
+     24| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 1 passed (6)
+   Start at  01:46:28
+   Duration  124ms (transform 53%, import 22%, tests 18%, worker 7%)

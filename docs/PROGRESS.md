@@ -1,4 +1,56 @@
-# Tidal 开发进度（2026-10-16，T05 + 无摄像头自动演示）
+# Tidal 开发进度（2026-10-16，T06 检查点）
+
+## 本轮 T06：特征、标定与测试回放
+
+在已有 Phaser / MediaPipe 诊断版本上增量完成 T06 的软件实现与自动验证，停在 T06；T07–T11 未开始。保留无摄像头模拟开关，原领域、游戏配置、键盘/自动输入、Phaser 表现、依赖锁文件和全部旧测试未改。用户确认无摄像头，真机骨架、标定可用性、参数和准确率继续 **manual_pending**。
+
+开始时 Git 干净，基线 `9932e0a`，本轮使用本地 `feature/t06-pose-calibration` 分支；不 push、不合并 main、不部署。以下 Git/T05 段落均为此前历史，不是当前任务状态。
+
+### 实现与文件
+
+- `src/pose/features.ts`：先恢复像素坐标再计算膝/肘角；腕相对髋、髋高用当前躯干尺度归一化；两侧独立，镜像仅在显示层。缺点、非有限数、越界置信度、零向量、裁切、微小躯干拒绝，不补默认角度。
+- `src/pose/smoothing.ts`：按时间间隔的一阶低通；无效帧、乱序、断档、尺寸变化及相邻帧位置/尺度突变清历史，不把失效区间插值成有效观察。
+- `src/pose/calibration.ts`、`calibrationSession.ts`：2秒站立基线、主手、上肩/下挥、蹲下/站起/举手/复位示例、Carry持姿/放下各2秒的分步采样与可分性检查。提供各任务就绪状态与按值复制的命名示例汇总；不发 ExerciseSignal，不改业务状态。
+- `src/config/recognitionConfig.ts`：集中实验阈值和输入校验，复用原最大采样间隔/数据年龄；不改 `demoConfig.ts`。
+- `src/ui/calibrationPanel.ts`、`setupPanel.ts`、`src/browser.ts`、`index.html`、`web/style.css`：准备页引导、特征/拒绝原因/进度、主手选择，停止/离开/换来源/失焦与后台清理。无有效关键点不能采集；原自动模拟不参与标定。标定完成仍不能用摄像头计运动次数。
+- `tests/fixtures/poses.synthetic.json`、`tests/helpers/syntheticPose.ts`、`replayPoseSource.ts`：明确来源的人工33点夹具和按时间戳回放；只用于测试，不打包成真实摄像头源。
+- 新增六份单测：`features`、`smoothing`、`calibration`、`calibrationSession`、`replayPoseSource`、`recognitionConfig`；新增 `tests/e2e/calibration.spec.ts`、`scripts/verify-t06-production.mjs`。
+- 文档：README、本进度、TEST_REPORT、SOURCES、IMPLEMENTATION_T06；本轮日志与截图放在 `artifacts/qa/t06/`。完整回归生成的旧证据目录图片恢复原版本，避免覆盖历史证据。
+
+### 实际命令、失败测试与结果
+
+| 命令 / 操作 | 本轮实际结果 |
+|---|---|
+| 初始 `npm run typecheck` / `npm run test:unit` | pass，44/44 原单测 |
+| `npm run test:unit -- tests/unit/features.test.ts tests/unit/calibration.test.ts` | 空实现先5失败/13通过 → 18/18通过；之后补置信度非法值负例 |
+| `npm run test:unit -- tests/unit/smoothing.test.ts` | 空实现5失败/1通过 → 6/6通过 |
+| `npm run test:unit -- tests/unit/calibrationSession.test.ts tests/unit/replayPoseSource.test.ts` | 空实现14失败 → 14/14通过；随后补配置/示例返回值/负时间/滤波退化/不完整Load等回归 |
+| `npm run test:unit -- tests/unit/calibrationSession.test.ts tests/unit/features.test.ts` | 边界补测先5失败/25通过（非法置信度2、缺少示例导出、负时间、滤波几何退化）→ 修复后全套98/98 |
+| `npm run test:e2e -- tests/e2e/calibration.spec.ts` | 先因缺少页面元素失败 → 3/3通过（33.8秒）；包括完整9步合成标定、失效清除和生命周期 |
+| `npm run verify` | pass：typecheck、lint、13文件98/98单测、23/23 E2E（3.9分钟）、build |
+| `npm run assets:verify` | pass：模型、4个MediaPipe运行文件、2个原创SVG |
+| `node scripts/verify-t06-production.mjs`（既有4175预览服务） | pass：实际打开新dist，无摄像头标定禁用；模拟启动、首个完整动作与暂停保留；无页面异常/外部来源/模型请求 |
+
+首次新E2E启动曾因Node JSON import缺少`with { type: 'json' }`而未收集到用例；修复测试加载后重新获得页面缺失的真实失败，未把“无测试”计为通过。失败日志、`calibration-e2e.log`、`final-verify.log`、`production-smoke.log/json`均在本轮证据目录。依赖未变，本轮没有重跑 `npm ci` / `assets:sync`，不将以前安装结果写成本轮结果。
+
+最终生产包 `index-DaYWpBoR.js`，1,257.53KB / gzip340.49KB；保留原有500KB体积警告。生产检查仅覆盖新准备页和模拟启动/暂停，**本轮没有重跑正式墙钟整局**；键盘双局、自动整局、库存守恒、奖励一次性、暂停/重置由完整E2E与原单测回归覆盖。此前142.927秒生产自动整局记录仍在历史段落。
+
+### 浏览器证据与审查
+
+- `calibrated-synthetic.png`：实际Chromium页面走完9步，明确加注“合成33点夹具 / 模拟Worker，非真人或模型准确率验收”；不是实际MediaPipe推理输出。界面显示三任务已标定，领域挥砍仍0/15；后续低置信度帧清除就绪。
+- `production-calibration-waiting.png`：实际生产构建，未请求摄像头，采样按钮禁用、三任务未标定。
+- `production-demo-paused.png`：生产模拟开关开启，首个完整动作后暂停，次数保持。三张图均已实际查看。
+- 独立只读审查：新增54/54单测独立通过，无Critical/Important；Minor为仅检测相邻帧突变。**缓慢换位、同位置换人不能可靠检测，须手动重做标定**，不承诺身份识别或通用多人隔离。审查记录见 `artifacts/qa/t06/review.txt`。
+
+### 手动待办与下一步
+
+当前没有摄像头，不要求用户立即完成真机步骤。有设备后：关闭模拟 → 接受计划 → 开启摄像头诊断 → 单人全身/举手范围可见 → 按本人左右选主手 → 逐步采集9步；检查舒适动作能否区分，遮挡/失焦后是否清除，停止/返回后指示灯是否关闭。记录设备、浏览器、分辨率、光照与拒绝原因，不必上传或保存真人视频/姿态轨迹。真实阈值可用性、准确率和性能均 `manual_pending`。
+
+本轮只完成 T06 准备能力，不代表三运动识别完成。下一轮 T07：砍树/装车的完整时序识别器、正负回放测试与事件顺序；T08 Carry、T09 摄像头业务接入仍后续。A03–A09 等既有产品假设继续未确认。
+
+运行：`npm ci` → `npm run assets:sync` → `npm run assets:verify` → `npm run dev`；完整验证 `npm run verify`。生产预览 `npm run build` → `npm run preview`。更详细的启动、模拟开关和标定步骤见 README。既有本机4175预览当前读取最新dist，不是对外部署。
+
+## 此前 T05 与 Git 交付记录
 
 ## Git 交付（2026-10-16）
 

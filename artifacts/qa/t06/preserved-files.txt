@@ -1,0 +1,37 @@
+Baseline: 9932e0a
+Check: git diff --exit-code against every baseline file in domain/input/game/pose, demoConfig, package+lock and tests
+Result: unchanged (exit 0)
+Protected paths:
+package-lock.json
+package.json
+src/config/demoConfig.ts
+src/domain/sessionController.ts
+src/domain/types.ts
+src/game/ActionAnimator.ts
+src/game/FarmScene.ts
+src/game/actors/FarmerActor.ts
+src/game/actors/HelperActor.ts
+src/game/actors/props.ts
+src/game/assets.ts
+src/game/createGame.ts
+src/game/drawFarm.ts
+src/input/autoDemoSource.ts
+src/input/keyboardActionSource.ts
+src/input/types.ts
+src/pose/cameraService.ts
+src/pose/pose.worker.ts
+src/pose/poseWorkerClient.ts
+src/pose/types.ts
+tests/e2e/boot.spec.ts
+tests/e2e/camera-errors.spec.ts
+tests/e2e/demo-toggle.spec.ts
+tests/e2e/keyboard-flow.spec.ts
+tests/e2e/keyboard_flow.py
+tests/e2e/visual-states.spec.ts
+tests/unit/actionAnimator.test.ts
+tests/unit/autoDemoSource.test.ts
+tests/unit/cameraService.test.ts
+tests/unit/config.test.mjs
+tests/unit/input.test.mjs
+tests/unit/poseWorkerClient.test.ts
+tests/unit/session.test.mjs

@@ -1,0 +1,55 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/calibration.spec.ts -g calibration requires
+
+[WebServer] (node:43120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:42812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate (8.3s)
+
+
+  1) tests\e2e\calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: locator('#calibrationCapture')
+    Expected: disabled
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" locator('#calibrationCapture') with timeout 7000ms
+      - waiting for locator('#calibrationCapture')
+
+
+      39 | test('calibration requires camera points and automatic demo cannot pretend to calibrate', async ({ page }) => {
+      40 |   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();
+    > 41 |   await expect(page.locator('#calibrationCapture')).toBeDisabled();await expect(page.locator('#calibrationStatus')).toContainText('等待');
+         |                                                     ^
+      42 |   await page.locator('#setupDemoToggle').click();await expect(page.locator('#calibrationPanel')).toBeHidden();
+      43 |   await page.waitForTimeout(500);await page.locator('#setupDemoToggle').click();
+      44 |   await expect(page.locator('#calibrationCapture')).toBeDisabled();await expect(page.locator('#calibrationReadiness')).not.toContainText('已标定');
+        at D:\work\corona\Tidal\tests\e2e\calibration.spec.ts:41:53
+
+    Error Context: test-results\calibration-calibration-re-24cae-cannot-pretend-to-calibrate\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\calibration-calibration-re-24cae-cannot-pretend-to-calibrate\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\calibration-calibration-re-24cae-cannot-pretend-to-calibrate\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate

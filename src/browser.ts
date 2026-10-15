@@ -4,6 +4,7 @@ import { KeyboardActionSource } from './input/keyboardActionSource.js';
 import { AutoDemoSource } from './input/autoDemoSource.js';
 import { createGame } from './game/createGame.js';
 import { SetupPanel } from './ui/setupPanel.js';
+import { CalibrationPanel } from './ui/calibrationPanel.js';
 import { SyntheticPreview } from './ui/syntheticPreview.js';
 import type { SessionSnapshot, TaskKind } from './domain/types.js';
 
@@ -30,7 +31,8 @@ const preview = new SyntheticPreview([
 ]);
 const game = createGame($('worldCanvas'), controller, config);
 const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
-  $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'));
+  $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'),
+  new CalibrationPanel($<HTMLDetailsElement>('calibrationPanel')));
 let current = controller.getSnapshot();
 let boundInputKey = '';
 let bindingGeneration = 0;
@@ -239,4 +241,4 @@ function animate(now:number):void {
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-window.addEventListener('pagehide', () => { void cameraPanel.stop(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+window.addEventListener('pagehide', () => { void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });

@@ -91,14 +91,26 @@
       <div class="camera-actions"><button class="secondary" id="cameraStart">开启摄像头诊断</button><button class="secondary" id="cameraStop">停止 / 取消</button></div>
       <div id="demoPreviewSetup" class="synthetic-preview" hidden>
         <canvas id="demoSetupCanvas" width="360" height="240" aria-label="脚本合成骨架动作预览"></canvas>
-        <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头；准备页不计成果。</small></div>
+        <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头、不参与标定；准备页不计成果。</small></div>
       </div>
       <div id="cameraDiagnostics">
       <div class="camera-preview"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体骨架诊断"></canvas></div>
       <p id="cameraStatus" role="status">点击开启诊断才请求视频权限；仅在本机处理。</p>
       <small id="cameraMetrics"></small><small>已返回推理帧：<span id="cameraFrames">0</span></small>
+      <details id="calibrationPanel" class="calibration-panel">
+        <summary>姿态标定 · T06</summary>
+        <p>单人、固定机位，全身与举手范围可见。按舒适幅度示范；预览镜像，主手按本人左右选择。</p>
+        <label>挥砍主手 <select id="calibrationSide"><option value="right">右手（本人右侧）</option><option value="left">左手（本人左侧）</option></select></label>
+        <p id="calibrationStatus" role="status">等待全身有效关键点</p>
+        <p id="calibrationInstruction"></p>
+        <progress id="calibrationProgress" max="1" value="0" aria-label="当前标定步骤采样进度"></progress>
+        <div class="calibration-actions"><button id="calibrationCapture" class="primary" disabled>采集自然站立</button><button id="calibrationReset" class="secondary">重做标定</button></div>
+        <p id="calibrationReason" class="calibration-reason"></p>
+        <p id="calibrationReadiness"></p><small id="calibrationFeatures"></small>
+        <small>实验参数，待真机调校；只保存本次内存。人体姿态不能证明器械重量或真实持握。标定不会启用摄像头游戏计数。</small>
+      </details>
       </div>
-      <div id="cameraLimitNote" class="modal-info">人体关键点不能确认器械重量、真实持握、心率或卡路里。请保持全身可见，本轮不做动作标定或计数。</div>
+      <div id="cameraLimitNote" class="modal-info">人体关键点不能确认器械重量、真实持握、心率或卡路里。标定仅作设备准备；真实运动计数将在后续接入。</div>
       <div class="modal-actions"><button class="secondary" id="backHome">返回首页</button><button class="primary" id="beginDemo">关闭摄像头并开始键盘演示 →</button></div>
     </div>
   </div>

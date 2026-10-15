@@ -1,0 +1,134 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/calibrationSession.test.ts tests/unit/features.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/features.test.ts (12 tests | 2 failed) 7ms
+   × rejects infinite-confidence input instead of substituting angles 3ms
+   × rejects confidence-out-of-range input instead of substituting angles 1ms
+ ❯ tests/unit/calibrationSession.test.ts (18 tests | 3 failed) 26ms
+   × calibration exposes named immutable-by-copy examples for later recognizers, then reset clears them 4ms
+   × negative arrival time cannot start preparation 2ms
+   × degenerate smoothed geometry cannot remain calibrated 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/calibrationSession.test.ts > calibration exposes named immutable-by-copy examples for later recognizers, then reset clears them
+TypeError: Cannot read properties of undefined (reading 'carry-hold')
+ ❯ tests/unit/calibrationSession.test.ts:56:10
+     54|   const session = new CalibrationSession();const time = allExamples(se…
+     55|   const examples = session.getSnapshot().examples;
+     56|   expect(examples['carry-hold']?.wrist.y).toBeLessThan(examples['carry…
+       |          ^
+     57|   expect(examples['load-squat']?.kneeDeg).toBeLessThan(examples['load-…
+     58|   examples['carry-hold']!.wrist.y = 123;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/calibrationSession.test.ts > negative arrival time cannot start preparation
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/calibrationSession.test.ts:63:121
+     61| });
+     62| test('negative arrival time cannot start preparation', () => {
+     63|   const session = new CalibrationSession();session.ingest(syntheticFra…
+       |                                                                                                                         ^
+     64| });
+     65| test('degenerate smoothed geometry cannot remain calibrated', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/calibrationSession.test.ts > degenerate smoothed geometry cannot remain calibrated
+AssertionError: expected { torsoScalePx: 130, …(3) } to be null
+
+- Expected:
+null
+
++ Received:
+{
+  "primarySide": "right",
+  "standingKnee": {
+    "left": 180,
+    "right": 180,
+  },
+  "torsoScalePx": 130,
+  "usableSides": [
+    "left",
+    "right",
+  ],
+}
+
+ ❯ tests/unit/calibrationSession.test.ts:70:76
+     68|   const frame = syntheticFrame(time), alpha = 1 - Math.exp(-100 / 60),…
+     69|   const collapse = replacePoint(frame, 16, { x: elbow.x + (elbow.x - w…
+     70|   session.ingest(collapse, time);expect(session.getSnapshot().calibrat…
+       |                                                                            ^
+     71| });
+     72| test.each([
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/features.test.ts > rejects infinite-confidence input instead of substituting angles
+ FAIL  tests/unit/features.test.ts > rejects confidence-out-of-range input instead of substituting angles
+AssertionError: expected { frameId: 1, capturedAtMs: +0, …(4) } to be null
+
+- Expected:
+null
+
++ Received:
+{
+  "capturedAtMs": 0,
+  "center": {
+    "x": 320,
+    "y": 240,
+  },
+  "frameId": 1,
+  "hipHeight": 1.3846153846153846,
+  "sides": {
+    "left": {
+      "confidence": 0.99,
+      "elbowDeg": 157.83365417791757,
+      "kneeDeg": 180,
+      "kneeFlexionDeg": 0,
+      "wrist": {
+        "x": -0.5384615384615384,
+        "y": 0.15384615384615385,
+      },
+    },
+    "right": {
+      "confidence": 0.99,
+      "elbowDeg": 157.83365417791757,
+      "kneeDeg": 180,
+      "kneeFlexionDeg": 0,
+      "wrist": {
+        "x": 0.5384615384615384,
+        "y": 0.15384615384615385,
+      },
+    },
+  },
+  "torsoScalePx": 130,
+}
+
+ ❯ tests/unit/features.test.ts:42:44
+     40|   if (kind === 'tiny') frame = { ...frame, landmarks: frame.landmarks.…
+     41|   if (kind === 'cropped') frame = replacePoint(frame, 28, { y: 1.02 });
+     42|   expect(extractFeatures(frame, baseline)).toBeNull();
+       |                                            ^
+     43| });
+     44|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 25 passed (30)
+   Start at  01:57:40
+   Duration  146ms (transform 39%, tests 36%, import 19%, worker 6%)

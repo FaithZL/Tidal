@@ -1,0 +1,96 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/features.test.ts tests/unit/calibration.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/features.test.ts (10 tests | 3 failed) 6ms
+   × angles use pixel units before geometry, regardless of image aspect ratio 3ms
+   × body translation and uniform scaling preserve normalized features 1ms
+   × anatomical sides stay independent; display mirroring never swaps indices 1ms
+ ❯ tests/unit/calibration.test.ts (8 tests | 2 failed) 8ms
+   × stable two-second standing calibrates scale, natural knees and available sides 5ms
+   × an occluded unused arm does not prevent calibrating the requested usable side 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/calibration.test.ts > stable two-second standing calibrates scale, natural knees and available sides
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/calibration.test.ts:7:21
+      5| test('stable two-second standing calibrates scale, natural knees and a…
+      6|   const result = calibrate(standingFrames());
+      7|   expect(result.ok).toBe(true);
+       |                     ^
+      8|   if (!result.ok) return;
+      9|   expect(result.calibration.torsoScalePx).toBeCloseTo(130);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/calibration.test.ts > an occluded unused arm does not prevent calibrating the requested usable side
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/calibration.test.ts:16:74
+     14|   const frames = standingFrames().map(f => replacePoint(f, 15, { visib…
+     15|   expect(calibrate(frames, undefined, 'left').ok).toBe(false);
+     16|   const result = calibrate(frames, undefined, 'right');expect(result.o…
+       |                                                                          ^
+     17|   if (result.ok) expect(result.calibration.usableSides).toEqual(['righ…
+     18| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/features.test.ts > angles use pixel units before geometry, regardless of image aspect ratio
+AssertionError: expected undefined to be close to 90, received difference is NaN, but expected 5e-7
+ ❯ tests/unit/features.test.ts:13:69
+     11|     frame = replacePoint(frame, 14, { x: 400 / width, y: 190 / 480 });
+     12|     frame = replacePoint(frame, 16, { x: 480 / width, y: 110 / 480 });
+     13|     expect(extractFeatures(frame, baseline)?.sides.right?.elbowDeg).to…
+       |                                                                     ^
+     14|   }
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/features.test.ts > body translation and uniform scaling preserve normalized features
+AssertionError: expected null not to be null
+ ❯ tests/unit/features.test.ts:20:17
+     18|   const transformed = { ...frame, landmarks: frame.landmarks.map(p => …
+     19|   const a = extractFeatures(frame, baseline), b = extractFeatures(tran…
+     20|   expect(a).not.toBeNull();expect(b).not.toBeNull();
+       |                 ^
+     21|   expect(b?.sides.right?.wrist.x).toBeCloseTo(a!.sides.right!.wrist.x,…
+     22|   expect(b?.sides.right?.wrist.y).toBeCloseTo(a!.sides.right!.wrist.y,…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/features.test.ts > anatomical sides stay independent; display mirroring never swaps indices
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ tests/unit/features.test.ts:28:41
+     26|   const frame = replacePoint(syntheticFrame(), 15, { y: .1 });
+     27|   const features = extractFeatures(frame, baseline);
+     28|   expect(features?.sides.left?.wrist.y).toBeLessThan(-1);
+       |                                         ^
+     29|   expect(features?.sides.right?.wrist.y).toBeGreaterThan(0);
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 13 passed (18)
+   Start at  01:43:37
+   Duration  147ms (transform 63%, import 16%, tests 15%, worker 5%)
