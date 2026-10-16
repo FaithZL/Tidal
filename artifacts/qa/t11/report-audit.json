@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-15T19:57:56.171Z",
+  "applicationCommit": "d4d086f3b44c50cfb2b8de6d6a236027749193e2",
+  "reportSha256": "898f777a045a46d9005663068c07bd1970148c661db840aa23ea953d5cad9aee",
+  "ids": 49,
+  "statuses": {
+    "pass": 33,
+    "manual_pending": 15,
+    "fail": 1
+  },
+  "failed": [
+    "P01"
+  ],
+  "pending": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "P02",
+    "P03",
+    "P04"
+  ],
+  "evidence": [
+    "artifacts/qa/t10/environment.json",
+    "artifacts/qa/t10/npm-ci.log",
+    "artifacts/qa/t10/assets-sync.log",
+    "artifacts/qa/t10/assets-verify.log",
+    "artifacts/qa/t10/verify.log",
+    "artifacts/qa/t10/review.md",
+    "artifacts/qa/t10/calibration-review-red.log",
+    "artifacts/qa/t10/calibration-review-green.log",
+    "artifacts/qa/t10/carry-polling-race.json",
+    "artifacts/qa/t10/carry-polling-green.log",
+    "artifacts/qa/t10/version-mismatch.log",
+    "artifacts/qa/t10/ten-cycle-resources.json",
+    "artifacts/qa/t10/subpath.json",
+    "artifacts/qa/t10/production-auto-flow.json",
+    "artifacts/qa/t10/production-auto-flow.log",
+    "artifacts/qa/t10/performance-probe.json",
+    "artifacts/qa/t10/production-setup.png",
+    "artifacts/qa/t10/production-running.png",
+    "artifacts/qa/t10/production-results.png",
+    "artifacts/qa/t10/desktop-1280x720.png",
+    "artifacts/qa/t10/desktop-1366x768.png",
+    "artifacts/qa/t10/desktop-1920x1080.png"
+  ],
+  "scope": "T11 documentation audit only. Reuses the verified T10 application; no new application changes or physical-camera evidence.",
+  "result": "pass"
+}

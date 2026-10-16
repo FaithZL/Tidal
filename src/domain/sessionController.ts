@@ -27,6 +27,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
   let lastCarryHoldSampleMs: number | null = null;
   let carryHolding = false;
   let carrySampleAtMs = -Infinity;
+  let cameraReady = false;
   let snapshot: SessionSnapshot = initial('keyboard');
 
   function initial(mode: 'keyboard' | 'camera'): SessionSnapshot {
@@ -105,6 +106,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
   function command(cmd: SessionCommand): void {
     if (disposed) return;
     if (cmd.kind === 'reset') {
+      cameraReady = false;
       snapshot = initial('keyboard');
       lastTickMs = clock.nowMs();
       resetInputs();
@@ -116,18 +118,29 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
       snapshot.phase = 'setup';
       snapshot.inputMode = cmd.mode;
     } else if (cmd.kind === 'switch-source' && (snapshot.phase === 'setup' || isPaused())) {
+      cameraReady = false;
       snapshot.inputMode = cmd.mode;
       snapshot.sourceEpoch++;
       resetInputs();
-    } else if (cmd.kind === 'setup-ready' && snapshot.phase === 'setup' && snapshot.inputMode === 'keyboard') {
+    } else if (cmd.kind === 'setup-ready' && snapshot.phase === 'setup' && (snapshot.inputMode === 'keyboard' ||
+      (cmd.calibrated?.chop === true && cmd.calibrated.load === true && cmd.calibrated.carry === true))) {
+      cameraReady = snapshot.inputMode === 'camera';
       snapshot.sessionStartedAtMs = clock.nowMs();
       lastTickMs = clock.nowMs();
       countdown('chop');
+    } else if (cmd.kind === 'camera-readiness') {
+      cameraReady = cmd.ready;
+      if (!cameraReady && snapshot.inputMode === 'camera' && snapshot.phase === 'countdown') {
+        snapshot.remainingMs = config.startCountdownMs;
+      }
     } else if (cmd.kind === 'pause' && snapshot.phase !== 'home' && snapshot.phase !== 'results') {
-      if (!snapshot.pauseReasons.includes(cmd.reason)) snapshot.pauseReasons = [...snapshot.pauseReasons, cmd.reason];
+      const restTracking = cmd.reason === 'tracking' && snapshot.inputMode === 'camera' && snapshot.phase === 'rest';
+      if (cmd.reason === 'tracking' && snapshot.inputMode === 'camera') cameraReady = false;
+      if (!restTracking && !snapshot.pauseReasons.includes(cmd.reason)) snapshot.pauseReasons = [...snapshot.pauseReasons, cmd.reason];
       carryHolding = false;
       lastCarryHoldSampleMs = null;
     } else if (cmd.kind === 'resume') {
+      if (cmd.reason === 'tracking' && snapshot.inputMode === 'camera' && !cameraReady) return;
       const hadPauses = isPaused();
       snapshot.pauseReasons = snapshot.pauseReasons.filter(x => x !== cmd.reason);
       if (hadPauses && !isPaused() && snapshot.phase === 'active') {
@@ -232,7 +245,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
       snapshot.remainingMs = Math.max(0, snapshot.remainingMs - delta);
       if (snapshot.remainingMs === 0) {
         if (snapshot.phase === 'countdown') active();
-        else if (snapshot.task) countdown(snapshot.task);
+        else if (snapshot.task && (snapshot.inputMode !== 'camera' || cameraReady)) countdown(snapshot.task);
       }
     }
     emit();

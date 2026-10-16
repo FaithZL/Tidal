@@ -1,0 +1,55 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts -g camera start stays
+
+[WebServer] (node:44788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:20260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it (8.3s)
+
+
+  1) tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: locator('#beginCamera')
+    Expected: disabled
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" locator('#beginCamera') with timeout 7000ms
+      - waiting for locator('#beginCamera')
+
+
+      4 | test.use({baseURL:'http://127.0.0.1:4174',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
+      5 | test('camera start stays disabled without calibration and simulation cannot enable it',async({page})=>{
+    > 6 |   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await expect(page.locator('#beginCamera')).toBeDisabled();
+        |                                                                                                                   ^
+      7 |   await page.locator('#setupDemoToggle').click();await expect(page.locator('#beginCamera')).toBeHidden();
+      8 | });
+      9 | test('synthetic camera pipeline completes the farm through real recognizers and releases resources',async({page})=>{
+        at D:\work\corona\Tidal\tests\e2e\source-lifecycle.spec.ts:6:115
+
+    Error Context: test-results\source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\source-lifecycle.spec.ts:5:1 › camera start stays disabled without calibration and simulation cannot enable it 

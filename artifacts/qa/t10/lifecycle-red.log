@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/deployment.spec.ts -g ten camera
+
+[WebServer] (node:47948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:53464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:40168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (12.2s)
+
+
+  1) tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      64 |   await mkdir(output,{recursive:true});await writeFile(`${output}/ten-cycle-resources.json`,JSON.stringify({input:'fake video + synthetic Worker; actual UI/camera lifecycle',method:'ended tracks, live worker/interval counts, Chromium CDP after forced GC; 5MB trend guard',samples},null,2));
+      65 |   expect(samples.every(s=>s.intervals===samples[0].intervals)).toBe(true);
+    > 66 |   expect(samples.every(s=>s.endedTrackListeners.length===0)).toBe(true);
+         |                                                              ^
+      67 |   expect(samples.at(-1)!.jsEventListeners).toBeLessThanOrEqual(samples[0].jsEventListeners+2);
+      68 |   // A trend guard, not an exact memory promise; allow runtime/graphics caches to warm up.
+      69 |   expect(samples.at(-1)!.usedHeap-samples[2].usedHeap).toBeLessThan(5_000_000);
+        at D:\work\corona\Tidal\tests\e2e\deployment.spec.ts:66:62
+
+    Error Context: test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth

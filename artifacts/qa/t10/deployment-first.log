@@ -1,0 +1,58 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/deployment.spec.ts
+
+[WebServer] (node:45560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:46648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session (12.5s)
+  ok 2 tests\e2e\deployment.spec.ts:15:64 › desktop 1366x768 keeps controls visible through a complete simulated session (11.8s)
+  ok 3 tests\e2e\deployment.spec.ts:15:64 › desktop 1920x1080 keeps controls visible through a complete simulated session (11.0s)
+  ok 4 tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (4.2s)
+  x  5 tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (11.6s)
+(node:54276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 6 tests\e2e\deployment.spec.ts:78:3 › production under /tidal/ › all local assets and real MediaPipe inference work with external requests blocked (2.0s)
+  ok 7 tests\e2e\deployment.spec.ts:88:83 › production under /tidal/ › models/pose_landmarker_lite.task 404 reports failure and releases capture (1.1s)
+  ok 8 tests\e2e\deployment.spec.ts:88:83 › production under /tidal/ › mediapipe/wasm/*.wasm 404 reports failure and releases capture (1.7s)
+
+
+  1) tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 93
+    Received:    98
+
+      60 |   }
+      61 |   expect(samples.every(s=>s.intervals===samples[0].intervals)).toBe(true);
+    > 62 |   expect(samples.at(-1)!.jsEventListeners).toBeLessThanOrEqual(samples[0].jsEventListeners+2);
+         |                                            ^
+      63 |   // A trend guard, not an exact memory promise; allow runtime/graphics caches to warm up.
+      64 |   expect(samples.at(-1)!.usedHeap-samples[2].usedHeap).toBeLessThan(5_000_000);
+      65 |   await mkdir(output,{recursive:true});await writeFile(`${output}/ten-cycle-resources.json`,JSON.stringify({input:'fake video + synthetic Worker; actual UI/camera lifecycle',method:'ended tracks, live worker/interval counts, Chromium CDP after forced GC; 5MB trend guard',samples},null,2));
+        at D:\work\corona\Tidal\tests\e2e\deployment.spec.ts:62:44
+
+    Error Context: test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deployment-ten-camera-star-54782-thout-sustained-heap-growth\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\deployment.spec.ts:42:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth
+  7 passed (1.0m)

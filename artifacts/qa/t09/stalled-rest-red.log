@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts -g stalled camera
+
+[WebServer] (node:54028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52480) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:47884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:53324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation (49.4s)
+
+
+  1) tests\e2e\source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation 
+
+    Error: expect(received).not.toContain(expected) // indexOf
+
+    Expected value: not "训练中"
+    Received array:     ["休息时间", "倒计时", "训练中", "已暂停"]
+
+      56 |   await page.waitForTimeout(800);
+      57 |   // Even a brief active transition violates the next-task preparation gate.
+    > 58 |   expect(await page.evaluate(()=>JSON.parse(document.body.dataset.stalledPhases!))).not.toContain('训练中');
+         |                                                                                         ^
+      59 |   expect(await page.locator('#setupModal').isVisible()).toBe(true);
+      60 |   await expect(page.locator('#loadValue')).toHaveText('0/15');
+      61 | });
+        at D:\work\corona\Tidal\tests\e2e\source-lifecycle.spec.ts:58:89
+
+    Error Context: test-results\source-lifecycle-a-stalled-a6719-ve-task-without-preparation\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\source-lifecycle-a-stalled-a6719-ve-task-without-preparation\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\source-lifecycle-a-stalled-a6719-ve-task-without-preparation\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation 

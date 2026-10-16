@@ -1,0 +1,88 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/deployment.spec.ts -g desktop 1280|audio requires
+
+[WebServer] (node:54584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:44020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session (5.5s)
+(node:50400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (8.5s)
+
+
+  1) tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session
+
+    Error: #actionBtn
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 720
+    Received:    743.78125
+
+      10 |   const box=await page.locator(selector).boundingBox(),v=page.viewportSize()!;
+      11 |   expect(box,selector).not.toBeNull();expect(box!.x,selector).toBeGreaterThanOrEqual(0);expect(box!.y,selector).toBeGreaterThanOrEqual(0);
+    > 12 |   expect(box!.x+box!.width,selector).toBeLessThanOrEqual(v.width);expect(box!.y+box!.height,selector).toBeLessThanOrEqual(v.height);
+         |                                                                                                       ^
+      13 | }
+      14 |
+      15 | for(const [width,height]of [[1280,720],[1366,768],[1920,1080]])test(`desktop ${width}x${height} keeps controls visible through a complete simulated session`,async({page})=>{
+        at inViewport (D:\work\corona\Tidal\tests\e2e\deployment.spec.ts:12:103)
+        at D:\work\corona\Tidal\tests\e2e\deployment.spec.ts:22:82
+
+    Error Context: test-results\deployment-desktop-1280x72-ba283--complete-simulated-session\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deployment-desktop-1280x72-ba283--complete-simulated-session\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deployment-desktop-1280x72-ba283--complete-simulated-session\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('#audioToggle')
+    Expected: "false"
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#audioToggle') with timeout 7000ms
+      - waiting for locator('#audioToggle')
+
+
+      32 |   });
+      33 |   await page.goto('/');await page.locator('#cancelPlan').click();expect(await page.locator('body').getAttribute('data-audio-contexts')).toBeNull();
+    > 34 |   await expect(page.locator('#audioToggle')).toHaveAttribute('aria-pressed','false');await page.locator('#audioToggle').click();
+         |                                              ^
+      35 |   await expect(page.locator('#audioToggle')).toHaveAttribute('aria-pressed','true');await expect(page.locator('body')).toHaveAttribute('data-audio-contexts','1');
+      36 |   await page.locator('#audioToggle').click();await expect(page.locator('#audioToggle')).toHaveAttribute('aria-pressed','false');
+      37 |   await page.addInitScript(()=>{window.AudioContext=class{constructor(){throw new Error('test unavailable');}} as unknown as typeof AudioContext;});
+        at D:\work\corona\Tidal\tests\e2e\deployment.spec.ts:34:46
+
+    Error Context: test-results\deployment-audio-requires--6d06a-lure-leaves-the-farm-usable\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\deployment-audio-requires--6d06a-lure-leaves-the-farm-usable\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\deployment-audio-requires--6d06a-lure-leaves-the-farm-usable\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\deployment.spec.ts:15:64 › desktop 1280x720 keeps controls visible through a complete simulated session
+    tests\e2e\deployment.spec.ts:28:1 › audio requires explicit unlock, can mute and failure leaves the farm usable

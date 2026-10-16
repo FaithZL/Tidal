@@ -1,0 +1,125 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sourceManager.test.ts tests/unit/cameraActionSource.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/cameraActionSource.test.ts (4 tests | 3 failed) 11ms
+   × camera cannot start without validated calibration, and no frames times out explicitly 4ms
+   × camera full chop produces the same authoritative result and stop blocks late frames 5ms
+   × domain camera setup requires explicit verified readiness and remains closed without it 1ms
+ ❯ tests/unit/sourceManager.test.ts (3 tests | 3 failed) 28ms
+   × switch stops the previous source and suppresses its old callback, while retaining mixed history 2ms
+   × an unresolved old start cannot delay switching or pollute a newer source 9ms
+   × queued switches wait for previous stop and only the latest starts 16ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/cameraActionSource.test.ts > camera cannot start without validated calibration, and no frames times out explicitly
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/cameraActionSource.test.ts:11:56
+      9| test('camera cannot start without validated calibration, and no frames…
+     10|   const camera=new CameraActionSource(()=>0),events:ExerciseSignal[]=[…
+     11|   await expect(camera.start(context,e=>events.push(e))).rejects.toThro…
+       |                                                        ^
+     12|   camera.setProfile(syntheticProfile());await camera.start(context,e=>…
+     13|   expect(events).toContainEqual(expect.objectContaining({kind:'trackin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/cameraActionSource.test.ts > camera full chop produces the same authoritative result and stop blocks late frames
+AssertionError: expected { sessionId: 'session-1', …(18) } to match object { chopReps: 1, choppedTrees: 1, …(2) }
+(15 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "chopReps": 1,
+-   "choppedTrees": 1,
+-   "groundLogs": 1,
+-   "phase": "rest",
++   "chopReps": 0,
++   "choppedTrees": 0,
++   "groundLogs": 0,
++   "phase": "active",
+  }
+
+ ❯ tests/unit/cameraActionSource.test.ts:21:38
+     19|   const events:ExerciseSignal[]=[];await camera.start(ctx,e=>{events.p…
+     20|   for(const pose of ['raised','down','raised'] as const)for(let i=0;i<…
+     21|   expect(h.controller.getSnapshot()).toMatchObject({chopReps:1,chopped…
+       |                                      ^
+     22|   expect(events.every(e=>e.sessionId===ctx.sessionId&&e.taskRunId===ct…
+     23|   expect(new Set(events.map(e=>e.seq)).size).toBe(events.length);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/cameraActionSource.test.ts > domain camera setup requires explicit verified readiness and remains closed without it
+AssertionError: expected 'setup' to be 'countdown' // Object.is equality
+
+Expected: "countdown"
+Received: "setup"
+
+ ❯ tests/unit/cameraActionSource.test.ts:38:131
+     36|   expect(h.controller.getSnapshot().phase).toBe('setup');
+     37|   h.controller.command({kind:'setup-ready',calibrated:{chop:true,load:…
+     38|   h.controller.command({kind:'setup-ready',calibrated:{chop:true,load:…
+       |                                                                                                                                   ^
+     39| });
+     40|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/sourceManager.test.ts > switch stops the previous source and suppresses its old callback, while retaining mixed history
+TypeError: old is not a function
+ ❯ tests/unit/sourceManager.test.ts:17:3
+     15|   const m=new SourceManager(),a=new FakeSource('camera'),b=new FakeSou…
+     16|   await m.switchTo(a,context,e=>events.push(e));const old=a.emit!;awai…
+     17|   old(signal);b.emit!(signal);expect(events).toHaveLength(1);expect(a.…
+       |   ^
+     18|   expect([...m.usedModes]).toEqual(['camera','keyboard']);await m.disp…
+     19|   m.resetHistory();expect(m.usedModes.size).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/sourceManager.test.ts > an unresolved old start cannot delay switching or pollute a newer source
+TypeError: a.emit is not a function
+ ❯ tests/unit/sourceManager.test.ts:26:5
+     24|   const first=m.switchTo(a,context,e=>events.push(e));await new Promis…
+     25|   await m.switchTo(b,{...context,sourceEpoch:2},e=>events.push(e));rel…
+     26|   a.emit!(signal);b.emit!(signal);expect(events).toHaveLength(1);expec…
+       |     ^
+     27| });
+     28| test('queued switches wait for previous stop and only the latest start…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/sourceManager.test.ts > queued switches wait for previous stop and only the latest starts
+TypeError: release is not a function
+ ❯ tests/unit/sourceManager.test.ts:34:3
+     32|   const second=m.switchTo(b,context,()=>{}),third=m.switchTo(c,context…
+     33|   await new Promise(resolve=>setTimeout(resolve,0));expect(b.log).toEq…
+     34|   release();await Promise.all([second,third]);expect(b.log).toEqual([]…
+       |   ^
+     35| });
+     36|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  6 failed | 1 passed (7)
+   Start at  02:59:37
+   Duration  140ms (transform 43%, tests 37%, import 15%, worker 5%)
+

@@ -1,0 +1,12 @@
+T06 independent read-only review, 2026-10-16 Asia/Shanghai
+Reviewer: /root/review_t06; base 9932e0a, local feature/t06-pose-calibration changes.
+Reviewed feature/calibration/smoothing/replay, setup lifecycle, synthetic isolation and retained domain contracts.
+Independent verification: 54/54 new unit tests passed. No E2E/build/server run by reviewer; no edits.
+Critical: none. Important: none.
+Minor: src/pose/smoothing.ts position/scale discontinuity compares adjacent frames only.
+Reproduction: after standing calibration, shift body 6.4px horizontally every 100ms for 20 frames;
+128px total displacement retains calibration. Slow movement/same-position person replacement is not detected reliably.
+Disposition: accepted within DEVELOPMENT_GUIDE 6.2 obvious-jump scope; README/PROGRESS/TEST_REPORT explicitly require manual recalibration in these cases.
+Do not describe this as identity recognition, universal multi-person rejection or detection of every position change.
+Out of scope/unverified: physical camera accuracy/performance, real threshold suitability, T07 recognizers, T08 hold timing, T09 integration.
+Assessment: ready for T06 checkpoint within stated limits. Physical tests remain manual_pending; no push/merge/deploy.

@@ -1,0 +1,88 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/audioFeedback.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/audioFeedback.test.ts (4 tests | 4 failed) 7ms
+   × audio is silent and allocates no context until explicit user enable 4ms
+   × mute stops active nodes, does not replay muted effects, dispose closes only once 1ms
+   × unavailable audio never throws into gameplay and can remain muted 0ms
+   × a late audio unlock cannot undo mute or disposal 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/audioFeedback.test.ts > audio is silent and allocates no context until explicit user enable
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/audioFeedback.test.ts:13:42
+     11| test('audio is silent and allocates no context until explicit user ena…
+     12|   const h=audioHarness();h.audio.handle(impact);expect(h.factory).not.…
+     13|   expect(await h.audio.setEnabled(true)).toBe(true);h.audio.handle(imp…
+       |                                          ^
+     14|   expect(h.context.resume).toHaveBeenCalledOnce();expect(h.oscillators…
+     15|   h.oscillators[0].onended?.();expect(h.oscillators[0].disconnect).toH…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/audioFeedback.test.ts > mute stops active nodes, does not replay muted effects, dispose closes only once
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/audioFeedback.test.ts:19:25
+     17| test('mute stops active nodes, does not replay muted effects, dispose …
+     18|   const h=audioHarness();await h.audio.setEnabled(true);h.audio.handle…
+     19|   expect(h.oscillators).toHaveLength(1);expect(h.oscillators[0].stop).…
+       |                         ^
+     20|   h.audio.handle(impact);expect(h.oscillators).toHaveLength(1);await h…
+     21| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/audioFeedback.test.ts > unavailable audio never throws into gameplay and can remain muted
+AssertionError: expected '' to contain '音效'
+
+- Expected
++ Received
+
+- 音效
+
+ ❯ tests/unit/audioFeedback.test.ts:24:72
+     22| test('unavailable audio never throws into gameplay and can remain mute…
+     23|   const audio=new AudioFeedback(()=>{throw new Error('no audio device'…
+     24|   expect(await audio.setEnabled(true)).toBe(false);expect(audio.error)…
+       |                                                                        ^
+     25| });
+     26| test('a late audio unlock cannot undo mute or disposal',async()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/audioFeedback.test.ts > a late audio unlock cannot undo mute or disposal
+TypeError: release is not a function
+ ❯ tests/unit/audioFeedback.test.ts:28:75
+     26| test('a late audio unlock cannot undo mute or disposal',async()=>{
+     27|   const h=audioHarness();let release!:()=>void;h.context.resume.mockIm…
+     28|   const enabling=h.audio.setEnabled(true);await h.audio.setEnabled(fal…
+       |                                                                           ^
+     29|   await h.audio.dispose();expect(await h.audio.setEnabled(true)).toBe(…
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  03:24:59
+   Duration  119ms (transform 51%, tests 22%, import 19%, worker 8%)

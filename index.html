@@ -18,6 +18,9 @@
         <div id="testModeBadge" class="pill warn" hidden>本地测试加速模式</div>
         <div id="modeBadge" class="pill">⌨ 键盘演示 · 非真实动作识别</div>
         <button id="demoToggle" class="secondary demo-toggle" role="switch" aria-checked="false">无摄像头测试：关</button>
+        <button id="audioToggle" class="secondary demo-toggle" aria-pressed="false">开启音效</button>
+        <button id="useKeyboard" class="secondary" hidden>切换键盘</button>
+        <button id="recalibrate" class="secondary" hidden>重新标定</button>
         <button id="pauseBtn" class="secondary" hidden>暂停</button>
         <button id="resetBtn" class="secondary">重新开始</button>
       </div>
@@ -64,7 +67,8 @@
           <button id="actionBtn" class="primary" disabled>等待开始</button>
           <p class="keyboard-hint" id="keyboardHint">可按 <kbd>Space</kbd> 完成一次动作</p>
         </div>
-        <div class="developer-note">键盘 / 自动模拟可完整演示。摄像头仅做关键点诊断，不计运动次数；视频仅本机内存处理，不上传、不录像。</div>
+        <div class="developer-note">摄像头需先标定，再手动启动姿态代理（真机待验证）。键盘 / 自动模拟独立标识；视频仅本机内存处理，不上传、不录像。</div>
+        <details class="developer-note"><summary>输入诊断</summary><small id="inputDebug">等待输入</small></details>
       </aside>
     </main>
     <footer class="site-footer"><span>ENGINEERING PROTOTYPE · 无服务端 · 无真实健康指标</span><span id="systemStatus" role="status">准备就绪</span></footer>
@@ -85,20 +89,33 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="setupHeading">
       <div class="modal-eyebrow">CHOOSE YOUR INPUT</div>
       <h2 id="setupHeading">选择演示输入方式</h2>
-      <p>键盘可完整演示。摄像头仅供关键点诊断，三种运动识别将在后续任务接入。</p>
+      <p>键盘与模拟可完整演示。摄像头需完成标定后手动启动姿态代理；真机准确率尚待验证。</p>
       <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
       <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
       <div class="camera-actions"><button class="secondary" id="cameraStart">开启摄像头诊断</button><button class="secondary" id="cameraStop">停止 / 取消</button></div>
       <div id="demoPreviewSetup" class="synthetic-preview" hidden>
         <canvas id="demoSetupCanvas" width="360" height="240" aria-label="脚本合成骨架动作预览"></canvas>
-        <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头；准备页不计成果。</small></div>
+        <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头、不参与标定；准备页不计成果。</small></div>
       </div>
       <div id="cameraDiagnostics">
       <div class="camera-preview"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体骨架诊断"></canvas></div>
       <p id="cameraStatus" role="status">点击开启诊断才请求视频权限；仅在本机处理。</p>
       <small id="cameraMetrics"></small><small>已返回推理帧：<span id="cameraFrames">0</span></small>
+      <details id="calibrationPanel" class="calibration-panel">
+        <summary>姿态标定 · T06</summary>
+        <p>单人、固定机位，全身与举手范围可见。按舒适幅度示范；预览镜像，主手按本人左右选择。</p>
+        <label>挥砍主手 <select id="calibrationSide"><option value="right">右手（本人右侧）</option><option value="left">左手（本人左侧）</option></select></label>
+        <p id="calibrationStatus" role="status">等待全身有效关键点</p>
+        <p id="calibrationInstruction"></p>
+        <progress id="calibrationProgress" max="1" value="0" aria-label="当前标定步骤采样进度"></progress>
+        <div class="calibration-actions"><button id="calibrationCapture" class="primary" disabled>采集自然站立</button><button id="calibrationReset" class="secondary">重做标定</button></div>
+        <p id="calibrationReason" class="calibration-reason"></p>
+        <p id="calibrationReadiness"></p><small id="calibrationFeatures"></small>
+        <small>实验参数，待真机调校；只保存本次内存。人体姿态不能证明器械重量或真实持握。完成标定后仍需手动启动。</small>
+      </details>
       </div>
-      <div id="cameraLimitNote" class="modal-info">人体关键点不能确认器械重量、真实持握、心率或卡路里。请保持全身可见，本轮不做动作标定或计数。</div>
+      <div id="cameraLimitNote" class="modal-info">人体关键点不能确认器械重量、真实持握、心率或卡路里。仅单人固定机位的姿态代理；真机验证待完成。</div>
+      <button id="beginCamera" class="primary full-width" disabled>完成标定后开始摄像头训练</button>
       <div class="modal-actions"><button class="secondary" id="backHome">返回首页</button><button class="primary" id="beginDemo">关闭摄像头并开始键盘演示 →</button></div>
     </div>
   </div>
@@ -113,7 +130,7 @@
         <div><span>⚡ 游戏体力</span><strong id="rewardStamina">100</strong></div>
       </div>
       <div class="prize"><img src="/assets/harvest-shirt.svg" alt="农场叶芽徽章 T 恤" /><span>盲盒奖励：<b>限定 T 恤</b></span></div>
-      <div class="actual-metrics"><b>本次演示记录（模拟流程，非真实运动成果）</b><div id="actualMetrics">完成 15 次砍伐，15 次装车</div><small>心率和卡路里：未接入测量设备，无法提供真实数据。66 天连续打卡与 500 卡等数据仅为原方案示意。</small></div>
+      <div class="actual-metrics"><b>本次运行记录（输入来源见下方，不是生理测量）</b><div id="actualMetrics">完成 15 次砍伐，15 次装车</div><small>心率和卡路里：未接入测量设备，无法提供真实数据。66 天连续打卡与 500 卡等数据仅为原方案示意。</small></div>
       <button id="resultsHome" class="primary full-width">返回农场首页</button>
     </div>
   </div>

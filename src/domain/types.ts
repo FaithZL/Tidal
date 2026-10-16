@@ -50,7 +50,8 @@ export interface SessionSnapshot {
 }
 export type SessionCommand =
   | { kind: 'open-setup'; mode: InputMode }
-  | { kind: 'setup-ready' }
+  | { kind: 'setup-ready'; calibrated?: Readonly<Record<TaskKind,boolean>> }
+  | { kind: 'camera-readiness'; ready: boolean }
   | { kind: 'pause'; reason: PauseReason }
   | { kind: 'resume'; reason: PauseReason }
   | { kind: 'switch-source'; mode: InputMode }

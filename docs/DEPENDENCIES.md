@@ -1,4 +1,4 @@
-# 依赖与资源记录（2026-10-15）
+# 依赖与资源记录（2026-10-16）
 
 本机：Windows，Node 24.14.0，npm 11.9.0。全部直接依赖精确锁定，间接依赖由 `package-lock.json` 固定。
 
@@ -26,6 +26,7 @@
 - Phaser：MIT；许可副本 `public/licenses/phaser-LICENSE.md`，来自锁定 npm 包。
 - T04 的几何占位已在 T05 替换为原创矢量场景与分层角色，未使用外部人物截图、付费素材、音频或网络字体，见下方补充。
 - 4个WASM运行文件及SHA-256见 `public/mediapipe/manifest.json`。`assets:verify`同时比对本地资源、manifest和已安装npm包；模型校验值写死在同步脚本，下载不符即拒绝。
+- T10新增声音由`src/ui/audioFeedback.ts`原生Web Audio正弦振荡器合成，无新增依赖/第三方录音；来源见SOURCES。锁文件保持，2026-10-16干净`npm ci`成功（137包，npm报告0漏洞）。
 
 ## 已验证的集成决策
 

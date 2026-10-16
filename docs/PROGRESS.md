@@ -1,4 +1,120 @@
-# Tidal 开发进度（2026-10-16，T05 + 无摄像头自动演示）
+# Tidal 开发进度（2026-10-16，连续推进 T07–T11）
+
+## 当前检查点：T11 证据交付收尾，真机与签字仍未完成
+
+- T07砍树/复合装车识别、T08持姿代理、T09摄像头输入联调、T10本地交付打磨已逐阶段验证、commit/push；分支`feature/t07-t11-completion`，提交依次`98aaba9`、`85df391`、`872b34c`、`d4d086f`。未合并或推送main，未对外部署。
+- T11更新`docs/TEST_REPORT.md`逐项验收、README与实施记录；路演手册含启动/备用切换/故障恢复/真机记录模板。49个ID：**33 pass、1 fail（P01）、15 manual_pending**；六个产品默认值保留未批准。范围内审查问题已通过RED→GREEN修复，保留原领域逻辑和全部负例。
+- 最终应用验证来自T10同一代码：干净安装/资源校验、typecheck/lint、**155单测、35 E2E**与build通过，正常时长生产自动整局**142.983秒**结算重置通过。T11只改文档，不虚构重复运行；验收ID与证据文件核对结果见`artifacts/qa/t11/report-audit.json`。
+- **保留未达标项**：P01软件渲染环境平均40.06fps，未达约60fps目标；短对照确认SwiftShader与农场渲染负载，硬件GPU表现未测。C01–C08、V01–V04、P02/P03/P04为人工待办：真人识别/性能/端到端延迟、产品视觉批准、物理断网彩排。不能称L2/L3或全部验收通过。
+- 当前可看：`npm run preview -- --port 4175 --strictPort`，访问`http://127.0.0.1:4175/`；生产预览服务已启动。接受计划→打开无摄像头测试→自动演示，开关仍可关闭。
+- 下一步仅补指定演示设备/摄像头测试、硬件加速性能复核或针对软件渲染优化，以及A03/A04/A06/A07/A08/A09产品签字；按`DEMO_RUNBOOK.md`记录失败逐例复测。没有自动扩展到新功能阶段。
+
+## T10 软件交付验证记录
+
+T07 `98aaba9`、T08 `85df391`、T09 `872b34c` 均已按授权push到 `feature/t07-t11-completion`。本轮保持原领域逻辑与模拟开关；无物理摄像头，真机和产品签字继续 `manual_pending`。
+
+- `src/ui/audioFeedback.ts`、`browser.ts`、`index.html`：默认静音、点击解锁的原创正弦反馈音，失败不阻断游戏，静音/页面释放清理节点；4项单测先失败后通过，浏览器验证真实Web Audio开关。
+- `web/style.css`：1280×720、1366×768紧凑桌面布局，保留1920×1080比例；首次720高度动作按钮超屏测试失败，修复后三尺寸完整流程、暂停、结果返回通过；截图已实际查看。
+- `tests/e2e/deployment.spec.ts`：三尺寸、音频、十轮退出重置、实际`/tidal/`生产构建、本地MediaPipe合成视频推理、模型/WASM404共8项。子路径Vite本已正确重写图片，不做猜测性路径修改。
+- 十轮资源测试定位`SetupPanel`每轮遗留`ended`事件监听器；用AbortController在停源时移除。CDP观察track全ended、Worker归零/峰值1、interval稳定1、timeout0、轨道监听0、全局监听90；堆只报告预热后趋势，不承诺精确内存。
+- 输入诊断补最近120游戏帧p95、识别阶段/拒绝原因、摄像头指标；明确不是端到端延迟。`scripts/verify-auto-demo.mjs`补外源请求阻断与预热后至少60秒rAF采样，正式生产验证待下方最终结果。
+- 全分支一次独立只读审查发现1个P2：准备页与Load识别器髋高门限不一致。先复现2项失败，再用`src/pose/loadCalibrationValidation.ts`共享门禁，标定当场提示重采，正常就绪能构造摄像头输入；相关32项通过，审查无其他发现。记录`artifacts/qa/t10/review.md`。
+- 第一轮全套回归153单测通过、E2E34/35通过；旧自动Carry测试因退避轮询到0.9秒才暂停，1.3秒测试目标过快结束遮挡开关。用首样本MutationObserver同步失焦，保留全部负例/暂停断言，定向重复3次通过。失败trace摘要与SHA保留在`carry-polling-race.json`，未提交62MB原始trace。
+- 干净安装首次被旧Vite进程占用原生DLL阻止；核实进程属于本仓库后停止，重新`npm ci`成功（137包、0漏洞），`assets:sync`/`assets:verify`通过。隔离错版本fixture验证JS/WASM错配会失败，见`version-mismatch.log`。没有修改依赖或锁文件。
+- 本轮最终`npm run verify`退出0：**155/155单测、35/35 E2E（7.4分钟）、typecheck/lint/build全部通过**。生产包`index-CFBWu24Q.js`，1,274.60KB/gzip345.59KB；保留500KB体积警告。完整证据在`artifacts/qa/t10/verify.log`。本次生成的旧轮次截图恢复原版本，保留历史证据。
+- 新增`docs/DEMO_RUNBOOK.md`，更新README、依赖/来源说明。T11将按49个验收ID交付证据表；物理断网、真实识别/端到端延迟、扬声器与美术批准仍待人工设备条件。
+- 真实生产验证：`npm run preview -- --port 4175 --strictPort`，另终端`$env:TIDAL_QA_DIR='artifacts/qa/t10'; $env:TIDAL_BLOCK_EXTERNAL='1'; node scripts/verify-auto-demo.mjs`退出0。正式5秒准备/15秒休息/60秒有效Carry，**142.983秒墙钟**完成结算重置，15单位到家、100/100游戏奖励，0页面异常/外源/姿态资源请求；结果明确含自动模拟。实际三张截图与JSON均已产生，结算截图已查看。
+- 性能实测：预热10秒后132.211秒、5296个rAF样本，平均**40.06fps**、p50 **16.8ms**、p95 **33.4ms**、最大**50.1ms**、>50ms一次。达到建议候选30fps底线，但不把约60fps目标写成通过；这是无头Chromium自动模拟，不是摄像头推理/端到端测量。物理断网与真人性能仍`manual_pending`。
+- 性能诊断对照（`node artifacts/qa/t10/performance-probe.mjs`）：同一无头浏览器、2秒预热+各10秒观察，空白页60.00fps/主线程任务0.057秒，农场静态页39.54fps/主线程任务10.089秒。实际WebGL报告**SwiftShader软件渲染**，没有采用系统列出的RTX GPU；定位到当前农场软件渲染路径负载，未证明真实硬件GPU表现。P01按60fps目标保留`fail`，候选30fps是否接受与有设备后的硬件加速复测另行确认，不降阈值伪装达标。
+
+## T09 软件联调历史记录
+
+T08提交 `85df391` 已push；本阶段在同一分支增量接入摄像头语义输入，领域计数/计时/库存/奖励仍只由原控制器维护。用户无摄像头，T09真人整局仍 **manual_pending**，下面证据均明确区分模拟来源。
+
+- 新增 `src/input/cameraActionSource.ts`、`sourceManager.ts`：标定门禁、三类识别器装配、任务/epoch/seq隔离、串行停旧源、取消迟到start、输入来源集合与无帧看门狗。
+- 修改 `src/ui/{setupPanel,calibrationPanel}.ts`、`src/browser.ts`、`index.html`：有效标定后显式开始/恢复摄像头、失败重新准备、显式切键盘、混合来源结算、输入阶段诊断；保留自动模拟开关。
+- `src/domain/{types,sessionController}.ts`增加准备状态命令与门禁，不重写原领域规则。休息不因跟踪丢失无限冻结，下一项等待就绪；多个暂停原因独立。`poseWorkerClient.ts`处理dispose端口抛错，保证终止。
+- 新增单测4文件12项、`tests/helpers/browserPoseFixture.ts`、`source-lifecycle.spec.ts`4项。合成33点+模拟Worker驱动真实标定/识别器/领域整局；另有真实MediaPipe处理合成视频的旧测试，均不是真机。
+- RED/GREEN：适配器空实现失败；无摄像头启动门禁失败；结算时误弹准备页、dispose抛错、休息准备门禁各先复现再修复。无帧休息回归用MutationObserver记录完整状态迁移，确实抓到“休息→倒计时→训练中→暂停”，修复后不再短暂进入活动任务。初版只检查最终状态未抓到此瞬态，已加强断言，没有删除负例。
+- `npm run verify`通过：**149/149单测、26/26 E2E（5.9分钟）、typecheck/lint/build**。随后新增停帧回归先失败再1/1通过，并重跑typecheck/lint/149单测/build。最终共有27项E2E；没有把分开执行写成一次27项全套运行。下一阶段干净安装后全量复测。
+- `npm run assets:verify`通过；最终构建`index-BMaraPft.js`，1,271.57KB/gzip344.55KB，既有体积警告保留。日志、合成整局JSON与已查看的结算截图在`artifacts/qa/t09/`；截图带测试输入横幅，无虚构真机证据。
+- README已清理过期“摄像头只能诊断/停T06”描述。未改锁文件/Phaser表现/键盘输入及原测试。无新后端/服务/上传。继续T10本地交付与T11证据化验收，不合并main、不对外部署。
+- 实际dist检查：`$env:TIDAL_QA_DIR='artifacts/qa/t09'; node scripts/verify-t06-production.mjs`通过（既有4175预览服务），无摄像头不能标定、自动模拟启动与暂停，无pageerror/外部来源/姿态资源请求。见`production-smoke.json`和对应截图；范围是冒烟检查，正式墙钟整局留T10。
+
+## T07 / T08 历史阶段记录
+
+### T08 已追加完成（下一步 T09）
+
+T07提交 `98aaba9` 已成功push到 `origin/feature/t07-t11-completion`（同时带上此前T06提交）。本次继续T08：
+
+- 新增 `carryRecognizer.ts`：沿用T06主手可见侧5维原型（相对腕位置、肘/膝角、髋高），RMS距离分类；500ms连续进入确认，0.35D进入/0.55D退出。原始帧已放下时立即退出，不让低通延迟继续计入；只输出hold-sample，权威时间仍在原SessionController。
+- `recognitionConfig.ts`集中新增实验配置；`calibrationSession.ts`与识别器共享RMS最小可分门限，避免准备页通过而Carry拒绝。这里只是姿态代理，单侧特征不证明双手持物/实际重量，真实动作可分性manual_pending。
+- 新增 `carryRecognizer.test.ts`、`carryTiming.test.ts`、`sessionHarness.ts`，追加一项标定门限一致性测试。初始空实现14失败/1通过；准备门限回归先1失败/18通过，然后修复。
+- 实际 `npm run typecheck`、`lint`、`test:unit` **137/137**、`test:e2e -- tests/e2e/calibration.spec.ts` **3/3**、`build`通过；日志 `artifacts/qa/t08/verify.log`，构建 `index-BU-pHBOW.js`，体积警告保留。
+- 覆盖有效10秒+放下5秒+有效50秒=60秒、进入延迟不倒填、5/10/15/30Hz有效计时一致、长gap/旧epoch/重复帧/多暂停原因和奖励一次性。原domain未修改；没有真机尝试。
+
+用户最新授权每阶段验证后commit/push，连续推进到T11；采用分支 `feature/t07-t11-completion`，不合并main、不部署。当前完成T07软件部分，接下来T08。真机继续manual_pending，不能据合成回放声称真实识别准确。
+
+- 新增 `src/pose/recognizers/{types,featureStream,repRecognizer,chopRecognizer,loadRecognizer}.ts`：复用T06标定/几何/低通，按观察顺序产生阶段、impact、rep-completed；完整复位才提交。共享输入检查与确认窗口，异常帧取消半次，周期超时拒绝。
+- 扩展 `recognitionConfig.ts` 实验值：120ms确认、Chop0.4–6秒/Load0.8–10秒、相对示例差值门限。Load确认膝角与髋部下移；站起和举手可连续，但短暂一帧举手不能绕过确认时间。
+- 新增 `tests/helpers/recognizerReplay.ts`、`chopRecognizer.test.ts`、`loadRecognizer.test.ts`，共22项；全部是明确合成33点输入。`getDebug()`返回阶段/拒绝原因，准备页业务接线留T09；当前没有真实运动游戏入口。
+- 实际红→绿：两个空识别器5失败/16通过；追加“站起确认时只有一帧举手”先失败，再用独立确认窗口修复。日志在 `artifacts/qa/t07/`。
+- 实际验证：`npm run typecheck`、`npm run lint`、`npm run test:unit` **120/120**、`npm run build`通过。构建 `index-mYnvI7-W.js`，保留已有体积警告。本阶段没有改浏览器交互，未重跑E2E或npm ci/assets:sync；T09/T10运行浏览器联调与完整回归。
+- 原domain、键盘/自动输入、Phaser与全部旧测试未改；没有保存/上传真人数据。安装启动仍 `npm ci` → `npm run assets:sync` → `npm run dev`。后续执行清单见 `IMPLEMENTATION_T07_T11.md`。
+
+## 此前 T06 检查点（历史记录）
+
+## 本轮 T06：特征、标定与测试回放
+
+在已有 Phaser / MediaPipe 诊断版本上增量完成 T06 的软件实现与自动验证，停在 T06；T07–T11 未开始。保留无摄像头模拟开关，原领域、游戏配置、键盘/自动输入、Phaser 表现、依赖锁文件和全部旧测试未改。用户确认无摄像头，真机骨架、标定可用性、参数和准确率继续 **manual_pending**。
+
+开始时 Git 干净，基线 `9932e0a`，本轮使用本地 `feature/t06-pose-calibration` 分支；不 push、不合并 main、不部署。以下 Git/T05 段落均为此前历史，不是当前任务状态。
+
+### 实现与文件
+
+- `src/pose/features.ts`：先恢复像素坐标再计算膝/肘角；腕相对髋、髋高用当前躯干尺度归一化；两侧独立，镜像仅在显示层。缺点、非有限数、越界置信度、零向量、裁切、微小躯干拒绝，不补默认角度。
+- `src/pose/smoothing.ts`：按时间间隔的一阶低通；无效帧、乱序、断档、尺寸变化及相邻帧位置/尺度突变清历史，不把失效区间插值成有效观察。
+- `src/pose/calibration.ts`、`calibrationSession.ts`：2秒站立基线、主手、上肩/下挥、蹲下/站起/举手/复位示例、Carry持姿/放下各2秒的分步采样与可分性检查。提供各任务就绪状态与按值复制的命名示例汇总；不发 ExerciseSignal，不改业务状态。
+- `src/config/recognitionConfig.ts`：集中实验阈值和输入校验，复用原最大采样间隔/数据年龄；不改 `demoConfig.ts`。
+- `src/ui/calibrationPanel.ts`、`setupPanel.ts`、`src/browser.ts`、`index.html`、`web/style.css`：准备页引导、特征/拒绝原因/进度、主手选择，停止/离开/换来源/失焦与后台清理。无有效关键点不能采集；原自动模拟不参与标定。标定完成仍不能用摄像头计运动次数。
+- `tests/fixtures/poses.synthetic.json`、`tests/helpers/syntheticPose.ts`、`replayPoseSource.ts`：明确来源的人工33点夹具和按时间戳回放；只用于测试，不打包成真实摄像头源。
+- 新增六份单测：`features`、`smoothing`、`calibration`、`calibrationSession`、`replayPoseSource`、`recognitionConfig`；新增 `tests/e2e/calibration.spec.ts`、`scripts/verify-t06-production.mjs`。
+- 文档：README、本进度、TEST_REPORT、SOURCES、IMPLEMENTATION_T06；本轮日志与截图放在 `artifacts/qa/t06/`。完整回归生成的旧证据目录图片恢复原版本，避免覆盖历史证据。
+
+### 实际命令、失败测试与结果
+
+| 命令 / 操作 | 本轮实际结果 |
+|---|---|
+| 初始 `npm run typecheck` / `npm run test:unit` | pass，44/44 原单测 |
+| `npm run test:unit -- tests/unit/features.test.ts tests/unit/calibration.test.ts` | 空实现先5失败/13通过 → 18/18通过；之后补置信度非法值负例 |
+| `npm run test:unit -- tests/unit/smoothing.test.ts` | 空实现5失败/1通过 → 6/6通过 |
+| `npm run test:unit -- tests/unit/calibrationSession.test.ts tests/unit/replayPoseSource.test.ts` | 空实现14失败 → 14/14通过；随后补配置/示例返回值/负时间/滤波退化/不完整Load等回归 |
+| `npm run test:unit -- tests/unit/calibrationSession.test.ts tests/unit/features.test.ts` | 边界补测先5失败/25通过（非法置信度2、缺少示例导出、负时间、滤波几何退化）→ 修复后全套98/98 |
+| `npm run test:e2e -- tests/e2e/calibration.spec.ts` | 先因缺少页面元素失败 → 3/3通过（33.8秒）；包括完整9步合成标定、失效清除和生命周期 |
+| `npm run verify` | pass：typecheck、lint、13文件98/98单测、23/23 E2E（3.9分钟）、build |
+| `npm run assets:verify` | pass：模型、4个MediaPipe运行文件、2个原创SVG |
+| `node scripts/verify-t06-production.mjs`（既有4175预览服务） | pass：实际打开新dist，无摄像头标定禁用；模拟启动、首个完整动作与暂停保留；无页面异常/外部来源/模型请求 |
+
+首次新E2E启动曾因Node JSON import缺少`with { type: 'json' }`而未收集到用例；修复测试加载后重新获得页面缺失的真实失败，未把“无测试”计为通过。失败日志、`calibration-e2e.log`、`final-verify.log`、`production-smoke.log/json`均在本轮证据目录。依赖未变，本轮没有重跑 `npm ci` / `assets:sync`，不将以前安装结果写成本轮结果。
+
+最终生产包 `index-DaYWpBoR.js`，1,257.53KB / gzip340.49KB；保留原有500KB体积警告。生产检查仅覆盖新准备页和模拟启动/暂停，**本轮没有重跑正式墙钟整局**；键盘双局、自动整局、库存守恒、奖励一次性、暂停/重置由完整E2E与原单测回归覆盖。此前142.927秒生产自动整局记录仍在历史段落。
+
+### 浏览器证据与审查
+
+- `calibrated-synthetic.png`：实际Chromium页面走完9步，明确加注“合成33点夹具 / 模拟Worker，非真人或模型准确率验收”；不是实际MediaPipe推理输出。界面显示三任务已标定，领域挥砍仍0/15；后续低置信度帧清除就绪。
+- `production-calibration-waiting.png`：实际生产构建，未请求摄像头，采样按钮禁用、三任务未标定。
+- `production-demo-paused.png`：生产模拟开关开启，首个完整动作后暂停，次数保持。三张图均已实际查看。
+- 独立只读审查：新增54/54单测独立通过，无Critical/Important；Minor为仅检测相邻帧突变。**缓慢换位、同位置换人不能可靠检测，须手动重做标定**，不承诺身份识别或通用多人隔离。审查记录见 `artifacts/qa/t06/review.txt`。
+
+### 手动待办与下一步
+
+当前没有摄像头，不要求用户立即完成真机步骤。有设备后：关闭模拟 → 接受计划 → 开启摄像头诊断 → 单人全身/举手范围可见 → 按本人左右选主手 → 逐步采集9步；检查舒适动作能否区分，遮挡/失焦后是否清除，停止/返回后指示灯是否关闭。记录设备、浏览器、分辨率、光照与拒绝原因，不必上传或保存真人视频/姿态轨迹。真实阈值可用性、准确率和性能均 `manual_pending`。
+
+本轮只完成 T06 准备能力，不代表三运动识别完成。下一轮 T07：砍树/装车的完整时序识别器、正负回放测试与事件顺序；T08 Carry、T09 摄像头业务接入仍后续。A03–A09 等既有产品假设继续未确认。
+
+运行：`npm ci` → `npm run assets:sync` → `npm run assets:verify` → `npm run dev`；完整验证 `npm run verify`。生产预览 `npm run build` → `npm run preview`。更详细的启动、模拟开关和标定步骤见 README。既有本机4175预览当前读取最新dist，不是对外部署。
+
+## 此前 T05 与 Git 交付记录
 
 ## Git 交付（2026-10-16）
 

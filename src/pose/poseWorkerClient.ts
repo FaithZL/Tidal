@@ -81,7 +81,8 @@ export class PoseWorkerClient {
       const timer = setTimeout(finish, 300);
       worker.onmessage = ({ data }) => { if (data.kind === 'disposed') finish(); };
       worker.onerror = finish;
-      worker.postMessage({ kind: 'dispose' });
+      try { worker.postMessage({ kind: 'dispose' }); }
+      catch { finish(); }
     });
   }
 }

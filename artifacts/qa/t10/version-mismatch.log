@@ -1,0 +1,1 @@
+PASS: mismatched 0.10.31 manifest vs 0.10.32 package rejected; isolated fixture, production assets unchanged
