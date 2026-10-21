@@ -9,6 +9,7 @@ import { SetupPanel } from './ui/setupPanel.js';
 import { CalibrationPanel } from './ui/calibrationPanel.js';
 import { SyntheticPreview } from './ui/syntheticPreview.js';
 import { AudioFeedback } from './ui/audioFeedback.js';
+import {GamePreview} from './ui/gamePreview.js';
 import type { SessionSnapshot, TaskKind } from './domain/types.js';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
@@ -22,7 +23,7 @@ const config = createDemoConfig(isTestMode ? {
   startCountdownMs: 180, restMs: 230, carryTargetMs: 1300,
 } : {});
 $('testModeBadge').hidden = !isTestMode;
-$('planChop').textContent = `挥砍 ${config.chopRepTarget} 次 · 砍倒 ${config.treeCount} 棵杉树`;
+$('planChop').textContent = `挥砍 ${config.repsPerTree} 次 × ${config.treeCount} 棵 · 共 ${config.chopRepTarget} 次`;
 $('planLoad').textContent = `深蹲推举 ${config.loadRepTarget} 次 · 装车 ${config.loadRepTarget} 份木材`;
 $('planCarry').textContent = `持续持姿 ${Math.ceil(config.carryTargetMs / 1000)} 秒 · 返回农场`;
 const controller = createSessionController(config, { nowMs: () => performance.now() });
@@ -36,7 +37,9 @@ const preview = new SyntheticPreview([
   { canvas: $<HTMLCanvasElement>('demoSetupCanvas'), label: $('demoSetupPhase') },
   { canvas: $<HTMLCanvasElement>('demoGameCanvas'), label: $('demoGamePhase') },
 ]);
-const game = createGame($('worldCanvas'), controller, config);
+const game = createGame($('worldCanvas'), controller, config,message=>{
+  displayError=message;renderUnavailable=true;stopHold();controller.command({kind:'pause',reason:'user'});panel(controller.getSnapshot());
+});
 const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
   $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'),
   calibrationPanel, {
@@ -49,11 +52,15 @@ const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCan
     onSuspend: () => {cameraInput.clearProfile();if(current.inputMode==='camera'&&running(current))requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');},
     onStop: () => {cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
   });
+const gamePreview=new GamePreview($('cameraPreview'),$<HTMLVideoElement>('cameraVideo'),$('setupPreviewHost'),$('gamePreviewHost'),message=>requireCameraPreparation(message,'source-error'));
 let current = controller.getSnapshot();
 let boundInputKey = '';
 let heldKeyboard = false;
 let heldPointer = false;
 let displayError = '';
+let renderUnavailable=false;
+let movementPhase='准备姿态';
+let movementContext='';
 let cameraPreparation = false;
 let planDismissed = false;
 let exitWasUserPaused = false;
@@ -73,7 +80,7 @@ function active(s: Readonly<SessionSnapshot>): boolean {
 function stopHold(): void { heldKeyboard = false; heldPointer = false; input.holdEnd(); }
 function running(s:Readonly<SessionSnapshot>):boolean{return ['countdown','active','rest'].includes(s.phase);}
 function updateCameraButton():void {
-  $<HTMLButtonElement>('beginCamera').disabled=calibrationPanel.getProfile()===null;
+  $<HTMLButtonElement>('beginCamera').disabled=renderUnavailable||calibrationPanel.getProfile()===null;
 }
 function requireCameraPreparation(message:string,reason:'tracking'|'source-error'|'visibility'='tracking'):void{
   displayError=message;cameraInput.clearProfile();
@@ -122,6 +129,17 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('audioToggle').setAttribute('aria-pressed',String(audio.enabled));
   void syncSource(s);
   const phase = s.phase;
+  const showCamera=s.inputMode==='camera'&&running(s)&&!cameraPreparation;
+  $('livePreview').hidden=!(showCamera||demoEnabled&&running(s));
+  $('gamePreviewHost').hidden=!showCamera;
+  gamePreview.setInGame(showCamera);
+  const key=`${s.sessionId}/${s.taskRunId}/${s.sourceEpoch}`;
+  const carryState=cameraInput.getDebug().phase;
+  $('liveSource').textContent=showCamera?'本机摄像头 · 姿态代理':'合成骨架 · 自动模拟';
+  $('liveMovementState').textContent=s.pauseReasons.length?'已暂停 · 运动不计时':phase==='rest'?(s.task==='load'?'休息 · 推车与归拢':'休息 · 固定货物'):phase==='countdown'?'准备开始':s.task==='carry'?(showCamera?(carryState==='holding'?'有效持姿 · 持续前进':carryState==='confirming'?'正在确认持姿':'放下 / 等待持姿'):'模拟持姿 · 持续前进'):movementContext===key?movementPhase:'准备姿态';
+  $('livePrescription').textContent=s.task==='chop'?`挥砍 ${config.repsPerTree} 次 × ${config.treeCount} 棵 · 共 ${config.chopRepTarget} 次`:s.task==='load'?`深蹲 → 站起 → 推举 → 复位 · ${config.loadRepTarget} 次`:`有效持姿 ${Math.ceil(config.carryTargetMs/1000)} 秒 · 运送回家`;
+  $<HTMLButtonElement>('acceptPlan').disabled=renderUnavailable;
+  $<HTMLButtonElement>('beginDemo').disabled=renderUnavailable;
   $('modeBadge').textContent = demoEnabled ? '▶ 自动模拟 · 非真实动作识别'
     : s.inputMode === 'camera' ? '📷 摄像头姿态代理 · 真机待验证' : '⌨ 键盘演示 · 非真实动作识别';
   for (const id of ['demoToggle', 'setupDemoToggle']) {
@@ -159,6 +177,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('planModal').hidden = phase !== 'home' || planDismissed;
   $('setupModal').hidden = phase !== 'setup'&&!cameraPreparation;
   $('resultsModal').hidden = phase !== 'results';
+  game.setInteractionEnabled($('setupModal').hidden&&$('resultsModal').hidden&&$('exitModal').hidden&&!renderUnavailable);
   $('pauseBtn').hidden = !(['countdown', 'active', 'rest'] as string[]).includes(phase);
   $('pauseBtn').textContent = s.pauseReasons.length ? '继续' : '暂停';
   const status = s.pauseReasons.length ? '已暂停' : phase === 'home' ? '未开始'
@@ -167,7 +186,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('statusTag').textContent = status;
   const usable = active(s) && !demoEnabled;
   const action = $('actionBtn') as HTMLButtonElement;
-  action.disabled = !usable && !(phase === 'home' && planDismissed);
+  action.disabled = renderUnavailable||!usable && !(phase === 'home' && planDismissed);
   action.textContent = phase === 'home' && planDismissed ? '查看今日计划' : s.task === 'carry' ? '按住拉车' : s.task === 'chop' ? '🪓 模拟一次挥砍' : s.task === 'load' ? '🪵 模拟一次装车' : '等待任务开始';
   $('actionPrompt').textContent = phase === 'countdown' ? `即将开始：${niceTask(s.task)}`
     : phase === 'rest' ? `休息 ${Math.ceil(s.remainingMs/1000)} 秒 · 下一个任务：${niceTask(s.task)}`
@@ -204,6 +223,9 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('rewardLogs').textContent = String(s.deliveredLogs);
   $('rewardCoins').textContent = String(s.rewardsGranted ? config.coinReward : 0);
   $('rewardStamina').textContent = String(s.rewardsGranted ? config.staminaReward : 0);
+  const duration=(ms:number)=>`${Math.floor(ms/60000).toString().padStart(2,'0')}:${Math.floor(ms/1000%60).toString().padStart(2,'0')}`;
+  $('resultChop').textContent=String(s.chopReps);$('resultLoad').textContent=String(s.loadReps);
+  $('resultCarry').textContent=(s.carryActiveMs/1000).toFixed(1);$('resultActive').textContent=duration(s.exerciseActiveMs);$('resultElapsed').textContent=duration(s.sessionElapsedMs);
   const cameraUsed=sourceManager.usedModes.has('camera'),keyboardUsed=sourceManager.usedModes.has('keyboard');
   const provenance=cameraUsed?(keyboardUsed?`混合输入：摄像头姿态代理 + ${demoUsed?'自动模拟':'键盘演示输入'}`:'摄像头姿态代理（非负载/健康测量）'):demoUsed?'含自动模拟（复用键盘模拟协议）':'键盘模拟';
   $('actualMetrics').textContent = `挥砍 ${s.chopReps} 次 · 装车 ${s.loadReps} 次 · 有效持姿 ${(s.carryActiveMs / 1000).toFixed(1)} 秒 · 任务有效时间 ${(s.exerciseActiveMs / 1000).toFixed(1)} 秒 · 本局经过时间（含休息/暂停）${(s.sessionElapsedMs / 1000).toFixed(1)} 秒 · 输入：${provenance}`;
@@ -215,6 +237,11 @@ controller.onEffect(e => {
   current = controller.getSnapshot();
   audio.handle(e);
   preview.apply(e);
+  if(e.kind==='action-phase'){
+    movementContext=`${e.sessionId}/${e.taskRunId}/${e.sourceEpoch}`;
+    const names={ready:'准备 · 稳定起始姿态','chop-down':'下挥 · 击中树干','chop-return':'复位 · 收回斧头','squat-down':'下蹲 · 拾起木材','stand-up':'站起 · 抬起木材','press-up':'推举 · 举过头顶','load-return':'抛出木材 · 完成复位'};
+    movementPhase=names[e.phase];
+  }
   if (e.kind === 'session-reset') {
     cameraPreparation=false;displayError='';cameraInput.clearProfile();sourceManager.resetHistory();
     demoEnabled = false;demoUsed = false;preview.setEnabled(false);void autoInput.stop();
@@ -232,6 +259,7 @@ $('cancelPlan').addEventListener('click', () => {
   panel(current);
 });
 $('acceptPlan').addEventListener('click', () => controller.command({kind:'open-setup',mode:'keyboard'}));
+$('viewLeft').addEventListener('click',()=>game.rotate(-1));$('viewRight').addEventListener('click',()=>game.rotate(1));$('viewReset').addEventListener('click',()=>game.resetView());
 $('audioToggle').addEventListener('click',async()=>{await audio.setEnabled(!audio.enabled);panel(controller.getSnapshot());});
 $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
 for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));
@@ -262,6 +290,7 @@ $('pauseBtn').addEventListener('click',()=>{
 const actionBtn=$('actionBtn') as HTMLButtonElement;
 $('cancelExit').addEventListener('click', () => {
   $('exitModal').hidden = true;
+  game.setInteractionEnabled($('setupModal').hidden&&$('resultsModal').hidden&&!renderUnavailable);
   if (!exitWasUserPaused) controller.command({ kind: 'resume', reason: 'user' });
   actionBtn.focus();
 });
@@ -283,7 +312,7 @@ window.addEventListener('keydown',e=>{
     if (!$('exitModal').hidden) return;
     exitWasUserPaused = current.pauseReasons.includes('user');
     stopHold(); controller.command({ kind: 'pause', reason: 'user' });
-    $('exitModal').hidden = false; $('cancelExit').focus(); return;
+    $('exitModal').hidden = false;game.setInteractionEnabled(false); $('cancelExit').focus(); return;
   }
   const target=e.target;
   if (!$('exitModal').hidden) return;
@@ -321,4 +350,4 @@ function animate(now:number):void {
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-window.addEventListener('pagehide', () => { void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+window.addEventListener('pagehide', () => { gamePreview.dispose();void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });

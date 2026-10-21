@@ -99,9 +99,9 @@ export function makeCart(r:WorldResources):{root:T.Group;wheels:T.Group[];ropes:
  }
  const ropes:T.Mesh[]=[];
  for(const x of[-.52,.52]){
-  const points=[new T.Vector3(x,.68,-.62),new T.Vector3(x,1.9,-.52),new T.Vector3(x,1.98,.5),new T.Vector3(x,.68,.62),new T.Vector3(x,.68,-.62)];
+  const points=[new T.Vector3(x,.68,-.62),new T.Vector3(x,1.66,-.52),new T.Vector3(x,1.7,.5),new T.Vector3(x,.68,.62),new T.Vector3(x,.68,-.62)];
   for(let i=1;i<points.length;i++){const rope=r.cylinder(.023,.023,1,0xead19b,6);segment(rope,points[i-1],points[i]);root.add(rope);ropes.push(rope);}
-  ropes.push(place(root,r.sphere(.075,0xe6c48a),x,1.98,.1));
+  ropes.push(place(root,r.sphere(.075,0xe6c48a),x,1.7,.1));
  }
  return{root,wheels,ropes};
 }

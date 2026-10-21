@@ -6,8 +6,8 @@ function building(r:WorldResources,parent:T.Group,x:number,z:number,w:number,d:n
  const shape=new T.Shape();shape.moveTo(-w*.6,0);shape.lineTo(0,1.7);shape.lineTo(w*.6,0);shape.closePath();
  const geo=r.geometry(`roof${w}/${d}`,()=>new T.ExtrudeGeometry(shape,{depth:d+.6,bevelEnabled:false}));
  place(b,r.mesh(geo,roof),0,2.95,-d*.5-.3);
- for(const side of[-1,1])for(let row=0;row<3;row++){
-  const slat=place(b,r.box(w*.65,.05,d+.65,roof-0x080400),side*w*.29,3.1+row*.34,0);slat.rotation.z=-side*Math.atan(1.7/(w*.6));
+ for(const side of[-1,1])for(let row=0;row<5;row++){
+  const fraction=(row+.5)/5;place(b,r.box(.035,.035,d+.64,roof-0x080400),side*w*.6*fraction,4.69-1.7*fraction,0);
  }
  place(b,r.box(1.2,2,.08,0x765331),0,1.25,d*.5+.05);
  for(const side of[-1,1]){

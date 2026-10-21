@@ -13,4 +13,6 @@ Task 2: complete — 7项编排测试先6失败，最小实现转绿；追加重
 
 Task 3: complete — Three0.186.1与类型0.186.0精确锁定；旧渲染器下orbit测试先失败，真实Three网格/相机接入后1/1浏览器通过（实际相机与投影改变、无额外次数），截图已查看。165单测/type/lint/build通过，包约670.7KB。旧Phaser源码保留追溯，生产入口仅加载Three。
 
-Task 4: in progress — 全屏HUD、通知、单路PiP及等宽结果。
+Task 4: complete — 新首页/等宽结果与摄像头PiP先2项失败后通过；增补镜头暂停漂移先失败再修复，全景reset有效。视频旧stream播放Promise/释放保护先2失败后修复。168单测/typecheck通过，新增5项浏览器全部通过；真实PiP节点、轨道、Worker不复制，截图有合成测试标识。
+
+Task 5: in progress — 保留旧语义回归，适配渲染器与默认库存；生产/性能/审查。
