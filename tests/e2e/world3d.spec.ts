@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from '../helpers/manualModeTest.js';
 import {mkdir} from 'node:fs/promises';
 import {installPoseFixture,prepareCamera} from '../helpers/browserPoseFixture.js';
 test.use({launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});

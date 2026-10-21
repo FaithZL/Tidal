@@ -10,6 +10,7 @@ import { CalibrationPanel } from './ui/calibrationPanel.js';
 import { SyntheticPreview } from './ui/syntheticPreview.js';
 import { AudioFeedback } from './ui/audioFeedback.js';
 import {GamePreview} from './ui/gamePreview.js';
+import {readDemoPreference,saveDemoPreference} from './ui/demoPreference.js';
 import type { SessionSnapshot, TaskKind } from './domain/types.js';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string): T => {
@@ -66,8 +67,10 @@ let movementContext='';
 let cameraPreparation = false;
 let planDismissed = false;
 let exitWasUserPaused = false;
-let demoEnabled = false;
+let preferredDemo=readDemoPreference();
+let demoEnabled = preferredDemo;
 let demoUsed = false;
+preview.setEnabled(demoEnabled);
 let previousFrameMs=0,diagnosticAtMs=0;
 const frameIntervals:number[]=[];
 
@@ -118,6 +121,7 @@ function switchKeyboard():void{
 }
 function setDemo(enabled: boolean): void {
   if(renderUnavailable)return;
+  preferredDemo=enabled;saveDemoPreference(enabled);
   if (demoEnabled === enabled) return;
   stopHold();
   // Cancel a partial cycle before changing source, then invalidate its context.
@@ -254,7 +258,7 @@ controller.onEffect(e => {
   }
   if (e.kind === 'session-reset') {
     cameraPreparation=false;displayError='';cameraInput.clearProfile();sourceManager.resetHistory();
-    demoEnabled = false;demoUsed = false;preview.setEnabled(false);void autoInput.stop();
+    demoEnabled = preferredDemo;demoUsed = false;preview.setEnabled(demoEnabled);void autoInput.stop();
     planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop();
   }
   if(e.kind==='rewards-granted'){cameraPreparation=false;void cameraPanel.stop();}
@@ -365,3 +369,11 @@ function animate(now:number):void {
 }
 requestAnimationFrame(animate);
 window.addEventListener('pagehide', () => { gamePreview.dispose();void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+// Start once per page load. Reset/results return home without starting another run.
+// Renderer initialization reports failure in an earlier microtask, before this gate.
+queueMicrotask(()=>{
+  if(!demoEnabled||renderUnavailable||current.phase!=='home')return;
+  controller.command({kind:'open-setup',mode:'keyboard'});
+  controller.command({kind:'setup-ready'});
+  if(document.hidden)controller.command({kind:'pause',reason:'visibility'});
+});

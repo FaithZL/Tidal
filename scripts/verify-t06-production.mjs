@@ -6,6 +6,7 @@ const output = process.env.TIDAL_QA_DIR ?? 'artifacts/qa/t06';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
 const errors = [], external = [], poseRequests = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('request', request => {

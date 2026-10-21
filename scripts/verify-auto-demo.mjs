@@ -9,6 +9,8 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1366, height: 900 } });
 if(blockExternal)await page.context().route('**/*',route=>new URL(route.request().url()).origin===new URL(url).origin?route.continue():route.abort());
 await page.addInitScript(()=>{
+  // Explicit manual-entry scenario; fresh-visit autoplay is covered separately.
+  localStorage.setItem('tidal.demo.enabled','false');
   const samples=[];let previous=0,started=0;
   const sample=now=>{if(!started)started=now;if(previous&&now-started>=10000)samples.push(now-previous);previous=now;requestAnimationFrame(sample);};
   requestAnimationFrame(sample);window.tidalFrameIntervals=samples;
@@ -56,7 +58,7 @@ try {
     fps:1000*intervals.length/spanMs,p50Ms:sorted[Math.floor(sorted.length*.5)],p95Ms:sorted[Math.floor(sorted.length*.95)],maxMs:sorted.at(-1),over50Ms:intervals.filter(ms=>ms>50).length};
   await page.screenshot({ path: `${output}/production-results.png`, fullPage: true });
   await page.locator('#resultsHome').click();await expect(page.locator('#planModal')).toBeVisible();
-  await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked', 'false');
+  await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked', 'true');
   await page.waitForTimeout(300);await expect(page.locator('#chopValue')).toHaveText('0/15');
   expect(errors).toEqual([]);expect(external).toEqual([]);expect(poseRequests).toEqual([]);
   const report = { date: new Date().toISOString(), browser: browser.version(), platform: process.platform,

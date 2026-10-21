@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page } from '../helpers/manualModeTest.js';
 import { mkdir } from 'node:fs/promises';
 test.use({ baseURL: 'http://127.0.0.1:4174' });
 

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../helpers/manualModeTest.js';
 
 test('Three.js farm boots, plan cancels and reopens without starting a session', async ({ page }) => {
   const errors: string[] = [];

@@ -1,9 +1,9 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../helpers/manualModeTest.js';
 import { mkdir } from 'node:fs/promises';
 
 test.use({ baseURL: 'http://127.0.0.1:4174' });
 
-test('no-camera demo is explicit, completes the full farm flow and resets off without camera requests', async ({ page }) => {
+test('no-camera demo is explicit, completes the full farm flow and resets with its chosen preference without camera requests', async ({ page }) => {
   const errors: string[] = [], requests: string[] = [];
   page.on('pageerror', e => errors.push(e.message));page.on('request', r => requests.push(r.url()));
   await page.addInitScript(() => {
@@ -28,7 +28,8 @@ test('no-camera demo is explicit, completes the full farm flow and resets off wi
   await expect(page.locator('#resultsModal')).toBeVisible({ timeout: 30000 });
   await expect(page.locator('#rewardLogs')).toHaveText('15');await expect(page.locator('#rewardCoins')).toHaveText('100');
   await expect(page.locator('#actualMetrics')).toContainText('自动模拟');
-  await page.locator('#resultsHome').click();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked', 'false');
+  await page.locator('#resultsHome').click();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked', 'true');
+  await expect(page.locator('#planModal')).toBeVisible();await expect(page.locator('#statusTag')).toHaveText('未开始');
   await page.waitForTimeout(300);await expect(page.locator('#chopValue')).toHaveText('0/15');
   expect(requests.filter(url => /pose_landmarker|\/worker\/|\/mediapipe\//.test(url))).toEqual([]);
   expect(await page.locator('html').getAttribute('data-camera-requested')).toBeNull();

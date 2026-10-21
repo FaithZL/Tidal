@@ -5,6 +5,7 @@ await mkdir('artifacts/qa', { recursive: true });
 const browser = await chromium.launch();
 const context = await browser.newContext({ permissions: ['camera'] });
 const page = await context.newPage();
+await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
 const report = { date: '2026-10-15', browser: browser.version(), platform: process.platform,
   input: 'Real camera attempt, no fake device flags; no image/pose recording', status: '', metrics: '', released: false, result: 'manual_pending' };
 try {
