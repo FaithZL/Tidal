@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Phaser farm boots, plan cancels and reopens without starting a session', async ({ page }) => {
+test('Three.js farm boots, plan cancels and reopens without starting a session', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
@@ -8,7 +8,7 @@ test('Phaser farm boots, plan cancels and reopens without starting a session', a
   await expect(page.locator('#planCarry')).toContainText('60 秒');
   await page.locator('#cancelPlan').click();
   await expect(page.locator('#planModal')).toBeHidden();
-  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-renderer', 'Phaser 3.90.0');
+  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-renderer', 'Three.js r186');
   await expect(page.locator('#worldCanvas canvas')).toBeVisible();
   await expect(page.locator('#chopValue')).toHaveText('0/15');
   await page.locator('#actionBtn').click();

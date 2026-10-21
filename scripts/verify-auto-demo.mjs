@@ -64,6 +64,7 @@ try {
     input: 'explicit automatic simulation + authored skeleton; no camera',
     timing: 'production 5s countdown / 15s rests / 60s effective carry; real wall clock',
     network:blockExternal?'all non-localhost origins blocked by browser routing; not a physical network disconnect':'no routing block; observed request origins',rendering,
+    renderer:await page.locator('#worldCanvas').getAttribute('data-renderer'),gpu:await page.locator('#worldCanvas').getAttribute('data-gpu'),
     durationSeconds: (Date.now() - start) / 1000, metrics, errors, external, poseRequests, reset: 'pass', result: 'pass' };
   await writeFile(`${output}/production-auto-flow.json`, JSON.stringify(report, null, 2) + '\n');console.log(report);
 } finally { await browser.close(); }

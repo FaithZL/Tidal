@@ -13,10 +13,12 @@ export class FarmWorld implements GameView{
  private readonly renderer:T.WebGLRenderer;private readonly controls:OrbitControls;private readonly resources=new WorldResources();
  private readonly choreography:WorldChoreography;private readonly player:Character3D;private readonly npc:Character3D;
  private readonly cart:ReturnType<typeof makeCart>;private readonly trees:ReturnType<typeof makePine>[]=[];private logs:T.Group[]=[];
+ private chips:T.Mesh[]=[];private sun:T.DirectionalLight|null=null;
  private readonly resizeObserver:ResizeObserver;private readonly events=new AbortController();private subscriptions:(()=>void)[]=[];
  private snapshot:Readonly<SessionSnapshot>;private request=0;private lastTime=0;private lastPaint='';private lastPhase='home';private overview=true;private dirty=true;private disposed=false;private lost=false;
  constructor(private readonly parent:HTMLElement,controller:SessionController,config:Readonly<DemoConfig>,private readonly onError:(message:string)=>void){
   this.snapshot=controller.getSnapshot();this.choreography=new WorldChoreography(config);this.choreography.sync(this.snapshot);
+  try{
   this.renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.25));this.renderer.outputColorSpace=T.SRGBColorSpace;
   this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.05;
@@ -25,11 +27,13 @@ export class FarmWorld implements GameView{
   this.scene.background=new T.Color(0xc5ded4);this.scene.fog=new T.Fog(0xc5ded4,65,125);
   this.scene.add(new T.HemisphereLight(0xfff5d6,0x6c8c66,1.6));
   const sun=place(this.scene,new T.DirectionalLight(0xffe1a7,1.8),-18,35,14);sun.castShadow=true;sun.shadow.mapSize.set(512,512);
+  this.sun=sun;
   sun.shadow.camera.left=-23;sun.shadow.camera.right=55;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-25;sun.shadow.camera.far=90;sun.shadow.bias=-.001;
   this.scene.add(buildEnvironment(this.resources));
   this.player=new Character3D(this.resources);this.npc=new Character3D(this.resources,true);this.scene.add(this.player.root,this.npc.root);
   this.npc.root.scale.setScalar(.88);this.cart=makeCart(this.resources);this.scene.add(this.cart.root);
   for(let i=0;i<config.treeCount;i++){const tree=makePine(this.resources);this.trees.push(tree);this.scene.add(tree.root);}
+  for(let i=0;i<8;i++){const chip=this.resources.box(.07,.1,.045,0xe4b66e);chip.visible=false;this.scene.add(chip);this.chips.push(chip);}
   this.camera.position.set(43,42,57);this.controls=new OrbitControls(this.camera,this.renderer.domElement);
   this.controls.target.set(14,0,0);this.controls.enableDamping=true;this.controls.dampingFactor=.12;this.controls.minDistance=7;this.controls.maxDistance=85;
   this.controls.minPolarAngle=.3;this.controls.maxPolarAngle=Math.PI/2-.1;this.controls.enablePan=false;this.controls.update();
@@ -40,7 +44,9 @@ export class FarmWorld implements GameView{
   this.subscriptions.push(controller.subscribe(s=>{this.snapshot=s;this.choreography.sync(s);}));
   this.subscriptions.push(controller.onEffect(e=>{this.snapshot=controller.getSnapshot();this.choreography.sync(this.snapshot);this.choreography.apply(e);this.dirty=true;}));
   parent.dataset.renderer=`Three.js r${T.REVISION}`;parent.dataset.art='tidal-farm-3d-v1';
+  const gl=this.renderer.getContext(),debug=gl.getExtension('WEBGL_debug_renderer_info');parent.dataset.gpu=debug?String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)):'WebGL2 renderer unavailable';
   this.request=requestAnimationFrame(this.animate);
+  }catch(error){this.destroy(true);throw error;}
  }
  private reportError(message:string):void{
   this.parent.dataset.error=message;
@@ -73,6 +79,9 @@ export class FarmWorld implements GameView{
    });
    while(this.logs.length<f.logs.length){const log=makeLog(this.resources);this.scene.add(log);this.logs.push(log);}
    this.logs.forEach((log,i)=>{const item=f.logs[i];log.visible=!!item;if(!item)return;const p=item.position;log.position.set(p.x,p.y,p.z);log.rotation.set(item.rotation,item.location==='hand'?f.player.yaw:Math.PI/2,0);});
+   const hit=f.effects.find(e=>e.kind==='impact'&&e.index>=0),hitTree=hit?f.trees[hit.index]:null;
+   this.chips.forEach((chip,i)=>{chip.visible=!!hitTree;if(!hit||!hitTree)return;const a=i*Math.PI/4,t=hit.progress;chip.position.set(hitTree.position.x+Math.cos(a)*t*1.1,1.1+Math.sin(t*Math.PI)*.55-t*.5,hitTree.position.z+Math.sin(a)*t*1.1);chip.rotation.set(t*4,a,t*5);chip.scale.setScalar(1-t*.7);});
+   this.parent.dataset.particles=hitTree?'8':'0';
    const values={action:f.action,fallen:String(state.choppedTrees),effects:f.effects.map(e=>e.kind).join(','),npc:state.phase==='rest'?(state.task==='load'?'gather':'secure'):state.phase==='results'?'celebrate':state.task==='carry'?'guide':'idle',inventory:`${state.groundLogs}/${state.cartLogs}/${state.deliveredLogs}`,cartPosition:`${f.cart.x.toFixed(3)},${f.cart.z.toFixed(3)}`,worldLogs:String(f.logs.length),rope:f.ropeProgress.toFixed(3),playerMode:f.player.mode};
    for(const[key,value]of Object.entries(values))if(this.parent.dataset[key]!==value)this.parent.dataset[key]=value;
    this.parent.setAttribute('aria-label',`可旋转三维农场。地面${state.groundLogs}、车上${state.cartLogs}、到家${state.deliveredLogs}。${state.pauseReasons.length?'已暂停':''}`);
@@ -87,8 +96,8 @@ export class FarmWorld implements GameView{
  resetView():void{if(this.disposed)return;this.overview=true;this.controls.reset();this.dirty=true;}
  setInteractionEnabled(enabled:boolean):void{this.controls.enabled=enabled&&!this.lost&&!this.disposed;}
  destroy(removeCanvas=true):void{
-  if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.request);this.events.abort();this.resizeObserver.disconnect();this.subscriptions.forEach(stop=>stop());
-  this.controls.dispose();this.choreography.dispose();this.scene.clear();this.resources.dispose();this.renderer.dispose();this.renderer.forceContextLoss();
-  if(removeCanvas)this.renderer.domElement.remove();this.logs=[];this.parent.dataset.disposed='true';
+  if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.request);this.events.abort();this.resizeObserver?.disconnect();this.subscriptions.forEach(stop=>stop());
+  this.controls?.dispose();this.choreography.dispose();this.scene.traverse(o=>{if(o instanceof T.InstancedMesh)o.dispose();});this.sun?.shadow.dispose();this.scene.clear();this.resources.dispose();this.renderer?.dispose();this.renderer?.forceContextLoss();
+  if(removeCanvas)this.renderer?.domElement.remove();this.logs=[];this.chips=[];this.parent.dataset.disposed='true';
  }
 }

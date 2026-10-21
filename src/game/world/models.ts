@@ -52,7 +52,7 @@ export class Character3D{
   let hy=1.05-squat,hz=.23;
   if(mode==='push'){hy=1.04;hz=.5;}
   else if(mode==='pull'){hy=1.04;hz=-.55;}
-  else if(mode==='secure'){hy=.9;hz=.5;}
+  else if(mode==='secure'){hy=1.85;hz=.5;}
   else if(mode==='celebrate'){hy=2.25;hz=.1;}
   else if(mode==='work'){
    if(chopping){hy=pose==='ready'?2.3:pose==='chop-down'?.85:1.7;hz=pose==='chop-down'?.85:.38;}
@@ -100,8 +100,8 @@ export function makeCart(r:WorldResources):{root:T.Group;wheels:T.Group[];ropes:
  const ropes:T.Mesh[]=[];
  for(const x of[-.52,.52]){
   const points=[new T.Vector3(x,.68,-.62),new T.Vector3(x,1.66,-.52),new T.Vector3(x,1.7,.5),new T.Vector3(x,.68,.62),new T.Vector3(x,.68,-.62)];
-  for(let i=1;i<points.length;i++){const rope=r.cylinder(.023,.023,1,0xead19b,6);segment(rope,points[i-1],points[i]);root.add(rope);ropes.push(rope);}
-  ropes.push(place(root,r.sphere(.075,0xe6c48a),x,1.7,.1));
+  for(let i=1;i<points.length;i++){const rope=r.cylinder(.03,.03,1,0x726044,6);segment(rope,points[i-1],points[i]);root.add(rope);ropes.push(rope);}
+  ropes.push(place(root,r.sphere(.075,0x726044),x,1.7,.1));
  }
  return{root,wheels,ropes};
 }

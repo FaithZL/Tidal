@@ -129,6 +129,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   $('audioToggle').setAttribute('aria-pressed',String(audio.enabled));
   void syncSource(s);
   const phase = s.phase;
+  $('app').dataset.phase=phase;
   const showCamera=s.inputMode==='camera'&&running(s)&&!cameraPreparation;
   $('livePreview').hidden=!(showCamera||demoEnabled&&running(s));
   $('gamePreviewHost').hidden=!showCamera;

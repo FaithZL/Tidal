@@ -29,6 +29,7 @@ test('throw starts at the actual hand anchor and never flashes back onto the gro
  expect(w.frame.logs.filter(l=>l.location==='ground')).toHaveLength(14);
  w.advance(100);w.sync({...s,loadReps:1,groundLogs:14,cartLogs:1});w.apply(effect({kind:'log-loaded',cartLogs:1}));
  expect(w.frame.logs.find(l=>l.id===0)?.location).toBe('flight');expect(w.frame.logs).toHaveLength(15);
+ expect(w.frame.logs.filter(l=>l.location==='hand')).toHaveLength(0);
  w.advance(1000);expect(w.frame.logs.find(l=>l.id===0)?.location).toBe('cart');expect(w.frame.logs).toHaveLength(15);
 });
 test('pausing freezes throw and resuming a new epoch restores uncommitted timber without duplicates',()=>{
@@ -63,4 +64,9 @@ test('duplicate committed effects remain ignored after a flight has finished',()
 test('configured tree counts retain all tree sections in the world',()=>{
  const w=new WorldChoreography(createDemoConfig({treeCount:4}));w.sync(state({choppedTrees:4,groundLogs:20}));
  expect(w.frame.trees).toHaveLength(4);expect(w.frame.logs).toHaveLength(20);
+});
+test('the helper faces the cargo when securing it instead of looking tangent to the cart',()=>{
+ const w=make(state({task:'carry',phase:'rest',cartLogs:15,choppedTrees:3,remainingMs:7500})),npc=w.frame.npc;
+ const facing=-(npc.position.x*Math.sin(npc.yaw)+npc.position.z*Math.cos(npc.yaw))/Math.hypot(npc.position.x,npc.position.z);
+ expect(facing).toBeCloseTo(1);
 });

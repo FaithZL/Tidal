@@ -14,12 +14,14 @@ export class WorldChoreography{
  private hand:Vec3={x:-1.1,y:2.25,z:0};
  private flights=new Map<number,Flight>();
  private committed=new Set<number>();
+ private loadRep='';private heldLog:number|null=null;
  private disposed=false;
  constructor(private readonly config:Readonly<DemoConfig>){this.animator=new ActionAnimator(config);}
  sync(s:Readonly<SessionSnapshot>):void{
   if(this.disposed)return;
-  if(this.snapshot?.sessionId!==s.sessionId){this.flights.clear();this.committed.clear();this.hand={x:-1.1,y:2.25,z:0};}
+  if(this.snapshot?.sessionId!==s.sessionId){this.flights.clear();this.committed.clear();this.heldLog=null;this.loadRep='';this.hand={x:-1.1,y:2.25,z:0};}
   else if(this.snapshot.sourceEpoch!==s.sourceEpoch||this.snapshot.taskRunId!==s.taskRunId){
+   this.heldLog=null;this.loadRep='';
    for(const[id,f]of this.flights)if(!f.committed)this.flights.delete(id);
   }
   this.snapshot=s;this.animator.sync(s);
@@ -31,6 +33,10 @@ export class WorldChoreography{
   if(e.kind==='session-reset'){this.flights.clear();this.animator.apply(e);return;}
   if(s.pauseReasons.length||s.phase!=='active'||e.taskRunId!==s.taskRunId||e.sourceEpoch!==s.sourceEpoch||('task'in e&&e.task!==s.task))return;
   this.animator.apply(e);
+  if(e.kind==='action-phase'&&e.task==='load'){
+   const key=`${e.taskRunId}/${e.sourceEpoch}/${e.repId}`;
+   if(key!==this.loadRep){this.loadRep=key;this.heldLog=s.groundLogs>0?s.deliveredLogs+s.cartLogs:null;}
+  }
   if(e.kind==='action-phase'&&e.task==='load'&&e.phase==='load-return'&&s.groundLogs>0){
    const id=s.deliveredLogs+s.cartLogs;
    if(!this.flights.has(id))this.flights.set(id,{from:{...this.hand},elapsed:0,committed:false});
@@ -38,6 +44,7 @@ export class WorldChoreography{
   if(e.kind==='log-loaded'){
    const id=s.deliveredLogs+e.cartLogs-1;
    if(this.committed.has(id))return;this.committed.add(id);
+   if(this.heldLog===id)this.heldLog=null;
    const f=this.flights.get(id);
    if(f)f.committed=true;
    else this.flights.set(id,{from:{...this.hand},elapsed:0,committed:true});
@@ -74,10 +81,9 @@ export class WorldChoreography{
    const p=s.phase==='results'?1:clamp(s.carryActiveMs/this.config.carryTargetMs);f.carryProgress=p;f.cart={x:40*p,y:0,z:0};
    f.player={position:{x:f.cart.x+1.6,y:0,z:0},yaw:Math.PI/2,mode:s.phase==='rest'?'idle':s.phase==='results'?'celebrate':'pull',pose:'ready',stride:p*240};
    f.ropeProgress=s.phase==='rest'?rest:1;
-   f.npc={position:s.phase==='rest'?{x:Math.cos(rest*Math.PI*2)*1.1,y:0,z:Math.sin(rest*Math.PI*2)*1.1}:{x:f.cart.x-1.5,y:0,z:-1.1},yaw:s.phase==='rest'?-rest*Math.PI*2:Math.PI/2,mode:s.phase==='rest'?'secure':s.phase==='results'?'celebrate':'walk',pose:'ready',stride:p*220};
+   f.npc={position:s.phase==='rest'?{x:Math.cos(rest*Math.PI*2)*1.1,y:0,z:Math.sin(rest*Math.PI*2)*1.1}:{x:f.cart.x-1.5,y:0,z:-1.1},yaw:s.phase==='rest'?-rest*Math.PI*2-Math.PI/2:Math.PI/2,mode:s.phase==='rest'?'secure':s.phase==='results'?'celebrate':'walk',pose:'ready',stride:p*220};
   }
   const total=this.config.initialLogs+s.choppedTrees*this.config.logsPerTree;
-  const handId=s.deliveredLogs+s.cartLogs;
   for(let id=0;id<total;id++){
    let location:'ground'|'hand'|'flight'|'cart'|'delivered'='ground';
    const col=id%5,row=Math.floor(id/5);let position:Vec3={x:-2.2+(id%3)*.32,y:.2+Math.floor((id%5)/3)*.3,z:-.8-row*.52};
@@ -89,7 +95,7 @@ export class WorldChoreography{
     const gathering=s.task==='load'&&s.phase==='rest'?clamp((rest-.12-(id%5)*.04)/.75):s.task==='chop'||s.phase==='home'||s.phase==='setup'?0:1;
     position={x:mix(scatter.x,position.x,gathering),y:position.y,z:mix(scatter.z,position.z,gathering)};
     const tree=f.trees[ti];if(tree?.fallProgress<1){const p=tree.fallProgress;position={x:t.x+Math.sin(p*Math.PI/2)*((id%5)*.45+.3),y:mix(.6+(id%5)*.5,.22,p),z:t.z+.4};}
-    if(s.task==='load'&&s.phase==='active'&&id===handId&&['squat-down','stand-up','press-up','load-return'].includes(pose)){location='hand';position={...this.hand};}
+    if(s.task==='load'&&s.phase==='active'&&id===this.heldLog&&['squat-down','stand-up','press-up','load-return'].includes(pose)){location='hand';position={...this.hand};}
    }
    const flight=this.flights.get(id);
    if(flight){

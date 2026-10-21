@@ -57,3 +57,14 @@ test('losing WebGL context pauses the session and shows a visible recovery error
  await page.locator('#worldCanvas canvas').dispatchEvent('webglcontextlost',{cancelable:true});
  await expect(page.locator('#renderError')).toContainText('重新加载');await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#actionBtn')).toBeDisabled();
 });
+test('a failure after allocating WebGL releases the canvas and GPU context before showing recovery',async({page})=>{
+ await page.addInitScript(()=>{
+  const get=HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext=function(...args:Parameters<typeof get>){const value=Reflect.apply(get,this,args);if(args[0]==='webgl2')Reflect.set(window,'failedWorldGL',value);return value;} as typeof get;
+  window.ResizeObserver=class{constructor(){throw new Error('test resize setup failed');}} as unknown as typeof ResizeObserver;
+ });
+ await page.goto('/');await expect(page.locator('#renderError')).toContainText('无法启动3D');
+ await expect(page.locator('#worldCanvas canvas')).toHaveCount(0);
+ expect(await page.evaluate(()=>(Reflect.get(window,'failedWorldGL') as WebGL2RenderingContext).isContextLost())).toBe(true);
+ await expect(page.locator('#acceptPlan')).toBeDisabled();
+});
