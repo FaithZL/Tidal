@@ -26,7 +26,9 @@
 
 安装`npm ci`→`npm run assets:sync`→`assets:verify`，开发`npm run dev`；正式`npm run build`→`npm run preview -- --port 4175 --strictPort`，访问localhost:4175。首页可拖拽/滚轮/全景重置；接受计划→无摄像头测试开→自动演示，重置默认关。摄像头到位后关闭模拟、先标定再显式开始，同一路视频移入PiP；壶铃摇摆示例只用于处方格式，不宣称新增摇摆识别。
 
-下一步完成文档/证据核对与开发分支push；之后仅补指定设备硬件GPU性能与真实摄像头/产品签字，或针对明确性能目标另做优化，不自动扩大功能。安装/测试完整命令见README，人工步骤见`DEMO_RUNBOOK.md`。下文均为历史记录。
+交付提交`499d0f9`已成功push到`origin/feature/3d-farm-experience`，`git ls-remote`核对相同SHA；本段随后补记，不改应用。49ID及26份证据核对通过，旧报告归档Git blob与原版完全相同。没有合并/推送main、没有公网部署。预览服务保持4175可用。
+
+本轮在批准范围交付检查点停止。下一步仅补指定设备硬件GPU性能与真实摄像头/产品签字，或针对明确性能目标另做优化，不自动扩大功能。安装/测试完整命令见README，人工步骤见`DEMO_RUNBOOK.md`。下文均为历史记录。
 
 ## 历史：2026-10-16 T07–T11
 

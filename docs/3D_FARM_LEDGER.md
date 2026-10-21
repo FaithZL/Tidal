@@ -21,4 +21,4 @@ Task 5 evidence: 旧七阶段动作/NPC/暂停像素冻结/持姿停止/重置�
 
 Task 5 review: 首轮全套169单测/41E2E（6.0分钟）/type/lint/build通过。一次独立审查0 Critical/2 Important/0 Minor：WebGL失效后恢复隐形计数（键盘/自动2失败）及同epoch拒绝装车循环残留飞木（原识别器真实可发出的合成序列1失败），一批修复03e249a。最终170单测/42E2E（6.1分钟）/type/lint/build通过，无二次审查。正式生产整局142.219秒结算重置通过，预热后131.56秒39.59fps/p95 33.4ms，实际SwiftShader，P01目标未达。设备/产品未裁决项保留manual_pending，详见artifacts/qa/3d/review.md。
 
-Task 6: documentation complete — README/PROGRESS/验收报告/工程与来源说明同步当前3D，旧2D报告原样归档；当前33 pass/1 fail/15 manual_pending，证据核对及push收尾。
+Task 6: complete — README/PROGRESS/验收报告/工程与来源说明同步当前3D，旧2D报告原样归档且Git blob相同；49ID/26份证据核对通过。当前33 pass/1 fail/15 manual_pending。交付提交499d0f9已push到origin/feature/3d-farm-experience，并用ls-remote核对相同SHA；本条为随后追加的文档记录，未改应用/测试，不合并或推送main，不部署。
