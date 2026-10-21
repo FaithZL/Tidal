@@ -1,121 +1,160 @@
-# Tidal 验收报告（T10/T11）
+# Tidal 真3D升级验收报告（2026-10-21）
 
-本表依据 `ACCEPTANCE.md` 逐项记录。**L1软件概念流程已有自动证据；L2摄像头互动和L3路演签字尚未通过。** 用户没有物理摄像头，不能用合成视频、人工关键点、HTTP成功或键盘演示替代真人准确率与彩排。
+## 当前主分支集成复验
 
-## 统一环境与证据口径
+用户已进一步明确授权合入并推送main；`753c841`与`daf2af1`无冲突合并，初始合并树与开发分支完全相同。本轮仅改授权/分支文档、测试输入同步并补采样边界负例，应用/依赖/锁文件/生产识别门槛未改。
 
-- 日期：2026-10-16（Asia/Shanghai）。分支 `feature/t07-t11-completion`，基线T06 `e8f129a`；T07 `98aaba9`、T08 `85df391`、T09 `872b34c`、T10 **`d4d086f`**均已push。最终应用代码与实际验证构建对应T10；T11仅整理文档及验收索引，没有再次修改应用。
-- Windows 11 Pro 10.0.26300；Ryzen 9 7950X；系统列出AMD Graphics / RTX3070Ti（不推断浏览器实际采用哪块GPU）。Node24.14.0 / npm11.9.0 / Chromium156.0.8078.4。原始环境记录：`artifacts/qa/t10/environment.json`。
-- Phaser3.90.0、MediaPipe0.10.32、TypeScript5.8.3、Vite8.3.4、Vitest5.0.4、Playwright1.64.1；依赖锁文件未变化。Lite float16 v1模型SHA：`59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a`。JS/WASM同一版本，CPU classic Worker，15Hz提交上限、最多1帧在途。
-- 正式配置：5秒倒计时/15秒休息/15次Chop/15次Load/60秒有效Carry，3棵×5次、初始12单位木材。测试模式仅把等待缩到180ms/230ms/1300ms，仍15+15完整动作；普通开发及生产忽略URL加速参数。
-- 标定/识别参数见 `src/config/recognitionConfig.ts`：置信度0.6、低通60ms、最大样本间隔200ms、年龄300ms；站立2秒、示例0.6秒、Carry示例2秒；阶段确认120ms、Chop0.4–6秒、Load0.8–10秒、Carry进入确认500ms、进入/退出距离0.35D/0.55D。均为实验值，真人未调校。
-- 输入缩写：**K**真实键盘语义源；**A**明确标记的自动模拟；**S**人工33点夹具/测试Worker（不是MediaPipe输出）；**V**Chromium合成视频+实际本地MediaPipe推理；**R**真人物理摄像头（本轮没有）。单测使用受控时间；浏览器来源和是否加速另列。
-- 表中证据相对仓库根目录；`U:name` = `tests/unit/name`，`B:name` = `tests/e2e/name`，`Q10:file` = `artifacts/qa/t10/file`，`Q09:file` = `artifacts/qa/t09/file`。测试文件给出可重复操作/断言，日志给出实际执行结果。上述版本/环境/参数对每一行共同适用。
+首轮全套208单测/48E2E通过、1E2E失败；原代码定向重跑通过，具体首轮逐帧原因未还原。随后用66ms合成采样实际证明450ms窗口可形成396ms循环并被正确拒绝，只将完整Chop夹具改为等待真实阶段并保足最短周期。全部停帧/计数/旧回调负例保留，无重试或假计数。第二轮`npm run verify`退出0：**209/209单测、49/49 E2E（6.6分钟）、typecheck/lint/build通过**；`assets:verify`通过。最终bundle仍为CYPYbaQo，693.52KB/gzip183.83KB，保留体积提示。`M:file`指`artifacts/qa/main-merge/file`：完整日志`M:verify-final.log`、`assets-verify.log`，首轮与证据局限见`M:diagnosis.md`，应用零差异见`M:application-diff.log`。
 
-## 本轮实际验证
+本轮未重新采集性能/真人数据，P01继续fail，49验收ID仍**33 pass、1 fail、15 manual_pending**。合入main不等于真机或最终产品签字；下方保留美术与历史轮次的原始记录。
 
-49个验收ID共 **33 pass、1 fail、15 manual_pending**。失败项P01：无头SwiftShader环境约40fps，未达约60fps目标；不把达到候选30fps底线改写为目标通过。人工待办为C01–C08、V01–V04、P02/P03/P04，另有六个产品假设未签字。T11完成的是证据化交付，真人验收和L2/L3签字仍未完成。
+## 温暖卡通3D美术精修记录
 
-最终`npm run verify`退出0：**155/155单测、35/35 E2E（7.4分钟）、类型/lint/build通过**。干净npm ci成功（先因旧Vite占用原生模块失败，定位并停止本项目服务后成功）；assets:sync/verify通过，锁文件未变。新增部署8项首次7通过/1资源监听失败，修复后全套通过；旧Carry测试轮询竞态修复后定向重复3次及最终全套均通过。完整日志`Q10:verify.log`，失败过程保留，未删除负例。
+基线`d60e59e`，按用户批准范围增量精修圆润人物与衣物、树皮/木纹/年轮、车板/绳结、屋瓦/田垄/作物/道路及接触明暗。`world/resources.ts`与新增`surfaces.ts`共享本地原创128×128纹理和圆角几何，草地主面用确定性顶点颜色减少采样；环境保留原农场内容、实例化与空间合批，当前138绘制对象/1169部件/40,624三角形。原领域、编排、输入、识别器、依赖和渲染比例策略均未改，默认模拟、刷新偏好与显式摄像头切换保留。
 
-一次全新上下文全分支只读审查发现1个P2：Load准备缺少髋部位移门禁。先补两项失败测试，再共享准备/识别校验，相关32项及上述155项全套通过；正常标定另断言可直接用于CameraActionSource。没有未处理的软件审查项。见`Q10:review.md`、`calibration-review-red.log`、`calibration-review-green.log`。真机与人工批准仍不在审查通过范围内。
+`N:file`指仓库根`artifacts/qa/art-polish/file`。本轮完整`npm run verify`退出0：**208/208单测、49/49 E2E（6.3分钟）、typecheck/lint/build通过**，见`N:verify-final.log`。新增美术材质共享/释放、圆角尺寸、手部锚点、接触阴影、道路平铺、场景内容与预算断言；旧动作、暂停、库存和摄像头负例保留。该完整回归对应草捆贴图语义修正前的`index-DEI107uw.js`，693.53KB/gzip183.83KB，保留500KB体积提示；本轮未改锁文件或重复安装。
 
-实际生产包`index-CFBWu24Q.js`在localhost:4175打开，正式墙钟整局142.983秒、结算/重置通过；全部非本地来源由浏览器路由阻断，0页面异常/外部请求/姿态资源请求。保存了实际准备、训练、结果截图；结算图已查看。`Q10:production-auto-flow.log/json`给出详细计时与帧间隔，`Q10:performance-probe.json`给出软件渲染对照。物理网络断开另列人工待办，不能用路由阻断代替现场彩排。
+同一Chromium156、1366×900、DPR1、实际SwiftShader软件渲染、正常默认自动模拟，预热10秒后独立采样**3500样本/60.0142秒，58.32fps、p50 16.7ms/p95 16.8ms/max66.6ms、>50ms 1次**；0页面异常/外源，见`N:final-profile.json/log`。实际3D比例0.8→0.5，结束683×450绘制后铺满1366×900；有清晰度代价，不声称锁60或相同分辨率成绩。此数据同样在草捆修正前取得；前轮59.74fps属于旧美术。首页/近景静态截图`N:final-home.png`、`final-hero.png`与动态性能分别记录。
 
-T09：149/149单测、26/26 E2E通过，追加第27项停帧过渡回归先失败再通过；最终type/lint/unit/build再次通过。T09生产冒烟打开`index-BMaraPft.js`，仅检查准备/模拟启动/暂停。日志及来源见`artifacts/qa/t09/`。
+随后仅将金黄草捆由端面年轮改为已有纵向纹理，无新增纹理、几何或逻辑；最终`index-CYPYbaQo.js`为693.52KB/gzip183.83KB。修正后typecheck/lint、**208单测、1项完整视觉E2E**、build与assets:verify通过，见`N:material-final.log`；49项完整E2E属于修正前DEI版，没有声称修正后重新全跑。最终生产静态截图`N:delivered-home.png`、`delivered-hero.png`与`delivered-capture.json`为比例1、1366×900、无摄像头/0异常/0外源；`N:replay/visual-replay.json`及15张图覆盖七阶段，使用浏览器控制时钟，不作fps证据。
+
+最终CYPYbaQo构建的正常生产整局实际**142.227秒**完成15次挥砍/15次装车/60秒有效持姿、到家15、奖励100/100与重置，0页面异常/外源/姿态资源请求，见`N:production-auto-flow.json/log`。预热后**131.6948秒/7338样本，55.72fps、p50 16.7ms/p95 33.3ms/max33.5ms、>50ms 0**；运送截图时比例0.512、699×460铺满1366×900。四张正式截图实际生成，训练/运送/结算均已查看，文字和PiP可读，3D边缘软化可见。它与草捆修正前独立60秒58.32fps的采样范围/比例不同，分别报告；不拿较高值代替最终整局。
+
+再做唯一远景去纹理短诊断：首休息相同8秒观察58.13fps/比例0.5→57.88fps/比例0.512（`N:forest-{before,after}-profile.json/log`），未显示明确收益，分辨率不同也不推断因果；候选已恢复，`N:restored-build.log`重新构建并核对最终bundle仍精确为CYPYbaQo。候选、失败与中断日志保留，不回写为通过。
+
+当前49ID：**33 pass、1 fail（P01）、15 manual_pending**。新版整局55.72fps尚未稳定达到约60fps目标，P01保守记fail，不降目标或拿前轮数据补齐。物理摄像头、硬件GPU、真人端到端性能、最终美术与动作节奏批准仍为`manual_pending`，L2/L3未通过。下方`P`与`Q`证据均为历史；本轮全套生成的DEI版三尺寸/合成PiP/资源证据另存`N:full-suite/`，最终材质版动作在`N:replay/`，不覆盖历史。
+
+## 历史增量：流畅度与约60fps复测
+
+基线`5f5579f`，保持既有领域/识别器/默认模拟/刷新记忆和显式摄像头切换。静态环境476→138可绘制网格（保留36,176三角形/1,031部件），同值DOM不重复写，3D像素比按持续绘制帧耗时自动降低，最低0.5；文字和摄像头视频不降分辨率。相关数量/变换/裁剪、HUD零无效修改、短动作/尖峰/暂停/漏刷新均有实际RED→GREEN证据。最终`npm run verify`退出0：**183/183单测、49/49 E2E（6.1分钟）、typecheck/lint/build通过**；`assets:verify`通过，主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，保留体积提示。未改依赖或锁文件，本轮未重新安装。一次独立只读审查无剩余问题，处理与范围见`artifacts/qa/performance/review.md`。
+
+`P:file`指`artifacts/qa/performance/file`：同一Chromium156、1366×900、DPR1、实际SwiftShader，正常生产时长，预热10秒后独立60秒采样，原始**40.47fps/p95 33.4ms**→最终**59.74fps/p95 16.7ms**，3585样本/60.0143秒、max33.4ms、>50ms 0。实际3D比例1→0.64→0.512，结束699×460绘制后铺满1366×900视口；**有清晰度代价，不能宣称相同分辨率达到60fps**。全文方法、失败候选与计数器口径见`P:README.md`；原始JSON未回写。
+
+正常`dist`整局另实测**141.930秒**，15次挥砍/15次装车/60秒持姿、到家15、奖励100/100、返回首页重置通过，0页面异常/外源/姿态资源请求。预热后131.3447秒/7701样本平均**58.63fps/p95 16.8ms/max33.5ms/>50ms 0**，与60秒对照分别报告；见`P:production-auto-flow.json/log`。四张生产截图真实生成，训练/运送/结果已查看，文字与PiP可读，3D边缘软化可见。浏览器阻断外源不是物理断网，合成骨架不是真人证据。
+
+该轮49ID：**34 pass、0 fail、15 manual_pending**。P01在本机软件GL/自适应画质条件下接近60fps目标，不声称锁60；硬件GPU、现场窗口实际表现、摄像头准确率/端到端性能和最终画质批准仍待验。L2/L3没有通过；本段数字为旧美术历史，最新范围见顶部及P01/P06。
+
+## 历史增量：默认模拟启动
+
+用户已明确授权默认开启模拟，首次打开/刷新自动演示，保留开关和真实摄像头入口。本轮基线`f32f973`；新增五项默认/刷新/偏好/摄像头失败/存储受限/图形门禁用例，原键盘/摄像头负例通过真实偏好显式选择手动入口。前4项RED后实现转绿，相关16E2E及单独图形门禁1项通过；最终`npm run verify`退出0：**170/170单测、47/47 E2E（6.2分钟）、typecheck/lint/build通过**，资源校验通过。当前主包`index-DNN17GvQ.js`675.90KB/gzip177.91KB。证据`artifacts/qa/default-demo/{red,green,renderer-guard,verify,assets-verify}.log`；独立一次审查0发现，见同目录review.md。
+
+`node artifacts/qa/default-demo/production-smoke.mjs`在实际4175生产预览通过，18.339秒完成普通时长默认启动/刷新重播、关闭记忆、注入摄像头缺失后保持手动且不再申请设备、重新开启刷新恢复；0页面异常/外源/姿态资源请求。普通构建忽略URL加速，目标仍60秒；未重复生产完整整局/性能基准。该错误分支为明确注入NotFoundError，不是真机。生产JSON/日志与三张截图均实际产生，本轮没有依赖变更或重新安装。
+
+重置保留偏好、不循环开局；只存本地开关，不存视频/姿态/训练进度。摄像头仍需手动申请视频、标定并显式开始；其错误不会开启模拟。本历史段的整局与性能证据属于`03e249a`；下方功能ID保留原证据并经本轮全套回归复测，P01/P04/P06另更新为最新性能记录。历史数据不代替顶部最新增量或真人验收。
+
+本轮为用户批准的T11之后体验升级，分支`feature/3d-farm-experience`，应用基线`30e36e3`，最终应用修复`03e249a`。继续原领域/输入/标定/识别器及负例测试，当前入口改用真实Three.js网格与Orbit相机。L1软件概念流程已有自动证据；**L2真实摄像头与L3产品签字没有通过**。旧2D报告原样存于`history/T11_2D_TEST_REPORT.md`，不沿用其40.06fps作为本轮性能。
+
+## 环境与证据口径
+
+- Windows11 Pro10.0.26300、Ryzen9 7950X、Node24.14.0/npm11.9.0、Chromium156.0.8078.4；系统列出显卡不代表浏览器实际采用。原始环境`Q:environment.json`；实际WebGL GPU随生产报告记录。没有物理摄像头。
+- Three0.186.1/@types0.186.0精确锁定；Phaser3.90.0保留旧源码依赖，当前入口不运行。MediaPipe0.10.32、TypeScript5.8.3、Vite8.3.4、Vitest5.0.4、Playwright1.64.1。模型Lite float16 v1 SHA256 `59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a`，CPU classic Worker、15Hz提交上限/单帧在途。
+- 正式配置：5秒准备/15秒休息/15次挥砍/15次复合装车/60秒有效持姿，3棵各5段，初始0，运送路线40世界单位（示意距离，非实测米数）。专用e2e模式只缩等待为180/230/1300ms，保留15+15完整循环；普通构建忽略加速URL。
+- 原实验识别参数不变：置信度0.6、低通60ms、样本间隔200ms/年龄300ms，阶段确认120ms、Chop0.4–6秒、Load0.8–10秒，Carry确认500ms/进入0.35D/退出0.55D。真人参数可用性未测。
+- **K**键盘语义源、**A**显式自动模拟、**S**人工33点/测试Worker、**V**合成视频+实际本地MediaPipe、**R**真人摄像头（无）。K/A/S/V不能证明真人识别准确率。
+- `Q:file`指仓库根`artifacts/qa/3d/file`，`U:file`指`tests/unit/file`，`B:file`指`tests/e2e/file`。旧历史证据如引用会写完整路径。
+
+## 实际执行
+
+初始155单测/typecheck通过。逐任务RED→GREEN包括0/5数量、视觉归属、真实相机投影、紧凑通知/PiP、暂停镜头、迟到video.play、飞木交接、初始化失败释放；日志保留于Q目录。干净`npm ci`成功（145包/audit146，0漏洞），assets:sync/verify通过。
+
+首轮全套`npm run verify`通过169单测、41E2E（6.0分钟）、type/lint/build。一次独立审查0 Critical/2 Important/0 Minor：图形丢失可恢复隐形计数、过快装车被拒绝后残留未提交飞木，先分别2浏览器/1单测失败后统一修复；170单测和定向2浏览器通过。详见`Q:review.md`及review-*-red/green.log，不做第二次审查。
+
+最终`npm run verify`退出0：**170/170单测、42/42 E2E（6.1分钟）、typecheck/lint/build通过**；本地资源再次校验通过。正常构建`index-CgL4PAsP.js`675.50KB/gzip177.76KB，保留500KB包体积提示，不改阈值隐藏。完整日志`Q:verify-final.log`。
+
+当时`dist/`在localhost:4175运行，`TIDAL_QA_DIR=artifacts/qa/3d TIDAL_BLOCK_EXTERNAL=1 node scripts/verify-auto-demo.mjs`通过：正式5/15/60配置、真实墙钟**142.219秒**完成15/15/60、到家15、100/100奖励与重置，0页面异常/外源/姿态资源请求。预热10秒后131.5614秒/5209样本，平均**39.59fps**，p50 **33.2ms**、p95 **33.4ms**、最大**50ms**、>50ms 0。实际GPU为**ANGLE SwiftShader软件渲染**，没有采用系统列出的RTX硬件；当时未达约60fps目标，P01判fail，不降低目标。最新复测见顶部及当前P01；候选30fps不等于指定硬件或真人性能通过。
+
+生产首页/训练/结算截图均实际生成并查看，`Q:production-home.png`、`production-running.png`、`production-results.png`；首页无加速徽标，结算真实显示60秒与模拟来源。`Q:production-auto-flow.json/log`为实际计时/来源/性能证据。浏览器路由阻断不替代现场物理断网。
+
+当时49ID判定：**33 pass、1 fail（P01）、15 manual_pending**。脚本仅核对当时证据完整性，不代替产品/真人验收；`Q:report-audit.json`为旧版本核查，最新性能见上方增量及当前P01。
 
 ## 功能与领域规则
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| F01 | K/A；计划来自同一配置，15/15/60，标预设 | 计划与界面从配置生成；普通构建不接受加速参数。U:config.test.mjs；B:boot.spec.ts | pass |
-| F02 | K；取消不开始，可重开 | 首页取消/重开及零计数通过。B:boot.spec.ts | pass |
-| F03 | 受控时钟4999/5000ms；只进入一次Chop | 边界与不完整循环门禁通过。U:session.test.mjs | pass |
-| F04 | K/S；15完整Chop，5/10/15倒树，无额外计数 | 复位才提交、impact不重复、旧rep/16次被忽略。U:chopRecognizer.test.ts、session.test.mjs；B:source-lifecycle.spec.ts；Q09:camera-flow.json | pass |
-| F05 | K/S；15复合Load，单蹲/单举不算 | 连续站起上举可用，短暂一帧/未复位被拒绝，15单位上车。U:loadRecognizer.test.ts；B:source-lifecycle.spec.ts | pass |
-| F06 | 受控时钟/K/A；两段15秒休息+5秒倒计时，Carry直结算 | 领域与浏览器过渡通过；正常生产墙钟另记。U:session.test.mjs；B:keyboard-flow.spec.ts、visual-states.spec.ts | pass |
-| F07 | S；有效10秒+放下5秒+有效50秒=60秒 | 精确累计60秒，不倒填500ms进入确认，5/10/15/30Hz一致。U:carryTiming.test.ts | pass |
-| F08 | K/A/S；15到家、车库存0、loadReps15、100/100/T恤 | 原权威结算和来源标注通过，合成整局库存0/0/15。B:keyboard-flow.spec.ts、source-lifecycle.spec.ts；Q09:synthetic-camera-results.png | pass |
-| F09 | 重复完成/回调；奖励一次 | 奖励一次性与Carry上限钳位通过；固定T恤展示不发第二次资源。U:session.test.mjs、carryTiming.test.ts | pass |
-| F10 | K双局、S结束/重置；旧局不污染新局 | 新session、清零、场景恢复、track/Worker结束。B:keyboard-flow.spec.ts、source-lifecycle.spec.ts；U:sourceManager.test.ts | pass |
-| F11 | K/S；每次变更库存守恒 | 砍树/装车/到家与NPC视觉不直接改库存。U:session.test.mjs、actionAnimator.test.ts；B:keyboard-flow.spec.ts | pass |
+| F01 | K/A同一配置15/15/60、标预设 | 配置与计划同源、普通URL不加速；U:config.test.mjs，B:boot.spec.ts | pass |
+| F02 | K取消/重开，不开始 | 首页零进度、可重开；B:boot.spec.ts | pass |
+| F03 | 受控4999/5000ms，只进一次Chop | 原边界/门禁保留；U:session.test.mjs | pass |
+| F04 | K/S完整15次，第5/10/15次产5/10/15段 | 每树5段初始0，第16次/impact不加；U:session.test.mjs、worldChoreography.test.ts；B:source-lifecycle.spec.ts | pass |
+| F05 | K/S完整复合Load15次 | 单蹲/单举/未复位/过快拒绝；U:loadRecognizer.test.ts、worldChoreography.test.ts；B:source-lifecycle.spec.ts | pass |
+| F06 | 两段休息和倒计时，Carry直结算 | 原领域与七阶段浏览器回归；U:session.test.mjs；B:keyboard-flow.spec.ts、visual-states.spec.ts | pass |
+| F07 | S有效10+放下5+有效50=60秒 | 不补算确认/放下/gap，5/10/15/30Hz一致；U:carryTiming.test.ts | pass |
+| F08 | K/A/S到家15、车0、load15、奖励100/100/T恤 | 结果运动与游戏等宽，来源明确；B:keyboard-flow.spec.ts、source-lifecycle.spec.ts、world3d.spec.ts；Q:results.png | pass |
+| F09 | 重复完成只发一次奖励 | 原一次性与上限负例保留；U:session.test.mjs、carryTiming.test.ts | pass |
+| F10 | K双局/S重置，旧局不污染 | 新session/0库存/停track与Worker；B:keyboard-flow.spec.ts、source-lifecycle.spec.ts | pass |
+| F11 | 所有权与库存守恒 | 地面/手持/飞行/车/到家按ID唯一；NPC/advance不写领域；U:session.test.mjs、worldChoreography.test.ts | pass |
 
-## 摄像头与动作验证
-
-| ID | 输入与预期 | 实际与证据 | 判定 |
-|---|---|---|---|
-| C01 | R；肩腕髋膝与真实骨架对应 | 仅V证明实际本地模型可推理，S证明UI连接。B:camera-errors.spec.ts、deployment.spec.ts。没有真人骨架证据 | manual_pending |
-| C02 | R；标定有效才可训练，裁切/低置信度拒绝 | S完成9步、门禁与失效清除通过；真人站位/幅度可用性未测。B:calibration.spec.ts、source-lifecycle.spec.ts；U:features/calibrationSession测试 | manual_pending |
-| C03 | R；20Chop+20负例，建议≥19正例、≤1误计 | S正反例通过；没有指定演示者逐次记录。U:chopRecognizer.test.ts。不能换算真人准确率 | manual_pending |
-| C04 | R；20复合Load+20负例，同上 | S完整循环/单蹲/单举/短暂举手/半次负例通过；没有真人抽样。U:loadRecognizer.test.ts | manual_pending |
-| C05 | R；持姿放下恢复≥5次，≤300ms非有效反馈 | S放下立即退出、间断不补算；真人可分性与UI延迟未测。U:carryRecognizer/carryTiming测试 | manual_pending |
-| C06 | R；相同姿态拒绝Carry | S不可分示例拒绝，标定与识别器共用门限；真人/器械条件未测。U:calibrationSession/carryRecognizer测试 | manual_pending |
-| C07 | R；完整一局，每项停顿可恢复 | S整局通过且结算释放，K/A完整流程通过；真人整局未运行。Q09:camera-flow.json | manual_pending |
-| C08 | R；离镜/明显换位不拼接旧动作 | S突变、低置信度和断档失效通过。缓慢换位/同位置换人不能可靠识别，需手动重标，未承诺身份识别。U:smoothing/calibrationSession测试 | manual_pending |
-
-## 异常、恢复与生命周期
+## 摄像头与动作
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| E01 | 注入权限拒绝；显式报错、可重试/键盘 | 不会自动切模拟或启动训练。B:camera-errors.spec.ts | pass |
-| E02 | V资源404/隔离版本错配；报错、关闭捕获 | 子路径模型/WASM404明确失败；0.10.31清单对0.10.32包被assets:verify拒绝。B:deployment.spec.ts；Q10:version-mismatch.log | pass |
-| E03 | 延迟初始化、迟到Promise、超时；清资源 | Worker30秒初始化/10秒帧超时、300ms终止兜底通过；取消后迟到视频与bitmap释放。U:cameraService/poseWorkerClient/poseWorkerLifecycle测试；B:demo-toggle.spec.ts | pass |
-| E04 | 注入设备缺失/占用/不支持/推理失败 | 分别显示错误，键盘入口显式；固定CPU，无静默GPU降级。B:camera-errors.spec.ts | pass |
-| E05 | S；低置信度/乱序/过期/断档不计成果 | 取消半次、停计持姿、要求重新准备；无帧也检查阶段门禁。U:features/smoothing/识别器测试；B:source-lifecycle.spec.ts | pass |
-| E06 | K/A/S；用户/后台/跟踪暂停独立，不补算 | 领域与摄像头集成通过；旧A测试退避轮询竞态已用首样本同步修复，定向重复3次及完整回归通过，全部暂停/停源断言保留。Q10:carry-polling-race.json、carry-polling-green.log、verify.log | pass |
-| E07 | 旧session/run/epoch、迟到回调；丢弃 | SourceManager代次隔离、Worker/bitmap迟到与新局旧事件通过。U:sourceManager/cameraActionSource/poseWorkerClient测试；B:keyboard-flow.spec.ts | pass |
-| E08 | V/S十轮启停退出重置；无持续资源叠加 | 定位并修复ended轨道监听未移除；track全ended、Worker0/峰值1、interval稳定1、timeout0、轨道监听0、总监听90。Q10:ten-cycle-resources.json；物理指示灯待设备复核 | pass |
-| E09 | S→K/A；停旧源、保成果、清半次、混合标识 | 按钮显式切换且暂停，不静默降级；结果保留混合模拟来源。B:source-lifecycle.spec.ts；U:sourceManager.test.ts | pass |
-| E10 | 重复seq/rep、NaN/负值/旧时间/超长gap | 所有无效输入不多记、不破坏库存；诊断保留原因。U:session/features/recognizer/carryTiming测试 | pass |
-| E11 | K；自动重复、失焦、pointercancel、表单焦点 | 不刷次数、不永久持姿，按钮/表单不误触发。B:keyboard-flow.spec.ts；U:input.test.mjs | pass |
-| E12 | S；休息离镜/停帧，下一项须重新就绪 | 休息到0仍等待；就绪后完整倒计时；修复先进入active再暂停的瞬态。U:cameraReadiness.test.ts；Q09:stalled-rest-red.log、stalled-rest-green.log | pass |
+| C01 | R视频/骨架/PiP对应 | V模型可推理；S同video/stream连续播放、track1/Worker峰值1；B:world3d.spec.ts。Q:camera-pip-synthetic.png明确合成，不是真人 | manual_pending |
+| C02 | R九步标定/失效门禁 | S门禁与清除通过，真人幅度/机位未测；B:calibration.spec.ts、source-lifecycle.spec.ts | manual_pending |
+| C03 | R20Chop+20负例 | 仅合成正反例，不能换算真人准确率；U:chopRecognizer.test.ts | manual_pending |
+| C04 | R20Load+20负例 | 合成完整/半次/短举/过快均有负例，真人未测；U:loadRecognizer.test.ts | manual_pending |
+| C05 | R放下恢复5次，≤300ms反馈 | S不补计、立即退出通过；真人可分性/反馈未测；U:carryRecognizer.test.ts、carryTiming.test.ts | manual_pending |
+| C06 | R相同姿态拒绝 | S不可分原型拒绝；不证明握物/重量；U:calibrationSession.test.ts、carryRecognizer.test.ts | manual_pending |
+| C07 | R完整一局含停顿 | K/A/S整局可恢复，真人整局未运行；B:source-lifecycle.spec.ts | manual_pending |
+| C08 | R离镜/换位不拼接 | S突变/断档清除；缓慢换位/同位置换人仍须重标；U:smoothing.test.ts | manual_pending |
+
+## 异常与生命周期
+
+| ID | 输入与预期 | 实际与证据 | 判定 |
+|---|---|---|---|
+| E01 | 拒绝权限可重试、无静默模拟 | 原错误路径保留；B:camera-errors.spec.ts | pass |
+| E02 | 模型/WASM404或版本错配报错 | 子路径实际404停捕获，当前资源校验通过；B:deployment.spec.ts；Q:assets-verify-final.log；版本错配历史fixture见artifacts/qa/t10/version-mismatch.log | pass |
+| E03 | 迟到初始化/Promise不泄漏 | 原超时/bitmap释放，新增旧video.play拒绝不污染新stream；U:gamePreview.test.ts及camera/Worker测试 | pass |
+| E04 | 缺失/占用/不支持/推理失败 | 分别显式报错；另注入3D初始化失败释放GL与canvas、上下文丢失后P/按钮/Space/自动输入均锁定；B:camera-errors.spec.ts、world3d.spec.ts | pass |
+| E05 | 失效关键点不计成果 | 原识别/准备门禁保留；B:source-lifecycle.spec.ts及U:features/smoothing/识别器测试 | pass |
+| E06 | 多暂停不覆盖、不补算 | 原暂停负例及新增自动镜头暂停/全景reset通过；B:keyboard-flow.spec.ts、demo-toggle.spec.ts、world3d.spec.ts | pass |
+| E07 | 旧session/run/epoch丢弃 | 原SourceManager隔离；新半次木材随epoch/任务/新rep清除；U:sourceManager.test.ts、worldChoreography.test.ts | pass |
+| E08 | 十轮启停/退出/重置无资源叠加 | track全ended、Worker0/峰值1、interval稳定1、timeout0、轨道监听0；单一3D世界复用，堆仅趋势守卫；Q:deployment/ten-cycle-resources.json。硬件GPU与指示灯另待测 | pass |
+| E09 | 显式切源保成果、清半次、标混合 | 原S→K/A整局及停源隔离保留；B:source-lifecycle.spec.ts、demo-toggle.spec.ts | pass |
+| E10 | 重复/NaN/负值/旧时间/gap拒绝 | 原全部负例保留；U:session/features/recognizer/carryTiming测试 | pass |
+| E11 | repeat/焦点/pointercancel不误计 | 原键盘回归及Orbit不产运动成果；B:keyboard-flow.spec.ts、world3d.spec.ts | pass |
+| E12 | 休息停帧不短暂进入active | 原瞬态回归保留，就绪后完整倒计时；B:source-lifecycle.spec.ts | pass |
 
 ## 视觉与声音
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| V01 | K/A/R；统一且可辨认农场视觉 | 原创矢量场景/角色/NPC可见，已实际查看三尺寸截图；最终产品美术批准未取得。Q10:desktop-*.png；历史Q05视觉序列 | manual_pending |
-| V02 | K/S/R；阶段对应、暂停保持 | 七阶段与暂停帧哈希通过；真人同步和A04接受未签字。B:visual-states.spec.ts；U:actionAnimator.test.ts | manual_pending |
-| V03 | K/A；两段NPC协作可重复且不造资源 | 归拢/固定货物脚本与库存回归通过，明确预设NPC；人工节奏批准待补。B:visual-states.spec.ts | manual_pending |
-| V04 | K/A；受击/倒树/入车/到家反馈一致 | 效果去重、只读领域与整局截图通过；产品人工观感仍待批准。B:visual-states.spec.ts；U:actionAnimator.test.ts | manual_pending |
-| V05 | A；1280×720/1366×768/1920×1080控件可达、比例正确 | 首次1280按钮超屏失败，紧凑布局后3尺寸整局/暂停/结果返回通过，已查看截图。长准备页可在模态内滚动。B:deployment.spec.ts；Q10:desktop-*.png | pass |
-| V06 | 用户点击；默认静音、可开关、失败不破坏流程 | 4单测和真实WebAudio浏览器控制通过；短节点结束/静音释放。实际扬声器听感待现场确认。U:audioFeedback.test.ts；B:deployment.spec.ts | pass |
+| V01 | 统一真3D、全景通知、实际旋转 | 实际相机及几何投影变化；本轮圆润模型/共享原创纹理与场景预算有单测，最终静态截图N:delivered-home.png、delivered-hero.png；历史Q:home.png、orbit.png保留。最终美术批准未取得 | manual_pending |
+| V02 | 七阶段对应、暂停保持 | 七阶段/暂停像素冻结、手部锚点已验证；B:visual-states.spec.ts；真人同步与最终节奏未签 | manual_pending |
+| V03 | 推车/归拢/绑绳不造木 | 人车把手相对位置、绕车朝向、绳索进度有测试；Q:replay/visual-replay.json；人工自然度待批准 | manual_pending |
+| V04 | 五段/抛木/绳索/运送/结果 | 单根所有权、被拒循环复位、末根跨休息连续完成；U:worldChoreography.test.ts；已看回放截图，最终观感待批准 | manual_pending |
+| V05 | 三桌面尺寸控件可达 | B:deployment.spec.ts完整流程/暂停/结果；Q:deployment/desktop-*.png；小通知≤390px、结果等宽有实际几何断言 | pass |
+| V06 | 音效需点击、可静音 | 原WebAudio控制/失败/释放回归保留，扬声器听感待现场；U:audioFeedback.test.ts；B:deployment.spec.ts | pass |
 
 ## 数据、来源与隐私
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| D01 | 页面检查；未测心率/卡路里不冒作实测 | 明确未接入，原500卡仅在说明中标示意；无随机健康数据。index.html；B:keyboard-flow.spec.ts | pass |
-| D02 | K/A/S；有效时间与会话时间分开 | 控制器分开累计；66天仅原方案示意，不填本局连续记录。U:session.test.mjs；Q09:synthetic-camera-results.png | pass |
-| D03 | 首页；不伪装AI规划 | 明确预设概念计划，无LLM请求或接口。index.html；B:boot.spec.ts | pass |
-| D04 | V/A；仅视频、本机处理、不上传/默认保存 | CameraService固定audio:false；网络观察/子路径阻断外源无外发，真实关键点没有存储入口。B:camera-errors/deployment测试；Q10:subpath.json | pass |
-| D05 | K/A/混合；常驻标签，来源不能洗白 | SourceManager历史集合+demoUsed在结算保留来源，重置才清；S→A完整混合测试通过。B:source-lifecycle.spec.ts | pass |
-| D06 | 资源；来源/许可可查 | 本地锁定模型/JS/WASM与许可副本，原创SVG/代码角色/正弦反馈音，无第三方音乐或参考截图角色复用。DEPENDENCIES/SOURCES/public/assets/README；Q10:assets-verify.log | pass |
+| D01 | 未测健康数据不伪造 | 心率/卡路里未接入；运动数据来源明确；B:keyboard-flow.spec.ts | pass |
+| D02 | 有效与经过时间分开 | 原领域累计分别显示，66天不填作本局成果；U:session.test.mjs；Q:results.png | pass |
+| D03 | 预设计划不装AI | 紧凑通知仍标概念预设，无LLM；B:boot.spec.ts | pass |
+| D04 | 仅视频、本机处理、不保存 | 原audio:false与本地Worker；子路径阻断外源；B:camera-errors.spec.ts、deployment.spec.ts；Q:deployment/subpath.json | pass |
+| D05 | A/K/S混合来源不洗白 | 复用来源集合/模拟标识；PiP/结果均标来源；B:source-lifecycle.spec.ts、world3d.spec.ts | pass |
+| D06 | 资源/许可可追溯 | 新Three MIT复制并校验，原创代码模型/材质；旧SVG保留；无外部素材/CDN；Q:assets-verify-final.log；SOURCES/DEPENDENCIES | pass |
 
 ## 性能与交付
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| P01 | A稳态预热后≥60秒；约60fps目标、候选底线30fps | 预热10秒后132.211秒/5296样本：40.06fps，p50 16.8ms/p95 33.4ms/max50.1ms，>50ms一次。达到候选底线，未达约60fps。额外10秒对照空白60.00/农场39.54fps，实际SwiftShader软件渲染；硬件GPU待复测，不据候选值改判。Q10:production-auto-flow.json、performance-probe.json | fail |
-| P02 | R；≥10–15Hz、单帧在途、报告年龄 | 单帧在途协议单测/V推理通过，面板显示耗时/年龄；实际真人性能未测。U:poseWorkerClient.test.ts | manual_pending |
-| P03 | R；阶段可见反馈p95≤250ms | 未采集真人端到端画面证据，推理耗时/游戏rAF不能替代 | manual_pending |
-| P04 | 依赖已安装，外网断开后刷新整局 | 子路径V外源路由阻断通过；正式墙钟A整局142.983秒，生产5/15/60配置，外源全部阻断后结算/重置通过，0页面异常/外源/姿态请求。物理断网彩排尚无证据。Q10:subpath.json、production-auto-flow.json | manual_pending |
-| P05 | V；实际构建部署到子路径，资源不404 | `/tidal/`实际构建、模型/JS/WASM/SVG均同源前缀，真实MediaPipe处理合成视频通过。Vite已正确重写HTML静态资源，无需猜测性改路径。Q10:subpath.json | pass |
-| P06 | 干净安装→资源→类型/lint/unit/E2E/build→实际dist | npm ci、sync/verify、155单测、35 E2E、type/lint/build均通过；实际dist整局/重置通过。包index-CFBWu24Q.js，1,274.60KB/gzip345.59KB，保留500KB体积警告。Q10:npm-ci.log、assets-sync.log、assets-verify.log、verify.log、production-auto-flow.json | pass |
+| P01 | A预热后≥60秒，约60fps目标 | 最终CYPYbaQo/SwiftShader正常整局预热后131.6948秒55.72fps/p95 33.3ms/max33.5ms/>50ms 0；运送比例0.512、699×460。N:production-auto-flow.json；修正前DEI独立60.0142秒58.32fps只作对应版本证据。尚未稳定约60，硬件/真人未测 | fail |
+| P02 | R推理≥10–15Hz/单帧在途 | 协议与V实际推理通过，真人性能未测；U:poseWorkerClient.test.ts | manual_pending |
+| P03 | R端到端阶段p95≤250ms | 未采真人画面证据，rAF/推理耗时不能替代 | manual_pending |
+| P04 | 物理断外网刷新整局 | 子路径回归保留，本轮最终整局阻断外源142.227秒结算重置，0外源；物理断网彩排未做；N:full-suite/deployment/subpath.json、production-auto-flow.json | manual_pending |
+| P05 | 实际构建子路径本地资源 | /tidal/真实模型推理与404负例保留，资源均同源；B:deployment.spec.ts；N:full-suite/deployment/subpath.json（DEI全套） | pass |
+| P06 | 干净安装→全套→实际dist | 锁文件未变；干净安装Q:npm-ci.log为历史，本轮未重复安装。当前合并树209单测/49E2E/type/lint/build/assets通过，bundle仍CYPYbaQo；M:verify-final.log、assets-verify.log、application-diff.log。该应用正式整局/重置为N:production-auto-flow.json既有证据，本次不冒充重跑；693.52KB，保留体积提示 | pass |
 
-## 尚需用户设备与产品确认
+## 产品处理与下一步
 
-当前没有把任何真人项标pass，也没有代签产品批准。设备到位后按 `DEMO_RUNBOOK.md`：记录浏览器/机位/光照/全身范围；检查真人骨架与9步标定；20次Chop+20负例、20次Load+20负例逐次记录；持姿放下恢复至少5次；完整一局和重置释放；真实推理性能/端到端延迟；现场断外网刷新与扬声器听感。默认不录视频、不导出真实轨迹。
-
-| 假设 | 当前处理 | 产品确认 |
+| 假设 | 当前处理 | 确认状态 |
 |---|---|---|
-| A03 数量冲突 | 可配置3棵×5次，新增12单位已有木材保证15份装车 | manual_pending |
-| A04 完全同步 | 采用有明确说明的动作阶段同步；非逐关节复制 | manual_pending |
-| A06 持握 | 使用可区分持姿代理，不证明重量/持物；同姿态空手不可辨 | manual_pending |
-| A07 示例指标 | 游戏结果与原方案健康示意分开，未测量不伪造 | manual_pending |
-| A08 AI计划 | 明确标注预设计划，无LLM服务 | manual_pending |
-| A09 美术 | 原创统一2D农场，最终美术与节奏由用户批准 | manual_pending |
+| A03 | 初始0、3树各5段，15挥砍/15装车 | 用户已于2026-10-21批准本轮设计 |
+| A04 | 阶段同步，非逐关节复制 | manual_pending |
+| A06 | 持姿代理，不证明持物/重量 | manual_pending |
+| A07 | 只显示计数/时长与明确游戏奖励，健康数据未测 | manual_pending |
+| A08 | 预设计划，未接LLM | manual_pending |
+| A09 | 真3D/旋转镜头与本轮温暖卡通精修方向已批准，最终美术与节奏待验 | manual_pending |
 
-L1仅覆盖已验证键盘/模拟与软件规则；L2/L3仍为manual_pending。完成T11文档与审查不等于真人验收签字。未推送主分支、未合并、未部署公网。
-
-T11文档核对：49个ID与`ACCEPTANCE.md`一一对应，无遗漏/重复；判定集合合法、明确引用的日志/截图存在。记录见`artifacts/qa/t11/report-audit.json`。本轮没有新增应用代码，复用同一T10提交的完整软件回归证据；没有伪称另跑一轮测试。
+无物理摄像头，下一步按`DEMO_RUNBOOK.md`记录真实骨架/PiP、九步标定、20+20正负例、5次持姿放下恢复、真人整局/资源关闭、推理和端到端性能；另在指定演示机做硬件GPU、物理断网和扬声器/视觉批准。默认不录制/上传视频，不保存真实姿态序列。当前没有合并main或部署公网。

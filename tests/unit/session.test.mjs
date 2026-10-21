@@ -46,6 +46,19 @@ test('countdown boundary is precise and full chop cycle is required',()=>{
  h.send('phase','chop',1,'chop-return');h.send('rep-completed','chop',1);
  assert.equal(h.controller.getSnapshot().chopReps,1);
 });
+
+test('each completed tree produces five sections and a sixteenth chop cannot mint wood',()=>{
+ const h=harness();h.begin();
+ for(let i=1;i<=15;i++){
+  h.rep('chop',i);
+  assert.equal(h.controller.getSnapshot().groundLogs,Math.floor(i/5)*5);
+ }
+ assert.equal(h.controller.getSnapshot().groundLogs,15);
+ assert.equal(h.controller.getSnapshot().choppedTrees,3);
+ const prior=h.controller.getSnapshot();
+ h.controller.accept({sessionId:prior.sessionId,taskRunId:'expired',sourceEpoch:prior.sourceEpoch,seq:200,capturedAtMs:h.clock.ms,kind:'rep-completed',task:'chop',repId:16});
+ assert.equal(h.controller.getSnapshot().groundLogs,15);
+});
 test('repeated rep ids, old session, old epoch and stale events are ignored',()=>{
  const h=harness();h.begin();h.rep('chop',1);h.rep('chop',1);
  assert.equal(h.controller.getSnapshot().chopReps,1);
@@ -71,7 +84,7 @@ test('inventory conservation, exact rewards and return to home',()=>{
  assert.equal(s.phase,'results');assert.equal(s.deliveredLogs,15);assert.equal(s.groundLogs,0);assert.equal(s.cartLogs,0);
  assert.equal(s.rewardsGranted,true);
  assert.equal(h.effects.filter(e=>e.kind==='rewards-granted').length,1);
- controller.command({kind:'reset'});s=controller.getSnapshot();assert.equal(s.phase,'home');assert.equal(s.groundLogs,12);
+ controller.command({kind:'reset'});s=controller.getSnapshot();assert.equal(s.phase,'home');assert.equal(s.groundLogs,0);
  assert.equal(s.rewardsGranted,false);assert.equal(s.deliveredLogs,0);
 });
 test('hold timer stops when released; long sample gaps do not award phantom time',()=>{
@@ -93,7 +106,7 @@ test('multiple pause reasons are independent and resume rotates input generation
  assert.equal(h.controller.getSnapshot().chopReps,0);
 });
 test('completion cannot mint wood twice through reset or late signals',()=>{
- const h=harness({treeCount:1,repsPerTree:1,initialLogs:0,carryTargetMs:200});h.begin();h.rep('chop',1);
+ const h=harness({treeCount:1,repsPerTree:1,initialLogs:0,logsPerTree:1,carryTargetMs:200});h.begin();h.rep('chop',1);
  assert.equal(h.controller.getSnapshot().groundLogs,1);
  const old=inputContext({...h.controller.getSnapshot(),phase:'active',task:'chop',taskRunId:'run-1'});
  h.tick(h.config.restMs);h.tick(h.config.startCountdownMs);h.rep('load',1);
@@ -130,7 +143,7 @@ test('final hold sample clamps both effective timers to the exact target',()=>{
 
 test('every emitted snapshot conserves inventory across two full sessions',()=>{
  const h=harness({carryTargetMs:200});let checked=0;
- h.controller.subscribe(s=>{checked++;assert.equal(s.groundLogs+s.cartLogs+s.deliveredLogs,12+s.choppedTrees);});
+ h.controller.subscribe(s=>{checked++;assert.equal(s.groundLogs+s.cartLogs+s.deliveredLogs,h.config.initialLogs+s.choppedTrees*h.config.logsPerTree);});
  for(let round=0;round<2;round++){
    proceedThroughTasks(h);h.send('hold-sample','carry',true,true);
    h.clock.ms+=100;h.send('hold-sample','carry',true,true);h.clock.ms+=100;h.send('hold-sample','carry',true,true);

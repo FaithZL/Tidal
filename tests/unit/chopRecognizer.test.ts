@@ -13,6 +13,24 @@ test('three full chop cycles emit ordered phases, one impact and one rep each', 
     expect(events.findIndex(e => e.kind === 'impact')).toBeLessThan(events.findIndex(e => e.kind === 'rep-completed'));
   }
 });
+
+test('a 450ms pose window can be a sub-400ms cycle after 15Hz sampling and must not count', () => {
+  const replay=(raisedAt:number)=>{
+    const r=new ChopRecognizer(syntheticProfile()),observed=[];
+    // Warm up raised, then sample a down window starting between observations.
+    for(let time=0;time<=2904;time+=66){
+      const events=r.update(syntheticFrame(time,time<2050||time>=raisedAt?'raised':'down'));
+      observed.push({time,events,phase:r.getDebug().phase});
+    }
+    return observed;
+  };
+  const short=replay(2500),long=replay(2570);
+  expect(short.find(row=>row.events.some(event=>event.kind==='phase'&&event.phase==='chop-down'))?.time).toBe(2310);
+  expect(short.find(row=>row.time===2706)?.phase).toBe('unready'); // 396ms since confirmed down.
+  expect(short.flatMap(row=>row.events).filter(event=>event.kind==='rep-completed')).toHaveLength(0);
+  expect(short.flatMap(row=>row.events).filter(event=>event.kind==='tracking'&&event.status==='lost')).toHaveLength(0);
+  expect(long.flatMap(row=>row.events).filter(event=>event.kind==='rep-completed')).toHaveLength(1);
+});
 test.each(['only-up', 'only-down', 'no-return', 'timeout', 'duplicate', 'gap', 'invalid', 'reset', 'jitter'] as const)('chop rejects %s without completing a partial cycle', kind => {
   const r = new ChopRecognizer(syntheticProfile()), p = new PoseReplay(r);
   if (kind === 'only-up') p.pose('raised', 3000);

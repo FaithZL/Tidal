@@ -1,0 +1,76 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/adaptiveResolution.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/adaptiveResolution.test.ts (4 tests | 3 failed) 6ms
+   × sustained slow rendered frames reduce raster cost with a bounded scale 4ms
+   × 60fps and short spikes retain sharpness without resolution oscillation 0ms
+   × low initial pixel density is never increased and invalid density has a safe default 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > sustained slow rendered frames reduce raster cost with a bounded scale
+AssertionError: expected 1 to be 0.8 // Object.is equality
+
+- Expected
++ Received
+
+- 0.8
++ 1
+
+ ❯ tests/unit/adaptiveResolution.test.ts:7:24
+      5|  const quality=new AdaptiveResolution(1);
+      6|  for(let i=0;i<40;i++)quality.observe(1000/30,true);
+      7|  expect(quality.ratio).toBe(.8);
+       |                        ^
+      8|  for(let i=0;i<400;i++)quality.observe(1000/30,true);
+      9|  expect(quality.ratio).toBe(.5);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > 60fps and short spikes retain sharpness without resolution oscillation
+AssertionError: expected 2 to be 1.25 // Object.is equality
+
+- Expected
++ Received
+
+- 1.25
++ 2
+
+ ❯ tests/unit/adaptiveResolution.test.ts:14:24
+     12| test('60fps and short spikes retain sharpness without resolution oscil…
+     13|  const quality=new AdaptiveResolution(2);
+     14|  expect(quality.ratio).toBe(1.25);
+       |                        ^
+     15|  for(let i=0;i<240;i++)quality.observe(i===100?45:1000/60,true);
+     16|  expect(quality.ratio).toBe(1.25);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > low initial pixel density is never increased and invalid density has a safe default
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/adaptiveResolution.test.ts:39:89
+     37|  for(let i=0;i<100;i++)low.observe(1000/30,true);
+     38|  expect(low.ratio).toBe(.4);
+     39|  for(const density of [0,-1,NaN,Infinity])expect(new AdaptiveResolutio…
+       |                                                                                         ^
+     40| });
+     41|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  12:02:24
+   Duration  109ms (transform 46%, import 22%, tests 22%, worker 9%)

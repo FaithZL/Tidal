@@ -17,8 +17,8 @@ export interface DemoConfig {
 const base = {
   treeCount: 3,
   repsPerTree: 5,
-  initialLogs: 12,
-  logsPerTree: 1,
+  initialLogs: 0,
+  logsPerTree: 5,
   startCountdownMs: 5000,
   restMs: 15000,
   carryTargetMs: 60000,

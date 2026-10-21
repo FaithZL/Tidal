@@ -1,0 +1,12 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/artResources.test.ts tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  13:10:41
+   Duration  247ms (tests 54%, import 22%, transform 22%, worker 2%)

@@ -1,0 +1,37 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/actorArt.test.ts (14 tests | 1 failed) 87ms
+   ❯ farm actor art contracts (14)
+     × uses a transparent contact fade below each actor without casting another disk shadow 21ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > uses a transparent contact fade below each actor without casting another disk shadow
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/actorArt.test.ts:27:33
+     25|    const material=disks[0].material;expect(material).toBeInstanceOf(T.…
+     26|    if(!(material instanceof T.MeshLambertMaterial))throw new Error('Co…
+     27|    expect(material.transparent).toBe(true);expect(material.map).not.to…
+       |                                 ^
+     28|    expect(disks[0].castShadow).toBe(false);expect(disks[0].receiveShad…
+     29|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 13 passed (14)
+   Start at  13:00:24
+   Duration  226ms (tests 63%, import 20%, transform 15%, worker 2%)

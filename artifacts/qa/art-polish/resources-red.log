@@ -1,0 +1,62 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/artResources.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/artResources.test.ts (3 tests | 3 failed) 7ms
+   × wood and endgrain are shared local textures with visible nonuniform surface detail 3ms
+   × new textured resources release each shared texture once and can be recreated after disposal 1ms
+   × rounded hero geometry preserves dimensions, finite normals and a small triangle budget 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/artResources.test.ts > wood and endgrain are shared local textures with visible nonuniform surface detail
+AssertionError: expected null to be an instance of DataTexture
+ ❯ tests/unit/artResources.test.ts:10:20
+      8|  try{
+      9|   const wood=r.material(0x9a683c,'wood'),cut=r.material(0x9a683c,'endg…
+     10|   expect(wood.map).toBeInstanceOf(T.DataTexture);expect(cut.map).toBeI…
+       |                    ^
+     11|   expect(r.material(0x9a683c,'wood')).toBe(wood);expect(wood).not.toBe…
+     12|   expect(r.material(0xc9a363,'wood').map).toBe(wood.map);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/artResources.test.ts > new textured resources release each shared texture once and can be recreated after disposal
+AssertionError: expected null not to be null
+ ❯ tests/unit/artResources.test.ts:23:23
+     21| test('new textured resources release each shared texture once and can …
+     22|  const r=new WorldResources();const wood=r.material(0x9a683c,'wood'),o…
+     23|  expect(wood.map).not.toBeNull();const map=wood.map!,textureDispose=vi…
+       |                       ^
+     24|  map.addEventListener('dispose',textureDispose);wood.addEventListener(…
+     25|  expect(other.map).toBe(map);r.dispose();r.dispose();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/artResources.test.ts > rounded hero geometry preserves dimensions, finite normals and a small triangle budget
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/artResources.test.ts:39:89
+     37|   const normals=head.geometry.getAttribute('normal');
+     38|   expect(Array.from(normals.array).every(Number.isFinite)).toBe(true);
+     39|   expect(Array.from(normals.array).some(value=>Math.abs(value)>.1&&Mat…
+       |                                                                                         ^
+     40|   expect(head.geometry.getAttribute('position').count/3).toBeLessThanO…
+     41|  }finally{r.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  12:59:55
+   Duration  145ms (import 48%, transform 33%, tests 13%, worker 5%)

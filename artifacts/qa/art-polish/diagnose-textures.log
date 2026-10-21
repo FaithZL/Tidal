@@ -1,0 +1,18 @@
+{
+  date: '2026-10-21T05:07:22.686Z',
+  scope: 'normal-clock production, identical first-rest 8s samples; shader intervention is diagnostic only, not acceptance',
+  results: [
+    {
+      mode: 'unchanged',
+      measurement: [Object],
+      scale: '0.5',
+      errors: []
+    },
+    {
+      mode: 'no-surface-sampling',
+      measurement: [Object],
+      scale: '0.512',
+      errors: []
+    }
+  ]
+}

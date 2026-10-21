@@ -1,8 +1,8 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page } from '../helpers/manualModeTest.js';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const output = 'artifacts/qa/t05';
+const output = 'artifacts/qa/3d/replay';
 async function frame(page: Page, name: string) {
   await page.locator('#worldCanvas').screenshot({ path: `${output}/${name}.png` });
 }
@@ -22,12 +22,13 @@ test('farm actors replay real keyboard stages, committed effects, both NPC scrip
   await page.clock.install({ time: new Date('2026-10-15T00:00:00Z') });
   await page.goto('/');await page.clock.pauseAt(new Date('2026-10-15T00:01:00Z'));
   const world = page.locator('#worldCanvas');
-  await expect(world).toHaveAttribute('data-art', 'tidal-farm-v1');
+  await expect(world).toHaveAttribute('data-art', 'tidal-farm-3d-v2');
   await page.locator('#cancelPlan').click();await frame(page, '01-home');
   await page.locator('#actionBtn').click();await page.locator('#acceptPlan').click();await page.locator('#beginDemo').click();
   await page.clock.fastForward(5050);await advance(page, 20);await expect(page.locator('#statusTag')).toHaveText('训练中');
   await frame(page, '02-ready');
-  await page.locator('#actionBtn').click();await advance(page, 160);
+  await page.locator('#actionBtn').click();await advance(page, 220);
+  await expect(world).toHaveAttribute('data-particles','8');
   await expect(world).toHaveAttribute('data-action', 'chop-down');await frame(page, '03-chop-down');
   await page.locator('#pauseBtn').click();await advance(page, 40);
   const hashFrame = async () => createHash('sha256').update(await world.screenshot()).digest('hex');
@@ -62,7 +63,7 @@ test('farm actors replay real keyboard stages, committed effects, both NPC scrip
   await frame(page, '14-home-arrival');await page.screenshot({ path: `${output}/15-results.png`, fullPage: true });
   await page.locator('#resultsHome').click();await advance(page, 1200);
   await expect(world).toHaveAttribute('data-fallen', '0');await expect(world).toHaveAttribute('data-effects', '');
-  await expect(world).toHaveAttribute('data-inventory', '12/0/0');await expect(world).toHaveAttribute('data-action', 'ready');
+  await expect(world).toHaveAttribute('data-inventory', '0/0/0');await expect(world).toHaveAttribute('data-action', 'ready');
   expect(errors).toEqual([]);
   await writeFile(`${output}/visual-replay.json`, JSON.stringify({ input: 'real KeyboardActionSource; browser controlled clock; not camera', phases: 7, screenshots: 15, errors, result: 'pass' }, null, 2));
 });

@@ -1,0 +1,7 @@
+{
+  "input": "real KeyboardActionSource; browser controlled clock; not camera",
+  "phases": 7,
+  "screenshots": 15,
+  "errors": [],
+  "result": "pass"
+}

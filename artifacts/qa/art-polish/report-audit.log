@@ -1,0 +1,29 @@
+{
+  date: '2026-10-21T05:34:45.235Z',
+  scope: 'Mechanical unique-ID/status and local evidence existence audit; P01 remains fail. Not physical-camera/hardware/product approval.',
+  ids: 49,
+  states: { pass: 33, fail: 1, manual_pending: 15 },
+  files: [
+    'baseline.log',
+    'verify-final.log',
+    'material-final.log',
+    'restored-build.log',
+    'review.md',
+    'delivered-capture.json',
+    'delivered-home.png',
+    'delivered-hero.png',
+    'final-profile.json',
+    'production-auto-flow.json',
+    'production-auto-flow.log',
+    'production-setup.png',
+    'production-running.png',
+    'production-carry.png',
+    'production-results.png',
+    'replay/visual-replay.json',
+    'replay/11-log-flight.png',
+    'full-suite/deployment/subpath.json',
+    'full-suite/deployment/ten-cycle-resources.json'
+  ],
+  productionBundle: 'http://127.0.0.1:4175/assets/index-CYPYbaQo.js',
+  result: 'pass'
+}

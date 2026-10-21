@@ -1,11 +1,11 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from '../helpers/manualModeTest.js';
 import {spawn,execFile,type ChildProcess} from 'node:child_process';
 import {promisify} from 'node:util';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {installPoseFixture} from '../helpers/browserPoseFixture.js';
 
 test.use({launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
-const output='artifacts/qa/t10';
+const output='artifacts/qa/3d/deployment';
 async function inViewport(page:Page,selector:string){
   const box=await page.locator(selector).boundingBox(),v=page.viewportSize()!;
   expect(box,selector).not.toBeNull();expect(box!.x,selector).toBeGreaterThanOrEqual(0);expect(box!.y,selector).toBeGreaterThanOrEqual(0);
@@ -15,7 +15,7 @@ async function inViewport(page:Page,selector:string){
 for(const [width,height]of [[1280,720],[1366,768],[1920,1080]])test(`desktop ${width}x${height} keeps controls visible through a complete simulated session`,async({page})=>{
   await page.setViewportSize({width,height});await page.goto('http://127.0.0.1:4174/?e2e=1');await page.locator('#cancelPlan').click();
   for(const id of ['worldCanvas','actionBtn','modeBadge','statusTag','demoToggle'])await inViewport(page,`#${id}`);
-  const canvas=await page.locator('#worldCanvas canvas').boundingBox();expect(canvas!.width/canvas!.height).toBeCloseTo(1280/720,1);
+  const canvas=await page.locator('#worldCanvas canvas').boundingBox();expect(canvas!.width/canvas!.height).toBeCloseTo(width/height,3);
   await page.locator('#actionBtn').click();await page.locator('#acceptPlan').click();await page.locator('#setupDemoToggle').click();
   await page.locator('#beginDemo').scrollIntoViewIfNeeded();await inViewport(page,'#beginDemo');await page.locator('#beginDemo').click();
   await expect(page.locator('#statusTag')).toHaveText('训练中');await page.locator('#pauseBtn').click();

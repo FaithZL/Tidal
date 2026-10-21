@@ -1,0 +1,82 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/config.test.mjs (3 tests | 2 failed) 5ms
+   × default quantities reflect detailed demo sequence 4ms
+   × changing treeCount updates all derived quantities 0ms
+ ❯ tests/unit/session.test.mjs (15 tests | 1 failed) 13ms
+   × each completed tree produces five sections and a sixteenth chop cannot mint wood 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/config.test.mjs > default quantities reflect detailed demo sequence
+AssertionError: Expected values to be strictly equal:
+
+12 !== 0
+
+
+- Expected
++ Received
+
+- 0
++ 12
+
+ ❯ tests/unit/config.test.mjs:11:10
+      9|   assert.equal(c.treeCount,3);
+     10|   assert.equal(c.carryTargetMs,60000);
+     11|   assert.equal(c.initialLogs,0);
+       |          ^
+     12|   assert.equal(c.logsPerTree,5);
+     13| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/config.test.mjs > changing treeCount updates all derived quantities
+AssertionError: Expected values to be strictly equal:
+
+16 !== 20
+
+
+- Expected
++ Received
+
+- 20
++ 16
+
+ ❯ tests/unit/config.test.mjs:17:10
+     15|   const c=createDemoConfig({treeCount:4});
+     16|   assert.equal(c.chopRepTarget,20);
+     17|   assert.equal(c.loadRepTarget,20);
+       |          ^
+     18| });
+     19| test('invalid quantities are rejected',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/session.test.mjs > each completed tree produces five sections and a sixteenth chop cannot mint wood
+AssertionError: Expected values to be strictly equal:
+
+12 !== 0
+
+
+- Expected
++ Received
+
+- 0
++ 12
+
+ ❯ tests/unit/session.test.mjs:54:10
+     52|  for(let i=1;i<=15;i++){
+     53|   h.rep('chop',i);
+     54|   assert.equal(h.controller.getSnapshot().groundLogs,Math.floor(i/5)*5…
+       |          ^
+     55|  }
+     56|  assert.equal(h.controller.getSnapshot().groundLogs,15);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 15 passed (18)
+   Start at  10:02:42
+   Duration  121ms (transform 48%, tests 25%, import 20%, worker 7%)

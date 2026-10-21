@@ -1,6 +1,7 @@
 import {expect,type Page} from '@playwright/test';
 import {syntheticFrame,type SyntheticPose} from './syntheticPose.js';
 import type {WorkerRequest,WorkerResponse} from '../../src/pose/types.js';
+import {recognitionConfig} from '../../src/config/recognitionConfig.js';
 declare global {interface Window {poseFixture:{pose:SyntheticPose;low:boolean;stalled:boolean;workers:number;maxWorkers:number;tracks:MediaStreamTrack[]}}}
 /** Test-only fake video + synthetic points. Not actual MediaPipe inference or a physical camera. */
 export async function installPoseFixture(page:Page){
@@ -25,6 +26,15 @@ export async function installPoseFixture(page:Page){
   },poses);
 }
 export async function setPose(page:Page,pose:SyntheticPose,ms=450){await page.evaluate(p=>{window.poseFixture.pose=p;},pose);await page.waitForTimeout(ms);}
+/** Drive valid observed phases, not an assumed number of frames in a fixed sleep. */
+export async function completeSyntheticChop(page:Page,count:number){
+  await setPose(page,'raised',0);await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
+  await setPose(page,'down',0);await expect(page.locator('#inputDebug')).toContainText(' · chop-down ·');
+  // Keep the real minimum-cycle protection; 450ms of commanded down can become
+  // only 396ms between confirmations after 15Hz sampling and smoothing.
+  await page.waitForTimeout(recognitionConfig.chopMinCycleMs);
+  await setPose(page,'raised',0);await expect(page.locator('#chopValue')).toHaveText(`${count}/15`);
+}
 export async function prepareCamera(page:Page){
   await page.locator('#acceptPlan').click();await page.locator('#cameraStart').click();await expect(page.locator('#calibrationCapture')).toBeEnabled();
   const steps:[SyntheticPose,string][]=[['standing','chop-raised'],['raised','chop-down'],['down','load-squat'],['squat','load-stand'],['standing','load-press'],['press','load-return'],['standing','carry-hold'],['hold','carry-release'],['standing','complete']];

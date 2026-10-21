@@ -1,0 +1,52 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/render-efficiency.spec.ts
+
+[WebServer] (node:41556) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:62696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:55444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\render-efficiency.spec.ts:4:1 › unchanged homepage HUD retains text nodes and does not mutate on every animation frame (875ms)
+(node:6880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\render-efficiency.spec.ts:18:1 › HUD optimization still shows action phases immediately and commits exactly one rep (1.3s)
+
+
+  1) tests\e2e\render-efficiency.spec.ts:4:1 › unchanged homepage HUD retains text nodes and does not mutate on every animation frame
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 140
+
+      12 |   requestAnimationFrame(frame);
+      13 |  }));
+    > 14 |  expect(result.mutations).toBe(0);expect(result.retained).toBe(true);
+         |                           ^
+      15 |  await expect(page.locator('#chopValue')).toHaveText('0/15');
+      16 | });
+      17 |
+        at D:\work\corona\Tidal\tests\e2e\render-efficiency.spec.ts:14:27
+
+    Error Context: test-results\render-efficiency-unchange-71bdd-te-on-every-animation-frame\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\render-efficiency-unchange-71bdd-te-on-every-animation-frame\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\render-efficiency-unchange-71bdd-te-on-every-animation-frame\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\render-efficiency.spec.ts:4:1 › unchanged homepage HUD retains text nodes and does not mutate on every animation frame
+  1 passed (5.6s)

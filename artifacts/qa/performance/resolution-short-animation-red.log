@@ -1,0 +1,42 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/adaptiveResolution.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/adaptiveResolution.test.ts (6 tests | 2 failed) 4ms
+   × a slow short chop animation can adapt before its idle gap clears observations 2ms
+   × sustained 55fps is still below the 60fps rendering target 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > a slow short chop animation can adapt before its idle gap clears observations
+AssertionError: expected 1 to be less than 1
+ ❯ tests/unit/adaptiveResolution.test.ts:38:24
+     36|  const quality=new AdaptiveResolution(1);
+     37|  for(let i=0;i<14;i++)quality.observe(1000/30,true);
+     38|  expect(quality.ratio).toBeLessThan(1);
+       |                        ^
+     39|  quality.observe(1000/60,false);
+     40|  const reduced=quality.ratio;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > sustained 55fps is still below the 60fps rendering target
+AssertionError: expected 1 to be less than 1
+ ❯ tests/unit/adaptiveResolution.test.ts:48:24
+     46|  const quality=new AdaptiveResolution(1);
+     47|  for(let i=0;i<90;i++)quality.observe(1000/55,true);
+     48|  expect(quality.ratio).toBeLessThan(1);
+       |                        ^
+     49| });
+     50|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  12:06:51
+   Duration  113ms (transform 53%, import 22%, tests 16%, worker 9%)

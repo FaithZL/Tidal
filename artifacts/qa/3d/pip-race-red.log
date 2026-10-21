@@ -1,0 +1,62 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/gamePreview.test.ts (3 tests | 2 failed) 6ms
+   × legitimate play failure is visible but an old source rejection cannot fail a newer stream 3ms
+   × disposing a preview invalidates an outstanding video play callback 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/gamePreview.test.ts > legitimate play failure is visible but an old source rejection cannot fail a newer stream
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "摄像头预览无法继续播放，请停止并重试",
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/unit/gamePreview.test.ts:13:116
+     11| });
+     12| test('legitimate play failure is visible but an old source rejection c…
+     13|  const f=fixture();f.p.setInGame(true);f.video.srcObject={};f.reject()…
+       |                                                                                                                    ^
+     14|  const next=fixture();next.p.setInGame(true);next.reject();await Promi…
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/gamePreview.test.ts > disposing a preview invalidates an outstanding video play callback
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "摄像头预览无法继续播放，请停止并重试",
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/unit/gamePreview.test.ts:17:109
+     15| });
+     16| test('disposing a preview invalidates an outstanding video play callba…
+     17|  const f=fixture();f.p.setInGame(true);f.p.dispose();f.reject();await …
+       |                                                                                                             ^
+     18| });
+     19|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  10:21:51
+   Duration  123ms (transform 53%, import 20%, tests 17%, worker 9%)

@@ -1,0 +1,33 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/worldChoreography.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/worldChoreography.test.ts (11 tests | 1 failed) 13ms
+   × a rejected short camera cycle returns uncommitted timber and the next cycle throws from its new hand anchor 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/worldChoreography.test.ts > a rejected short camera cycle returns uncommitted timber and the next cycle throws from its new hand anchor
+AssertionError: expected 'flight' to be 'ground' // Object.is equality
+
+Expected: "ground"
+Received: "flight"
+
+ ❯ tests/unit/worldChoreography.test.ts:87:35
+     85|  w.advance(1000);expect(w.frame.logs[0].location).toBe('flight');
+     86|  for(const e of phases.slice(returning+1))w.apply(effect({repId:e.repI…
+     87|  expect(w.frame.logs[0].location).toBe('ground');
+       |                                   ^
+     88|  const nextHand={x:4,y:3,z:2};w.setHandAnchor(nextHand);
+     89|  const seen=replay.events.length;replay.pose('squat',400).pose('press'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  10:39:23
+   Duration  142ms (transform 49%, tests 24%, import 21%, worker 5%)

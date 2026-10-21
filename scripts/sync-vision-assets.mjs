@@ -23,3 +23,6 @@ for (const file of await readdir('node_modules/@mediapipe/tasks-vision/wasm')) {
 }
 await writeFile('public/mediapipe/manifest.json', JSON.stringify({ version: packageJson.version, license: packageJson.license, modelUrl, modelSha256: modelHash, files }, null, 2) + '\n');
 console.log(`Synced MediaPipe ${packageJson.version}; model ${modelHash}; ${Object.keys(files).length} runtime files`);
+await mkdir('public/licenses',{recursive:true});
+await copyFile('node_modules/three/LICENSE','public/licenses/three-LICENSE.txt');
+console.log('Synced Three.js MIT license from the locked npm package');

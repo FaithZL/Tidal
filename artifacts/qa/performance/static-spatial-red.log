@@ -1,0 +1,36 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/staticBatch.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/staticBatch.test.ts (5 tests | 1 failed) 30ms
+   × nearby scenery shares root-local spatial batches while distant scenery is frustum culled 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/staticBatch.test.ts > nearby scenery shares root-local spatial batches while distant scenery is frustum culled
+AssertionError: expected 4 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 4
+
+ ❯ tests/unit/staticBatch.test.ts:123:21
+    121|   const submitted=meshes(root).filter(mesh=>frustum.intersectsObject(m…
+    122|   // Seeing one end of a long repeated row must not submit its invisib…
+    123|   expect(submitted).toBe(2);
+       |                     ^
+    124|   const batches=meshes(root).filter((mesh):mesh is T.InstancedMesh=>me…
+    125|   expect(batches).toHaveLength(2);expect(batches.map(mesh=>mesh.count)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  12:04:02
+   Duration  157ms (tests 38%, import 32%, transform 26%, worker 3%)

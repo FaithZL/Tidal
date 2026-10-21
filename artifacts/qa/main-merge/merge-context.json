@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-21",
+  "sourceBranch": "feature/3d-farm-experience",
+  "sourceCommit": "daf2af1e295feba24639a5891bdadb8fcf9989f9",
+  "targetBefore": "753c841d8de868ed4f761a0b9bef78f235225f7e",
+  "mergeBase": "30e36e3d9a3a196ca11810d40e5eff6f08621296",
+  "mergedIndexTree": "6720a7dbf5876371778a811ca7bddf7d3e42ac1d",
+  "sourceTree": "6720a7dbf5876371778a811ca7bddf7d3e42ac1d",
+  "initialMergeMatchesSource": true,
+  "scope": "User explicitly authorized merge and push to main; no deployment. Non-fast-forward merge, no conflicts. Documentation and fresh QA records follow."
+}

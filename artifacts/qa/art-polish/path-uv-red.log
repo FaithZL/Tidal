@@ -1,0 +1,29 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/artResources.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/artResources.test.ts (4 tests | 1 failed) 24ms
+   × long paths tile dirt at world scale instead of stretching one patch across the entire route 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/artResources.test.ts > long paths tile dirt at world scale instead of stretching one patch across the entire route
+AssertionError: expected 1 to be close to 24, received difference is 23, but expected 0.005
+ ❯ tests/unit/artResources.test.ts:52:29
+     50|   };
+     51|   // Box top is vertices8..11; a two-world-unit tile repeats24 times a…
+     52|   expect(range(road,8,'X')).toBeCloseTo(24);expect(range(road,8,'Y')).…
+       |                             ^
+     53|   expect(range(cross,8,'X')).toBeCloseTo(1.5);expect(range(cross,8,'Y'…
+     54|   expect((road.material as T.MeshLambertMaterial).map).toBe((cross.mat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  13:08:09
+   Duration  160ms (import 35%, tests 32%, transform 30%, worker 3%)

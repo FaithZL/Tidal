@@ -1,0 +1,25 @@
+{
+  date: '2026-10-21T03:54:38.855Z',
+  browser: '156.0.8078.4',
+  scope: '8s first-rest A/B diagnosis, normal production bundle; no fake frame rate or acceptance claim',
+  results: [
+    {
+      mode: 'unchanged',
+      measurement: [Object],
+      taskSeconds: 8.092768000000001,
+      scriptSeconds: 0.439469
+    },
+    {
+      mode: 'no-backdrop-blur',
+      measurement: [Object],
+      taskSeconds: 8.131064,
+      scriptSeconds: 0.428187
+    },
+    {
+      mode: 'half-render-resolution',
+      measurement: [Object],
+      taskSeconds: 7.472803,
+      scriptSeconds: 0.719263
+    }
+  ]
+}

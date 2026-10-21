@@ -1,6 +1,6 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from '../helpers/manualModeTest.js';
 import {mkdir,writeFile} from 'node:fs/promises';
-import {installPoseFixture,prepareCamera,setPose} from '../helpers/browserPoseFixture.js';
+import {installPoseFixture,prepareCamera,setPose,completeSyntheticChop} from '../helpers/browserPoseFixture.js';
 test.use({baseURL:'http://127.0.0.1:4174',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
 test('camera start stays disabled without calibration and simulation cannot enable it',async({page})=>{
   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await expect(page.locator('#beginCamera')).toBeDisabled();
@@ -11,7 +11,7 @@ test('synthetic camera pipeline completes the farm through real recognizers and 
   await page.goto('/?e2e=1');await prepareCamera(page);await page.locator('#beginCamera').click();
   await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#actionBtn')).toBeDisabled();
   await page.keyboard.press('Space');await expect(page.locator('#chopValue')).toHaveText('0/15');
-  for(let i=1;i<=15;i++){await setPose(page,'raised');await setPose(page,'down');await setPose(page,'raised',500);await expect(page.locator('#chopValue')).toHaveText(`${i}/15`);}
+  for(let i=1;i<=15;i++)await completeSyntheticChop(page,i);
   await expect(page.locator('#missionTitle')).toContainText('装');await expect(page.locator('#statusTag')).toHaveText('训练中');
   for(let i=1;i<=15;i++){await setPose(page,'standing');await setPose(page,'squat');await setPose(page,'press');await setPose(page,'standing',550);await expect(page.locator('#loadValue')).toHaveText(`${i}/15`);}
   await expect(page.locator('#statusTag')).toHaveText('训练中');await setPose(page,'hold',900);
@@ -49,10 +49,7 @@ test('a stalled camera during rest cannot start the next active task without pre
     });
     observer.observe(count,{childList:true});observer.observe(status,{childList:true});
   });
-  for(let i=1;i<=15;i++){
-    await setPose(page,'raised');await setPose(page,'down');await setPose(page,'raised',i===15?0:500);
-    await expect(page.locator('#chopValue')).toHaveText(`${i}/15`);
-  }
+  for(let i=1;i<=15;i++)await completeSyntheticChop(page,i);
   await page.waitForTimeout(800);
   // Even a brief active transition violates the next-task preparation gate.
   expect(await page.evaluate(()=>JSON.parse(document.body.dataset.stalledPhases!))).not.toContain('训练中');

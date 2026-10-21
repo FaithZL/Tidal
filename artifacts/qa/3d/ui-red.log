@@ -1,0 +1,81 @@
+[WebServer] (node:61532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:64436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:25984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:66280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:58340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\world3d.spec.ts:18:1 › full farm homepage has a small notification and results give exercise and rewards equal space (473ms)
+(node:44696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\world3d.spec.ts:31:1 › camera PiP reuses the same playing video and stream during training and re-preparation (22.2s)
+
+
+  1) tests\e2e\world3d.spec.ts:18:1 › full farm homepage has a small notification and results give exercise and rewards equal space
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1366
+    Received: 864.140625
+
+      19 |  await page.goto('http://127.0.0.1:4174/?e2e=1');
+      20 |  const world=(await page.locator('#worldCanvas').boundingBox())!,card=(await page.locator('#planModal .modal').boundingBox())!;
+    > 21 |  expect(world.width).toBe(page.viewportSize()!.width);expect(world.height).toBe(page.viewportSize()!.height);expect(card.width).toBeLessThanOrEqual(390);
+         |                      ^
+      22 |  await page.screenshot({path:'artifacts/qa/3d/home.png'});
+      23 |  await page.locator('#acceptPlan').click();await page.locator('#setupDemoToggle').click();await page.locator('#beginDemo').click();
+      24 |  await expect(page.locator('#livePreview')).toBeVisible();await expect(page.locator('#livePrescription')).toContainText('5 次 × 3');
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:21:22
+
+    Error Context: test-results\world3d-full-farm-homepage-ddd15-ise-and-rewards-equal-space\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-full-farm-homepage-ddd15-ise-and-rewards-equal-space\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-full-farm-homepage-ddd15-ise-and-rewards-equal-space\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\world3d.spec.ts:31:1 › camera PiP reuses the same playing video and stream during training and re-preparation
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#gamePreviewHost #cameraVideo')
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#gamePreviewHost #cameraVideo') with timeout 7000ms
+      - waiting for locator('#gamePreviewHost #cameraVideo')
+
+
+      33 |  await page.locator('#cameraVideo').evaluate((v:HTMLVideoElement)=>{Reflect.set(window,'originalVideo',v);Reflect.set(window,'originalStream',v.srcObject);});
+      34 |  await page.locator('#beginCamera').click();await expect(page.locator('#statusTag')).toHaveText('训练中');
+    > 35 |  await expect(page.locator('#gamePreviewHost #cameraVideo')).toBeVisible();await expect(page.locator('#livePrescription')).toContainText('5 次 × 3');
+         |                                                              ^
+      36 |  const before=await page.locator('#cameraVideo').evaluate((v:HTMLVideoElement)=>v.currentTime);
+      37 |  await expect.poll(()=>page.locator('#cameraVideo').evaluate((v:HTMLVideoElement)=>v.currentTime)).toBeGreaterThan(before);
+      38 |  expect(await page.locator('#cameraVideo').evaluate((v:HTMLVideoElement)=>v===Reflect.get(window,'originalVideo')&&v.srcObject===Reflect.get(window,'originalStream'))).toBe(true);
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:35:62
+
+    Error Context: test-results\world3d-camera-PiP-reuses--ef393-training-and-re-preparation\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-camera-PiP-reuses--ef393-training-and-re-preparation\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-camera-PiP-reuses--ef393-training-and-re-preparation\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\world3d.spec.ts:18:1 › full farm homepage has a small notification and results give exercise and rewards equal space
+    tests\e2e\world3d.spec.ts:31:1 › camera PiP reuses the same playing video and stream during training and re-preparation

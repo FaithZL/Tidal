@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-21T02:54:20.301Z",
+  "applicationCommit": "03e249a1454b83c9b588912ab5d3c03e9882b4f1",
+  "reportSha256": "114de8d5b92b6be4bd75a76f62568419decb68b2b726adc2b9aebe52acff1a7f",
+  "ids": 49,
+  "statuses": {
+    "pass": 33,
+    "manual_pending": 15,
+    "fail": 1
+  },
+  "failed": [
+    "P01"
+  ],
+  "pending": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "P02",
+    "P03",
+    "P04"
+  ],
+  "evidence": [
+    "artifacts/qa/3d/environment.json",
+    "artifacts/qa/3d/npm-ci.log",
+    "artifacts/qa/3d/assets-sync.log",
+    "artifacts/qa/3d/assets-verify-final.log",
+    "artifacts/qa/3d/verify.log",
+    "artifacts/qa/3d/verify-final.log",
+    "artifacts/qa/3d/review.md",
+    "artifacts/qa/3d/review-unit-red.log",
+    "artifacts/qa/3d/review-unit-green.log",
+    "artifacts/qa/3d/review-browser-red.log",
+    "artifacts/qa/3d/review-browser-green.log",
+    "artifacts/qa/3d/home.png",
+    "artifacts/qa/3d/orbit.png",
+    "artifacts/qa/3d/camera-pip-synthetic.png",
+    "artifacts/qa/3d/results.png",
+    "artifacts/qa/3d/production-home.png",
+    "artifacts/qa/3d/production-auto-flow.json",
+    "artifacts/qa/3d/production-auto-flow.log",
+    "artifacts/qa/3d/production-setup.png",
+    "artifacts/qa/3d/production-running.png",
+    "artifacts/qa/3d/production-results.png",
+    "artifacts/qa/3d/replay/visual-replay.json",
+    "artifacts/qa/3d/deployment/ten-cycle-resources.json",
+    "artifacts/qa/3d/deployment/subpath.json",
+    "artifacts/qa/3d/deployment/desktop-1280x720.png",
+    "artifacts/qa/3d/deployment/desktop-1366x768.png",
+    "artifacts/qa/3d/deployment/desktop-1920x1080.png"
+  ],
+  "scope": "Current true 3D software evidence only; no physical-camera, hardware GPU or product acceptance claim.",
+  "result": "pass"
+}

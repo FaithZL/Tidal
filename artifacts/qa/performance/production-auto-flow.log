@@ -1,0 +1,38 @@
+Automatic chop: 15 complete, real 15-second rest
+Automatic load: 15 complete, real 15-second rest
+Automatic carry: normal 60-second target, adjacent hold samples
+{
+  date: '2026-10-21T04:19:31.987Z',
+  browser: '156.0.8078.4',
+  platform: 'win32',
+  bundles: [ 'http://127.0.0.1:4175/assets/index-w4yGvhR9.js' ],
+  input: 'explicit automatic simulation + authored skeleton; no camera',
+  timing: 'production 5s countdown / 15s rests / 60s effective carry; real wall clock',
+  network: 'all non-localhost origins blocked by browser routing; not a physical network disconnect',
+  rendering: {
+    method: 'requestAnimationFrame intervals after 10s warmup; headless Chromium, automatic simulation, not physical-camera performance',
+    samples: 7701,
+    spanMs: 131344.7,
+    fps: 58.63198134374664,
+    p50Ms: 16.69999999999709,
+    p95Ms: 16.80000000000291,
+    maxMs: 33.5,
+    over50Ms: 0
+  },
+  renderQuality: {
+    scale: 0.512,
+    width: 699,
+    height: 460,
+    cssWidth: 1366,
+    cssHeight: 900
+  },
+  renderer: 'Three.js r186',
+  gpu: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  durationSeconds: 141.93,
+  metrics: '挥砍 15 次 · 装车 15 次 · 有效持姿 60.0 秒 · 任务有效时间 94.8 秒 · 本局经过时间（含休息/暂停）139.9 秒 · 输入：含自动模拟（复用键盘模拟协议）',
+  errors: [],
+  external: [],
+  poseRequests: [],
+  reset: 'pass',
+  result: 'pass'
+}

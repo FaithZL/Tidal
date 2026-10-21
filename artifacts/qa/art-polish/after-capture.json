@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-21T05:02:01.342Z",
+  "browser": "156.0.8078.4",
+  "label": "after",
+  "bundles": [
+    "http://127.0.0.1:4175/assets/index-j7fkkkrU.js"
+  ],
+  "scope": "production manual keyboard entry, normal countdown, no camera, screenshots are observations rather than a product-art approval",
+  "home": {
+    "scale": 1,
+    "width": 1366,
+    "height": 900,
+    "cssWidth": 1366,
+    "cssHeight": 900
+  },
+  "hero": {
+    "scale": 1,
+    "width": 1366,
+    "height": 900,
+    "cssWidth": 1366,
+    "cssHeight": 900
+  },
+  "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "errors": [],
+  "external": []
+}

@@ -1,0 +1,20 @@
+{
+  date: '2026-10-21T03:40:14.192Z',
+  browser: '156.0.8078.4',
+  bundles: [ 'http://127.0.0.1:4175/assets/index-DNN17GvQ.js' ],
+  input: 'authored synthetic skeleton + automatic simulated signals; injected NotFoundError only for camera-choice branch; no physical camera',
+  timing: 'production 5s countdown / 15s rests / 60s carry, ordinary build ignores ?e2e=1; short startup/reload smoke, not a complete production session or performance benchmark',
+  assertions: [
+    'fresh visit automatically starts',
+    'reload starts a fresh automatic session',
+    'toggle off freezes then persists on reload',
+    'explicit camera failure stays manual after reload without another permission request',
+    're-enable persists and restarts on reload'
+  ],
+  durationSeconds: 18.339,
+  errors: [],
+  external: [],
+  poseRequests: [],
+  physicalCamera: 'manual_pending',
+  result: 'pass'
+}

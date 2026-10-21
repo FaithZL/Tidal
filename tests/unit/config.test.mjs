@@ -8,11 +8,13 @@ test('default quantities reflect detailed demo sequence',()=>{
   assert.equal(c.loadRepTarget,15);
   assert.equal(c.treeCount,3);
   assert.equal(c.carryTargetMs,60000);
+  assert.equal(c.initialLogs,0);
+  assert.equal(c.logsPerTree,5);
 });
 test('changing treeCount updates all derived quantities',()=>{
   const c=createDemoConfig({treeCount:4});
   assert.equal(c.chopRepTarget,20);
-  assert.equal(c.loadRepTarget,16);
+  assert.equal(c.loadRepTarget,20);
 });
 test('invalid quantities are rejected',()=>{
   assert.throws(()=>createDemoConfig({treeCount:-1}),RangeError);

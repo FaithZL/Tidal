@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from '../helpers/manualModeTest.js';
 import { mkdir } from 'node:fs/promises';
 import { syntheticFrame, type SyntheticPose } from '../helpers/syntheticPose.js';
 import type { WorkerRequest, WorkerResponse } from '../../src/pose/types.js';

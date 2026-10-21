@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-21T12:21:24.0522297+08:00",
+  "scope": "Mechanical ID/status count only; not a replacement for browser, physical-camera or product verification",
+  "ids": 49,
+  "uniqueIds": 49,
+  "pass": 34,
+  "fail": 0,
+  "manual_pending": 15
+}

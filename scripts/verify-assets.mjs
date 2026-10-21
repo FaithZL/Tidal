@@ -15,3 +15,7 @@ for (const name of ['farm-landscape.svg', 'harvest-shirt.svg']) {
   if (hash(await readFile(`public/assets/${name}`)) !== art.files[name]) throw new Error(`Missing/mismatched farm asset: ${name}`);
 }
 console.log(`Verified 2 original farm SVG assets (${art.revision})`);
+const three=JSON.parse(await readFile('node_modules/three/package.json','utf8'));
+if(project.dependencies.three!==three.version)throw new Error('Three.js package version mismatch');
+if(hash(await readFile('public/licenses/three-LICENSE.txt'))!==hash(await readFile('node_modules/three/LICENSE')))throw new Error('Three.js license mismatch');
+console.log(`Verified Three.js ${three.version} and its local MIT license`);
