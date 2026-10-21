@@ -1,0 +1,52 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/worldChoreography.test.ts (9 tests | 2 failed) 10ms
+   × duplicate committed effects remain ignored after a flight has finished 4ms
+   × configured tree counts retain all tree sections in the world 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/worldChoreography.test.ts > duplicate committed effects remain ignored after a flight has finished
+AssertionError: expected [ Array(1) ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/unit/worldChoreography.test.ts:61:94
+     59| test('duplicate committed effects remain ignored after a flight has fi…
+     60|  const w=make(state({task:'load',choppedTrees:3,groundLogs:14,cartLogs…
+     61|  w.apply(e);w.advance(1000);w.apply(e);expect(w.frame.logs.filter(l=>l…
+       |                                                                                              ^
+     62| });
+     63| test('configured tree counts retain all tree sections in the world',()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/worldChoreography.test.ts > configured tree counts retain all tree sections in the world
+AssertionError: expected [ { …(3) }, { …(3) }, { …(3) } ] to have a length of 4 but got 3
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ tests/unit/worldChoreography.test.ts:65:24
+     63| test('configured tree counts retain all tree sections in the world',()…
+     64|  const w=new WorldChoreography(createDemoConfig({treeCount:4}));w.sync…
+     65|  expect(w.frame.trees).toHaveLength(4);expect(w.frame.logs).toHaveLeng…
+       |                        ^
+     66| });
+     67|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 7 passed (9)
+   Start at  10:05:36
+   Duration  126ms (transform 47%, tests 26%, import 19%, worker 7%)

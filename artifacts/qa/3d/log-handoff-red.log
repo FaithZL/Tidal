@@ -1,0 +1,45 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/worldChoreography.test.ts (10 tests | 2 failed) 11ms
+   × throw starts at the actual hand anchor and never flashes back onto the ground during commit 4ms
+   × the helper faces the cargo when securing it instead of looking tangent to the cart 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/worldChoreography.test.ts > throw starts at the actual hand anchor and never flashes back onto the ground during commit
+AssertionError: expected [ { id: 1, location: 'hand', …(2) } ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/unit/worldChoreography.test.ts:32:54
+     30|  w.advance(100);w.sync({...s,loadReps:1,groundLogs:14,cartLogs:1});w.a…
+     31|  expect(w.frame.logs.find(l=>l.id===0)?.location).toBe('flight');expec…
+     32|  expect(w.frame.logs.filter(l=>l.location==='hand')).toHaveLength(0);
+       |                                                      ^
+     33|  w.advance(1000);expect(w.frame.logs.find(l=>l.id===0)?.location).toBe…
+     34| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/worldChoreography.test.ts > the helper faces the cargo when securing it instead of looking tangent to the cart
+AssertionError: expected -0 to be close to 1, received difference is 1, but expected 0.005
+ ❯ tests/unit/worldChoreography.test.ts:71:17
+     69|  const w=make(state({task:'carry',phase:'rest',cartLogs:15,choppedTree…
+     70|  const facing=-(npc.position.x*Math.sin(npc.yaw)+npc.position.z*Math.c…
+     71|  expect(facing).toBeCloseTo(1);
+       |                 ^
+     72| });
+     73|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 8 passed (10)
+   Start at  10:29:52
+   Duration  126ms (transform 47%, tests 27%, import 19%, worker 6%)

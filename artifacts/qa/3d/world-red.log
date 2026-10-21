@@ -1,0 +1,53 @@
+[WebServer] (node:49504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:53864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:66344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\world3d.spec.ts:3:1 › real 3D farm renders and orbiting changes camera and projected geometry without adding exercise (8.2s)
+
+
+  1) tests\e2e\world3d.spec.ts:3:1 › real 3D farm renders and orbiting changes camera and projected geometry without adding exercise
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('#worldCanvas')
+    Expected pattern: /^Three.js/
+    Received string:  "Phaser 3.90.0"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        17 × locator resolved to <div role="img" data-fallen="0" data-effects="" data-npc="idle" id="worldCanvas" data-action="ready" data-inventory="0/0/0" data-art="tidal-farm-v1" data-renderer="Phaser 3.90.0" data-cart-position="790.00,540.00" aria-label="林间农场。一片林地，一段属于你的好时光。地面木材0，车上0，到家0。NPC预设协作。">…</div>
+           - unexpected value "Phaser 3.90.0"
+
+
+      3 | test('real 3D farm renders and orbiting changes camera and projected geometry without adding exercise',async({page})=>{
+      4 |  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');
+    > 5 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-renderer',/^Three.js/);
+        |                                             ^
+      6 |  await page.locator('#cancelPlan').click();const world=page.locator('#worldCanvas');
+      7 |  const initial=await world.getAttribute('data-camera'),projected=await world.getAttribute('data-probe');
+      8 |  const canvas=page.locator('#worldCanvas canvas'),box=(await canvas.boundingBox())!;
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:5:45
+
+    Error Context: test-results\world3d-real-3D-farm-rende-b0b92-try-without-adding-exercise\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-real-3D-farm-rende-b0b92-try-without-adding-exercise\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-real-3D-farm-rende-b0b92-try-without-adding-exercise\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\world3d.spec.ts:3:1 › real 3D farm renders and orbiting changes camera and projected geometry without adding exercise

@@ -1,0 +1,20 @@
+[WebServer] (node:19772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:75924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:53028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:9056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\world3d.spec.ts:5:1 › real 3D farm renders and orbiting changes camera and projected geometry without adding exercise (2.6s)
+  ok 2 tests\e2e\world3d.spec.ts:18:1 › full farm homepage has a small notification and results give exercise and rewards equal space (7.0s)
+  ok 3 tests\e2e\world3d.spec.ts:31:1 › camera PiP reuses the same playing video and stream during training and re-preparation (15.3s)
+  ok 4 tests\e2e\world3d.spec.ts:46:1 › pause stops automatic camera drift and reset view restores the farm overview during a task (1.7s)
+  ok 5 tests\e2e\world3d.spec.ts:54:1 › losing WebGL context pauses the session and shows a visible recovery error (798ms)
+
+  5 passed (31.2s)

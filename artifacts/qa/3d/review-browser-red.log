@@ -1,0 +1,102 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/world3d.spec.ts -g blocks every resume
+
+[WebServer] (node:5780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:46440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:71340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:63096) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:56216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=false (9.1s)
+(node:74620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=true (9.1s)
+
+
+  1) tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=false
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "已暂停"
+    Received: "训练中"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        18 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+           - unexpected value "训练中"
+
+
+      61 |  await page.keyboard.press('KeyP');
+      62 |  await page.evaluate(()=>{(document.activeElement as HTMLElement)?.blur();});await page.keyboard.press('Space');await page.waitForTimeout(1000);
+    > 63 |  await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+         |                                           ^
+      64 |  await page.locator('#pauseBtn').dispatchEvent('click');await page.keyboard.press('Space');await page.waitForTimeout(500);
+      65 |  await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+      66 |  await expect(page.locator('#actionBtn')).toBeDisabled();await expect(page.locator('#pauseBtn')).toBeDisabled();
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:63:43
+
+    Error Context: test-results\world3d-losing-WebGL-conte-0f9c1--input-path-automatic-false\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-losing-WebGL-conte-0f9c1--input-path-automatic-false\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-losing-WebGL-conte-0f9c1--input-path-automatic-false\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=true
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "已暂停"
+    Received: "已完成"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        8 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        - locator resolved to <span id="statusTag" class="subtag">休息时间</span>
+        - unexpected value "休息时间"
+        3 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        6 × locator resolved to <span id="statusTag" class="subtag">已完成</span>
+          - unexpected value "已完成"
+
+
+      61 |  await page.keyboard.press('KeyP');
+      62 |  await page.evaluate(()=>{(document.activeElement as HTMLElement)?.blur();});await page.keyboard.press('Space');await page.waitForTimeout(1000);
+    > 63 |  await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+         |                                           ^
+      64 |  await page.locator('#pauseBtn').dispatchEvent('click');await page.keyboard.press('Space');await page.waitForTimeout(500);
+      65 |  await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+      66 |  await expect(page.locator('#actionBtn')).toBeDisabled();await expect(page.locator('#pauseBtn')).toBeDisabled();
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:63:43
+
+    Error Context: test-results\world3d-losing-WebGL-conte-21ac9-d-input-path-automatic-true\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-losing-WebGL-conte-21ac9-d-input-path-automatic-true\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-losing-WebGL-conte-21ac9-d-input-path-automatic-true\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=false
+    tests\e2e\world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=true

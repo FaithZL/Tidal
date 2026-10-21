@@ -1,10 +1,12 @@
-# 依赖与资源记录（2026-10-16）
+# 依赖与资源记录（2026-10-21）
 
 本机：Windows，Node 24.14.0，npm 11.9.0。全部直接依赖精确锁定，间接依赖由 `package-lock.json` 固定。
 
 | 依赖 | 安装版本 | 用途 |
 |---|---|---|
-| phaser | 3.90.0 | 2D 场景 |
+| three | 0.186.1 | 当前真3D农场与Orbit相机，本地打包 |
+| @types/three | 0.186.0 | Three.js类型，strict检查 |
+| phaser | 3.90.0 | 保留旧2D源码的依赖，当前入口不加载 |
 | @mediapipe/tasks-vision | 0.10.32 | 本地 VIDEO 姿态推理 |
 | typescript | 5.8.3 | strict 类型检查，保留原版本 |
 | vite | 8.3.4 | 开发、Worker 打包、生产构建 |
@@ -24,6 +26,8 @@
 - 模型许可：[官方模型卡第2页](https://storage.googleapis.com/mediapipe-assets/Model%20Card%20BlazePose%20GHUM%203D.pdf) 列出 Apache License 2.0。
 - MediaPipe JS/WASM：同一 `@mediapipe/tasks-vision@0.10.32` npm 包，Apache-2.0；许可副本 `public/licenses/mediapipe-LICENSE.txt`，来源 [v0.10.32 LICENSE](https://github.com/google-ai-edge/mediapipe/blob/v0.10.32/LICENSE)。
 - Phaser：MIT；许可副本 `public/licenses/phaser-LICENSE.md`，来自锁定 npm 包。
+- Three.js：MIT；许可副本`public/licenses/three-LICENSE.txt`来自锁定npm包；`assets:sync`复制，`assets:verify`检查版本及许可内容。当前几何、材质、人物、绳索与环境均由`src/game/world`原创代码生成，没有外部模型、贴图、网络字体或CDN。
+- 2026-10-21真3D升级新增上述两个精确依赖并更新唯一npm锁文件；干净`npm ci`成功（145包，audit146，0漏洞），随后资源同步/校验通过。T05/T10“不改依赖”均仅为历史记录。
 - T04 的几何占位已在 T05 替换为原创矢量场景与分层角色，未使用外部人物截图、付费素材、音频或网络字体，见下方补充。
 - 4个WASM运行文件及SHA-256见 `public/mediapipe/manifest.json`。`assets:verify`同时比对本地资源、manifest和已安装npm包；模型校验值写死在同步脚本，下载不符即拒绝。
 - T10新增声音由`src/ui/audioFeedback.ts`原生Web Audio正弦振荡器合成，无新增依赖/第三方录音；来源见SOURCES。锁文件保持，2026-10-16干净`npm ci`成功（137包，npm报告0漏洞）。

@@ -1,4 +1,34 @@
-# Tidal 开发进度（2026-10-16，连续推进 T07–T11）
+# Tidal 开发进度（2026-10-21，用户批准的真3D升级）
+
+## 当前检查点：真3D软件交付完成，性能目标与真机/产品验收保留待办
+
+用户要求并批准可旋转真3D、全景首页/紧凑通知、单路摄像头PiP、每树5段、人物推车/手部抛木/NPC绑绳、连续远程运送和等宽运动/奖励结算；设计与实施清单已确认，按当前目录执行。用户既有验证后commit/push授权继续有效，只推开发分支，不合并main、不对外部署。
+
+- 分支`feature/3d-farm-experience`，应用基线`30e36e3`，设计提交`0baf882`。开始时工作区干净，实际typecheck/155单测通过；保留领域、输入、识别器及有效负例，未重新生成项目。
+- `0d24a9c`：`demoConfig.ts`默认初始0/每树5，三树15段，与15次装车对应；配置/领域回归先3失败后156通过。单木段夹具显式覆盖1，原SessionController实现未改。
+- `5e8bc67`：新增`src/game/world/{types,choreography}.ts`及回归；只读快照与原ActionAnimator，按ID表示地面/手持/飞行/车上/到家。先6失败，边界再2失败，修复后165单测；人车同速/手部锚点/绳索/40世界单位路线不写业务进度。
+- `815bb8b`：精确锁定Three0.186.1/类型0.186.0，新增`FarmWorld/models/environment/resources`及GameView入口；真实关节人物、建筑/田地/森林、投影、Orbit旋转缩放/全景重置。旧Phaser源码与3.90.0依赖保留，当前只运行Three，无第二个隐藏画布。原渲染器下相机测试先失败，真实相机/投影改变后通过。
+- `f9d62e1`：`index.html`、`web/world.css`、`browser.ts`、`ui/gamePreview.ts`：约368px通知、全视口农场、游戏内PiP/阶段/处方、运动与奖励等宽结算。复用同一video/srcObject/track/Worker，切回准备不重开捕获。布局/PiP先2失败，镜头暂停/迟到play错误保护先失败后修复，168单测/新增5E2E通过。
+- `ac2f28c`：旧七阶段动作/NPC/暂停像素冻结/放下停止/重置回归适配3D；真实8枚碎屑、初始化中途失败释放canvas/GL/监听/几何材质、实例资源；木头提交后不提前拿下一根、NPC面向货物，均先失败后修复。169单测通过；已实际查看首页、Orbit、推车、抛木、绑绳、PiP与结果截图。
+- `03e249a`：一次独立全分支只读审查（0 Critical/2 Important/0 Minor），分别复现WebGL丢失后可恢复隐形计数、同epoch过快Load被拒绝后飞木残留；2浏览器/1单测先失败，统一门禁及新rep未提交木材清理后170单测/定向2E2E通过。未改识别器与领域规则；未做第二次审查。未裁决设备/观感范围见`artifacts/qa/3d/review.md`。
+
+### 本轮实际验证命令与证据
+
+- `npm ci`成功（145包/audit146、0漏洞），`npm run assets:sync`、`assets:verify`通过；Three许可随本地资源同步并校验。日志在`artifacts/qa/3d/`。
+- 首轮`npm run verify`通过：169/169单测、41/41 E2E（6.0分钟）、typecheck/lint/build。审查修复后最终`npm run verify`退出0：**170/170单测、42/42 E2E（6.1分钟）、typecheck/lint/build**；`index-CgL4PAsP.js`675.50KB/gzip177.76KB，保留500KB警告；`assets:verify`再次通过。详见`verify-final.log`、`assets-verify-final.log`。
+- 每项RED/GREEN日志与实际截图保存于`artifacts/qa/3d/`；合成PiP截图有QA说明，不是真人证据。旧测试生成的历史图片在最终提交前恢复原版；新回放/三尺寸证据保存于本轮目录。
+- 正式dist已独立运行：`npm run preview -- --port 4175 --strictPort`（服务保持可用），另终端`$env:TIDAL_QA_DIR='artifacts/qa/3d'; $env:TIDAL_BLOCK_EXTERNAL='1'; node scripts/verify-auto-demo.mjs`退出0。正式5/15/60配置，**142.219秒**完成15/15/60、到家15、100/100奖励和重置；0页面异常/外源/姿态资源请求。生产截图真实生成并查看；`node artifacts/qa/3d/capture-home.mjs`另验证正式60秒首页并截图，不使用e2e加速。
+- 本轮3D性能：预热10秒后131.5614秒/5209样本，平均**39.59fps**，p50 33.2ms/p95 33.4ms/max50ms/>50ms 0。实际ANGLE SwiftShader软件渲染，硬件GPU未测；**约60fps目标仍未达，P01=fail**，不拿候选30fps作通过。没有复用旧2D性能。当前49ID为33 pass/1 fail/15 manual_pending；旧报告原样移至`docs/history/T11_2D_TEST_REPORT.md`。
+
+### 保留待办与使用
+
+无物理摄像头，真实骨架/九步标定/动作精度/游戏PiP连续播放/真人整局/推理与端到端延迟均`manual_pending`；软件GL异常注入不证明所有驱动故障已覆盖。最终美术自然度/绳索贴合/音效听感/硬件GPU与物理断网彩排仍待用户设备验证。A03数量与真3D方向已批准；A04/A06/A07/A08及A09最终成品批准仍待确认。
+
+安装`npm ci`→`npm run assets:sync`→`assets:verify`，开发`npm run dev`；正式`npm run build`→`npm run preview -- --port 4175 --strictPort`，访问localhost:4175。首页可拖拽/滚轮/全景重置；接受计划→无摄像头测试开→自动演示，重置默认关。摄像头到位后关闭模拟、先标定再显式开始，同一路视频移入PiP；壶铃摇摆示例只用于处方格式，不宣称新增摇摆识别。
+
+下一步完成文档/证据核对与开发分支push；之后仅补指定设备硬件GPU性能与真实摄像头/产品签字，或针对明确性能目标另做优化，不自动扩大功能。安装/测试完整命令见README，人工步骤见`DEMO_RUNBOOK.md`。下文均为历史记录。
+
+## 历史：2026-10-16 T07–T11
 
 ## 当前检查点：T11 证据交付收尾，真机与签字仍未完成
 

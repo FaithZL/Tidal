@@ -15,6 +15,10 @@ Task 3: complete — Three0.186.1与类型0.186.0精确锁定；旧渲染器下o
 
 Task 4: complete — 新首页/等宽结果与摄像头PiP先2项失败后通过；增补镜头暂停漂移先失败再修复，全景reset有效。视频旧stream播放Promise/释放保护先2失败后修复。168单测/typecheck通过，新增5项浏览器全部通过；真实PiP节点、轨道、Worker不复制，截图有合成测试标识。
 
-Task 5: in progress — 保留旧语义回归，适配渲染器与默认库存；生产/性能/审查。
+Task 5: complete — 保留旧语义回归，适配渲染器与默认库存；生产/性能/一次审查均已实际执行，未达标/设备项如实保留。
 
-Task 5 evidence: 旧七阶段动作/NPC/暂停像素冻结/持姿停止/重置回放在新3D实际通过；新增碰撞碎屑先失败，接真实8枚网格反馈后通过。初始化中途失败泄漏canvas的测试先失败，释放renderer/context/实例化资源后通过。照片复核发现下一段木材过早入手与NPC朝向，补2失败断言后修复；169单测/type/lint通过。完整回归与生产验证待执行。
+Task 5 evidence: 旧七阶段动作/NPC/暂停像素冻结/持姿停止/重置回放在新3D实际通过；新增碰撞碎屑先失败，接真实8枚网格反馈后通过。初始化中途失败泄漏canvas的测试先失败，释放renderer/context/实例化资源后通过。照片复核发现下一段木材过早入手与NPC朝向，补2失败断言后修复；169单测/type/lint通过。
+
+Task 5 review: 首轮全套169单测/41E2E（6.0分钟）/type/lint/build通过。一次独立审查0 Critical/2 Important/0 Minor：WebGL失效后恢复隐形计数（键盘/自动2失败）及同epoch拒绝装车循环残留飞木（原识别器真实可发出的合成序列1失败），一批修复03e249a。最终170单测/42E2E（6.1分钟）/type/lint/build通过，无二次审查。正式生产整局142.219秒结算重置通过，预热后131.56秒39.59fps/p95 33.4ms，实际SwiftShader，P01目标未达。设备/产品未裁决项保留manual_pending，详见artifacts/qa/3d/review.md。
+
+Task 6: documentation complete — README/PROGRESS/验收报告/工程与来源说明同步当前3D，旧2D报告原样归档；当前33 pass/1 fail/15 manual_pending，证据核对及push收尾。

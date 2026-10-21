@@ -1,0 +1,67 @@
+[WebServer] (node:78420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:68416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:51332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:46292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\world3d.spec.ts:45:1 › pause stops automatic camera drift and reset view restores the farm overview during a task (9.0s)
+(node:60104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\world3d.spec.ts:53:1 › losing WebGL context pauses the session and shows a visible recovery error (946ms)
+
+
+  1) tests\e2e\world3d.spec.ts:45:1 › pause stops automatic camera drift and reset view restores the farm overview during a task
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: "1.544,7.493,9.935"
+    Received: "0.348,7.557,10.022"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.442,7.552,10.015" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1091,0.1049,0.9853" data-effects="impact,impact,impact">…</div>
+        - unexpected value "0.442,7.552,10.015"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.422,7.553,10.016" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1073,0.1038,0.9853" data-effects="impact,impact,impact">…</div>
+        - unexpected value "0.422,7.553,10.016"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.399,7.554,10.018" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1050,0.1026,0.9853" data-effects="impact,impact,impact">…</div>
+        - unexpected value "0.399,7.554,10.018"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.368,7.555,10.020" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1021,0.1009,0.9853" data-effects="impact,impact,impact">…</div>
+        - unexpected value "0.368,7.555,10.020"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.350,7.556,10.021" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1004,0.1000,0.9853" data-effects="impact,impact,impact">…</div>
+        - unexpected value "0.350,7.556,10.021"
+        12 × locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-world-logs="0" data-inventory="0/0/0" data-action="chop-down" data-player-mode="work" data-art="tidal-farm-3d-v1" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="0.348,7.557,10.022" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-probe="-0.1002,0.0999,0.9853" data-effects="impact,impact,impact">…</div>
+           - unexpected value "0.348,7.557,10.022"
+
+
+      48 |  await page.locator('#acceptPlan').click();await page.locator('#setupDemoToggle').click();await page.locator('#beginDemo').click();
+      49 |  await expect(page.locator('#statusTag')).toHaveText('训练中');await page.locator('#pauseBtn').click();await page.waitForTimeout(50);
+    > 50 |  const paused=await world.getAttribute('data-camera');await page.waitForTimeout(400);await expect(world).toHaveAttribute('data-camera',paused!);
+         |                                                                                                          ^
+      51 |  await page.locator('#viewReset').click();await expect(world).toHaveAttribute('data-camera',overview!);await expect(page.locator('#statusTag')).toHaveText('已暂停');
+      52 | });
+      53 | test('losing WebGL context pauses the session and shows a visible recovery error',async({page})=>{
+        at D:\work\corona\Tidal\tests\e2e\world3d.spec.ts:50:106
+
+    Error Context: test-results\world3d-pause-stops-automa-21a3f-farm-overview-during-a-task\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\world3d-pause-stops-automa-21a3f-farm-overview-during-a-task\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\world3d-pause-stops-automa-21a3f-farm-overview-during-a-task\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\world3d.spec.ts:45:1 › pause stops automatic camera drift and reset view restores the farm overview during a task
+  1 passed (13.4s)
