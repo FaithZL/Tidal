@@ -2,6 +2,8 @@ import {expect,test} from 'vitest';
 import {WorldChoreography} from '../../src/game/world/choreography.js';
 import {createDemoConfig} from '../../src/config/demoConfig.js';
 import type {SessionSnapshot,GameEffect} from '../../src/domain/types.js';
+import {LoadRecognizer} from '../../src/pose/recognizers/loadRecognizer.js';
+import {PoseReplay,syntheticProfile} from '../helpers/recognizerReplay.js';
 const config=createDemoConfig();
 const base:SessionSnapshot={sessionId:'world',taskRunId:'run',sourceEpoch:1,phase:'active',task:'chop',inputMode:'keyboard',pauseReasons:[],remainingMs:0,chopReps:0,choppedTrees:0,loadReps:0,cartLogs:0,groundLogs:0,deliveredLogs:0,carryActiveMs:0,exerciseActiveMs:0,sessionElapsedMs:0,rewardsGranted:false,sessionStartedAtMs:0};
 const state=(patch:Partial<SessionSnapshot>={})=>({...base,...patch});
@@ -69,4 +71,27 @@ test('the helper faces the cargo when securing it instead of looking tangent to 
  const w=make(state({task:'carry',phase:'rest',cartLogs:15,choppedTrees:3,remainingMs:7500})),npc=w.frame.npc;
  const facing=-(npc.position.x*Math.sin(npc.yaw)+npc.position.z*Math.cos(npc.yaw))/Math.hypot(npc.position.x,npc.position.z);
  expect(facing).toBeCloseTo(1);
+});
+
+test('a rejected short camera cycle returns uncommitted timber and the next cycle throws from its new hand anchor',()=>{
+ const w=make(state({task:'load',choppedTrees:3,groundLogs:15}));
+ const replay=new PoseReplay(new LoadRecognizer(syntheticProfile()));
+ replay.pose('standing',400).pose('squat',250).pose('press',250).pose('standing',600);
+ expect(replay.reps).toHaveLength(0);
+ const phases=replay.events.filter(e=>e.kind==='phase');
+ const returning=phases.findIndex(e=>e.phase==='load-return');expect(returning).toBeGreaterThan(0);
+ w.setHandAnchor({x:1,y:2,z:3});
+ for(const e of phases.slice(0,returning+1))w.apply(effect({repId:e.repId,phase:e.phase,progress:e.progress}));
+ w.advance(1000);expect(w.frame.logs[0].location).toBe('flight');
+ for(const e of phases.slice(returning+1))w.apply(effect({repId:e.repId,phase:e.phase,progress:e.progress}));
+ expect(w.frame.logs[0].location).toBe('ground');
+ const nextHand={x:4,y:3,z:2};w.setHandAnchor(nextHand);
+ const seen=replay.events.length;replay.pose('squat',400).pose('press',400).pose('standing',600);
+ expect(replay.reps).toHaveLength(1);
+ for(const e of replay.events.slice(seen))if(e.kind==='phase'){
+  w.apply(effect({repId:e.repId,phase:e.phase,progress:e.progress}));
+  if(e.phase==='squat-down')expect(w.frame.logs[0].location).toBe('hand');
+  if(e.phase==='load-return')expect(w.frame.logs[0]).toMatchObject({location:'flight',position:nextHand});
+ }
+ expect(w.frame.logs).toHaveLength(15);
 });

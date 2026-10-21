@@ -35,7 +35,11 @@ export class WorldChoreography{
   this.animator.apply(e);
   if(e.kind==='action-phase'&&e.task==='load'){
    const key=`${e.taskRunId}/${e.sourceEpoch}/${e.repId}`;
-   if(key!==this.loadRep){this.loadRep=key;this.heldLog=s.groundLogs>0?s.deliveredLogs+s.cartLogs:null;}
+   if(key!==this.loadRep){
+    // A recognizer can reject a completed-looking cycle without changing epoch.
+    for(const[id,f]of this.flights)if(!f.committed)this.flights.delete(id);
+    this.loadRep=key;this.heldLog=s.groundLogs>0?s.deliveredLogs+s.cartLogs:null;
+   }
   }
   if(e.kind==='action-phase'&&e.task==='load'&&e.phase==='load-return'&&s.groundLogs>0){
    const id=s.deliveredLogs+s.cartLogs;

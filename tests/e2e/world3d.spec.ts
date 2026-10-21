@@ -51,11 +51,20 @@ test('pause stops automatic camera drift and reset view restores the farm overvi
  const paused=await world.getAttribute('data-camera');await page.waitForTimeout(400);await expect(world).toHaveAttribute('data-camera',paused!);
  await page.locator('#viewReset').click();await expect(world).toHaveAttribute('data-camera',overview!);await expect(page.locator('#statusTag')).toHaveText('已暂停');
 });
-test('losing WebGL context pauses the session and shows a visible recovery error',async({page})=>{
- await page.goto('http://127.0.0.1:4174/?e2e=1');await page.locator('#acceptPlan').click();await page.locator('#beginDemo').click();
+for(const automatic of [false,true])test(`losing WebGL context blocks every resume and input path, automatic=${automatic}`,async({page})=>{
+ await page.goto('http://127.0.0.1:4174/?e2e=1');await page.locator('#acceptPlan').click();
+ if(automatic)await page.locator('#setupDemoToggle').click();await page.locator('#beginDemo').click();
  await expect(page.locator('#statusTag')).toHaveText('训练中');
  await page.locator('#worldCanvas canvas').dispatchEvent('webglcontextlost',{cancelable:true});
- await expect(page.locator('#renderError')).toContainText('重新加载');await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#actionBtn')).toBeDisabled();
+ await expect(page.locator('#renderError')).toContainText('重新加载');await expect(page.locator('#statusTag')).toHaveText('已暂停');
+ const metrics=await page.locator('#actualMetrics').textContent();
+ await page.keyboard.press('KeyP');
+ await page.evaluate(()=>{(document.activeElement as HTMLElement)?.blur();});await page.keyboard.press('Space');await page.waitForTimeout(1000);
+ await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+ await page.locator('#pauseBtn').dispatchEvent('click');await page.keyboard.press('Space');await page.waitForTimeout(500);
+ await expect(page.locator('#actualMetrics')).toHaveText(metrics!);
+ await expect(page.locator('#actionBtn')).toBeDisabled();await expect(page.locator('#pauseBtn')).toBeDisabled();
+ await page.locator('#resetBtn').click();await expect(page.locator('#acceptPlan')).toBeDisabled();
 });
 test('a failure after allocating WebGL releases the canvas and GPU context before showing recovery',async({page})=>{
  await page.addInitScript(()=>{
