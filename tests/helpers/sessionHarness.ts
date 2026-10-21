@@ -3,7 +3,7 @@ import { createDemoConfig } from '../../src/config/demoConfig.js';
 import type { ExerciseSignal, GameEffect } from '../../src/domain/types.js';
 import type { RecognitionEvent } from '../../src/pose/recognizers/types.js';
 export function sessionHarness(target=60000) {
-  const clock={ms:0,nowMs(){return this.ms;}},config=createDemoConfig({treeCount:1,repsPerTree:1,initialLogs:0,startCountdownMs:1,restMs:1,carryTargetMs:target});
+  const clock={ms:0,nowMs(){return this.ms;}},config=createDemoConfig({treeCount:1,repsPerTree:1,initialLogs:0,logsPerTree:1,startCountdownMs:1,restMs:1,carryTargetMs:target});
   const controller=createSessionController(config,clock),effects:GameEffect[]=[];let seq=0;
   controller.onEffect(e=>effects.push(e));
   function tick(ms:number){clock.ms+=ms;controller.tick(clock.ms);}
