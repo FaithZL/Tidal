@@ -9,4 +9,6 @@ Pre-flight: Task4 PiP→Task5生命周期，共用同一video/srcObject/Worker�
 
 Task 1: complete — 默认0/5与第5/10/15次产5/10/15测试先3失败；改配置、单木段夹具明确覆盖1后156/156单测及typecheck通过。原领域实现未改。证据artifacts/qa/3d/quantities-{red,green}.log。
 
-Task 2: in progress — 三维表现数据，手锚点与库存归属测试。
+Task 2: complete — 7项编排测试先6失败，最小实现转绿；追加重复完成效果与4棵树配置先2失败再修复。165/165单测、typecheck/lint通过。视觉位置/归属仍只读权威快照。
+
+Task 3: in progress — Three真实场景、镜头与资源生命周期。
