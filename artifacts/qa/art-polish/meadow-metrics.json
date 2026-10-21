@@ -1,0 +1,13 @@
+{
+  "drawables": 138,
+  "pieces": 1169,
+  "triangles": 40624,
+  "meadow": {
+    "triangles": 672,
+    "vertices": 375,
+    "minShade": 0.8318297266960144,
+    "maxShade": 0.966282308101654,
+    "hasMap": false,
+    "vertexColors": true
+  }
+}

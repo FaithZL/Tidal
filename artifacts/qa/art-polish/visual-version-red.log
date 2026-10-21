@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/visual-states.spec.ts
+
+[WebServer] (node:31364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:27708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (7.8s)
+
+
+  1) tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: "tidal-farm-3d-v1"
+    Received: "tidal-farm-3d-v2"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        18 × locator resolved to <div role="img" data-fallen="0" data-effects="" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-action="ready" data-world-logs="0" data-render-scale="1" data-inventory="0/0/0" data-player-mode="idle" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="43.000,42.000,57.000" data-probe="-0.3072,0.1592,0.9985" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE))…>…</div>
+           - unexpected value "tidal-farm-3d-v2"
+
+
+      23 |   await page.goto('/');await page.clock.pauseAt(new Date('2026-10-15T00:01:00Z'));
+      24 |   const world = page.locator('#worldCanvas');
+    > 25 |   await expect(world).toHaveAttribute('data-art', 'tidal-farm-3d-v1');
+         |                       ^
+      26 |   await page.locator('#cancelPlan').click();await frame(page, '01-home');
+      27 |   await page.locator('#actionBtn').click();await page.locator('#acceptPlan').click();await page.locator('#beginDemo').click();
+      28 |   await page.clock.fastForward(5050);await advance(page, 20);await expect(page.locator('#statusTag')).toHaveText('训练中');
+        at D:\work\corona\Tidal\tests\e2e\visual-states.spec.ts:25:23
+
+    Error Context: test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\visual-states-farm-actors--c7da4--both-NPC-scripts-and-reset\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset

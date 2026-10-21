@@ -1,6 +1,22 @@
 # Tidal 真3D升级验收报告（2026-10-21）
 
-## 当前增量：流畅度与约60fps复测
+## 当前增量：温暖卡通3D美术精修
+
+基线`d60e59e`，按用户批准范围增量精修圆润人物与衣物、树皮/木纹/年轮、车板/绳结、屋瓦/田垄/作物/道路及接触明暗。`world/resources.ts`与新增`surfaces.ts`共享本地原创128×128纹理和圆角几何，草地主面用确定性顶点颜色减少采样；环境保留原农场内容、实例化与空间合批，当前138绘制对象/1169部件/40,624三角形。原领域、编排、输入、识别器、依赖和渲染比例策略均未改，默认模拟、刷新偏好与显式摄像头切换保留。
+
+`N:file`指仓库根`artifacts/qa/art-polish/file`。本轮完整`npm run verify`退出0：**208/208单测、49/49 E2E（6.3分钟）、typecheck/lint/build通过**，见`N:verify-final.log`。新增美术材质共享/释放、圆角尺寸、手部锚点、接触阴影、道路平铺、场景内容与预算断言；旧动作、暂停、库存和摄像头负例保留。该完整回归对应草捆贴图语义修正前的`index-DEI107uw.js`，693.53KB/gzip183.83KB，保留500KB体积提示；本轮未改锁文件或重复安装。
+
+同一Chromium156、1366×900、DPR1、实际SwiftShader软件渲染、正常默认自动模拟，预热10秒后独立采样**3500样本/60.0142秒，58.32fps、p50 16.7ms/p95 16.8ms/max66.6ms、>50ms 1次**；0页面异常/外源，见`N:final-profile.json/log`。实际3D比例0.8→0.5，结束683×450绘制后铺满1366×900；有清晰度代价，不声称锁60或相同分辨率成绩。此数据同样在草捆修正前取得；前轮59.74fps属于旧美术。首页/近景静态截图`N:final-home.png`、`final-hero.png`与动态性能分别记录。
+
+随后仅将金黄草捆由端面年轮改为已有纵向纹理，无新增纹理、几何或逻辑；最终`index-CYPYbaQo.js`为693.52KB/gzip183.83KB。修正后typecheck/lint、**208单测、1项完整视觉E2E**、build与assets:verify通过，见`N:material-final.log`；49项完整E2E属于修正前DEI版，没有声称修正后重新全跑。最终生产静态截图`N:delivered-home.png`、`delivered-hero.png`与`delivered-capture.json`为比例1、1366×900、无摄像头/0异常/0外源；`N:replay/visual-replay.json`及15张图覆盖七阶段，使用浏览器控制时钟，不作fps证据。
+
+最终CYPYbaQo构建的正常生产整局实际**142.227秒**完成15次挥砍/15次装车/60秒有效持姿、到家15、奖励100/100与重置，0页面异常/外源/姿态资源请求，见`N:production-auto-flow.json/log`。预热后**131.6948秒/7338样本，55.72fps、p50 16.7ms/p95 33.3ms/max33.5ms、>50ms 0**；运送截图时比例0.512、699×460铺满1366×900。四张正式截图实际生成，训练/运送/结算均已查看，文字和PiP可读，3D边缘软化可见。它与草捆修正前独立60秒58.32fps的采样范围/比例不同，分别报告；不拿较高值代替最终整局。
+
+再做唯一远景去纹理短诊断：首休息相同8秒观察58.13fps/比例0.5→57.88fps/比例0.512（`N:forest-{before,after}-profile.json/log`），未显示明确收益，分辨率不同也不推断因果；候选已恢复，`N:restored-build.log`重新构建并核对最终bundle仍精确为CYPYbaQo。候选、失败与中断日志保留，不回写为通过。
+
+当前49ID：**33 pass、1 fail（P01）、15 manual_pending**。新版整局55.72fps尚未稳定达到约60fps目标，P01保守记fail，不降目标或拿前轮数据补齐。物理摄像头、硬件GPU、真人端到端性能、最终美术与动作节奏批准仍为`manual_pending`，L2/L3未通过。下方`P`与`Q`证据均为历史；本轮全套生成的DEI版三尺寸/合成PiP/资源证据另存`N:full-suite/`，最终材质版动作在`N:replay/`，不覆盖历史。
+
+## 历史增量：流畅度与约60fps复测
 
 基线`5f5579f`，保持既有领域/识别器/默认模拟/刷新记忆和显式摄像头切换。静态环境476→138可绘制网格（保留36,176三角形/1,031部件），同值DOM不重复写，3D像素比按持续绘制帧耗时自动降低，最低0.5；文字和摄像头视频不降分辨率。相关数量/变换/裁剪、HUD零无效修改、短动作/尖峰/暂停/漏刷新均有实际RED→GREEN证据。最终`npm run verify`退出0：**183/183单测、49/49 E2E（6.1分钟）、typecheck/lint/build通过**；`assets:verify`通过，主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，保留体积提示。未改依赖或锁文件，本轮未重新安装。一次独立只读审查无剩余问题，处理与范围见`artifacts/qa/performance/review.md`。
 
@@ -8,7 +24,7 @@
 
 正常`dist`整局另实测**141.930秒**，15次挥砍/15次装车/60秒持姿、到家15、奖励100/100、返回首页重置通过，0页面异常/外源/姿态资源请求。预热后131.3447秒/7701样本平均**58.63fps/p95 16.8ms/max33.5ms/>50ms 0**，与60秒对照分别报告；见`P:production-auto-flow.json/log`。四张生产截图真实生成，训练/运送/结果已查看，文字与PiP可读，3D边缘软化可见。浏览器阻断外源不是物理断网，合成骨架不是真人证据。
 
-当前49ID：**34 pass、0 fail、15 manual_pending**。P01在本机软件GL/自适应画质条件下接近60fps目标，不声称锁60；硬件GPU、现场窗口实际表现、摄像头准确率/端到端性能和最终画质批准仍待验。L2/L3没有通过；下方旧轮次数字均为历史，当前P01/P06已更新。
+该轮49ID：**34 pass、0 fail、15 manual_pending**。P01在本机软件GL/自适应画质条件下接近60fps目标，不声称锁60；硬件GPU、现场窗口实际表现、摄像头准确率/端到端性能和最终画质批准仍待验。L2/L3没有通过；本段数字为旧美术历史，最新范围见顶部及P01/P06。
 
 ## 历史增量：默认模拟启动
 
@@ -93,7 +109,7 @@
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| V01 | 统一真3D、全景通知、实际旋转 | 实际相机及几何投影变化；已查看Q:home.png、orbit.png。最终美术批准未取得 | manual_pending |
+| V01 | 统一真3D、全景通知、实际旋转 | 实际相机及几何投影变化；本轮圆润模型/共享原创纹理与场景预算有单测，最终静态截图N:delivered-home.png、delivered-hero.png；历史Q:home.png、orbit.png保留。最终美术批准未取得 | manual_pending |
 | V02 | 七阶段对应、暂停保持 | 七阶段/暂停像素冻结、手部锚点已验证；B:visual-states.spec.ts；真人同步与最终节奏未签 | manual_pending |
 | V03 | 推车/归拢/绑绳不造木 | 人车把手相对位置、绕车朝向、绳索进度有测试；Q:replay/visual-replay.json；人工自然度待批准 | manual_pending |
 | V04 | 五段/抛木/绳索/运送/结果 | 单根所有权、被拒循环复位、末根跨休息连续完成；U:worldChoreography.test.ts；已看回放截图，最终观感待批准 | manual_pending |
@@ -115,12 +131,12 @@
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| P01 | A预热后≥60秒，约60fps目标 | 本机SwiftShader/自适应比例0.512：独立60.0143秒59.74fps/p95 16.7ms；正式整局预热后131.3447秒58.63fps/p95 16.8ms/max33.5ms/>50ms 0；P:final-confirmed-profile.json、production-auto-flow.json。约60而非锁60，硬件/真人仍待复测 | pass |
+| P01 | A预热后≥60秒，约60fps目标 | 最终CYPYbaQo/SwiftShader正常整局预热后131.6948秒55.72fps/p95 33.3ms/max33.5ms/>50ms 0；运送比例0.512、699×460。N:production-auto-flow.json；修正前DEI独立60.0142秒58.32fps只作对应版本证据。尚未稳定约60，硬件/真人未测 | fail |
 | P02 | R推理≥10–15Hz/单帧在途 | 协议与V实际推理通过，真人性能未测；U:poseWorkerClient.test.ts | manual_pending |
 | P03 | R端到端阶段p95≤250ms | 未采真人画面证据，rAF/推理耗时不能替代 | manual_pending |
-| P04 | 物理断外网刷新整局 | 子路径与最新正式整局阻断外源通过，141.930秒结算重置；物理断网彩排未做；Q:deployment/subpath.json、P:production-auto-flow.json | manual_pending |
-| P05 | 实际构建子路径本地资源 | /tidal/真实模型推理与404负例保留，资源均同源；B:deployment.spec.ts；Q:deployment/subpath.json | pass |
-| P06 | 干净安装→全套→实际dist | 锁文件未变；干净安装为历史Q:npm-ci.log，本轮未重复安装。最新183单测/49E2E/type/lint/build/assets及正式dist整局/重置通过；P:verify-final.log、assets-verify.log、production-auto-flow.json。主包678.15KB，保留体积提示 | pass |
+| P04 | 物理断外网刷新整局 | 子路径回归保留，本轮最终整局阻断外源142.227秒结算重置，0外源；物理断网彩排未做；N:full-suite/deployment/subpath.json、production-auto-flow.json | manual_pending |
+| P05 | 实际构建子路径本地资源 | /tidal/真实模型推理与404负例保留，资源均同源；B:deployment.spec.ts；N:full-suite/deployment/subpath.json（DEI全套） | pass |
+| P06 | 干净安装→全套→实际dist | 锁文件未变；干净安装Q:npm-ci.log为历史，本轮未重复安装。草捆修正前208单测/49E2E/type/lint/build通过；修正后208单测/1完整视觉E2E/type/lint/build/assets通过；最终CYPYbaQo正常整局结算/重置通过。N:verify-final.log、material-final.log、restored-build.log、production-auto-flow.json；693.52KB，保留体积提示 | pass |
 
 ## 产品处理与下一步
 
@@ -131,6 +147,6 @@
 | A06 | 持姿代理，不证明持物/重量 | manual_pending |
 | A07 | 只显示计数/时长与明确游戏奖励，健康数据未测 | manual_pending |
 | A08 | 预设计划，未接LLM | manual_pending |
-| A09 | 真3D/旋转镜头方向已批准，最终美术与节奏待验 | manual_pending |
+| A09 | 真3D/旋转镜头与本轮温暖卡通精修方向已批准，最终美术与节奏待验 | manual_pending |
 
 无物理摄像头，下一步按`DEMO_RUNBOOK.md`记录真实骨架/PiP、九步标定、20+20正负例、5次持姿放下恢复、真人整局/资源关闭、推理和端到端性能；另在指定演示机做硬件GPU、物理断网和扬声器/视觉批准。默认不录制/上传视频，不保存真实姿态序列。当前没有合并main或部署公网。

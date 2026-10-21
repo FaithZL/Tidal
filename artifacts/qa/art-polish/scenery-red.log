@@ -1,0 +1,68 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/staticBatch.test.ts tests/unit/environmentArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/environmentArt.test.ts (4 tests | 4 failed) 33ms
+   × the real farm contains distinct crop silhouettes with deterministic varied plants 21ms
+   × the forest has layered tree silhouettes and individual tint variation 4ms
+   × the homestead renders local patterned roof, woodwork and stone foundation 4ms
+   × the long road has irregular grassy verges outside its clear walk surface 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/environmentArt.test.ts > the real farm contains distinct crop silhouettes with deterministic varied plants
+AssertionError: expected 1 to be greater than or equal to 3
+ ❯ tests/unit/environmentArt.test.ts:21:61
+     19|   const repeated=meshes(other).filter((mesh):mesh is T.InstancedMesh=>…
+     20|   expect(crops).toHaveLength(6);
+     21|   expect(new Set(crops.map(crop=>crop.geometry.uuid)).size).toBeGreate…
+       |                                                             ^
+     22|   crops.forEach((crop,p)=>{
+     23|    expect(crop.instanceColor).not.toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/environmentArt.test.ts > the forest has layered tree silhouettes and individual tint variation
+AssertionError: expected 2 to be greater than or equal to 5
+ ❯ tests/unit/environmentArt.test.ts:43:96
+     41|   const forest=meshes(root).find((mesh):mesh is T.InstancedMesh=>mesh …
+     42|   expect(forest).toBeDefined();const vertices=forest!.geometry.getAttr…
+     43|   expect(new Set(Array.from({length:vertices.count},(_,i)=>vertices.ge…
+       |                                                                                                ^
+     44|   expect(forest!.instanceColor).not.toBeNull();
+     45|   const colors=new Set<string>();for(let i=0;i<130;i++){const color=ne…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/environmentArt.test.ts > the homestead renders local patterned roof, woodwork and stone foundation
+AssertionError: expected null to be an instance of DataTexture
+ ❯ tests/unit/environmentArt.test.ts:68:87
+     66|     }
+     67|    }
+     68|    expect(found).toBeDefined();expect((found!.material as T.MeshLamber…
+       |                                                                                       ^
+     69|   }
+     70|   const roofs=meshes(root).filter(mesh=>mesh.geometry.type==='ExtrudeG…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/environmentArt.test.ts > the long road has irregular grassy verges outside its clear walk surface
+AssertionError: expected 0 to be greater than or equal to 40
+ ❯ tests/unit/environmentArt.test.ts:88:32
+     86|    }
+     87|   }
+     88|   expect(edgePositions.length).toBeGreaterThanOrEqual(40);
+       |                                ^
+     89|   expect(new Set(edgePositions.map(position=>Math.abs(position.z).toFi…
+     90|   expect(edgePositions.some(position=>position.z<0)).toBe(true);expect…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  4 failed | 5 passed (9)
+   Start at  12:58:46
+   Duration  183ms (tests 42%, import 28%, transform 27%, worker 3%)

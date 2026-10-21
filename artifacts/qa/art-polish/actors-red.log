@@ -1,0 +1,92 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/actorArt.test.ts (13 tests | 5 failed) 22ms
+   ❯ farm actor art contracts (13)
+     × keeps both cut faces and bark visible within the three-draw log budget 4ms
+     × gives the false helper variant rounded heads and a fabric torso within its draw budget 6ms
+     × gives the true helper variant rounded heads and a fabric torso within its draw budget 1ms
+     × keeps cart grips and cargo ropes at the choreography contact points while rounding its wooden rails 2ms
+     × shares lobed pine tiers and preserves the existing tree fall envelope 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > keeps both cut faces and bark visible within the three-draw log budget
+AssertionError: expected 5 to be less than or equal to 3
+ ❯ tests/unit/actorArt.test.ts:22:24
+     20|  it('keeps both cut faces and bark visible within the three-draw log b…
+     21|   const log=makeLog(resource()),parts=meshes(log),size=new T.Box3().se…
+     22|   expect(parts.length).toBeLessThanOrEqual(3);
+       |                        ^
+     23|   expect(parts.filter(mapped)).toHaveLength(3);
+     24|   expect(size.x).toBeGreaterThan(.86);expect(size.x).toBeLessThan(.91);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > gives the false helper variant rounded heads and a fabric torso within its draw budget
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > gives the true helper variant rounded heads and a fabric torso within its draw budget
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/actorArt.test.ts:40:49
+     38|    return center.y>1.1&&center.y<1.45&&size.x>.4&&size.y>.4;
+     39|   });
+     40|   expect(torso.some(m=>mapped(m)&&bevelled(m))).toBe(true);
+       |                                                 ^
+     41|   const head=parts.filter(m=>{
+     42|    const bounds=new T.Box3().setFromObject(m),size=bounds.getSize(new …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > keeps cart grips and cargo ropes at the choreography contact points while rounding its wooden rails
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/actorArt.test.ts:74:50
+     72|   const rails=parts.filter(m=>new T.Box3().setFromObject(m).getSize(ne…
+     73|   expect(rails.length).toBeGreaterThanOrEqual(6);
+     74|   expect(rails.every(m=>mapped(m)&&bevelled(m))).toBe(true);
+       |                                                  ^
+     75|   expect(triangles(cart.root)).toBeLessThan(5500);
+     76|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > shares lobed pine tiers and preserves the existing tree fall envelope
+AssertionError: expected 3 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 3
+
+ ❯ tests/unit/actorArt.test.ts:83:50
+     81|   expect(triangles(tree.root)).toBeLessThan(1100);
+     82|   expect(tiers.length).toBeGreaterThanOrEqual(3);
+     83|   expect(new Set(tiers.map(m=>m.geometry)).size).toBe(1);
+       |                                                  ^
+     84|   expect(meshes(other.crown)[0].geometry).toBe(tiers[0].geometry);
+     85|   const vertices=tiers[0].geometry.getAttribute('position'),rings=new …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 8 passed (13)
+   Start at  12:58:48
+   Duration  175ms (transform 34%, import 33%, tests 29%, worker 3%)

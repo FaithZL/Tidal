@@ -29,18 +29,27 @@ function release(root:T.Object3D,r:WorldResources):void{
  root.traverse(object=>{if(object instanceof T.InstancedMesh)object.dispose();});r.dispose();
 }
 
-// Original: 476 drawables. Global batching reached 65 but submitted distant road
-// stones in close views. 16-unit spatial batches use 138, trading calls for culling.
-// Dropping scenery to meet the budget must still fail geometry/count checks.
-test('the complete farm environment fits 150 drawable meshes without removing scenery',()=>{
+// The polished environment may change silhouettes, but must retain the farm's
+// population and spatial extent within finite geometry and submission budgets.
+test('the complete farm keeps its planted plots and forest within finite rendering budgets',()=>{
  const r=new WorldResources(),root=buildEnvironment(r);
  try{
   const drawables=meshes(root);
-  expect(triangles(root)).toBe(36176);
-  expect(expanded(root)).toHaveLength(1031);
+  expect(triangles(root)).toBeLessThanOrEqual(42000);
+  expect(expanded(root).length).toBeGreaterThanOrEqual(1031);
   const originalInstances=drawables.filter((mesh):mesh is T.InstancedMesh=>mesh instanceof T.InstancedMesh&&(mesh.count===72||mesh.count===130));
   expect(originalInstances.map(mesh=>mesh.count).sort((a,b)=>a-b)).toEqual([72,72,72,72,72,72,130]);
   expect(drawables.length).toBeLessThanOrEqual(150);
+  const items=expanded(root);
+  for(const [w,d,x,z] of[[5.4,4.5,43,-4],[5,4,1,-13],[4,3.5,20,-14]]){
+   const foundation=items.find(item=>item.mesh.geometry===r.box(w+.25,.3,d+.25,0xada17b).geometry);
+   expect(foundation).toBeDefined();expectMatrix(foundation!.matrix,new T.Matrix4().makeTranslation(x,.15,z));
+  }
+  expect(items.filter(item=>item.mesh.geometry===r.cylinder(.12,.2,1.45,0x8e6843,7).geometry)).toHaveLength(12);
+  expect(items.filter(item=>item.mesh.geometry===r.cylinder(.6,.6,1.15,0xcdb568,12).geometry)).toHaveLength(18);
+  expect(items.some(item=>item.mesh.geometry===r.cylinder(1,1,.055,0x7db6bc,48).geometry&&item.matrix.elements[12]===35)).toBe(true);
+  expect(items.some(item=>item.mesh.geometry===r.cylinder(.5,.9,4.2,0xe1d2b0,8).geometry&&item.matrix.elements[12]===28)).toBe(true);
+  expect(items.some(item=>item.mesh.geometry===r.box(48,.045,2.35,0xd9c895,'path').geometry&&item.matrix.elements[12]===18)).toBe(true);
  }finally{release(root,r);}
 });
 
@@ -53,7 +62,7 @@ test('batching preserves the farm fence and nested house transforms, materials a
   for(const position of[[-12.68,.38,-20],[-12.68,.78,19],[48.27,.38,-20],[48.27,.78,19]]){
    const rail=rails.find(item=>item.matrix.elements[12]>position[0]-.0001&&item.matrix.elements[12]<position[0]+.0001&&Math.abs(item.matrix.elements[13]-position[1])<.0001&&Math.abs(item.matrix.elements[14]-position[2])<.0001);
    expect(rail).toBeDefined();
-   expect(rail!.mesh.material).toBe(r.material(0xe4d09c));
+   expect(rail!.mesh.material).toBe(r.material(0xe4d09c,'wood'));
    expect(rail!.mesh.castShadow).toBe(false);expect(rail!.mesh.receiveShadow).toBe(true);
    expectMatrix(rail!.matrix,new T.Matrix4().makeTranslation(position[0],position[1],position[2]));
   }
@@ -61,25 +70,34 @@ test('batching preserves the farm fence and nested house transforms, materials a
   const foundation=items.find(item=>item.mesh.geometry===foundationGeometry);
   expect(foundation).toBeDefined();
   expectMatrix(foundation!.matrix,new T.Matrix4().makeTranslation(43,.15,-4));
-  expect(foundation!.mesh.material).toBe(r.material(0xada17b));
+  expect(foundation!.mesh.material).toBe(r.material(0xada17b,'stone'));
   expect(foundation!.mesh.castShadow).toBe(true);expect(foundation!.mesh.receiveShadow).toBe(true);
  }finally{release(root,r);}
 });
 
-test('the original crop and forest instance transforms survive environment batching',()=>{
+test('planted crops and forest remain inside their original regions after batching',()=>{
  const r=new WorldResources(),root=buildEnvironment(r);
  try{
   root.updateMatrixWorld(true);
-  const crop=meshes(root).find((mesh):mesh is T.InstancedMesh=>mesh instanceof T.InstancedMesh&&mesh.count===72&&mesh.material===r.material(0x789348));
+  const crops=meshes(root).filter((mesh):mesh is T.InstancedMesh=>mesh instanceof T.InstancedMesh&&mesh.count===72);
   const forest=meshes(root).find((mesh):mesh is T.InstancedMesh=>mesh instanceof T.InstancedMesh&&mesh.count===130);
-  expect(crop).toBeDefined();expect(forest).toBeDefined();
-  const matrix=new T.Matrix4();crop!.getMatrixAt(0,matrix);
-  expectMatrix(matrix,new T.Matrix4().makeTranslation(6.5,.36,3.8));
-  crop!.getMatrixAt(71,matrix);
-  expectMatrix(matrix,new T.Matrix4().compose(new T.Vector3(11.54,.36,7.79),new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),42.6),new T.Vector3(1,1.36,1)));
-  forest!.getMatrixAt(0,matrix);
-  expectMatrix(matrix,new T.Matrix4().compose(new T.Vector3(-25,1.8,-24),new T.Quaternion(),new T.Vector3(1.2,1.2,1.2)));
-  expect(crop!.receiveShadow).toBe(true);expect(crop!.castShadow).toBe(false);
+  expect(crops).toHaveLength(6);expect(forest).toBeDefined();
+  const matrix=new T.Matrix4();
+  crops.forEach((crop,p)=>{
+   for(let i=0;i<72;i++){
+    crop.getMatrixAt(i,matrix);
+    expect(matrix.elements[12]).toBeGreaterThanOrEqual(6+(p%3)*7.2);
+    expect(matrix.elements[12]).toBeLessThanOrEqual(12+(p%3)*7.2);
+    expect(matrix.elements[14]).toBeGreaterThanOrEqual(3.15+Math.floor(p/3)*7);
+    expect(matrix.elements[14]).toBeLessThanOrEqual(8.45+Math.floor(p/3)*7);
+   }
+   expect(crop.receiveShadow).toBe(true);expect(crop.castShadow).toBe(false);
+  });
+  for(let i=0;i<130;i++){
+   forest!.getMatrixAt(i,matrix);
+   expect(matrix.elements[12]).toBeGreaterThanOrEqual(-26);expect(matrix.elements[12]).toBeLessThanOrEqual(58);
+   expect(Math.abs(matrix.elements[14])).toBeGreaterThanOrEqual(21);expect(Math.abs(matrix.elements[14])).toBeLessThanOrEqual(31);
+  }
   expect(forest!.receiveShadow).toBe(false);expect(forest!.castShadow).toBe(false);
  }finally{release(root,r);}
 });

@@ -22,7 +22,7 @@ test('farm actors replay real keyboard stages, committed effects, both NPC scrip
   await page.clock.install({ time: new Date('2026-10-15T00:00:00Z') });
   await page.goto('/');await page.clock.pauseAt(new Date('2026-10-15T00:01:00Z'));
   const world = page.locator('#worldCanvas');
-  await expect(world).toHaveAttribute('data-art', 'tidal-farm-3d-v1');
+  await expect(world).toHaveAttribute('data-art', 'tidal-farm-3d-v2');
   await page.locator('#cancelPlan').click();await frame(page, '01-home');
   await page.locator('#actionBtn').click();await page.locator('#acceptPlan').click();await page.locator('#beginDemo').click();
   await page.clock.fastForward(5050);await advance(page, 20);await expect(page.locator('#statusTag')).toHaveText('训练中');

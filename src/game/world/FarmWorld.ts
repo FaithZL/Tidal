@@ -23,12 +23,12 @@ export class FarmWorld implements GameView{
   try{
   this.renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   this.renderer.setPixelRatio(this.resolution.ratio);parent.dataset.renderScale=String(this.resolution.ratio);this.renderer.outputColorSpace=T.SRGBColorSpace;
-  this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.05;
-  this.renderer.setClearColor(0xc5ded4);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.BasicShadowMap;
+  this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.03;
+  this.renderer.setClearColor(0xc5dce1);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.BasicShadowMap;
   this.renderer.domElement.setAttribute('aria-label','可旋转的三维农场，拖拽旋转、滚轮缩放');this.renderer.domElement.tabIndex=0;parent.appendChild(this.renderer.domElement);
-  this.scene.background=new T.Color(0xc5ded4);this.scene.fog=new T.Fog(0xc5ded4,65,125);
-  this.scene.add(new T.HemisphereLight(0xfff5d6,0x6c8c66,1.6));
-  const sun=place(this.scene,new T.DirectionalLight(0xffe1a7,1.8),-18,35,14);sun.castShadow=true;sun.shadow.mapSize.set(512,512);
+  this.scene.background=new T.Color(0xc5dce1);this.scene.fog=new T.Fog(0xc5dce1,85,155);
+  this.scene.add(new T.HemisphereLight(0xe0ecf4,0x536b43,1.1));
+  const sun=place(this.scene,new T.DirectionalLight(0xffedd0,2),-18,35,14);sun.castShadow=true;sun.shadow.mapSize.set(512,512);
   this.sun=sun;
   sun.shadow.camera.left=-23;sun.shadow.camera.right=55;sun.shadow.camera.top=25;sun.shadow.camera.bottom=-25;sun.shadow.camera.far=90;sun.shadow.bias=-.001;
   this.scene.add(buildEnvironment(this.resources));
@@ -45,7 +45,7 @@ export class FarmWorld implements GameView{
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.controls.enabled=false;this.reportError('3D图形上下文已丢失，请重新加载页面后继续');},{signal:this.events.signal});
   this.subscriptions.push(controller.subscribe(s=>{this.snapshot=s;this.choreography.sync(s);}));
   this.subscriptions.push(controller.onEffect(e=>{this.snapshot=controller.getSnapshot();this.choreography.sync(this.snapshot);this.choreography.apply(e);this.dirty=true;}));
-  parent.dataset.renderer=`Three.js r${T.REVISION}`;parent.dataset.art='tidal-farm-3d-v1';
+  parent.dataset.renderer=`Three.js r${T.REVISION}`;parent.dataset.art='tidal-farm-3d-v2';
   const gl=this.renderer.getContext(),debug=gl.getExtension('WEBGL_debug_renderer_info');parent.dataset.gpu=debug?String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)):'WebGL2 renderer unavailable';
   this.request=requestAnimationFrame(this.animate);
   }catch(error){this.destroy(true);throw error;}

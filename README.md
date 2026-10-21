@@ -1,6 +1,6 @@
 # Tidal · 映动农场
 
-在现有源码上增量实现的真3D农场运动Web Demo：Three.js0.186.1 + TypeScript + 本地MediaPipe。仓库：[FaithZL/Tidal](https://github.com/FaithZL/Tidal)，当前分支`feature/3d-farm-experience`。用户已批准真3D设计及验证后提交/push；不合并主分支、不对外部署。旧Phaser3.90.0源码和依赖保留追溯，当前入口只运行Three.js。
+在现有源码上增量实现的真3D农场运动Web Demo：Three.js0.186.1 + TypeScript + 本地MediaPipe。当前美术按用户批准的温暖卡通方向精修：圆润人物、衣物细节、木纹与年轮、屋瓦、田垄、作物和接触明暗；使用共享的本地原创纹理与几何，不改玩法或输入。仓库：[FaithZL/Tidal](https://github.com/FaithZL/Tidal)，当前分支`feature/3d-farm-experience`。用户已授权验证后提交/push；不合并主分支、不对外部署。旧Phaser3.90.0源码和依赖保留追溯，当前入口只运行Three.js。
 
 **首次打开或刷新即可看效果：无摄像头模拟默认开启，自动进入正常倒计时和完整农场流程。** 合成骨架和农场自动运行，正式时长约两分半。开关保留，关闭后暂停自动输入，并记住选择；再次刷新会留在手动首页。重新开启后刷新可恢复自动演示。重置/结算返回首页保留开关偏好，但不会自动再开一局。模拟不请求摄像头、不调用识别器、不参与标定，结算始终保留模拟来源。
 
@@ -16,11 +16,13 @@ T06 特征/标定、T07 砍树/装车识别、T08 持姿代理、T09 摄像头�
 
 操作步骤见[路演手册](docs/DEMO_RUNBOOK.md)，当前逐项证据和人工待办见[验收报告](docs/TEST_REPORT.md)。旧2D的155单测/35E2E及40.06fps记录已归档到[历史报告](docs/history/T11_2D_TEST_REPORT.md)，不作为当前3D性能或真机证据。
 
-最新流畅度验证：**183/183单测、49/49浏览器E2E（6.1分钟）、typecheck/lint/build/assets校验通过**。相同1366×900、DPR1、SwiftShader软件渲染、正式自动模拟，预热10秒后60秒实测从**40.47fps提高到59.74fps**，p95从33.4ms降到16.7ms、无>50ms帧。最终3D比例0.512（699×460绘制后铺满视口），不是同分辨率成绩；硬件GPU和真实摄像头性能仍待验证。主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，保留体积提示。方法、失败候选及原始JSON见`artifacts/qa/performance/README.md`。
+本轮美术完整回归：**208/208单测、49/49浏览器E2E（6.3分钟）、typecheck/lint/build通过**，见`artifacts/qa/art-polish/verify-final.log`。草捆贴图语义修正前的`index-DEI107uw.js`（693.53KB/gzip183.83KB）在1366×900、DPR1、SwiftShader软件渲染、正常自动模拟下，预热10秒后独立60秒实测**58.32fps、p95 16.8ms、最大66.6ms、>50ms 1次**，0页面异常/外源。3D比例0.8→0.5，最终683×450铺满视口，有清晰度代价；这属于约60fps条件结果，硬件GPU与真人性能仍待验证。原始数据见`artifacts/qa/art-polish/final-profile.json`，500KB体积提示保留。
 
-最终正式整局**141.930秒**通过：15次挥砍、15次装车、60秒有效持姿、15段到家、100/100奖励与重置；0页面异常/外源/姿态资源请求。该整局预热后131.3447秒平均**58.63fps**、p95 16.8ms、最大33.5ms，无>50ms帧。四张截图与`production-auto-flow.json/log`已实际生成并查看；这是明确模拟输入，约60fps的结果不代表持续锁60或真人性能。
+随后仅将金黄草捆由年轮改为已有纵向纹理；最终`index-CYPYbaQo.js`（693.52KB/gzip183.83KB）已通过typecheck/lint、208单测、1项完整七阶段视觉E2E、build和assets校验，见`artifacts/qa/art-polish/material-final.log`。49项全套属于该材质修正前版本，未冒称重新全跑。最终首页/近景截图见同目录`delivered-home.png`、`delivered-hero.png`；领域、编排、输入、依赖及默认模拟/显式摄像头切换均保留。
 
-历史证据分别保留于`artifacts/qa/3d/`（170单测/42E2E、142.219秒整局、39.59fps）和`artifacts/qa/default-demo/`（170单测/47E2E、默认启动冒烟18.339秒），不冒作最新性能；本轮未改锁文件或重复安装。
+最终正常生产整局实际**142.227秒**完成15/15/60、15段到家、100/100游戏奖励和重置，0页面异常/外源/姿态资源请求。预热后131.6948秒/7338样本，平均**55.72fps、p95 33.3ms、max33.5ms、>50ms 0**；运送截图时3D比例0.512、699×460铺满1366×900。证据和四张实际截图见`artifacts/qa/art-polish/production-auto-flow.json`及同目录；纹理候选与证据口径见该目录README。远景去纹理短对照无明确收益，已恢复原材质，重新构建哈希仍为上述版本。**稳定约60fps尚未达到，P01保守记fail：当前49ID为33 pass、1 fail、15 manual_pending**。物理摄像头、硬件GPU与最终审美批准继续待验；不拿旧版或短采样冒作最终整局成绩。
+
+历史证据保留于`artifacts/qa/performance/`（183单测/49E2E，旧美术独立60秒59.74fps，141.930秒整局/预热后58.63fps）、`artifacts/qa/3d/`（170单测/42E2E、142.219秒整局、39.59fps）和`artifacts/qa/default-demo/`（170单测/47E2E、默认启动冒烟18.339秒），均不冒作本轮美术结果；本轮未改锁文件或重复安装。
 
 本轮为T11之后用户追加的真3D体验升级，保留原领域逻辑、识别器与有效负例测试。L2/L3真机与最终美术签字仍未通过。获得摄像头后按手册复测，保留模拟开关并显式切换输入，无需重写领域逻辑。
 
@@ -97,7 +99,7 @@ npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts
 
 性能复测：`node scripts/profile-demo.mjs`，保持4175生产预览，且不要同时运行其他测试。默认全新浏览器、1366×900、预热10秒后采样60秒，记录rAF帧间隔、实际GPU、3D渲染比例与布局开销；输出`artifacts/qa/performance/profile.json`。可用`TIDAL_PROFILE_OUTPUT`改证据路径。软件渲染下的结果不代表真实摄像头或硬件GPU表现。
 
-本轮生产验证设置`$env:TIDAL_BLOCK_EXTERNAL='1'`、`$env:TIDAL_QA_DIR='artifacts/qa/performance'`后执行该脚本：浏览器阻断非本地来源，完成正式时长流程，预热10秒后记录至少60秒rAF帧间隔、实际WebGL GPU和3D画布比例。该方法不等于物理断网，也不测真人动作端到端延迟。
+生产整局复测设置`$env:TIDAL_BLOCK_EXTERNAL='1'`、`$env:TIDAL_QA_DIR='artifacts/qa/art-polish'`后执行该脚本：浏览器阻断非本地来源，按正式时长流程记录成果，预热10秒后记录至少60秒rAF帧间隔、实际WebGL GPU和3D画布比例。本轮最终结果待记录；上一轮证据保留于`artifacts/qa/performance/`。该方法不等于物理断网，也不测真人动作端到端延迟。
 
 最新实际命令、结果、截图及待办见 [PROGRESS](docs/PROGRESS.md)、[TEST_REPORT](docs/TEST_REPORT.md)。依赖与许可见 [DEPENDENCIES](docs/DEPENDENCIES.md)、[SOURCES](docs/SOURCES.md)、[原创素材](public/assets/README.md)。旧轮次证据保留在 `artifacts/qa/`，不能代替最新复测或真机验收。
 

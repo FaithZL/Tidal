@@ -1,0 +1,79 @@
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  29 passed (29)
+      Tests  208 passed (208)
+   Start at  13:24:30
+   Duration  1.31s (tests 55%, transform 24%, import 17%, worker 4%)
+
+[WebServer] (node:37264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:20380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (1.0m)
+
+  1 passed (1.1m)
+
+> tidal-farm-motion-demo@0.1.0 build
+> npm run typecheck && npm run build:worker && vite build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 build:worker
+> vite build --config vite.worker.config.ts
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3 modules transformed.
+rendering chunks...
+computing gzip size...
+public/worker/pose.js  135.84 kB │ gzip: 40.48 kB
+
+✓ built in 36ms
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 46 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  13.66 kB │ gzip:   5.04 kB
+dist/assets/index--ubrjyiu.css   16.39 kB │ gzip:   4.45 kB
+dist/assets/index-CYPYbaQo.js   693.52 kB │ gzip: 183.83 kB
+
+✓ built in 177ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+> tidal-farm-motion-demo@0.1.0 assets:verify
+> node scripts/verify-assets.mjs
+
+Verified model and 4 MediaPipe 0.10.32 runtime files
+Verified 2 original farm SVG assets (tidal-farm-v1)
+Verified Three.js 0.186.1 and its local MIT license

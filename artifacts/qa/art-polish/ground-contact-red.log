@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/artResources.test.ts tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/artResources.test.ts (5 tests | 1 failed) 26ms
+   × vertex-painted ground cannot alter the shared plain material used by unpainted objects 3ms
+ ❯ tests/unit/actorArt.test.ts (15 tests | 1 failed) 111ms
+   ❯ farm actor art contracts (15)
+     × keeps soft contact decals above the raised road, including the scaled NPC 21ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/actorArt.test.ts > farm actor art contracts > keeps soft contact decals above the raised road, including the scaled NPC
+AssertionError: expected 0.007999999810010195 to be greater than 0.0625
+ ❯ tests/unit/actorArt.test.ts:26:25
+     24|    const bounds=new T.Box3().setFromObject(disk);
+     25|    // Crossroads top: .04 + .045/2 = .0625; a lower decal is hidden by…
+     26|    expect(bounds.min.y).toBeGreaterThan(.0625);expect(bounds.max.y).to…
+       |                         ^
+     27|   }
+     28|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/artResources.test.ts > vertex-painted ground cannot alter the shared plain material used by unpainted objects
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/artResources.test.ts:63:32
+     61|  try{
+     62|   const painted=r.material(0xa7bd76,'solid',true),plain=r.material(0xa…
+     63|   expect(painted.vertexColors).toBe(true);expect(plain.vertexColors).t…
+       |                                ^
+     64|   expect(painted).not.toBe(plain);expect(painted.map).toBeNull();
+     65|   expect(r.material(0xa7bd76,'solid',true)).toBe(painted);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 18 passed (20)
+   Start at  13:10:40
+   Duration  260ms (tests 52%, transform 26%, import 20%, worker 2%)
