@@ -52,7 +52,7 @@ export class WorldChoreography{
  dispose():void{this.disposed=true;this.snapshot=null;this.flights.clear();this.committed.clear();this.animator.dispose();}
  get frame():WorldFrame{
   const s=this.snapshot,old=this.animator.frame,pose=old.action;
-  const f:WorldFrame={player:{position:{x:2,y:0,z:4},yaw:-Math.PI/2,mode:'idle',pose,stride:0},npc:{position:{x:1,y:0,z:-2},yaw:0,mode:'idle',pose:'ready',stride:0},cart:{x:3,y:0,z:0},logs:[],trees:Array.from({length:this.config.treeCount},(_,i)=>({position:worldTreePosition(i),felled:false,fallProgress:0})),ropeProgress:0,carryProgress:0,action:pose};
+  const f:WorldFrame={player:{position:{x:2,y:0,z:4},yaw:-Math.PI/2,mode:'idle',pose,stride:0},npc:{position:{x:1,y:0,z:-2},yaw:0,mode:'idle',pose:'ready',stride:0},cart:{x:3,y:0,z:0},logs:[],trees:Array.from({length:this.config.treeCount},(_,i)=>({position:worldTreePosition(i),felled:false,fallProgress:0})),ropeProgress:0,carryProgress:0,action:pose,effects:old.effects.map(e=>({kind:e.kind,index:e.index,progress:e.progress}))};
   if(!s)return f;
   const rest=clamp(1-s.remainingMs/this.config.restMs);
   f.trees=f.trees.map((t,i)=>({...t,felled:i<s.choppedTrees,fallProgress:i<s.choppedTrees?old.effects.find(e=>e.kind==='tree'&&e.index===i)?.progress??1:0}));

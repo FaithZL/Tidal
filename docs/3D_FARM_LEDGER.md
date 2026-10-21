@@ -11,4 +11,6 @@ Task 1: complete — 默认0/5与第5/10/15次产5/10/15测试先3失败；改�
 
 Task 2: complete — 7项编排测试先6失败，最小实现转绿；追加重复完成效果与4棵树配置先2失败再修复。165/165单测、typecheck/lint通过。视觉位置/归属仍只读权威快照。
 
-Task 3: in progress — Three真实场景、镜头与资源生命周期。
+Task 3: complete — Three0.186.1与类型0.186.0精确锁定；旧渲染器下orbit测试先失败，真实Three网格/相机接入后1/1浏览器通过（实际相机与投影改变、无额外次数），截图已查看。165单测/type/lint/build通过，包约670.7KB。旧Phaser源码保留追溯，生产入口仅加载Three。
+
+Task 4: in progress — 全屏HUD、通知、单路PiP及等宽结果。
