@@ -6,6 +6,7 @@ import {WorldChoreography} from './choreography.js';
 import {WorldResources,place} from './resources.js';
 import {Character3D,makeCart,makeLog,makePine} from './models.js';
 import {buildEnvironment} from './environment.js';
+import {AdaptiveResolution} from './adaptiveResolution.js';
 export interface GameView{destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;setInteractionEnabled(enabled:boolean):void}
 /** Three owns rendering, never business progress. */
 export class FarmWorld implements GameView{
@@ -14,13 +15,14 @@ export class FarmWorld implements GameView{
  private readonly choreography:WorldChoreography;private readonly player:Character3D;private readonly npc:Character3D;
  private readonly cart:ReturnType<typeof makeCart>;private readonly trees:ReturnType<typeof makePine>[]=[];private logs:T.Group[]=[];
  private chips:T.Mesh[]=[];private sun:T.DirectionalLight|null=null;
+ private readonly resolution=new AdaptiveResolution(devicePixelRatio);private paintedLastFrame=false;
  private readonly resizeObserver:ResizeObserver;private readonly events=new AbortController();private subscriptions:(()=>void)[]=[];
  private snapshot:Readonly<SessionSnapshot>;private request=0;private lastTime=0;private lastPaint='';private lastPhase='home';private overview=true;private dirty=true;private disposed=false;private lost=false;
  constructor(private readonly parent:HTMLElement,controller:SessionController,config:Readonly<DemoConfig>,private readonly onError:(message:string)=>void){
   this.snapshot=controller.getSnapshot();this.choreography=new WorldChoreography(config);this.choreography.sync(this.snapshot);
   try{
   this.renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
-  this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.25));this.renderer.outputColorSpace=T.SRGBColorSpace;
+  this.renderer.setPixelRatio(this.resolution.ratio);parent.dataset.renderScale=String(this.resolution.ratio);this.renderer.outputColorSpace=T.SRGBColorSpace;
   this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.05;
   this.renderer.setClearColor(0xc5ded4);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.BasicShadowMap;
   this.renderer.domElement.setAttribute('aria-label','可旋转的三维农场，拖拽旋转、滚轮缩放');this.renderer.domElement.tabIndex=0;parent.appendChild(this.renderer.domElement);
@@ -56,8 +58,12 @@ export class FarmWorld implements GameView{
  }
  private resize():void{const width=this.parent.clientWidth,height=this.parent.clientHeight;if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.dirty=true;}
  private animate=(now:number):void=>{
-  if(this.disposed)return;this.request=requestAnimationFrame(this.animate);if(this.lost||document.hidden)return;
-  const delta=this.lastTime?Math.min(100,now-this.lastTime):0;this.lastTime=now;this.choreography.advance(delta);
+  if(this.disposed)return;this.request=requestAnimationFrame(this.animate);
+  if(this.lost||document.hidden){this.lastTime=0;this.paintedLastFrame=false;this.resolution.observe(0,false);return;}
+  const elapsed=this.lastTime?now-this.lastTime:0;
+  const ratio=this.resolution.observe(elapsed,this.paintedLastFrame&&!this.snapshot.pauseReasons.length);this.paintedLastFrame=false;
+  if(ratio!==this.renderer.getPixelRatio()){this.renderer.setPixelRatio(ratio);this.parent.dataset.renderScale=String(ratio);this.dirty=true;}
+  const delta=Math.min(100,elapsed);this.lastTime=now;this.choreography.advance(delta);
   let f=this.choreography.frame;this.player.update(f.player,this.snapshot.task==='chop');this.choreography.setHandAnchor(this.player.handPosition());f=this.choreography.frame;
   const state=this.snapshot,home=state.phase==='home'||state.phase==='setup';
   const phase=home?'home':`${state.task}`;
@@ -87,7 +93,7 @@ export class FarmWorld implements GameView{
    this.parent.setAttribute('aria-label',`可旋转三维农场。地面${state.groundLogs}、车上${state.cartLogs}、到家${state.deliveredLogs}。${state.pauseReasons.length?'已暂停':''}`);
   }
   if(this.dirty){
-   this.renderer.render(this.scene,this.camera);this.dirty=false;
+   this.renderer.render(this.scene,this.camera);this.dirty=false;this.paintedLastFrame=true;
    this.parent.dataset.camera=this.camera.position.toArray().map(n=>n.toFixed(3)).join(',');
    const projected=new T.Vector3(-6,1,1).project(this.camera);this.parent.dataset.probe=projected.toArray().map(n=>n.toFixed(4)).join(',');
   }

@@ -1,0 +1,29 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/staticBatch.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/staticBatch.test.ts (3 tests | 1 failed) 23ms
+   × the complete farm environment fits a hundred drawable meshes without removing scenery 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/staticBatch.test.ts > the complete farm environment fits a hundred drawable meshes without removing scenery
+AssertionError: expected 476 to be less than or equal to 100
+ ❯ tests/unit/staticBatch.test.ts:41:28
+     39|   const originalInstances=drawables.filter((mesh):mesh is T.InstancedM…
+     40|   expect(originalInstances.map(mesh=>mesh.count).sort((a,b)=>a-b)).toE…
+     41|   expect(drawables.length).toBeLessThanOrEqual(100);
+       |                            ^
+     42|  }finally{release(root,r);}
+     43| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  11:55:55
+   Duration  160ms (transform 35%, import 31%, tests 30%, worker 3%)

@@ -1,5 +1,6 @@
 import * as T from 'three';
 import {WorldResources,place} from './resources.js';
+import {batchStaticMeshes} from './staticBatch.js';
 function building(r:WorldResources,parent:T.Group,x:number,z:number,w:number,d:number,wall:number,roof:number):void{
  const b=place(parent,new T.Group(),x,0,z);
  place(b,r.box(w+.25,.3,d+.25,0xada17b),0,.15,0);place(b,r.box(w,2.8,d,wall),0,1.6,0);
@@ -86,5 +87,5 @@ export function buildEnvironment(r:WorldResources):T.Group{
  for(let i=0;i<18;i++){
   const hay=place(root,r.cylinder(.6,.6,1.15,0xcdb568,12),3+(i%3)*1.2, .6+Math.floor(i/9)*1.1,-8-Math.floor(i/3)%3);hay.rotation.z=Math.PI/2;
  }
- return root;
+ batchStaticMeshes(root);return root;
 }

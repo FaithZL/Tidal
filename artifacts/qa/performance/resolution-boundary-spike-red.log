@@ -1,0 +1,36 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/adaptiveResolution.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/adaptiveResolution.test.ts (7 tests | 1 failed) 6ms
+   × one isolated spike at the observation boundary does not reduce quality 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/adaptiveResolution.test.ts > one isolated spike at the observation boundary does not reduce quality
+AssertionError: expected 0.8 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0.8
+
+ ❯ tests/unit/adaptiveResolution.test.ts:55:24
+     53|  for(let i=0;i<23;i++)quality.observe(1000/60,true);
+     54|  quality.observe(45,true);
+     55|  expect(quality.ratio).toBe(1);
+       |                        ^
+     56| });
+     57|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  12:07:09
+   Duration  109ms (transform 53%, import 19%, tests 19%, worker 8%)

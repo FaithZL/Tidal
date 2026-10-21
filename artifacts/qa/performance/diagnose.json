@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-21T03:54:38.855Z",
+  "browser": "156.0.8078.4",
+  "scope": "8s first-rest A/B diagnosis, normal production bundle; no fake frame rate or acceptance claim",
+  "results": [
+    {
+      "mode": "unchanged",
+      "measurement": {
+        "fps": 32.43351130183124,
+        "p95": 33.400000000001455,
+        "samples": 260
+      },
+      "taskSeconds": 8.092768000000001,
+      "scriptSeconds": 0.439469
+    },
+    {
+      "mode": "no-backdrop-blur",
+      "measurement": {
+        "fps": 32.49097472924188,
+        "p95": 33.400000000001455,
+        "samples": 261
+      },
+      "taskSeconds": 8.131064,
+      "scriptSeconds": 0.428187
+    },
+    {
+      "mode": "half-render-resolution",
+      "measurement": {
+        "fps": 60.00199590838782,
+        "p95": 16.799999999999272,
+        "samples": 481
+      },
+      "taskSeconds": 7.472803,
+      "scriptSeconds": 0.719263
+    }
+  ]
+}

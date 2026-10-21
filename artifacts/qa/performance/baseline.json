@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-21T03:51:50.588Z",
+  "browser": "156.0.8078.4",
+  "bundles": [
+    "http://127.0.0.1:4175/assets/index-DNN17GvQ.js"
+  ],
+  "viewport": {
+    "width": 1366,
+    "height": 900,
+    "dpr": 1
+  },
+  "renderer": "Three.js r186",
+  "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "method": "headless Chromium production, normal clocks, default automatic simulation, WebGL API counters (including shadows), CPU submission time is not GPU execution time",
+  "warmupMs": 10000,
+  "requestedWindowMs": 60000,
+  "targetFps": 60,
+  "measurement": {
+    "samples": 2429,
+    "spanMs": 60014.299999999996,
+    "fps": 40.473687104573415,
+    "p50Ms": 16.799999999995634,
+    "p95Ms": 33.400000000001455,
+    "maxMs": 50,
+    "over50": 0,
+    "renders": 3022,
+    "drawCalls": 647894,
+    "drawCallsPerRender": 214.39245532759762,
+    "trianglesPerRender": 11557.698874917274,
+    "drawSubmissionMs": 202.89999890327454
+  },
+  "byPhase": {
+    "active/砍伐杉树": {
+      "samples": 585,
+      "spanMs": 12049.500000000002,
+      "fps": 48.54973235403958,
+      "p50Ms": 16.700000000000728,
+      "p95Ms": 33.39999999999782,
+      "maxMs": 33.400000000001455,
+      "over50": 0,
+      "renders": 472,
+      "drawCalls": 68388,
+      "drawCallsPerRender": 144.88983050847457,
+      "trianglesPerRender": 7389.271186440678,
+      "drawSubmissionMs": 21.600000143051147
+    },
+    "rest/把木材装上手推车": {
+      "samples": 486,
+      "spanMs": 14982.799999999996,
+      "fps": 32.43719464986519,
+      "p50Ms": 33.29999999999927,
+      "p95Ms": 33.400000000001455,
+      "maxMs": 33.5,
+      "over50": 0,
+      "renders": 972,
+      "drawCalls": 221484,
+      "drawCallsPerRender": 227.8641975308642,
+      "trianglesPerRender": 12425.977366255143,
+      "drawSubmissionMs": 70.39999932050705
+    },
+    "countdown/把木材装上手推车": {
+      "samples": 275,
+      "spanMs": 5033.100000000006,
+      "fps": 54.63829449047301,
+      "p50Ms": 16.69999999999709,
+      "p95Ms": 33.30000000000291,
+      "maxMs": 33.400000000001455,
+      "over50": 0,
+      "renders": 62,
+      "drawCalls": 13856,
+      "drawCallsPerRender": 223.48387096774192,
+      "trianglesPerRender": 12083.806451612903,
+      "drawSubmissionMs": 5.100000023841858
+    },
+    "active/把木材装上手推车": {
+      "samples": 748,
+      "spanMs": 17582.6,
+      "fps": 42.54205862614176,
+      "p50Ms": 16.700000000004366,
+      "p95Ms": 33.400000000001455,
+      "maxMs": 33.5,
+      "over50": 0,
+      "renders": 846,
+      "drawCalls": 189081,
+      "drawCallsPerRender": 223.5,
+      "trianglesPerRender": 12084,
+      "drawSubmissionMs": 58.00000035762787
+    },
+    "rest/推车返回农场": {
+      "samples": 335,
+      "spanMs": 10366.299999999996,
+      "fps": 32.316255558878304,
+      "p50Ms": 33.30000000000291,
+      "p95Ms": 33.40000000000873,
+      "maxMs": 50,
+      "over50": 0,
+      "renders": 670,
+      "drawCalls": 155085,
+      "drawCallsPerRender": 231.47014925373134,
+      "trianglesPerRender": 12521.373134328358,
+      "drawSubmissionMs": 47.79999905824661
+    }
+  },
+  "cpu": {
+    "TaskDuration": 46.825134000000006,
+    "ScriptDuration": 2.802556,
+    "LayoutDuration": 0.781264,
+    "RecalcStyleDuration": 0.17797200000000002,
+    "LayoutCount": 2436,
+    "RecalcStyleCount": 2436
+  },
+  "physicalCamera": "manual_pending",
+  "errors": [],
+  "external": []
+}

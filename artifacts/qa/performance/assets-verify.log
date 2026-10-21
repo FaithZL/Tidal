@@ -1,0 +1,7 @@
+
+> tidal-farm-motion-demo@0.1.0 assets:verify
+> node scripts/verify-assets.mjs
+
+Verified model and 4 MediaPipe 0.10.32 runtime files
+Verified 2 original farm SVG assets (tidal-farm-v1)
+Verified Three.js 0.186.1 and its local MIT license

@@ -43,6 +43,12 @@ try {
     await expect(page.locator('#statusTag')).toHaveText('训练中', { timeout: 8000 });
   }
   console.log('Automatic carry: normal 60-second target, adjacent hold samples');
+  await page.waitForTimeout(5000);
+  await page.screenshot({path:`${output}/production-carry.png`,fullPage:true});
+  const renderQuality=await page.locator('#worldCanvas canvas').evaluate(canvas=>({
+    scale:Number(canvas.parentElement.dataset.renderScale??1),width:canvas.width,height:canvas.height,
+    cssWidth:canvas.clientWidth,cssHeight:canvas.clientHeight
+  }));
   await expect(page.locator('#resultsModal')).toBeVisible({ timeout: 75000 });
   await expect(page.locator('#carryValue')).toHaveText('60.0/60s');
   await expect(page.locator('#rewardLogs')).toHaveText('15');
@@ -65,7 +71,7 @@ try {
     bundles: await page.locator('script[type="module"]').evaluateAll(nodes => nodes.map(node => node.src)),
     input: 'explicit automatic simulation + authored skeleton; no camera',
     timing: 'production 5s countdown / 15s rests / 60s effective carry; real wall clock',
-    network:blockExternal?'all non-localhost origins blocked by browser routing; not a physical network disconnect':'no routing block; observed request origins',rendering,
+    network:blockExternal?'all non-localhost origins blocked by browser routing; not a physical network disconnect':'no routing block; observed request origins',rendering,renderQuality,
     renderer:await page.locator('#worldCanvas').getAttribute('data-renderer'),gpu:await page.locator('#worldCanvas').getAttribute('data-gpu'),
     durationSeconds: (Date.now() - start) / 1000, metrics, errors, external, poseRequests, reset: 'pass', result: 'pass' };
   await writeFile(`${output}/production-auto-flow.json`, JSON.stringify(report, null, 2) + '\n');console.log(report);

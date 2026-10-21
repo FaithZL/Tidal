@@ -1,12 +1,22 @@
 # Tidal 真3D升级验收报告（2026-10-21）
 
-## 当前增量：默认模拟启动
+## 当前增量：流畅度与约60fps复测
+
+基线`5f5579f`，保持既有领域/识别器/默认模拟/刷新记忆和显式摄像头切换。静态环境476→138可绘制网格（保留36,176三角形/1,031部件），同值DOM不重复写，3D像素比按持续绘制帧耗时自动降低，最低0.5；文字和摄像头视频不降分辨率。相关数量/变换/裁剪、HUD零无效修改、短动作/尖峰/暂停/漏刷新均有实际RED→GREEN证据。最终`npm run verify`退出0：**183/183单测、49/49 E2E（6.1分钟）、typecheck/lint/build通过**；`assets:verify`通过，主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，保留体积提示。未改依赖或锁文件，本轮未重新安装。一次独立只读审查无剩余问题，处理与范围见`artifacts/qa/performance/review.md`。
+
+`P:file`指`artifacts/qa/performance/file`：同一Chromium156、1366×900、DPR1、实际SwiftShader，正常生产时长，预热10秒后独立60秒采样，原始**40.47fps/p95 33.4ms**→最终**59.74fps/p95 16.7ms**，3585样本/60.0143秒、max33.4ms、>50ms 0。实际3D比例1→0.64→0.512，结束699×460绘制后铺满1366×900视口；**有清晰度代价，不能宣称相同分辨率达到60fps**。全文方法、失败候选与计数器口径见`P:README.md`；原始JSON未回写。
+
+正常`dist`整局另实测**141.930秒**，15次挥砍/15次装车/60秒持姿、到家15、奖励100/100、返回首页重置通过，0页面异常/外源/姿态资源请求。预热后131.3447秒/7701样本平均**58.63fps/p95 16.8ms/max33.5ms/>50ms 0**，与60秒对照分别报告；见`P:production-auto-flow.json/log`。四张生产截图真实生成，训练/运送/结果已查看，文字与PiP可读，3D边缘软化可见。浏览器阻断外源不是物理断网，合成骨架不是真人证据。
+
+当前49ID：**34 pass、0 fail、15 manual_pending**。P01在本机软件GL/自适应画质条件下接近60fps目标，不声称锁60；硬件GPU、现场窗口实际表现、摄像头准确率/端到端性能和最终画质批准仍待验。L2/L3没有通过；下方旧轮次数字均为历史，当前P01/P06已更新。
+
+## 历史增量：默认模拟启动
 
 用户已明确授权默认开启模拟，首次打开/刷新自动演示，保留开关和真实摄像头入口。本轮基线`f32f973`；新增五项默认/刷新/偏好/摄像头失败/存储受限/图形门禁用例，原键盘/摄像头负例通过真实偏好显式选择手动入口。前4项RED后实现转绿，相关16E2E及单独图形门禁1项通过；最终`npm run verify`退出0：**170/170单测、47/47 E2E（6.2分钟）、typecheck/lint/build通过**，资源校验通过。当前主包`index-DNN17GvQ.js`675.90KB/gzip177.91KB。证据`artifacts/qa/default-demo/{red,green,renderer-guard,verify,assets-verify}.log`；独立一次审查0发现，见同目录review.md。
 
 `node artifacts/qa/default-demo/production-smoke.mjs`在实际4175生产预览通过，18.339秒完成普通时长默认启动/刷新重播、关闭记忆、注入摄像头缺失后保持手动且不再申请设备、重新开启刷新恢复；0页面异常/外源/姿态资源请求。普通构建忽略URL加速，目标仍60秒；未重复生产完整整局/性能基准。该错误分支为明确注入NotFoundError，不是真机。生产JSON/日志与三张截图均实际产生，本轮没有依赖变更或重新安装。
 
-重置保留偏好、不循环开局；只存本地开关，不存视频/姿态/训练进度。摄像头仍需手动申请视频、标定并显式开始；其错误不会开启模拟。下方49ID与3D整局/性能证据属于已标注的`03e249a`版本；当前增量不重新宣称其软件渲染性能或真机已通过。
+重置保留偏好、不循环开局；只存本地开关，不存视频/姿态/训练进度。摄像头仍需手动申请视频、标定并显式开始；其错误不会开启模拟。本历史段的整局与性能证据属于`03e249a`；下方功能ID保留原证据并经本轮全套回归复测，P01/P04/P06另更新为最新性能记录。历史数据不代替顶部最新增量或真人验收。
 
 本轮为用户批准的T11之后体验升级，分支`feature/3d-farm-experience`，应用基线`30e36e3`，最终应用修复`03e249a`。继续原领域/输入/标定/识别器及负例测试，当前入口改用真实Three.js网格与Orbit相机。L1软件概念流程已有自动证据；**L2真实摄像头与L3产品签字没有通过**。旧2D报告原样存于`history/T11_2D_TEST_REPORT.md`，不沿用其40.06fps作为本轮性能。
 
@@ -27,11 +37,11 @@
 
 最终`npm run verify`退出0：**170/170单测、42/42 E2E（6.1分钟）、typecheck/lint/build通过**；本地资源再次校验通过。正常构建`index-CgL4PAsP.js`675.50KB/gzip177.76KB，保留500KB包体积提示，不改阈值隐藏。完整日志`Q:verify-final.log`。
 
-实际`dist/`在localhost:4175运行，`TIDAL_QA_DIR=artifacts/qa/3d TIDAL_BLOCK_EXTERNAL=1 node scripts/verify-auto-demo.mjs`通过：正式5/15/60配置、真实墙钟**142.219秒**完成15/15/60、到家15、100/100奖励与重置，0页面异常/外源/姿态资源请求。预热10秒后131.5614秒/5209样本，平均**39.59fps**，p50 **33.2ms**、p95 **33.4ms**、最大**50ms**、>50ms 0。实际GPU为**ANGLE SwiftShader软件渲染**，没有采用系统列出的RTX硬件；未达约60fps目标，P01保留fail，不降低目标。达到候选30fps并不等于指定硬件或真人性能通过。
+当时`dist/`在localhost:4175运行，`TIDAL_QA_DIR=artifacts/qa/3d TIDAL_BLOCK_EXTERNAL=1 node scripts/verify-auto-demo.mjs`通过：正式5/15/60配置、真实墙钟**142.219秒**完成15/15/60、到家15、100/100奖励与重置，0页面异常/外源/姿态资源请求。预热10秒后131.5614秒/5209样本，平均**39.59fps**，p50 **33.2ms**、p95 **33.4ms**、最大**50ms**、>50ms 0。实际GPU为**ANGLE SwiftShader软件渲染**，没有采用系统列出的RTX硬件；当时未达约60fps目标，P01判fail，不降低目标。最新复测见顶部及当前P01；候选30fps不等于指定硬件或真人性能通过。
 
 生产首页/训练/结算截图均实际生成并查看，`Q:production-home.png`、`production-running.png`、`production-results.png`；首页无加速徽标，结算真实显示60秒与模拟来源。`Q:production-auto-flow.json/log`为实际计时/来源/性能证据。浏览器路由阻断不替代现场物理断网。
 
-49ID判定：**33 pass、1 fail（P01）、15 manual_pending**。脚本仅核对证据完整性，不代替产品/真人验收；`Q:report-audit.json`记录ID/来源文件核查。
+当时49ID判定：**33 pass、1 fail（P01）、15 manual_pending**。脚本仅核对当时证据完整性，不代替产品/真人验收；`Q:report-audit.json`为旧版本核查，最新性能见上方增量及当前P01。
 
 ## 功能与领域规则
 
@@ -105,12 +115,12 @@
 
 | ID | 输入与预期 | 实际与证据 | 判定 |
 |---|---|---|---|
-| P01 | A预热后≥60秒，约60fps目标 | 新3D预热后131.5614秒/5209样本，39.59fps，p50 33.2/p95 33.4/max50ms；实际ANGLE SwiftShader。目标未达，硬件GPU待复测，不把候选30fps改作目标；Q:production-auto-flow.json | fail |
+| P01 | A预热后≥60秒，约60fps目标 | 本机SwiftShader/自适应比例0.512：独立60.0143秒59.74fps/p95 16.7ms；正式整局预热后131.3447秒58.63fps/p95 16.8ms/max33.5ms/>50ms 0；P:final-confirmed-profile.json、production-auto-flow.json。约60而非锁60，硬件/真人仍待复测 | pass |
 | P02 | R推理≥10–15Hz/单帧在途 | 协议与V实际推理通过，真人性能未测；U:poseWorkerClient.test.ts | manual_pending |
 | P03 | R端到端阶段p95≤250ms | 未采真人画面证据，rAF/推理耗时不能替代 | manual_pending |
-| P04 | 物理断外网刷新整局 | 子路径和正式整局阻断外源通过，142.219秒完成结算重置；物理断网彩排未做；Q:deployment/subpath.json、production-auto-flow.json | manual_pending |
+| P04 | 物理断外网刷新整局 | 子路径与最新正式整局阻断外源通过，141.930秒结算重置；物理断网彩排未做；Q:deployment/subpath.json、P:production-auto-flow.json | manual_pending |
 | P05 | 实际构建子路径本地资源 | /tidal/真实模型推理与404负例保留，资源均同源；B:deployment.spec.ts；Q:deployment/subpath.json | pass |
-| P06 | 干净安装→全套→实际dist | npm ci/资源同步校验、170单测/42E2E/type/lint/build及正式dist整局/重置通过；Q:npm-ci.log、assets-verify-final.log、verify-final.log、production-auto-flow.json。主包675.50KB，保留体积提示 | pass |
+| P06 | 干净安装→全套→实际dist | 锁文件未变；干净安装为历史Q:npm-ci.log，本轮未重复安装。最新183单测/49E2E/type/lint/build/assets及正式dist整局/重置通过；P:verify-final.log、assets-verify.log、production-auto-flow.json。主包678.15KB，保留体积提示 | pass |
 
 ## 产品处理与下一步
 

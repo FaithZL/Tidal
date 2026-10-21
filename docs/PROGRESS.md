@@ -1,6 +1,34 @@
 # Tidal 开发进度（2026-10-21，用户批准的真3D升级）
 
-## 最新追加：模拟默认开启与刷新自动演示
+## 最新追加：接近60fps的演示流畅度优化
+
+用户要求继续优化流畅度、保留默认模拟和真实摄像头切换，验证后提交/push。工作分支仍`feature/3d-farm-experience`，基线`5f5579f`；本轮开始工作区干净，实际typecheck和原170单测通过。保留原SessionController、输入适配器、标定/识别器、配置、依赖及全部负例，没有新增引擎或改写业务。
+
+- `src/game/world/{environment,staticBatch}.ts`：只对不可变环境按几何/材质/阴影和16单位空间格合批，476个可绘制网格降到138，保留36,176三角形/1,031部件、原实例与全部变换/阴影。先用数量预算实际RED；全局合批在生产对照中没有改善fps且裁剪变差，新增远端裁剪RED后改为空间合批，5项GREEN。没有用删除场景达预算。
+- `src/ui/domUpdates.ts`、`src/browser.ts`：缓存稳定ID节点，相同文本/属性/类名/进度不重复写；合并同一帧内中间文案，保留动作阶段即时反馈、单路PiP与切源调用。新增`render-efficiency.spec.ts`先测到20帧140次无效DOM修改而RED，修复后零修改/节点保留及一次完整计数2项GREEN。没有节流Controller或整个界面订阅。
+- `src/game/world/{adaptiveResolution,FarmWorld}.ts`：只对3D画布自适应像素比，初始min(DPR,1.25)、最低min(初始,0.5)。连续绘制400ms均值>17.5ms且有至少2帧/5%慢帧、当前仍慢时降0.8倍；暂停/静止/后台/无效或>250ms间隔清观测，刷新才重新评估，避免反复升降。短动作、55fps重复漏刷新、单尖峰、恢复、低DPR、下界均先实际失败再修复；8项策略测试通过。不改变运动输入频率、有效时间或库存。
+- `scripts/profile-demo.mjs`、`scripts/verify-auto-demo.mjs`：新增可复测60秒rAF/实际GPU/CPU布局/WebGL调用诊断，正式整局补运送截图与实际画布比例。原始失败/候选结果全部保留在`artifacts/qa/performance/`，各JSON版本、方法与计数器口径见该目录README。一次独立只读审查无剩余C/I/Minor，单尖峰建议已用RED→GREEN处理；后续实测门禁参数修正另有负例，不重复派审查。
+
+### 实际性能对照
+
+同一Chromium156.0.8078.4、1366×900 CSS像素、DPR1、正常生产时长，预热10秒后观察60秒，默认自动模拟、ANGLE SwiftShader软件渲染：
+
+- 原始`index-DNN17GvQ`：**40.47fps**，p95 33.4ms，2429样本/60.0143秒；原分辨率。仅去背景模糊的8秒诊断无收益，未据此修改CSS。
+- 最终`index-w4yGvhR9`：**59.74fps**，p50/p95 **16.7ms**、最大33.4ms、>50ms **0次**，3585样本/60.0143秒；0页面异常/外源。装车及第二休息约60.00fps，首休息59.67fps，挥砍59.09fps。完整原始数据为`final-confirmed-profile.json/log`，`final-profile.json`是57.24fps中间候选，不混用。
+- 代价必须明确：3D画布比例逐步1→0.64→0.512，结束实际**699×460**、CSS仍1366×900；不是同分辨率达到60fps。文字/摄像头视频清晰度不变。布局耗时0.781264→0.024931秒，次数2436→164；更高帧数下ScriptDuration增加，未谎称所有CPU时间都下降。
+- 基线JSON旧`renders/*PerRender`命名实际指COLOR清除/pass，不是呈现帧；保留原数据，后续改用`colorClears/*PerColorClear`。fps只取独立rAF间隔，不拿draw次数、HTTP200或时钟模拟当fps。硬件GPU、真人推理与端到端性能仍`manual_pending`。
+
+### 本轮验证与交付
+
+- `npm run verify`退出0：**183/183单测、49/49 E2E（6.1分钟）、typecheck/lint/build通过**。`npm run assets:verify`通过本地模型、MediaPipe运行时、原创素材和Three许可校验。主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，原500KB提示保留；最终日志`verify-final.log`、`assets-verify.log`。
+- `$env:TIDAL_QA_DIR='artifacts/qa/performance'; $env:TIDAL_BLOCK_EXTERNAL='1'; node scripts/verify-auto-demo.mjs`在实际4175生产预览退出0：**141.930秒**完成正常5/15/60、15次挥砍/15次装车/60秒有效持姿、15段到家、100/100游戏奖励与返回首页重置；来源始终标为自动模拟，0页面异常/外源/姿态资源请求。预热后**131.3447秒/7701样本，58.63fps、p50 16.7/p95 16.8/最大33.5ms、>50ms 0**；与独立60秒59.74fps不同范围，分别报告。日志/JSON和四张实际截图均保存在本轮证据目录，已查看训练、运送和结算图片，文字/PiP/结果可读；3D边缘软化可见，最终主观画质仍待用户确认。
+- 当前49验收ID为**34 pass、0 fail、15 manual_pending**，P01只在本机软件GL/自适应条件下达到约60fps，不保证锁60或指定硬件/真人性能。README/TEST_REPORT/开发指南/来源说明已更新。旧轮次被测试重生成的历史截图/JSON均恢复原版，本轮证据独立保存。
+
+未更改依赖/锁文件，本轮不重复安装；上一轮干净安装记录仍保留并明确版本。真实骨架/九步标定/准确率/真人PiP/真人整局、硬件GPU与现场物理断网继续`manual_pending`；最低比例主观清晰度和最终美术由用户确认。保留默认开/刷新新会话、显式关与真实摄像头选择的记忆；不自动申请设备、不静默回模拟。
+
+安装与启动仍为`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`；正式`npm run build`→`npm run preview -- --port 4175 --strictPort`。本轮停止在性能增量检查点；下一步在指定演示设备验证硬件GPU和真实摄像头，或处理用户明确指定的新反馈。按授权只提交/push当前开发分支，不合并main、不公开部署。下文为历史记录。
+
+## 历史追加：模拟默认开启与刷新自动演示
 
 用户明确要求默认开启、刷新可直接看效果、保留开关/以后切真实输入，验证后提交push。工作分支仍`feature/3d-farm-experience`，基线`f32f973`；开始工作区干净，实际typecheck与170单测通过。采用现有开关/启动流程的小改动，不新增假摄像头或人工关键点识别链路。
 
@@ -16,7 +44,7 @@
 
 本轮验证完毕后按用户授权提交/push当前开发分支；没有合并或推送main，没有公开部署。后续只补真机/硬件与产品验收，或用户另指定的工作。
 
-## 当前检查点：真3D软件交付完成，性能目标与真机/产品验收保留待办
+## 历史检查点：真3D软件交付完成，性能目标与真机/产品验收保留待办
 
 用户要求并批准可旋转真3D、全景首页/紧凑通知、单路摄像头PiP、每树5段、人物推车/手部抛木/NPC绑绳、连续远程运送和等宽运动/奖励结算；设计与实施清单已确认，按当前目录执行。用户既有验证后commit/push授权继续有效，只推开发分支，不合并main、不对外部署。
 

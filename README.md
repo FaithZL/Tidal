@@ -12,11 +12,15 @@ T06 特征/标定、T07 砍树/装车识别、T08 持姿代理、T09 摄像头�
 
 当前首页展示完整原创3D农场与紧凑计划通知；拖拽旋转、滚轮缩放、按钮恢复全景。训练时右下PiP展示同一摄像头视频/骨架或明确标注的合成骨架，以及动作阶段和训练处方。人物推车、每树5段、从手部抛木、NPC绑绳，Carry按有效时间连续前进40世界单位（示意距离，非实测米数）。结果等宽展示运动数据与游戏奖励。音效默认关闭，可点击启用/静音。
 
+为接近60fps，持续运动中如果帧耗时偏高，3D画布会自动降低渲染分辨率，最低为CSS尺寸的0.5倍；文字、按钮和摄像头视频保持原尺寸与清晰度。场景内容、运动目标与计时不变。暂停、静止和单次卡顿不触发降档；本页保留选定档位以避免画质来回跳动，刷新重新评估。高性能设备保留初始分辨率（设备像素比上限1.25）。
+
 操作步骤见[路演手册](docs/DEMO_RUNBOOK.md)，当前逐项证据和人工待办见[验收报告](docs/TEST_REPORT.md)。旧2D的155单测/35E2E及40.06fps记录已归档到[历史报告](docs/history/T11_2D_TEST_REPORT.md)，不作为当前3D性能或真机证据。
 
-上一轮真3D验证（`03e249a`）：170/170单测、42/42浏览器E2E、typecheck/lint/build、干净安装与资源校验通过。正式整局142.219秒；SwiftShader软件渲染预热后平均39.59fps/p95 33.4ms，**约60fps目标未达**，硬件GPU未测。49验收ID为33通过/1失败/15人工待验；这些整局性能数值属于当时构建，不冒作本轮默认启动性能。
+最新流畅度验证：**183/183单测、49/49浏览器E2E（6.1分钟）、typecheck/lint/build/assets校验通过**。相同1366×900、DPR1、SwiftShader软件渲染、正式自动模拟，预热10秒后60秒实测从**40.47fps提高到59.74fps**，p95从33.4ms降到16.7ms、无>50ms帧。最终3D比例0.512（699×460绘制后铺满视口），不是同分辨率成绩；硬件GPU和真实摄像头性能仍待验证。主包`index-w4yGvhR9.js`678.15KB/gzip178.65KB，保留体积提示。方法、失败候选及原始JSON见`artifacts/qa/performance/README.md`。
 
-本轮默认启动验证：**170/170单测、47/47浏览器E2E（6.2分钟）、typecheck/lint/build/assets校验通过**。正式`dist`首次启动/刷新/关闭记忆/摄像头错误后不切模拟/重新开启冒烟通过（18.339秒、0页面异常/外源/姿态资源请求），未重复做完整生产整局或性能基准。主包`index-DNN17GvQ.js`675.90KB/gzip177.91KB，体积提示保留。日志和截图见`artifacts/qa/default-demo/`。
+最终正式整局**141.930秒**通过：15次挥砍、15次装车、60秒有效持姿、15段到家、100/100奖励与重置；0页面异常/外源/姿态资源请求。该整局预热后131.3447秒平均**58.63fps**、p95 16.8ms、最大33.5ms，无>50ms帧。四张截图与`production-auto-flow.json/log`已实际生成并查看；这是明确模拟输入，约60fps的结果不代表持续锁60或真人性能。
+
+历史证据分别保留于`artifacts/qa/3d/`（170单测/42E2E、142.219秒整局、39.59fps）和`artifacts/qa/default-demo/`（170单测/47E2E、默认启动冒烟18.339秒），不冒作最新性能；本轮未改锁文件或重复安装。
 
 本轮为T11之后用户追加的真3D体验升级，保留原领域逻辑、识别器与有效负例测试。L2/L3真机与最终美术签字仍未通过。获得摄像头后按手册复测，保留模拟开关并显式切换输入，无需重写领域逻辑。
 
@@ -91,7 +95,9 @@ npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts
 
 正式时长自动整局验证：保持4175预览服务，在另一终端执行 `node scripts/verify-auto-demo.mjs`；默认输出 `artifacts/qa/demo-toggle/`，可用 `TIDAL_QA_DIR` 与 `TIDAL_PREVIEW_URL` 改路径。使用真实墙钟，仍为明确模拟输入。
 
-本轮生产验证设置`$env:TIDAL_BLOCK_EXTERNAL='1'`、`$env:TIDAL_QA_DIR='artifacts/qa/3d'`后执行该脚本：浏览器阻断非本地来源，完成正式时长流程，预热10秒后记录至少60秒rAF帧间隔和实际WebGL GPU。该方法不等于物理断网，也不测真人动作端到端延迟。
+性能复测：`node scripts/profile-demo.mjs`，保持4175生产预览，且不要同时运行其他测试。默认全新浏览器、1366×900、预热10秒后采样60秒，记录rAF帧间隔、实际GPU、3D渲染比例与布局开销；输出`artifacts/qa/performance/profile.json`。可用`TIDAL_PROFILE_OUTPUT`改证据路径。软件渲染下的结果不代表真实摄像头或硬件GPU表现。
+
+本轮生产验证设置`$env:TIDAL_BLOCK_EXTERNAL='1'`、`$env:TIDAL_QA_DIR='artifacts/qa/performance'`后执行该脚本：浏览器阻断非本地来源，完成正式时长流程，预热10秒后记录至少60秒rAF帧间隔、实际WebGL GPU和3D画布比例。该方法不等于物理断网，也不测真人动作端到端延迟。
 
 最新实际命令、结果、截图及待办见 [PROGRESS](docs/PROGRESS.md)、[TEST_REPORT](docs/TEST_REPORT.md)。依赖与许可见 [DEPENDENCIES](docs/DEPENDENCIES.md)、[SOURCES](docs/SOURCES.md)、[原创素材](public/assets/README.md)。旧轮次证据保留在 `artifacts/qa/`，不能代替最新复测或真机验收。
 

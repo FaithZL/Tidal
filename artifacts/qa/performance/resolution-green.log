@@ -1,0 +1,12 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/adaptiveResolution.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  12:03:15
+   Duration  101ms (transform 53%, import 25%, worker 11%, tests 10%, environment 1%)
