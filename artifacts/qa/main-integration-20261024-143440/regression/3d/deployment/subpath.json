@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:55594/tidal/",
+  "browser": "156.0.8078.4",
+  "input": "Chromium fake video; real local MediaPipe CPU Worker, not a physical camera",
+  "external": [],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:55594/tidal/",
+    "http://127.0.0.1:55594/tidal/assets/index-DcQxQ0BS.js",
+    "http://127.0.0.1:55594/tidal/assets/index-CVIrnIoA.css",
+    "http://127.0.0.1:55594/tidal/assets/harvest-shirt.svg",
+    "http://127.0.0.1:55594/tidal/assets/browser-vAnFnxVQ.js",
+    "http://127.0.0.1:55594/tidal/assets/OrbitControls-BWIrCJhk.js",
+    "http://127.0.0.1:55594/tidal/assets/nprMaterials-D_gzCDo6.js",
+    "http://127.0.0.1:55594/tidal/assets/userModel-Dad6QtH_.js",
+    "http://127.0.0.1:55594/tidal/worker/pose.js",
+    "http://127.0.0.1:55594/tidal/models/pose_landmarker_lite.task",
+    "http://127.0.0.1:55594/tidal/mediapipe/wasm/vision_wasm_internal.js",
+    "http://127.0.0.1:55594/tidal/mediapipe/wasm/vision_wasm_internal.wasm"
+  ],
+  "result": "pass"
+}

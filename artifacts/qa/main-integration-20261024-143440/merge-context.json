@@ -1,0 +1,32 @@
+{
+  "mainBefore": "a45116b8fea9d696f482c936a4aabaf79c597f0c",
+  "feature": "8b96cb91fb0da5c8eea0d25c69edec08b96be791",
+  "featureTree": "b6b671aeb4185940a306a9ef5ea248baaf6499d5",
+  "method": "fast-forward after full verification and independent review",
+  "historicalBranches": [
+    {
+      "branch": "origin/feature/3d-farm-experience",
+      "head": "daf2af1e295feba24639a5891bdadb8fcf9989f9",
+      "ancestorOfFeature": true,
+      "missingFromFeature": 0
+    },
+    {
+      "branch": "origin/feature/t07-t11-completion",
+      "head": "30e36e3d9a3a196ca11810d40e5eff6f08621296",
+      "ancestorOfFeature": true,
+      "missingFromFeature": 0
+    },
+    {
+      "branch": "feature/t07-t11-completion",
+      "head": "0baf882e4d989c5063b4eb32e126f843430a49c5",
+      "ancestorOfFeature": true,
+      "missingFromFeature": 0
+    },
+    {
+      "branch": "feature/t06-pose-calibration",
+      "head": "e8f129abe7234cbb00a2451b853c85b75de6bcb9",
+      "ancestorOfFeature": true,
+      "missingFromFeature": 0
+    }
+  ]
+}

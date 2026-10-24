@@ -1,5 +1,34 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：审查、完整验证后合入并推送main（2026-10-24）
+
+用户明确要求“酌情合入main”。本轮核对远端与历史分支：`feature/3d-farm-experience`、T06标定、T07–T11（包括本地额外设计文档提交）均已是最新开发分支的祖先，缺失提交数全部0，无需重复合并。`origin/main=a45116b`也是`codex/npr-farm-sample=8b96cb9`的祖先，因此选择快进合并，保留原提交和开发分支，不重写历史。源应用完整验证与两席独立只读审查通过后，将本地main快进到`8b96cb9`，实际核对Git树与受测开发分支完全相同；`git push origin main`成功，随后远端main与开发分支均实查为`8b96cb91fb0da5c8eea0d25c69edec08b96be791`。本节、README、授权记录与本轮证据随后归档为独立提交同步。
+
+本轮只集成已有局部成果与交付说明，没有修改应用源码/输入/领域/配置/依赖、扩大农场或改变默认入口；旧3D、NPC和静态/原型对照保留，真实设备与最终美术仍按原状态待验。用户已指定以后以新电脑为主开发环境，新电脑可直接`git clone https://github.com/FaithZL/Tidal.git`取得main。
+
+### 本轮实际验证与证据
+
+全部新记录在`artifacts/qa/main-integration-20261024-143440/`：
+
+| 命令或检查 | 实际结果 | 证据 |
+|---|---|---|
+| `npm run verify` | **exit0**；typecheck/lint、**369/369单测（49文件）**、**78/78 E2E（8.2分钟）**及build全部通过 | `verify.log` |
+| `npm run assets:verify` | 合并前、快进检出后均exit0，含两FBX及CC0/NPR原素材 | `assets-verify.log`、`assets-after-merge.log` |
+| 祖先关系及快进结果树核对 | 所有历史分支无遗漏；main快进结果与受测分支Git树完全相同 | `merge-context.json`、`merged-tree.json` |
+| 校验当前dist/index.html与临时4176预览响应完全相同，设置`TIDAL_GRIP_QA_DIR=artifacts/qa/main-integration-20261024-143440/production`、`TIDAL_GRIP_RECORD=0`运行`node artifacts/qa/user-grip/capture-grip.mjs` | exit0，生产人物/房屋、六阶段逐帧、特写、旋转和窄屏抓图完成；0页面/控制台错误、0外源请求，没有录视频 | `production-capture.log`、`production/capture.json`及15张PNG |
+
+生产检查前旧4176服务已停止，本轮使用工具管理的临时预览会话运行并在检查后正常结束。自动截图不等于用户最终美术批准；390×844仍是桌面Chromium窄屏，不是真手机。最终构建入口仍为`index-D08wYbcD.js`，人物样片仍为`userModelSample-6S0FYXKr.js`；原500KB/FBX贴图警告保留。本轮没有重新`npm ci`/`assets:sync`，没有新真人摄像头、硬件GPU或60fps采样；旧P01 fail与人工待验项不改写。上轮76/78加两项复验的记录保留为历史，本轮78/78是这次新执行的一整套结果。
+
+测试前备份并逐项核对1,177份历史QA；33份被测试覆盖的文件先转存本轮`regression/`，再按原SHA恢复旧路径，见`qa-restoration.json`。本轮只新增独立证据，不用新截图替换旧轮次结论。README更新main接手方式，AGENTS记录本次明确合并/推送授权；后续常规工作仍不自动合并或推送。
+
+### 独立审查与保留待办
+
+两席只读审查均判定可合并，未发现Critical/Important。素材席直接读提交对象核对九份CC0、两FBX与两张NPR PNG哈希；以`core.autocrlf=false/true`只读过滤得到18/18字节及SHA一致，确认不是LFS指针且本地引用完整。运行席核对独立预览不初始化训练/摄像头或改模拟偏好、NPR素材门禁、取消/迟到释放及上下文丢失锁存；完整结果见`review.md`。
+
+保留两项不阻塞合并的Minor，均为静态审查推导，未声称已经浏览器复现或测得GPU泄漏：旧`model=prototype`对照页`src/characterSample.ts:30–31`在pagehide释放后缺少持久化pageshow恢复，BFCache后退可能恢复失效画面；同文件局部`sun.shadow`未纳入显式统一释放。下一步在新电脑按具体任务先复现，再补相应测试并最小修复，暂不扩大本次集成范围。
+
+启动仍为`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，访问实际端口的`/?art=character-motion&rev=7`；普通`/`维持默认无摄像头模拟规则。继续停在第7版人物局部审阅，等待用户反馈再决定后续开发，不把合入main等同于L2/L3或最终美术验收。
+
 ## 最新追加：已推送开发分支供新电脑接续（2026-10-24）
 
 用户明确授权将`codex/npr-farm-sample`推送GitHub，并指定之后以新电脑作为本项目主开发环境。本轮`git push -u origin codex/npr-farm-sample`成功创建远端分支并设置upstream；随后`git ls-remote --heads origin codex/npr-farm-sample main`实查，开发分支为`068ea851f83feb16f40452a1ff4bba6a8f4ce8b3`，`main`仍为`a45116b8fea9d696f482c936a4aabaf79c597f0c`。本节作为后续文档提交同步，不改变已推送的应用基线；没有合并main或部署。
