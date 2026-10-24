@@ -1,0 +1,47 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/character-motion.spec.ts tests/e2e/deployment.spec.ts
+
+[WebServer] (node:2152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:69612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:70756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 17 tests using 1 worker
+
+(node:57684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input (1.8s)
+  ok  2 tests\e2e\character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable (3.3s)
+[WebServer] 19:55:53 [vite] (client) [console.error] TypeError: Failed to fetch
+[WebServer]     at FileLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31825:3)
+[WebServer]     at GLTFLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js?v=8297a5dd:194:10)
+[WebServer]     at http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31632:10
+[WebServer]     at new Promise (<anonymous>)
+[WebServer]     at GLTFLoader.loadAsync (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31631:10)
+[WebServer]     at loadSampleCharacter (http://127.0.0.1:4173/src/game/world/sampleCharacter.ts:504:10)
+[WebServer]     at start (http://127.0.0.1:4173/src/characterSample.ts:123:17)
+[WebServer]     at http://127.0.0.1:4173/src/characterSample.ts:243:6
+  ok  3 tests\e2e\character-motion.spec.ts:35:1 › bone asset failure is visible and disables replay (545ms)
+  ok  4 tests\e2e\character-motion.spec.ts:42:1 › face inspection changes the real camera without changing a paused pose or saved input preference (2.0s)
+  ok  5 tests\e2e\character-motion.spec.ts:56:1 › switching to idle while paused redraws the bones immediately (2.2s)
+  ok  6 tests\e2e\character-motion.spec.ts:68:1 › the review timeline selects an exact paused pose without advancing a workout (2.1s)
+  ok  7 tests\e2e\character-motion.spec.ts:78:1 › the original farm cannot receive clicks before its dynamic module has installed handlers (858ms)
+  ok  8 tests\e2e\character-motion.spec.ts:89:1 › entry module download failure is explicit and leaves a usable reload link (164ms)
+(node:29844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 tests\e2e\deployment.spec.ts:16:64 › desktop 1280x720 keeps controls visible through a complete simulated session (7.3s)
+  ok 10 tests\e2e\deployment.spec.ts:16:64 › desktop 1366x768 keeps controls visible through a complete simulated session (7.3s)
+  ok 11 tests\e2e\deployment.spec.ts:16:64 › desktop 1920x1080 keeps controls visible through a complete simulated session (7.7s)
+  ok 12 tests\e2e\deployment.spec.ts:29:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (1.7s)
+  ok 13 tests\e2e\deployment.spec.ts:43:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (4.5s)
+  ok 14 tests\e2e\deployment.spec.ts:104:3 › production under /tidal/ › the isolated character review loads its bones and textures under the same subpath (1.4s)
+  ok 15 tests\e2e\deployment.spec.ts:113:3 › production under /tidal/ › all local assets and real MediaPipe inference work with external requests blocked (1.5s)
+  ok 16 tests\e2e\deployment.spec.ts:123:83 › production under /tidal/ › models/pose_landmarker_lite.task 404 reports failure and releases capture (810ms)
+  ok 17 tests\e2e\deployment.spec.ts:123:83 › production under /tidal/ › mediapipe/wasm/*.wasm 404 reports failure and releases capture (981ms)
+
+  17 passed (52.7s)

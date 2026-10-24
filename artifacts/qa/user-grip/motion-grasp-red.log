@@ -1,0 +1,25 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (22 tests | 1 failed) 1810ms
+   × the motion aligns each real hand grasp opening with the handle instead of centering the shaft on palm skin 76ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the motion aligns each real hand grasp opening with the handle instead of centering the shaft on palm skin
+AssertionError: left actual grasp opening at 0: expected 0.06576473218982967 to be less than 0.006
+ ❯ tests/unit/userCharacterMotion.test.ts:113:121
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 21 passed (22)
+   Start at  23:03:32
+   Duration  1.95s (tests 97%, import 2%, transform 1%)
+

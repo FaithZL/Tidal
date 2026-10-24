@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "retrievedDate": "2026-10-22",
+  "purpose": "Local isolated character-motion prototype. Quaternius CC0 peasant outfit with stand/chop/recover motions; not Leo, not purchased, no claim of final anime art or verified camera/retargeting/contact.",
+  "author": "Quaternius",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourcePages": [
+    "https://quaternius.com/packs/universalanimationlibrary.html",
+    "https://quaternius.com/packs/universalanimationlibrary2.html",
+    "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html"
+  ],
+  "distributionNote": "Product-specific Standard ZIP license files retained verbatim; no reliance on the differing site-wide QAL. Archive files themselves are not in the repository.",
+  "files": [
+    {
+      "file": "idle.glb",
+      "bytes": 253548,
+      "sha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7"
+    },
+    {
+      "file": "Male_Peasant.bin",
+      "bytes": 674764,
+      "sha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c"
+    },
+    {
+      "file": "Male_Peasant.gltf",
+      "bytes": 23103,
+      "sha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216"
+    },
+    {
+      "file": "OUTFITS-LICENSE.txt",
+      "bytes": 728,
+      "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb"
+    },
+    {
+      "file": "T_Peasant_BaseColor.png",
+      "bytes": 5055760,
+      "sha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade"
+    },
+    {
+      "file": "T_Regular_Male_Dark_BaseColor.png",
+      "bytes": 1316151,
+      "sha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802"
+    },
+    {
+      "file": "tree-chopping.glb",
+      "bytes": 134712,
+      "sha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41"
+    },
+    {
+      "file": "UAL1-LICENSE.txt",
+      "bytes": 332,
+      "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061"
+    },
+    {
+      "file": "UAL2-LICENSE.txt",
+      "bytes": 332,
+      "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061"
+    }
+  ],
+  "motions": [
+    {
+      "file": "idle.glb",
+      "sha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7",
+      "bytes": 253548,
+      "clip": "Idle_Loop",
+      "durationSeconds": 2.5,
+      "sourceUrl": "https://quaternius.itch.io/universal-animation-library",
+      "sourceArchive": "universal-animation-library.zip",
+      "sourceArchiveSha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
+      "sourceArchiveEntry": "Universal Animation Library[Standard]/Unreal-Godot/UAL1_Standard.glb",
+      "sourceEntrySha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+      "licenseFile": "UAL1-LICENSE.txt",
+      "license": "CC0-1.0",
+      "derivation": "Kept only the named animation, all hierarchy nodes, and its input/output accessors; stripped mannequin mesh/material/skin/texture; compacted referenced bufferViews, preserving every retained accessor byte and original animation channel; no resampling or key edits."
+    },
+    {
+      "file": "tree-chopping.glb",
+      "sha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41",
+      "bytes": 134712,
+      "clip": "TreeChopping_Loop",
+      "durationSeconds": 0.9666666666666667,
+      "sourceUrl": "https://quaternius.itch.io/universal-animation-library-2",
+      "sourceArchive": "universal-animation-library-2.zip",
+      "sourceArchiveSha256": "4008ea208a604773a2b2177d965f0f5d3195498b5bf838c3f5785d68e95f2a68",
+      "sourceArchiveEntry": "Universal Animation Library 2[Standard]/Unreal-Godot/UAL2_Standard.glb",
+      "sourceEntrySha256": "8cee20ab1bc55130092447e810e26df22dd2803eccc54f52137a7d54d7ab88a8",
+      "licenseFile": "UAL2-LICENSE.txt",
+      "license": "CC0-1.0",
+      "derivation": "Kept only the named animation, all hierarchy nodes, and its input/output accessors; stripped mannequin mesh/material/skin/texture; compacted referenced bufferViews, preserving every retained accessor byte and original animation channel; no resampling or key edits."
+    }
+  ],
+  "outfit": {
+    "sourceUrl": "https://quaternius.itch.io/modular-character-outfits-fantasy",
+    "sourceArchive": "outfit-standard.zip",
+    "sourceArchiveSha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
+    "sourceArchiveBytes": 294347394,
+    "sourceEntrySha256": "8f5a6cf6c1cf96e0a0f8e1a861b4245d42b7f88d44e5076da3d48f3fc52f4e76",
+    "sourceArchiveEntry": "Modular Character Outfits - Fantasy[Standard]/Exports/glTF (Godot-Unreal)/Outfits/Male_Peasant.gltf",
+    "license": "CC0-1.0",
+    "licenseFile": "OUTFITS-LICENSE.txt",
+    "files": [
+      {
+        "file": "Male_Peasant.gltf",
+        "bytes": 23103,
+        "sha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216",
+        "derivation": "Removed normal/roughness texture references and their image/texture entries; kept two original base-color maps. Set metallicFactor0 and roughnessFactor0.8. No mesh, skin, bone, UV, weight, or transform edits."
+      },
+      {
+        "file": "Male_Peasant.bin",
+        "bytes": 674764,
+        "sha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c",
+        "sourceArchiveEntry": "Modular Character Outfits - Fantasy[Standard]/Exports/glTF (Godot-Unreal)/Outfits/Male_Peasant.bin",
+        "derivation": "Exact original BIN."
+      },
+      {
+        "file": "T_Peasant_BaseColor.png",
+        "bytes": 5055760,
+        "sha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade",
+        "sourceArchiveEntry": "Modular Character Outfits - Fantasy[Standard]/Exports/glTF (Godot-Unreal)/Outfits/T_Peasant_BaseColor.png",
+        "derivation": "Exact original base-color PNG, no pixel edits."
+      },
+      {
+        "file": "T_Regular_Male_Dark_BaseColor.png",
+        "bytes": 1316151,
+        "sha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802",
+        "sourceArchiveEntry": "Modular Character Outfits - Fantasy[Standard]/Exports/glTF (Godot-Unreal)/Outfits/T_Regular_Male_Dark_BaseColor.png",
+        "derivation": "Exact original base-color PNG, no pixel edits."
+      }
+    ]
+  },
+  "inspection": {
+    "loader": "Installed three@0.186.1 GLTFLoader (Node), actual parseAsync and AnimationMixer sampling. Raw GLB original and subset hand positions match at t0.1933333.",
+    "coordinateSystem": "glTF Y-up, metres; model forward +Z by toe direction. Keep original root bone rotation (-90deg about X).",
+    "joints": 65,
+    "boneNames": [
+      "root",
+      "pelvis",
+      "spine_01",
+      "spine_02",
+      "spine_03",
+      "neck_01",
+      "Head",
+      "clavicle_l",
+      "upperarm_l",
+      "lowerarm_l",
+      "hand_l",
+      "clavicle_r",
+      "upperarm_r",
+      "lowerarm_r",
+      "hand_r",
+      "thigh_l",
+      "calf_l",
+      "foot_l",
+      "ball_l",
+      "ball_leaf_l",
+      "thigh_r",
+      "calf_r",
+      "foot_r",
+      "ball_r",
+      "ball_leaf_r"
+    ],
+    "fingerNames": "index/middle/pinky/ring/thumb_{01,02,03,04_leaf}_{l,r}",
+    "clipChannels": 195,
+    "outfitMeshes": 4,
+    "outfitPrimitives": 5,
+    "outfitTriangles": 12894,
+    "outfitVertices": 8855,
+    "outfitBoundsWithoutHead": {
+      "min": [
+        -0.8994145393371582,
+        -0.003967255353927612,
+        -0.18447723984718323
+      ],
+      "max": [
+        0.8994146585464478,
+        1.55865478515625,
+        0.16754150390625
+      ]
+    },
+    "outfitRestWorldPositions": {
+      "Head": [
+        0,
+        1.5998,
+        -0.0174
+      ],
+      "hand_l": [
+        0.6832,
+        1.4555,
+        -0.0654
+      ],
+      "hand_r": [
+        -0.6832,
+        1.4555,
+        -0.0654
+      ],
+      "pelvis": [
+        0,
+        0.9491,
+        -0.043
+      ],
+      "ball_l": [
+        0.0906,
+        0.0152,
+        0.0547
+      ],
+      "ball_r": [
+        -0.0906,
+        0.0152,
+        0.0547
+      ]
+    },
+    "retargetingRequired": "Same bone names/hierarchy, differing local bind rotations and lengths. Playing all source TRS directly changes target proportions; preserve target bone translations and retarget rotations using source/target bind transforms. Pelvis/root translation needs suitable scale/contact adjustment.",
+    "sampleIntervalSeconds": 0.03222222129503886,
+    "sampleCount": 30,
+    "sourceChopObserved": {
+      "rightHandLowestSample": {
+        "time": 0.25778,
+        "position": [
+          0.01513,
+          1.06281,
+          0.54058
+        ]
+      },
+      "leftHandLowestSample": {
+        "time": 0.38667,
+        "position": [
+          0.47445,
+          0.81174,
+          -0.16886
+        ]
+      },
+      "handOriginDistanceRangeMetres": [
+        0.9294904361530569,
+        1.2317262100807955
+      ],
+      "phaseInference": "Approximate downstroke t0..0.20, low hold/follow-through t0.20..0.35, recovery t0.35..0.9667; inferred from sampled source hand/head positions, not authored impact metadata. Source contains no axe/markers. Two-handed axe grip is not verified and needs prototype correction."
+    }
+  }
+}

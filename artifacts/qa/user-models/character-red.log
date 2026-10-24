@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userStaticCharacter.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userStaticCharacter.test.ts (2 tests | 2 failed) 6ms
+   × the imported fixed-pose character follows only the world placement and uses its own grip marker 3ms
+   × a late character after cancellation is released rather than mounted or counted 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userStaticCharacter.test.ts > the imported fixed-pose character follows only the world placement and uses its own grip marker
+Error: User static character not implemented
+ ❯ new UserStaticCharacter src/game/world/userStaticCharacter.ts:6:69
+      4| export class UserStaticCharacter{
+      5|  readonly root=new T.Group();readonly motionSupport='static';readonly …
+      6|  constructor(_loading:Promise<UserModel>){this.ready=Promise.reject(ne…
+       |                                                                     ^
+      7|  get visualRevision():number{return 0;}
+      8|  update(_actor:WorldActor,_chopping:boolean,_deltaMs?:number):void{}
+ ❯ tests/unit/userStaticCharacter.test.ts:10:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userStaticCharacter.test.ts > a late character after cancellation is released rather than mounted or counted
+AssertionError: expected [Function] to throw error matching /cancelled/ but got 'User static character not implemented'
+
+- Expected:
+/cancelled/
+
++ Received:
+"User static character not implemented"
+
+ ❯ tests/unit/userStaticCharacter.test.ts:18:116
+     16| });
+     17| test('a late character after cancellation is released rather than moun…
+     18|  const loading=deferred(),character=new UserStaticCharacter(loading.pr…
+       |                                                                                                                    ^
+     19|  character.dispose();await rejected;const asset=model();loading.resolv…
+     20|  expect(asset.dispose).toHaveBeenCalledTimes(1);expect(character.root.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  20:37:18
+   Duration  136ms (import 47%, transform 35%, tests 12%, worker 6%)
+

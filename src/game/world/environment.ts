@@ -65,7 +65,7 @@ function building(r:WorldResources,parent:T.Group,x:number,z:number,w:number,d:n
  b.traverse(o=>{if(o instanceof T.Mesh)o.castShadow=true;});
 }
 /** Original procedural village. No remote model, image, font or texture request. */
-export function buildEnvironment(r:WorldResources):T.Group{
+export function buildEnvironment(r:WorldResources,options:{excludeSampleZone?:boolean}={}):T.Group{
  const root=new T.Group();
  place(root,r.box(108,.45,64,0x8eae67,'soil'),15,-.25,0);
  // Broad meadow detail is interpolated from a small shared grid, avoiding a
@@ -94,7 +94,7 @@ export function buildEnvironment(r:WorldResources):T.Group{
   verges.setColorAt(i,new T.Color().setHSL(.2+variation(i+200)*.05,.3,.72+variation(i+240)*.14));
  }verges.receiveShadow=true;root.add(verges);
  building(r,root,43,-4,5.4,4.5,0xd9bc8c,0xa75e46);
- building(r,root,1,-13,5,4,0xae6b50,0x685c54);
+ if(!options.excludeSampleZone)building(r,root,1,-13,5,4,0xae6b50,0x685c54);
  building(r,root,20,-14,4,3.5,0xe4c78d,0xb77952);
  // Crops in six fertile plots, with raised wooden boundaries and planted rows.
  const colors=[0x789348,0xe1b956,0x618747,0x99ad53,0xc37b4e,0x65924b];
@@ -144,7 +144,8 @@ export function buildEnvironment(r:WorldResources):T.Group{
   const mountain=place(root,r.cone(7+(i%3)*2,10+(i%4)*2,[0x8ca997,0x98b0a1,0x718f83][i%3],5),-30+i*9,4,-43-(i%2)*6);mountain.rotation.y=i*.4;
  }
  for(let i=0;i<18;i++){
-  const hay=place(root,r.cylinder(.6,.6,1.15,0xcdb568,12,'wood'),3+(i%3)*1.2, .6+Math.floor(i/9)*1.1,-8-Math.floor(i/3)%3);hay.rotation.z=Math.PI/2;
+  // The approved local sample opens the porch sightline without deleting bales.
+  const hay=place(root,r.cylinder(.6,.6,1.15,0xcdb568,12,'wood'),(options.excludeSampleZone?17:3)+(i%3)*1.2, .6+Math.floor(i/9)*1.1,(options.excludeSampleZone?-17:-8)-Math.floor(i/3)%3);hay.rotation.z=Math.PI/2;
  }
  batchStaticMeshes(root);return root;
 }

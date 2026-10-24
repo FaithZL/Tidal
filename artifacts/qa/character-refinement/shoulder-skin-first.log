@@ -1,0 +1,53 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleShoulder.test.ts (2 tests | 2 failed) 243ms
+   ❯ sample garment shoulder continuity (2)
+     × keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips 147ms
+     × keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop 92ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips
+AssertionError: skin cuts the sleeve at null/0: expected 64 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 64
+
+ ❯ tests/unit/sampleShoulder.test.ts:62:79
+     60|   for(const [time,weight] of [[null,0],[0,.5],[0,1],[.16,1],[.35,1],[.…
+     61|    actor.sample(.8,time,weight);
+     62|    expect(crossings(skin,sleeve),`skin cuts the sleeve at ${time}/${we…
+       |                                                                               ^
+     63|    expect(hand.position.length()).toBe(length);
+     64|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop
+AssertionError: standing: brown sleeve edges pierce the actual skinned beige tunic: expected 2 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 2
+
+ ❯ tests/unit/sampleShoulder.test.ts:73:104
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  18:48:37
+   Duration  406ms (tests 77%, transform 12%, import 10%, worker 1%)
+

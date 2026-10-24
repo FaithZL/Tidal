@@ -1,0 +1,6242 @@
+[
+  {
+    "mode": -1,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8347723292127773,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056196672805,
+        "shoulderWrist": 0.49189812919012516
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118189174767,
+        "shoulderWrist": 0.45572761746204227
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043678974319,
+        "shoulderWrist": 0.37139211934128163
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085223213423,
+        "shoulderWrist": 0.25901263280098635
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633208213723,
+        "shoulderWrist": 0.25989106539282686
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 0.24807836114529547,
+        "shoulderWrist": 0.32690184827984226
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 0.10411242213418523,
+        "shoulderWrist": 0.401894266240727
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 58,
+        "skinSleeve": 0,
+        "contact": 0.026450983974712176,
+        "shoulderWrist": 0.4573393405194024
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 58,
+        "skinSleeve": 0,
+        "contact": 0.001155465047528031,
+        "shoulderWrist": 0.47757601725493065
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 4.495282976882783e-9,
+        "shoulderWrist": 0.4785228372287719
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 4.495282976882783e-9,
+        "shoulderWrist": 0.4785228372287719
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 4.495282976882783e-9,
+        "shoulderWrist": 0.4785228372287719
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 3.8647853221883205e-9,
+        "shoulderWrist": 0.47889714584960313
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 46,
+        "skinSleeve": 0,
+        "contact": 8.963981116277585e-9,
+        "shoulderWrist": 0.4831550804662586
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 58,
+        "skinSleeve": 0,
+        "contact": 4.4119563450413395e-9,
+        "shoulderWrist": 0.46585581271081034
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 2.488145790724512e-8,
+        "shoulderWrist": 0.3142990437171451
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 9.54210879043895e-9,
+        "shoulderWrist": 0.3142990078748042
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 9.495154582772483e-9,
+        "shoulderWrist": 0.314299010284268
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 1.387994283545803e-8,
+        "shoulderWrist": 0.314299023225034
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 8.430975554018807e-9,
+        "shoulderWrist": 0.3142990241703573
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 0.003411084981173977,
+        "shoulderWrist": 0.31323597061104724
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 40,
+        "skinSleeve": 0,
+        "contact": 0.02407304050837949,
+        "shoulderWrist": 0.3071239630465722
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217494649058023,
+        "shoulderWrist": 0.29518455104209335
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401914719065168,
+        "shoulderWrist": 0.28193617305448626
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709808573003,
+        "shoulderWrist": 0.2749089431250276
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038948257275256,
+        "shoulderWrist": 0.2875373495859932
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.566007485395106,
+        "shoulderWrist": 0.3091144230323161
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.707174004422243,
+        "shoulderWrist": 0.37634103200459734
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049436825023,
+        "shoulderWrist": 0.4396304393950094
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886990821638,
+        "shoulderWrist": 0.4817696895680859
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622401426888,
+        "shoulderWrist": 0.5002932851951337
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.6296831695962056e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.000001238260488093261
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000018664167629833513
+      },
+      {
+        "time": 3.35,
+        "max": 4.619108354443341e-9,
+        "elbow": 1.4300839309421554e-9
+      },
+      {
+        "time": 3.65,
+        "max": 4.61909957979072e-9,
+        "elbow": 1.4300793748901604e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 1.0841123999971796e-8
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 2.818805549663295e-15
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.000002095448225546344,
+        "elbow": 0.000002095448225546344
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476407151e-7,
+        "elbow": 4.745164814715261e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": -0.5,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056196570333,
+        "shoulderWrist": 0.4918981291939379
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118188611815,
+        "shoulderWrist": 0.455727617550931
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043669073128,
+        "shoulderWrist": 0.37139210867108585
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085242260933,
+        "shoulderWrist": 0.25901263220513904
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633211043867,
+        "shoulderWrist": 0.25989106563696734
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 52,
+        "skinSleeve": 0,
+        "contact": 0.24807836058017255,
+        "shoulderWrist": 0.3269018474039752
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 64,
+        "skinSleeve": 0,
+        "contact": 0.10411242284260354,
+        "shoulderWrist": 0.4018942654860184
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 0.026450984524926457,
+        "shoulderWrist": 0.4573393397110244
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 56,
+        "skinSleeve": 0,
+        "contact": 0.001155465536223779,
+        "shoulderWrist": 0.47757601647497794
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 56,
+        "skinSleeve": 0,
+        "contact": 3.76249926946407e-9,
+        "shoulderWrist": 0.4785228364511736
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 56,
+        "skinSleeve": 0,
+        "contact": 3.76249926946407e-9,
+        "shoulderWrist": 0.4785228364511736
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 56,
+        "skinSleeve": 0,
+        "contact": 3.76249926946407e-9,
+        "shoulderWrist": 0.4785228364511736
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 60,
+        "skinSleeve": 0,
+        "contact": 3.1695617430047748e-9,
+        "shoulderWrist": 0.47889714507063474
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 58,
+        "skinSleeve": 0,
+        "contact": 8.185427713043253e-9,
+        "shoulderWrist": 0.4831550803955048
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 68,
+        "skinSleeve": 0,
+        "contact": 2.8638303156297023e-9,
+        "shoulderWrist": 0.46585581380495067
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 2.2218659621160924e-8,
+        "shoulderWrist": 0.31429904768087313
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 4.473950119725454e-9,
+        "shoulderWrist": 0.3142990115657615
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 4.474729195974855e-9,
+        "shoulderWrist": 0.3142990139625413
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 1.1427249139528601e-8,
+        "shoulderWrist": 0.3142990269353457
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 4.241058024749401e-9,
+        "shoulderWrist": 0.31429902793311515
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 0.003411077939817984,
+        "shoulderWrist": 0.31323597434939987
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 0.024073033234973524,
+        "shoulderWrist": 0.30712396661105174
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 14,
+        "skinSleeve": 0,
+        "contact": 0.07217493850747396,
+        "shoulderWrist": 0.2951845540372483
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401913711345705,
+        "shoulderWrist": 0.28193617514963415
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709775098996,
+        "shoulderWrist": 0.27490894077351813
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038948017716805,
+        "shoulderWrist": 0.2875373482959595
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074837846126,
+        "shoulderWrist": 0.30911442217317925
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740024646335,
+        "shoulderWrist": 0.37634101898105055
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049436185804,
+        "shoulderWrist": 0.43963043957888587
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886990428905,
+        "shoulderWrist": 0.48176968958834027
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622401373466,
+        "shoulderWrist": 0.5002932851959981
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.740823552537989e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604879584565
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000018622656961155035
+      },
+      {
+        "time": 3.35,
+        "max": 5.35182468643621e-9,
+        "elbow": 2.2340275635837007e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.351816070548812e-9,
+        "elbow": 2.2340282288011934e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 3.658675106882445e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 7.590274590316201e-15
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.000002092456486428407,
+        "elbow": 0.000002092456486428407
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476304622e-7,
+        "elbow": 4.745164813066215e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 0,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056196403195,
+        "shoulderWrist": 0.4918981292000058
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118196622751,
+        "shoulderWrist": 0.4557276150709836
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043670941847,
+        "shoulderWrist": 0.37139210902134473
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.665608521137873,
+        "shoulderWrist": 0.2590126312325424
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633211909596,
+        "shoulderWrist": 0.2598910656839329
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 26,
+        "skinSleeve": 0,
+        "contact": 0.2480783578099416,
+        "shoulderWrist": 0.32690185020594537
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 34,
+        "skinSleeve": 0,
+        "contact": 0.104112422324036,
+        "shoulderWrist": 0.40189426384728705
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 46,
+        "skinSleeve": 0,
+        "contact": 0.02645098500929097,
+        "shoulderWrist": 0.457339338968113
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 40,
+        "skinSleeve": 0,
+        "contact": 0.0011554661677486337,
+        "shoulderWrist": 0.477576015732696
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 40,
+        "skinSleeve": 0,
+        "contact": 3.4842246569591834e-9,
+        "shoulderWrist": 0.4785228357095835
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 40,
+        "skinSleeve": 0,
+        "contact": 3.4842246569591834e-9,
+        "shoulderWrist": 0.4785228357095835
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 40,
+        "skinSleeve": 0,
+        "contact": 3.4842246569591834e-9,
+        "shoulderWrist": 0.4785228357095835
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 44,
+        "skinSleeve": 0,
+        "contact": 3.0019057110570944e-9,
+        "shoulderWrist": 0.4788971443218561
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 65,
+        "skinSleeve": 0,
+        "contact": 7.204055157904013e-9,
+        "shoulderWrist": 0.4831550804536322
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 56,
+        "skinSleeve": 0,
+        "contact": 1.958025301045508e-9,
+        "shoulderWrist": 0.4658558147522921
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.9969354588482068e-8,
+        "shoulderWrist": 0.31429904733215974
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.7632400771666678e-9,
+        "shoulderWrist": 0.3142990110027034
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.759429607489832e-9,
+        "shoulderWrist": 0.3142990133793184
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 9.679693481100223e-9,
+        "shoulderWrist": 0.31429902629351403
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.6986260340811157e-9,
+        "shoulderWrist": 0.31429902730195597
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.0034110776027613692,
+        "shoulderWrist": 0.3132359736986006
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.024073033130689772,
+        "shoulderWrist": 0.3071239658487538
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493887508811,
+        "shoulderWrist": 0.2951845530975372
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401913733137826,
+        "shoulderWrist": 0.2819361746516079
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709717928433,
+        "shoulderWrist": 0.2749089414240331
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038947822564033,
+        "shoulderWrist": 0.2875373478914316
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.566007482266158,
+        "shoulderWrist": 0.3091144214969298
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740025697406,
+        "shoulderWrist": 0.3763410193957767
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441169891,
+        "shoulderWrist": 0.43963043437867205
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.806888699747578,
+        "shoulderWrist": 0.48176968898293665
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622401285873,
+        "shoulderWrist": 0.5002932851973869
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.8689996458702328e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604878263581
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.000001856401575498097
+      },
+      {
+        "time": 3.35,
+        "max": 5.648464588587756e-9,
+        "elbow": 2.895607742179023e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.648456165976712e-9,
+        "elbow": 2.8956117964581585e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 1.9190979757800635e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.2120386676258984e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.0000020879296825517016,
+        "elbow": 0.0000020879296825517016
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476535312e-7,
+        "elbow": 4.745164812652032e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 0.2,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056198565466,
+        "shoulderWrist": 0.4918981291063896
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118196438923,
+        "shoulderWrist": 0.4557276151842119
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.803904367189269,
+        "shoulderWrist": 0.37139210924002813
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085205095726,
+        "shoulderWrist": 0.25901263098446076
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212102075,
+        "shoulderWrist": 0.2598910656935165
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 22,
+        "skinSleeve": 0,
+        "contact": 0.24807835803470143,
+        "shoulderWrist": 0.3269018501225486
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 34,
+        "skinSleeve": 0,
+        "contact": 0.10411242221614737,
+        "shoulderWrist": 0.4018942640869576
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 46,
+        "skinSleeve": 0,
+        "contact": 0.026450985120523247,
+        "shoulderWrist": 0.4573393387214934
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 46,
+        "skinSleeve": 0,
+        "contact": 0.0011554664060445508,
+        "shoulderWrist": 0.47757601547657186
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 43,
+        "skinSleeve": 0,
+        "contact": 3.6197253204131044e-9,
+        "shoulderWrist": 0.4785228354530937
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 43,
+        "skinSleeve": 0,
+        "contact": 3.6197253204131044e-9,
+        "shoulderWrist": 0.4785228354530937
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 43,
+        "skinSleeve": 0,
+        "contact": 3.6197253204131044e-9,
+        "shoulderWrist": 0.4785228354530937
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 3.2024943316567946e-9,
+        "shoulderWrist": 0.47889714406047307
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 77,
+        "skinSleeve": 0,
+        "contact": 6.849965476008282e-9,
+        "shoulderWrist": 0.48315508051320305
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 46,
+        "skinSleeve": 0,
+        "contact": 1.8284460395336142e-9,
+        "shoulderWrist": 0.46585581507300483
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.9376871099272785e-8,
+        "shoulderWrist": 0.3142990470489852
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.8243215710517004e-9,
+        "shoulderWrist": 0.31429901068397503
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.816479231577921e-9,
+        "shoulderWrist": 0.3142990130535585
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 9.224011389163551e-9,
+        "shoulderWrist": 0.3142990259287571
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.5870940338587405e-9,
+        "shoulderWrist": 0.31429902692819234
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.0034110779826390983,
+        "shoulderWrist": 0.3132359733312289
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.024073033441052844,
+        "shoulderWrist": 0.3071239655200674
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.0721749390735212,
+        "shoulderWrist": 0.2951845528575
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401913736502104,
+        "shoulderWrist": 0.2819361745786803
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.2726670971279012,
+        "shoulderWrist": 0.27490894157365225
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038947783759635,
+        "shoulderWrist": 0.2875373479555389
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074819651274,
+        "shoulderWrist": 0.3091144214524995
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740026394998,
+        "shoulderWrist": 0.376341019663177
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441237464,
+        "shoulderWrist": 0.43963043460377504
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886997245283,
+        "shoulderWrist": 0.4817696890126281
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402434226,
+        "shoulderWrist": 0.5002932851762655
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.7748394466500313e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604894290194
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000020210840120156193
+      },
+      {
+        "time": 3.35,
+        "max": 5.6552910331551965e-9,
+        "elbow": 3.0516428260120696e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.655282299989343e-9,
+        "elbow": 3.0516479600892357e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 1.8369010902487833e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.3475296230681847e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.000002184974979190305,
+        "elbow": 0.000002184974979190305
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476760099e-7,
+        "elbow": 4.7451648259078434e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 0.35,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056198509913,
+        "shoulderWrist": 0.49189812910922454
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118196298141,
+        "shoulderWrist": 0.45572761526678557
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043672572816,
+        "shoulderWrist": 0.3713921094155235
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085202278809,
+        "shoulderWrist": 0.25901263085792886
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.45476332122169977,
+        "shoulderWrist": 0.25989106569910886
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 22,
+        "skinSleeve": 0,
+        "contact": 0.24807835818709406,
+        "shoulderWrist": 0.3269018500771051
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 34,
+        "skinSleeve": 0,
+        "contact": 0.10411242200288669,
+        "shoulderWrist": 0.4018942641078324
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 0.026450985158952743,
+        "shoulderWrist": 0.4573393385586708
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 55,
+        "skinSleeve": 0,
+        "contact": 0.001155466560210786,
+        "shoulderWrist": 0.4775760153040261
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 53,
+        "skinSleeve": 0,
+        "contact": 3.80770210660262e-9,
+        "shoulderWrist": 0.47852283528007666
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 53,
+        "skinSleeve": 0,
+        "contact": 3.80770210660262e-9,
+        "shoulderWrist": 0.47852283528007666
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 53,
+        "skinSleeve": 0,
+        "contact": 3.80770210660262e-9,
+        "shoulderWrist": 0.47852283528007666
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 53,
+        "skinSleeve": 0,
+        "contact": 3.438096522761779e-9,
+        "shoulderWrist": 0.47889714388317145
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 69,
+        "skinSleeve": 0,
+        "contact": 6.641051662330655e-9,
+        "shoulderWrist": 0.48315508056965484
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 42,
+        "skinSleeve": 0,
+        "contact": 1.8215852576165116e-9,
+        "shoulderWrist": 0.4658558152909923
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.9016812345004123e-8,
+        "shoulderWrist": 0.3142990468716139
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.924011101361607e-9,
+        "shoulderWrist": 0.31429901048855463
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.9148668007726836e-9,
+        "shoulderWrist": 0.3142990128539302
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.942955735908887e-9,
+        "shoulderWrist": 0.3142990257038032
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.5802922463255366e-9,
+        "shoulderWrist": 0.31429902669640614
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.003411078208765297,
+        "shoulderWrist": 0.3132359731044778
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.02407303362067608,
+        "shoulderWrist": 0.30712396532271335
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493918406817,
+        "shoulderWrist": 0.29518455272129623
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.1540191373830983,
+        "shoulderWrist": 0.2819361745395135
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709710261877,
+        "shoulderWrist": 0.2749089416589868
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038947763563873,
+        "shoulderWrist": 0.2875373480289873
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074818482902,
+        "shoulderWrist": 0.30911442149316065
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740026938534,
+        "shoulderWrist": 0.37634101987892926
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441274574,
+        "shoulderWrist": 0.4396304347675178
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886997073782,
+        "shoulderWrist": 0.4817696890341834
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402403734,
+        "shoulderWrist": 0.5002932851769092
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.8156231527231865e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604893521967
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000020144630780193535
+      },
+      {
+        "time": 3.35,
+        "max": 5.633285356532547e-9,
+        "elbow": 3.1271683172647437e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.6332767658809186e-9,
+        "elbow": 3.1271739363763383e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 1.7831763378893917e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.3637594114856343e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.000002181357622887671,
+        "elbow": 0.000002181357622887671
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349475121886e-7,
+        "elbow": 4.7451648247051107e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 0.6,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056198425948,
+        "shoulderWrist": 0.49189812911346437
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118196079249,
+        "shoulderWrist": 0.4557276153888468
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043673531536,
+        "shoulderWrist": 0.3713921096946672
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085199733115,
+        "shoulderWrist": 0.2590126307260972
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.45476332123695173,
+        "shoulderWrist": 0.25989106570638787
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 0.24807835841105588,
+        "shoulderWrist": 0.32690185002549416
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 26,
+        "skinSleeve": 0,
+        "contact": 0.104112421918724,
+        "shoulderWrist": 0.40189426437533565
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 0.02645098410033035,
+        "shoulderWrist": 0.4573393387214078
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 0.0011554667491905275,
+        "shoulderWrist": 0.47757601505440794
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 45,
+        "skinSleeve": 0,
+        "contact": 4.244187949433555e-9,
+        "shoulderWrist": 0.4785228350294171
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 45,
+        "skinSleeve": 0,
+        "contact": 4.244187949433555e-9,
+        "shoulderWrist": 0.4785228350294171
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 45,
+        "skinSleeve": 0,
+        "contact": 4.244187949433555e-9,
+        "shoulderWrist": 0.4785228350294171
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 53,
+        "skinSleeve": 0,
+        "contact": 3.942180914114441e-9,
+        "shoulderWrist": 0.4788971436245648
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 77,
+        "skinSleeve": 0,
+        "contact": 6.468092957911114e-9,
+        "shoulderWrist": 0.48315508068217466
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 1.9515786737432446e-9,
+        "shoulderWrist": 0.4658558156133979
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.8544090793595e-8,
+        "shoulderWrist": 0.31429904663842284
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.1458976066150636e-9,
+        "shoulderWrist": 0.31429901023474854
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.1360482872554964e-9,
+        "shoulderWrist": 0.31429901259478
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.575111624028945e-9,
+        "shoulderWrist": 0.31429902541065546
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 2.678725427174697e-9,
+        "shoulderWrist": 0.3142990263932135
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.0034110784731698697,
+        "shoulderWrist": 0.31323597280860116
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.024073033830700103,
+        "shoulderWrist": 0.3071239650688383
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493931656442,
+        "shoulderWrist": 0.2951845525510586
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401913740504422,
+        "shoulderWrist": 0.28193617449190905
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709707372416,
+        "shoulderWrist": 0.27490894176682684
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038947740343153,
+        "shoulderWrist": 0.2875373481602467
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074817797682,
+        "shoulderWrist": 0.30911442163541886
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740027765328,
+        "shoulderWrist": 0.37634102022441346
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441310776,
+        "shoulderWrist": 0.4396304350089083
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886996814448,
+        "shoulderWrist": 0.48176968906592954
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402357775,
+        "shoulderWrist": 0.5002932851778715
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.8866625665864077e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.000001238260489362711
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000020046763393520988
+      },
+      {
+        "time": 3.35,
+        "max": 5.569693890327338e-9,
+        "elbow": 3.189831228277679e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.569685378888174e-9,
+        "elbow": 3.18983792008045e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 1.8422549136419305e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.4392838329887153e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.0000021760056228710076,
+        "elbow": 0.0000021760056228710076
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476176461e-7,
+        "elbow": 4.7451648249902124e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 1.2,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.836005619828761,
+        "shoulderWrist": 0.49189812912033154
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8381118195703169,
+        "shoulderWrist": 0.4557276155830232
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043674915705,
+        "shoulderWrist": 0.3713921101820115
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976684,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 14,
+        "skinSleeve": 0,
+        "contact": 0.2480783577530534,
+        "shoulderWrist": 0.32690185026880325
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 22,
+        "skinSleeve": 0,
+        "contact": 0.10411242154824085,
+        "shoulderWrist": 0.40189426502090314
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 34,
+        "skinSleeve": 0,
+        "contact": 0.026450984375479866,
+        "shoulderWrist": 0.4573393391036236
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 0.0011554658836722157,
+        "shoulderWrist": 0.47757601571209934
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 4.322413096336737e-9,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 4.322413096336737e-9,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 4.322413096336737e-9,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 31,
+        "skinSleeve": 0,
+        "contact": 3.9297462122895634e-9,
+        "shoulderWrist": 0.4788971442517731
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 43,
+        "skinSleeve": 0,
+        "contact": 7.331260867148738e-9,
+        "shoulderWrist": 0.4831550810086899
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 1.1964496333479025e-8,
+        "shoulderWrist": 0.4658558169495947
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.783439674639589e-8,
+        "shoulderWrist": 0.3142990462902568
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.737904648738413e-9,
+        "shoulderWrist": 0.31429900986001696
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.727469711690811e-9,
+        "shoulderWrist": 0.31429901221255774
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.049178167089194e-9,
+        "shoulderWrist": 0.31429902497743023
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.1381460917249186e-9,
+        "shoulderWrist": 0.3142990259433538
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.003411078760698529,
+        "shoulderWrist": 0.31323597237034045
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.02407303407021964,
+        "shoulderWrist": 0.30712396469632286
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493949000336,
+        "shoulderWrist": 0.29518455230575286
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.15401913743600676,
+        "shoulderWrist": 0.2819361744245221
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709703575276,
+        "shoulderWrist": 0.27490894192599663
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4303894771086507,
+        "shoulderWrist": 0.2875373484229357
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074818344756,
+        "shoulderWrist": 0.30911442202392136
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740029101364,
+        "shoulderWrist": 0.3763410208382742
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441322681,
+        "shoulderWrist": 0.43963043539342705
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886996386595,
+        "shoulderWrist": 0.4817696891161467
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402282598,
+        "shoulderWrist": 0.500293285179422
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.9433469005511362e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604891719017
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.0000019891547380982028
+      },
+      {
+        "time": 3.35,
+        "max": 5.5502109881461034e-9,
+        "elbow": 3.244893337556533e-9
+      },
+      {
+        "time": 3.65,
+        "max": 5.550202338077541e-9,
+        "elbow": 3.2449013322380267e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 2.506502903051024e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.5083642375311283e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.0000021675224806148928,
+        "elbow": 0.0000021675224806148928
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349475833684e-7,
+        "elbow": 4.745164823967932e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  },
+  {
+    "mode": 2,
+    "samples": [
+      {
+        "time": 0,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834772330361323,
+        "shoulderWrist": 0.498089557551111
+      },
+      {
+        "time": 0.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8354311999652662,
+        "shoulderWrist": 0.49927707636669943
+      },
+      {
+        "time": 0.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8320345214786319,
+        "shoulderWrist": 0.5006656056038521
+      },
+      {
+        "time": 0.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8258401918717276,
+        "shoulderWrist": 0.5019645569836219
+      },
+      {
+        "time": 0.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8184473533244498,
+        "shoulderWrist": 0.5029169193688418
+      },
+      {
+        "time": 0.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8114052799426585,
+        "shoulderWrist": 0.5032870766642482
+      },
+      {
+        "time": 0.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754278,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 0.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033361,
+        "shoulderWrist": 0.5019648154468587
+      },
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 0.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761334,
+        "shoulderWrist": 0.49927556885096924
+      },
+      {
+        "time": 1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 1.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104386,
+        "shoulderWrist": 0.4974209303807311
+      },
+      {
+        "time": 1.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485535,
+        "shoulderWrist": 0.49756623530877336
+      },
+      {
+        "time": 1.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946878,
+        "shoulderWrist": 0.49844378192425304
+      },
+      {
+        "time": 1.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8346211077418934,
+        "shoulderWrist": 0.49973262413527497
+      },
+      {
+        "time": 1.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 1.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.822650248682077,
+        "shoulderWrist": 0.5023323606323138
+      },
+      {
+        "time": 1.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519618
+      },
+      {
+        "time": 1.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470036
+      },
+      {
+        "time": 1.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047128492870486,
+        "shoulderWrist": 0.5026531592227725
+      },
+      {
+        "time": 2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 2.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842572,
+        "shoulderWrist": 0.5001981682849174
+      },
+      {
+        "time": 2.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8149988226181832,
+        "shoulderWrist": 0.49884195216006894
+      },
+      {
+        "time": 2.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8225924714507599,
+        "shoulderWrist": 0.49779163217075556
+      },
+      {
+        "time": 2.4,
+        "phase": "prepare",
+        "weight": 0,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8298082783572526,
+        "shoulderWrist": 0.49737043432091255
+      },
+      {
+        "time": 2.5,
+        "phase": "prepare",
+        "weight": 0.00989944263133262,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8360056198197684,
+        "shoulderWrist": 0.4918981291247176
+      },
+      {
+        "time": 2.6,
+        "phase": "prepare",
+        "weight": 0.06632368091905873,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.838111819544718,
+        "shoulderWrist": 0.45572761570553094
+      },
+      {
+        "time": 2.7,
+        "phase": "prepare",
+        "weight": 0.1845871267667412,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8039043675703409,
+        "shoulderWrist": 0.37139211052084325
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197819793,
+        "shoulderWrist": 0.25901263056449403
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.45476332128040525,
+        "shoulderWrist": 0.2598910657262941
+      },
+      {
+        "time": 3,
+        "phase": "prepare",
+        "weight": 0.7355570193275797,
+        "chopTime": 0,
+        "sleeveTunic": 10,
+        "skinSleeve": 0,
+        "contact": 0.24807835665036015,
+        "shoulderWrist": 0.3269018505860954
+      },
+      {
+        "time": 3.1,
+        "phase": "prepare",
+        "weight": 0.8821230491995679,
+        "chopTime": 0,
+        "sleeveTunic": 18,
+        "skinSleeve": 0,
+        "contact": 0.10411241757578636,
+        "shoulderWrist": 0.40189426855978855
+      },
+      {
+        "time": 3.2,
+        "phase": "prepare",
+        "weight": 0.969369964609654,
+        "chopTime": 0,
+        "sleeveTunic": 26,
+        "skinSleeve": 0,
+        "contact": 0.02645098248812011,
+        "shoulderWrist": 0.4573393419561422
+      },
+      {
+        "time": 3.3,
+        "phase": "prepare",
+        "weight": 0.9986547387644849,
+        "chopTime": 0,
+        "sleeveTunic": 27,
+        "skinSleeve": 0,
+        "contact": 0.001155466191587854,
+        "shoulderWrist": 0.4775760159832512
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 29,
+        "skinSleeve": 0,
+        "contact": 6.624295733159735e-9,
+        "shoulderWrist": 0.47852283593386447
+      },
+      {
+        "time": 3.5,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 29,
+        "skinSleeve": 0,
+        "contact": 6.624295733159735e-9,
+        "shoulderWrist": 0.47852283593386447
+      },
+      {
+        "time": 3.6,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 29,
+        "skinSleeve": 0,
+        "contact": 6.624295733159735e-9,
+        "shoulderWrist": 0.47852283593386447
+      },
+      {
+        "time": 3.7,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.0020686666071415257,
+        "sleeveTunic": 29,
+        "skinSleeve": 0,
+        "contact": 6.0094682757531755e-9,
+        "shoulderWrist": 0.4788971444704818
+      },
+      {
+        "time": 3.8,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.03941099886596198,
+        "sleeveTunic": 27,
+        "skinSleeve": 0,
+        "contact": 9.30273916584603e-9,
+        "shoulderWrist": 0.48315508276290736
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 1.1841538495453213e-8,
+        "shoulderWrist": 0.46585581704025975
+      },
+      {
+        "time": 4,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.20225566084682944,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 1.7352978426100417e-8,
+        "shoulderWrist": 0.31429904605153025
+      },
+      {
+        "time": 4.1,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.23959799310565008,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 4.369513574959474e-9,
+        "shoulderWrist": 0.31429900960464846
+      },
+      {
+        "time": 4.2,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24558591293334958,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 4.3575694306300755e-9,
+        "shoulderWrist": 0.31429901195256277
+      },
+      {
+        "time": 4.3,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.2878532183837888,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 7.738797618245173e-9,
+        "shoulderWrist": 0.314299024683717
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.7065971047636694e-9,
+        "shoulderWrist": 0.3142990256376355
+      },
+      {
+        "time": 4.5,
+        "phase": "recover",
+        "weight": 0.9949122299382717,
+        "chopTime": 0.31012023284594403,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.0034110788549389873,
+        "shoulderWrist": 0.3132359720725695
+      },
+      {
+        "time": 4.6,
+        "phase": "recover",
+        "weight": 0.9645061728395065,
+        "chopTime": 0.31482303620856483,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.024073034167122122,
+        "shoulderWrist": 0.3071239644433023
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493959177022,
+        "shoulderWrist": 0.29518455213878675
+      },
+      {
+        "time": 4.8,
+        "phase": "recover",
+        "weight": 0.7901234567901241,
+        "chopTime": 0.3417942288481158,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.1540191374570243,
+        "shoulderWrist": 0.2819361743785499
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.2726670970115529,
+        "shoulderWrist": 0.2749089420380199
+      },
+      {
+        "time": 5,
+        "phase": "recover",
+        "weight": 0.5000000000000004,
+        "chopTime": 0.3866666555404662,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.43038947693341695,
+        "shoulderWrist": 0.287537348644211
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074819449185,
+        "shoulderWrist": 0.3091144223769588
+      },
+      {
+        "time": 5.2,
+        "phase": "recover",
+        "weight": 0.2098765432098767,
+        "chopTime": 0.43153908223281673,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7071740029957548,
+        "shoulderWrist": 0.37634102127579766
+      },
+      {
+        "time": 5.3,
+        "phase": "recover",
+        "weight": 0.10351562500000078,
+        "chopTime": 0.447989570442587,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.7813049441300526,
+        "shoulderWrist": 0.4396304356388945
+      },
+      {
+        "time": 5.4,
+        "phase": "recover",
+        "weight": 0.035493827160493985,
+        "chopTime": 0.45851027487236773,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8068886996106801,
+        "shoulderWrist": 0.4817696891475789
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402234194,
+        "shoulderWrist": 0.5002932851804058
+      },
+      {
+        "time": 5.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8062417879754276,
+        "shoulderWrist": 0.5029173664719472
+      },
+      {
+        "time": 5.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8045393016033362,
+        "shoulderWrist": 0.5019648154468584
+      },
+      {
+        "time": 5.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260115,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 5.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8119444190761335,
+        "shoulderWrist": 0.4992755688509694
+      },
+      {
+        "time": 6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8190812810588907,
+        "shoulderWrist": 0.4980879570114158
+      },
+      {
+        "time": 6.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8265843332104384,
+        "shoulderWrist": 0.4974209303807307
+      },
+      {
+        "time": 6.2,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8328512389485536,
+        "shoulderWrist": 0.49756623530877314
+      },
+      {
+        "time": 6.3,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8359442304946876,
+        "shoulderWrist": 0.498443781924253
+      },
+      {
+        "time": 6.4,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.834621107741893,
+        "shoulderWrist": 0.4997326241352748
+      },
+      {
+        "time": 6.5,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8296700948840954,
+        "shoulderWrist": 0.5011219079929825
+      },
+      {
+        "time": 6.6,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8226502486820773,
+        "shoulderWrist": 0.502332360632314
+      },
+      {
+        "time": 6.7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8151298765041229,
+        "shoulderWrist": 0.5031165004519615
+      },
+      {
+        "time": 6.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8086252030191569,
+        "shoulderWrist": 0.5032430248470031
+      },
+      {
+        "time": 6.9,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.804712849287049,
+        "shoulderWrist": 0.5026531592227726
+      },
+      {
+        "time": 7,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8047451946055361,
+        "shoulderWrist": 0.5015580528672944
+      },
+      {
+        "time": 7.1,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8085633851842571,
+        "shoulderWrist": 0.5001981682849177
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.964614116821291e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "continuity": [
+      {
+        "time": 2.4,
+        "max": 0.0000014105246650396038,
+        "elbow": 0.0000012382604891342198
+      },
+      {
+        "time": 2.445174303266685,
+        "max": 0.000002622136347686638,
+        "elbow": 0.000001979485501382287
+      },
+      {
+        "time": 3.35,
+        "max": 2.397293286363452e-9,
+        "elbow": 1.3757958511484936e-9
+      },
+      {
+        "time": 3.65,
+        "max": 2.397284767708445e-9,
+        "elbow": 1.375804925745511e-9
+      },
+      {
+        "time": 4.15,
+        "max": 2.784643836996195e-8,
+        "elbow": 3.408439865477482e-9
+      },
+      {
+        "time": 4.4,
+        "max": 5.708500781997399e-14,
+        "elbow": 1.545038492643246e-14
+      },
+      {
+        "time": 5.54293772218945,
+        "max": 0.0000021622430097987198,
+        "elbow": 0.0000021622430097987198
+      },
+      {
+        "time": 5.6,
+        "max": 5.086349476304622e-7,
+        "elbow": 4.7451648237836373e-7
+      },
+      {
+        "time": 7.1,
+        "max": 0.00000208171544282878,
+        "elbow": 0.0000018629953263661808
+      }
+    ],
+    "maxContinuity": 0.000002622136347686638
+  }
+]

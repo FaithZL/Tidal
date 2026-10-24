@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts tests/unit/sampleCharacter.test.ts tests/unit/sampleMotionContinuity.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  3 passed (3)
+      Tests  25 passed (25)
+   Start at  19:09:41
+   Duration  1.97s (tests 95%, import 3%, transform 2%)
+

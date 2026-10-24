@@ -1,0 +1,7 @@
+{
+  "url": "http://127.0.0.1:4176/?art=character-motion",
+  "scope": "Actual production sample; visible Orbit drag/wheel inputs; held windup. Front/rear and low viewpoints inspect garment seams, not a cloth simulation certification.",
+  "time": "3.4000",
+  "phase": "prepare",
+  "errors": []
+}

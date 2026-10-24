@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (13 tests | 1 failed) 1150ms
+   × both palm markers keep contact with two different points of the actual rigid source handle 75ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > both palm markers keep contact with two different points of the actual rigid source handle
+AssertionError: left 4.15: expected 0.011702567935013066 to be less than 0.006
+ ❯ tests/unit/userCharacterMotion.test.ts:45:79
+     43|   motion.sample(t);
+     44|   const left=rig.axe.root.localToWorld(rig.axe.grips.upper.clone()),ri…
+     45|   expect(motion.handPosition('left').distanceTo(left),`left ${t.toFixe…
+       |                                                                               ^
+     46|   expect(motion.handPosition('right').distanceTo(right),`right ${t.toF…
+     47|   expect(left.distanceTo(right)).toBeGreaterThan(.18);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  21:46:06
+   Duration  1.29s (tests 95%, import 3%, transform 2%)
+

@@ -1,0 +1,40 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprMeadowRefinement.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMeadowRefinement.test.ts (5 tests | 1 failed) 57ms
+   × plant roots follow the actual sloped banks instead of sinking below or hiding inside them 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > plant roots follow the actual sloped banks instead of sinking below or hiding inside them
+AssertionError: expected [ 'sample-meadow-grass[290]', …(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "sample-meadow-grass[290]",
++   "sample-meadow-grass[299]",
++ ]
+
+ ❯ tests/unit/nprMeadowRefinement.test.ts:90:23
+     88|   }
+     89|   expect(elevatedPlants).toBeGreaterThan(20);expect(levelPlants).toBeG…
+     90|   expect(fullyBuried).toEqual([]);expect(belowSlope).toEqual([]);
+       |                       ^
+     91|  }finally{release(root,resources);}
+     92| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  15:06:49
+   Duration  211ms (tests 48%, import 26%, transform 23%, worker 2%)
+

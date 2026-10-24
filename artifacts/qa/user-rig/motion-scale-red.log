@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (14 tests | 1 failed) 1305ms
+   × uniform scene scaling keeps the real hands on the handle and both foot bones on their original support 64ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > uniform scene scaling keeps the real hands on the handle and both foot bones on their original support
+AssertionError: left 0: expected 0.06257050801298072 to be less than 0.006
+ ❯ tests/unit/userCharacterMotion.test.ts:76:108
+     74|   for(const side of ['left','right'] as const){
+     75|    const foot=side==='left'?'leftFoot':'rightFoot',grip=side==='left'?…
+     76|    expect(motion.handPosition(side).distanceTo(rig.axe.root.localToWor…
+       |                                                                                                            ^
+     77|    expect(rig.bones[foot].getWorldPosition(new T.Vector3()).distanceTo…
+     78|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 13 passed (14)
+   Start at  21:54:07
+   Duration  1.44s (tests 96%, import 2%, transform 2%)
+

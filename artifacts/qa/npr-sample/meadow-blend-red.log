@@ -1,0 +1,33 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprEnvironment.test.ts (5 tests | 1 failed) 62ms
+   × the local painted meadow adds broad cool green variation below the unchanged road contact plane 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > the local painted meadow adds broad cool green variation below the unchanged road contact plane
+AssertionError: expected 3 to be 4 // Object.is equality
+
+- Expected
++ Received
+
+- 4
++ 3
+
+ ❯ tests/unit/nprEnvironment.test.ts:39:27
+     37|   expect(m.material.vertexColors).toBe(true);expect(m.material.color.g…
+     38|   const colors=m.geometry.getAttribute('color');expect(colors).toBeDef…
+     39|   expect(colors.itemSize).toBe(4);expect(m.material.transparent).toBe(…
+       |                           ^
+     40|   expect(colors.getW(0)).toBe(0);expect(colors.getW(Math.floor(colors.…
+     41|   expect(new Set(Array.from({length:colors.count},(_,i)=>[colors.getX(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  14:02:39
+   Duration  204ms (tests 53%, import 25%, transform 20%, worker 2%)
+

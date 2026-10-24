@@ -1,0 +1,27 @@
+[
+  {
+    "path": "artifacts/qa/npr-refinement/home.png",
+    "sha": "3AF421E7935F3345C6B62B873B038BB684AD74C9283A3F6BA45399EFE6AEE7FC",
+    "backup": "artifacts__qa__npr-refinement__home.png"
+  },
+  {
+    "path": "artifacts/qa/npr-refinement/chop-paused.png",
+    "sha": "E79E07B8C75BE92BF6AAE506830807618BC08ADAA81F078E97C8EB8C175B77A0",
+    "backup": "artifacts__qa__npr-refinement__chop-paused.png"
+  },
+  {
+    "path": "artifacts/qa/npr-refinement/load.png",
+    "sha": "5F64667D76767F647023609732A4345819BDFFE4A8448E05ADB8DFACFAC664D2",
+    "backup": "artifacts__qa__npr-refinement__load.png"
+  },
+  {
+    "path": "artifacts/qa/npr-refinement/results.png",
+    "sha": "20E86F93595B7B14AE0FEE1E006A20E7DBA43B5581F69F31431B8187E5C2A774",
+    "backup": "artifacts__qa__npr-refinement__results.png"
+  },
+  {
+    "path": "artifacts/qa/default-demo/automatic-start.png",
+    "sha": "858DFAD1C7E87658B61089EFB079897F76269E04ED5AEF6479CB64F389A9B318",
+    "backup": "artifacts__qa__default-demo__automatic-start.png"
+  }
+]

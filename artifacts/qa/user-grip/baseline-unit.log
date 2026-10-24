@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  47 passed (47)
+      Tests  345 passed (345)
+   Start at  22:44:38
+   Duration  3.02s (tests 83%, import 10%, transform 6%, worker 1%)
+

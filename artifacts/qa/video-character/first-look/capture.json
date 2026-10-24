@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-22T11:41:52.619Z",
+  "url": "http://127.0.0.1:4176/?art=character-motion",
+  "browser": "156.0.8078.4",
+  "scope": "Actual isolated production Three.js sample. Original trial head, CC0 Quaternius garment/retargeted animation, NOT Leo. Normal preview clock, no camera, no exercise counts. Video is uninterrupted original-speed screen recording; stills select exact paused poses through the visible review timeline.",
+  "poses": [
+    {
+      "label": "standing",
+      "time": "0.8000",
+      "phase": "站立 · 呼吸与重心"
+    },
+    {
+      "label": "windup",
+      "time": "3.4000",
+      "phase": "挥砍 · 蓄力与转体"
+    },
+    {
+      "label": "strike",
+      "time": "3.9500",
+      "phase": "挥砍 · 下挥发力"
+    },
+    {
+      "label": "recovery",
+      "time": "4.9500",
+      "phase": "回收 · 缓冲与复位"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "bundles": [
+    "http://127.0.0.1:4176/assets/index-D1ogJfnK.js"
+  ]
+}

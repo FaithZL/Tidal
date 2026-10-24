@@ -1,0 +1,53 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleShoulder.test.ts (3 tests | 2 failed) 1050ms
+   ❯ sample garment shoulder continuity (3)
+     × preserves garment clearance through the production clock, including blends and the slow return through the source clip 765ms
+     × keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop 106ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > preserves garment clearance through the production clock, including blends and the slow return through the source clip
+AssertionError: brown sleeve pierces tunic at clock 3s (prepare): expected 8 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 8
+
+ ❯ tests/unit/sampleShoulder.test.ts:63:100
+     61|    clock.time=time;const frame=clock.frame;actor.sample(frame.idleTime…
+     62|    expect(crossings(skin,sleeve),`forearm skin pierces cloth at clock …
+     63|    expect(crossings(sleeve,tunic),`brown sleeve pierces tunic at clock…
+       |                                                                                                    ^
+     64|   }
+     65|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop
+AssertionError: raised: brown sleeve edges pierce the actual skinned beige tunic: expected 18 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 18
+
+ ❯ tests/unit/sampleShoulder.test.ts:82:104
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  18:59:43
+   Duration  1.22s (tests 93%, transform 4%, import 3%)
+

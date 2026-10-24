@@ -1,0 +1,63 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userHandGrip.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userHandGrip.test.ts (4 tests | 3 failed) 369ms
+   × corrects the real finger and thumb triangle surfaces around the supplied handle, not only hand markers 79ms
+   × changes only existing hand vertices by a bounded amount and preserves UVs source bytes and resource identities 102ms
+   × pressure is deterministic idempotent and bounded even for invalid values 80ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userHandGrip.test.ts > corrects the real finger and thumb triangle surfaces around the supplied handle, not only hand markers
+AssertionError: left source surface intersects the .62-scaled handle: expected 0 to be greater than 0.0317
+ ❯ tests/unit/userHandGrip.test.ts:74:121
+     72|   // Actual original shaft cross-sections at the two grips reach radiu…
+     73|   // the approved constant .62 display scale makes it <.0316.
+     74|   expect(surfaceClearance(rig,side,center,grip.frames[side]),`${side} …
+       |                                                                                                                         ^
+     75|  }
+     76| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userHandGrip.test.ts > changes only existing hand vertices by a bounded amount and preserves UVs source bytes and resource identities
+AssertionError: expected 0 to be greater than 100
+ ❯ tests/unit/userHandGrip.test.ts:85:16
+     83|   expect(prior.y<.73||(prior.x>.44&&prior.y<1.06)).toBe(true);
+     84|  }
+     85|  expect(moved).toBeGreaterThan(100);expect(max).toBeLessThan(.045);
+       |                ^
+     86|  expect(Array.from(geometry.getAttribute('uv').array)).toEqual(uv);exp…
+     87|  expect(rig.mesh.geometry).toBe(geometry);expect(rig.mesh.material).to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userHandGrip.test.ts > pressure is deterministic idempotent and bounded even for invalid values
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/userHandGrip.test.ts:94:100
+     92|  const {rig,grip}=await fixture(),p=rig.mesh.geometry.getAttribute('po…
+     93|  grip.apply(.95);const once=Array.from(p.array),version=p.version;grip…
+     94|  grip.apply(1);const tight=Array.from(p.array);expect(tight.some((v,i)…
+       |                                                                                                    ^
+     95|  grip.apply(.95);expect(Array.from(p.array)).toEqual(once);
+     96|  for(const pressure of [NaN,Infinity,-1,2]){grip.apply(pressure);expec…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  22:59:41
+   Duration  510ms (tests 86%, import 7%, transform 6%, worker 1%)
+

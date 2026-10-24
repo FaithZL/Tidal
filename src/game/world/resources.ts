@@ -5,6 +5,10 @@ export type {SurfaceKind} from './surfaces.js';
 /** Shared local geometry/materials; owned and disposed by one FarmWorld. */
 export class WorldResources{
  private geometries=new Map<string,T.BufferGeometry>();private materials=new Map<string,T.MeshLambertMaterial>();private textures=new Map<SurfaceKind,T.DataTexture>();
+ private extraMaterials=new Map<string,T.Material>();private extraTextures=new Set<T.Texture>();
+ /** Namespaced visual resources share the same world lifetime as legacy resources. */
+ cachedMaterial<M extends T.Material>(key:string,make:()=>M):M{let material=this.extraMaterials.get(key);if(!material){material=make();this.extraMaterials.set(key,material);}return material as M;}
+ trackTexture<X extends T.Texture>(texture:X):X{this.extraTextures.add(texture);return texture;}
  material(color:number,surface:SurfaceKind='solid',vertexColors=false):T.MeshLambertMaterial{
   const key=`${color}/${surface}/${vertexColors}`;let m=this.materials.get(key);
   if(!m){
@@ -29,7 +33,7 @@ export class WorldResources{
  sphere(r:number,c:number,surface:SurfaceKind='solid'):T.Mesh{return this.mesh(this.geometry(`s${r}`,()=>new T.SphereGeometry(r,12,8)),c,surface);}
  cone(r:number,h:number,c:number,sides=8,surface:SurfaceKind='solid'):T.Mesh{return this.mesh(this.geometry(`p${r}/${h}/${sides}`,()=>new T.ConeGeometry(r,h,sides)),c,surface);}
  mesh(g:T.BufferGeometry,c:number,surface:SurfaceKind='solid',vertexColors=false):T.Mesh{const m=new T.Mesh(g,this.material(c,surface,vertexColors));m.receiveShadow=true;return m;}
- dispose():void{for(const g of this.geometries.values())g.dispose();for(const m of this.materials.values())m.dispose();for(const t of this.textures.values())t.dispose();this.geometries.clear();this.materials.clear();this.textures.clear();}
+ dispose():void{for(const g of this.geometries.values())g.dispose();for(const m of new Set<T.Material>([...this.materials.values(),...this.extraMaterials.values()]))m.dispose();for(const t of new Set<T.Texture>([...this.textures.values(),...this.extraTextures]))t.dispose();this.geometries.clear();this.materials.clear();this.textures.clear();this.extraMaterials.clear();this.extraTextures.clear();}
 }
 export function place<O extends T.Object3D>(parent:T.Object3D,object:O,x:number,y:number,z:number):O{object.position.set(x,y,z);parent.add(object);return object;}
 export function segment(mesh:T.Mesh,a:T.Vector3,b:T.Vector3):void{const direction=b.clone().sub(a),length=direction.length();mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.scale.y=Math.max(.001,length);mesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),direction.normalize());}

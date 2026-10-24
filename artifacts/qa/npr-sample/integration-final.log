@@ -1,0 +1,19 @@
+[WebServer] (node:20596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:67684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:26940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start (1.8s)
+  ok 2 tests\e2e\npr-sample.spec.ts:19:1 › NPR missing texture fails visibly and cannot advance a hidden session (1.3s)
+  ok 3 tests\e2e\npr-sample.spec.ts:26:1 › sample keeps explicit real camera selection and never falls back to simulation on device failure (2.9s)
+  ok 4 tests\e2e\npr-sample.spec.ts:36:1 › local NPR sample keeps pause, input switch, inventory and complete simulated results (9.1s)
+
+  4 passed (20.1s)

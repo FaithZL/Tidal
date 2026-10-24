@@ -1,0 +1,53 @@
+[WebServer] (node:39928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:58536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:33948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:56124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\npr-sample.spec.ts:100:1 › reset during a partial swing immediately snaps the rendered hands to the new home pose (14.2s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:100:1 › reset during a partial swing immediately snaps the rendered hands to the new home pose 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('html')
+    Expected: "1.7700,1.0500,4.0000"
+    Received: "1.5371,1.2671,4.0000"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('html') with timeout 7000ms
+      - waiting for locator('html')
+        18 × locator resolved to <html lang="zh-CN" data-hand-after-reset="1.5371,1.2671,4.0000">…</html>
+           - unexpected value "1.5371,1.2671,4.0000"
+
+
+      114 |  await expect(page.locator('#statusTag')).toHaveText('未开始');
+      115 |  // The actual rendered hand must already be the new idle pose at the first frame, not easing out of the old swing.
+    > 116 |  await expect(page.locator('html')).toHaveAttribute('data-hand-after-reset','1.7700,1.0500,4.0000');
+          |                                     ^
+      117 |  await expect(page.locator('#chopValue')).toHaveText('0/15');
+      118 | });
+      119 |
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:116:37
+
+    Error Context: test-results\npr-sample-reset-during-a--aed82--hands-to-the-new-home-pose\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-reset-during-a--aed82--hands-to-the-new-home-pose\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-reset-during-a--aed82--hands-to-the-new-home-pose\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\npr-sample.spec.ts:100:1 › reset during a partial swing immediately snaps the rendered hands to the new home pose 

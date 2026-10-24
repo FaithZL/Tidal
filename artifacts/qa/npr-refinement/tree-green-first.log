@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprVegetation.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprVegetation.test.ts (4 tests | 1 failed) 33ms
+   ❯ leaf silhouette tree refinement (4)
+     × keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget
+AssertionError: expected -0.028611045330762863 to be close to +0, received difference is 0.028611045330762863, but expected 5e-7
+ ❯ tests/unit/nprVegetation.test.ts:40:24
+     38|  it('keeps the rooted trunk, broad canopy and instanced triangle submi…
+     39|   const {r,p}=create(),value=tree(r,p),bounds=new T.Box3().setFromObje…
+     40|   expect(bounds.min.y).toBeCloseTo(0,6);expect(size.y).toBeGreaterThan…
+       |                        ^
+     41|   expect(size.x).toBeGreaterThan(3.2);expect(size.x).toBeLessThan(4);e…
+     42|   expect(meshes(value.root).length).toBeLessThanOrEqual(12);expect(tri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  14:26:48
+   Duration  190ms (tests 35%, transform 31%, import 31%, worker 3%)
+

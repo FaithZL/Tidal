@@ -1,0 +1,39 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (15 tests | 2 failed) 1666ms
+   ❯ derived skeleton on the actual user character (15)
+     × keeps nearby hand and knee surface edges attached to their own anatomical chains 66ms
+     × keeps the actual left inner elbow surface from stretching across the joint 56ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > keeps nearby hand and knee surface edges attached to their own anatomical chains
+AssertionError: source hand/knee edge 1844/1842 at 3.4s: expected 2.882209736144674 to be less than 2
+ ❯ tests/unit/userCharacterRig.test.ts:131:71
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > keeps the actual left inner elbow surface from stretching across the joint
+AssertionError: left elbow 12940/12941 at 4.15s: expected 2.1252241089213117 to be less than 1.8
+ ❯ tests/unit/userCharacterRig.test.ts:154:72
+    152|      motion.sample(sample);rig.root.updateMatrixWorld(true);rig.skelet…
+    153|      const deformed=rig.mesh.getVertexPosition(a,new T.Vector3()).dist…
+    154|      expect(deformed/original,`${side} elbow ${a}/${b} at ${sample}s`)…
+       |                                                                        ^
+    155|     }
+    156|    }finally{rig.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 13 passed (15)
+   Start at  22:54:18
+   Duration  1.80s (tests 97%, import 2%, transform 1%)
+

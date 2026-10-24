@@ -1,0 +1,47 @@
+[WebServer] (node:35576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:74428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:37144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:58232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately (9.7s)
+
+
+  1) tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 6
+    Received:   6
+
+    Call Log:
+    - Timeout 7000ms exceeded while waiting on the predicate
+
+      48 |  await page.getByRole('button',{name:'仅看站立'}).click();
+      49 |  await expect(page.locator('#motionPhase')).toHaveText('站立 · 呼吸与重心');
+    > 50 |  await expect.poll(async()=>Number(await page.locator('#motionStage').getAttribute('data-paints'))).toBeGreaterThan(paints);
+         |                                                                                                     ^
+      51 |  expect((await page.locator('#motionCanvas').screenshot()).equals(before)).toBe(false);
+      52 | });
+      53 |
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:50:101
+
+    Error Context: test-results\character-motion-switching-1994e-draws-the-bones-immediately\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-switching-1994e-draws-the-bones-immediately\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-switching-1994e-draws-the-bones-immediately\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately 

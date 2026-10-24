@@ -1,0 +1,22 @@
+body.character-sample{background:#d7e1d6;color:#30483d;font-family:"Microsoft YaHei",system-ui,sans-serif}
+#motionStage{position:fixed;inset:0;background:linear-gradient(#bdd8df,#ecebdc)}
+#motionCanvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.motion-heading{position:fixed;top:32px;left:36px;z-index:2;max-width:500px;pointer-events:none}
+.motion-heading small{font-size:10px;letter-spacing:3px;color:#60786b}.motion-heading h1{font-size:24px;margin:10px 0;letter-spacing:1px}.motion-heading p{font-size:12px;line-height:1.9;max-width:440px;margin:0;color:#516d60}
+.motion-panel{position:fixed;right:28px;bottom:32px;width:300px;z-index:2;background:#f9f6e9eb;border:1px solid #fff9;border-radius:18px;padding:23px;box-shadow:0 14px 45px #233c3220;backdrop-filter:blur(10px)}
+.motion-panel h2{font-size:19px;margin:0 0 8px}.motion-panel p{font-size:12px;line-height:1.8;color:#5b7166;margin:7px 0 17px}.motion-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px}.motion-buttons button{padding:12px 6px;border-radius:9px;background:#dfe7da;color:#355446;font-size:12px;border:1px solid #c6d5c7}.motion-buttons button:first-child{background:#355d49;color:#fff3d8}.motion-buttons button[aria-pressed=true]{outline:2px solid #bd9660}.motion-panel a{display:block;color:#526c60;margin-top:18px;font-size:11px;text-decoration:none}.motion-note{border-top:1px solid #c9d6c4;padding-top:14px;margin-top:17px!important;font-size:10px!important}.motion-footer{position:fixed;bottom:29px;left:36px;font-size:11px;color:#536f5d;pointer-events:none}
+#motionError{position:fixed;inset:40% 15%;z-index:4;background:#fff3e6;padding:24px;border:1px solid #bb9067;border-radius:14px;max-height:160px;color:#67462e}
+#motionStage[data-assets=loading]::after{content:"正在载入本地骨骼与动作…";position:absolute;inset:0;display:grid;place-items:center;background:#e0e8dcdd;color:#46654f;z-index:1}
+@media(max-width:700px){.motion-heading{left:19px;top:18px;max-width:92%}.motion-heading h1{font-size:19px}.motion-heading p{font-size:10px;max-width:310px}.motion-panel{left:14px;right:14px;bottom:13px;width:auto;padding:14px}.motion-panel h2{font-size:15px}.motion-panel p{margin:4px 0 10px;font-size:10px}.motion-buttons{grid-template-columns:repeat(4,1fr);gap:5px}.motion-buttons button{font-size:10px;padding:10px 3px}.motion-note{margin:9px 0 0!important;padding-top:8px}.motion-panel a{margin-top:9px}.motion-footer{display:none}}
+.motion-scrub{display:block;font-size:10px;color:#627764;margin-top:17px}.motion-scrub span{float:right;font-variant-numeric:tabular-nums}.motion-scrub input{display:block;width:100%;margin:9px 0 0;accent-color:#557650}
+.user-model-sample #motionStage[data-assets=loading]::after{content:"正在载入人物、房屋与内嵌贴图…"}
+.user-model-sample .motion-buttons{grid-template-columns:repeat(3,1fr)}
+.user-model-sample .motion-panel{width:310px}
+.user-model-sample .user-motion-buttons{grid-template-columns:1fr 1fr;margin-top:12px;padding-top:12px;border-top:1px solid #c9d6c4}
+.user-model-sample .motion-scrub{margin-top:12px}
+.user-model-sample .motion-panel{max-height:calc(100dvh - 64px);overflow-y:auto}
+.user-model-sample:has(#modelGrip) .model-view-buttons{grid-template-columns:1fr 1fr}
+.user-model-sample .motion-inspect-note{font-size:10px;margin:6px 0 0}
+@media(max-width:700px){.user-model-sample .motion-panel{width:auto}.user-model-sample .motion-note{font-size:9px!important}.user-model-sample .motion-panel p{line-height:1.65}}
+@media(max-width:700px){.user-model-sample .user-motion-buttons{grid-template-columns:repeat(4,1fr);margin-top:8px;padding-top:8px}.user-model-sample .motion-panel{max-height:48dvh}.user-model-sample .motion-scrub{margin-top:8px}.user-model-sample .motion-scrub input{margin-top:6px}}
+@media(max-width:700px){.user-model-sample:has(#modelGrip) .model-view-buttons{grid-template-columns:repeat(4,1fr)}.user-model-sample .motion-inspect-note{font-size:9px;margin-top:4px}}

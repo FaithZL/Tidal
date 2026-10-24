@@ -1,0 +1,16 @@
+{
+  output: 'artifacts/qa/user-rig/final',
+  samples: [
+    { name: 'stand', time: 0, blade: '-2.2963,0.2412,1.9732' },
+    { name: 'raised', time: 3.5, blade: '-2.3963,2.8643,0.8420' },
+    { name: 'impact', time: 4.15, blade: '-2.2308,0.4036,2.4897' },
+    { name: 'recover', time: 4.8, blade: '-2.2459,0.3363,2.3578' }
+  ],
+  recording: {
+    wallMs: 16010,
+    previewTime: '16.0660',
+    note: 'Uninterrupted actual screen recording; normal presentation clock, no camera. Encoding rate is not game fps.'
+  },
+  errors: [],
+  external: []
+}

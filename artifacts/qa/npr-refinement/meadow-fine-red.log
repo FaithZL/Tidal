@@ -1,0 +1,38 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprMeadowRefinement.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMeadowRefinement.test.ts (7 tests | 2 failed) 71ms
+   × individual meadow blades stay slender relative to their curved height 7ms
+   × daisy heads and low herbs remain small accents at their actual ground scale 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > individual meadow blades stay slender relative to their curved height
+AssertionError: expected 2.8580988183991067 to be greater than 5.7
+ ❯ tests/unit/nprMeadowRefinement.test.ts:59:62
+     57|   const [grass]=instances(root,['sample-meadow-grass']),vertices=grass…
+     58|   const vertex=(i:number)=>new T.Vector3().fromBufferAttribute(vertice…
+     59|   expect(height).toBeCloseTo(.34,5);expect(height/bodyWidth).toBeGreat…
+       |                                                              ^
+     60|  }finally{release(root,resources);}
+     61| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > daisy heads and low herbs remain small accents at their actual ground scale
+AssertionError: expected 0.22243333589727413 to be less than 0.125
+ ❯ tests/unit/nprMeadowRefinement.test.ts:70:162
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 5 passed (7)
+   Start at  15:17:40
+   Duration  224ms (tests 54%, import 23%, transform 20%, worker 2%)
+

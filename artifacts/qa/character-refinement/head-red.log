@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleHead.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleHead.test.ts (6 tests | 2 failed) 111ms
+   ❯ isolated sample young-adult head (6)
+     × fits the existing head bone envelope with a visibly slimmer face than the old round head 31ms
+     × has almond eye openings instead of round bead-like eyes 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > fits the existing head bone envelope with a visibly slimmer face than the old round head
+AssertionError: expected 0.8053332964579264 to be less than 0.76
+ ❯ tests/unit/sampleHead.test.ts:37:33
+     35|   const faceSize=new T.Box3().setFromObject(face).getSize(new T.Vector…
+     36|   // A broad round face reads as a child/toy once attached to the adul…
+     37|   expect(faceSize.x/faceSize.y).toBeLessThan(.76);
+       |                                 ^
+     38|   expect(size.x).toBeLessThan(.37);
+     39|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > has almond eye openings instead of round bead-like eyes
+AssertionError: expected 1.799994610762977 to be greater than 2.6
+ ❯ tests/unit/sampleHead.test.ts:45:26
+     43|   for(const sign of[-1,1]){
+     44|    const size=sideBounds(whites,sign).getSize(new T.Vector3());
+     45|    expect(size.x/size.y).toBeGreaterThan(2.6);
+       |                          ^
+     46|    expect(size.x).toBeGreaterThan(.057);
+     47|    expect(size.y).toBeGreaterThan(.017);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  18:35:28
+   Duration  281ms (tests 61%, import 19%, transform 18%, worker 2%)
+

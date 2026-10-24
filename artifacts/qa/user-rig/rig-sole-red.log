@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (8 tests | 1 failed) 1189ms
+   ❯ derived skeleton on the actual user character (8)
+     × keeps the actual soles rigid when the ankle articulates for foot locking 58ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > keeps the actual soles rigid when the ankle articulates for foot locking
+AssertionError: expected 0.018619357596437937 to be close to 0.02120604747146938, received difference is 0.002586689875031443, but expected 0.000005
+ ❯ tests/unit/userCharacterRig.test.ts:107:78
+    105|     expect(selected.length).toBeGreaterThan(30);const before=selected.…
+    106|     rig.bones[name].rotateX(.55);rig.root.updateMatrixWorld(true);rig.…
+    107|     for(let i=1;i<selected.length;i+=7)expect(after[0].distanceTo(afte…
+       |                                                                              ^
+    108|     rig.resetPose();
+    109|    }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  21:39:33
+   Duration  1.33s (tests 95%, import 3%, transform 2%)
+

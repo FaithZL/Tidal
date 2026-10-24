@@ -1,0 +1,14 @@
+[
+  {
+    "file": "chop-preview.webm",
+    "fps": 25.0,
+    "frames": 200.0,
+    "duration": 8.0
+  },
+  {
+    "file": "load-preview.webm",
+    "fps": 25.0,
+    "frames": 125.0,
+    "duration": 5.0
+  }
+]

@@ -1,0 +1,29 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprEnvironment.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts [ tests/unit/nprEnvironment.test.ts ]
+Error: Cannot find module '../../src/game/world/nprEnvironment.js' imported from D:/work/corona/Tidal/tests/unit/nprEnvironment.test.ts
+ ❯ tests/unit/nprEnvironment.test.ts:6:1
+      4| import {WorldResources} from '../../src/game/world/resources.js';
+      5| import {NprPalette} from '../../src/game/world/nprMaterials.js';
+      6| import {buildNprSampleEnvironment} from '../../src/game/world/nprEnvir…
+       | ^
+      7|
+      8| function meshes(root:T.Object3D):T.Mesh[]{const result:T.Mesh[]=[];roo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  13:53:22
+   Duration  155ms (worker 95%, environment 5%)
+

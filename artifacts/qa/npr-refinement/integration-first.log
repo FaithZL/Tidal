@@ -1,0 +1,64 @@
+[WebServer] (node:30652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:71612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:67408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start (2.0s)
+  ok 2 tests\e2e\npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start (1.9s)
+  ok 3 tests\e2e\npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay (1.4s)
+  ok 4 tests\e2e\npr-sample.spec.ts:37:1 › NPR missing texture fails visibly and cannot advance a hidden session (1.5s)
+  ok 5 tests\e2e\npr-sample.spec.ts:44:1 › reset while sample assets load cancels the deferred automatic start (2.0s)
+  ok 6 tests\e2e\npr-sample.spec.ts:54:1 › late atlas completion cannot revive controls after graphics context loss and reset (1.6s)
+  ok 7 tests\e2e\npr-sample.spec.ts:68:1 › sample keeps explicit real camera selection and never falls back to simulation on device failure (3.8s)
+  x  8 tests\e2e\npr-sample.spec.ts:78:1 › a rendered chop blends between poses, freezes mid-swing on pause and resumes without duplicate credit (14.4s)
+(node:63448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 9 tests\e2e\npr-sample.spec.ts:100:1 › local NPR sample keeps pause, input switch, inventory and complete simulated results (11.2s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:78:1 › a rendered chop blends between poses, freezes mid-swing on pause and resumes without duplicate credit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#chopValue')
+    Expected: "1/15"
+    Received: "0/15"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#chopValue') with timeout 7000ms
+      - waiting for locator('#chopValue')
+        18 × locator resolved to <strong id="chopValue">0/15</strong>
+           - unexpected value "0/15"
+
+
+      94 |  expect(await page.locator('#worldCanvas canvas').evaluate((c:HTMLCanvasElement)=>c.toDataURL())).toBe(pixels);
+      95 |  await expect(page.locator('#chopValue')).toHaveText('0/15');
+    > 96 |  await page.locator('#pauseBtn').click();await page.keyboard.press('Space');await expect(page.locator('#chopValue')).toHaveText('1/15');
+         |                                                                                                                      ^
+      97 |  await page.waitForTimeout(350);await expect(page.locator('#chopValue')).toHaveText('1/15');
+      98 | });
+      99 |
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:96:118
+
+    Error Context: test-results\npr-sample-a-rendered-chop-21860-es-without-duplicate-credit\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-a-rendered-chop-21860-es-without-duplicate-credit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-a-rendered-chop-21860-es-without-duplicate-credit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\npr-sample.spec.ts:78:1 › a rendered chop blends between poses, freezes mid-swing on pause and resumes without duplicate credit 
+  8 passed (45.9s)

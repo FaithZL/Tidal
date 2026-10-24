@@ -1,0 +1,200 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprCharacterRefinement.test.ts tests/unit/nprModels.test.ts tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+stderr | tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > leaves a visible forehead instead of a solid dark fringe across the front of the face
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps both eyes visible from the front and a modestly elevated orbit view
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > gives working clothes a rolled sleeve, waist belt and pouch silhouette rather than an uninterrupted overalls tube
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps one continuous trouser surface through each knee in straight and bent poses
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps the farmer close to 2.2 world units with shared static details inside the local model budget
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+ ❯ tests/unit/nprCharacterRefinement.test.ts (5 tests | 5 failed) 49ms
+   ❯ NPR farmer refinement (5)
+     × leaves a visible forehead instead of a solid dark fringe across the front of the face 23ms
+     × keeps both eyes visible from the front and a modestly elevated orbit view 7ms
+     × gives working clothes a rolled sleeve, waist belt and pouch silhouette rather than an uninterrupted overalls tube 6ms
+     × keeps one continuous trouser surface through each knee in straight and bent poses 6ms
+     × keeps the farmer close to 2.2 world units with shared static details inside the local model budget 6ms
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > sculpts an adult farmer with a tapered torso and six-head proportions rather than a rounded box head
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/ready world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/chop-down world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/squat-down world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/press-up world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the push/idle world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the pull/idle world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the secure/idle world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+stderr | tests/unit/nprModels.test.ts > local NPR actor sample > preserves the celebrate/idle world hand anchor
+THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index 1. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.
+
+ ❯ tests/unit/nprModels.test.ts (11 tests | 9 failed) 95ms
+   ❯ local NPR actor sample (11)
+     × sculpts an adult farmer with a tapered torso and six-head proportions rather than a rounded box head 23ms
+     × preserves the work/ready world hand anchor 7ms
+     × preserves the work/chop-down world hand anchor 6ms
+     × preserves the work/squat-down world hand anchor 6ms
+     × preserves the work/press-up world hand anchor 6ms
+     × preserves the push/idle world hand anchor 6ms
+     × preserves the pull/idle world hand anchor 4ms
+     × preserves the secure/idle world hand anchor 5ms
+     × preserves the celebrate/idle world hand anchor 5ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > leaves a visible forehead instead of a solid dark fringe across the front of the face
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ farmer tests/unit/nprCharacterRefinement.test.ts:10:14
+ ❯ tests/unit/nprCharacterRefinement.test.ts:24:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps both eyes visible from the front and a modestly elevated orbit view
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ farmer tests/unit/nprCharacterRefinement.test.ts:10:14
+ ❯ tests/unit/nprCharacterRefinement.test.ts:32:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > gives working clothes a rolled sleeve, waist belt and pouch silhouette rather than an uninterrupted overalls tube
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ farmer tests/unit/nprCharacterRefinement.test.ts:10:14
+ ❯ tests/unit/nprCharacterRefinement.test.ts:39:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps one continuous trouser surface through each knee in straight and bent poses
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ farmer tests/unit/nprCharacterRefinement.test.ts:10:14
+ ❯ tests/unit/nprCharacterRefinement.test.ts:52:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/unit/nprCharacterRefinement.test.ts > NPR farmer refinement > keeps the farmer close to 2.2 world units with shared static details inside the local model budget
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ farmer tests/unit/nprCharacterRefinement.test.ts:10:14
+ ❯ tests/unit/nprCharacterRefinement.test.ts:70:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > sculpts an adult farmer with a tapered torso and six-head proportions rather than a rounded box head
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ tests/unit/nprModels.test.ts:16:29
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/ready world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/chop-down world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/squat-down world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the work/press-up world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the push/idle world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the pull/idle world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the secure/idle world hand anchor
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > preserves the celebrate/idle world hand anchor
+Error: Cannot assemble farmer detail brass-buttons-v3
+ ❯ src/game/world/nprModels.ts:43:20
+     41|   });
+     42|   const merged=mergeGeometries(geometries,false);geometries.forEach(g=…
+     43|   if(!merged)throw new Error(`Cannot assemble farmer detail ${key}`);r…
+       |                    ^
+     44|  }),p,color,surface);
+     45| }
+ ❯ WorldResources.geometry src/game/world/resources.ts:21:106
+ ❯ details src/game/world/nprModels.ts:37:18
+ ❯ new NprCharacter3D src/game/world/nprModels.ts:140:13
+ ❯ tests/unit/nprModels.test.ts:43:29
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/14]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  14 failed | 17 passed (31)
+   Start at  14:28:26
+   Duration  271ms (tests 60%, import 22%, transform 16%, worker 2%)
+

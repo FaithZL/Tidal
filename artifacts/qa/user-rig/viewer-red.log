@@ -1,0 +1,61 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/user-models.spec.ts -g exposes local derived-bone
+
+[WebServer] (node:40264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:35020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:38444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 21:33:22 [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 21:33:22 [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 21:33:22 [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 21:33:22 [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  x  1 tests\e2e\user-models.spec.ts:3:1 › the supplied character exposes local derived-bone motion and keeps the house review usable (8.3s)
+
+
+  1) tests\e2e\user-models.spec.ts:3:1 › the supplied character exposes local derived-bone motion and keeps the house review usable 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#motionStage')
+    Expected: "derived-skeleton"
+    Received: "static"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#motionStage') with timeout 7000ms
+      - waiting for locator('#motionStage')
+        18 × locator resolved to <main data-paints="2" id="motionStage" data-view="full" data-assets="ready" data-motion-support="static">…</main>
+           - unexpected value "static"
+
+
+       7 |  await expect(page.getByRole('heading',{name:'人物与房屋模型'})).toBeVisible();
+       8 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-assets','ready');
+    >  9 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-motion-support','derived-skeleton');
+         |                                             ^
+      10 |  await expect(page.locator('#motionSource')).toContainText('本地派生骨骼');
+      11 |  await expect(page.locator('#motionSource')).toContainText('非真人输入');
+      12 |  await expect(page.getByRole('button',{name:'重播动作'})).toBeEnabled();
+        at D:\work\corona\Tidal\tests\e2e\user-models.spec.ts:9:45
+
+    Error Context: test-results\user-models-the-supplied-c-8adbc-eps-the-house-review-usable\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\user-models-the-supplied-c-8adbc-eps-the-house-review-usable\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\user-models-the-supplied-c-8adbc-eps-the-house-review-usable\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\user-models.spec.ts:3:1 › the supplied character exposes local derived-bone motion and keeps the house review usable 

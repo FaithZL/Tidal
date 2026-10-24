@@ -2,7 +2,10 @@ import {test,expect} from '../helpers/manualModeTest.js';
 test.use({baseURL:'http://127.0.0.1:4174'});
 
 test('unchanged homepage HUD retains text nodes and does not mutate on every animation frame',async({page})=>{
- await page.goto('/?e2e=1');await expect(page.locator('#planModal')).toBeVisible();
+ await page.goto('/?e2e=1');
+ // Measure steady-state HUD work after the new dynamic entry has finished startup.
+ await expect(page.locator('body')).toHaveAttribute('data-boot','ready');
+ await expect(page.locator('#planModal')).toBeVisible();
  const result=await page.evaluate(()=>new Promise<{mutations:number;retained:boolean}>(resolve=>{
   const nodes=['modeBadge','missionTitle','missionText','planModal','pauseBtn','rewardLogs','countdown'].map(id=>document.getElementById(id)!);
   const children=nodes.map(n=>n.firstChild);let mutations=0,frames=0;

@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (11 tests | 1 failed) 1339ms
+   ❯ derived skeleton on the actual user character (11)
+     × does not seed the chest bone from the actual skin beneath the jaw 55ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > does not seed the chest bone from the actual skin beneath the jaw
+AssertionError: expected 0.8669315576553345 to be less than 0.05
+ ❯ tests/unit/userCharacterRig.test.ts:143:24
+    141|    // skin under the jaw, not the blue chest garment behind it.
+    142|    for(let i=0;i<4;i++)if(rig.skeleton.bones[indices.getComponent(5299…
+    143|    expect(chestWeight).toBeLessThan(.05);
+       |                        ^
+    144|   }finally{rig.dispose();}
+    145|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  21:54:58
+   Duration  1.47s (tests 96%, import 2%, transform 2%)
+

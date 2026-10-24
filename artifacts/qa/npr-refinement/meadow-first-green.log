@@ -1,0 +1,39 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts tests/unit/nprMeadowRefinement.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMeadowRefinement.test.ts (4 tests | 1 failed) 45ms
+   × plants preserve the road, cottage walk and all three chopping footholds with bounded actual scenery cost 18ms
+ ❯ tests/unit/nprEnvironment.test.ts (5 tests | 1 failed) 81ms
+   × the local sample keeps road and work anchors clear within bounded scenery and finite rendering budgets 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > the local sample keeps road and work anchors clear within bounded scenery and finite rendering budgets
+AssertionError: expected 17680 to be less than or equal to 10000
+ ❯ tests/unit/nprEnvironment.test.ts:72:165
+     70|   expect(bounds.min.y).toBeGreaterThanOrEqual(.024);expect(bounds.max.…
+     71|   expect(all.length).toBeLessThanOrEqual(60);
+     72|   expect(all.reduce((sum,mesh)=>sum+(mesh.geometry.index?.count??mesh.…
+       |                                                                                                                                                                     ^
+     73|   const clearRoad=new T.Box3(new T.Vector3(-6,.08,-1.175),new T.Vector…
+     74|   for(const mesh of all){
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > plants preserve the road, cottage walk and all three chopping footholds with bounded actual scenery cost
+AssertionError: expected 60 to be less than 50
+ ❯ tests/unit/nprMeadowRefinement.test.ts:62:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 7 passed (9)
+   Start at  14:27:44
+   Duration  238ms (tests 51%, import 25%, transform 21%, worker 2%)
+

@@ -1,0 +1,92 @@
+[WebServer] (node:30992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:71012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:79868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\character-motion.spec.ts:64:1 › the original farm cannot receive clicks before its dynamic module has installed handlers (7.2s)
+(node:75668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 16:58:52 [vite] (client) [Unhandled rejection] TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:4173/src/browser.ts
+[WebServer] 
+  x  2 tests\e2e\character-motion.spec.ts:74:1 › entry module download failure is explicit and leaves a usable reload link (7.2s)
+
+
+  1) tests\e2e\character-motion.spec.ts:64:1 › the original farm cannot receive clicks before its dynamic module has installed handlers 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('body')
+    Expected: ""
+    Received: serializes to the same string
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('body') with timeout 7000ms
+      - waiting for locator('body')
+        18 × locator resolved to <body>…</body>
+           - unexpected value "null"
+
+
+      66 |  await page.route('**/src/browser.ts',async route=>{await gate;await route.continue();});
+      67 |  await page.goto('/',{waitUntil:'domcontentloaded'});
+    > 68 |  try{await expect(page.locator('body')).toHaveAttribute('inert','');}finally{release();}
+         |                                         ^
+      69 |  await expect(page.locator('body')).not.toHaveAttribute('inert','');
+      70 |  await page.locator('#demoToggle').click();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+      71 |  await page.locator('#cancelPlan').click();await expect(page.locator('#planModal')).toBeHidden();
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:68:41
+
+    Error Context: test-results\character-motion-the-origi-bfde6-dule-has-installed-handlers\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-the-origi-bfde6-dule-has-installed-handlers\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-the-origi-bfde6-dule-has-installed-handlers\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\character-motion.spec.ts:74:1 › entry module download failure is explicit and leaves a usable reload link 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "演示启动失败"
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByRole('alert') with timeout 7000ms
+      - waiting for getByRole('alert')
+
+
+      74 | test('entry module download failure is explicit and leaves a usable reload link',async({page})=>{
+      75 |  await page.route('**/src/browser.ts',r=>r.abort('failed'));
+    > 76 |  await page.goto('/');await expect(page.getByRole('alert')).toContainText('演示启动失败');
+         |                                                             ^
+      77 |  await expect(page.getByRole('link',{name:'重新加载'})).toBeVisible();
+      78 |  await expect(page.locator('body')).not.toHaveAttribute('inert','');
+      79 | });
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:76:61
+
+    Error Context: test-results\character-motion-entry-mod-aec30-leaves-a-usable-reload-link\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-entry-mod-aec30-leaves-a-usable-reload-link\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-entry-mod-aec30-leaves-a-usable-reload-link\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\character-motion.spec.ts:64:1 › the original farm cannot receive clicks before its dynamic module has installed handlers 
+    tests\e2e\character-motion.spec.ts:74:1 › entry module download failure is explicit and leaves a usable reload link 

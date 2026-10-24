@@ -1,0 +1,127 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (13 tests | 13 failed) 800ms
+   × the real supplied body stands up and deforms at its own hips and arms instead of moving as one rigid statue 104ms
+   × both feet and the actual low sole vertices stay planted throughout the local chop 69ms
+   × both palm markers keep contact with two different points of the actual rigid source handle 62ms
+   × the source axe remains rigid and recovery never repeats the high preparation 64ms
+   × the actual hands blade and head are continuous across the 2.4s stage boundary 54ms
+   × the actual hands blade and head are continuous across the 3.35s stage boundary 69ms
+   × the actual hands blade and head are continuous across the 3.65s stage boundary 58ms
+   × the actual hands blade and head are continuous across the 4.15s stage boundary 72ms
+   × the actual hands blade and head are continuous across the 4.4s stage boundary 53ms
+   × the actual hands blade and head are continuous across the 5.6s stage boundary 49ms
+   × the actual hands blade and head are continuous across the 7.1s stage boundary 49ms
+   × motion respects scene placement and invalid time does not poison skin matrices 48ms
+   × a direct cut from the raised pose to standing is detected as a visible jump 46ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the real supplied body stands up and deforms at its own hips and arms instead of moving as one rigid statue
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:23:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > both feet and the actual low sole vertices stay planted throughout the local chop
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:30:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > both palm markers keep contact with two different points of the actual rigid source handle
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:43:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the source axe remains rigid and recovery never repeats the high preparation
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:52:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 2.4s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 3.35s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 3.65s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 4.15s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 4.4s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 5.6s stage boundary
+ FAIL  tests/unit/userCharacterMotion.test.ts > the actual hands blade and head are continuous across the 7.1s stage boundary
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:57:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > motion respects scene placement and invalid time does not poison skin matrices
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:61:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > a direct cut from the raised pose to standing is detected as a visible jump
+Error: User skeleton motion not implemented
+ ❯ UserCharacterMotion.sample src/game/world/userCharacterMotion.ts:6:68
+      4| export class UserCharacterMotion{
+      5|  constructor(private readonly rig:UserCharacterRig){}
+      6|  sample(_timeSec:number,_idleOnly=false):{phase:SamplePhase}{throw new…
+       |                                                                    ^
+      7|  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.…
+      8|  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[sid…
+ ❯ tests/unit/userCharacterMotion.test.ts:67:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  13 failed (13)
+   Start at  21:40:27
+   Duration  941ms (tests 93%, import 4%, transform 3%)
+

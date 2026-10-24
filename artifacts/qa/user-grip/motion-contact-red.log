@@ -1,0 +1,56 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (17 tests | 3 failed) 1499ms
+   × the entire sampled source axe clears the wood surface during recoil and recovery, instead of dragging through the stump 80ms
+   × the blade first lifts out of the wood before returning sideways to the low standing grip 65ms
+   × the blade holds contact while the upper body absorbs the strike, then makes a small controlled rebound 57ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the entire sampled source axe clears the wood surface during recoil and recovery, instead of dragging through the stump
+AssertionError: axe inside wood at 4.19s: expected 0.4022151601710813 to be greater than or equal to 0.4023997563903222
+ ❯ tests/unit/userCharacterMotion.test.ts:90:129
+     88|  const top=Math.min(...axePoints(rig).filter(within).map(point=>point.…
+     89|  for(let time=4.15;time<=5.6;time+=.01){
+     90|   motion.sample(time);for(const point of axePoints(rig).filter(within)…
+       |                                                                                                                                 ^
+     91|  }
+     92| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the blade first lifts out of the wood before returning sideways to the low standing grip
+AssertionError: expected 0.3544872072901125 to be greater than 0.5035947984354641
+ ❯ tests/unit/userCharacterMotion.test.ts:96:72
+     94| test('the blade first lifts out of the wood before returning sideways …
+     95|  const {motion}=await fixture();motion.sample(4.15);const hit=motion.b…
+     96|  motion.sample(4.7);const clear=motion.bladePosition();expect(clear.y)…
+       |                                                                        ^
+     97|  motion.sample(5.2);const away=motion.bladePosition();expect(Math.hypo…
+     98| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > the blade holds contact while the upper body absorbs the strike, then makes a small controlled rebound
+AssertionError: expected 0.00046448070957419137 to be greater than 0.004
+ ❯ tests/unit/userCharacterMotion.test.ts:102:162
+    100| test('the blade holds contact while the upper body absorbs the strike,…
+    101|  const {rig,motion}=await fixture();motion.sample(4.15);const hit=moti…
+    102|  motion.sample(4.19);expect(motion.bladePosition().distanceTo(hit)).to…
+       |                                                                                                                                                                  ^
+    103|  motion.sample(4.28);expect(motion.bladePosition().y).toBeGreaterThan(…
+    104| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 14 passed (17)
+   Start at  22:52:17
+   Duration  1.64s (tests 96%, import 2%, transform 2%)
+

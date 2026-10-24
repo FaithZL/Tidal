@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userChopContact.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userChopContact.test.ts (3 tests | 2 failed) 5ms
+   ❯ the local chopping work surface (3)
+     × aligns its visible top to the real lowest tool vertex inside the contact disc, with only a 1mm bite 3ms
+     × measures posed world geometry through ancestor placement, rotation and uniform scaling without mutating it 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userChopContact.test.ts > the local chopping work surface > aligns its visible top to the real lowest tool vertex inside the contact disc, with only a 1mm bite
+Error: User chop contact is not implemented
+ ❯ deriveUserChopContact src/game/world/userChopContact.ts:4:96
+      2| import * as T from 'three';
+      3| export interface UserChopContact{readonly center:T.Vector3;readonly su…
+      4| export function deriveUserChopContact(_rig:Pick<UserCharacterRig,'axe'…
+       |                                                                                                ^
+      5|
+ ❯ tests/unit/userChopContact.test.ts:19:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userChopContact.test.ts > the local chopping work surface > measures posed world geometry through ancestor placement, rotation and uniform scaling without mutating it
+Error: User chop contact is not implemented
+ ❯ deriveUserChopContact src/game/world/userChopContact.ts:4:96
+      2| import * as T from 'three';
+      3| export interface UserChopContact{readonly center:T.Vector3;readonly su…
+      4| export function deriveUserChopContact(_rig:Pick<UserCharacterRig,'axe'…
+       |                                                                                                ^
+      5|
+ ❯ tests/unit/userChopContact.test.ts:32:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  22:52:39
+   Duration  134ms (import 47%, transform 38%, tests 10%, worker 5%)
+

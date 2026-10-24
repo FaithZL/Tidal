@@ -1,0 +1,35 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userModel.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userModel.test.ts (7 tests | 1 failed) 103ms
+   ❯ user-supplied static FBX model (7)
+     × identifies a failed character request or malformed FBX as character rather than house failure 15ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > identifies a failed character request or malformed FBX as character rather than house failure
+AssertionError: expected [Function] to throw error including '用户人物模型加载失败' but got 'body stream interrupted'
+
+Expected: "用户人物模型加载失败"
+Received: "body stream interrupted"
+
+ ❯ tests/unit/userModel.test.ts:68:53
+     66|   await expect(loadUserModel('character','/tidal/')).rejects.toThrow('…
+     67|   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:true,arrayBuffer…
+     68|   await expect(loadUserModel('character','/tidal/')).rejects.toThrow('…
+       |                                                     ^
+     69|  });
+     70| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  20:46:27
+   Duration  233ms (tests 68%, import 19%, transform 12%, worker 1%)
+

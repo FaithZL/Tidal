@@ -1,0 +1,50 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprEnvironment.test.ts (5 tests | 2 failed) 64ms
+   × sample exclusion removes only the local barn while the default farm retains all three roofs 47ms
+   × the local painted meadow adds broad cool green variation below the unchanged road contact plane 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > sample exclusion removes only the local barn while the default farm retains all three roofs
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/nprEnvironment.test.ts:26:94
+     24|    }
+     25|   }
+     26|   expect(hayPositions).toHaveLength(18);expect(hayPositions.every(posi…
+       |                                                                                              ^
+     27|  }finally{release(legacy,r);release(sample,r);}
+     28| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > the local painted meadow adds broad cool green variation below the unchanged road contact plane
+AssertionError: expected undefined to be an instance of Mesh
+ ❯ tests/unit/nprEnvironment.test.ts:33:77
+     31|  const r=new WorldResources(),root=buildNprSampleEnvironment(r,new Npr…
+     32|  try{
+     33|   const meadow=root.getObjectByName('sample-painted-meadow');expect(me…
+       |                                                                             ^
+     34|   const m=meadow as T.Mesh<T.BufferGeometry,T.MeshToonMaterial>,bounds…
+     35|   expect(bounds.max.y).toBeLessThan(.0575);expect(bounds.min.y).toBeGr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  13:58:45
+   Duration  219ms (tests 52%, import 25%, transform 21%, worker 2%)
+

@@ -1,0 +1,38 @@
+
+> tidal-farm-motion-demo@0.1.0 build
+> npm run typecheck && npm run build:worker && vite build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 build:worker
+> vite build --config vite.worker.config.ts
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3 modules transformed.
+rendering chunks...
+computing gzip size...
+public/worker/pose.js  135.84 kB │ gzip: 40.48 kB
+
+✓ built in 34ms
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 73 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             13.69 kB │ gzip:   5.06 kB
+dist/assets/character-sample-B7C_ML0E.css    3.94 kB │ gzip:   1.36 kB
+dist/assets/index-CVIrnIoA.css              17.29 kB │ gzip:   4.78 kB
+dist/assets/character-sample-CePOScfc.js     0.89 kB │ gzip:   0.43 kB
+dist/assets/index-CfgtkfKX.js                3.30 kB │ gzip:   1.60 kB
+dist/assets/nprMaterials-D_gzCDo6.js        12.17 kB │ gzip:   4.39 kB
+dist/assets/userModelSample-BJDegtwA.js     30.23 kB │ gzip:  12.13 kB
+dist/assets/userModel-Dad6QtH_.js           53.47 kB │ gzip:  18.20 kB
+dist/assets/characterSample-YFcqW6No.js     78.99 kB │ gzip:  26.26 kB
+dist/assets/browser-DOLpZQDy.js            133.31 kB │ gzip:  45.81 kB
+dist/assets/OrbitControls-BWIrCJhk.js      644.59 kB │ gzip: 160.90 kB
+
+✓ built in 249ms

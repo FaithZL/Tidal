@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleCostume.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleCostume.test.ts (6 tests | 1 failed) 825ms
+   ❯ reference-inspired local costume (6)
+     × lays the short scarf ends close to the actual deformed back instead of projecting as detached straps 80ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > lays the short scarf ends close to the actual deformed back instead of projecting as detached straps
+AssertionError: scarf floats off the back at 0.8s: expected 0.06299072460223552 to be less than 0.032
+ ❯ tests/unit/sampleCostume.test.ts:103:75
+    101|    clock.time=time;const frame=clock.frame;actor.sample(frame.idleTime…
+    102|    const vertices=points(tails),distances=[36,40,44,63,67,71,117,121,1…
+    103|    expect(Math.max(...distances),`scarf floats off the back at ${time}…
+       |                                                                           ^
+    104|   }
+    105|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  19:45:24
+   Duration  992ms (tests 92%, import 4%, transform 4%)
+

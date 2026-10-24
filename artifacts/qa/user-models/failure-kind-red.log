@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userModel.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userModel.test.ts (7 tests | 2 failed) 94ms
+   ❯ user-supplied static FBX model (7)
+     × cleans up invalid imported geometry and materials when validation rejects it 2ms
+     × identifies a failed character request or malformed FBX as character rather than house failure 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > cleans up invalid imported geometry and materials when validation rejects it
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ tests/unit/userModel.test.ts:60:20
+     58|   geometry.addEventListener('dispose',disposed);material.addEventListe…
+     59|   expect(()=>prepareUserModel(source,'character')).toThrow(/geometry|b…
+     60|   expect(disposed).toHaveBeenCalledTimes(1);expect(materialDisposed).t…
+       |                    ^
+     61|  });
+     62|  it('identifies a failed character request or malformed FBX as charact…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > identifies a failed character request or malformed FBX as character rather than house failure
+AssertionError: expected [Function] to throw error including '用户人物模型加载失败' but got 'network failed'
+
+Expected: "用户人物模型加载失败"
+Received: "network failed"
+
+ ❯ tests/unit/userModel.test.ts:64:53
+     62|  it('identifies a failed character request or malformed FBX as charact…
+     63|   vi.stubGlobal('fetch',vi.fn().mockRejectedValue(new TypeError('netwo…
+     64|   await expect(loadUserModel('character','/tidal/')).rejects.toThrow('…
+       |                                                     ^
+     65|   vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response('not an…
+     66|   await expect(loadUserModel('character','/tidal/')).rejects.toThrow('…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 5 passed (7)
+   Start at  20:44:08
+   Duration  226ms (tests 66%, import 19%, transform 13%, worker 2%)
+

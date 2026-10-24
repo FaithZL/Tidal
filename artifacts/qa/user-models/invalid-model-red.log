@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userModel.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userModel.test.ts (6 tests | 1 failed) 91ms
+   ❯ user-supplied static FBX model (6)
+     × cleans up invalid imported geometry and materials when validation rejects it 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > cleans up invalid imported geometry and materials when validation rejects it
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ tests/unit/userModel.test.ts:60:20
+     58|   geometry.addEventListener('dispose',disposed);material.addEventListe…
+     59|   expect(()=>prepareUserModel(source,'character')).toThrow(/geometry|b…
+     60|   expect(disposed).toHaveBeenCalledTimes(1);expect(materialDisposed).t…
+       |                    ^
+     61|  });
+     62| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  20:43:35
+   Duration  218ms (tests 65%, import 20%, transform 13%, worker 2%)
+

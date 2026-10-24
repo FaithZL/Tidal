@@ -1,0 +1,26 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMaterials.test.ts (4 tests | 1 failed) 6ms
+   × open leaf silhouettes use a separately owned cutout map and keep depth for natural overlap 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMaterials.test.ts > open leaf silhouettes use a separately owned cutout map and keep depth for natural overlap
+TypeError: p.leaves is not a function
+ ❯ tests/unit/nprMaterials.test.ts:42:12
+     40| test('open leaf silhouettes use a separately owned cutout map and keep…
+     41|  const r=new WorldResources(),atlas=new T.Texture(),leaves=new T.Textu…
+     42|  const m=p.leaves();expect(m.map).toBe(leaves);expect(m.map).not.toBe(…
+       |            ^
+     43|  expect(m.side).toBe(T.DoubleSide);expect(m.transparent).toBe(false);e…
+     44|  expect(p.leaves()).toBe(m);expect(leaves.colorSpace).toBe(T.SRGBColor…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  14:24:37
+   Duration  147ms (import 49%, transform 36%, tests 10%, worker 5%)
+

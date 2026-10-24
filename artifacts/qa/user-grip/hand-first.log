@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userHandGrip.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userHandGrip.test.ts (4 tests | 1 failed) 454ms
+   × corrects the real finger and thumb triangle surfaces around the supplied handle, not only hand markers 92ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userHandGrip.test.ts > corrects the real finger and thumb triangle surfaces around the supplied handle, not only hand markers
+AssertionError: left source surface intersects the .62-scaled handle: expected 0 to be greater than 0.0317
+ ❯ tests/unit/userHandGrip.test.ts:75:121
+     73|   // Actual original shaft cross-sections at the two grips reach radiu…
+     74|   // the approved constant .62 display scale makes it <.0316.
+     75|   expect(surfaceClearance(rig,side,center,grip.frames[side]),`${side} …
+       |                                                                                                                         ^
+     76|  }
+     77| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  23:03:10
+   Duration  589ms (tests 88%, import 6%, transform 5%)
+

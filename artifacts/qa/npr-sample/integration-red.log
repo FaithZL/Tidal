@@ -1,0 +1,77 @@
+[WebServer] (node:37032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:64960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:54016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start (8.1s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: "tidal-npr-sample-v1"
+    Received: "tidal-farm-3d-v2"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-action="ready" data-world-logs="0" data-render-scale="1" data-effects="impact" data-inventory="0/0/0" data-player-mode="work" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="-0.202,7.587,10.290" data-probe="-0.1044,0.0938,0.9852" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C…>…</div>
+        2 × unexpected value "tidal-farm-3d-v2"
+          - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-world-logs="0" data-render-scale="1" data-inventory="0/0/0" data-player-mode="work" data-action="chop-return" data-art="tidal-farm-3d-v2" data-effects="impact,impact" data-renderer="Three.js r186" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="-0.202,7.587,10.290" data-probe="-0.1044,0.0938,0.9852" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subz…>…</div>
+          - unexpected value "tidal-farm-3d-v2"
+          - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-action="ready" data-world-logs="0" data-render-scale="1" data-inventory="0/0/0" data-player-mode="work" data-art="tidal-farm-3d-v2" data-effects="impact,impact" data-renderer="Three.js r186" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="-0.202,7.587,10.290" data-probe="-0.1044,0.0938,0.9852" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="1" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-world-logs="5" data-inventory="5/0/0" data-render-scale="0.8" data-player-mode="work" data-action="chop-return" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-cart-position="3.000,0.000" data-camera="-2.598,7.587,7.095" aria-label="可旋转三维农场。地面5、车上0、到家0。" data-effects="tree,impact,impact" data-probe="-0.0395,-0.4395,0.9797" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Devic…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="2" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-world-logs="10" data-inventory="10/0/0" data-player-mode="work" data-render-scale="0.64" data-action="chop-return" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="1.321,7.587,3.659" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面10、车上0、到家0。" data-probe="-0.8842,-0.7044,0.9770" data-effects="tree,impact,impact,impact" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftSh…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-action="ready" data-world-logs="15" data-inventory="15/0/0" data-player-mode="work" data-render-scale="0.64" data-effects="tree,tree" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="3.447,7.038,8.748" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面15、车上0、到家0。" data-probe="-0.5390,0.2140,0.9851" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-world-logs="15" data-inventory="11/4/0" data-player-mode="work" data-render-scale="0.64" data-action="squat-down" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="2.670,7.038,8.347" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面11、车上4、到家0。" data-probe="-0.5066,0.1446,0.9843" data-effects="tree,log,impact,log,impact,log,impact,log" data-gpu="ANGLE (Google, Vulkan …>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-world-logs="15" data-action="press-up" data-inventory="6/9/0" data-player-mode="work" data-render-scale="0.64" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="2.588,7.038,8.304" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面6、车上9、到家0。" data-probe="-0.5030,0.1369,0.9843" data-effects="log,log,impact,log,impact,log,impact,log" data-gpu="ANGLE (Google, Vulkan 1.3.0…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-world-logs="15" data-inventory="1/14/0" data-player-mode="work" data-render-scale="0.512" data-action="load-return" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="2.588,7.038,8.304" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面1、车上14、到家0。" data-probe="-0.5030,0.1369,0.9843" data-effects="log,log,impact,log,impact,log,impact,log,impact" data-gpu="ANGLE (Google,…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-effects="log" data-action="ready" data-world-logs="15" data-inventory="0/15/0" data-player-mode="pull" data-render-scale="0.512" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="5.455,8.136,9.685" data-cart-position="2.142,0.000" aria-label="可旋转三维农场。地面0、车上15、到家0。" data-probe="-0.5925,0.1908,0.9873" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x00…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-action="ready" data-world-logs="15" data-inventory="0/15/0" data-player-mode="pull" data-render-scale="0.512" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="17.243,8.136,9.685" data-cart-position="18.111,0.000" aria-label="可旋转三维农场。地面0、车上15、到家0。" data-probe="-1.2162,0.5247,0.9905" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x000…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+        - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-action="ready" data-world-logs="15" data-inventory="0/15/0" data-player-mode="pull" data-render-scale="0.512" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-camera="32.882,8.136,9.685" data-cart-position="34.874,0.000" aria-label="可旋转三维农场。地面0、车上15、到家0。" data-probe="-1.7013,0.7844,0.9929" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x000…>…</div>
+        3 × unexpected value "tidal-farm-3d-v2"
+          - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-rope="1.000" data-particles="0" data-action="ready" data-npc="celebrate" data-world-logs="15" data-inventory="0/0/15" data-render-scale="0.512" data-art="tidal-farm-3d-v2" data-player-mode="celebrate" data-renderer="Three.js r186" data-camera="46.148,7.587,8.940" data-cart-position="40.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家15。" data-probe="-2.0367,0.9597,0.9941" data-gpu="ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzer…>…</div>
+        - unexpected value "tidal-farm-3d-v2"
+
+
+       9 |  await page.goto(sample,{waitUntil:'domcontentloaded'});
+      10 |  try{
+    > 11 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-art','tidal-npr-sample-v1');
+         |                                              ^
+      12 |   await expect(page.locator('#acceptPlan')).toBeDisabled();await page.waitForTimeout(350);
+      13 |   await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#statusTag')).toHaveText('未开始');
+      14 |  }finally{release();}
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:11:46
+
+    Error Context: test-results\npr-sample-NPR-sample-wait-c8925-re-autoplay-or-manual-start\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-NPR-sample-wait-c8925-re-autoplay-or-manual-start\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-NPR-sample-wait-c8925-re-autoplay-or-manual-start\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start 

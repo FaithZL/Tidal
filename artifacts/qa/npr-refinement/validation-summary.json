@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-22",
+  "branch": "codex/npr-farm-sample",
+  "base": "a45116b8fea9d696f482c936a4aabaf79c597f0c",
+  "scope": "local NPR people/trees/meadow + fine presentation motion only",
+  "typecheck": "pass",
+  "lint": "pass",
+  "unit": {
+    "files": 36,
+    "passed": 257
+  },
+  "e2e": {
+    "cases": 59,
+    "finalCoverage": "all cases passed across second complete run58 + unchanged individual replay1",
+    "singleCompleteVerifyExitZero": false,
+    "attempts": [
+      {
+        "log": "verify-first.log",
+        "passed": 56,
+        "failed": 3,
+        "cause": "fixed test preview-port collision"
+      },
+      {
+        "log": "verify-second.log",
+        "passed": 58,
+        "failed": 1,
+        "cause": "Windows UNKNOWN screenshot file open, upstream cause unknown"
+      }
+    ],
+    "targetedReplay": {
+      "log": "visual-replay-recheck.log",
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "build": {
+    "status": "pass",
+    "log": "build-final.log",
+    "bundle": "index-DrLIbJGD.js"
+  },
+  "assets": "pass",
+  "performance": {
+    "status": "fail",
+    "fps": 34.0586061298826,
+    "renderer": "SwiftShader software",
+    "scale": 0.5,
+    "physicalCamera": "manual_pending"
+  },
+  "pushed": false,
+  "merged": false
+}

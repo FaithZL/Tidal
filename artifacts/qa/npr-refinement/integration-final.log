@@ -1,0 +1,25 @@
+[WebServer] (node:25756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:58792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:5880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:47636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:16744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start (2.0s)
+  ok  2 tests\e2e\npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start (1.9s)
+  ok  3 tests\e2e\npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay (1.4s)
+  ok  4 tests\e2e\npr-sample.spec.ts:37:1 › NPR missing texture fails visibly and cannot advance a hidden session (1.4s)
+  ok  5 tests\e2e\npr-sample.spec.ts:44:1 › reset while sample assets load cancels the deferred automatic start (2.0s)
+  ok  6 tests\e2e\npr-sample.spec.ts:54:1 › late atlas completion cannot revive controls after graphics context loss and reset (1.5s)
+  ok  7 tests\e2e\npr-sample.spec.ts:68:1 › sample keeps explicit real camera selection and never falls back to simulation on device failure (3.6s)
+  ok  8 tests\e2e\npr-sample.spec.ts:78:1 › a rendered chop blends between poses, freezes mid-swing on pause and resumes without duplicate credit (8.7s)
+  ok  9 tests\e2e\npr-sample.spec.ts:100:1 › reset during a partial swing immediately snaps the rendered hands to the new home pose (6.8s)
+  ok 10 tests\e2e\npr-sample.spec.ts:120:1 › local NPR sample keeps pause, input switch, inventory and complete simulated results (10.0s)
+
+  10 passed (44.7s)

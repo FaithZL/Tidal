@@ -1,0 +1,13 @@
+{
+  "file": "artifacts\\qa\\character-motion\\motion-preview.webm",
+  "bytes": 3826568,
+  "sha256": "0f29de513abd3f4bbf7bd2dc0817b07f2671c9d7fa8e79f8ea5f01fef458d943",
+  "fpsEncoded": 25.0,
+  "frameCountHeader": 412.0,
+  "width": 1366.0,
+  "height": 900.0,
+  "note": "Screen recording of the isolated Three.js sample. Encoded video fps is NOT a game performance measurement.",
+  "decodedFrames": 412,
+  "uniqueDecodedFrames": 412,
+  "durationSeconds": 16.48
+}

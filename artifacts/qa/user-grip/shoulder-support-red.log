@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (16 tests | 2 failed) 1863ms
+   ❯ derived skeleton on the actual user character (16)
+     × keeps the shoulder sleeve from inheriting a forearm rotation through axial projection 82ms
+     × confines forearm support to the distal upper arm instead of the shoulder sleeve 58ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > keeps the shoulder sleeve from inheriting a forearm rotation through axial projection
+AssertionError: expected 2.0754695646829617 to be less than 2
+ ❯ tests/unit/userCharacterRig.test.ts:175:126
+    173|    for(const time of [2.9,3.4,3.9,4.15]){
+    174|     motion.sample(time);rig.root.updateMatrixWorld(true);rig.skeleton.…
+    175|     expect(rig.mesh.getVertexPosition(a,new T.Vector3()).distanceTo(ri…
+       |                                                                                                                              ^
+    176|    }
+    177|   }finally{rig.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > confines forearm support to the distal upper arm instead of the shoulder sleeve
+AssertionError: left sleeve 13264 inherits distal arm bones: expected 0.18261481821537018 to be less than 0.025
+ ❯ tests/unit/userCharacterRig.test.ts:184:70
+    182|    for(const corner of [13263,13264]){
+    183|     let distal=0;for(let j=0;j<4;j++)if([rig.bones.leftForeArm,rig.bon…
+    184|     expect(distal,`left sleeve ${corner} inherits distal arm bones`).t…
+       |                                                                      ^
+    185|    }
+    186|   }finally{rig.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  23:13:06
+   Duration  2.01s (tests 97%, import 2%, transform 1%)
+

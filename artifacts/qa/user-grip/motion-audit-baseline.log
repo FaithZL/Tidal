@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-22",
+  "method": "Actual normalized FBX + current runtime rig/motion in CPU; original textures stubbed only; not browser or finger collision proof.",
+  "sourceSha256": {
+    "src/game/world/userModel.ts": "af62c383c446c18f0e2850802bef14f8db07e7a7ba0b1146a592f9ef712d052f",
+    "src/game/world/userCharacterRig.ts": "ec8e0ea1149b133ab4d2cf37d77a21e008077e599b7aa9458c03041593d75d9b",
+    "src/game/world/userCharacterMotion.ts": "67fad0487624a5790a211c6a528787e137308953e3c5778e7dce6405636d4e19"
+  },
+  "fbxSha256": "de65c08a0c332fa1701e3d2f578f12cdc6d3bf61d19d8514cfda41fa83af1717",
+  "warnings": [
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ShininessExponent",
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ReflectionFactor"
+  ],
+  "workTarget": {
+    "centerXZ": [
+      0.5691641766290751,
+      0.9897470467780312
+    ],
+    "stumpHeight": 0.4035947984354641,
+    "visibleCutTop": 0.4185947984354641,
+    "radius": 0.202
+  },
+  "summary": {
+    "minimumBladeYInsideStump": {
+      "time": 4.9,
+      "y": 0.31449760214109435,
+      "belowWoodTop": 0.08909719629436974,
+      "belowVisibleCutTop": 0.10409719629436975
+    },
+    "maximumRecoveryChordDeviation": 0.024475920897488117,
+    "sampleCount": 711
+  }
+}

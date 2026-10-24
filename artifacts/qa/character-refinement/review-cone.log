@@ -1,0 +1,506 @@
+[
+  {
+    "mode": "current",
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.9433469005511362e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 35,
+        "skin": 0,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.77,
+        "tunic": 49,
+        "skin": 0,
+        "shoulderWrist": 0.48168417746484027
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.4658558169495947
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3142990106728378
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3142990259433538
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.29518455230575286
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.27490894192599663
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.30911442202392136
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.500293285179422
+      }
+    ]
+  },
+  {
+    "mode": "radial-.30",
+    "peakBladeStep": 0.425626173374074,
+    "maxGripError": 2.9433469005511362e-8,
+    "minimumBlade": [
+      -0.29592469769197793,
+      0.6995469118869093,
+      0.9392206275396116
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 35,
+        "skin": 0,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.77,
+        "tunic": 49,
+        "skin": 0,
+        "shoulderWrist": 0.48168417746484027
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.4658558169495944
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3142990106728378
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3142990259433538
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.29518455230575286
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.27490894192599663
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3091144218655166
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.500293285179401
+      }
+    ]
+  },
+  {
+    "mode": "forward-.30",
+    "peakBladeStep": 0.3868140289074374,
+    "maxGripError": 3.067119745981434e-8,
+    "minimumBlade": [
+      -0.477813741818585,
+      0.9559952256337185,
+      0.9822309782298176
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.4899999996722326
+      },
+      {
+        "time": 3.77,
+        "tunic": 41,
+        "skin": 0,
+        "shoulderWrist": 0.490000002756219
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999234672414
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3862132392078675
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3862132502982395
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3540713753801098
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3002441342215819
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.31971102826663944
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5002925863448563
+      }
+    ]
+  },
+  {
+    "mode": "authored-.30",
+    "peakBladeStep": 0.3893796796199722,
+    "maxGripError": 3.133001267195447e-8,
+    "minimumBlade": [
+      -0.4159391358198594,
+      0.9920785186560768,
+      1.0540224779639387
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999960245244
+      },
+      {
+        "time": 3.77,
+        "tunic": 41,
+        "skin": 0,
+        "shoulderWrist": 0.4900000025460817
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999377085196
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.38399135784332045
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.39800534010736416
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.36495366224747505
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.30284321107105006
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.32311329091839386
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5002938146466877
+      }
+    ]
+  },
+  {
+    "mode": "forward-.35",
+    "peakBladeStep": 0.3868140289074374,
+    "maxGripError": 3.067119745981434e-8,
+    "minimumBlade": [
+      -0.477813741818585,
+      0.9559952256337185,
+      0.9822309782298176
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.4899999996722326
+      },
+      {
+        "time": 3.77,
+        "tunic": 41,
+        "skin": 0,
+        "shoulderWrist": 0.490000002756219
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999234672414
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3862132392078675
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3862132502982395
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3540713753801098
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.3002441342215819
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.31971102826663944
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5002925863448563
+      }
+    ]
+  },
+  {
+    "mode": "authored-.35",
+    "peakBladeStep": 0.3893796796199722,
+    "maxGripError": 3.133001267195447e-8,
+    "minimumBlade": [
+      -0.4159391358198594,
+      0.9920785186560768,
+      1.0540224779639387
+    ],
+    "crossings": [
+      {
+        "time": 0.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999960245244
+      },
+      {
+        "time": 3.77,
+        "tunic": 41,
+        "skin": 0,
+        "shoulderWrist": 0.4900000025460817
+      },
+      {
+        "time": 3.9,
+        "tunic": 38,
+        "skin": 0,
+        "shoulderWrist": 0.48999999377085196
+      },
+      {
+        "time": 4.15,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.38399135784332045
+      },
+      {
+        "time": 4.4,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.39800534010736416
+      },
+      {
+        "time": 4.7,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.36495366224747505
+      },
+      {
+        "time": 4.9,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.30284321107105006
+      },
+      {
+        "time": 5.1,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.32311329091839386
+      },
+      {
+        "time": 5.5,
+        "tunic": 0,
+        "skin": 0,
+        "shoulderWrist": 0.5002938146466877
+      }
+    ]
+  }
+]

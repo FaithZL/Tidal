@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (6 tests | 2 failed) 463ms
+   ❯ derived skeleton on the actual user character (6)
+     × binds a real articulated skeleton while retaining the original file metadata 99ms
+     × moves the actual forearm and shin skin when their bones bend instead of rocking the whole character 83ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > binds a real articulated skeleton while retaining the original file metadata
+AssertionError: expected [ …(17) ] to have a length of 19 but got 17
+
+- Expected
++ Received
+
+- 19
++ 17
+
+ ❯ tests/unit/userCharacterRig.test.ts:25:78
+     23|   try{
+     24|    expect(model.motionSupport).toBe('static');expect(rig.motionSupport…
+     25|    expect(rig.mesh).toBeInstanceOf(T.SkinnedMesh);expect(rig.skeleton.…
+       |                                                                              ^
+     26|    expect(rig.bones.leftForeArm.parent).toBe(rig.bones.leftUpperArm);e…
+     27|    expect(rig.bones.head.parent).toBe(rig.bones.neck);expect(rig.bones…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > moves the actual forearm and shin skin when their bones bend instead of rocking the whole character
+AssertionError: expected 0 to be greater than 255
+ ❯ tests/unit/userCharacterRig.test.ts:64:52
+     62|    const armBefore=sample(arm),legBefore=sample(leg),headOrigin=rig.bo…
+     63|    rig.bones.leftForeArm.rotateX(.35);rig.bones.rightShin.rotateX(-.3);
+     64|    expect(changedVertices(rig.mesh,arm,armBefore)).toBeGreaterThan(arm…
+       |                                                    ^
+     65|    expect(rig.bones.head.getWorldPosition(new T.Vector3()).distanceTo(…
+     66|    rig.resetPose();rig.root.updateMatrixWorld(true);rig.skeleton.updat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  21:35:13
+   Duration  603ms (tests 89%, import 6%, transform 5%)
+

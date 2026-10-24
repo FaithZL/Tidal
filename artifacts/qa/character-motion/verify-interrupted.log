@@ -1,0 +1,74 @@
+
+> tidal-farm-motion-demo@0.1.0 verify
+> npm run typecheck && npm run lint && npm run test:unit && npm run test:e2e && npm run build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  38 passed (38)
+      Tests  270 passed (270)
+   Start at  16:53:30
+   Duration  1.37s (tests 52%, transform 26%, import 19%, worker 3%)
+
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test
+
+[WebServer] (node:54660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:77304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:31792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 65 tests using 1 worker
+
+(node:44632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   1 tests\e2e\boot.spec.ts:3:1 › Three.js farm boots, plan cancels and reopens without starting a session (7.3s)
+(node:53948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  2 tests\e2e\boot.spec.ts:19:1 › ordinary builds ignore URL acceleration flags (214ms)
+  ok  3 tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input (1.4s)
+  ok  4 tests\e2e\character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable (3.0s)
+[WebServer] 16:53:50 [vite] (client) [console.error] TypeError: Failed to fetch
+[WebServer]     at FileLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31825:3)
+[WebServer]     at GLTFLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js?v=8297a5dd:194:10)
+[WebServer]     at http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31632:10
+[WebServer]     at new Promise (<anonymous>)
+[WebServer]     at GLTFLoader.loadAsync (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31631:10)
+[WebServer]     at loadSampleCharacter (http://127.0.0.1:4173/src/game/world/sampleCharacter.ts:302:10)
+[WebServer]     at start (http://127.0.0.1:4173/src/characterSample.ts:119:17)
+[WebServer]     at http://127.0.0.1:4173/src/characterSample.ts:216:6
+  ok  5 tests\e2e\character-motion.spec.ts:35:1 › bone asset failure is visible and disables replay (504ms)
+  ok  6 tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately (1.9s)
+  ok  7 tests\e2e\character-motion.spec.ts:54:1 › the review timeline selects an exact paused pose without advancing a workout (1.9s)
+  ok  8 tests\e2e\default-demo.spec.ts:5:1 › fresh visits and reloads automatically show the explicit demo without requesting a camera (7.9s)
+  ok  9 tests\e2e\default-demo.spec.ts:24:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload (3.9s)
+  ok 10 tests\e2e\default-demo.spec.ts:34:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads (2.6s)
+  ok 11 tests\e2e\default-demo.spec.ts:44:1 › blocked browser storage still allows autoplay and a session-local off switch without errors (2.2s)
+  ok 12 tests\e2e\default-demo.spec.ts:53:1 › a renderer initialization failure keeps default autoplay at home with no hidden progression (889ms)
+  x  13 tests\e2e\demo-toggle.spec.ts:6:1 › no-camera demo is explicit, completes the full farm flow and resets with its chosen preference without camera requests (1.0m)
+(node:20768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  14 tests\e2e\demo-toggle.spec.ts:39:1 › turning demo off cancels partial input and pauses; manual mode can resume (1.0m)
+(node:35824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  15 tests\e2e\demo-toggle.spec.ts:51:1 › real camera stays separate after demo and errors never turn simulation back on (1.0m)
+(node:30312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

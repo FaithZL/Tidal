@@ -1,0 +1,6 @@
+2026-10-22: Localized user-provided FBX; byte-for-byte copies, no re-export.
+Scope: character and house local replacement; no purchase, upload, deploy, git commit or push.
+modelf23d8a6f4b3801.fbx -> character.fbx: PASS same bytes; bytes=3149804; SHA256=de65c08a0c332fa1701e3d2f578f12cdc6d3bf61d19d8514cfda41fa83af1717; FBX=7400; triangles=4900; bones=0, skin=false, animations=0; four embedded 2048x2048 maps preserved.
+model4e87ceb4739501.fbx -> house.fbx: PASS same bytes; bytes=3391244; SHA256=e6bec4ad925df0dbd165b363452d95ad72047de56e1a7c8a0910e60d8ede34f7; FBX=7400; triangles=4430; bones=0, skin=false, animations=0; four embedded 2048x2048 maps preserved.
+PASS provenance JSON parse, required metadata and no absolute source/server path in metadata.
+Original author / public redistribution license not provided; not CC0.

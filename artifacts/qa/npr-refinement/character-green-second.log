@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprCharacterRefinement.test.ts tests/unit/nprModels.test.ts tests/unit/actorArt.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  3 passed (3)
+      Tests  31 passed (31)
+   Start at  14:28:39
+   Duration  287ms (tests 64%, import 18%, transform 16%, worker 2%)
+

@@ -1,0 +1,66 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprMotion.test.ts tests/unit/nprModels.test.ts tests/unit/nprCharacterRefinement.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMotion.test.ts (8 tests | 2 failed) 120ms
+   ❯ fine farmer presentation motion (8)
+     × passes through an intermediate down-swing and reaches the original contact anchor by 60 ms 36ms
+     × sequences squat, stand, press and release with a body hinge and an independently reacting head 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > passes through an intermediate down-swing and reaches the original contact anchor by 60 ms
+AssertionError: expected [ +0, 0.8500000000000001, 0.85 ] to deeply equal [ +0, 0.85, 0.85 ]
+
+- Expected
++ Received
+
+  [
+    0,
+-   0.85,
++   0.8500000000000001,
+    0.85,
+  ]
+
+ ❯ tests/unit/nprMotion.test.ts:27:42
+     25|   expect(actor.animating).toBe(true);
+     26|   actor.update(down,true,40);
+     27|   expect(actor.handPosition().toArray()).toEqual([0,.85,.85]);expect(a…
+       |                                          ^
+     28|  });
+     29|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > sequences squat, stand, press and release with a body hinge and an independently reacting head
+AssertionError: expected [ +0, 0.44999999999999996, 0.55 ] to deeply equal [ +0, 0.45, 0.55 ]
+
+- Expected
++ Received
+
+  [
+    0,
+-   0.45,
++   0.44999999999999996,
+    0.55,
+  ]
+
+ ❯ tests/unit/nprMotion.test.ts:62:94
+     60|   expect(pivot).toBeDefined();expect(head).toBeDefined();expect(pivot!…
+     61|   expect(actor.handPosition().y).toBeGreaterThan(.45);expect(actor.han…
+     62|   actor.update({...ready,pose:'squat-down'},false,70);expect(actor.han…
+       |                                                                                              ^
+     63|   for(const [pose,y,z] of[['stand-up',1.55,.48],['press-up',2.35,.48],…
+     64|    actor.update({...ready,pose},false,70);expect(actor.animating).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 25 passed (27)
+   Start at  15:10:18
+   Duration  302ms (tests 61%, transform 21%, import 16%, worker 1%)
+

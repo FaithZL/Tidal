@@ -1,0 +1,47 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMaterials.test.ts (3 tests | 1 failed) 7ms
+   × soft lighting keeps broad transitions and atlas repeats remain inside an inset tile 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMaterials.test.ts > soft lighting keeps broad transitions and atlas repeats remain inside an inset tile
+AssertionError: expected 'uniform vec4 nprAtlasRect;\n\nvec3 ge…' to contain 'textureGrad( map, atlasUv'
+
+- Expected
++ Received
+
+- textureGrad( map, atlasUv
++ uniform vec4 nprAtlasRect;
++
++ vec3 getGradientIrradiance( vec3 normal, vec3 lightDirection ) {
++  float level = dot( normal, lightDirection ) * 0.5 + 0.5;
++  float lit = smoothstep( 0.22, 0.78, level );
++  return mix( vec3( 0.59, 0.65, 0.72 ), vec3( 1.0, 0.97, 0.88 ), lit );
++ }
++
++       #ifdef USE_MAP
++        vec2 atlasUv = nprAtlasRect.xy + fract( vMapUv ) * nprAtlasRect.zw;
++        vec4 paint = texture2D( map, atlasUv );
++        diffuseColor.rgb *= mix( vec3( 1.0 ), paint.rgb, 0.46 );
++        diffuseColor.a *= paint.a;
++       #endif
++      
+
+ ❯ tests/unit/nprMaterials.test.ts:24:32
+     22|  expect(shader.fragmentShader).toContain('smoothstep( 0.22, 0.78');
+     23|  expect(shader.fragmentShader).toContain('fract( vMapUv )');
+     24|  expect(shader.fragmentShader).toContain('textureGrad( map, atlasUv');
+       |                                ^
+     25|  expect(shader.fragmentShader).toContain('dFdx( vMapUv ) * nprAtlasRec…
+     26|  expect(shader.fragmentShader).toContain('nprAtlasRect');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  14:05:24
+   Duration  140ms (import 48%, transform 34%, tests 13%, worker 4%)
+

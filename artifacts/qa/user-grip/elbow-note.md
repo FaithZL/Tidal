@@ -1,0 +1,23 @@
+# User character elbow weighting refinement
+
+2026-10-22. CPU verification only; no GPU/browser capture or input/domain changes by this subtask.
+
+The unchanged real FBX and previous delivered Motion source (SHA `67fad0487624a5790a211c6a528787e137308953e3c5778e7dce6405636d4e19`) reproduce left inner elbow corners 12940/12941 stretching **3.2806969×** at 4.15 s and right inner elbow 2563/2564 stretching **3.0736933×** standing. The left elbow had **14.47% Hand influence**, and adjacent corners had abrupt upper/forearm weight changes. This is a same-arm support/gradient problem, distinct from the previously fixed hand/knee cross-chain error.
+
+`elbow-red.log` retains all three actual failing tests. The implementation keeps 17 bones and the total arm-chain share, softly partitions upper/forearm support with continuous surface distance, blends the measured forearm cross-section, and limits hand support to the wrist/palm region. It changes initialization weights only, not per-frame meshes, source FBX, UVs, triangle count, material ownership, palms or foot interfaces.
+
+The initial axial approach fixed the two target edges but introduced a 5.12× sleeve edge elsewhere. `elbow-shoulder-red.log` and the new sleeve regression preserve that failure. A trial relying on surface distance plus radial hand gating also failed existing hand-edge tests; `elbow-green-geodesic.log` is deliberately a **failed intermediate run despite its filename**, and `elbow-review-geodesic.json` records it. Those approaches were replaced, not accepted or hidden.
+
+Final rig SHA `997b96360f9ce84c4f623871a1ef758795aa4b71ff0d57b6bea0cccfbb5e1986`: **15/15 binding tests pass**, including all previous 11 assertions and four new elbow/hand-support/sleeve cases (`elbow-green-hybrid.log`). Typecheck and isolated rig lint also exited 0 in the terminal. No test thresholds were relaxed.
+
+`elbow-isolated-review.json` uses the previous delivered **compiled Motion snapshot**, with its original TypeScript SHA above recorded in the method; its snapshot hash is therefore the compiled JS hash, not that TypeScript hash. It isolates the new binding weights from concurrent Motion edits. The same original left target edge becomes **1.1644×** at 4.15 s, and the right target edge **0.8316×** standing. Across nine sampled poses, no source edge longer than 1 cm exceeds 3×; the remaining maximum approximately **2.724×** is at the right underarm/torso blend, outside these inner-elbow probes. These metrics do not prove collision freedom or final naturalness.
+
+`elbow-review-hybrid.json` instead uses the then-current edited Motion SHA `190729fb23f378bec6bf1c9af4032a2ff95599c3734f0085de264eb8d8c7a3a4`; do not present its before/after as a pure binding experiment. Both helper scripts transpile three modules to QA snapshots; if Motion later imports additional runtime grip/corrective modules, update the helper's module capture before reusing it. The parent owns subsequent combined verification, actual closeup review and final documentation.
+
+## Later integration regression: real grip frames expose proximal sleeve support
+
+After real grasp centers/frames and lower grip `.16` were integrated, the unchanged sleeve regression failed at **3.9 s, 2.0754696×** (`shoulder-grip-red.log`). Source corners 13263/13264 lie only 20.9%/30.0% along shoulder→elbow, yet the second had 18.26% ForeArm support. The hand corrective does not alter these sleeve coordinates; the new IK pose exposed incorrect proximal support rather than a need to move the tool trajectory.
+
+An additional actual support test first failed (`shoulder-support-red.log`). A continuous distal-support factor now limits ForeArm to the elbow end of the upper arm, redistributing only within the existing arm-chain share. Chest/spine, source geometry, fingers, markers, skeleton API and Motion remain untouched. The second sleeve corner now has **0.354% ForeArm**; the target edge becomes **0.82188× at 3.9 s**, range approximately 0.650–1.032× over ten current poses. `shoulder-grip-before.json` and `shoulder-grip-after.json` record current source SHAs using Vite SSR, including the real hand module, rather than historical compiled Motion.
+
+Current rig SHA `75070403c9e5d971d04f2107b47068e6f41506d9bb6cae73353837555cfcc46a`: **48/48 related Rig/Motion/Grip/Contact tests pass**, including binding 16/16 (`shoulder-grip-green.log`); isolated rig lint and typecheck exit0. The 2× sleeve threshold and all previous assertions remain unchanged. A different upper-shoulder transition still reaches approximately 2.257× at 4.7 s, and an existing collar boundary about 2.095×; these were unchanged by this repair and remain naturalness/collision limitations for final actual visual review.

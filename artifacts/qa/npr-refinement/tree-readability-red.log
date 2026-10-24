@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprVegetation.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprVegetation.test.ts (5 tests | 2 failed) 33ms
+   ❯ leaf silhouette tree refinement (5)
+     × uses crossed bough cards throughout an irregular canopy instead of opaque round crown cores 9ms
+     × limits overlapping alpha cards and preserves larger painted leaf shapes at the sample distance 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > uses crossed bough cards throughout an irregular canopy instead of opaque round crown cores
+AssertionError: expected 240 to be less than or equal to 160
+ ❯ tests/unit/nprVegetation.test.ts:18:120
+     16|   const {r,p}=create(),value=tree(r,p),cards=meshes(value.crown).filte…
+     17|   expect(cards.length).toBeGreaterThan(0);
+     18|   const cardCount=cards.reduce((sum,m)=>sum+m.count,0);expect(cardCoun…
+       |                                                                                                                        ^
+     19|   const centers:T.Vector3[]=[],matrix=new T.Matrix4();
+     20|   for(const card of cards){
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > limits overlapping alpha cards and preserves larger painted leaf shapes at the sample distance
+AssertionError: expected 0.5099999917073484 to be greater than or equal to 0.75
+ ❯ tests/unit/nprVegetation.test.ts:54:20
+     52|   for(const card of cards)for(let i=0;i<card.count;i++){
+     53|    card.getMatrixAt(i,matrix);matrix.decompose(position,rotation,scale…
+     54|    expect(scale.y).toBeGreaterThanOrEqual(.75);expect(scale.y).toBeLes…
+       |                    ^
+     55|   }
+     56|   expect(cards.reduce((sum,m)=>sum+m.count,0)).toBeLessThanOrEqual(160…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  15:17:42
+   Duration  179ms (tests 38%, import 33%, transform 26%, worker 3%)
+

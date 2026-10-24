@@ -1,0 +1,46 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprVegetation.test.ts tests/unit/nprModels.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprVegetation.test.ts (5 tests | 1 failed) 36ms
+   ❯ leaf silhouette tree refinement (5)
+     × keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget 5ms
+ ❯ tests/unit/nprModels.test.ts (11 tests | 1 failed) 124ms
+   ❯ local NPR actor sample (11)
+     × uses individual leaf silhouettes and visible forks within the existing tree interaction envelope 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprModels.test.ts > local NPR actor sample > uses individual leaf silhouettes and visible forks within the existing tree interaction envelope
+AssertionError: expected 5.049853622913361 to be less than 4.9
+ ❯ tests/unit/nprModels.test.ts:62:54
+     60|   expect(leaves[0].geometry).toBe(meshes(other.crown).find(m=>m instan…
+     61|   expect(meshes(tree.crown).some(m=>!(m instanceof T.InstancedMesh)&&(…
+     62|   expect(size.y).toBeGreaterThan(4.3);expect(size.y).toBeLessThan(4.9);
+       |                                                      ^
+     63|   expect(size.x).toBeGreaterThan(3.2);expect(size.x).toBeLessThan(4.15…
+     64|   const submittedTriangles=meshes(tree.root).reduce((sum,m)=>sum+(m.ge…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget
+AssertionError: expected 5.049853622913361 to be less than 4.9
+ ❯ tests/unit/nprVegetation.test.ts:40:92
+     38|  it('keeps the rooted trunk, broad canopy and instanced triangle submi…
+     39|   const {r,p}=create(),value=tree(r,p),bounds=new T.Box3().setFromObje…
+     40|   expect(bounds.min.y).toBeCloseTo(0,6);expect(size.y).toBeGreaterThan…
+       |                                                                                            ^
+     41|   expect(size.x).toBeGreaterThan(3.2);expect(size.x).toBeLessThan(4.15…
+     42|   expect(meshes(value.root).length).toBeLessThanOrEqual(12);expect(tri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 14 passed (16)
+   Start at  15:17:43
+   Duration  273ms (tests 60%, import 23%, transform 15%, worker 2%)
+

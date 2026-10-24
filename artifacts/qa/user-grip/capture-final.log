@@ -1,0 +1,18 @@
+{
+  output: 'artifacts/qa/user-grip/final',
+  samples: [
+    { name: 'stand', time: 0, blade: '-2.2963,0.2412,1.9732' },
+    { name: 'raised', time: 3.5, blade: '-2.3963,2.8640,0.8420' },
+    { name: 'impact', time: 4.15, blade: '-2.2308,0.4066,2.4897' },
+    { name: 'rebound', time: 4.28, blade: '-2.2308,0.4346,2.4897' },
+    { name: 'clear', time: 4.7, blade: '-2.2458,0.5566,2.4547' },
+    { name: 'recover', time: 5.15, blade: '-2.3410,0.5398,2.1769' }
+  ],
+  recording: {
+    wallMs: 16004,
+    previewTime: '16.0660',
+    note: 'Uninterrupted actual screen recording; normal presentation clock, no camera. Encoding rate is not game fps.'
+  },
+  errors: [],
+  external: []
+}

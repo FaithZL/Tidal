@@ -1,0 +1,146 @@
+[
+  {
+    "autocrlf": "false",
+    "file": "idle.glb",
+    "expectedSha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7",
+    "actualSha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7",
+    "bytes": 253548,
+    "expectedBytes": 253548
+  },
+  {
+    "autocrlf": "false",
+    "file": "Male_Peasant.bin",
+    "expectedSha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c",
+    "actualSha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c",
+    "bytes": 674764,
+    "expectedBytes": 674764
+  },
+  {
+    "autocrlf": "false",
+    "file": "Male_Peasant.gltf",
+    "expectedSha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216",
+    "actualSha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216",
+    "bytes": 23103,
+    "expectedBytes": 23103
+  },
+  {
+    "autocrlf": "false",
+    "file": "OUTFITS-LICENSE.txt",
+    "expectedSha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+    "actualSha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+    "bytes": 728,
+    "expectedBytes": 728
+  },
+  {
+    "autocrlf": "false",
+    "file": "T_Peasant_BaseColor.png",
+    "expectedSha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade",
+    "actualSha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade",
+    "bytes": 5055760,
+    "expectedBytes": 5055760
+  },
+  {
+    "autocrlf": "false",
+    "file": "T_Regular_Male_Dark_BaseColor.png",
+    "expectedSha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802",
+    "actualSha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802",
+    "bytes": 1316151,
+    "expectedBytes": 1316151
+  },
+  {
+    "autocrlf": "false",
+    "file": "tree-chopping.glb",
+    "expectedSha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41",
+    "actualSha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41",
+    "bytes": 134712,
+    "expectedBytes": 134712
+  },
+  {
+    "autocrlf": "false",
+    "file": "UAL1-LICENSE.txt",
+    "expectedSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "actualSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "bytes": 332,
+    "expectedBytes": 332
+  },
+  {
+    "autocrlf": "false",
+    "file": "UAL2-LICENSE.txt",
+    "expectedSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "actualSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "bytes": 332,
+    "expectedBytes": 332
+  },
+  {
+    "autocrlf": "true",
+    "file": "idle.glb",
+    "expectedSha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7",
+    "actualSha256": "e01d03fb3083794e427c897e57312eedb7db7d43df94d493bb6005fd71aa7ec7",
+    "bytes": 253548,
+    "expectedBytes": 253548
+  },
+  {
+    "autocrlf": "true",
+    "file": "Male_Peasant.bin",
+    "expectedSha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c",
+    "actualSha256": "e46bde795f7b69b351d322d7a5628e07131cfb48ed0afe366293f1b3f530433c",
+    "bytes": 674764,
+    "expectedBytes": 674764
+  },
+  {
+    "autocrlf": "true",
+    "file": "Male_Peasant.gltf",
+    "expectedSha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216",
+    "actualSha256": "e868b240386f47b62e639ba3f8409806b44ef19c52ae0e1d48b20c0e13dbc216",
+    "bytes": 23103,
+    "expectedBytes": 23103
+  },
+  {
+    "autocrlf": "true",
+    "file": "OUTFITS-LICENSE.txt",
+    "expectedSha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+    "actualSha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+    "bytes": 728,
+    "expectedBytes": 728
+  },
+  {
+    "autocrlf": "true",
+    "file": "T_Peasant_BaseColor.png",
+    "expectedSha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade",
+    "actualSha256": "a43635628d95571cd62fd4db0cc3a6ea32778b2bc02f242dda224c89d07f1ade",
+    "bytes": 5055760,
+    "expectedBytes": 5055760
+  },
+  {
+    "autocrlf": "true",
+    "file": "T_Regular_Male_Dark_BaseColor.png",
+    "expectedSha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802",
+    "actualSha256": "b4dcc0f4139aab548d7c070c4655bd2080ef16caeaaabee6c4aeb693c524e802",
+    "bytes": 1316151,
+    "expectedBytes": 1316151
+  },
+  {
+    "autocrlf": "true",
+    "file": "tree-chopping.glb",
+    "expectedSha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41",
+    "actualSha256": "80ea821a98c1fa92c4bff1f10b51fdf205a6a07a7448ebe6ab14533ee36ecd41",
+    "bytes": 134712,
+    "expectedBytes": 134712
+  },
+  {
+    "autocrlf": "true",
+    "file": "UAL1-LICENSE.txt",
+    "expectedSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "actualSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "bytes": 332,
+    "expectedBytes": 332
+  },
+  {
+    "autocrlf": "true",
+    "file": "UAL2-LICENSE.txt",
+    "expectedSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "actualSha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+    "bytes": 332,
+    "expectedBytes": 332
+  }
+]

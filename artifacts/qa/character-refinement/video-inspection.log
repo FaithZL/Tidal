@@ -1,0 +1,12 @@
+{
+  "file": "stand-chop-recover.webm",
+  "bytes": 3753282,
+  "sha256": "3ee40807c10a956b8433013a96c75afd93e8282be4ff54261c2ff5cc7a086f6d",
+  "width": 1366,
+  "height": 900,
+  "decodedFrames": 416,
+  "uniqueDecodedFrames": 416,
+  "encodedFps": 25.0,
+  "durationSeconds": 16.64,
+  "scope": "Uninterrupted Playwright screen recording. Encoding FPS is not game FPS, hardware performance or real camera accuracy."
+}

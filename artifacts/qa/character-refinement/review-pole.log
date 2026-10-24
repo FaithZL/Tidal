@@ -1,0 +1,649 @@
+[
+  {
+    "mode": {
+      "across": 0,
+      "up": 0.5
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.93737716623266e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3,
+        "tunic": 10,
+        "skin": 0
+      },
+      {
+        "time": 3.1,
+        "tunic": 22,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 34,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 43,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 39,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 39,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 39,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 39,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 33,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 35,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 0,
+      "up": 1
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 3.039534153159124e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.1,
+        "tunic": 18,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 25,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 35,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 23,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 0,
+      "up": 2
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.315440671740138e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 15,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 13,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 0,
+      "up": 4
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.594223503475435e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 21,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 13,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 5,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 1.2,
+      "up": 0.5
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 3.027390749189142e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.1,
+        "tunic": 18,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 25,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 29,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 31,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 31,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 29,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 1.2,
+      "up": 1
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.6853783573753275e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.1,
+        "tunic": 14,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 21,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 23,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 27,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 1.2,
+      "up": 2
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.237533293940629e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 15,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 13,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 1.2,
+      "up": 4
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.5135545358652412e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 21,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 10,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 5,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 4,
+      "up": 0.5
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.0001706946627265e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.1,
+        "tunic": 14,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 23,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 15,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 19,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 4,
+      "up": 1
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.065177146610202e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.1,
+        "tunic": 10,
+        "skin": 0
+      },
+      {
+        "time": 3.2,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 15,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 17,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 4,
+      "up": 2
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.1866218156794072e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 15,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 13,
+        "skin": 0
+      }
+    ]
+  },
+  {
+    "mode": {
+      "across": 4,
+      "up": 4
+    },
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.3971836546029263e-8,
+    "maxContinuity": 0.000002622136347686638,
+    "crossings": [
+      {
+        "time": 3.2,
+        "tunic": 17,
+        "skin": 0
+      },
+      {
+        "time": 3.3,
+        "tunic": 19,
+        "skin": 0
+      },
+      {
+        "time": 3.4,
+        "tunic": 23,
+        "skin": 0
+      },
+      {
+        "time": 3.5,
+        "tunic": 23,
+        "skin": 0
+      },
+      {
+        "time": 3.6,
+        "tunic": 23,
+        "skin": 0
+      },
+      {
+        "time": 3.7,
+        "tunic": 21,
+        "skin": 0
+      },
+      {
+        "time": 3.8,
+        "tunic": 13,
+        "skin": 0
+      },
+      {
+        "time": 3.9,
+        "tunic": 7,
+        "skin": 0
+      }
+    ]
+  }
+]

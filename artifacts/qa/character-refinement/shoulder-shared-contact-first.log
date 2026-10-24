@@ -1,0 +1,94 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts tests/unit/sampleCharacter.test.ts tests/unit/sampleMotionContinuity.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleShoulder.test.ts (2 tests | 2 failed) 295ms
+   ❯ sample garment shoulder continuity (2)
+     × keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips 192ms
+     × keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop 98ms
+ ❯ tests/unit/sampleMotionContinuity.test.ts (10 tests | 3 failed) 683ms
+   ❯ actual skinned sample motion transitions (10)
+     × keeps wrists, palms and blade continuous at 3.35s 79ms
+     × keeps wrists, palms and blade continuous at 4.15s 64ms
+     × detects the real-model jump that an immediate cut from the impact pose to idle would cause 58ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps wrists, palms and blade continuous at 3.35s
+AssertionError: leftElbow jumps across 3.35s: expected 0.024295605503778066 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:67:57
+     65|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     66|    expect(Number.isFinite(distance),`${name} at ${boundary}s`).toBe(tr…
+     67|    expect(distance,`${name} jumps across ${boundary}s`).toBeLessThan(.…
+       |                                                         ^
+     68|   }
+     69|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps wrists, palms and blade continuous at 4.15s
+AssertionError: leftElbow jumps across 4.15s: expected 0.0831073409828629 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:67:57
+     65|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     66|    expect(Number.isFinite(distance),`${name} at ${boundary}s`).toBe(tr…
+     67|    expect(distance,`${name} jumps across ${boundary}s`).toBeLessThan(.…
+       |                                                         ^
+     68|   }
+     69|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > detects the real-model jump that an immediate cut from the impact pose to idle would cause
+AssertionError: expected 0.0777914662373691 to be greater than 0.1
+ ❯ tests/unit/sampleMotionContinuity.test.ts:87:28
+     85|   // Negative control: remove the release blend from this input only; …
+     86|   const after=landmarks(actor,{...clock.frame,chopTime:null,weight:0})…
+     87|   expect(deltas.leftWrist).toBeGreaterThan(.1);
+       |                            ^
+     88|   expect(deltas.blade).toBeGreaterThan(.1);
+     89|   expect(Object.values(deltas).some(distance=>distance>=.0001)).toBe(t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips
+AssertionError: skin cuts the sleeve at 0/1: expected 36 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 36
+
+ ❯ tests/unit/sampleShoulder.test.ts:62:79
+     60|   for(const [time,weight] of [[null,0],[0,.5],[0,1],[.16,1],[.35,1],[.…
+     61|    actor.sample(.8,time,weight);
+     62|    expect(crossings(skin,sleeve),`skin cuts the sleeve at ${time}/${we…
+       |                                                                               ^
+     63|    expect(hand.position.length()).toBe(length);
+     64|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop
+AssertionError: standing: brown sleeve edges pierce the actual skinned beige tunic: expected 2 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 2
+
+ ❯ tests/unit/sampleShoulder.test.ts:73:104
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  5 failed | 18 passed (23)
+   Start at  18:56:09
+   Duration  922ms (tests 89%, import 5%, transform 5%)
+

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-22T13:03:25.967Z",
+  "browser": "156.0.8078.4",
+  "entry": [
+    "http://127.0.0.1:4176/assets/index-C8z6hSw_.js"
+  ],
+  "source": "Actual production Three.js rendering of user-supplied FBX models; static pose, no camera or animation claim.",
+  "farm": {
+    "house": "user-fbx",
+    "character": "user-fbx-static",
+    "inventory": "0/0/0"
+  },
+  "errors": [],
+  "external": [],
+  "narrow": "Desktop Chromium viewport emulation only; not a real phone"
+}

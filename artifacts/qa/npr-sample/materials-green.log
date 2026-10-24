@@ -1,0 +1,9 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  13:51:48
+   Duration  166ms (import 40%, transform 35%, tests 21%, worker 4%)
+

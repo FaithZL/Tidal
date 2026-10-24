@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleHead.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleHead.test.ts (8 tests | 2 failed) 248ms
+   ❯ isolated sample young-adult head (8)
+     × keeps the upper hair silhouette continuous without detached side arcs 112ms
+     × keeps the nose short and softly projected at portrait scale 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > keeps the upper hair silhouette continuous without detached side arcs
+AssertionError: air gap at hair height 0.405, yaw -0.42: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/sampleHead.test.ts:74:94
+     72|    const first=hits.indexOf(true),last=hits.lastIndexOf(true);expect(f…
+     73|    // A surface that curls out and returns to the scalp leaves an air …
+     74|    expect(hits.slice(first,last+1).every(Boolean),`air gap at hair hei…
+       |                                                                                              ^
+     75|   }
+     76|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > keeps the nose short and softly projected at portrait scale
+AssertionError: expected 0.07399998605251312 to be less than 0.06
+ ❯ tests/unit/sampleHead.test.ts:81:18
+     79|   const head=makeHead(),nose=head.getObjectByName('npr-farmer-nose')!;
+     80|   const size=new T.Box3().setFromObject(nose).getSize(new T.Vector3());
+     81|   expect(size.y).toBeLessThan(.06);expect(size.z).toBeLessThan(.04);
+       |                  ^
+     82|  });
+     83|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  18:41:51
+   Duration  436ms (tests 79%, import 11%, transform 9%, worker 1%)
+

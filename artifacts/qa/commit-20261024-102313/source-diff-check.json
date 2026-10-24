@@ -1,0 +1,5 @@
+{
+  "command": "git diff --cached --check -- . :!artifacts/qa/** :!public/assets/character-motion/**",
+  "exitCode": 0,
+  "note": "Raw historical QA output and frozen source asset bytes are excluded; application, tests, scripts and project documentation remain checked."
+}

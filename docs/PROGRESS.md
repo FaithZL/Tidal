@@ -1,4 +1,345 @@
-# Tidal 开发进度（2026-10-21，用户批准的真3D升级）
+# Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
+
+## 最新追加：按用户要求提交全部本地改动（2026-10-24）
+
+用户为跨电脑接续工作明确要求“把所有改动都提交”。本轮在当前`codex/npr-farm-sample`分支，将基于`a45116b`积累的源码、测试、文档、NPR/人物动作素材、用户原始FBX和历史QA一并整理为本地提交；原有忽略规则继续排除依赖、构建产物、临时报告、备份与环境密钥。本轮授权为本地commit，没有push、合并或对外部署；本地提交用户FBX不代表其公开再分发许可已确认。下方各轮“未提交”描述保留为当时记录。
+
+### 本轮实际验证、旧测试与迁移修正
+
+日志、失败trace和本轮回归输出在`artifacts/qa/commit-20261024-102313/`：
+
+| 命令 | 实际结果 | 证据 |
+|---|---|---|
+| `npm run verify` | **exit1**；typecheck/lint、49文件**369/369单测**通过；E2E **76/78通过（9.1分钟）**，因两项失败未执行尾部build | `verify.log` |
+| `npm run test:e2e -- tests/e2e/keyboard-flow.spec.ts tests/e2e/deployment.spec.ts -g 'repeat keys\|the supplied character and house load locally'` | **2/2通过，8.6秒，exit0** | `e2e-recheck.log` |
+| `npm run build` | exit0，含typecheck/Worker；入口及人物样片仍为`index-D08wYbcD.js`、`userModelSample-6S0FYXKr.js` | `build.log` |
+| `npm run assets:verify` | exit0，原模型/运行文件/素材及许可记录校验通过 | `assets-verify.log` |
+
+第一项失败是旧`keyboard-flow.spec.ts`的重复键/焦点/重置用例：`nprVegetation.ts`请求返回`net::ERR_NO_BUFFER_SPACE`，导致动态导入失败并显示启动错误，尚未进入业务断言。trace中该请求无响应体、约2ms失败，其余56个HTTP请求200；系统底层原因未证实。原测试与应用代码不变，单项复验通过；现场在`keyboard-startup-failure/`。
+
+第二项是`deployment.spec.ts:117`仍期望默认人物预览为`static`，而第6/7版已明确默认为`derived-skeleton`，仅`&model=static`保留静态对照。本轮先取得上述真实RED，再只修正这一行期望值；原FBX路径、禁止旧素材、外源/页面错误、链接和不启动训练画布的断言均保留，独立只读审查确认与当前契约一致。原失败在`subpath-old-assertion-failure/`，修正后定向复验通过。**本轮没有修改应用源码、放宽计数负例或更改超时/重试配置。**
+
+78项浏览器用例在首轮76项加两项定向复验中分批通过，**不能记为某次78/78或完整verify退出0**。本轮没有重新`npm ci`/`assets:sync`，没有重测真实摄像头、手机或性能。既有500KB/FBX贴图警告保留，P01 fail与最终美术/真实设备的`manual_pending`不变。
+
+最终暂存检查另复现迁移问题：Git自动行尾转换使3份CC0原许可在`core.autocrlf=false`检出后与既有字节/SHA不符（`staged-assets-red.json`，9项中3项不符）。新增`.gitattributes`，仅对`public/assets/character-motion/**`禁用文本行尾转换，并将该目录原字节重新暂存；没有修改素材、许可原文或来源哈希。随后分别以`core.autocrlf=false/true`从暂存区检出全部9份受校验素材，**18/18字节数和SHA一致**（`staged-assets-green.json`），再跑`assets:verify`通过。
+
+全量`git diff --cached --check`对原始QA输出和素材许可内的既有尾空格/末尾空行报非零，未为排版改写这些证据或许可。排除`artifacts/qa/**`与冻结原文素材目录后，应用/测试/脚本/项目文档的暂存diff检查exit0，见`source-diff-check.json`；不将局部检查冒称全量无空白告警。
+
+### 历史证据保留与迁移边界
+
+测试前备份并校验1,131份历史QA文件；本轮覆盖生成的33份文件先转存`regression/`，再按原SHA恢复旧路径，见`qa-restoration.json`。历史诊断脚本`artifacts/qa/user-grip/plot-hands.py`与`artifacts/qa/user-models/preview-source.mjs`仍含旧电脑绝对路径，不属于应用或npm验证链，迁机后单独重跑需调整输入路径。用户源FBX与内嵌纹理保持原字节。
+
+仍停在第7版人物局部审阅，未扩展全农场。启动：`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，打开`http://127.0.0.1:5173/?art=character-motion&rev=7`。本地commit不会自动上传到GitHub；另一台电脑需取得包含该提交的仓库副本，或后续经用户授权推送后再克隆。下一步依据用户局部反馈继续，真实设备/硬件GPU与公开资产许可仍待确认。
+
+## 最新追加：握斧、肘部与落斧缓冲回收精修（第7版）
+
+继续用户已批准的新人物局部，仅修改独立`?art=character-motion`；原领域/input/config、依赖、锁文件、用户FBX字节与已有未提交工作保留，没有购买/提交/push/部署或扩展全农场。接手实际typecheck及**345/345单测**通过（`artifacts/qa/user-grip/baseline-*.log`）。以下是本轮真实结果，上一轮345/31项与第6版录屏保留在下一节。
+
+### 实现与改动文件
+
+- 新`src/game/world/userHandGrip.ts`、新`tests/unit/userHandGrip.test.ts`6项：用真实卷指开口替代掌面标记定位斧轴；原指垫/拇指做有界局部几何校正，握紧压力有轻微变化。保留17主骨架、原UV/三角/图像，不新增假手或GPU资源，手外法线逐字节保留。端点与手部法线只在初始化预计算，逐帧混合已有attribute；可确定性恢复原派生网格。**不是完整逐指三节绑定或动捕。** 原棕色烘焙、低模棱角仍可见。
+- `userCharacterRig.ts`、对应单测11→16项：按真实臂链连续分配肘/腕权重，限制Hand在腕掌范围，限制ForeArm在上臂靠肘范围；保留肩胸份额。原左/右内肘边3.28/3.07倍伸长已修复；新握姿暴露的肩袖2.075倍回归也修复，未放宽旧2倍阈值。
+- `userCharacterMotion.ts`、对应单测14→24项：手骨按各自真实握轴frame接IK，显示双手间距约.242，斧仍固定62%。7.1秒时间轴保留；下挥加速到接触，斧刃停住时躯干稍晚跟进；短暂受力、约2.8cm反弹、先抬高15cm拔出，再沿弧线收回。头颈吸收窗口两端速度平顺，脚锁、骨长、握点、暂停确定性与均匀缩放断言保留。不产生ExerciseSignal或业务成果。
+- 新`userChopContact.ts`、新3项单测：只读当前真实斧网格，按接触圆内最低工具顶点＋1mm咬合量确定木面；修正旧viewer切面比实际接触高15mm。`src/userModelSample.ts`与`web/character-sample.css`补“手肘特写”，点击暂停当前动作并以真实双掌/双肘构图，可旋转；“人物近景”恢复全循环构图，镜头不逐帧追手。静态源/房屋/旧prototype模式保留。
+- `tests/e2e/user-models.spec.ts`8→9项，补实际特写像素、暂停、旋转、返回及偏好断言。README、SOURCES及用户资产README同步本轮范围；QA脚本、源码SHA、失败/审查/画面独立保存在`artifacts/qa/user-grip/`。
+
+### 失败测试、独立检查与限制
+
+真实RED包括：整斧回收穿木、尚未拔出就收低、身体没有延迟吸收；旧掌面标记使握轴偏6.58cm；头颈缓冲起止约.036m/s速度跳变；肘窝Hand漏权及肩袖ForeArm漏权；no-op指面/压力与手肘特写缺失。第一版手指接触修正产生局部小指垫角面，再增加面积/原朝向保护修复。指面原固定三角集合、raw四压力及七个实际蒙皮姿态都检查，不以marker或合成替身代替几何；全部旧负例保留。
+
+中间全量`hand-unit-all.log`为**365/366**，1项肩袖失败，不能写成绿；修复记录在`shoulder-grip-*`。首次统一lint另有prefer-const失败，已最小修复，保留`lint-first.log`并重新跑完整unit/lint/build。中间`first-render/second-render/`都不是最终画面。
+
+独立源几何检查：431/439个原手三角，七姿态实际蒙皮后最小握轴间隙左32.99mm/右34.56mm，超过显示柄最大半径31.58mm；最终指面顶点最大位移约3.98/4.06cm，局部面积/朝向保护通过。旧Motion隔离肘指标与当前新握姿指标有不同源码SHA，见`elbow-note.md/hand-audit.md`，不混称纯权重对照。独立密集斧三角采样约201万次，只发现设计的1mm咬合，无超过2mm侵入；该审查基于文件内记录的中间SHA，最终源码另有完整顶点轨迹单测，**均不是解析碰撞或完整自交证明**。衣物少量上肩/颈口压折、护腕相近及原烘焙棕色仍需近景审阅。
+
+### 最终实际验证
+
+冻结应用源码后运行：
+
+| 命令 | 实际结果 | 本轮日志 |
+|---|---|---|
+| `npm run typecheck` / `npm run lint` | exit0 | `typecheck-final.log` / `lint-final.log` |
+| `npm run test:unit` | **369/369，49文件，3.23秒** | `unit-final.log` |
+| `npm run test:e2e -- tests/e2e/user-models.spec.ts tests/e2e/character-motion.spec.ts tests/e2e/npr-sample.spec.ts tests/e2e/default-demo.spec.ts` | **32/32，1.6分钟** | `e2e-final.log` |
+| `npm run build` | exit0，含typecheck/Worker | `build-final.log` |
+| `npm run assets:verify` | exit0，原FBX/本地素材SHA保持 | `assets-final.log` |
+| 设置`TIDAL_GRIP_QA_DIR=artifacts/qa/user-grip/final`、`TIDAL_GRIP_RECORD=1`，运行`node artifacts/qa/user-grip/capture-grip.mjs` | exit0，0页面/控制台错误，0外源 | `capture-final.log`、`final/capture.json` |
+| 本地Python运行已有`inspect_video.py` | 18.68秒、467帧可解码、463不同帧 | `video-inspection.log`、`final/video-metadata.json` |
+
+32项覆盖新样片9、原prototype8、NPR10、默认模拟5，含真实画面暂停/特写/逐帧、原完整合成业务流程/库存/结算/重置、默认刷新和真实摄像头失败不回模拟。没有全跑所有E2E/verify、没有重新npm ci或性能采样。5张测试重生成的历史QA图先备份，再把本轮输出转存`regression/`并按SHA恢复旧路径。
+
+最终生产入口`index-D08wYbcD.js`3.30KB，样片`userModelSample-6S0FYXKr.js`31.03KB，共享`OrbitControls-BWIrCJhk.js`644.59KB；原500KB/FBX镜面贴图警告保留。实际查看`final/raised-grip.png/clear-grip.png/grip-side.png`及全身六阶段/背面/窄屏；没有可见的长尖刺或开缝，棱角/烘焙色仍在。`final/stand-chop-recover.webm`是最终dist正常时钟连续实录，录制等待16.004秒、时钟到16.066秒，总18.68秒含加载与重播，编码25fps不代表游戏FPS。390×844为桌面Chromium窄屏，不是真手机。
+
+当前预览`http://127.0.0.1:4176/?art=character-motion&rev=7`。启动仍为`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`（5173同查询）；生产`npm run build`→`npm run preview -- --host 127.0.0.1 --port 4176 --strictPort`。独立样片不启动训练/摄像头、不改模拟偏好；普通首页默认无摄像头自动模拟与显式真实输入选择保留。
+
+本轮停在局部审阅。真实摄像头、真实手机、硬件GPU/新60fps、完整自碰撞、最终自然度与原素材公开许可继续`manual_pending`，旧P01 fail不变。下一步根据用户慢放/旋转反馈精修已有低模的指形、袖口和节奏；在获得局部认可前不接全农场。未提交或push。
+
+## 上一轮：新人物绑定骨架与站立、挥砍、回收局部样片
+
+按用户本轮要求，在现有目录/分支及全部未提交工作上增量实现；没有重新生成项目，没有修改领域/input/config、依赖或锁文件，没有购买/上传/部署/提交/push。接手实际typecheck和**320/320单测**通过，记录在`artifacts/qa/user-rig/baseline-*.log`。仅将派生动作接到`?art=character-motion`，**没有将它扩展到全农场**；原局部农场的新人物仍使用静态适配。
+
+### 已实现的文件与范围
+
+- 新`src/game/world/userCharacterRig.ts`：读取实际人物拓扑，完整拆出原斧230三角，保留原UV/贴图；主体生成17骨骼的SkinnedMesh、每顶点至多4个非负归一化权重。关节为对这份非对称弯腰原姿态人工标记，沿真实表面边计算蒙皮距离，避免靠近膝盖的手把裤面拖走；皮包/皮带/发尖跟随各自部位，靴底刚性接触。原FBX未重写、未导出新文件，源仍为无骨骼静态物体，派生适配标为`derived-skeleton`。
+- 新`userCharacterMotion.ts`：7.1秒局部编排，站立呼吸→抬手蓄力与转体→0.5秒下挥→低位缓冲→平滑回收。双腿IK锁定支撑点，双臂IK跟随独立斧柄的两握点；保持骨长、支持当前场景放置/旋转及均匀缩放。斧恒定缩为原尺寸62%、小角度转柄露出刃面；这是表现适配，不是修改源资产或动捕。只驱动骨架，不产生ExerciseSignal、计次、库存或奖励。
+- `src/userModelSample.ts`、`web/character-sample.css`：默认自动循环新人物局部动作，保留旋转/缩放和房屋审阅；增加暂停/继续、重播、0.5×、仅站立、逐帧时间轴。工作木桩对齐真实刃尖落点；全循环相机边界只采样实际蒙皮与斧，不把隐藏静态原件算进去。提供`&model=static`源姿态对照、`&model=prototype`旧人物动作对照。页内明确无摄像头合成动画，独立入口不启动训练/摄像头、不读写模拟偏好。
+- 新`tests/unit/userCharacterRig.test.ts`11项、`userCharacterMotion.test.ts`14项；更新`tests/e2e/user-models.spec.ts`为8项并保留加载失败、迟到释放/上下文丢失和blob撤销负例。文档更新本文件、README、SOURCES与用户资产README；真实截图/录屏/审查记录在`artifacts/qa/user-rig/`。
+
+### 真实失败、修复与复验
+
+实际RED包括：缺少骨架/动作实现；衣饰误跟近处手臂；混合踝权重导致鞋底变形；neck骨轴没有指向真实子关节；原空间距离权重让真实手/膝表面边被拉长6–10倍；下颌受chest拖动；下挥握点超出手臂长度；根与祖先均匀缩放后手离柄6.25cm；浏览器默认仍为静态。全部先保留失败日志再修实现，未删除负例或放宽旧断言。主要日志为`rig-*-red.log`、`motion-red.log/motion-first.log/motion-scale-red.log`、`viewer-red.log`及对应GREEN。
+
+独立CPU审查发现并协助修复手/膝跨链权重。三个原坏边在九个阶段恢复至原长约0.976–1.123倍；头颈没有大于2倍边残留。诊断仍存在同臂链肘内侧约3.28倍局部边伸长（2.07cm→约6.79cm）；实拍近景未见开缝或尖刺，**不等于完整碰撞/手指包裹或最终自然度通过**。完整前后源码SHA和局限见`independent-review.md`、`review-weights-after-fix.json`，其中前后动作握点也调整过，不冒称纯权重隔离实验。
+
+冻结所有应用源码后实际运行：
+
+| 命令 | 实际结果 | 本轮日志 |
+|---|---|---|
+| `npm run typecheck` / `npm run lint` | exit0 | `typecheck-final.log` / `lint-final.log` |
+| `npm run test:unit` | **345/345，47文件，2.63秒** | `unit-final.log` |
+| `npm run test:e2e -- tests/e2e/user-models.spec.ts tests/e2e/character-motion.spec.ts tests/e2e/npr-sample.spec.ts tests/e2e/default-demo.spec.ts` | **31/31，1.5分钟** | `e2e-final.log` |
+| `npm run build` | exit0，含typecheck与Worker构建 | `build-final.log` |
+| `npm run assets:verify` | exit0，原FBX字节/SHA不变 | `assets-final.log` |
+| `node artifacts/qa/user-rig/capture-rig.mjs`，设置`TIDAL_RIG_QA_DIR=artifacts/qa/user-rig/final`、`TIDAL_RIG_RECORD=1` | exit0，实际生产画面，0页面/控制台错误、0外源请求 | `capture-final.log`、`final/capture.json` |
+| `node artifacts/qa/user-rig/capture-close.mjs` | exit0，站立/下挥实际近景 | `capture-close.log`、`final/close-capture.json` |
+| 本地Python运行已有`inspect_video.py` | 18.32秒、458帧可解码、455不同帧 | `video-inspection.log`、`final/video-metadata.json` |
+| `git diff --check` | exit0，只有已有CRLF提示 | 实际终端记录 |
+
+这轮没有重复`npm ci`、没有全跑所有E2E/`verify`、没有新性能采样。31项包含新样片实际像素变化/暂停/逐帧/偏好、原prototype动作、NPR完整合成流程/库存/重置，以及首次默认模拟、刷新偏好、真实摄像头失败不回模拟。真实摄像头未接入本轮实测，不能把这些用例当真机动作识别通过。E2E重生成的5张历史QA图已先备份，之后把本轮输出转存`user-rig/regression/`并按SHA逐字节恢复原图。
+
+### 实际画面、运行与下一步
+
+最终生产入口`index-6FIOMvve.js`3.30KB；用户样片`userModelSample-BCkvePYz.js`22.59KB，共享`OrbitControls-BWIrCJhk.js`644.59KB。原>500KB与FBX不支持镜面/反射贴图关系警告保留。实际查看`final/stand.png/raised.png/impact.png/recover.png/stand-back.png/raised-back.png`与肘部近景、390×844窄屏图。连续实录`final/stand-chop-recover.webm`含两轮以上正常时钟动作，录制段16.010秒、时钟到16.066秒；视频总18.32秒含加载/点重播过程，25fps只是编码率，不是游戏FPS、硬件GPU或手机验收。
+
+当前预览：`http://127.0.0.1:4176/?art=character-motion&rev=6`。复现安装/启动：`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`（5173加相同查询）。生产：`npm run build`→`npm run preview -- --host 127.0.0.1 --port 4176 --strictPort`。普通`/`保留默认无摄像头自动模拟和显式真实输入切换，关闭偏好继续跨刷新记住；样片不改变该偏好。
+
+本轮停在这份新人物的局部审阅。手指尚未逐指绑定，肘内侧压折、双手握姿/斧头尺寸与整体节奏仍需用户旋转/慢放确认；未做完整网格自碰撞或自由移动脚步。真实摄像头、真实手机、硬件GPU、最终美术批准、原模型公开再分发许可继续`manual_pending`；旧P01 fail不变，没有购买Leo或推送资产。下一步依据局部反馈精修手腕/肘部和节奏，确认后再另行接入农场装车/拉车，当前未自动扩展。
+
+## 上一轮：替换用户提供的人物与房屋FBX
+
+交付前最后补查“返回农场”：真实导航RED发现链接仍进普通旧版`/`；仅将它指向已导入模型的`?art=npr-sample`后，**6/6用户模型E2E复验通过（10.5秒）**，build（含typecheck）/该文件lint再次通过。`return-farm-{red,green}.log`及`build-delivered.log/lint-delivered.log/capture-delivered.log`是这次仅链接修正后的记录；下方34项全套属于修正前，不冒称最后又全跑。`final/`截图与下述构建哈希为此后交付版。
+
+用户提供`modelf23d8a6f4b3801.fbx`与`model4e87ceb4739501.fbx`并要求替换，随后明确继续工作。已在原目录/分支增量接入，全部既有未提交源码保留，没有改领域/input/config、依赖或锁文件，没有购买、上传、部署、提交/push或扩建全农场。接手实际typecheck及**307/307单测**通过（`artifacts/qa/user-models/baseline-*.log`）。
+
+### 实际模型与替换范围
+
+- 前者为蓝衣棕发人物，**4,900三角、3,149,804字节**；后者为红瓦房屋，**4,430三角、3,391,244字节**。均为FBX7400，每份1网格/材质、4张内嵌2048²纹理；8张图片实际解码成功，Three CPU与浏览器读取通过。原文件逐字节复制到`public/assets/user-models/{character,house}.fbx`，SHA/来源见provenance与本轮inspection记录。
+- **人物是一整块带斧头的固定砍树姿态，没有骨骼、Skin或动画。** 本轮没有冒称它已具备站立—挥砍—回收连续动作，也没有用整体晃动伪装肢体动画。人物/房屋为用户提供用于本地替换，原作者与公开再分发许可未提供，未标为CC0或据此推送原资产。
+- `?art=character-motion`现在默认展示这两份真实模型；新`src/userModelSample.ts`提供人物近景/房屋近景/同框、旋转与缩放，并明确静态限制。`&model=prototype`显式保留原骨骼动作对照；原`characterSample.ts`、头部、服装、动作与有效负例保留。`src/entry.ts`按该参数分流，两个独立预览都不初始化训练/摄像头或读写模拟偏好。
+- `?art=npr-sample`在原局部场景替换玩家和房屋，NPC/树木/道路等保持。新人物只跟随编排根位置/yaw，肢体和自带斧头仍固定；手中木材使用明确的近似固定握点，不是骨骼握持通过。场景标签写明“无骨骼静态姿态”，提供原动作人物对照。普通`/`仍为原农场，默认模拟与真实摄像头切换规则保留。
+
+### 文件、失败测试与实现
+
+新`world/userModel.ts`用锁定Three自带FBXLoader读取模型，等待内嵌图片完成后才就绪，撤销本次blob URL，拒绝未内嵌的外部贴图路径。统一等比缩放、脚底落地与朝向；人物按实际鞋底区域居中，避免长斧偏移人物锚点。保留原UV/颜色/法线纹理，改为Soft Toon并有意去除镜面高光；FBXLoader不自动应用roughness/metallic链接，原图保留在源FBX中，不能称完整PBR生效。资源与世界共享缓存独立拥有并幂等释放。
+
+新`userHouseMount.ts/userStaticCharacter.ts`分别处理门禁、挂载和取消/迟到释放。`FarmWorld.ts`将两模型与原图集共同纳入ready；加载失败显式报错，不显示旧模型作静默回退；上下文丢失或销毁后不能重新挂载。`nprEnvironment.ts`新增默认关闭的omitCottage选项，旧程序房屋和原环境测试保留。`web/character-sample.css/world.css`只补预览/对照及窄屏样式；`scripts/verify-assets.mjs`追加两原始FBX的字节/SHA/版本校验，旧动作录屏脚本默认URL加`model=prototype`。
+
+新增`userModel.test.ts`7项、`userHouseMount.test.ts`4项、`userStaticCharacter.test.ts`2项和`user-models.spec.ts`6项，子路径部署另增1项。真实RED包括未实现模型准备、空/NaN几何不释放、缺失挂载/取消、静态适配未实现、人物网络/响应体错误误归房屋，以及新默认预览缺失/加载门禁。保留所有旧肩袖/动作/领域负例；旧动作相关浏览器用例显式选择prototype，不能把新静态角色算作动画通过。
+
+首轮相关E2E为**33/34通过、1失败**（`e2e-green.log`）：原半挥砍重置用例没有等待新增资产就绪，接受计划点击后准备页未打开；trace保留。该轮运行期间还发生Vite因源修正重载，不能当最终稳定证据。对该用例补与相邻用例相同的实际assets-ready等待，原首帧手部位置/零成果断言不变；全部源码冻结后重新运行如下完整相关34项通过。上下文丢失负例现在要求assets=failed，仍保留禁止启动/零计数断言，不再将迟到贴图完成标为ready。
+
+### 最终实际验证与画面
+
+| 命令 | 实际结果 | 本轮日志 |
+|---|---|---|
+| `npm run typecheck` / `npm run lint` | exit0 | `typecheck-final.log` / `lint-final.log` |
+| `npm run test:unit` | **320/320，45文件，2.30秒** | `unit-final.log` |
+| `npm run test:e2e -- tests/e2e/user-models.spec.ts tests/e2e/npr-sample.spec.ts tests/e2e/character-motion.spec.ts tests/e2e/deployment.spec.ts` | **34/34，1.7分钟** | `e2e-final.log` |
+| `npm run build` | exit0 | `build-final.log` |
+| `npm run assets:verify` | exit0，含两用户原件与原9项CC0资产 | `assets-final.log` |
+| `node artifacts/qa/user-models/capture-models.mjs` | exit0，0页面/控制台异常、0外源 | `capture-final.log`、`final/capture.json` |
+
+所有新日志在`artifacts/qa/user-models/`。本轮为全单测和上述相关34项浏览器验证，**没有重新全跑所有E2E或完整verify、没有再次npm ci**。34项包含原骨骼动作暂停/逐帧、默认模拟与完整合成流程/库存/结算/重置、真实摄像头失败不回模拟、10次合成资源生命周期、本地子路径与MediaPipe处理合成视频；不能外推真人摄像头通过。新浏览器检查还实际计数8个内嵌图片URL均已revoke、上下文丢失后迟到模型不重开预览。
+
+最终生产构建入口`index-C8z6hSw_.js`3.26KB，用户预览`userModelSample-CkaiOMLw.js`6.41KB，加载器`userModel-Cnyt4fJP.js`53.47KB，共享`OrbitControls-BT33Vl8F.js`642.99KB。既有>500KB警告及FBX不支持的镜面/反射贴图链接警告如实保留，没有隐藏。未做本轮性能采样，原P01 fail不变。
+
+实际查看`final/together.png/character.png/character-back.png/house.png/farm-local.png/narrow-390x844.png`：为最终dist的Three真实画面；修正了首轮窄屏右侧房屋/风车裁切，按真实包围盒和界面遮挡取景，resize重新构图。390×844仅桌面Chromium窄屏视口，不是真手机。首次捕获因4176服务已停止而connection refused，重启本地preview后实拍成功，失败与重试日志保留。最终截图/元数据和独立审阅索引在本轮QA README。
+
+部署测试重生成的5项已跟踪历史QA已备份到本轮目录并恢复HEAD；NPR原用例另重生成了旧未跟踪目录内4张PNG，这4张已转存本轮`regression/`并在原目录README注明当前来源，不能再当上一轮原图。其余历史证据未替换。
+
+### 当前入口与下一步
+
+运行中的预览：`http://127.0.0.1:4176/?art=character-motion&rev=5`；返回局部农场用`?art=npr-sample`，原动作对照用`?art=character-motion&model=prototype`。复现安装/启动：`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`（5173同查询）；生产`npm run build`→`npm run preview -- --host 127.0.0.1 --port 4176 --strictPort`。
+
+下一步若要让这份新人物自然站立、挥砍、回收、装车和拉车，需要对含斧头的合并网格做绑定/拆分与动画适配；本轮只完成模型外观替换，不声称绑定已完成。摄像头真机、硬件GPU、真实手机、素材公开再分发许可与最终美术接受仍`manual_pending`；默认模拟和显式真实输入保留。
+
+## 上一轮：按参考视频角色继续改造人物局部
+
+用户要求直接参考视频角色。本轮实际查看原视频11、12、14.5秒米白衣砍树青年，另核对0.5、1.97秒蓝衣少年；主参考为前者，不能混称同一角色。米白衣角色主要是侧后视，没有可辨认的清晰正脸，因此五官是同风格原创解释，不能称逐项还原。源视频与分析裁切仅留系统TEMP，不进入应用/素材仓库；只读比对在`artifacts/qa/video-character/visual-audit.md`。
+
+沿现有`codex/npr-farm-sample`及全部未提交工作增量实现，没有扩展全农场、改领域/input/config或依赖/锁文件，也没有购买Leo、联系作者、提交/push或部署。原首页默认模拟和真实摄像头手动切换保留；独立样片不初始化训练/摄像头、不改变偏好。
+
+### 实际文件与实现
+
+- `src/game/world/sampleHead.ts`、`tests/unit/sampleHead.test.ts`：缩短下半脸与下颌、暖棕眼睛；栗棕碎刘海、不齐鬓角与短后颈发束，闭合发壳与较柔和高光。保留原眼睛可见、无发缝、法线、资源释放和三角预算断言，增加脸部比例与侧/后轮廓实际射线测试（8→11项）。这是原创代码头部，不是Leo或从视频抽取的模型。
+- 新`sampleCostume.ts`与`tests/unit/sampleCostume.test.ts`（8项）：原创红棕围巾、短弯垂角、贴背V皮带及后侧小皮包，分别挂颈/胸/骨盆骨。背部几何仅在构造时贴合真实服装，保留动画骨随动；不是逐帧布料物理。实际姿态采样验证颈圈不穿下颌、开口存在、围巾/背带距衣面小于3.2cm，保留上移围巾会穿脸的负例。
+- `sampleCharacter.ts`接入配饰、稍降头挂点与颈接点；对原材质独立克隆，局部重着米白衣袖、灰绿裤和深棕靴。上衣仅暖色高亮布料参与变色，保留暗色皮革/绑带与金属；磁盘PNG像素、GLTF/bin、UV与原许可/SHA不变。共享配饰由`WorldResources`释放，角色材质/派生几何由actor释放，重复释放测试保留；没有改IK、肩袖修复或动作时钟。
+- `src/characterSample.ts`只调整样片光照/曝光、减轻阴影与来源说明；`scripts/capture-character-motion.mjs`独立输出本轮QA，新增实际背面站立/举斧截图，不覆写上轮证据。
+
+### 真实RED、验证和证据
+
+接手typecheck退出0。初次全量unit运行时新头部测试已经加入，**296项原测试通过、2项新测试失败（298总计）**，不是完整基线全绿；真实RED为下半脸比例1.609超界与轮廓仅1发束。随后配饰缺失/重着色、悬空披角、矩形尾端/缺V背带、后颈0独立发尖均先实际失败，再最小实现。失败及中间截图保留，不能与最终画面混用。
+
+最终源代码实际运行：
+
+| 命令 | 实际结果 | 本轮日志 |
+|---|---|---|
+| `npm run typecheck` | exit0 | `typecheck-final.log` |
+| `npm run lint` | exit0 | `lint-final.log` |
+| `npm run test:unit` | **307/307，42文件，3.08秒** | `unit-final.log` |
+| `npm run test:e2e -- tests/e2e/character-motion.spec.ts tests/e2e/deployment.spec.ts` | **17/17，52.7秒** | `e2e-final.log` |
+| `npm run build` | exit0 | `build-final.log` |
+| `npm run assets:verify` | exit0，含9项CC0文件/原许可 | `assets-final.log` |
+| `node scripts/capture-character-motion.mjs` | exit0，0异常/0外源 | `capture-final.log`、`final/capture.json` |
+
+日志均在`artifacts/qa/video-character/`。本轮是全单测与相关17项浏览器复验，**没有重新运行完整68项E2E或完整verify**；下文296/68全套属于上一轮。本轮没有再次`npm ci`或修改依赖。浏览器涵盖暂停画面冻结、面部旋转/偏好不变、原首页门禁、三分辨率完整模拟流程、10次合成视频资源释放、子路径真实本地MediaPipe处理合成视频及模型/WASM失败；这些不是真人摄像头验收。测试重生成的旧QA恢复，新记录独立存放。
+
+最终构建入口`index-BqtD090n.js`3.04KB、样片`characterSample-DqOobiPA.js`79.79KB、共享`nprMaterials-CiVz23UG.js`652.96KB；既有>500KB警告保留。生产4176实际录屏**16.72秒、1366×900、418解码帧且418帧不同**，25fps仅录像编码。已查看四阶段精确暂停帧0.80/3.40/3.95/4.95秒、脸部近景、背面站立/举斧及录像抽帧，0页面/控制台异常与0外源。录像、SHA、命令与独立审阅见该QA目录README；未做本轮60fps性能验收。原P01 fail不变。
+
+### 局部审阅边界与启动
+
+发顶/刘海仍偏大块、后颈略长，服装/手指/胸前接触及脚底约3–4cm漂移仍属试作，不能称视频同款成品或完整布料碰撞/物理脚锁。独立只读审阅未发现Critical/Important问题，美术接受继续由用户审阅。摄像头真机、硬件GPU、真实手机继续`manual_pending`。Leo仍未购买，购买前明确告知；不扩展全农场。
+
+现有生产预览：`http://127.0.0.1:4176/?art=character-motion&rev=4`。可拖拽旋转、点击面部特写、暂停/慢放和拖动时间轴。复现：`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，打开5173同查询；生产`npm run build`→`npm run preview -- --port 4176 --strictPort`。下一步先审阅人物整体/正背面和动作，再按反馈细化发束/服装接触；原模拟/摄像头流程保持。
+
+## 上一轮：人物局部第二轮——脸型、头发、肩袖与动作
+
+用户要求继续现有`?art=character-motion`，脸/发向已选定的Leo日式青年方向调整、脸更俊朗、修肩缝并让下挥/回收自然；购买前告知，暂不扩展全农场。本轮在原`codex/npr-farm-sample`工作区增量实施，保留接手时全部未提交工作。实际基线`typecheck`与271/271单测通过（`artifacts/qa/character-refinement/baseline-*.log`）；没有新增依赖、改锁文件、改领域/input/config、购买Leo、联系作者、推送或部署。
+
+### 实际改动
+
+- 新`src/game/world/sampleHead.ts`为该样片单独制作原创青年头部：收窄脸型、明确下颌、杏眼/眼睑/眼眉、短鼻与嘴唇、贴头皮的侧分发束。替换原样片从`NprCharacter3D`抽取临时头的方式；原农场头部没有替换。头部略缩小并降低挂点，颈段终点跟随下颌。它不是Leo原模型，不含付费网格/贴图或商品图片像素。
+- `sampleCharacter.ts`在运行时重新裁接棕色袖子：袖口接米色短袖的实际开口、匹配位置/权重并在滚边内留出空间；将原本藏在袖内的前臂根部衔接到真实袖口，手指和可见远端前臂保留。棕袖从源1408三角改为432三角；磁盘GLTF/bin/贴图/原许可与哈希未改。原始与派生几何均由角色拥有并幂等释放，共享头/斧资源由`WorldResources`释放。
+- 握持仍为刚性斧柄、原0.3单位副手间距；肘部方向从原动作连续过渡到胸前/外侧方向。删除正数blend阈值的硬切，不保留失败的双臂中心、伸长袖口或斧柄锥约束实验。
+- `characterSampleClock.ts`改为五次平滑：蓄力后实际下挥为3.65–4.15秒，峰值不加速原动作；4.15–4.40低位缓冲，4.40–5.60逐渐松副手/卸力回到待机，不再沿源循环再次举斧。保留暂停、后台与异常间隔不补时间。
+- `characterSample.ts`增加“面部特写”，与全身镜头往返，不改暂停姿势或模拟偏好；窄屏向上构图以避开控制面板。已有旋转、慢放、重播、站立和逐帧滑杆保留。`capture-character-motion.mjs`支持独立QA输出目录，保留上轮证据，新增真实截图的脸部区域近景。
+
+### 失败测试、检查与当前证据
+
+先写并实际运行RED：新脸型/杏眼比例、头发三分之四轮廓空洞、短鼻检查；回收重复举斧和下挥边界速度检查；面部镜头浏览器用例；袖衣/皮肤相交检查；实际GLTF在blend=.001前后的肘部跳动（15.45/13.51cm）。实现后头部8项、时钟6项、实际角色11项、动作连续性10项和肩袖4项通过；最终完整单测实际**296/296（41文件）**，typecheck/lint通过，`assets:verify`通过9项CC0资产及原模型/运行时校验。
+
+最终**`npm run verify`单次完整退出0**（`verify-final.log`）：296单测、**68/68 E2E（8.0分钟）**、typecheck/lint/build全部通过，包含新增面部镜头暂停/偏好测试与原农场、默认模拟、真实输入失败、资源释放、子路径部署等软件回归。`npm run assets:verify`另行退出0（`assets-final.log`）。最终构建入口`index-D7jOxtRS.js`3.04KB，样片`characterSample-LWW3LInk.js`72.77KB，共享`nprMaterials-BJJsp7KB.js`652.95KB；既有>500KB提示保留，不能据构建通过推断性能通过。没有运行本轮`npm ci`或改依赖；上文安装命令是复现方式。测试重生成的历史QA图恢复为接手版本，新证据独立留档。
+
+肩袖测试契约为实际肩帽/袖口区域与全前臂皮肤覆盖：从原网格近端袖口及upperarm逆绑定位置推导区域，保留同一区域原始未裁接袖子的穿插负例；72个真实样片时钟采样点及额外阶段边界均无袖帽穿插、无前臂皮肤穿袖。最初“与整个上衣任意面都不能相交”的断言超出肩缝范围；原全身扫描未删除，中央胸前手臂/衣物接触仍作为下方限制保留。没有通过屏蔽原肩缝负例、改颜色或深度偏移来冒称修复。
+
+实际生产构建四角度截图在`artifacts/qa/character-refinement/final/shoulder-*.png`：正/背三分之四和低角度均已查看，原前臂碎片条纹消失；皮肤到袖口、肩帽接合连续，棕带白色菱形件是原有五金。独立审查未发现肩缝范围内的重要问题。第一次近景仍有悬空发束，已收回到头皮包络；中间截图/失败日志保留，不混为最终证据。
+
+最终构建再次运行`node scripts/capture-character-motion.mjs`退出0（`capture-final.log/final/capture.json`）：**16.64秒原速连续录屏、1366×900、416实际解码帧且416帧不同、0异常/外源**。25fps仅录像编码，非游戏帧率；元数据/SHA在`final/video-metadata.json`。通过可见时间轴核对0.80/3.40/3.95/4.95秒四阶段后截图；脸部全图/区域近景、390×844视口和四角度均为实际3D画面。已查看最终近景、下挥/回收和录像抽帧，索引见QA README。捕获脚本默认输出新目录，不覆写上轮录像。
+
+### 尚未验收与下一步
+
+中央胸前手臂/衣物仍有接触和小重叠，没有完整布料碰撞；手掌锚点贴柄不等于手指已完全包裹，水平脚底约3–4cm滑移也不是物理脚锁。脸/发/颈比例与完整动作自然度仍需用户审阅，不能称Leo成品或最终美术。摄像头真机、硬件GPU和真实手机继续`manual_pending`；390×844仅是桌面Chromium的窄屏视口。未重新做60fps性能验收，原P01 fail不变。
+
+启动方式不变：`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，打开`http://127.0.0.1:5173/?art=character-motion`；生产`npm run build`→`npm run preview -- --port 4176 --strictPort`。原首页默认模拟与真实摄像头手动切换保留，独立样片不初始化它们。下一步先审阅这一人物局部，再决定下一轮脸/发、手指或布料修整；不自动扩展全农场，Leo购买与网页/仓库分发许可仍需购买前明确。
+
+## 上一轮：人物骨骼局部样片与Leo采购核查
+
+用户已选择Leo日式青年方向，要求先核实格式/授权、购买前告知，并只交付站立—挥砍—回收局部样片。本轮继续原目录/分支，接手实际typecheck和257单测通过，全部已有未提交修改保留。未购买/联系作者/上传用户资料，未改领域/config/input、依赖或锁文件，没有提交/push/合并或扩全农场。
+
+### Leo核查与当前角色来源
+
+原作者Unity商店公开Package Content实际展开，确认`Models/Leo_YoungAdult.fbx`、独立PNG；三段动画为Unity`.anim`，没有确认独立动画FBX/GLB或导出后的蒙皮/44表情兼容性。Unity官方允许按EULA跨引擎使用；公开可提取GLB、随GitHub公开原资产/派生模型尚无明确授权，不能将“商用允许”当作该交付方式获准。详细证据与购买前问题在`artifacts/qa/character-motion/leo-terms.md`。未进入结账，实际价税以购买时复核；未声称Leo已经接入。
+
+样片明确显示“原创试装头部＋CC0农夫骨骼与动画，非Leo原模型”。本地`public/assets/character-motion/`只收Quaternius对应Standard归档明确CC0的Male Peasant蒙皮/两张原始basecolor、`Idle_Loop`与`TreeChopping_Loop`两段精简GLB、三份原许可证及provenance。动画源0.966667秒/2.5秒，提取保留的关键帧字节与原GLB逐字节相同；运行时为样片重新安排举斧蓄力/下挥/回收节奏，并非宣称原动作未经调整或来自动捕。服装12,894三角，原始贴图4096²/2048²，本地资源约7.46MB；尚未做移动端纹理压缩。ZIP留系统临时目录，未入仓。
+
+### 实现范围
+
+- `src/entry.ts`按`?art=character-motion`动态选择独立样片，其余入口仍加载原`browser.ts`；`index.html`只更换入口脚本。新`characterSample.ts/web/character-sample.css`使用相同锁定Three.js，单人物/固定木桩、暖光/地面、可旋转镜头，重播/暂停/慢速/站立/时间轴。样片不导入训练或摄像头入口、不读写模拟偏好、没有计数/库存/奖励；不是把片段挂回真实识别链路。
+- 新`world/sampleCharacter.ts`加载实际蒙皮和骨架，按目标绑定参考姿态重定向旋转、保留骨长/缩放骨盆变化；AnimationMixer按绝对时间采样。斧头附右手、左臂解析接触校正；临时原创头部附Head骨，补颈段，按真实蒙皮鞋底顶点校正地面。当前脸/发/服装仍是技术试装，肩部服装在极端举臂处的外观仍待美术修整，不宣称Leo级成品或物理握持。
+- 新`characterSampleClock.ts`只有表现时钟，暂停/后台/无效或>100ms间隔不补时间；没有领域回调。资源由样片与角色分别明确持有、幂等释放；伴随资源加载失败时释放迟到成功模型。相同可见姿态不重复运行IK，暂停时不反复绘制，仍可旋转或切姿态重绘。
+- `verify-assets.mjs`新增9项素材字节/SHA与许可元数据校验；实际许可证、源归档/条目SHA与派生说明在`provenance.json`，没有仅凭网页“免费”推断。单测和浏览器测试均保留原负例。
+
+### 失败与修正证据
+
+QA集中在`artifacts/qa/character-motion/`。入口首个浏览器RED实际等待不到样片标题（`e2e-red.log`）；角色实际资产测试先RED，再完成最小实现。集成首次2失败/1通过：传给加载器的base重复拼接`assets/character-motion/`，trace中错误URL虽返回200但为SPA回退内容，不能证明加载成功；改为传Vite BASE_URL后3/3通过。首个lint报一项prefer-const，已修正，后续完整检查重新运行。
+
+首次实拍发现头颈断开、鞋底/阴影接触与待机斧头隐藏，补真实蒙皮顶点/颈段/待机持斧负例并修正；缩小舞台阴影远平面/偏移，角色保留地面投影但关闭自阴影接收。审查另发现暂停切站立只更新标签、不触发重绘；用真实draw计数复现RED（6→6），加dirty标记后通过。截图脚本也实际暴露`strike.png`已经落在回收3.9665秒，已改用可见时间轴选3.7700秒并核对阶段后保存，未把错误阶段图继续当下挥证据。
+
+完整回归还实际发现新动态入口让原首页在脚本处理器安装前接收点击。首轮verify中断，`verify-interrupted.log/entry-failures/`保留原首页/模拟流程失败；没有把中断当通过。新增入口门禁/导入失败两项浏览器RED后，HTML初始`inert`，原`browser.ts`只在处理器装好后解除；样片先替换界面再解除，模块下载失败显示明确重载入口。原首页、模拟开关与7项样片定向回归14/14通过（`entry-green.log`）。
+
+最终完整`npm run verify`仍退出1：**270单测通过、66/67 E2E通过（7.7分钟）**，唯一失败是原首页稳态HUD测试在新模块初始化前开始观察，计到6项启动变更。只在该测试观察器前等待`body[data-boot=ready]`，原“20帧0变更、文本节点保留”断言未改；`final-recheck.log`实际**9/9通过**（7样片＋2渲染效率）。另对GLTF拥有的ImageBitmap补“共享图像只关闭一次”的RED/修正，正常/失败清理均关闭位图；最终源代码**typecheck/lint与271/271单测（38文件）通过**，`assets:verify`通过，日志为`*-final.log`。**全部67 E2E在完整轮66项＋该失败项定向复验中分批通过；没有一次67/67全套或verify退出0。**
+
+随后实际`npm run build`退出0（`build-final.log`）：入口`index-D5IQaeJ6.js`3.04KB，样片`characterSample-OdF77zLb.js`60.13KB，共享`nprModels-CMU07vW-.js`674.66KB，500KB提示保留。没有改依赖/锁文件、重复安装或重新npm ci；不把历史安装算本轮。测试重生成的历史QA图片/JSON恢复原值，独立新证据目录保留。
+
+生产4176使用最终dist运行`node scripts/capture-character-motion.mjs`退出0（`capture-final.log/capture.json`）：实际16.48秒、1366×900、412解码帧/25fps编码，0页面/控制台异常、0外源请求，无摄像头/训练计数。原速实录`motion-preview.webm`是该录像副本，未加速；四张实际暂停帧通过可见时间轴定位0.80/3.40/3.77/4.50秒，并断言idle/prepare/strike/recover阶段。已查看最终图像和视频抽帧，`video-metadata.json/video-frames/`留证。25fps编码不是游戏帧率，本轮没有单独性能采样，不宣称达到60fps；原农场P01 fail不变。仅请求在Codex打开预览，工具返回queued，未声称已经观察到用户标签页。
+
+README、SOURCES、DEPENDENCIES、TEST_REPORT和素材说明同步。启动`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`后访问`http://127.0.0.1:5173/?art=character-motion`；生产`npm run build`→`npm run preview -- --port 4176 --strictPort`，访问同查询。下一步停在局部审阅：按用户反馈调整动作/头发脸型、肩部衣物接缝及略长的临时颈部，购买Leo前先明确网页分发许可与可导出动画；不自动扩展全场。真实摄像头、硬件GPU、Leo实际导入和最终美术继续`manual_pending`。
+
+## 最新追加：外部骨骼角色与动画选型（调研，尚未接入）
+
+用户反馈动作仍不自然，要求从网上找更好看的角色模型。本轮读取最新进度、规则、实际Git修改和现有表现接口，保留全部未提交局部样板；只做原作者资源、预览、格式和许可核查，没有替换游戏角色、购买、修改领域/输入/依赖或提交/push。参考仍是日式田园动画、自然青年比例，暂不扩展全农场。
+
+- 原作者候选：Neko Legends的`Leo, Young Adult`为日式青年男角色，但现成服装是现代连帽衫/长裤/运动鞋，农夫工作服需要另做；`Kiyomi - Adventurer`为日式女冒险角色、服装更接近幻想田园。实际查看商店预览，不把商店/Unity画面当Three.js效果。均为付费Unity资源；尚未购买/下载，独立FBX/GLB交付与蒙皮、贴图、动画质量未实测，Unity专用着色器不能直接移入本项目。现价因税区/索引有差异，以结账页为准；未作付款承诺。
+- 免费候选：Quaternius的Universal Base Characters + Modular Character Outfits Fantasy之Peasant。已查看原作者免费版图片，属于偏西式风格化的成年比例，可作为骨骼/劳作服基础，不宣称已与参考视频同风格。只读核对Standard归档：Base免费版实际仅含Superhero男女完整身体和部分头发，**不含Regular/Teen完整身体**，免费男款头与身体同一网格，需要离线拆分；Male Peasant有蒙皮和全身骨架/四部分衣服，但没有可见头部，需要配头、头发并校正颈部/绑定，不能当作直接可用的完整免费主角。
+- 动作资源：只读核对Quaternius Universal Animation Library 1/2的Standard包与明确CC0许可文件。实际有`Idle_Loop/Walk_Loop/Push_Loop/PickUp_Table`以及`TreeChopping_Loop/Walk_Carry_Loop/OverhandThrow`等候选。它们是可重定向动画，不是已验证的本项目动作，更不宣称动捕；没有据营销页把120+/130+全库算作免费。未发现已确认可直接覆盖本项目抓木、举木投掷和绑绳全过程的整套片段。
+- 许可边界：Quaternius网站全局QAL页面与上述包页CC0表述不同，已进一步检查对应Standard归档中的`License.txt/License_Standard.txt`为明确CC0，而不是仅凭“免费商用”推断。若后续实际接入，必须把所用文件的许可/版本/哈希与派生过程一同留档。Mixamo只作为备选，Adobe FAQ的游戏使用许可不等于允许将原始动画公开进GitHub；本轮未下载/上传任何Mixamo角色或用户素材。
+- 增量实现方向已核对可行：在现有`VisualActor`边界加入GLTFLoader、骨骼蒙皮和AnimationMixer；保留SessionController、编排根位置及真实两手世界锚。挥砍/装车要按现有阶段分段停住/衔接，不能收到一次事件就无限循环动画；补脚底接触、腰胯重心和双手握持，暂停/后台不补时间，动画完成不提交次数。此为后续实现建议，**本轮没有新增骨骼动画代码或自然度/性能通过结论**。
+
+网页预览截图`quaternius-standard-source.png/kiyomi-source.png/leo-source.png`保存在`artifacts/qa/character-research/`，不是Tidal游戏内验收截图；付费候选的促销背景/部分服装贴图有作者AI使用声明，没有据此把单张预览当实际网格/动画证明。实际使用网页检索、原作者浏览器预览、Standard ZIP只读检查、源码/文档读取和`git diff --check`；没有为纯调研重复单测/构建，上一轮257单测及分批E2E、34.06fps的软件GL结果仍仅属于上一轮程序化角色。摄像头真机和新模型实际兼容性、硬件性能、美术接受度继续`manual_pending`。下一步先按选定角色制作局部骨骼动作小样，再决定是否更换主角；不自动扩展全场或购买素材。当前预览/启动方式不变。
+
+## 最新追加：第二版局部人物/植被与动作精修（等待用户审阅）
+
+用户反馈第一版与参考视频仍差较多，要求只继续打磨人物、树木、草地，随后追加人物动画更细腻。本轮沿`codex/npr-farm-sample`当前目录增量处理，接手时第一版代码/文档均未提交，全部保留；实际基线typecheck和228单测通过（`artifacts/qa/npr-refinement/baseline.log`）。没有改领域、config、input、依赖/锁文件，没有提交/push/合并或对外部署。入口仍为`?art=npr-sample`，标记“第二版”；普通`/`保留旧v2，远景山林/农田没有扩展或重新制作。
+
+- `nprModels.ts`、新`nprCharacterRefinement.test.ts`：以正面/俯视射线实际复现头发遮住额头/双眼、嘴埋入脸；开脸棕发、可见五官、卷袖/围巾/腰包、连续弯曲手臂/裤腿和长靴。静态小细节合并，可变几何按角色独立持有，闲置不反复上传；8种手部世界锚、NPC身份、车把/轮轴/绳索及木材接口保留。仍是原创程序化角色，没有交付专业GLB、动作捕捉或完整骨骼蒙皮系统。
+- 新`nprMotion.ts/nprMotion.test.ts`：只消费观察到的表现帧间隔，有限相位插值；挥砍蓄力、60ms快速下挥、回收缓冲，腰部俯仰/扭转、独立头部和手腕斧角；装车蹲起/举木/收手；行走单脚支撑、脚跟脚尖与重心小幅变化。0/负/无效/>100ms间隔不补算，暂停冻结；根位置/yaw继续来自原编排，实际两手中心喂回原木材锚。动画不提交ExerciseSignal、不推进任务或产生额外成果；NPC仍为旧预设姿态，不宣称同步升级了NPC骨骼动画。
+- 新`nprVegetation.ts/nprVegetation.test.ts`：曲干、根系、分叉和128组较大交叉叶枝卡片，替换不透明团块树冠，保留倒树接口。实际每树3绘制对象/2804三角（含实例），只代表几何成本，不等于帧率。透明原创手绘`leaf-bough-v2.png`为内置imagegen生成1254×1254 RGBA/1,472,691字节，完整提示词/哈希/来源在同目录provenance.json，未输入/复制视频像素；`nprMaterials.ts`统一alphaTest/depth/shadow材质与释放，`FarmWorld.ts`同时等待图集和叶枝载入，缺失仍显式失败、不自动开局。
+- `nprEnvironment.ts`、新`nprMeadowRefinement.test.ts`：380簇细弯草、32低叶、14小花、18石块和宽幅草地冷暖/磨损变化，保留道路/门前路径/3个站位。实拍后缩细草叶/花叶，草/低叶/花/石只在初始化时采样两处真实缓坡高度，修正24簇埋根（含2处完全埋藏）的负例；不加逐帧地形射线。局部环境33绘制对象/17,680三角，范围仍x[-12,10]/z[-20,4]。旧农舍形状保留，仅合并静态装饰。
+- `FarmWorld.ts`在局部动画revision改变时渲染，包括最后一帧；暂停和长gap传0；换局在session-reset效果回调显式清姿态。审查实际发现reset效果先于订阅，原订阅sessionID比较无法触发，已用浏览器首帧手锚RED复现并修正。10项样板E2E覆盖双素材门禁/失败、暂停时真实截图像素冻结、恢复不重复计数、第一帧重置、显式摄像头失败、完整模拟/库存/奖励与返回首页。
+
+### 验证与失败记录（本轮没有单次全套verify退出0）
+
+所有日志在`artifacts/qa/npr-refinement/`。实际typecheck/lint与**257/257单测（36文件）通过**；新增29单测、4样板E2E，全部既有行为负例保留。定向样板10/10通过（`integration-final.log`）。首次定向8通过/1失败是新测试恢复后焦点仍在暂停按钮，Space被正确保护；测试显式聚焦动作按钮后通过，没有改生产键盘/识别门槛。
+
+第一轮`npm run verify`退出1：**56/59 E2E通过**，3项子路径部署失败（`verify-first.log`、`port-failures/`）。原因已由源码/实际连接证据核实：旧测试也用4176，碰到用户预览页，r.ok误把SPA回退HTML当对应构建。只改`tests/e2e/deployment.spec.ts`为系统分配独立端口、检查子进程退出和精确构建HTML；不占/停止用户4176。原3项实际复验3/3通过（`subpath-green.log`）。
+
+第二轮`npm run verify`仍退出1：**58/59通过（6.9分钟）**，唯一失败为旧视觉回放写`artifacts/qa/3d/replay/10-load-return.png`时Windows报UNKNOWN open错误，尚未到其后断言。`verify-second.log`（亦保留原`verify-final.log`）与`screenshot-failure/`保存失败；根因未能还原，不认定生产动作bug。原代码、原路径、原断言单独复验**1/1通过（1.2分钟）**，见`visual-replay-recheck.log`，无重试配置/超时放宽/删断言。**59项全部在第二轮58项＋该单项复验中分批通过，不能写成某一次59/59全套或verify退出0。**
+
+随后实际`npm run build`和`npm run assets:verify`退出0（`build-final.log/assets-verify.log`）。最终`index-DrLIbJGD.js`735.58KB/gzip197.96KB，500KB提示保留；与录像/性能采样的bundle相同。未改依赖，未重复npm ci；历史安装证据不冒充本轮安装。旧测试重生成的历史截图/JSON在完成复验后恢复原值，本轮独立目录保留新证据。
+
+### 实拍动作与性能
+
+既有4176预览服务提供本轮`dist`，运行`node artifacts/qa/npr-refinement/record-motion.mjs`退出0。正式URL无e2e参数，普通5秒倒计时/15秒休息，真实键盘UI完成15次挥砍和3次装车后暂停；48.508秒记录，0页面异常/外源/姿态资源请求，无摄像头。`motion-capture.json/log`和`motion-preview.webm`保留原始记录；实际截图`showcase.png/chop.png/load.png`已取得并查看。录像末画布比例0.5（683×450铺满1366×900），编码开销使它不适合作性能基准，也不宣称截图时3D必为全分辨率。
+
+使用已安装Playwright FFmpeg1013，从实录6.8秒起截8秒`chop-preview.webm`、43.5秒起截5秒`load-preview.webm`，VP9、25fps，保持原速，没有改动作时间。实际检查200帧/125帧和多个原帧，`video-metadata.json/video-frames/clip-encode.log`留证；视频是游戏渲染，不是imagegen角色图或真人识别。静态图和短片供用户审美/动作节奏审阅，不等于视频级品质或最终验收。
+
+独立`TIDAL_PREVIEW_URL=http://127.0.0.1:4176/?art=npr-sample`、`TIDAL_PROFILE_OUTPUT=artifacts/qa/npr-refinement/production-profile.json`运行`node scripts/profile-demo.mjs`退出0。无录像、普通生产时钟、默认自动模拟，Chromium156/SwiftShader，预热10秒后**2044样本/60.0142秒，34.06fps，p50 33.3/p95 49.9/max66.7ms，>50ms22次**；比例始终0.5，结束683×450，0页面异常/外源。**60fps fail**，较第一版38.70fps没有改善；绘制对象减少不代表alpha/阴影开销下降。硬件GPU继续manual_pending，未把25fps编码或脚本退出0当作游戏性能通过。
+
+README、SOURCES、DEPENDENCIES、TEST_REPORT、素材说明及QA索引同步。当前只停在第二版局部美术/动作检查点，等用户审阅，再决定继续局部修正或扩展。默认模拟、显式真实摄像头切换、零成果重置、库存守恒和奖励一次性仍保留；真人标定/准确率/PiP/完整真人流程、硬件GPU、最终美术继续manual_pending，P01仍fail。下一步优先按反馈细化姿态/接触与局部素材，并针对叶簇覆盖率、阴影和LOD做性能优化；不自动扩全场/推送/部署。
+
+运行仍`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`（`http://127.0.0.1:5173/?art=npr-sample`）；正式`npm run build`→`npm run preview -- --host 127.0.0.1 --port 4176 --strictPort`。257单测可`npm run test:unit`，10局部E2E可`npx playwright test tests/e2e/npr-sample.spec.ts`，完整检查仍`npm run verify`；本轮执行状态见上文，保留未获一次全套全绿的限制。
+
+## 历史追加：第一版局部NPR样板（用户随后要求继续打磨）
+
+用户明确批准“先局部，OK了之后再扩展”。本轮从`main=a45116b`在当前目录增量开发，分支`codex/npr-farm-sample`；保留接手时两份规划/来源文档修改，未覆盖无关工作。实际重新运行typecheck和原209单测通过，见`artifacts/qa/npr-sample/baseline.log`。没有新增依赖、安装或修改锁文件，未改SessionController、config、input及测试夹具；未提交/push/合并或对外部署。
+
+样板入口为`?art=npr-sample`，普通`/`保留旧v2完整农场作对照。本轮只审阅人物、树、手推车与砍树—装车交界一角，不把设计批准写成视频级美术验收通过。
+
+- 新增`world/nprModels.ts`：有机截面人物、较自然头身比例、头发/服装细节，不规则阔叶冠及边缘叶簇；车、木材、机器人身份/轮轴/车把/绳索和8种手部锚点保留。造型由原创代码生成，没有交付专业GLB或新的绑定动画资产。法线绕序与团块比例均实际RED→GREEN。
+- 新增`world/nprEnvironment.ts`：局部瓦顶/挑檐/窗框凹进/门廊、共享手绘草地、低缓坡与灌丛/草簇。草地主面低于既有道路接触面，边缘透明顶点色渐隐，修正首版硬矩形接缝；样板把旧18草捆移至远端，默认场景数量和位置保持。远景松林、山体、农田仍为旧版，未全场扩展。
+- 新增`world/nprMaterials.ts`与`public/assets/npr/`：内置imagegen生成1536×1024六格原创手绘图集（2,688,321字节），未复制参考视频/图像像素；精确提示词、生成源和SHA在provenance.json。共享Soft Toon以宽过渡代替硬色阶，图集UV内缩，使用未折返UV导数的textureGrad避免重复边界误选mip；不是实时GI或专业烘焙光照。`resources.ts`统一缓存/释放新旧资源，`verify-assets.mjs`补哈希/尺寸校验。
+- `FarmWorld.ts`按显式入口选择样板模型、局部构图、天空渐变/雾/暖光/PCF阴影；`browser.ts`等待真实图集完成才允许手动/自动开始，失败显式报错。独立审查发现“加载中重置后延迟开局”和“丢上下文后加载完成重新启用”两项Important，均先浏览器RED，再用初始sessionId取消延迟启动、独立renderFailed锁存修正；6项样板E2E保留负例。默认模拟/显式真实摄像头偏好继续沿用，无自动申请设备或失败切模拟。
+
+### 实际验证与证据
+
+首轮完整运行被中断：当时228单测/typecheck/lint通过，demo-toggle准备页开关等待失败。保留`verify-interrupted.log`、失败上下文和trace。复核trace：22.903秒`autoDemoSource.ts`请求出现`net::ERR_NO_BUFFER_SPACE`，点击前应用仍是未初始化静态HTML；约82.22秒另有源码修改触发Vite全刷新，解释后期元素脱离。初始错误上游原因未知，不能将其直接归为HMR或生产逻辑bug。
+
+停止应用代码修改后实际`npm run verify`退出0：**228/228单测（32文件）、55/55浏览器E2E（7.3分钟）、typecheck/lint/build通过**；`npm run assets:verify`退出0。日志为`verify-final.log`、`assets-verify.log`。最终构建`index-DYRjJfQE.js`716.20KB/gzip190.79KB；500KB提示保留，图集另外本地加载。新材质/场景/模型测试19项，样板浏览器6项；全部旧测试保留。旧测试重生成的历史截图/JSON恢复原值，本轮证据单独存放。
+
+生产实际运行：`npm run preview -- --host 127.0.0.1 --port 4176 --strictPort`。用`TIDAL_PREVIEW_URL=http://127.0.0.1:4176/?art=npr-sample`、`TIDAL_ART_DIR=artifacts/qa/npr-sample`、`TIDAL_ART_LABEL=delivered`运行`node scripts/capture-art.mjs`退出0；普通5秒倒计时、键盘零计数，已获得并查看`delivered-home.png/delivered-hero.png`与capture.json，1366×900、DPR1、画布比例1，0页面异常/外源。这是静态正式构建截图，不是模拟骨架识别或动态帧率证明。样板完整自动流程/暂停/库存15段/100奖励/重置在上述E2E验证，使用明确加速测试时长，不冒称重新跑过普通142秒整局或真人流程。
+
+`TIDAL_PREVIEW_URL`同上、`TIDAL_PROFILE_OUTPUT=artifacts/qa/npr-sample/production-profile.json`运行`node scripts/profile-demo.mjs`退出0。Chromium156、SwiftShader软件GL、正常生产时钟/默认自动模拟、预热10秒后**2323样本/60.0308秒，38.70fps，p50 33.3/p95 33.4/max66.6ms，>50ms 3次**；比例0.64→0.5，结束683×450铺满1366×900，0页面异常/外源。不是硬件GPU结果；60fps目标**fail**，没有把脚本退出0写成性能达标，截图全分辨率也不代表动态画质。本轮优先停在局部审美检查点，后续需对样板绘制/阴影成本优化并在指定设备复测；不复用旧版55.72fps作为新样板证据。
+
+README、SOURCES、DEPENDENCIES、素材来源与本轮QA索引同步。真实摄像头、真人标定/准确率/PiP/真人整局、硬件GPU和最终美术接受度继续`manual_pending`；既有P01=fail不变。本轮停在局部样板，等用户审阅比例、色光、树冠笔触与建筑风格，再决定修正或扩展；没有自动扩展全农场。安装/启动仍`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，访问`http://127.0.0.1:5173/?art=npr-sample`；正式构建/预览见上文。
+
+手机审阅用`showcase.png`同为实际4176生产构建：`node artifacts/qa/npr-sample/capture-showcase.mjs`退出0，沿真实按钮收起计划卡，手动首页零计数、无摄像头、1366×900/比例1，0异常/外源；`showcase.json/log`记录条件。没有修改页面内容来模拟效果。电脑端预览入口已通过open_in_codex请求显示，工具返回queued，未声称已在用户标签页完成观察。
+
+## 历史规划：日式动画田园NPR美术路线（2026-10-22，随后批准局部样板）
+
+用户提供参考MP4并要求先规划：自然可信比例、日式动画田园幻想、Soft Toon与低频水彩环境贴图、柔和光照/暖阳/蓝天、分层绿地及空气透视，避免塑料、过度卡通/饱和或照片写实。本轮只读核对现有源码与契约；参考视频实际为98.4秒、1920×1080、30fps，用本机已有OpenCV抽取9个时点并查看接触表及约13.8/49.2秒原帧，没有完整逐帧或音轨分析，不把视频中联机/UGC/AI教练展示扩入范围。抽帧仅存临时目录，没有把视频或参考截图打包为项目素材。
+
+拟采用现有Three0.186.1工程内的“关键GLB/原创手绘贴图＋共享Soft Toon＋低频烘焙明暗”路线，先做砍树—装车交界的一块可旋转样板，确认比例、色光、笔触与动作接触，再扩展全农场。保留SessionController、输入/标定/识别、默认模拟/真实摄像头切换、五段切木与手部/车把/绳索锚点。具体资产、着色配置与质量档仍为规划建议，未确认或实现，不把现有程序噪声称为手绘水彩。
+
+实际只运行文件/源码检查与本地视频抽帧，没有安装依赖、修改应用、执行新测试/构建/性能测试、提交或推送。209单测/49E2E属于下方主分支上一轮证据；历史55.72fps为SwiftShader且自适应低分辨率，稳定约60fps仍fail，真人与硬件GPU继续manual_pending。本轮改动仅为本规划记录与SOURCES参考索引；下一步先确认风格样板范围与目标设备/质量档，再形成可执行设计与资源清单。
 
 ## 最新追加：按用户授权合入main，合并结果验证通过
 

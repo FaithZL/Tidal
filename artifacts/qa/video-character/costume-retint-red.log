@@ -1,0 +1,34 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleCostume.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleCostume.test.ts (5 tests | 1 failed) 665ms
+   ❯ reference-inspired local costume (5)
+     × retains the original shared garment map and UVs while isolating the cloth retint to the sleeves and trousers 67ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > retains the original shared garment map and UVs while isolating the cloth retint to the sleeves and trousers
+AssertionError: expected MeshToonMaterial{ …(77) } not to be MeshToonMaterial{ …(77) } // Object.is equality
+
+Compared values have no visual difference.
+
+ ❯ tests/unit/sampleCostume.test.ts:104:30
+    102|   const {actor,garmentMap}=await fixture(),tunic=mesh(actor,'Male_Peas…
+    103|   const tunicMaterial=tunic.material as T.MeshToonMaterial,sleeveMater…
+    104|   expect(sleeveMaterial).not.toBe(tunicMaterial);expect(trouserMateria…
+       |                              ^
+    105|   for(const material of[tunicMaterial,sleeveMaterial,trouserMaterial])…
+    106|   const tunicUvs=Array.from(tunic.geometry.getAttribute('uv').array),s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  19:41:27
+   Duration  823ms (tests 91%, import 5%, transform 4%)
+

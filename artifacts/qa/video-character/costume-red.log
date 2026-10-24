@@ -1,0 +1,74 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleCostume.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleCostume.test.ts (4 tests | 4 failed) 325ms
+   ❯ reference-inspired local costume (4)
+     × attaches the soft collar, chest drape and compact rear pouch to their animated bones 126ms
+     × keeps the folded collar out of the actual jaw across the presentation clock and detects a misplaced collar 72ms
+     × keeps a real neck opening with varying folds instead of a closed shell or a floating plate 62ms
+     × releases costume allocations once with the shared world and does not release them from an actor twice 56ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > attaches the soft collar, chest drape and compact rear pouch to their animated bones
+AssertionError: sample-scarf-collar is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:33:84
+     31| }
+     32| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     33|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     34| }
+     35| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:58:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > keeps the folded collar out of the actual jaw across the presentation clock and detects a misplaced collar
+AssertionError: sample-scarf-collar is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:33:84
+     31| }
+     32| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     33|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     34| }
+     35| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:70:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > keeps a real neck opening with varying folds instead of a closed shell or a floating plate
+AssertionError: sample-scarf-collar is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:33:84
+     31| }
+     32| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     33|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     34| }
+     35| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:83:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > releases costume allocations once with the shared world and does not release them from an actor twice
+AssertionError: sample-scarf-collar is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:33:84
+     31| }
+     32| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     33|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     34| }
+     35| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:91:52
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  19:38:30
+   Duration  527ms (tests 78%, transform 12%, import 10%, worker 1%)
+

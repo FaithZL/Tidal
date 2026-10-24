@@ -1,0 +1,81 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts tests/unit/sampleCharacter.test.ts tests/unit/sampleMotionContinuity.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleShoulder.test.ts (2 tests | 2 failed) 275ms
+   ❯ sample garment shoulder continuity (2)
+     × keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips 175ms
+     × keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop 95ms
+ ❯ tests/unit/sampleMotionContinuity.test.ts (10 tests | 2 failed) 671ms
+   ❯ actual skinned sample motion transitions (10)
+     × keeps wrists, palms and blade continuous at 3.35s 78ms
+     × keeps wrists, palms and blade continuous at 4.15s 63ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps wrists, palms and blade continuous at 3.35s
+AssertionError: leftElbow jumps across 3.35s: expected 0.013577188353942907 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:67:57
+     65|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     66|    expect(Number.isFinite(distance),`${name} at ${boundary}s`).toBe(tr…
+     67|    expect(distance,`${name} jumps across ${boundary}s`).toBeLessThan(.…
+       |                                                         ^
+     68|   }
+     69|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps wrists, palms and blade continuous at 4.15s
+AssertionError: leftElbow jumps across 4.15s: expected 0.0008220284207470637 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:67:57
+     65|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     66|    expect(Number.isFinite(distance),`${name} at ${boundary}s`).toBe(tr…
+     67|    expect(distance,`${name} jumps across ${boundary}s`).toBeLessThan(.…
+       |                                                         ^
+     68|   }
+     69|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the covered forearm skin inside the brown cuff instead of showing alternating skin and cloth strips
+AssertionError: skin cuts the sleeve at 0/0.5: expected 18 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 18
+
+ ❯ tests/unit/sampleShoulder.test.ts:62:79
+     60|   for(const [time,weight] of [[null,0],[0,.5],[0,1],[.16,1],[.35,1],[.…
+     61|    actor.sample(.8,time,weight);
+     62|    expect(crossings(skin,sleeve),`skin cuts the sleeve at ${time}/${we…
+       |                                                                               ^
+     63|    expect(hand.position.length()).toBe(length);
+     64|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop
+AssertionError: standing: brown sleeve edges pierce the actual skinned beige tunic: expected 2 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 2
+
+ ❯ tests/unit/sampleShoulder.test.ts:73:104
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  4 failed | 19 passed (23)
+   Start at  18:54:18
+   Duration  901ms (tests 89%, import 6%, transform 5%)
+

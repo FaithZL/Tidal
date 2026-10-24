@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleCostume.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleCostume.test.ts (8 tests | 3 failed) 1090ms
+   ❯ reference-inspired local costume (8)
+     × tapers each soft scarf drop to a narrow curved end instead of retaining two rectangular cutoffs 78ms
+     × holds both branches of the V harness close to the animated back with stable bone attachment and finite bounds 76ms
+     × releases costume allocations once with the shared world and does not release them from an actor twice 76ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > tapers each soft scarf drop to a narrow curved end instead of retaining two rectangular cutoffs
+AssertionError: expected 0.5673791499773567 to be less than 0.25
+ ❯ tests/unit/sampleCostume.test.ts:112:20
+    110|    const top=new T.Box3().setFromPoints(vertices.slice(offset,offset+9…
+    111|    const tip=new T.Box3().setFromPoints(vertices.slice(offset+72,offse…
+    112|    expect(tip/top).toBeLessThan(.25);
+       |                    ^
+    113|   }
+    114|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > holds both branches of the V harness close to the animated back with stable bone attachment and finite bounds
+AssertionError: sample-back-harness is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:35:84
+     33| }
+     34| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     35|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     36| }
+     37| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:117:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/sampleCostume.test.ts > reference-inspired local costume > releases costume allocations once with the shared world and does not release them from an actor twice
+AssertionError: sample-back-harness is present: expected undefined to be an instance of Mesh
+ ❯ mesh tests/unit/sampleCostume.test.ts:35:84
+     33| }
+     34| function mesh(actor:SampleCharacter,name:string):T.Mesh{
+     35|  const result=actor.root.getObjectByName(name);expect(result,`${name} …
+       |                                                                                    ^
+     36| }
+     37| function points(object:T.Mesh,relativeTo?:T.Object3D):T.Vector3[]{
+ ❯ tests/unit/sampleCostume.test.ts:133:152
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 5 passed (8)
+   Start at  19:50:14
+   Duration  1.25s (tests 94%, import 3%, transform 3%)
+

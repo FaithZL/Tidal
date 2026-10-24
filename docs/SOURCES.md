@@ -1,5 +1,65 @@
 # 来源、参考图与可核查技术资料
 
+## 2026-10-22握斧与缓冲回收精修（最新）
+
+继续使用用户原FBX，没有新购/下载/上传素材。`userHandGrip.ts`只对既有手网格的指垫/拇指做本地小幅几何校正与法线修整，握轴按实际卷指开口拟合；不是新增假手、Leo、完整逐指三节骨架或动捕。原FBX、UV/图像、三角总数、手外法线保留；源烘焙棕色和低模角面仍是限制。动态握距在该样片略增，斧62%固定显示尺寸不变。
+
+`userCharacterRig.ts`调整肘/腕和肩袖支持范围，`userCharacterMotion.ts`重新编排真实斧轨迹及身体延迟吸收；`userChopContact.ts`只读实际工具几何对齐木面，未引入物理引擎、领域事件或新摄像头算法。真实失败、独立CPU三角面检查与最终Three浏览器录屏独立存放`artifacts/qa/user-grip/`；只作用于局部样片，不把合成动作/数值检查当真机识别、完整自碰撞或最终美术批准。
+
+## 2026-10-22用户人物的本地派生骨架与动作（最新）
+
+用户明确要求为新人物绑定并接上站立、挥砍、回收，先做局部样片、保留无摄像头模拟。本轮不新增下载/购买/上传素材，仍使用下节两份FBX原字节副本。原人物没有骨骼；新增`userCharacterRig.ts`按实际模型拓扑拆出230三角原斧、标记17个关节、生成蒙皮。原UV/材质与总4900三角保留，斧在动作样片固定缩为62%。隐藏原静态网格保留资源所有权，提供显式静态对照，不能把派生骨架说成源FBX本有。
+
+`userCharacterMotion.ts`为本地原创编排：呼吸、蓄力、下挥、低位缓冲与回收，双手握点和足部使用两段IK。它不产生ExerciseSignal或修改领域状态，未使用摄像头/动捕序列，也未逐指绑定。真实FBX的CPU顶点/拓扑诊断、失败修正、Three浏览器截图与连续录屏在`artifacts/qa/user-rig/`；合成动画不能证明真人识别或最终自然度。原素材公开再分发许可和摄像头真机仍待确认。
+
+## 2026-10-22用户提供的实际人物与房屋FBX（最新）
+
+用户在本会话提供`modelf23d8a6f4b3801.fbx`（人物）及`model4e87ceb4739501.fbx`（房屋）并明确要求替换。两份逐字节本地副本为`public/assets/user-models/character.fbx/house.fbx`，源名、字节/SHA、FBX7400规格、内嵌图及许可边界记录于同目录provenance.json/README。用户提供用于本地项目不等于已核实公开再分发许可；没有标为CC0，没有上传、购买或公开部署。
+
+只读二进制解析与Three FBXLoader实际确认：人物4900三角、房屋4430三角，都是单网格静态物体，0骨骼/skin/动画；人物自带斧头且固定砍姿。8张2048²嵌入图逐张实际解码，没有缺失。材质只接颜色/法线，Soft Toon有意忽略镜面；粗糙/金属源图仍在FBX但未宣称完整PBR生效。模型原像素与UV未改，没有将视频帧当新贴图。检查脚本/报告和实际本地渲染证据见`artifacts/qa/user-models/`。
+
+## 2026-10-22按视频砍树青年改造局部（最新）
+
+实际查看用户本地`f38d303d396bf728a3d9141460b9b2ac_raw.mp4`的11、12、14.5秒米白衣砍树角色，另核对0.5/1.97秒蓝衣少年。两者是不同角色；主参考前者的短栗棕发、红棕围巾、米白衣袖、灰绿裤、深靴和后侧皮包/V皮带。视频主要侧后视，无法可靠确定眼睛/鼻/正脸；新五官为同风格原创解释，不能声称完整还原。分析裁切仅在TEMP，未进入应用或仓库；只读审阅文字在`artifacts/qa/video-character/visual-audit.md`。
+
+新头/围巾/背带/皮包为`sampleHead.ts/sampleCostume.ts`原创代码几何；服装仍是已留证的Quaternius CC0源文件，运行时材质克隆/局部着色保留原PNG像素与UV，源GLTF/bin/贴图/许可/SHA未改。没有从视频/Leo商品图提取纹理、复制模型、购买或联系作者。实际Three.js截图与录屏独立放在`artifacts/qa/video-character/final/`；它们是本地试作效果，不是参考视频原帧、Leo成品、动捕或摄像头证明。
+
+## 2026-10-22人物局部第二轮精修
+
+本轮没有新购、下载或收入第三方模型/贴图。`src/game/world/sampleHead.ts`为独立原创青年头部的网格代码，仅参考已选定的日式青年造型方向；未使用Leo付费网格、纹理或商品图片像素。原`nprModels.ts`中的农场人物头部保留。
+
+衣物的运行时派生位于`sampleCharacter.ts`：调整袖口与前臂覆盖部位的几何/权重，配合握持和肘部连续过渡；这不同于直接渲染原始网格。磁盘CC0源资产及对应SHA没有变化，原始12,894三角只描述源模型。人物动作时钟重新安排源动作的下挥和卸力，不能称为新动捕或真实摄像头动作验收。新实际画面与失败/修正证据独立存放在`artifacts/qa/character-refinement/`。
+
+## 2026-10-22 Leo方向局部动作样片（采购核查与实际CC0资源）
+
+用户选择Leo方向，但要求购买前告知。本轮未购买、未联系作者，未向外站上传用户资料。实际展开[Leo官方商店](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/leo-young-adult-313183)公开Package Content，确认`Leo_YoungAdult.fbx`及PNG，动画目录为Unity`.anim`；独立动画FBX/GLB未确认。[Unity官方跨引擎说明](https://support.unity.com/hc/en-us/articles/34387186019988-Can-I-use-assets-from-the-Asset-Store-with-other-engines)允许合规跨引擎使用，同时限制原始资源可被下载/提取，不能据此将公开GLB/GitHub原资产分发当作已获准。详见`artifacts/qa/character-motion/leo-terms.md`，并不宣称所有WebGL游戏被禁止。
+
+实际样片不是Leo：原创临时头部、代码制作颈/斧与局部舞台，加Quaternius官方Standard的Male Peasant蒙皮衣服和两段动画。`public/assets/character-motion/provenance.json`记录源页、归档/条目SHA、9个本地文件SHA、提取/JSON修改过程，三份原始CC0许可保留；未把全站不同QAL统称CC0。两段精简GLB保留原关键帧字节，运行时代码做绑定重定向、分段重定时、过渡和握持校正；没有复制Leo模型、商品图片像素或用户视频素材进入游戏。
+
+原作者服装两张basecolor保留原图，没用AI改图或下载第三方镜像；模型、纹理、骨架/动画均在本地，运行时无外源。实际录屏/暂停帧另存`artifacts/qa/character-motion/`，明确为Three.js技术试装，不是购买后Leo效果或真摄像头识别成功。资产只读检查与运行时接触/自然度是不同证据，最终美术仍待人工审阅。
+
+## 2026-10-22 外部角色/骨骼动画调研（候选，未作为应用素材）
+
+用户要求更自然动作和网上角色模型。原作者商品/预览仅用于选型，不代表Tidal已经加载/渲染该模型。未购买、上传用户素材或把第三方FBX/GLB加入`public/`；浏览器网页预览截图单独放在`artifacts/qa/character-research/`，不能与游戏实拍混用。
+
+- [Neko Legends：Leo, Young Adult](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/leo-young-adult-313183)：已查看青年男角色预览；现代服装不适合作为现成农夫装。Unity Humanoid、44面部blend shapes与3动作等为商品页声明，独立格式/运行时兼容性未验证。
+- [Neko Legends：Kiyomi - Adventurer](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/kiyomi-adventurer-278652)：已查看日式幻想女角色预览；69面部blend shapes、约40动作等为商品页声明。运行环境和着色器针对Unity URP，不等于Three.js开箱可用。两者均按[Unity Asset Store条款](https://unity.com/legal/as-terms)评估，不能把游戏使用许可当成原始素材公开分发许可；没有购买或归档检查。
+- [Quaternius Universal Base Characters](https://quaternius.com/packs/universalbasecharacters.html)、[Modular Character Outfits Fantasy](https://quaternius.com/packs/modularcharacteroutfitsfantasy.html)：免费Standard包只读核对，许可文件明确CC0；免费Base只有Superhero男女与部分头发，不能将网页列出的Regular/Teen也称免费。Peasant衣服带骨架、需另配头部。原作者免费版示意图实际查看；偏西式比例/脸型，仍须美术改造。
+- [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html)、[Universal Animation Library 2](https://quaternius.com/packs/universalanimationlibrary2.html)：Standard归档许可明确CC0。已核对实际片段名：待机、行走、推、桌面拾取、砍树、搬运走和上手投掷；名称不是接触质量/本项目适配证明。UAL1完整Standard归档SHA256=`cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724`；UAL2=`4008ea208a604773a2b2177d965f0f5d3195498b5bf838c3f5785d68e95f2a68`（18,735,003字节）。为只读调研，不在仓库加入原ZIP。
+- [Quaternius全局QAL](https://quaternius.com/license.html)于2026-08-28更新，限制独立素材分发；与上述产品页/Standard文件的CC0标记并存。后续按所用具体文件保留许可证据，不一概宣称网站全部CC0。
+- [Adobe Mixamo FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html)允许游戏中使用模型/动作，但不明确许可公开原始资产；[Adobe通用条款](https://www.adobe.com/legal/terms.html)包含Content Files独立分发限制。因此Mixamo暂为需要进一步核对交付方式的备选，未当作公开仓库可直接收入的免费动作库。
+- [Three.js GLTFLoader](https://threejs.org/docs/pages/GLTFLoader.html)、[AnimationMixer](https://threejs.org/docs/pages/AnimationMixer.html)、[AnimationAction](https://threejs.org/docs/pages/AnimationAction.html)：原生加载、动画混合/暂停能力已核对；本项目的分段动作、脚底固定、道具接触、资源释放及性能仍须实现和测试，文档不替代实测。
+
+2026-10-22用户认为第一版局部样板与视频差距较大，明确要求继续打磨人物/树木/草地、暂不扩展全农场，随后追加“人物动画能不能细腻一些”。本轮以同一参考原帧作对照，新增开脸人物、工作服/连续弯曲肢体、只消费表现帧的NprMotion（姿态过渡/腰部重心/头腕跟随/脚尖脚跟），未改领域/识别或新增动作计数。树木用原创透明叶簇而非不透明球冠，草地细草/低叶/小花及坡面落地均为原创代码网格。
+
+`public/assets/npr/leaf-bough-v2.png`为内置imagegen生成、未输入任何参考图像的1254×1254 RGBA叶枝素材，1,472,691字节，SHA256为`f42e6a8e54ce00d7b3147c3ac2cce69c1a00deb81aa7b09de20c7d578daea036`；完整最终提示词及生成路径在同目录`leaf-bough-v2.provenance.json`。它仅用于交叉叶枝卡片，真实三维根/枝干与卡片矩阵由代码生成；不是生成图片替代游戏截图。没有购买/下载专业GLB、录音或参考视频像素。
+
+本轮`artifacts/qa/npr-refinement/motion-preview.webm`记录正式构建普通键盘流程，未申请摄像头/录制真人；8秒`chop-preview.webm`与5秒`load-preview.webm`从该实录按原速截取，未改播放速度。使用本机已有Playwright附带FFmpeg1013的VP9编码器；仅QA视频制作，不进入应用依赖/运行时，不把视频25fps编码规格当作游戏帧率。实际元数据、命令和独立性能记录见同目录及PROGRESS。
+
+2026-10-22用户提供`f38d303d396bf728a3d9141460b9b2ac_raw.mp4`作为新美术参考，并批准“先局部，OK了之后再扩展”：本轮只做人物、树、手推车及砍树—装车一角的NPR样板。实际本地解析视频为1920×1080、30fps、98.4秒，抽取9个时点，查看接触表及约13.8/49.2秒画面；没有完整逐帧/音轨分析。视频混合农场场景与产品概念展示，参考重点为林间色光、树冠体块和前中远层次，不据此增加联机/UGC/AI教练业务或推断实时性能。仅临时抽帧用于分析，不在仓库打包原视频/截图，不将参考像素或角色直接作为生产素材。
+
+本轮局部样板的几何由`nprModels.ts/nprEnvironment.ts`原创代码制作；没有下载GLB或宣称专业角色资产已经完成。`public/assets/npr/pastoral-atlas-v1.png`为内置OpenAI imagegen新生成的1536×1024不透明六格手绘材质图集，未输入参考视频/图片；上排树皮、木板、屋瓦，下排灰泥、草地、树叶。实际SHA256为`48b05a7297950f5aa25a3b8dd038871e70c5835642408e91860dfc5ac80ecd90`，完整提示词、生成路径和来源声明在同目录provenance.json/README。它是贴图资源，不是游戏截图或审美验收证据。运行时仅本地加载，`assets:verify`校验哈希和尺寸；参考风格、最终画质及是否扩展仍待用户审阅。真实摄像头与硬件GPU继续manual_pending。
+
 2026-10-21用户要求美术资源更细致、精致，并回复“可以的，按照这个路线去搞”，批准沿用温暖卡通真3D方向精修人物、木材/手推车/树木、建筑/道路/农田与光照，同时保留原动作、默认模拟和真实摄像头切换，重新实测约60fps目标。所有新增表面纹理为本项目确定性代码生成的128×128 DataTexture，造型由原网格和锁定Three.js几何工具增量制作，没有外部模型、AI生成图片、购买素材、字体下载或外发服务；来源清单见`public/assets/README.md`。视觉方案批准不等于用户已验收最终成品；摄像头真机仍manual_pending。
 
 2026-10-21用户继续要求优化演示流畅度，尽量达到60fps，保留默认模拟与真实摄像头切换，验证后提交/push。当前新增静态空间合批、DOM相同值去重和3D画布自适应像素比；最后一项会以清晰度换帧率，属于实现策略，不是把低分辨率数据冒作相同画质性能。没有新增素材、依赖或外部服务，原模型/许可/合成数据来源不变。测量方法和原始证据见`artifacts/qa/performance/README.md`，真机仍待验证。

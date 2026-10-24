@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userHandGrip.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userHandGrip.test.ts (6 tests | 1 failed) 730ms
+   × does not invert the actual finger pad triangles while opening a grip clearance 76ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userHandGrip.test.ts > does not invert the actual finger pad triangles while opening a grip clearance
+AssertionError: collapsed source finger triangle 8865: expected 0.000022334773147415396 to be greater than 0.000035975729763435526
+ ❯ tests/unit/userHandGrip.test.ts:127:72
+    125|   const now=[0,1,2].map(offset=>new T.Vector3().fromBufferAttribute(p,…
+    126|   const current=now[1].sub(now[0]).cross(now[2].sub(now[0]));
+    127|   expect(current.length(),`collapsed source finger triangle ${first}`)…
+       |                                                                        ^
+    128|   expect(current.normalize().dot(old.normalize()),`source finger trian…
+    129|  });
+ ❯ tests/unit/userHandGrip.test.ts:123:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  23:14:19
+   Duration  869ms (tests 93%, import 4%, transform 3%)
+

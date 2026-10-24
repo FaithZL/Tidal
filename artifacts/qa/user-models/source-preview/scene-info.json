@@ -1,0 +1,58 @@
+[
+  {
+    "file": "modelf23d8a6f4b3801.fbx",
+    "size": [
+      0.998046875,
+      0.8652343954043396,
+      0.46679691282059704
+    ],
+    "bones": 0,
+    "animations": 0,
+    "meshes": [
+      {
+        "name": "tripo_node_8243f6af",
+        "type": "Mesh",
+        "vertices": 14700,
+        "triangles": 4900,
+        "materials": [
+          {
+            "name": "tripo_mat_8243f6af",
+            "color": "cccccc",
+            "map": true,
+            "normalMap": true,
+            "bumpMap": false
+          }
+        ]
+      }
+    ],
+    "scale": 3.0058708414872797
+  },
+  {
+    "file": "model4e87ceb4739501.fbx",
+    "size": [
+      0.791015625,
+      0.6308594484283383,
+      0.9980469025757408
+    ],
+    "bones": 0,
+    "animations": 0,
+    "meshes": [
+      {
+        "name": "tripo_node_a250cf65",
+        "type": "Mesh",
+        "vertices": 13290,
+        "triangles": 4430,
+        "materials": [
+          {
+            "name": "tripo_mat_a250cf65",
+            "color": "cccccc",
+            "map": true,
+            "normalMap": true,
+            "bumpMap": false
+          }
+        ]
+      }
+    ],
+    "scale": 3.0058707584359574
+  }
+]

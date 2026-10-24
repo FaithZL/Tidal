@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleMotionContinuity.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleMotionContinuity.test.ts (10 tests | 2 failed) 652ms
+   ❯ actual skinned sample motion transitions (10)
+     × keeps the left elbow continuous when the contact correction switches during prepare 53ms
+     × keeps the left elbow continuous when the contact correction switches during release 53ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps the left elbow continuous when the contact correction switches during prepare
+AssertionError: leftElbow jumps at blend cutoff 2.445174303266685s: expected 0.15449258613548741 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:77:66
+     75|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     76|    expect(Number.isFinite(distance),`${name} at blend cutoff ${boundar…
+     77|    expect(distance,`${name} jumps at blend cutoff ${boundary}s`).toBeL…
+       |                                                                  ^
+     78|   }
+     79|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleMotionContinuity.test.ts > actual skinned sample motion transitions > keeps the left elbow continuous when the contact correction switches during release
+AssertionError: leftElbow jumps at blend cutoff 5.54293772218945s: expected 0.13514100547034755 to be less than 0.0001
+ ❯ tests/unit/sampleMotionContinuity.test.ts:77:66
+     75|   for(const [name,distance] of Object.entries(displacements(before,aft…
+     76|    expect(Number.isFinite(distance),`${name} at blend cutoff ${boundar…
+     77|    expect(distance,`${name} jumps at blend cutoff ${boundary}s`).toBeL…
+       |                                                                  ^
+     78|   }
+     79|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 8 passed (10)
+   Start at  18:45:38
+   Duration  844ms (tests 89%, import 6%, transform 5%)
+

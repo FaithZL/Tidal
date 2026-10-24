@@ -1,0 +1,1266 @@
+[
+  {
+    "mode": "current",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976684,
+        "shoulderWrist": 0.2590126306026086
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 4.322413096336737e-9,
+        "shoulderWrist": 0.4785228356791015
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 49,
+        "skinSleeve": 0,
+        "contact": 3.4691190396118786e-9,
+        "shoulderWrist": 0.48168417746484027
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 1.1964496333479025e-8,
+        "shoulderWrist": 0.4658558169495947
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.734264044337954e-9,
+        "shoulderWrist": 0.3142990106728378
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.1381460917249186e-9,
+        "shoulderWrist": 0.3142990259433538
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493949000336,
+        "shoulderWrist": 0.29518455230575286
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709703575276,
+        "shoulderWrist": 0.27490894192599663
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074818344756,
+        "shoulderWrist": 0.30911442202392136
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402282598,
+        "shoulderWrist": 0.500293285179422
+      }
+    ],
+    "peakBladeStep": 0.4256261900924517,
+    "maxGripError": 2.9433469005511362e-8,
+    "minimumBlade": [
+      -0.29592469180543707,
+      0.6995469054360366,
+      0.9392206243465263
+    ]
+  },
+  {
+    "mode": "radial-.30",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976687,
+        "shoulderWrist": 0.2590126306026086,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8379090236942457,
+          "length": 0.31799999287431324,
+          "predicted": 0.5199090308199326,
+          "actualTarget": 0.6639333800850207
+        }
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8520849857435493,
+          "length": 0.3179999837168455,
+          "predicted": 0.5340850020267037,
+          "actualTarget": 0.6264833022440643
+        }
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 35,
+        "skinSleeve": 0,
+        "contact": 4.322413096336737e-9,
+        "shoulderWrist": 0.4785228356791015,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7965228072201116,
+          "length": 0.3179999651845724,
+          "predicted": 0.47852284203553913,
+          "actualTarget": 0.47852283543038565
+        }
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 49,
+        "skinSleeve": 0,
+        "contact": 3.4691190396118786e-9,
+        "shoulderWrist": 0.48168417746484027,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7996841588003131,
+          "length": 0.3179999796888239,
+          "predicted": 0.48168417911148914,
+          "actualTarget": 0.4816841818010969
+        }
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 1.1964496423999454e-8,
+        "shoulderWrist": 0.4658558169495944,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7838557925764196,
+          "length": 0.31799996986289564,
+          "predicted": 0.4658558227135241,
+          "actualTarget": 0.46585581627935063
+        }
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.734264044337954e-9,
+        "shoulderWrist": 0.3142990106728378,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.632298981608344,
+          "length": 0.31799998332349383,
+          "predicted": 0.31429899828485014,
+          "actualTarget": 0.31429901188022985
+        }
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 3.1381460917249186e-9,
+        "shoulderWrist": 0.3142990259433538,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6322989965814199,
+          "length": 0.31799998316661776,
+          "predicted": 0.3142990134148021,
+          "actualTarget": 0.3142990264220411
+        }
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.07217493949000336,
+        "shoulderWrist": 0.29518455230575286,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6655353629581163,
+          "length": 0.31799998231783627,
+          "predicted": 0.34753538064028,
+          "actualTarget": 0.343798592274051
+        }
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.27266709703575276,
+        "shoulderWrist": 0.27490894192599663,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7324002686533625,
+          "length": 0.3179999842604255,
+          "predicted": 0.4144002843929369,
+          "actualTarget": 0.4433712435074507
+        }
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5660074805731056,
+        "shoulderWrist": 0.3091144218655166,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7738186650966711,
+          "length": 0.31799998963257065,
+          "predicted": 0.45581867546410054,
+          "actualTarget": 0.5427513073558535
+        }
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099622402212846,
+        "shoulderWrist": 0.500293285179401,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6888648063260303,
+          "length": 0.31799998730909435,
+          "predicted": 0.3708648190169361,
+          "actualTarget": 0.5728614536270751
+        }
+      }
+    ],
+    "peakBladeStep": 0.425626173374074,
+    "maxGripError": 2.9433469005511362e-8,
+    "minimumBlade": [
+      -0.29592469769197793,
+      0.6995469118869093,
+      0.9392206275396116
+    ]
+  },
+  {
+    "mode": "forward-.30",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6843302727787849,
+          "length": 0.31799998725251727,
+          "predicted": 0.36633028552626773,
+          "actualTarget": 0.567619887544264
+        }
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976687,
+        "shoulderWrist": 0.2590126306026086,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8379090236942457,
+          "length": 0.31799999287431324,
+          "predicted": 0.5199090308199326,
+          "actualTarget": 0.6639333800850207
+        }
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8520849857435493,
+          "length": 0.3179999837168455,
+          "predicted": 0.5340850020267037,
+          "actualTarget": 0.6264833022440643
+        }
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 6.185426281667722e-9,
+        "shoulderWrist": 0.4899999996722326,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7965228072201116,
+          "length": 0.3179999651845724,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999971434948
+        }
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 3.499855742208847e-9,
+        "shoulderWrist": 0.490000002756219,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7996841588003131,
+          "length": 0.3179999796888239,
+          "predicted": 0.49,
+          "actualTarget": 0.49000000502438484
+        }
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 4.704910394536503e-9,
+        "shoulderWrist": 0.48999999234672414,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7838557925764196,
+          "length": 0.31799996986289564,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999936803262
+        }
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 6.856472596470872e-9,
+        "shoulderWrist": 0.3862132392078675,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.632298981608344,
+          "length": 0.31799998332349383,
+          "predicted": 0.38621322928852925,
+          "actualTarget": 0.38621324523187356
+        }
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 5.9693562047137696e-9,
+        "shoulderWrist": 0.3862132502982395,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6322989965814199,
+          "length": 0.31799998316661776,
+          "predicted": 0.386213240072896,
+          "actualTarget": 0.3862132555620986
+        }
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.06527927697592571,
+        "shoulderWrist": 0.3540713753801098,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6655353629581163,
+          "length": 0.31799998231783627,
+          "predicted": 0.41730793860424037,
+          "actualTarget": 0.3894717978984105
+        }
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.25515626556866056,
+        "shoulderWrist": 0.3002441342215819,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7324002686533625,
+          "length": 0.3179999842604255,
+          "predicted": 0.4820934574465158,
+          "actualTarget": 0.4384231773090112
+        }
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5997468505699705,
+        "shoulderWrist": 0.31971102826663944,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7738186650966711,
+          "length": 0.31799998963257065,
+          "predicted": 0.49,
+          "actualTarget": 0.611555717672498
+        }
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099650896468097,
+        "shoulderWrist": 0.5002925863448563,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6888648063260303,
+          "length": 0.31799998730909435,
+          "predicted": 0.4413675753331667,
+          "actualTarget": 0.5727455353673963
+        }
+      }
+    ],
+    "peakBladeStep": 0.3868140289074374,
+    "maxGripError": 3.067119745981434e-8,
+    "minimumBlade": [
+      -0.477813741818585,
+      0.9559952256337185,
+      0.9822309782298176
+    ]
+  },
+  {
+    "mode": "authored-.30",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6843302727787849,
+          "length": 0.31799998725251727,
+          "predicted": 0.4372285730552666,
+          "actualTarget": 0.567619237535783
+        }
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976687,
+        "shoulderWrist": 0.2590126306026086,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8379090236942457,
+          "length": 0.31799999287431324,
+          "predicted": 0.5199090308199326,
+          "actualTarget": 0.6639333800850207
+        }
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.8520849857435493,
+          "length": 0.3179999837168455,
+          "predicted": 0.5340850020267037,
+          "actualTarget": 0.6264833022440643
+        }
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 6.1644862386232045e-9,
+        "shoulderWrist": 0.48999999960245244,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7965228072201116,
+          "length": 0.3179999651845724,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999971505019
+        }
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 3.5396945523480618e-9,
+        "shoulderWrist": 0.4900000025460817,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7996841588003131,
+          "length": 0.3179999796888239,
+          "predicted": 0.49,
+          "actualTarget": 0.49000000492760787
+        }
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 4.2414372300951684e-9,
+        "shoulderWrist": 0.48999999377085196,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7838557925764196,
+          "length": 0.31799996986289564,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999946288166
+        }
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.940441406715258e-9,
+        "shoulderWrist": 0.38399135784332045,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.632298981608344,
+          "length": 0.31799998332349383,
+          "predicted": 0.38399134969844534,
+          "actualTarget": 0.38399136407995715
+        }
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.17188998524444e-9,
+        "shoulderWrist": 0.39800534010736416,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6322989965814199,
+          "length": 0.31799998316661776,
+          "predicted": 0.39800533286356654,
+          "actualTarget": 0.39800534566559165
+        }
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.06252452035997763,
+        "shoulderWrist": 0.36495366224747505,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6655353629581163,
+          "length": 0.31799998231783627,
+          "predicted": 0.43038202283687843,
+          "actualTarget": 0.3962515582328416
+        }
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.23303946648559495,
+        "shoulderWrist": 0.30284321107105006,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7324002686533625,
+          "length": 0.3179999842604255,
+          "predicted": 0.49,
+          "actualTarget": 0.40430621907961056
+        }
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5863398486000371,
+        "shoulderWrist": 0.32311329091839386,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.7738186650966711,
+          "length": 0.31799998963257065,
+          "predicted": 0.49,
+          "actualTarget": 0.5966340950461383
+        }
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8095260699088539,
+        "shoulderWrist": 0.5002938146466877,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6888648063260303,
+          "length": 0.31799998730909435,
+          "predicted": 0.49,
+          "actualTarget": 0.5723324102706846
+        }
+      }
+    ],
+    "peakBladeStep": 0.3893796796199722,
+    "maxGripError": 3.133001267195447e-8,
+    "minimumBlade": [
+      -0.4159391358198594,
+      0.9920785186560768,
+      1.0540224779639387
+    ]
+  },
+  {
+    "mode": "forward-.35",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988,
+        "cone": {
+          "minimum": 0.3,
+          "maximum": 0.49,
+          "distance": 0.6843302727787849,
+          "length": 0.31799998725251727,
+          "predicted": 0.49,
+          "actualTarget": 0.5676171480915088
+        }
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976687,
+        "shoulderWrist": 0.2590126306026086,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.8379090236942457,
+          "length": 0.31799999287431324,
+          "predicted": 0.5199090308199326,
+          "actualTarget": 0.6639333800850207
+        }
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.8520849857435493,
+          "length": 0.3179999837168455,
+          "predicted": 0.5340850020267037,
+          "actualTarget": 0.6264833022440643
+        }
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 6.185426281667722e-9,
+        "shoulderWrist": 0.4899999996722326,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7965228072201116,
+          "length": 0.3179999651845724,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999971434948
+        }
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 3.499855742208847e-9,
+        "shoulderWrist": 0.490000002756219,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7996841588003131,
+          "length": 0.3179999796888239,
+          "predicted": 0.49,
+          "actualTarget": 0.49000000502438484
+        }
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 4.704910394536503e-9,
+        "shoulderWrist": 0.48999999234672414,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7838557925764196,
+          "length": 0.31799996986289564,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999936803262
+        }
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 6.856472596470872e-9,
+        "shoulderWrist": 0.3862132392078675,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.632298981608344,
+          "length": 0.31799998332349383,
+          "predicted": 0.38621322928852925,
+          "actualTarget": 0.38621324523187356
+        }
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 5.9693562047137696e-9,
+        "shoulderWrist": 0.3862132502982395,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6322989965814199,
+          "length": 0.31799998316661776,
+          "predicted": 0.386213240072896,
+          "actualTarget": 0.3862132555620986
+        }
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.06527927697592571,
+        "shoulderWrist": 0.3540713753801098,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6655353629581163,
+          "length": 0.31799998231783627,
+          "predicted": 0.41730793860424037,
+          "actualTarget": 0.3894717978984105
+        }
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.25515626556866056,
+        "shoulderWrist": 0.3002441342215819,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7324002686533625,
+          "length": 0.3179999842604255,
+          "predicted": 0.4820934574465158,
+          "actualTarget": 0.4384231773090112
+        }
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5997468505699705,
+        "shoulderWrist": 0.31971102826663944,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7738186650966711,
+          "length": 0.31799998963257065,
+          "predicted": 0.49,
+          "actualTarget": 0.611555717672498
+        }
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8099650896468097,
+        "shoulderWrist": 0.5002925863448563,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6888648063260303,
+          "length": 0.31799998730909435,
+          "predicted": 0.4413675753331667,
+          "actualTarget": 0.5727455353673963
+        }
+      }
+    ],
+    "peakBladeStep": 0.3868140289074374,
+    "maxGripError": 3.067119745981434e-8,
+    "minimumBlade": [
+      -0.477813741818585,
+      0.9559952256337185,
+      0.9822309782298176
+    ]
+  },
+  {
+    "mode": "authored-.35",
+    "samples": [
+      {
+        "time": 0.8,
+        "phase": "idle",
+        "weight": 0,
+        "chopTime": null,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8066545911260113,
+        "shoulderWrist": 0.5006650212510988,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6843302727787849,
+          "length": 0.31799998725251727,
+          "predicted": 0.4372285730552666,
+          "actualTarget": 0.567619237535783
+        }
+      },
+      {
+        "time": 2.8,
+        "phase": "prepare",
+        "weight": 0.3544155544669254,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.6656085197976687,
+        "shoulderWrist": 0.2590126306026086,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.8379090236942457,
+          "length": 0.31799999287431324,
+          "predicted": 0.5199090308199326,
+          "actualTarget": 0.6639333800850207
+        }
+      },
+      {
+        "time": 2.9,
+        "phase": "prepare",
+        "weight": 0.5492510598324218,
+        "chopTime": 0,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.4547633212614023,
+        "shoulderWrist": 0.25989106571773435,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.8520849857435493,
+          "length": 0.3179999837168455,
+          "predicted": 0.5340850020267037,
+          "actualTarget": 0.6264833022440643
+        }
+      },
+      {
+        "time": 3.4,
+        "phase": "prepare",
+        "weight": 1,
+        "chopTime": 0,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 6.1644862386232045e-9,
+        "shoulderWrist": 0.48999999960245244,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7965228072201116,
+          "length": 0.3179999651845724,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999971505019
+        }
+      },
+      {
+        "time": 3.77,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.02253569983154302,
+        "sleeveTunic": 41,
+        "skinSleeve": 0,
+        "contact": 3.5396945523480618e-9,
+        "shoulderWrist": 0.4900000025460817,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7996841588003131,
+          "length": 0.3179999796888239,
+          "predicted": 0.49,
+          "actualTarget": 0.49000000492760787
+        }
+      },
+      {
+        "time": 3.9,
+        "phase": "strike",
+        "weight": 1,
+        "chopTime": 0.12083332985639572,
+        "sleeveTunic": 38,
+        "skinSleeve": 0,
+        "contact": 4.2414372300951684e-9,
+        "shoulderWrist": 0.48999999377085196,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7838557925764196,
+          "length": 0.31799996986289564,
+          "predicted": 0.49,
+          "actualTarget": 0.4899999946288166
+        }
+      },
+      {
+        "time": 4.15,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.24166665971279144,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.940441406715258e-9,
+        "shoulderWrist": 0.38399135784332045,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.632298981608344,
+          "length": 0.31799998332349383,
+          "predicted": 0.38399134969844534,
+          "actualTarget": 0.38399136407995715
+        }
+      },
+      {
+        "time": 4.4,
+        "phase": "recover",
+        "weight": 1,
+        "chopTime": 0.30933332443237305,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 8.17188998524444e-9,
+        "shoulderWrist": 0.39800534010736416,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6322989965814199,
+          "length": 0.31799998316661776,
+          "predicted": 0.39800533286356654,
+          "actualTarget": 0.39800534566559165
+        }
+      },
+      {
+        "time": 4.7,
+        "phase": "recover",
+        "weight": 0.8964843750000001,
+        "chopTime": 0.3253437406383455,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.06252452035997763,
+        "shoulderWrist": 0.36495366224747505,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6655353629581163,
+          "length": 0.31799998231783627,
+          "predicted": 0.43038202283687843,
+          "actualTarget": 0.3962515582328416
+        }
+      },
+      {
+        "time": 4.9,
+        "phase": "recover",
+        "weight": 0.6533805941358024,
+        "chopTime": 0.3629437909967462,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.23303946648559495,
+        "shoulderWrist": 0.30284321107105006,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7324002686533625,
+          "length": 0.3179999842604255,
+          "predicted": 0.49,
+          "actualTarget": 0.40430621907961056
+        }
+      },
+      {
+        "time": 5.1,
+        "phase": "recover",
+        "weight": 0.3466194058641985,
+        "chopTime": 0.41038952008418633,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.5863398486000371,
+        "shoulderWrist": 0.32311329091839386,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.7738186650966711,
+          "length": 0.31799998963257065,
+          "predicted": 0.49,
+          "actualTarget": 0.5966340950461383
+        }
+      },
+      {
+        "time": 5.5,
+        "phase": "recover",
+        "weight": 0.005087770061728336,
+        "chopTime": 0.4632130782349886,
+        "sleeveTunic": 0,
+        "skinSleeve": 0,
+        "contact": 0.8095260699088539,
+        "shoulderWrist": 0.5002938146466877,
+        "cone": {
+          "minimum": 0.35,
+          "maximum": 0.49,
+          "distance": 0.6888648063260303,
+          "length": 0.31799998730909435,
+          "predicted": 0.49,
+          "actualTarget": 0.5723324102706846
+        }
+      }
+    ],
+    "peakBladeStep": 0.3893796796199722,
+    "maxGripError": 3.133001267195447e-8,
+    "minimumBlade": [
+      -0.4159391358198594,
+      0.9920785186560768,
+      1.0540224779639387
+    ]
+  }
+]

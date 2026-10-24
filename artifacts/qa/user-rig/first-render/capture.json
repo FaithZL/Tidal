@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22T13:47:08.684Z",
+  "browser": "156.0.8078.4",
+  "source": "Actual production Three.js rig rendering; local synthetic animation, no camera",
+  "samples": [
+    {
+      "name": "stand",
+      "time": 0,
+      "blade": "-2.3572,0.2221,1.9508"
+    },
+    {
+      "name": "raised",
+      "time": 3.5,
+      "blade": "-2.4672,2.7128,0.8249"
+    },
+    {
+      "name": "impact",
+      "time": 4.15,
+      "blade": "-2.2926,0.3785,2.4785"
+    },
+    {
+      "name": "recover",
+      "time": 4.8,
+      "blade": "-2.3075,0.3127,2.3432"
+    }
+  ],
+  "errors": []
+}

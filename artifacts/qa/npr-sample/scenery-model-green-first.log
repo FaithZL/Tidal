@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprEnvironment.test.ts (4 tests | 1 failed) 59ms
+   × sample surfaces share the palette and their resources release once with the existing world owner 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > sample surfaces share the palette and their resources release once with the existing world owner
+AssertionError: expected 22 to be less than 18
+ ❯ tests/unit/nprEnvironment.test.ts:70:160
+     68|    materials.add(mesh.material as T.Material);geometries.add(mesh.geom…
+     69|   }
+     70|   expect(meshes(root).length).toBeGreaterThan(20);expect(materials.siz…
+       |                                                                                                                                                                ^
+     71|   for(const material of materials)expect(meshes(second).some(mesh=>mes…
+     72|   for(const item of[...materials,...geometries]){const count={count:0}…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  13:55:25
+   Duration  211ms (tests 49%, import 25%, transform 23%, worker 2%)
+

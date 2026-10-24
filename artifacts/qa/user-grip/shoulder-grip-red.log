@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (15 tests | 1 failed) 1760ms
+   ❯ derived skeleton on the actual user character (15)
+     × keeps the shoulder sleeve from inheriting a forearm rotation through axial projection 74ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > keeps the shoulder sleeve from inheriting a forearm rotation through axial projection
+AssertionError: expected 2.0754695646829617 to be less than 2
+ ❯ tests/unit/userCharacterRig.test.ts:175:126
+    173|    for(const time of [2.9,3.4,3.9,4.15]){
+    174|     motion.sample(time);rig.root.updateMatrixWorld(true);rig.skeleton.…
+    175|     expect(rig.mesh.getVertexPosition(a,new T.Vector3()).distanceTo(ri…
+       |                                                                                                                              ^
+    176|    }
+    177|   }finally{rig.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  23:10:33
+   Duration  1.91s (tests 97%, import 2%, transform 1%)
+

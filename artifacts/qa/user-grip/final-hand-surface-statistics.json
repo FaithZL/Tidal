@@ -1,0 +1,58 @@
+{
+  "scope": "CPU actual supplied hand triangles: bind pressure .95 and seven actual skinned motion samples. Not a full mesh self-intersection proof.",
+  "hands": {
+    "left": {
+      "fixedSourceTriangles": 431,
+      "bindClearance": 0.03503999711629172,
+      "movedCorners": 419,
+      "maxDisplacement": 0.039837187834852565,
+      "minimumFaceDotVsRest": 0.1323456030501004,
+      "minimumAreaRatio": 0.3040686392511848
+    },
+    "right": {
+      "fixedSourceTriangles": 439,
+      "bindClearance": 0.03503999456810535,
+      "movedCorners": 353,
+      "maxDisplacement": 0.040609795984507424,
+      "minimumFaceDotVsRest": 0.1447362517856948,
+      "minimumAreaRatio": 0.28402507815009836
+    }
+  },
+  "posed": [
+    {
+      "time": 0,
+      "left": 0.034677767160809586,
+      "right": 0.03571200098637337
+    },
+    {
+      "time": 3.5,
+      "left": 0.033908524101215615,
+      "right": 0.03455999477775826
+    },
+    {
+      "time": 3.95,
+      "left": 0.0337418505675142,
+      "right": 0.034559994777757626
+    },
+    {
+      "time": 4.15,
+      "left": 0.032986994609239144,
+      "right": 0.03455999477775821
+    },
+    {
+      "time": 4.28,
+      "left": 0.03319170326408251,
+      "right": 0.03455999477775781
+    },
+    {
+      "time": 4.7,
+      "left": 0.033086061471968554,
+      "right": 0.034559994777757994
+    },
+    {
+      "time": 5.15,
+      "left": 0.03457864177100503,
+      "right": 0.03513600361825042
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprEnvironment.test.ts (4 tests | 3 failed) 61ms
+   × the sample cottage is grounded, has real sloped overhanging roof panels and recessed window openings 3ms
+   × the local sample keeps road and work anchors clear within bounded scenery and finite rendering budgets 1ms
+   × sample surfaces share the palette and their resources release once with the existing world owner 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > the sample cottage is grounded, has real sloped overhanging roof panels and recessed window openings
+AssertionError: expected undefined to be an instance of Mesh
+ ❯ tests/unit/nprEnvironment.test.ts:27:16
+     25|   root.updateMatrixWorld(true);
+     26|   const wall=root.getObjectByName('sample-cottage-wall'),left=root.get…
+     27|   expect(wall).toBeInstanceOf(T.Mesh);expect(left).toBeInstanceOf(T.Me…
+       |                ^
+     28|   const walls=new T.Box3().setFromObject(wall!),roof=new T.Box3().setF…
+     29|   expect(walls.min.y).toBeCloseTo(.23,3);expect(roof.min.x).toBeLessTh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > the local sample keeps road and work anchors clear within bounded scenery and finite rendering budgets
+AssertionError: expected undefined to be defined
+ ❯ tests/unit/nprEnvironment.test.ts:56:80
+     54|    }else expect(new T.Box3().setFromObject(mesh).intersectsBox(clearRo…
+     55|   }
+     56|   const bank=all.find(mesh=>mesh.name==='sample-grass-bank-west');expe…
+       |                                                                                ^
+     57|   const positions=bank!.geometry.getAttribute('position'),heights=new …
+     58|   expect(heights.size).toBeGreaterThan(8);expect(bank!.receiveShadow).…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/nprEnvironment.test.ts > sample surfaces share the palette and their resources release once with the existing world owner
+AssertionError: expected 0 to be greater than 20
+ ❯ tests/unit/nprEnvironment.test.ts:70:31
+     68|    materials.add(mesh.material as T.Material);geometries.add(mesh.geom…
+     69|   }
+     70|   expect(meshes(root).length).toBeGreaterThan(20);expect(materials.siz…
+       |                               ^
+     71|   for(const material of materials)expect(meshes(second).some(mesh=>mes…
+     72|   for(const item of[...materials,...geometries]){const count={count:0}…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  13:53:42
+   Duration  267ms (tests 45%, import 28%, transform 24%, worker 3%)
+

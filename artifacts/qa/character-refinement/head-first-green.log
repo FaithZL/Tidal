@@ -1,0 +1,35 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleHead.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleHead.test.ts (6 tests | 1 failed) 158ms
+   ❯ isolated sample young-adult head (6)
+     × places the mouth over the jaw rather than inside the face 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > places the mouth over the jaw rather than inside the face
+AssertionError: expected 'npr-farmer-head' to be 'npr-farmer-mouth' // Object.is equality
+
+Expected: "npr-farmer-mouth"
+Received: "npr-farmer-head"
+
+ ❯ tests/unit/sampleHead.test.ts:58:49
+     56|   const head=makeHead(),mouth=head.getObjectByName('npr-farmer-mouth')…
+     57|   const center=new T.Box3().setFromObject(mouth).getCenter(new T.Vecto…
+     58|   expect(visible(head,center.x,center.y)?.name).toBe('npr-farmer-mouth…
+       |                                                 ^
+     59|  });
+     60|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  18:37:58
+   Duration  359ms (tests 66%, transform 18%, import 14%, worker 1%)
+

@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userHandGrip.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  23:08:07
+   Duration  636ms (tests 90%, import 5%, transform 4%)
+

@@ -1,0 +1,53 @@
+[WebServer] (node:78496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:56496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:48852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\npr-sample.spec.ts:36:1 › late atlas completion cannot revive controls after graphics context loss and reset (8.6s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:36:1 › late atlas completion cannot revive controls after graphics context loss and reset 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#acceptPlan')
+    Expected: disabled
+    Received: enabled
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#acceptPlan') with timeout 7000ms
+      - waiting for locator('#acceptPlan')
+        18 × locator resolved to <button class="primary" id="acceptPlan">…</button>
+           - unexpected value "enabled"
+
+
+      44 |  }finally{release();}
+      45 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','ready');await page.waitForTimeout(400);
+    > 46 |  await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                            ^
+      47 |  await expect(page.locator('#statusTag')).toHaveText('未开始');
+      48 | });
+      49 |
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:46:44
+
+    Error Context: test-results\npr-sample-late-atlas-comp-b45d2-hics-context-loss-and-reset\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-late-atlas-comp-b45d2-hics-context-loss-and-reset\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-late-atlas-comp-b45d2-hics-context-loss-and-reset\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\npr-sample.spec.ts:36:1 › late atlas completion cannot revive controls after graphics context loss and reset 

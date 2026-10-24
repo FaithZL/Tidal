@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "importedAt": "2026-10-22",
+  "source": "User supplied these two local FBX files in this project conversation and explicitly requested character and house replacement.",
+  "permission": {
+    "status": "user-provided-unverified-redistribution",
+    "authorizedScope": "Local replacement and preview in this project as requested by the user.",
+    "originalAuthor": null,
+    "publicRedistributionLicense": null,
+    "licenseNotice": "No original-author or public redistribution license was supplied. These files must not be labelled CC0 or assumed publicly redistributable. No purchase or public deployment was performed."
+  },
+  "materialPolicy": {
+    "rendering": "Project soft-toon integration uses basecolor and normal detail; specular response is intentionally omitted.",
+    "roughnessAndMetallic": "The source embeds roughness and metallic textures. Three.js FBXLoader 0.186.1 does not automatically apply the exported ShininessExponent and ReflectionFactor texture links. Their presence is preserved in the original FBX but this integration does not claim full PBR support."
+  },
+  "assets": [
+    {
+      "id": "user-character",
+      "file": "character.fbx",
+      "sourceFileName": "modelf23d8a6f4b3801.fbx",
+      "kind": "character",
+      "description": "Brown-haired, blue-clothed character holding an axe in a fixed chopping pose.",
+      "bytes": 3149804,
+      "sha256": "de65c08a0c332fa1701e3d2f578f12cdc6d3bf61d19d8514cfda41fa83af1717",
+      "format": "FBX binary",
+      "fbxVersion": 7400,
+      "meshCount": 1,
+      "triangles": 4900,
+      "rig": {
+        "bones": 0,
+        "skin": false,
+        "animations": 0
+      },
+      "embeddedTextures": [
+        { "semantic": "basecolor", "name": "tripo_model_basecolor.JPEG", "width": 2048, "height": 2048 },
+        { "semantic": "normal", "name": "tripo_model_normal.PNG", "width": 2048, "height": 2048 },
+        { "semantic": "roughness", "name": "tripo_model_roughness.JPEG", "width": 2048, "height": 2048 },
+        { "semantic": "metallic", "name": "tripo_model_metallic.JPEG", "width": 2048, "height": 2048 }
+      ]
+    },
+    {
+      "id": "user-house",
+      "file": "house.fbx",
+      "sourceFileName": "model4e87ceb4739501.fbx",
+      "kind": "house",
+      "description": "Static cottage with red roof tiles, pale walls, timber beams and surrounding details.",
+      "bytes": 3391244,
+      "sha256": "e6bec4ad925df0dbd165b363452d95ad72047de56e1a7c8a0910e60d8ede34f7",
+      "format": "FBX binary",
+      "fbxVersion": 7400,
+      "meshCount": 1,
+      "triangles": 4430,
+      "rig": {
+        "bones": 0,
+        "skin": false,
+        "animations": 0
+      },
+      "embeddedTextures": [
+        { "semantic": "basecolor", "name": "tripo_model_basecolor.JPEG", "width": 2048, "height": 2048 },
+        { "semantic": "normal", "name": "tripo_model_normal.PNG", "width": 2048, "height": 2048 },
+        { "semantic": "roughness", "name": "tripo_model_roughness.JPEG", "width": 2048, "height": 2048 },
+        { "semantic": "metallic", "name": "tripo_model_metallic.JPEG", "width": 2048, "height": 2048 }
+      ]
+    }
+  ]
+}

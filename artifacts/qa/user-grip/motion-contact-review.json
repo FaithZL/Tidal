@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-22",
+  "method": "Actual supplied FBX, CPU Three transforms, empty Texture stubs. 230 original axe triangles sampled at 12 barycentric divisions per triangle, every 5ms from3.65to7.10s. Denser probe than vertices but not exact analytic collision proof.",
+  "snapshots": {
+    "userModel": "af62c383c446c18f0e2850802bef14f8db07e7a7ba0b1146a592f9ef712d052f",
+    "userCharacterRig": "997b96360f9ce84c4f623871a1ef758795aa4b71ff0d57b6bea0cccfbb5e1986",
+    "userCharacterMotion": "49f95e6dfd6f1333ee810eb3e5b88ca362a1a090fbd576ee87343812064e7150",
+    "userChopContact": "b71dbdcb43a2f96682caa7a7dba629e5ec883085e68a1fcbf6364e0667895d51"
+  },
+  "sourceSha": "de65c08a0c332fa1701e3d2f578f12cdc6d3bf61d19d8514cfda41fa83af1717",
+  "warnings": [
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ShininessExponent",
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ReflectionFactor"
+  ],
+  "contact": {
+    "center": [
+      0.5691641766290751,
+      0.4074379941704688,
+      0.9897470467780312
+    ],
+    "surfaceY": 0.4074379941704688,
+    "radius": 0.202
+  },
+  "meshSamples": 20930,
+  "measured": 2014183,
+  "minimum": -0.0010000000000000009,
+  "worst": {
+    "time": 4.15,
+    "clearance": -0.0010000000000000009,
+    "point": [
+      0.5559842307646775,
+      0.4064379941704688,
+      1.038425228818906
+    ],
+    "sample": 1104
+  },
+  "belowTolerance": 0,
+  "velocities": [
+    {
+      "time": 2.4,
+      "blade": {
+        "incoming": 0.002789137396597141,
+        "outgoing": 0.0027892402057293777,
+        "velocityChange": 3.333310293930401e-7
+      },
+      "head": {
+        "incoming": 0.0022968619227625477,
+        "outgoing": 0.0022971988121482417,
+        "velocityChange": 3.369448678910815e-7
+      }
+    },
+    {
+      "time": 3.35,
+      "blade": {
+        "incoming": 3.475079766488754e-7,
+        "outgoing": 0,
+        "velocityChange": 3.475079766488754e-7
+      },
+      "head": {
+        "incoming": 9.654182205755247e-9,
+        "outgoing": 0,
+        "velocityChange": 9.654182205755247e-9
+      }
+    },
+    {
+      "time": 3.65,
+      "blade": {
+        "incoming": 0,
+        "outgoing": 0.002221769577292106,
+        "velocityChange": 0.002221769577292106
+      },
+      "head": {
+        "incoming": 0,
+        "outgoing": 1.3708381334342657e-7,
+        "velocityChange": 1.3708381334342657e-7
+      }
+    },
+    {
+      "time": 4.15,
+      "blade": {
+        "incoming": 7.084281407586034,
+        "outgoing": 0,
+        "velocityChange": 7.084281407586034
+      },
+      "head": {
+        "incoming": 0.38417865771115134,
+        "outgoing": 0.418423187606197,
+        "velocityChange": 0.03625667870327615
+      }
+    },
+    {
+      "time": 4.2,
+      "blade": {
+        "incoming": 0,
+        "outgoing": 0.000005458502538857601,
+        "velocityChange": 0.000005458502538857601
+      },
+      "head": {
+        "incoming": 0.18660663376886785,
+        "outgoing": 0.18618707504317306,
+        "velocityChange": 0.00041966379464458437
+      }
+    },
+    {
+      "time": 4.27,
+      "blade": {
+        "incoming": 0.12668888391687005,
+        "outgoing": 0.12453557898473022,
+        "velocityChange": 0.0021533049321398323
+      },
+      "head": {
+        "incoming": 0.002328819467797068,
+        "outgoing": 0.002282637860889973,
+        "velocityChange": 0.00004618162735833321
+      }
+    },
+    {
+      "time": 4.28,
+      "blade": {
+        "incoming": 0.000005458502538857601,
+        "outgoing": 9.247691501457211e-7,
+        "velocityChange": 0.0000063832716890033225
+      },
+      "head": {
+        "incoming": 0.002282637860889973,
+        "outgoing": 0.002328690450876794,
+        "velocityChange": 0.00004605259004083474
+      }
+    },
+    {
+      "time": 4.4,
+      "blade": {
+        "incoming": 9.247691501457211e-7,
+        "outgoing": 5.299451597229691e-7,
+        "velocityChange": 0.0000014425266439460587
+      },
+      "head": {
+        "incoming": 0.036719940737286405,
+        "outgoing": 3.2090068280303446e-7,
+        "velocityChange": 0.036719639021068486
+      }
+    },
+    {
+      "time": 4.7,
+      "blade": {
+        "incoming": 5.299543807377832e-7,
+        "outgoing": 1.0361406851664666e-7,
+        "velocityChange": 4.779708282893338e-7
+      },
+      "head": {
+        "incoming": 3.192278115278032e-7,
+        "outgoing": 2.343768338935778e-8,
+        "velocityChange": 2.9600242954253315e-7
+      }
+    },
+    {
+      "time": 5.6,
+      "blade": {
+        "incoming": 0.0012791234106160224,
+        "outgoing": 0.0012797024351307584,
+        "velocityChange": 5.81673948779996e-7
+      },
+      "head": {
+        "incoming": 0.00105817438400177,
+        "outgoing": 0.0010585720808244524,
+        "velocityChange": 3.978621045234353e-7
+      }
+    },
+    {
+      "time": 7.1,
+      "blade": {
+        "incoming": 0.0053097340546592875,
+        "outgoing": 0.0053097340546592875,
+        "velocityChange": 0
+      },
+      "head": {
+        "incoming": 0.004381762451276036,
+        "outgoing": 0.004381761496279196,
+        "velocityChange": 2.2860557656010074e-9
+      }
+    }
+  ]
+}

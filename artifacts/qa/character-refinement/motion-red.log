@@ -1,0 +1,40 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/characterSampleClock.test.ts (5 tests | 2 failed) 6ms
+   ❯ isolated character preview clock (5)
+     × unloads the axe after impact instead of replaying the source loop into another overhead windup 2ms
+     × eases into and out of the actual downstroke without a velocity jump at the raised pose or impact 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/characterSampleClock.test.ts > isolated character preview clock > unloads the axe after impact instead of replaying the source loop into another overhead windup
+AssertionError: expected 0.7783840000000003 to be less than 0.5
+ ❯ tests/unit/characterSampleClock.test.ts:29:33
+     27|    clock.time=time;
+     28|    expect(clock.frame.phase).toBe('recover');
+     29|    expect(clock.frame.chopTime).toBeLessThan(.5);
+       |                                 ^
+     30|   }
+     31|   clock.time=4.7;expect(clock.frame.weight).toBeLessThan(.9);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/characterSampleClock.test.ts > isolated character preview clock > eases into and out of the actual downstroke without a velocity jump at the raised pose or impact
+AssertionError: expected 1.0000000000021103 to be less than 0.01
+ ❯ tests/unit/characterSampleClock.test.ts:40:22
+     38|   const impactSpeed=(sourceAt(3.9)-sourceAt(3.9-step))/step;
+     39|   const middleSpeed=(sourceAt(3.775+step)-sourceAt(3.775-step))/(2*ste…
+     40|   expect(startSpeed).toBeLessThan(.01);expect(impactSpeed).toBeLessTha…
+       |                      ^
+     41|   expect(middleSpeed).toBeGreaterThan(1.2);
+     42|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  18:34:45
+   Duration  144ms (transform 56%, import 20%, tests 17%, worker 7%)
+

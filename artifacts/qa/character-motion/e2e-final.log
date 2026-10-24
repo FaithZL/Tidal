@@ -1,0 +1,29 @@
+[WebServer] (node:4356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:66692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:30132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input (2.4s)
+  ok 2 tests\e2e\character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable (5.7s)
+[WebServer] 16:50:52 [vite] (client) [console.error] TypeError: Failed to fetch
+[WebServer]     at FileLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31825:3)
+[WebServer]     at GLTFLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js?v=8297a5dd:194:10)
+[WebServer]     at http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31632:10
+[WebServer]     at new Promise (<anonymous>)
+[WebServer]     at GLTFLoader.loadAsync (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=8297a5dd:31631:10)
+[WebServer]     at loadSampleCharacter (http://127.0.0.1:4173/src/game/world/sampleCharacter.ts?t=1792659047959:302:10)
+[WebServer]     at start (http://127.0.0.1:4173/src/characterSample.ts?t=1792659047959:117:17)
+[WebServer]     at http://127.0.0.1:4173/src/characterSample.ts?t=1792659047959:214:6
+  ok 3 tests\e2e\character-motion.spec.ts:35:1 › bone asset failure is visible and disables replay (854ms)
+  ok 4 tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately (2.4s)
+  ok 5 tests\e2e\character-motion.spec.ts:54:1 › the review timeline selects an exact paused pose without advancing a workout (2.4s)
+
+  5 passed (20.7s)

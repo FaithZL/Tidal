@@ -31,6 +31,7 @@ $('planChop').textContent = `挥砍 ${config.repsPerTree} 次 × ${config.treeCo
 $('planLoad').textContent = `深蹲推举 ${config.loadRepTarget} 次 · 装车 ${config.loadRepTarget} 份木材`;
 $('planCarry').textContent = `持续持姿 ${Math.ceil(config.carryTargetMs / 1000)} 秒 · 返回农场`;
 const controller = createSessionController(config, { nowMs: () => performance.now() });
+const initialSessionId=controller.getSnapshot().sessionId;
 const input = new KeyboardActionSource(isTestMode ? .085 : 1);
 const autoInput = new AutoDemoSource(isTestMode ? .085 : 1);
 const cameraInput = new CameraActionSource();
@@ -42,7 +43,7 @@ const preview = new SyntheticPreview([
   { canvas: $<HTMLCanvasElement>('demoGameCanvas'), label: $('demoGamePhase') },
 ]);
 const game = createGame($('worldCanvas'), controller, config,message=>{
-  displayError=message;renderUnavailable=true;stopHold();cameraInput.clearProfile();calibrationPanel.reset();
+  displayError=message;renderUnavailable=true;renderFailed=true;stopHold();cameraInput.clearProfile();calibrationPanel.reset();
   controller.command({kind:'pause',reason:'user'});void cameraPanel.stop();panel(controller.getSnapshot());
 });
 const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
@@ -64,7 +65,8 @@ let boundInputKey = '';
 let heldKeyboard = false;
 let heldPointer = false;
 let displayError = '';
-let renderUnavailable=false;
+let renderUnavailable=!!game.ready;
+let renderFailed=false;
 let movementPhase='准备姿态';
 let movementContext='';
 let cameraPreparation = false;
@@ -371,9 +373,15 @@ requestAnimationFrame(animate);
 window.addEventListener('pagehide', () => { gamePreview.dispose();void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
 // Start once per page load. Reset/results return home without starting another run.
 // Renderer initialization reports failure in an earlier microtask, before this gate.
-queueMicrotask(()=>{
-  if(!demoEnabled||renderUnavailable||current.phase!=='home')return;
+const startDefaultDemo=()=>{
+  if(!demoEnabled||renderUnavailable||current.phase!=='home'||current.sessionId!==initialSessionId)return;
   controller.command({kind:'open-setup',mode:'keyboard'});
   controller.command({kind:'setup-ready'});
   if(document.hidden)controller.command({kind:'pause',reason:'visibility'});
-});
+};
+if(game.ready){
+ game.ready.then(()=>{if(renderFailed)return;renderUnavailable=false;panel(controller.getSnapshot());startDefaultDemo();})
+  .catch(()=>{/* FarmWorld reports an explicit error; failed assets keep the start gate closed. */});
+}else queueMicrotask(startDefaultDemo);
+// A dynamic entry must not expose the static buttons before all handlers exist.
+document.body.inert=false;document.body.dataset.boot='ready';

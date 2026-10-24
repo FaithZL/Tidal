@@ -1,7 +1,8 @@
 import {test,expect,type Page} from '../helpers/manualModeTest.js';
 import {spawn,execFile,type ChildProcess} from 'node:child_process';
 import {promisify} from 'node:util';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {createServer} from 'node:net';
 import {installPoseFixture} from '../helpers/browserPoseFixture.js';
 
 test.use({launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
@@ -79,14 +80,47 @@ test('ten camera start-exit-reset cycles release tracks workers timers and liste
 
 test.describe('production under /tidal/',()=>{
   let server:ChildProcess;
-  const url='http://127.0.0.1:4176/tidal/';
+  let url:string;
   test.beforeAll(async()=>{
     await promisify(execFile)(process.execPath,['node_modules/vite/bin/vite.js','build','--base','/tidal/','--outDir','dist-subpath'],{windowsHide:true});
-    server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--base','/tidal/','--outDir','dist-subpath','--port','4176','--strictPort'],{windowsHide:true,stdio:'ignore'});
-    for(let n=0;n<100;n++){if(await fetch(url).then(r=>r.ok,()=>false))return;await new Promise(resolve=>setTimeout(resolve,100));}
+    // Keep the user's production preview independent from isolated subpath QA.
+    const port=await new Promise<number>((resolve,reject)=>{
+      const probe=createServer();probe.once('error',reject);probe.listen(0,'127.0.0.1',()=>{
+        const address=probe.address();if(!address||typeof address==='string'){probe.close();reject(new Error('Cannot allocate preview port'));return;}
+        probe.close(error=>error?reject(error):resolve(address.port));
+      });
+    });
+    url=`http://127.0.0.1:${port}/tidal/`;
+    const expectedIndex=await readFile('dist-subpath/index.html','utf8');
+    server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--base','/tidal/','--outDir','dist-subpath','--port',String(port),'--strictPort'],{windowsHide:true,stdio:'ignore'});
+    for(let n=0;n<100;n++){
+      if(server.exitCode!==null)throw new Error(`Subpath preview exited: ${server.exitCode}`);
+      if(await fetch(url).then(async r=>r.ok&&(await r.text())===expectedIndex,()=>false))return;
+      await new Promise(resolve=>setTimeout(resolve,100));
+    }
     throw new Error('Subpath preview failed to start');
   });
   test.afterAll(()=>{server?.kill();});
+  test('the isolated character review loads its bones and textures under the same subpath',async({page,context})=>{
+    const local:string[]=[],outside:string[]=[];
+    await context.route('**/*',route=>{const request=route.request().url();if(new URL(request).origin!==new URL(url).origin){outside.push(request);return route.abort();}local.push(request);return route.continue();});
+    await page.goto(`${url}?art=character-motion&model=prototype`);await expect(page.locator('#motionStage')).toHaveAttribute('data-assets','ready');
+    expect(local.some(u=>u.includes('/tidal/assets/character-motion/Male_Peasant.gltf'))).toBe(true);
+    expect(local.some(u=>u.includes('/tidal/assets/character-motion/tree-chopping.glb'))).toBe(true);
+    expect(local.some(u=>u.endsWith('/T_Peasant_BaseColor.png'))).toBe(true);expect(outside).toEqual([]);
+    await expect(page.locator('#worldCanvas')).toHaveCount(0);
+  });
+  test('the supplied character and house load locally under the same subpath',async({page,context})=>{
+    const local:string[]=[],outside:string[]=[],errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+    await context.route('**/*',route=>{const request=route.request().url();if(new URL(request).origin!==new URL(url).origin){outside.push(request);return route.abort();}local.push(request);return route.continue();});
+    await page.goto(`${url}?art=character-motion`);await expect(page.locator('#motionStage')).toHaveAttribute('data-assets','ready');
+    await expect(page.locator('#motionStage')).toHaveAttribute('data-motion-support','derived-skeleton');
+    expect(local.some(request=>request.includes('/tidal/assets/user-models/character.fbx'))).toBe(true);
+    expect(local.some(request=>request.includes('/tidal/assets/user-models/house.fbx'))).toBe(true);
+    expect(local.some(request=>request.includes('/assets/character-motion/'))).toBe(false);expect(outside).toEqual([]);expect(errors).toEqual([]);
+    await expect(page.getByRole('link',{name:'原动作样片对照'})).toHaveAttribute('href','/tidal/?art=character-motion&model=prototype');
+    await expect(page.locator('#worldCanvas')).toHaveCount(0);
+  });
   test('all local assets and real MediaPipe inference work with external requests blocked',async({page,context})=>{
     const requests:string[]=[],external:string[]=[],errors:string[]=[];
     page.on('pageerror',e=>errors.push(e.message));

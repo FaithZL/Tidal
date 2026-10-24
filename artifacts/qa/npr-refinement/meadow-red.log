@@ -1,0 +1,60 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprMeadowRefinement.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMeadowRefinement.test.ts (4 tests | 4 failed) 28ms
+   × composed meadow clumps populate the tree floor and foreground in irregular patches, with warm dry stems 15ms
+   × grass uses tapering bent ribbon surfaces and the work corner includes low leaves, daisies and rounded stones 5ms
+   × plants preserve the road, cottage walk and all three chopping footholds with bounded actual scenery cost 3ms
+   × meadow blending retains fully transparent outer vertices with metre-scale cool and warm transitions 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > composed meadow clumps populate the tree floor and foreground in irregular patches, with warm dry stems
+AssertionError: sample-meadow-grass must be real instanced scenery: expected undefined to be an instance of InstancedMesh
+ ❯ tests/unit/nprMeadowRefinement.test.ts:8:196
+
+ ❯ instances tests/unit/nprMeadowRefinement.test.ts:8:89
+ ❯ tests/unit/nprMeadowRefinement.test.ts:15:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > grass uses tapering bent ribbon surfaces and the work corner includes low leaves, daisies and rounded stones
+AssertionError: sample-meadow-grass must be real instanced scenery: expected undefined to be an instance of InstancedMesh
+ ❯ tests/unit/nprMeadowRefinement.test.ts:8:196
+
+ ❯ instances tests/unit/nprMeadowRefinement.test.ts:8:89
+ ❯ tests/unit/nprMeadowRefinement.test.ts:34:39
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > plants preserve the road, cottage walk and all three chopping footholds with bounded actual scenery cost
+AssertionError: sample-meadow-grass must be real instanced scenery: expected undefined to be an instance of InstancedMesh
+ ❯ tests/unit/nprMeadowRefinement.test.ts:8:196
+
+ ❯ instances tests/unit/nprMeadowRefinement.test.ts:8:89
+ ❯ tests/unit/nprMeadowRefinement.test.ts:52:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/nprMeadowRefinement.test.ts > meadow blending retains fully transparent outer vertices with metre-scale cool and warm transitions
+AssertionError: expected 0.13424592582687667 to be greater than 0.32
+ ❯ tests/unit/nprMeadowRefinement.test.ts:76:57
+     74|    if(colors.getW(i)>.95)luminance.push(colors.getX(i)*meadow.material…
+     75|   }
+     76|   expect(Math.max(...luminance)-Math.min(...luminance)).toBeGreaterTha…
+       |                                                         ^
+     77|  }finally{release(root,resources);}
+     78| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  14:25:32
+   Duration  202ms (import 35%, tests 31%, transform 30%, worker 3%)
+

@@ -1,0 +1,51 @@
+[WebServer] (node:78584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:8148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:75540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input (7.9s)
+
+
+  1) tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '人物动作局部样片' })
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '人物动作局部样片' }) with timeout 7000ms
+      - waiting for getByRole('heading', { name: '人物动作局部样片' })
+
+
+       6 |  const requests:string[]=[];page.on('request',r=>requests.push(r.url()));
+       7 |  await page.goto(url);
+    >  8 |  await expect(page.getByRole('heading',{name:'人物动作局部样片'})).toBeVisible();
+         |                                                            ^
+       9 |  await expect(page.locator('#motionSource')).toContainText('非 Leo 原模型');
+      10 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-assets','ready');
+      11 |  await expect(page.locator('#motionCanvas')).toBeVisible();
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:8:60
+
+    Error Context: test-results\character-motion-the-local-a4992-never-starts-exercise-input\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-the-local-a4992-never-starts-exercise-input\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-the-local-a4992-never-starts-exercise-input\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input 

@@ -1,0 +1,53 @@
+[WebServer] (node:34980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:77016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:7996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\character-motion.spec.ts:42:1 › switching to idle while paused redraws the bones immediately (4.3s)
+  x  2 tests\e2e\character-motion.spec.ts:52:1 › the review timeline selects an exact paused pose without advancing a workout (8.4s)
+
+
+  1) tests\e2e\character-motion.spec.ts:52:1 › the review timeline selects an exact paused pose without advancing a workout 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('slider', { name: '逐帧检视' })
+    Expected: enabled
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" getByRole('slider', { name: '逐帧检视' }) with timeout 7000ms
+      - waiting for getByRole('slider', { name: '逐帧检视' })
+
+
+      52 | test('the review timeline selects an exact paused pose without advancing a workout',async({page})=>{
+      53 |  await page.goto(url);await expect(page.locator('#motionStage')).toHaveAttribute('data-assets','ready');
+    > 54 |  const timeline=page.getByRole('slider',{name:'逐帧检视'});await expect(timeline).toBeEnabled();
+         |                                                                               ^
+      55 |  await timeline.evaluate((element:HTMLInputElement)=>{element.value='3.77';element.dispatchEvent(new Event('input',{bubbles:true}));});
+      56 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-time','3.7700');
+      57 |  await expect(page.locator('#motionPhase')).toHaveText('挥砍 · 下挥发力');
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:54:79
+
+    Error Context: test-results\character-motion-the-revie-4e240-without-advancing-a-workout\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-the-revie-4e240-without-advancing-a-workout\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-the-revie-4e240-without-advancing-a-workout\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\character-motion.spec.ts:52:1 › the review timeline selects an exact paused pose without advancing a workout 
+  1 passed (17.9s)

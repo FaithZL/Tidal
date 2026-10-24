@@ -1,0 +1,42 @@
+
+> tidal-farm-motion-demo@0.1.0 build
+> npm run typecheck && npm run build:worker && vite build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 build:worker
+> vite build --config vite.worker.config.ts
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 3 modules transformed.
+rendering chunks...
+computing gzip size...
+public/worker/pose.js  135.84 kB │ gzip: 40.48 kB
+
+✓ built in 35ms
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 69 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             13.69 kB │ gzip:   5.06 kB
+dist/assets/character-sample-DTudmuMb.css    3.10 kB │ gzip:   1.22 kB
+dist/assets/index-CVIrnIoA.css              17.29 kB │ gzip:   4.78 kB
+dist/assets/index-C8z6hSw_.js                3.26 kB │ gzip:   1.59 kB
+dist/assets/userModelSample-CkaiOMLw.js      6.41 kB │ gzip:   3.27 kB
+dist/assets/nprMaterials-DQBtaTsK.js        12.18 kB │ gzip:   4.41 kB
+dist/assets/userModel-Cnyt4fJP.js           53.47 kB │ gzip:  18.24 kB
+dist/assets/characterSample-RLTWUjgY.js     79.87 kB │ gzip:  26.54 kB
+dist/assets/browser-CDD9tRjg.js            133.32 kB │ gzip:  45.85 kB
+dist/assets/OrbitControls-BT33Vl8F.js      642.99 kB │ gzip: 160.39 kB
+
+✓ built in 186ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

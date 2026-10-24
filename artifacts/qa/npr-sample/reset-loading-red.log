@@ -1,0 +1,59 @@
+[WebServer] (node:74884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:42324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\npr-sample.spec.ts:26:1 › reset while sample assets load cancels the deferred automatic start (9.1s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:26:1 › reset while sample assets load cancels the deferred automatic start 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "未开始"
+    Received: "已完成"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        6 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        - locator resolved to <span id="statusTag" class="subtag">休息时间</span>
+        - unexpected value "休息时间"
+        7 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        3 × locator resolved to <span id="statusTag" class="subtag">已完成</span>
+          - unexpected value "已完成"
+
+
+      30 |  try{await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','loading');await page.locator('#resetBtn').click();}finally{release();}
+      31 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','ready');await page.waitForTimeout(600);
+    > 32 |  await expect(page.locator('#statusTag')).toHaveText('未开始');await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                           ^
+      33 |  await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','true');await expect(page.locator('#acceptPlan')).toBeEnabled();
+      34 | });
+      35 |
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:32:43
+
+    Error Context: test-results\npr-sample-reset-while-sam-7a384-he-deferred-automatic-start\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-reset-while-sam-7a384-he-deferred-automatic-start\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-reset-while-sam-7a384-he-deferred-automatic-start\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\npr-sample.spec.ts:26:1 › reset while sample assets load cancels the deferred automatic start 

@@ -1,0 +1,992 @@
+{
+  "date": "2026-10-22",
+  "method": "Actual real user FBX, current TS Vite SSR load; CPU skin/geometry only, no browser. Source bind positions copied before corrective application; original hand geometry may be locally corrected by Motion.",
+  "snapshots": {
+    "userCharacterRig": "997b96360f9ce84c4f623871a1ef758795aa4b71ff0d57b6bea0cccfbb5e1986",
+    "userCharacterMotion": "b4b422b7493212bcb7e90b19ba7916c27f344e3ea50bc4fe8ca7530b76af5c28",
+    "userHandGrip": "0f7a891a7a7eb417f03e4538d8a2fed63479d2e825c17e62c28deeaa4d269797"
+  },
+  "warnings": [
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ShininessExponent",
+    "THREE.FBXLoader: %s map is not supported in three.js, skipping texture. ReflectionFactor"
+  ],
+  "samples": [
+    {
+      "time": 0,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 0.8849480261611237,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.0568127099319882,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8506766325536429,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": []
+    },
+    {
+      "time": 0.8,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 0.9068288479826324,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.0540519722731665,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8505400152267482,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": []
+    },
+    {
+      "time": 2.9,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.9245473197152194,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.875332952048142,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8249972574772689,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.9245473197152194
+        },
+        {
+          "a": 13267,
+          "b": 13268,
+          "ratio": 1.9245473197152194
+        },
+        {
+          "a": 5228,
+          "b": 5226,
+          "ratio": 1.8100242701797782
+        },
+        {
+          "a": 5230,
+          "b": 5231,
+          "ratio": 1.8100242701797782
+        },
+        {
+          "a": 12351,
+          "b": 12352,
+          "ratio": 1.8053028115206289
+        },
+        {
+          "a": 13275,
+          "b": 13276,
+          "ratio": 1.8053028115206289
+        }
+      ]
+    },
+    {
+      "time": 3.4,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 0.8103712609742798,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.883533180038401,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8968567970605885,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 13278,
+          "b": 13279,
+          "ratio": 2.096678069693231
+        },
+        {
+          "a": 13375,
+          "b": 13376,
+          "ratio": 2.096678069693231
+        },
+        {
+          "a": 4221,
+          "b": 4222,
+          "ratio": 1.96318890063138
+        },
+        {
+          "a": 4225,
+          "b": 4226,
+          "ratio": 1.96318890063138
+        },
+        {
+          "a": 5228,
+          "b": 5226,
+          "ratio": 1.9610573100690565
+        },
+        {
+          "a": 5230,
+          "b": 5231,
+          "ratio": 1.9610573100690565
+        },
+        {
+          "a": 8191,
+          "b": 8192,
+          "ratio": 1.8982457552067842
+        },
+        {
+          "a": 8251,
+          "b": 8252,
+          "ratio": 1.8982457552067842
+        },
+        {
+          "a": 13333,
+          "b": 13334,
+          "ratio": 1.859168080214416
+        },
+        {
+          "a": 13369,
+          "b": 13370,
+          "ratio": 1.859168080214416
+        }
+      ]
+    },
+    {
+      "time": 3.9,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 2.0754695646829617,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.8737206917368895,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8293947183362927,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 2.0754695646829617
+        },
+        {
+          "a": 13267,
+          "b": 13268,
+          "ratio": 2.0754695646829617
+        },
+        {
+          "a": 12351,
+          "b": 12352,
+          "ratio": 1.8952689737213
+        },
+        {
+          "a": 13275,
+          "b": 13276,
+          "ratio": 1.8952689737213
+        }
+      ]
+    },
+    {
+      "time": 4.15,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.5311557462136494,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.1633846615123244,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.885038636124192,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 7494,
+          "b": 7495,
+          "ratio": 2.016517977271652
+        },
+        {
+          "a": 11845,
+          "b": 11846,
+          "ratio": 2.016517977271652
+        },
+        {
+          "a": 13278,
+          "b": 13279,
+          "ratio": 2.003389340603723
+        },
+        {
+          "a": 13375,
+          "b": 13376,
+          "ratio": 2.003389340603723
+        }
+      ]
+    },
+    {
+      "time": 4.4,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.3653861872319286,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.1522575226953573,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8821004671417108,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 7494,
+          "b": 7495,
+          "ratio": 2.095480895879263
+        },
+        {
+          "a": 11845,
+          "b": 11846,
+          "ratio": 2.095480895879263
+        },
+        {
+          "a": 13278,
+          "b": 13279,
+          "ratio": 1.9907867360839555
+        },
+        {
+          "a": 13375,
+          "b": 13376,
+          "ratio": 1.9907867360839555
+        }
+      ]
+    },
+    {
+      "time": 4.7,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.9771065748469743,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.1495135861498074,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.9065899600974286,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 13278,
+          "b": 13279,
+          "ratio": 2.2573491463497377
+        },
+        {
+          "a": 13375,
+          "b": 13376,
+          "ratio": 2.2573491463497377
+        },
+        {
+          "a": 13270,
+          "b": 13271,
+          "ratio": 2.0615308092446085
+        },
+        {
+          "a": 13301,
+          "b": 13299,
+          "ratio": 2.0615308092446085
+        },
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 1.9771065748469743
+        },
+        {
+          "a": 13267,
+          "b": 13268,
+          "ratio": 1.9771065748469743
+        },
+        {
+          "a": 13245,
+          "b": 13246,
+          "ratio": 1.9110579824087823
+        },
+        {
+          "a": 13260,
+          "b": 13261,
+          "ratio": 1.9110579824087823
+        },
+        {
+          "a": 13425,
+          "b": 13426,
+          "ratio": 1.8368800116456478
+        },
+        {
+          "a": 13428,
+          "b": 13429,
+          "ratio": 1.8368800116456478
+        }
+      ]
+    },
+    {
+      "time": 4.95,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 0.9624489115665754,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.047583086073737,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8934354449632577,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": [
+        {
+          "a": 13278,
+          "b": 13279,
+          "ratio": 2.024610661247425
+        },
+        {
+          "a": 13375,
+          "b": 13376,
+          "ratio": 2.024610661247425
+        },
+        {
+          "a": 4221,
+          "b": 4222,
+          "ratio": 1.8923917709631484
+        },
+        {
+          "a": 4225,
+          "b": 4226,
+          "ratio": 1.8923917709631484
+        },
+        {
+          "a": 8191,
+          "b": 8192,
+          "ratio": 1.8417372085423986
+        },
+        {
+          "a": 8251,
+          "b": 8252,
+          "ratio": 1.8417372085423986
+        }
+      ]
+    },
+    {
+      "time": 5.6,
+      "probes": [
+        {
+          "a": 13263,
+          "b": 13264,
+          "ratio": 0.8525033202676701,
+          "upperProjection": [
+            0.2085628582387797,
+            0.29964267566326475
+          ],
+          "weights": [
+            {
+              "user-chest": 0.48541298508644104,
+              "user-leftUpperArm": 0.45538949966430664,
+              "user-spine": 0.04322344809770584,
+              "user-leftForeArm": 0.015974054113030434
+            },
+            {
+              "user-leftUpperArm": 0.5618353486061096,
+              "user-chest": 0.24592325091362,
+              "user-leftForeArm": 0.18261481821537018,
+              "user-spine": 0.009626595303416252
+            }
+          ]
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.0609125576513267,
+          "upperProjection": [
+            0.8178367571026303,
+            0.7748423164806039
+          ],
+          "weights": [
+            {
+              "user-leftForeArm": 0.9478263854980469,
+              "user-leftUpperArm": 0.05217361822724342,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-leftForeArm": 0.9230875372886658,
+              "user-leftUpperArm": 0.07691246271133423,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.8508906588501209,
+          "upperProjection": [
+            0.7069568282760642,
+            0.771448130484825
+          ],
+          "weights": [
+            {
+              "user-rightForeArm": 0.9919031262397766,
+              "user-rightUpperArm": 0.008096872828900814,
+              "user-pelvis": 0,
+              "user-spine": 0
+            },
+            {
+              "user-rightForeArm": 0.9782615900039673,
+              "user-rightUpperArm": 0.021738391369581223,
+              "user-pelvis": 0,
+              "user-spine": 0
+            }
+          ]
+        }
+      ],
+      "shoulderEdges": []
+    }
+  ]
+}

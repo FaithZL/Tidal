@@ -1,0 +1,10 @@
+{
+  entry: [ 'http://127.0.0.1:4176/assets/index-A5OcDc49.js' ],
+  farm: {
+    house: 'user-fbx',
+    character: 'user-fbx-static',
+    inventory: '0/0/0'
+  },
+  errors: [],
+  external: []
+}

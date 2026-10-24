@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleHead.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleHead.test.ts (11 tests | 1 failed) 882ms
+   ❯ isolated sample young-adult head (11)
+     × has separate short nape tips in the rear silhouette instead of a straight cap edge 133ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > has separate short nape tips in the rear silhouette instead of a straight cap edge
+AssertionError: expected 0 to be greater than or equal to 3
+ ❯ tests/unit/sampleHead.test.ts:124:16
+    122|   let tips=0,last=-5;
+    123|   for(let i=4;i<edge.length-4;i++)if(i-last>=5&&(edge[i-4]+edge[i+4])/…
+    124|   expect(tips).toBeGreaterThanOrEqual(3);
+       |                ^
+    125|  });
+    126|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  19:49:53
+   Duration  1.03s (tests 94%, import 3%, transform 3%)
+

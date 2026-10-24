@@ -1,0 +1,10 @@
+{
+  poses: [
+    { label: 'standing', time: '0.8000', phase: '站立 · 呼吸与重心' },
+    { label: 'windup', time: '3.4000', phase: '挥砍 · 蓄力与转体' },
+    { label: 'strike', time: '3.7700', phase: '挥砍 · 下挥发力' },
+    { label: 'recovery', time: '4.5000', phase: '回收 · 缓冲与复位' }
+  ],
+  errors: [],
+  external: []
+}

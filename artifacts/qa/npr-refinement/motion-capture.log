@@ -1,0 +1,15 @@
+{
+  date: '2026-10-22T07:33:38.147Z',
+  url: 'http://127.0.0.1:4176/?art=npr-sample',
+  bundles: [ 'http://127.0.0.1:4176/assets/index-DrLIbJGD.js' ],
+  browser: '156.0.8078.4',
+  scope: 'actual production keyboard UI, normal5s countdown/15s rest;15chops+3loads then pause, no acceleration/no physical camera; video encoding overhead means not an FPS benchmark',
+  durationMs: 48508,
+  chopStartsMs: 7237,
+  loadStartsMs: 44045,
+  raster: { width: 683, height: 450, scale: '0.5' },
+  gpu: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  errors: [],
+  external: [],
+  poseRequests: []
+}

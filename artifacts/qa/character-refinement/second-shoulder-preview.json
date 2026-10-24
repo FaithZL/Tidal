@@ -1,0 +1,16 @@
+{
+  "url": "http://127.0.0.1:4176/?art=character-motion",
+  "observations": [
+    {
+      "label": "windup",
+      "time": "3.4000",
+      "phase": "prepare"
+    },
+    {
+      "label": "strike",
+      "time": "3.9500",
+      "phase": "strike"
+    }
+  ],
+  "errors": []
+}

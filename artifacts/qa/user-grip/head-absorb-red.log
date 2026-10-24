@@ -1,0 +1,43 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterMotion.test.ts (24 tests | 2 failed) 2493ms
+   × head absorption eases its velocity across 4.15s without a small snap at the neck 68ms
+   × head absorption eases its velocity across 4.4s without a small snap at the neck 95ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > head absorption eases its velocity across 4.15s without a small snap at the neck
+AssertionError: expected 0.03625667870327616 to be less than 0.01
+ ❯ tests/unit/userCharacterMotion.test.ts:124:35
+    122|  const at=(time:number)=>{motion.sample(time);return rig.bones.head.ge…
+    123|  const center=at(boundary),before=center.clone().sub(at(boundary-epsil…
+    124|  expect(before.distanceTo(after)).toBeLessThan(.01);
+       |                                   ^
+    125| });
+    126|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userCharacterMotion.test.ts > head absorption eases its velocity across 4.4s without a small snap at the neck
+AssertionError: expected 0.036719639021068486 to be less than 0.01
+ ❯ tests/unit/userCharacterMotion.test.ts:124:35
+    122|  const at=(time:number)=>{motion.sample(time);return rig.bones.head.ge…
+    123|  const center=at(boundary),before=center.clone().sub(at(boundary-epsil…
+    124|  expect(before.distanceTo(after)).toBeLessThan(.01);
+       |                                   ^
+    125| });
+    126|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 22 passed (24)
+   Start at  23:05:59
+   Duration  2.63s (tests 98%, import 1%, transform 1%)
+

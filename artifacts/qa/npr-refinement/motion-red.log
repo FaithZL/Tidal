@@ -1,0 +1,142 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprMotion.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprMotion.test.ts (8 tests | 7 failed) 110ms
+   ❯ fine farmer presentation motion (8)
+     × passes through an intermediate down-swing and reaches the original contact anchor by 60 ms 28ms
+     × freezes a partially observed motion on delta zero, even when a different action pose arrives 15ms
+     × does not catch up long, negative or invalid sampling intervals 10ms
+     × is stable across frame partitions and keeps the root and held-log anchor tied to the rendered hands 18ms
+     × sequences squat, stand, press and release with a body hinge and an independently reacting head 10ms
+     × lifts only the swing foot while the stance boot stays above the ground plane 9ms
+     × settles without perpetual idle uploads and supports an explicit snap on reset 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > passes through an intermediate down-swing and reaches the original contact anchor by 60 ms
+AssertionError: expected 0.85 to be greater than 0.85
+ ❯ tests/unit/nprMotion.test.ts:24:34
+     22|   const actor=farmer();actor.update(ready,true);
+     23|   actor.update(down,true,20);
+     24|   expect(actor.handPosition().y).toBeGreaterThan(.85);expect(actor.han…
+       |                                  ^
+     25|   expect(actor.animating).toBe(true);
+     26|   actor.update(down,true,40);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > freezes a partially observed motion on delta zero, even when a different action pose arrives
+AssertionError: expected [ +0, 1.7, 0.38 ] to deeply equal [ +0, 0.85, 0.85 ]
+
+- Expected
++ Received
+
+  [
+    0,
+-   0.85,
+-   0.85,
++   1.7,
++   0.38,
+  ]
+
+ ❯ tests/unit/nprMotion.test.ts:35:42
+     33|   const leg=actor.root.getObjectByName('npr-farmer-arm-left') as T.Mes…
+     34|   for(let i=0;i<8;i++)actor.update({...down,pose:'chop-return'},true,0…
+     35|   expect(actor.handPosition().toArray()).toEqual(before);expect(actor.…
+       |                                          ^
+     36|  });
+     37|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > does not catch up long, negative or invalid sampling intervals
+AssertionError: expected [ +0, 0.85, 0.85 ] to deeply equal [ +0, 2.3, 0.38 ]
+
+- Expected
++ Received
+
+  [
+    0,
+-   2.3,
+-   0.38,
++   0.85,
++   0.85,
+  ]
+
+ ❯ tests/unit/nprMotion.test.ts:41:73
+     39|   const actor=farmer();actor.update(ready,true);const before=actor.han…
+     40|   for(const delta of[101,1000,-10,Number.NaN,Number.POSITIVE_INFINITY]…
+     41|    actor.update(down,true,delta);expect(actor.handPosition().toArray()…
+       |                                                                         ^
+     42|   }
+     43|   actor.update(down,true,20);expect(actor.handPosition().y).toBeGreate…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > is stable across frame partitions and keeps the root and held-log anchor tied to the rendered hands
+TypeError: Cannot read properties of undefined (reading 'getWorldPosition')
+ ❯ tests/unit/nprMotion.test.ts:16:89
+     14| }
+     15| function handCenter(actor:NprCharacter3D):T.Vector3{
+     16|  return ['left','right'].map(side=>actor.root.getObjectByName(`npr-far…
+       |                                                                                         ^
+     17| }
+     18| afterEach(()=>{resources.forEach(r=>r.dispose());resources.length=0;});
+ ❯ handCenter tests/unit/nprMotion.test.ts:16:26
+ ❯ tests/unit/nprMotion.test.ts:52:38
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > sequences squat, stand, press and release with a body hinge and an independently reacting head
+AssertionError: expected undefined to be defined
+ ❯ tests/unit/nprMotion.test.ts:60:17
+     58|   actor.update({...ready,pose:'squat-down'},false,70);
+     59|   const pivot=actor.root.getObjectByName('npr-farmer-body-pivot'),head…
+     60|   expect(pivot).toBeDefined();expect(head).toBeDefined();expect(pivot!…
+       |                 ^
+     61|   expect(actor.handPosition().y).toBeGreaterThan(.45);expect(actor.han…
+     62|   actor.update({...ready,pose:'squat-down'},false,70);expect(actor.han…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > lifts only the swing foot while the stance boot stays above the ground plane
+AssertionError: expected 0.030000004768371585 to be greater than 0.09
+ ❯ tests/unit/nprMotion.test.ts:74:74
+     72|   const boots=['left','right'].map(side=>actor.root.getObjectByName(`n…
+     73|   const feet=boots.map(boot=>new T.Box3().setFromObject(boot).min.y);
+     74|   expect(Math.min(...feet)).toBeCloseTo(.03,5);expect(Math.max(...feet…
+       |                                                                          ^
+     75|   expect(feet.every(y=>y>=.02999)).toBe(true);
+     76|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/unit/nprMotion.test.ts > fine farmer presentation motion > settles without perpetual idle uploads and supports an explicit snap on reset
+AssertionError: expected undefined to be false // Object.is equality
+
+- Expected:
+false
+
++ Received:
+undefined
+
+ ❯ tests/unit/nprMotion.test.ts:80:113
+     78|  it('settles without perpetual idle uploads and supports an explicit s…
+     79|   const actor=farmer();actor.update(ready,true);actor.update(down,true…
+     80|   actor.update(idle,false);expect(actor.handPosition().toArray()).toEq…
+       |                                                                                                                 ^
+     81|   const revision=actor.visualRevision;
+     82|   for(let i=0;i<20;i++)actor.update(idle,false,16);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 1 passed (8)
+   Start at  15:06:26
+   Duration  272ms (tests 66%, import 18%, transform 15%, worker 2%)
+

@@ -1,0 +1,232 @@
+[
+  {
+    "file": "C:/Users/Zero/xwechat_files/zhuling6376_d513/msg/file/2026-10/modelf23d8a6f4b3801.fbx",
+    "version": 7400,
+    "objectCounts": {
+      "Geometry": 1,
+      "Model": 1,
+      "Material": 1,
+      "Texture": 4,
+      "Video": 4
+    },
+    "deformers": [],
+    "geometries": [
+      {
+        "id": 367163365,
+        "name": "tripo_mesh_8243f6af::Geometry",
+        "type": "Mesh",
+        "controlPoints": 2479,
+        "polygonCorners": 14700,
+        "polygons": 4900,
+        "triangles": 4900,
+        "bounds": {
+          "min": [
+            -0.4990234375,
+            -0.2333984225988388,
+            -0.4326171875
+          ],
+          "max": [
+            0.4990234375,
+            0.2333984524011612,
+            0.4326171875
+          ]
+        },
+        "layers": [
+          {
+            "kind": "LayerElementSmoothing",
+            "mapping": "ByPolygon",
+            "reference": "Direct"
+          },
+          {
+            "kind": "LayerElementNormal",
+            "mapping": "ByPolygonVertex",
+            "reference": "IndexToDirect"
+          },
+          {
+            "kind": "LayerElementUV",
+            "mapping": "ByPolygonVertex",
+            "reference": "IndexToDirect"
+          },
+          {
+            "kind": "LayerElementMaterial",
+            "mapping": "AllSame",
+            "reference": "IndexToDirect"
+          }
+        ]
+      }
+    ],
+    "videos": [
+      {
+        "id": 171268358,
+        "name": "tripo_model_basecolor::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/8243f6af-068b-44f4-9530-0baa87a81272/tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_basecolor.JPEG",
+        "relativeFilename": "tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_basecolor.JPEG",
+        "embeddedBytes": 876759,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\modelf23d8a6f4b3801-0-tripo_model_basecolor.JPEG",
+        "sha256": "17af26a5b456e21d7cdb208234c8989ac9ecb5aa02ea21d5146f7d60c83b2c1d"
+      },
+      {
+        "id": 180247536,
+        "name": "tripo_model_normal::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/8243f6af-068b-44f4-9530-0baa87a81272/tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_normal.PNG",
+        "relativeFilename": "tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_normal.PNG",
+        "embeddedBytes": 1088929,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "PNG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\modelf23d8a6f4b3801-1-tripo_model_normal.PNG",
+        "sha256": "41df69d82df5774e72028e8d0390848e197b6ec49cf9e17fc9bdd3303c03e793"
+      },
+      {
+        "id": 963909496,
+        "name": "tripo_model_roughness::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/8243f6af-068b-44f4-9530-0baa87a81272/tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_roughness.JPEG",
+        "relativeFilename": "tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_roughness.JPEG",
+        "embeddedBytes": 501680,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\modelf23d8a6f4b3801-2-tripo_model_roughness.JPEG",
+        "sha256": "88b771354f64740490674c8bbb98000d676a11340b90f9caa781b7b7e449b5e0"
+      },
+      {
+        "id": 186100597,
+        "name": "tripo_model_metallic::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/8243f6af-068b-44f4-9530-0baa87a81272/tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_metallic.JPEG",
+        "relativeFilename": "tripo_convert_8243f6af-068b-44f4-9530-0baa87a81272.fbm/tripo_model_metallic.JPEG",
+        "embeddedBytes": 478885,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\modelf23d8a6f4b3801-3-tripo_model_metallic.JPEG",
+        "sha256": "8d83fcd826f388a5e0a196fd7c44face3dc231957420e99e8ed4b5c756441d2d"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/Zero/xwechat_files/zhuling6376_d513/msg/file/2026-10/model4e87ceb4739501.fbx",
+    "version": 7400,
+    "objectCounts": {
+      "Geometry": 1,
+      "Model": 1,
+      "Material": 1,
+      "Texture": 4,
+      "Video": 4
+    },
+    "deformers": [],
+    "geometries": [
+      {
+        "id": 594628534,
+        "name": "tripo_mesh_a250cf65::Geometry",
+        "type": "Mesh",
+        "controlPoints": 2475,
+        "polygonCorners": 13290,
+        "polygons": 4430,
+        "triangles": 4430,
+        "bounds": {
+          "min": [
+            -0.3955078125,
+            -0.4990234375,
+            -0.3154296875
+          ],
+          "max": [
+            0.3955078125,
+            0.4990234375,
+            0.3154297173023224
+          ]
+        },
+        "layers": [
+          {
+            "kind": "LayerElementSmoothing",
+            "mapping": "ByPolygon",
+            "reference": "Direct"
+          },
+          {
+            "kind": "LayerElementNormal",
+            "mapping": "ByPolygonVertex",
+            "reference": "IndexToDirect"
+          },
+          {
+            "kind": "LayerElementUV",
+            "mapping": "ByPolygonVertex",
+            "reference": "IndexToDirect"
+          },
+          {
+            "kind": "LayerElementMaterial",
+            "mapping": "AllSame",
+            "reference": "IndexToDirect"
+          }
+        ]
+      }
+    ],
+    "videos": [
+      {
+        "id": 431235309,
+        "name": "tripo_model_basecolor::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/a250cf65-ba0a-43ce-9458-be9cca723ecb/tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_basecolor.JPEG",
+        "relativeFilename": "tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_basecolor.JPEG",
+        "embeddedBytes": 649804,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\model4e87ceb4739501-0-tripo_model_basecolor.JPEG",
+        "sha256": "3a2459d6ae39adff42617e27d55fe949b71c6c2c99eb2f98b0338158e0cd2943"
+      },
+      {
+        "id": 70630194,
+        "name": "tripo_model_normal::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/a250cf65-ba0a-43ce-9458-be9cca723ecb/tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_normal.PNG",
+        "relativeFilename": "tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_normal.PNG",
+        "embeddedBytes": 1215291,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "PNG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\model4e87ceb4739501-1-tripo_model_normal.PNG",
+        "sha256": "51ba7114e1724e1cc81425a86a369cf31c899461667eaadc589262044f13715b"
+      },
+      {
+        "id": 136009701,
+        "name": "tripo_model_roughness::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/a250cf65-ba0a-43ce-9458-be9cca723ecb/tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_roughness.JPEG",
+        "relativeFilename": "tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_roughness.JPEG",
+        "embeddedBytes": 687845,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\model4e87ceb4739501-2-tripo_model_roughness.JPEG",
+        "sha256": "cdfa1ef0780b30da0e39fca77b57891d6c3b73b8351b3b1cad387971d649a1c7"
+      },
+      {
+        "id": 277554310,
+        "name": "tripo_model_metallic::Video",
+        "filename": "/mnt/pfs/server/tcli_0add4209e21b4fa2bdfd87ae916e09b4/20261022/a250cf65-ba0a-43ce-9458-be9cca723ecb/tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_metallic.JPEG",
+        "relativeFilename": "tripo_convert_a250cf65-ba0a-43ce-9458-be9cca723ecb.fbm/tripo_model_metallic.JPEG",
+        "embeddedBytes": 638825,
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "format": "JPEG"
+        },
+        "extractedPath": "C:\\Users\\Zero\\AppData\\Local\\Temp\\tidal-user-fbx-inspection-20261022\\model4e87ceb4739501-3-tripo_model_metallic.JPEG",
+        "sha256": "dd4cc35a6e0b6cd52daf7a2b3a769341e0ff02f9318f4c26cc28a7887300470e"
+      }
+    ]
+  }
+]

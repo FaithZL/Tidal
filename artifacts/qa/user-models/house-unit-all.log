@@ -1,0 +1,82 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userModel.test.ts (5 tests | 5 failed) 200ms
+   ❯ user-supplied static FBX model (5)
+     × grounds and uniformly scales the actual character without inventing skin or animation 82ms
+     × grounds and uniformly scales the actual house without inventing skin or animation 48ms
+     × preserves original texture and UVs while removing imported specular glare 38ms
+     × releases original materials at conversion and owned maps/geometry once at disposal 27ms
+     × rejects empty or invalid geometry rather than reporting a usable imported model 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > grounds and uniformly scales the actual character without inventing skin or animation
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > grounds and uniformly scales the actual house without inventing skin or animation
+Error: User FBX preparation not implemented
+ ❯ prepareUserModel src/game/world/userModel.ts:4:87
+      2| export type UserModelKind='character'|'house';
+      3| export interface UserModel{readonly root:T.Group;readonly kind:UserMod…
+      4| export function prepareUserModel(_source:T.Group,_kind:UserModelKind):…
+       |                                                                                       ^
+      5| export async function loadUserModel(_kind:UserModelKind,_baseUrl:strin…
+      6|
+ ❯ tests/unit/userModel.test.ts:19:43
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > preserves original texture and UVs while removing imported specular glare
+Error: User FBX preparation not implemented
+ ❯ prepareUserModel src/game/world/userModel.ts:4:87
+      2| export type UserModelKind='character'|'house';
+      3| export interface UserModel{readonly root:T.Group;readonly kind:UserMod…
+      4| export function prepareUserModel(_source:T.Group,_kind:UserModelKind):…
+       |                                                                                       ^
+      5| export async function loadUserModel(_kind:UserModelKind,_baseUrl:strin…
+      6|
+ ❯ tests/unit/userModel.test.ts:33:158
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > releases original materials at conversion and owned maps/geometry once at disposal
+Error: User FBX preparation not implemented
+ ❯ prepareUserModel src/game/world/userModel.ts:4:87
+      2| export type UserModelKind='character'|'house';
+      3| export interface UserModel{readonly root:T.Group;readonly kind:UserMod…
+      4| export function prepareUserModel(_source:T.Group,_kind:UserModelKind):…
+       |                                                                                       ^
+      5| export async function loadUserModel(_kind:UserModelKind,_baseUrl:strin…
+      6|
+ ❯ tests/unit/userModel.test.ts:45:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > rejects empty or invalid geometry rather than reporting a usable imported model
+AssertionError: expected [Function] to throw error matching /empty|geometry|bounds/i but got 'User FBX preparation not implemented'
+
+- Expected:
+/empty|geometry|bounds/i
+
++ Received:
+"User FBX preparation not implemented"
+
+ ❯ tests/unit/userModel.test.ts:50:59
+     48|  });
+     49|  it('rejects empty or invalid geometry rather than reporting a usable …
+     50|   expect(()=>prepareUserModel(new T.Group(),'character')).toThrow(/emp…
+       |                                                           ^
+     51|   const invalid=new T.Group(),mesh=new T.Mesh(new T.BufferGeometry(),n…
+     52|   expect(()=>prepareUserModel(invalid,'house')).toThrow(/empty|geometr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed | 43 passed (44)
+      Tests  5 failed | 311 passed (316)
+   Start at  20:32:58
+   Duration  2.37s (tests 79%, import 10%, transform 9%, worker 1%)
+

@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userStaticCharacter.test.ts tests/unit/userModel.test.ts tests/unit/userHouseMount.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  3 passed (3)
+      Tests  11 passed (11)
+   Start at  20:39:06
+   Duration  224ms (tests 49%, import 32%, transform 16%, worker 3%)
+

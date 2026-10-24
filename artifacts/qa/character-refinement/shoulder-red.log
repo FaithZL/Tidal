@@ -1,0 +1,33 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleShoulder.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleShoulder.test.ts (1 test | 1 failed) 197ms
+   ❯ sample garment shoulder continuity (1)
+     × keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop 191ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleShoulder.test.ts > sample garment shoulder continuity > keeps the visible brown sleeves from cutting through the tunic during idle, raised arms and the real chop
+AssertionError: standing: brown sleeve edges pierce the actual skinned beige tunic: expected 132 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 132
+
+ ❯ tests/unit/sampleShoulder.test.ts:64:104
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  18:38:58
+   Duration  390ms (tests 72%, import 15%, transform 12%, worker 1%)
+

@@ -1,0 +1,19 @@
+{
+  "id": "tidal-leaf-bough-v2",
+  "file": "leaf-bough-v2.png",
+  "purpose": "Original transparent hand-painted leaf spray for crossed 3D canopy cards; not a screenshot.",
+  "generation": {
+    "method": "OpenAI built-in image_gen.imagegen",
+    "generatedDate": "2026-10-22",
+    "inputImages": [],
+    "sourceFile": "C:/Users/Zero/.codex/generated_images/01a13fc0-70cc-75f2-a097-967bc5a084da/exec-aecb68b1-0bb9-4e82-b6b5-4cf6bbc1955f.png",
+    "prompt": "Create an ORIGINAL production game foliage diffuse texture on a genuinely transparent background, square image 1024x1024. A single airy asymmetric small broadleaf twig spray fills central 88% of frame; 24-36 individually readable almond/ovate leaves with subtly serrated irregular edges, a few fine brown branching stems, many irregular transparent holes between leaf groups, alpha-clear outside. Overall silhouette branching and open, not a round bush/blob/cotton cloud. Leaves vary in natural sage green, olive green, muted sunlit yellow-green and gentle cool green shadows; moderate values so they stay readable under 3D lighting. Hand-painted Japanese pastoral animation environment aesthetic, opaque watercolor/gouache, broad restrained brush marks, matte soft shading. Flat orthographic view of one compact branch spray from above/side for a 3D crossed foliage card, no perspective scene, no ground, no sky, no tree trunk, no border, no text, no labels, no watermark. Delicate detailed leaf edges, not photographic, no neon, no black outlines, no baked cast shadow or white/gray/colored background. Transparent PNG cutout, maintain generous transparent margins; leaf cluster extends diagonally lower left to upper right with a smaller offshoot. This is an albedo/cutout asset, not concept art or a game screenshot."
+  },
+  "image": {
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "sha256": "f42e6a8e54ce00d7b3147c3ac2cce69c1a00deb81aa7b09de20c7d578daea036"
+  },
+  "scope": "No reference pixels copied; code geometry and generated material combine in a real rotatable 3D local sample. Not final art acceptance."
+}

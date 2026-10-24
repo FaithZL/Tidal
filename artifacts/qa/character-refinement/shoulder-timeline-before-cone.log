@@ -1,0 +1,85 @@
+{
+  "samples": 72,
+  "failures": [
+    {
+      "time": 3,
+      "phase": "prepare",
+      "weight": 0.7355570193275797,
+      "chopTime": 0,
+      "sleeveTunic": 14,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.1,
+      "phase": "prepare",
+      "weight": 0.8821230491995679,
+      "chopTime": 0,
+      "sleeveTunic": 22,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.2,
+      "phase": "prepare",
+      "weight": 0.969369964609654,
+      "chopTime": 0,
+      "sleeveTunic": 34,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.3,
+      "phase": "prepare",
+      "weight": 0.9986547387644849,
+      "chopTime": 0,
+      "sleeveTunic": 35,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.4,
+      "phase": "prepare",
+      "weight": 1,
+      "chopTime": 0,
+      "sleeveTunic": 35,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.5,
+      "phase": "prepare",
+      "weight": 1,
+      "chopTime": 0,
+      "sleeveTunic": 35,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.6,
+      "phase": "prepare",
+      "weight": 1,
+      "chopTime": 0,
+      "sleeveTunic": 35,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.7,
+      "phase": "strike",
+      "weight": 1,
+      "chopTime": 0.0020686666071415257,
+      "sleeveTunic": 31,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.8,
+      "phase": "strike",
+      "weight": 1,
+      "chopTime": 0.03941099886596198,
+      "sleeveTunic": 43,
+      "skinSleeve": 0
+    },
+    {
+      "time": 3.9,
+      "phase": "strike",
+      "weight": 1,
+      "chopTime": 0.12083332985639572,
+      "sleeveTunic": 38,
+      "skinSleeve": 0
+    }
+  ]
+}

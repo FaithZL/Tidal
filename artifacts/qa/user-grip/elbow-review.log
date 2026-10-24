@@ -1,0 +1,1268 @@
+THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+{
+  "snapshots": {
+    "userModel": "af62c383c446c18f0e2850802bef14f8db07e7a7ba0b1146a592f9ef712d052f",
+    "userCharacterRig": "e27a454229ce17e11a4f01de376aab142864bd59deb3469555543d839c54462a",
+    "userCharacterMotion": "67fad0487624a5790a211c6a528787e137308953e3c5778e7dce6405636d4e19"
+  },
+  "regionWeights": {
+    "rightPalm": {
+      "corners": 814,
+      "average": {
+        "rightForeArm": 0.004923,
+        "rightHand": 0.995077
+      }
+    },
+    "rightThigh": {
+      "corners": 179,
+      "average": {
+        "pelvis": 0.01037,
+        "rightThigh": 0.895335,
+        "rightShin": 0.092151,
+        "rightFoot": 0.002131
+      }
+    },
+    "leftPalm": {
+      "corners": 1308,
+      "average": {
+        "leftForeArm": 0.053055,
+        "leftHand": 0.946945
+      }
+    },
+    "shoulderRight": {
+      "corners": 285,
+      "average": {
+        "spine": 0.212212,
+        "chest": 0.260799,
+        "rightUpperArm": 0.524267,
+        "rightForeArm": 0.002363
+      }
+    },
+    "shoulderLeft": {
+      "corners": 727,
+      "average": {
+        "spine": 0.026876,
+        "chest": 0.257993,
+        "leftUpperArm": 0.591227,
+        "leftForeArm": 0.123904
+      }
+    }
+  },
+  "samples": [
+    {
+      "time": 0,
+      "contacts": {
+        "left": 2.6945789820192466e-16,
+        "right": 2.3551386880256624e-16
+      },
+      "ratioOver2": 0,
+      "ratioOver3": 0,
+      "worstByRegion": {},
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9768259821860835,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 0.9999999999999988,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 0.9999999999999943,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.000000000000001,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.9999999999999976,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 0.8,
+      "contacts": {
+        "left": 4.0125770192081414e-16,
+        "right": 7.656716496459005e-16
+      },
+      "ratioOver2": 0,
+      "ratioOver3": 0,
+      "worstByRegion": {},
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9761163676840011,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.000000000000002,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1.0000000000000004,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.0000000000000038,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.9999999999999941,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 2.9,
+      "contacts": {
+        "left": 1.3877787807814457e-16,
+        "right": 2.5438405243138006e-16
+      },
+      "ratioOver2": 16,
+      "ratioOver3": 4,
+      "worstByRegion": {
+        "shoulders": {
+          "ratio": 4.739,
+          "original": 0.027,
+          "cornerA": 13263,
+          "cornerB": 13264,
+          "restA": [
+            0.3575802445411682,
+            1.3558690547943115,
+            -0.1071660965681076
+          ],
+          "restB": [
+            0.371462881565094,
+            1.3373589515686035,
+            -0.12104871869087219
+          ],
+          "weightsA": {
+            "chest": 0.48541,
+            "leftUpperArm": 0.39567,
+            "leftForeArm": 0.0757,
+            "spine": 0.04322
+          },
+          "weightsB": {
+            "leftForeArm": 0.55927,
+            "chest": 0.24592,
+            "leftUpperArm": 0.18518,
+            "spine": 0.00963
+          }
+        },
+        "waist-elbows": {
+          "ratio": 2.7238,
+          "original": 0.0173,
+          "cornerA": 8021,
+          "cornerB": 8019,
+          "restA": [
+            -0.04038812220096588,
+            1.110609531402588,
+            -0.1256762593984604
+          ],
+          "restB": [
+            -0.02650550566613674,
+            1.1152369976043701,
+            -0.13493134081363678
+          ],
+          "weightsA": {
+            "spine": 0.7032,
+            "pelvis": 0.23812,
+            "rightUpperArm": 0.05833,
+            "rightThigh": 0.00035
+          },
+          "weightsB": {
+            "spine": 0.72203,
+            "rightUpperArm": 0.21446,
+            "pelvis": 0.06339,
+            "chest": 0.00012
+          }
+        }
+      },
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9766804543691638,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000042,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1.0000000000000004,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.9999999999999983,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 1.0000000000000018,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ],
+      "worst": {
+        "ratio": 4.739,
+        "original": 0.027,
+        "cornerA": 13263,
+        "cornerB": 13264,
+        "restA": [
+          0.3575802445411682,
+          1.3558690547943115,
+          -0.1071660965681076
+        ],
+        "restB": [
+          0.371462881565094,
+          1.3373589515686035,
+          -0.12104871869087219
+        ],
+        "weightsA": {
+          "chest": 0.48541,
+          "leftUpperArm": 0.39567,
+          "leftForeArm": 0.0757,
+          "spine": 0.04322
+        },
+        "weightsB": {
+          "leftForeArm": 0.55927,
+          "chest": 0.24592,
+          "leftUpperArm": 0.18518,
+          "spine": 0.00963
+        }
+      }
+    },
+    {
+      "time": 3.4,
+      "contacts": {
+        "left": 2.482534153247273e-16,
+        "right": 5.928593550334434e-17
+      },
+      "ratioOver2": 8,
+      "ratioOver3": 0,
+      "worstByRegion": {
+        "waist-elbows": {
+          "ratio": 2.3227,
+          "original": 0.0196,
+          "cornerA": 8161,
+          "cornerB": 8162,
+          "restA": [
+            -0.09129105508327484,
+            1.1522573232650757,
+            -0.2228545844554901
+          ],
+          "restB": [
+            -0.07278089970350266,
+            1.1568849086761475,
+            -0.21822704374790192
+          ],
+          "weightsA": {
+            "spine": 0.7848,
+            "rightUpperArm": 0.13543,
+            "pelvis": 0.07973,
+            "rightThigh": 0.00004
+          },
+          "weightsB": {
+            "spine": 0.6668,
+            "rightUpperArm": 0.31128,
+            "pelvis": 0.02189,
+            "chest": 0.00003
+          }
+        },
+        "shoulders": {
+          "ratio": 2.305,
+          "original": 0.0337,
+          "cornerA": 13278,
+          "cornerB": 13279,
+          "restA": [
+            0.3529527187347412,
+            1.5733634233474731,
+            -0.18583427369594574
+          ],
+          "restB": [
+            0.32518747448921204,
+            1.577991008758545,
+            -0.16732411086559296
+          ],
+          "weightsA": {
+            "leftUpperArm": 0.59835,
+            "chest": 0.30833,
+            "spine": 0.09332,
+            "pelvis": 0
+          },
+          "weightsB": {
+            "chest": 0.52368,
+            "spine": 0.2659,
+            "leftUpperArm": 0.21042,
+            "pelvis": 0
+          }
+        }
+      },
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9774990641769271,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000064,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1.0000000000000022,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.9999999999999944,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 1.0000000000000009,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ],
+      "worst": {
+        "ratio": 2.3227,
+        "original": 0.0196,
+        "cornerA": 8161,
+        "cornerB": 8162,
+        "restA": [
+          -0.09129105508327484,
+          1.1522573232650757,
+          -0.2228545844554901
+        ],
+        "restB": [
+          -0.07278089970350266,
+          1.1568849086761475,
+          -0.21822704374790192
+        ],
+        "weightsA": {
+          "spine": 0.7848,
+          "rightUpperArm": 0.13543,
+          "pelvis": 0.07973,
+          "rightThigh": 0.00004
+        },
+        "weightsB": {
+          "spine": 0.6668,
+          "rightUpperArm": 0.31128,
+          "pelvis": 0.02189,
+          "chest": 0.00003
+        }
+      }
+    },
+    {
+      "time": 3.9,
+      "contacts": {
+        "left": 1.7554167342883506e-16,
+        "right": 7.850462293418876e-17
+      },
+      "ratioOver2": 8,
+      "ratioOver3": 4,
+      "worstByRegion": {
+        "shoulders": {
+          "ratio": 5.1211,
+          "original": 0.027,
+          "cornerA": 13263,
+          "cornerB": 13264,
+          "restA": [
+            0.3575802445411682,
+            1.3558690547943115,
+            -0.1071660965681076
+          ],
+          "restB": [
+            0.371462881565094,
+            1.3373589515686035,
+            -0.12104871869087219
+          ],
+          "weightsA": {
+            "chest": 0.48541,
+            "leftUpperArm": 0.39567,
+            "leftForeArm": 0.0757,
+            "spine": 0.04322
+          },
+          "weightsB": {
+            "leftForeArm": 0.55927,
+            "chest": 0.24592,
+            "leftUpperArm": 0.18518,
+            "spine": 0.00963
+          }
+        }
+      },
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.982815352651628,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000047,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1.0000000000000022,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.9999999999999991,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.9999999999999976,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ],
+      "worst": {
+        "ratio": 5.1211,
+        "original": 0.027,
+        "cornerA": 13263,
+        "cornerB": 13264,
+        "restA": [
+          0.3575802445411682,
+          1.3558690547943115,
+          -0.1071660965681076
+        ],
+        "restB": [
+          0.371462881565094,
+          1.3373589515686035,
+          -0.12104871869087219
+        ],
+        "weightsA": {
+          "chest": 0.48541,
+          "leftUpperArm": 0.39567,
+          "leftForeArm": 0.0757,
+          "spine": 0.04322
+        },
+        "weightsB": {
+          "leftForeArm": 0.55927,
+          "chest": 0.24592,
+          "leftUpperArm": 0.18518,
+          "spine": 0.00963
+        }
+      }
+    },
+    {
+      "time": 4.15,
+      "contacts": {
+        "left": 2.6766507790745728e-16,
+        "right": 2.396682302503803e-16
+      },
+      "ratioOver2": 10,
+      "ratioOver3": 2,
+      "worstByRegion": {
+        "shoulders": {
+          "ratio": 3.4105,
+          "original": 0.027,
+          "cornerA": 13263,
+          "cornerB": 13264,
+          "restA": [
+            0.3575802445411682,
+            1.3558690547943115,
+            -0.1071660965681076
+          ],
+          "restB": [
+            0.371462881565094,
+            1.3373589515686035,
+            -0.12104871869087219
+          ],
+          "weightsA": {
+            "chest": 0.48541,
+            "leftUpperArm": 0.39567,
+            "leftForeArm": 0.0757,
+            "spine": 0.04322
+          },
+          "weightsB": {
+            "leftForeArm": 0.55927,
+            "chest": 0.24592,
+            "leftUpperArm": 0.18518,
+            "spine": 0.00963
+          }
+        }
+      },
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.988234833679299,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000018,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 0.9999999999999899,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.999999999999992,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 0.9999999999999992,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ],
+      "worst": {
+        "ratio": 3.4105,
+        "original": 0.027,
+        "cornerA": 13263,
+        "cornerB": 13264,
+        "restA": [
+          0.3575802445411682,
+          1.3558690547943115,
+          -0.1071660965681076
+        ],
+        "restB": [
+          0.371462881565094,
+          1.3373589515686035,
+          -0.12104871869087219
+        ],
+        "weightsA": {
+          "chest": 0.48541,
+          "leftUpperArm": 0.39567,
+          "leftForeArm": 0.0757,
+          "spine": 0.04322
+        },
+        "weightsB": {
+          "leftForeArm": 0.55927,
+          "chest": 0.24592,
+          "leftUpperArm": 0.18518,
+          "spine": 0.00963
+        }
+      }
+    },
+    {
+      "time": 4.4,
+      "contacts": {
+        "left": 3.188872858294072e-16,
+        "right": 2.7132761032412845e-16
+      },
+      "ratioOver2": 10,
+      "ratioOver3": 0,
+      "worstByRegion": {
+        "shoulders": {
+          "ratio": 2.9495,
+          "original": 0.027,
+          "cornerA": 13263,
+          "cornerB": 13264,
+          "restA": [
+            0.3575802445411682,
+            1.3558690547943115,
+            -0.1071660965681076
+          ],
+          "restB": [
+            0.371462881565094,
+            1.3373589515686035,
+            -0.12104871869087219
+          ],
+          "weightsA": {
+            "chest": 0.48541,
+            "leftUpperArm": 0.39567,
+            "leftForeArm": 0.0757,
+            "spine": 0.04322
+          },
+          "weightsB": {
+            "leftForeArm": 0.55927,
+            "chest": 0.24592,
+            "leftUpperArm": 0.18518,
+            "spine": 0.00963
+          }
+        }
+      },
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9895547863944617,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000038,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 1.0000000000000002,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 1,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ],
+      "worst": {
+        "ratio": 2.9495,
+        "original": 0.027,
+        "cornerA": 13263,
+        "cornerB": 13264,
+        "restA": [
+          0.3575802445411682,
+          1.3558690547943115,
+          -0.1071660965681076
+        ],
+        "restB": [
+          0.371462881565094,
+          1.3373589515686035,
+          -0.12104871869087219
+        ],
+        "weightsA": {
+          "chest": 0.48541,
+          "leftUpperArm": 0.39567,
+          "leftForeArm": 0.0757,
+          "spine": 0.04322
+        },
+        "weightsB": {
+          "leftForeArm": 0.55927,
+          "chest": 0.24592,
+          "leftUpperArm": 0.18518,
+          "spine": 0.00963
+        }
+      }
+    },
+    {
+      "time": 4.95,
+      "contacts": {
+        "left": 4.552781680079512e-16,
+        "right": 6.304854800243424e-16
+      },
+      "ratioOver2": 0,
+      "ratioOver3": 0,
+      "worstByRegion": {},
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9846175826948806,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 0.9999999999999947,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 1.0000000000000089,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.9999999999999991,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 1.0000000000000053,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ]
+    },
+    {
+      "time": 5.6,
+      "contacts": {
+        "left": 2.7755575615628914e-16,
+        "right": 2.8441001681421824e-16
+      },
+      "ratioOver2": 0,
+      "ratioOver3": 0,
+      "worstByRegion": {},
+      "probeEdges": [
+        {
+          "a": 706,
+          "b": 707,
+          "ratio": 0.9779052991013217,
+          "weightsA": {
+            "rightThigh": 0.93412,
+            "rightShin": 0.06583,
+            "pelvis": 0.00005,
+            "spine": 0
+          },
+          "weightsB": {
+            "rightThigh": 0.99251,
+            "rightShin": 0.00636,
+            "pelvis": 0.00113,
+            "spine": 0
+          }
+        },
+        {
+          "a": 1844,
+          "b": 1842,
+          "ratio": 1.0000000000000016,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 1927,
+          "b": 1928,
+          "ratio": 0.9999999999999937,
+          "weightsA": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightHand": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 12940,
+          "b": 12941,
+          "ratio": 0.9999999999999906,
+          "weightsA": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "leftForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        },
+        {
+          "a": 2563,
+          "b": 2564,
+          "ratio": 1.0000000000000009,
+          "weightsA": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          },
+          "weightsB": {
+            "rightForeArm": 1,
+            "pelvis": 0,
+            "spine": 0,
+            "chest": 0
+          }
+        }
+      ]
+    }
+  ]
+}

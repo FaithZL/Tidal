@@ -1,0 +1,46 @@
+{
+  "id": "tidal-pastoral-atlas-v1",
+  "file": "pastoral-atlas-v1.png",
+  "purpose": "Diffuse/albedo atlas for the approved local NPR farm art sample. This image is a texture asset, not an in-game screenshot.",
+  "generation": {
+    "method": "OpenAI built-in image_gen.imagegen",
+    "generatedDate": "2026-10-22",
+    "inputImages": [],
+    "sourceFile": "C:/Users/Zero/.codex/generated_images/01a16228-2053-7bb2-9e59-a23a5c4b15f5/exec-e6e9f3db-4c94-497d-9a57-2b9bd4731dea.png",
+    "prompt": "Use case: stylized-concept.\nAsset type: production diffuse/albedo texture atlas for a pastoral 3D game, not a scene or concept illustration.\nCreate one landscape 3:2 image, ideally 1536 x 1024 pixels. Fill the entire image with exactly 3 equal-width columns and 2 equal-height rows, six square material swatches flush against one another with straight boundaries. No gutters, borders, text, labels or diagram markings.\nTOP LEFT: warm grey-brown broadleaf tree bark, gently flowing vertical ridges, a few broad knots, subtle olive shadows, hand-painted low-frequency variation.\nTOP CENTER: aged honey-brown timber planks, vertical grain and a few broad quiet seams, weathered and matte, no metallic fixtures.\nTOP RIGHT: muted warm terracotta roof tiles in shallow repeating horizontal rows, simplified painted clay tonal variation.\nBOTTOM LEFT: warm ivory lime plaster, very subtle pale peach and cool beige watercolor blooms, almost flat, gentle imperfections.\nBOTTOM CENTER: natural restrained meadow-green painted ground surface, broad layered olive, sage and moss-green washes, very sparse soft grass accents, no distinct landscape objects.\nBOTTOM RIGHT: restrained broadleaf foliage surface, connected soft irregular medium-green and pale sage brush masses, subtle blue-green shadow shapes, no distinct branches or sky.\nArt direction: original Japanese pastoral animation background painting, hand-painted watercolor and opaque gouache character, sophisticated low-frequency brushwork, gentle natural middle values, readable surfaces when wrapped onto 3D meshes.\nTechnical constraints: flat front-facing material surfaces only, uniform diffuse illumination, no directional light baked in, no cast shadows, no perspective, no vignette, no gradients across the whole atlas, no photorealism, no high-frequency procedural noise, no shiny plastic, no excessive saturation. No characters, scenery, buildings, loose props, leaves silhouetted on transparency, logos, signatures, watermark, or text. Opaque image. Keep each material internally quiet and approximately tileable."
+  },
+  "image": {
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "bytes": 2688321,
+    "sha256": "48b05a7297950f5aa25a3b8dd038871e70c5835642408e91860dfc5ac80ecd90"
+  },
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "tilePixels": 512,
+    "origin": "top-left",
+    "tiles": [
+      [
+        "bark",
+        "wood",
+        "roof"
+      ],
+      [
+        "plaster",
+        "grass",
+        "foliage"
+      ]
+    ]
+  },
+  "provenance": {
+    "externalAssetsCopied": false,
+    "referenceVideoFrameUsed": false,
+    "note": "Original AI-generated project asset; no external texture or reference-video pixels were supplied or copied. Use is subject to the applicable OpenAI terms; this record does not assert exclusive copyright or third-party legal clearance."
+  },
+  "qualityReview": {
+    "inspected": true,
+    "result": "Six correctly arranged square swatches, opaque, no labels or gutters; restrained hand-painted color variation. Roof and foliage have intentional painted tonal depth, so runtime lighting should remain soft. In-game UV seams, repetition, color balance and final aesthetic acceptance require scene review."
+  }
+}

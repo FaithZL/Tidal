@@ -1,0 +1,46 @@
+[WebServer] (node:74036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:25840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:20332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:31932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:64060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\character-motion.spec.ts:42:1 › face inspection changes the real camera without changing a paused pose or saved input preference (1.0m)
+
+
+  1) tests\e2e\character-motion.spec.ts:42:1 › face inspection changes the real camera without changing a paused pose or saved input preference 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '面部特写', exact: true })
+
+
+      45 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-time','0.8000');
+      46 |  const before=await page.locator('#motionCanvas').screenshot(),preference=await page.evaluate(()=>localStorage.getItem('tidal.demo.enabled'));
+    > 47 |  const face=page.getByRole('button',{name:'面部特写',exact:true});await face.click();
+         |                                                                          ^
+      48 |  await expect(face).toHaveAttribute('aria-pressed','true');
+      49 |  await expect(page.locator('#motionStage')).toHaveAttribute('data-view','face');
+      50 |  expect((await page.locator('#motionCanvas').screenshot()).equals(before)).toBe(false);
+        at D:\work\corona\Tidal\tests\e2e\character-motion.spec.ts:47:74
+
+    Error Context: test-results\character-motion-face-insp-2db8e-e-or-saved-input-preference\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\character-motion-face-insp-2db8e-e-or-saved-input-preference\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\character-motion-face-insp-2db8e-e-or-saved-input-preference\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\character-motion.spec.ts:42:1 › face inspection changes the real camera without changing a paused pose or saved input preference 

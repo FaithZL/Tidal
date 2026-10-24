@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:5174/?art=character-motion",
+  "source": "Vite development source",
+  "observations": [
+    {
+      "label": "windup",
+      "time": "3.4000",
+      "phase": "prepare"
+    },
+    {
+      "label": "strike",
+      "time": "3.9500",
+      "phase": "strike"
+    }
+  ],
+  "errors": []
+}

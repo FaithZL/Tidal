@@ -1,0 +1,84 @@
+[WebServer] (node:24980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:22664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:28080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start (8.2s)
+(node:15072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay (8.4s)
+
+
+  1) tests\e2e\npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    Call Log:
+    - Timeout 7000ms exceeded while waiting on the predicate
+
+      22 |  await page.goto(sample,{waitUntil:'domcontentloaded'});
+      23 |  try{
+    > 24 |   await expect.poll(()=>requested).toBe(true);await page.waitForTimeout(300);
+         |                                    ^
+      25 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','loading');await expect(page.locator('#acceptPlan')).toBeDisabled();
+      26 |   await expect(page.locator('#chopValue')).toHaveText('0/15');
+      27 |  }finally{release();}
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:24:36
+
+    Error Context: test-results\npr-sample-the-separate-le-677ca-before-the-sample-can-start\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-the-separate-le-677ca-before-the-sample-can-start\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-the-separate-le-677ca-before-the-sample-can-start\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#renderError')
+    Expected substring: "美术样板贴图加载失败"
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" locator('#renderError') with timeout 7000ms
+      - waiting for locator('#renderError')
+
+
+      31 | test('a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay',async({page})=>{
+      32 |  await page.route('**/assets/npr/leaf-bough-v2.png',route=>route.abort('failed'));
+    > 33 |  await page.goto(sample);await expect(page.locator('#renderError')).toContainText('美术样板贴图加载失败');
+         |                                                                     ^
+      34 |  await page.waitForTimeout(300);await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+      35 | });
+      36 |
+        at D:\work\corona\Tidal\tests\e2e\npr-sample.spec.ts:33:69
+
+    Error Context: test-results\npr-sample-a-missing-leaf--65232-k-tree-or-fallback-autoplay\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\npr-sample-a-missing-leaf--65232-k-tree-or-fallback-autoplay\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\npr-sample-a-missing-leaf--65232-k-tree-or-fallback-autoplay\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start 
+    tests\e2e\npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay 

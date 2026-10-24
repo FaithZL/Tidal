@@ -1,0 +1,58 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprVegetation.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/nprVegetation.test.ts (4 tests | 3 failed) 14ms
+   ❯ leaf silhouette tree refinement (4)
+     × uses small crossed bough cards throughout an irregular canopy instead of opaque round crown cores 6ms
+     × keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget 3ms
+     × emits finite normals with outward-facing trunk sides and shares all owned geometry and materials 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > uses small crossed bough cards throughout an irregular canopy instead of opaque round crown cores
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/unit/nprVegetation.test.ts:17:24
+     15|  it('uses small crossed bough cards throughout an irregular canopy ins…
+     16|   const {r,p}=create(),value=tree(r,p),cards=meshes(value.crown).filte…
+     17|   expect(cards.length).toBeGreaterThan(0);
+       |                        ^
+     18|   expect(cards.reduce((sum,m)=>sum+m.count,0)).toBeGreaterThanOrEqual(…
+     19|   const centers:T.Vector3[]=[],matrix=new T.Matrix4();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > keeps the rooted trunk, broad canopy and instanced triangle submissions inside the interaction budget
+AssertionError: expected 26 to be less than or equal to 12
+ ❯ tests/unit/nprVegetation.test.ts:42:37
+     40|   expect(bounds.min.y).toBeCloseTo(0,6);expect(size.y).toBeGreaterThan…
+     41|   expect(size.x).toBeGreaterThan(3.2);expect(size.x).toBeLessThan(4);e…
+     42|   expect(meshes(value.root).length).toBeLessThanOrEqual(12);expect(tri…
+       |                                     ^
+     43|   const bases:T.Vector3[]=[],positions=value.trunk.geometry.getAttribu…
+     44|   for(let i=0;i<positions.count;i++)if(positions.getY(i)<.025)bases.pu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/nprVegetation.test.ts > leaf silhouette tree refinement > emits finite normals with outward-facing trunk sides and shares all owned geometry and materials
+AssertionError: expected +0 to be close to 1, received difference is 1, but expected 0.00005
+ ❯ tests/unit/nprVegetation.test.ts:57:90
+     55|    for(let i=0;i<positions.count;i++){
+     56|     const position=new T.Vector3().fromBufferAttribute(positions,i),no…
+     57|     expect(position.toArray().every(Number.isFinite)).toBe(true);expec…
+       |                                                                                          ^
+     58|    }
+     59|   });
+ ❯ tests/unit/nprVegetation.test.ts:52:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  14:24:48
+   Duration  163ms (import 41%, transform 34%, tests 21%, worker 4%)
+

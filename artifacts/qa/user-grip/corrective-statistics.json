@@ -1,0 +1,34 @@
+{
+  "left": {
+    "uniqueAffectedPositionsApprox": 36,
+    "movedCorners": 208,
+    "maxDisplacement": 0.0407179448697761,
+    "maxLocation": [
+      0.4686411917209625,
+      0.8884875774383545,
+      0.017777463421225548
+    ],
+    "edgeOver2": 0,
+    "worstEdge": [
+      1.8971930368409724,
+      10597,
+      10598
+    ]
+  },
+  "right": {
+    "uniqueAffectedPositionsApprox": 29,
+    "movedCorners": 193,
+    "maxDisplacement": 0.040622844567692884,
+    "maxLocation": [
+      0.06141773611307144,
+      0.5969526171684265,
+      0.2630370557308197
+    ],
+    "edgeOver2": 14,
+    "worstEdge": [
+      2.907746332566271,
+      1934,
+      1932
+    ]
+  }
+}

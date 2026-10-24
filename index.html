@@ -7,7 +7,7 @@
   <title>TIDAL · 映动农场 | Web Demo</title>
   <link rel="stylesheet" href="/web/world.css" />
 </head>
-<body>
+<body inert data-boot="loading">
   <div id="app">
     <header class="topbar">
       <div class="identity">
@@ -159,6 +159,6 @@
       <div class="modal-actions"><button class="secondary" id="cancelExit">继续训练</button><button class="primary" id="confirmExit">结束并重置</button></div>
     </div>
   </div>
-  <script type="module" src="/src/browser.ts"></script>
+  <script type="module" src="/src/entry.ts"></script>
 </body>
 </html>

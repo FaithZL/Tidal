@@ -1,0 +1,29 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts [ tests/unit/userCharacterRig.test.ts ]
+Error: Cannot find module '../../src/game/world/userCharacterRig.js' imported from D:/work/corona/Tidal/tests/unit/userCharacterRig.test.ts
+ ❯ tests/unit/userCharacterRig.test.ts:6:1
+      4| import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
+      5| import {prepareUserModel} from '../../src/game/world/userModel.js';
+      6| import {createUserCharacterRig} from '../../src/game/world/userCharact…
+       | ^
+      7|
+      8| afterEach(()=>vi.restoreAllMocks());
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  21:31:43
+   Duration  140ms (worker 96%, environment 4%)
+

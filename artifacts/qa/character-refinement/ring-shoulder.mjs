@@ -1,0 +1,2 @@
+import {readFile} from 'node:fs/promises';
+const m=JSON.parse(await readFile('public/assets/character-motion/Male_Peasant.gltf','utf8')),b=await readFile('public/assets/character-motion/Male_Peasant.bin');const view=m.bufferViews[0];const a=new Float32Array(b.buffer,b.byteOffset+(view.byteOffset??0),view.byteLength/4);const vertices=[];for(let i=0;i<a.length;i+=3)if(a[i]>.30&&a[i]<.36)vertices.push({i:i/3,p:[a[i],a[i+1],a[i+2]]});console.log(JSON.stringify(vertices));

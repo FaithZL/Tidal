@@ -1,0 +1,40 @@
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/characterSampleClock.test.ts (6 tests | 2 failed) 8ms
+   ❯ isolated character preview clock (6)
+     × eases into and out of the actual downstroke without a velocity jump at the raised pose or impact 2ms
+     × never accelerates the already fast source downstroke beyond its recorded playback rate 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/characterSampleClock.test.ts > isolated character preview clock > eases into and out of the actual downstroke without a velocity jump at the raised pose or impact
+AssertionError: expected 0.13524695670286135 to be less than 0.01
+ ❯ tests/unit/characterSampleClock.test.ts:40:60
+     38|   const impactSpeed=(sourceAt(4.15)-sourceAt(4.15-step))/step;
+     39|   const middleSpeed=(sourceAt(3.9+step)-sourceAt(3.9-step))/(2*step);
+     40|   expect(startSpeed).toBeLessThan(.01);expect(impactSpeed).toBeLessTha…
+       |                                                            ^
+     41|   expect(middleSpeed).toBeGreaterThan(.8);
+     42|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/characterSampleClock.test.ts > isolated character preview clock > never accelerates the already fast source downstroke beyond its recorded playback rate
+AssertionError: expected 1.8124226159994676 to be less than or equal to 1
+ ❯ tests/unit/characterSampleClock.test.ts:49:16
+     47|    peak=Math.max(peak,(clock.frame.chopTime!-before)/step);
+     48|   }
+     49|   expect(peak).toBeLessThanOrEqual(1);
+       |                ^
+     50|  });
+     51| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  18:42:45
+   Duration  157ms (transform 51%, import 21%, tests 20%, worker 8%)
+

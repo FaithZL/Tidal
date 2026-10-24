@@ -1,0 +1,38 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userCharacterRig.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/userCharacterRig.test.ts (7 tests | 1 failed) 1123ms
+   ❯ derived skeleton on the actual user character (7)
+     × attaches disconnected belt pouches to the pelvis instead of their nearby moving arms 67ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userCharacterRig.test.ts > derived skeleton on the actual user character > attaches disconnected belt pouches to the pelvis instead of their nearby moving arms
+AssertionError: expected 531 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 531
+
+ ❯ tests/unit/userCharacterRig.test.ts:93:54
+     91|    const selected=pouches.flat(),before=selected.map(index=>rig.mesh.g…
+     92|    rig.bones.leftUpperArm.rotateX(.8);rig.bones.rightUpperArm.rotateX(…
+     93|    expect(changedVertices(rig.mesh,selected,before)).toBe(0);
+       |                                                      ^
+     94|    rig.resetPose();rig.bones.pelvis.rotateY(.3);expect(changedVertices…
+     95|   }finally{rig.dispose();}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  21:37:13
+   Duration  1.26s (tests 95%, import 3%, transform 2%)
+

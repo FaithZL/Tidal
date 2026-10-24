@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/nprEnvironment.test.ts tests/unit/environmentArt.test.ts tests/unit/staticBatch.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+
+ Test Files  3 passed (3)
+      Tests  15 passed (15)
+   Start at  13:59:42
+   Duration  314ms (tests 65%, transform 17%, import 17%, worker 1%)
+

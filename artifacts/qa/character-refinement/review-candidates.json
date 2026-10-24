@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "original-.25s",
+    "peakBladeStep": 0.8175395743400843,
+    "peakWristStep": 0.4916395336886526,
+    "maxContact": 2.3592175066964956e-8
+  },
+  {
+    "mode": "forearm-.25s",
+    "peakBladeStep": 1.10726718812247,
+    "peakWristStep": 0.4916395336886526,
+    "maxContact": 0.10380296368814816
+  },
+  {
+    "mode": "original-.4s",
+    "peakBladeStep": 0.5289945237925102,
+    "peakWristStep": 0.3168811846436657,
+    "maxContact": 2.7300320142200234e-8
+  },
+  {
+    "mode": "forearm-.4s",
+    "peakBladeStep": 0.7129708379529197,
+    "peakWristStep": 0.3168811846436657,
+    "maxContact": 0.10829607678815849
+  },
+  {
+    "mode": "original-.5s",
+    "peakBladeStep": 0.4256261900924517,
+    "peakWristStep": 0.25578766737585923,
+    "maxContact": 2.3592175066964956e-8
+  }
+]

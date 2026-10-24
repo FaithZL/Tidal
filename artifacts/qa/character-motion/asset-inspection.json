@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "checks": [
+    "sha256:idle.glb",
+    "sha256:Male_Peasant.bin",
+    "sha256:Male_Peasant.gltf",
+    "sha256:OUTFITS-LICENSE.txt",
+    "sha256:T_Peasant_BaseColor.png",
+    "sha256:T_Regular_Male_Dark_BaseColor.png",
+    "sha256:tree-chopping.glb",
+    "sha256:UAL1-LICENSE.txt",
+    "sha256:UAL2-LICENSE.txt",
+    "all-retained-keyframe-bytes-identical:idle.glb",
+    "all-retained-keyframe-bytes-identical:tree-chopping.glb",
+    "peasant-all-referenced-files-local-and-in-bounds"
+  ],
+  "pngs": [
+    {
+      "file": "T_Peasant_BaseColor.png",
+      "width": 4096,
+      "height": 4096
+    },
+    {
+      "file": "T_Regular_Male_Dark_BaseColor.png",
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "limits": "Asset parsing, exact sample preservation, hashes and local references only; actual prototype visuals/retargeting/contact/performance pending parent verification."
+}

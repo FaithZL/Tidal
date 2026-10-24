@@ -1,0 +1,44 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/sampleHead.test.ts
+
+
+ RUN  v5.0.4 D:/work/corona/Tidal
+
+ ❯ tests/unit/sampleHead.test.ts (10 tests | 2 failed) 605ms
+   ❯ isolated sample young-adult head (10)
+     × uses a short young-adult lower face instead of a long pointed chin 7ms
+     × breaks the combed cap outline with several staggered side tufts 307ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > uses a short young-adult lower face instead of a long pointed chin
+AssertionError: expected 1.6094670769424193 to be less than 1.4
+ ❯ tests/unit/sampleHead.test.ts:51:60
+     49|   const mouthCenter=new T.Box3().setFromObject(head.getObjectByName('n…
+     50|   const chin=new T.Box3().setFromObject(face).min.y;
+     51|   expect((eyeCenter.y-mouthCenter.y)/(mouthCenter.y-chin)).toBeLessTha…
+       |                                                            ^
+     52|   // Keep a distinct jaw below the mouth rather than satisfying the pr…
+     53|   expect(mouthCenter.y-chin).toBeGreaterThan(.075);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/sampleHead.test.ts > isolated sample young-adult head > breaks the combed cap outline with several staggered side tufts
+AssertionError: expected 1 to be greater than or equal to 3
+ ❯ tests/unit/sampleHead.test.ts:105:17
+    103|    for(let i=3;i<edges.length-3;i++)if(i-last>=4&&edges[i]-(edges[i-3]…
+    104|   }
+    105|   expect(lobes).toBeGreaterThanOrEqual(3);
+       |                 ^
+    106|  });
+    107|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 8 passed (10)
+   Start at  19:36:47
+   Duration  829ms (tests 85%, transform 9%, import 5%, worker 1%)
+

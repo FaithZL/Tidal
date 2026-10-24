@@ -1,5 +1,17 @@
 # 依赖与资源记录（2026-10-21）
 
+2026-10-22用户模型替换使用已有Three.js0.186.1内置FBXLoader，没有新增npm依赖/改锁文件或再次安装。新增用户原始FBX合计6,541,048字节，内嵌8张2048²贴图；规格/字节/SHA与本地用途/许可未知边界见`public/assets/user-models/provenance.json`。两模型均无rig/skin/动画，原CC0骨骼样片保留显式对照；两类素材不能混称同一许可。未用外部转换服务、下载新模型、购买或部署。
+
+2026-10-22视频角色局部改造只增加原创围巾/背带/皮包代码与头部形状，局部克隆重着CC0服装材质；无新增npm依赖、锁文件/磁盘源贴图变化、购买或外部运行时请求。9项源资源及许可校验通过，参考视频/裁切没有进入应用。完整派生边界见`SOURCES.md`及`public/assets/character-motion/README.md`。
+
+2026-10-22人物局部第二轮只增加原创头部网格代码和本地衣物运行时派生，没有新增依赖、变更锁文件、付费素材或后台服务。磁盘CC0资产9项字节/SHA校验仍通过；源模型三角数与运行时派生网格需区分，详见`public/assets/character-motion/README.md`。Leo仍未购买。
+
+2026-10-22人物动作样片新增本地Quaternius Standard的CC0农夫蒙皮/服装、两张原始basecolor、精简Idle/TreeChopping骨架GLB（约7.46MB）；9项文件哈希、源ZIP/条目SHA、原许可和派生记录见`public/assets/character-motion/provenance.json`。使用已有Three.js GLTFLoader/AnimationMixer，没有新增npm依赖、安装或改锁文件。原创头部/颈/斧、重定向/接触校正为本项目代码；不是Leo、动捕或新识别功能。Leo仅核实公开FBX/PNG/.anim目录，未购买；公开网页GLB/仓库许可继续待明确。下方“没有外部GLB”为上一轮局部样板的历史记录。
+
+第二版局部样板额外使用`public/assets/npr/leaf-bough-v2.png`（原创内置imagegen透明叶枝，1254×1254 RGBA，1,472,691字节），来源/完整提示词/哈希见同目录provenance.json。NprMotion与可变肢体网格是现有Three/TypeScript内的程序化表现，没有新增骨骼动画库或运行时服务。QA用既有Playwright FFmpeg1013裁出原速WebM短片，未安装/打包新视频依赖；未更改npm锁文件。
+
+2026-10-22局部NPR样板没有新增npm依赖或更改锁文件。新增本地原创AI生成手绘图集`public/assets/npr/pastoral-atlas-v1.png`（1536×1024，2,688,321字节）；完整提示词、生成来源、尺寸及SHA256见同目录`pastoral-atlas-v1.provenance.json`。未复制参考视频帧，没有外部GLB/网络字体或购买素材。仅`?art=npr-sample`加载该图集；下方“无独立图片/全部程序纹理”是主分支旧v2的历史描述。
+
 本机：Windows，Node 24.14.0，npm 11.9.0。全部直接依赖精确锁定，间接依赖由 `package-lock.json` 固定。
 
 | 依赖 | 安装版本 | 用途 |
