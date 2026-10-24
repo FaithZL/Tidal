@@ -1,0 +1,54 @@
+[
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g 'synthetic camera pipeline|a stalled camera'",
+    "exitCode": 1,
+    "log": "reproduce.log"
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.diagnostic.spec.ts -g 'synthetic camera pipeline|a stalled camera'",
+    "exitCode": 1,
+    "log": "diagnostic.log"
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.diagnostic.spec.ts -g 'a stalled camera'",
+    "exitCode": 0,
+    "log": "render-diagnostic.log",
+    "elapsedSeconds": 48.77
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.diagnostic.spec.ts -g 'a stalled camera' --repeat-each=2",
+    "exitCode": 1,
+    "log": "screenshotless-diagnostic.log",
+    "elapsedSeconds": 60.453
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g 'synthetic camera pipeline|a stalled camera' --repeat-each=2",
+    "exitCode": 1,
+    "log": "density-half.log",
+    "elapsedSeconds": 240.409
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g 'synthetic camera pipeline|a stalled camera' --repeat-each=2",
+    "exitCode": 0,
+    "log": "chromium-channel.log",
+    "elapsedSeconds": 249.509
+  },
+  {
+    "command": "npm run verify",
+    "exitCode": 0,
+    "log": "verify.log",
+    "elapsedSeconds": 554.616
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-verify.log",
+    "elapsedSeconds": 0.148
+  },
+  {
+    "command": "node artifacts/qa/source-lifecycle-20261025/production-smoke.mjs",
+    "exitCode": 0,
+    "log": "production-smoke.log",
+    "elapsedSeconds": 0.923
+  }
+]

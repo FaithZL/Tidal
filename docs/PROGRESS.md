@@ -1,5 +1,46 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：本轮E2E修复限定范围提交与main推送授权（2026-10-25）
+
+用户在上述验证完成后，明确要求仅提交这次E2E修复和对应验证记录并推送main，保留原有未提交工作，不部署。本轮提交范围为`source-lifecycle.spec.ts`的Chromium模式修复、上一节排查与验证记录及`artifacts/qa/source-lifecycle-20261025/`本轮证据；原有PROGRESS的43行本机接续/安装记录、整个`local-handoff-20261025/`、`progress-before.md`旧记录副本均不纳入提交，原字节保留。
+
+推送前实查本地与远端main仍为`20aceb2`，应用/测试代码与本轮已通过369单测、78E2E及build的版本一致，交付阶段不重复安装或无理由重跑全量验证。新增归档处理：一份110,250,431字节的失败试验trace超过单文件限制，原ZIP保留本地，提交三份不超过40MiB的无损分卷、SHA清单及`restore-trace.mjs`，可完整还原；其余诊断与成功/失败日志不删减。执行时单独构造PROGRESS暂存版本，并核对暂存diff、素材/历史QA SHA与旧工作保留情况；只执行普通main推送，不强推、不合并其他分支、不部署。实际提交与远端核对结果见本聊天交付回复。
+
+## 最新追加：本机两项摄像头E2E排查与最小测试修复（2026-10-25）
+
+用户授权仅排查前轮两项失败、确认原因后最小修复并验证，明确不commit/push。继续在本机main、HEAD `20aceb2ee6e3ae98d9fdce0032b30eacb85e15cf`上增量处理，保留既有未提交PROGRESS和`local-handoff-20261025/`。本轮证据独立保存于`artifacts/qa/source-lifecycle-20261025/`，实际测试命令/退出码见`commands.json`，诊断汇总见`diagnosis.json`。
+
+### 原因与修复边界
+
+原样复跑首次1/2通过，休息用例仍在砍树阶段提前失效。临时仅通过测试路由插桩，捕获两项分别因相邻样本间隔**207.5ms / 246.3ms**超过既有200ms门限而`invalidate('gap')`，再由`browser.ts`的onFrame要求重新准备；对应帧返回年龄仅0.5ms / 0.4ms，视频时间正常前进，没有捕获到>100ms的bitmap读取耗时。根因链路是浏览器运行中的采样回调迟到触发既有安全门禁，并非漏加次数或真实摄像头硬件故障。临时日志保存于`diagnostic-37.json`、`diagnostic-68.json`及对应trace；未把reset后的通用提示当作原始原因。
+
+单变量对照：关闭trace连续截图仍0/2通过，不能单独归因截图；DPR降至0.5仍2/4通过，不能作为修复。这两项试改均已撤回。实查锁定Playwright：默认headless使用`chromium-headless-shell`，本机WebGL为SwiftShader；指定`channel:'chromium'`使用已安装的完整Chromium新headless模式，本机实际为**Apple M4 / ANGLE Metal**。两者同为现有revision1248、Chromium156.0.8078.4，没有新安装或升级。上述对照定位本机测试浏览器/软件图形运行路径造成的时序不稳定；没有进一步声称定位了驱动内部某个耗时函数，或已经修复产品性能。
+
+最终代码差异只有`tests/e2e/source-lifecycle.spec.ts`的浏览器选择`channel:'chromium'`及一行解释。恢复默认DPR与原trace，保留真实Three.js、CameraService、PoseWorkerClient、识别器与领域；所有原断言、200ms/300ms门限、超时、重试和输入夹具均未修改。去掉浏览器选择与注释后，其余测试文件字节与HEAD完全一致，见`assertion-preservation.json`。应用源码、素材、许可、依赖、锁文件与.gitattributes无改动。独立只读审查无阻塞项，见`review.json`。
+
+### 本轮实际验证
+
+| 命令 / 操作 | 实际结果 | 证据 |
+|---|---|---|
+| 原样定向两项`npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g 'synthetic camera pipeline\|a stalled camera'` | exit1，1通过/1失败；保留真实失败 | reproduce.log、reproduce-results/ |
+| 临时插桩定向两项 | exit1，均明确捕获gap | diagnostic.log、diagnostic-results/及diagnostic-*.json |
+| 仅关闭trace截图，休息用例重复2次 | exit1，0/2；试改撤回 | screenshotless-diagnostic.log、screenshotless-results/ |
+| 仅DPR0.5，两项各重复2次 | exit1，2/4；试改撤回 | density-half.log、density-half-results/ |
+| 最终模式`npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g 'synthetic camera pipeline\|a stalled camera' --repeat-each=2` | **exit0，4/4通过，4.2分钟**；完整结算与休息停帧原断言均实际到达 | chromium-channel.log |
+| `npm run verify` | **exit0**；typecheck/lint、49文件**369/369单测**、**78/78 E2E（9.1分钟）**、build全部通过；命令总554.6秒 | verify.log |
+| `npm run assets:verify` | exit0，模型/运行文件、SVG、Three许可、NPR、CC0与两份原FBX校验通过 | assets-verify.log |
+| 实际4176生产构建执行`node artifacts/qa/source-lifecycle-20261025/production-smoke.mjs` | exit0，实际Apple M4 Metal、DPR1、1366×768 Three画布，入口`index-D08wYbcD.js`，0页面错误/外源请求，无摄像头申请；已实际查看截图 | production-smoke.log/json、production-main.png |
+
+原有500KB构建提示和FBX不支持部分贴图的警告保留；负例测试预期的故障日志没有删除。生产检查为普通首页，不是新真人整局、60fps或最终美术验收；临时4176预览检查后停止。没有重跑npm ci/assets:sync或下载浏览器。
+
+测试前备份并记录**1,307份**既有QA的SHA；本轮**34份**被重生成文件先另存本轮`regression/`，再按原字节恢复，全部1,307份SHA一致，见`qa-baseline.json`与`qa-restoration.json`。前轮失败trace和本机记录保留不动，本轮成功证据另存，不改写历史失败。临时诊断spec已删除，诊断脚本快照只存于本轮QA。
+
+### 保留限制与停点
+
+本轮修复测试浏览器选择，不能据此声称默认headless-shell的软件GL负载已优化，也不能把合成视频/关键点通过当成真人识别、真实手机、端到端延迟、约60fps或最终美术验收。其他机器的完整Chromium也不保证硬件GPU；仅安装`--only-shell`的环境需按既有`npx playwright install chromium`安装完整浏览器。本机当前已具备，无需重装。
+
+继续停在`/?art=character-motion&rev=7`人物局部审阅；未扩展全农场、处理其他Minor、购买或部署。无commit/push/合并，HEAD与分支不变。启动仍在本目录运行`npm run dev`并按实际端口访问；本轮不保持预览服务。下一步等待用户开发指令。
+
 ## 最新追加：审查、完整验证后合入并推送main（2026-10-24）
 
 用户明确要求“酌情合入main”。本轮核对远端与历史分支：`feature/3d-farm-experience`、T06标定、T07–T11（包括本地额外设计文档提交）均已是最新开发分支的祖先，缺失提交数全部0，无需重复合并。`origin/main=a45116b`也是`codex/npr-farm-sample=8b96cb9`的祖先，因此选择快进合并，保留原提交和开发分支，不重写历史。源应用完整验证与两席独立只读审查通过后，将本地main快进到`8b96cb9`，实际核对Git树与受测开发分支完全相同；`git push origin main`成功，随后远端main与开发分支均实查为`8b96cb91fb0da5c8eea0d25c69edec08b96be791`。本节、README、授权记录与本轮证据随后归档为独立提交同步。

@@ -1,0 +1,104 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts -g synthetic camera pipeline|a stalled camera --repeat-each=2
+
+[WebServer] (node:29708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:29797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.3m)
+(node:29899) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (47.3s)
+(node:29970) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.4m)
+  ✘  4 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (28.4s)
+
+
+  1) tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#loadValue')
+    Expected: "9/15"
+    Received: "8/15"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#loadValue') with timeout 7000ms
+      - waiting for locator('#loadValue')
+        18 × locator resolved to <strong id="loadValue">8/15</strong>
+           - unexpected value "8/15"
+
+
+      15 |   for(let i=1;i<=15;i++)await completeSyntheticChop(page,i);
+      16 |   await expect(page.locator('#missionTitle')).toContainText('装');await expect(page.locator('#statusTag')).toHaveText('训练中');
+    > 17 |   for(let i=1;i<=15;i++){await setPose(page,'standing');await setPose(page,'squat');await setPose(page,'press');await setPose(page,'standing',550);await expect(page.locator('#loadValue')).toHaveText(`${i}/15`);}
+         |                                                                                                                                                                                             ^
+      18 |   await expect(page.locator('#statusTag')).toHaveText('训练中');await setPose(page,'hold',900);
+      19 |   await page.locator('#pauseBtn').click();const carry=await page.locator('#carryValue').textContent();await page.waitForTimeout(500);await expect(page.locator('#carryValue')).toHaveText(carry!);
+      20 |   await page.locator('#pauseBtn').click();await expect(page.locator('#resultsModal')).toBeVisible({timeout:10000});
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/source-lifecycle.spec.ts:17:189
+
+    Error Context: test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#chopValue')
+    Expected: "3/15"
+    Received: "2/15"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#chopValue') with timeout 7000ms
+      - waiting for locator('#chopValue')
+        18 × locator resolved to <strong id="chopValue">2/15</strong>
+           - unexpected value "2/15"
+
+
+       at ../helpers/browserPoseFixture.ts:36
+
+      34 |   // only 396ms between confirmations after 15Hz sampling and smoothing.
+      35 |   await page.waitForTimeout(recognitionConfig.chopMinCycleMs);
+    > 36 |   await setPose(page,'raised',0);await expect(page.locator('#chopValue')).toHaveText(`${count}/15`);
+         |                                                                           ^
+      37 | }
+      38 | export async function prepareCamera(page:Page){
+      39 |   await page.locator('#acceptPlan').click();await page.locator('#cameraStart').click();await expect(page.locator('#calibrationCapture')).toBeEnabled();
+        at completeSyntheticChop (/Users/zero/work/ai_ws/Tidal/tests/helpers/browserPoseFixture.ts:36:75)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/source-lifecycle.spec.ts:53:25
+
+    Error Context: test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation-repeat1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources 
+    tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation 
+  2 passed (4.0m)

@@ -1,0 +1,18 @@
+{
+  "baseHead": "20aceb2ee6e3ae98d9fdce0032b30eacb85e15cf",
+  "stagedBeforeThisAuditFiles": 87,
+  "previousProgressUnstagedAddedLines": 43,
+  "previousLocalHandoffFilesUnstagedAndUnchanged": 72,
+  "allOriginalQaHashesMatch": true,
+  "testedE2eFileMatchesStagedBytes": true,
+  "allEvidenceBlobsMatchWorkingFileSha256": true,
+  "largestStagedFileBytes": 65759022,
+  "singleFileLimitBytes": 104857600,
+  "rawEvidenceDiffCheckExit": 2,
+  "whitespaceFindingsConfinedToRawQaEvidence": true,
+  "sourceDocsRestoreScriptDiffCheckExit": 0,
+  "restoreScriptSyntaxExit": 0,
+  "largeTraceReassembly": "actual bytes and SHA-256 verified in trace-parts-verification.json",
+  "tests": "Previously completed full verify remains applicable: no application or test changes since 369/369 + 78/78 + build passed; no redundant full rerun",
+  "deployment": "not requested and not performed"
+}

@@ -1,7 +1,8 @@
 import {test,expect} from '../helpers/manualModeTest.js';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {installPoseFixture,prepareCamera,setPose,completeSyntheticChop} from '../helpers/browserPoseFixture.js';
-test.use({baseURL:'http://127.0.0.1:4174',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
+// Use installed Chromium's new headless mode; headless-shell falls back to software GL on this Mac.
+test.use({channel:'chromium',baseURL:'http://127.0.0.1:4174',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
 test('camera start stays disabled without calibration and simulation cannot enable it',async({page})=>{
   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await expect(page.locator('#beginCamera')).toBeDisabled();
   await page.locator('#setupDemoToggle').click();await expect(page.locator('#beginCamera')).toBeHidden();

@@ -1,0 +1,9 @@
+{
+  "command": "node restore-trace.mjs <temporary copy of trace.zip.parts.json>",
+  "reassemblyExitCode": 0,
+  "reassembledBytes": 110250431,
+  "sha256MatchesOriginal": true,
+  "sha256": "f2cb23dab44d90390e2be67f89b7ebee78b023283b11168c1e9ec11822e54418",
+  "existingFileRefused": true,
+  "originalAndPartsUnmodified": true
+}

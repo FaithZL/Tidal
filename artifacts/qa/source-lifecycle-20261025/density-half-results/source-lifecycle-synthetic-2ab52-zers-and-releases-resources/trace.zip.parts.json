@@ -1,0 +1,24 @@
+{
+  "original": "trace.zip",
+  "bytes": 110250431,
+  "sha256": "f2cb23dab44d90390e2be67f89b7ebee78b023283b11168c1e9ec11822e54418",
+  "reason": "Lossless split for GitHub single-file size limit; original trace.zip retained locally and excluded from the commit.",
+  "parts": [
+    {
+      "file": "trace.part-001.zip",
+      "bytes": 41943040,
+      "sha256": "43f7658cc6ed932a774ece7c548bb6abfd23c52b9db2986df126d8f2ac290cfe"
+    },
+    {
+      "file": "trace.part-002.zip",
+      "bytes": 41943040,
+      "sha256": "8a60c5bf8e9a0e53ff6770cc5c8c803902e057a126d24c49814e2fe40b290a40"
+    },
+    {
+      "file": "trace.part-003.zip",
+      "bytes": 26364351,
+      "sha256": "bb4147fa516a7149c6aed2b2741a974942df20f3abbc25bf9783b9fbdb7207c4"
+    }
+  ],
+  "restore": "Run node ../../restore-trace.mjs trace.zip.parts.json from this trace folder, or concatenate parts in manifest order and verify SHA-256."
+}

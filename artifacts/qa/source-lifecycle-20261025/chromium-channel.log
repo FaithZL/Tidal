@@ -1,0 +1,25 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts -g synthetic camera pipeline|a stalled camera --repeat-each=2
+
+[WebServer] (node:30175) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30195) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:30265) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.3m)
+  ✓  2 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (46.1s)
+(node:30477) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.3m)
+  ✓  4 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (43.7s)
+
+  4 passed (4.2m)

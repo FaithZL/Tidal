@@ -1,0 +1,20 @@
+{
+  "baseURL": "http://127.0.0.1:4176",
+  "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+  "renderer": "Three.js r186",
+  "renderScale": "1",
+  "canvas": {
+    "width": 1366,
+    "height": 768
+  },
+  "dpr": 1,
+  "inventory": "0/0/0",
+  "status": "未开始",
+  "scripts": [
+    "http://127.0.0.1:4176/assets/index-D08wYbcD.js"
+  ],
+  "errors": [],
+  "external": [],
+  "input": "manual home; no camera requested",
+  "limitations": "Not real camera, performance or final art acceptance"
+}

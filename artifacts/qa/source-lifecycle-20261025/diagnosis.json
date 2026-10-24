@@ -1,0 +1,62 @@
+{
+  "input": "authored synthetic pose landmarks + browser fake video + Worker stub; not a physical camera",
+  "observedFailure": {
+    "path": "SetupPanel.draw -> CalibrationSession.ingest -> PoseSmoother gap -> invalidation -> browser onFrame requires preparation",
+    "sampleGapsMs": [
+      207.5,
+      246.3
+    ],
+    "maxAllowedGapMs": 200,
+    "responseAgesMs": [
+      0.5,
+      0.4
+    ],
+    "videoClockAdvanced": true,
+    "bitmapDelaysOver100msLogged": false,
+    "reasonEvidence": [
+      "diagnostic-37.json",
+      "diagnostic-68.json"
+    ]
+  },
+  "experiments": [
+    {
+      "name": "original tests, unchanged",
+      "result": "1 passed / 1 failed",
+      "evidence": "reproduce.log"
+    },
+    {
+      "name": "temporary ingress/invalidation probes",
+      "result": "both failed with gap",
+      "evidence": "diagnostic.log"
+    },
+    {
+      "name": "trace screenshots disabled only",
+      "result": "0/2 passed; rejected as sufficient explanation/fix",
+      "evidence": "screenshotless-diagnostic.log"
+    },
+    {
+      "name": "DPR .5 only",
+      "result": "2/4 passed; rejected and reverted",
+      "evidence": "density-half.log"
+    },
+    {
+      "name": "browser mode GPU comparison",
+      "result": "default headless shell=SwiftShader; installed full Chromium new headless=Apple M4 Metal",
+      "evidence": "browser-gpu.json"
+    }
+  ],
+  "finalCandidate": "Only tests/e2e/source-lifecycle.spec.ts test.use channel:'chromium'; DPR, trace, assertions, timeouts/retries and app source unchanged",
+  "scopeLimitations": [
+    "The safety gate correctly rejected real observation gaps, so thresholds remain unchanged",
+    "The probes establish sampling callback delays and browser graphics-path difference, not driver-internal timing attribution",
+    "This does not prove real camera recognition accuracy, 60fps or end-to-end latency",
+    "No dependencies installed/upgraded; no commit/push/merge/deploy"
+  ],
+  "finalVerification": {
+    "targetedRepeat": "4/4 pass, exit0",
+    "verify": "369/369 unit + 78/78 E2E + typecheck/lint/build, exit0",
+    "assetsVerify": "exit0",
+    "productionSmoke": "exit0, Apple M4 Metal, DPR1, 1366x768, index-D08wYbcD.js",
+    "qaRestoration": "1307/1307 original hashes match; 34 regenerated files archived and restored"
+  }
+}

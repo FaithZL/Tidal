@@ -1,0 +1,101 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts -g synthetic camera pipeline|a stalled camera
+
+[WebServer] (node:28527) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28547) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28595) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:28616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/source-lifecycle.spec.ts:9:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.4m)
+  ✘  2 tests/e2e/source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation (33.1s)
+
+
+  1) tests/e2e/source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#inputDebug')
+    Timeout: 7000ms
+    - Expected substring  - 1
+    + Received string     + 4
+
+    -  · chop-down ·
+    + camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    + 游戏帧间隔 p95 16.7ms（最近120帧，非端到端延迟）
+    + 640×480 · 33 个关键点 · 15.0 Hz · 推理 p50/p95 0/0ms · 样本年龄 1ms · 人体关键点可用
+    + 右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px
+
+    Call log:
+      - Expect "toContainText" locator('#inputDebug') with timeout 7000ms
+      - waiting for locator('#inputDebug')
+        5 × locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · ready · 等待/有效输入↵游戏帧间隔 …</small>
+          - unexpected value "camera · run-1 · epoch 3 · ready · 等待/有效输入
+    游戏帧间隔 p95 33.4ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 15.1 Hz · 推理 p50/p95 0/0ms · 样本年龄 1ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 61.0° · 腕相对髋 (0.12, -1.52) · 躯干 130px"
+        4 × locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+          - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 33.4ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 14.9 Hz · 推理 p50/p95 0/0ms · 样本年龄 0ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+        - locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+        - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 33.3ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 14.9 Hz · 推理 p50/p95 0/0ms · 样本年龄 1ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+        2 × locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+          - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 16.7ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 14.9 Hz · 推理 p50/p95 0/0ms · 样本年龄 1ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+          - locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+          - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 16.7ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 14.9 Hz · 推理 p50/p95 0/0ms · 样本年龄 0ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+        3 × locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+          - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 16.7ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 14.9 Hz · 推理 p50/p95 0/0ms · 样本年龄 0ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+        - locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · stopped · 等待/有效输入↵游戏帧间…</small>
+        - unexpected value "camera · run-1 · epoch 3 · stopped · 等待/有效输入
+    游戏帧间隔 p95 16.7ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 15.0 Hz · 推理 p50/p95 0/0ms · 样本年龄 1ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+
+
+       at ../helpers/browserPoseFixture.ts:32
+
+      30 | export async function completeSyntheticChop(page:Page,count:number){
+      31 |   await setPose(page,'raised',0);await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
+    > 32 |   await setPose(page,'down',0);await expect(page.locator('#inputDebug')).toContainText(' · chop-down ·');
+         |                                                                          ^
+      33 |   // Keep the real minimum-cycle protection; 450ms of commanded down can become
+      34 |   // only 396ms between confirmations after 15Hz sampling and smoothing.
+      35 |   await page.waitForTimeout(recognitionConfig.chopMinCycleMs);
+        at completeSyntheticChop (/Users/zero/work/ai_ws/Tidal/tests/helpers/browserPoseFixture.ts:32:74)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/source-lifecycle.spec.ts:52:25
+
+    Error Context: test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/source-lifecycle.spec.ts:40:1 › a stalled camera during rest cannot start the next active task without preparation 
+  1 passed (2.0m)

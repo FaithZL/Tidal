@@ -1,0 +1,7 @@
+{
+  "originalSha256": "32668ce24f5fe64433c96041826cdbfdd526d4ff1b2d816cd84fb0c038a8c42f",
+  "afterRemovingBrowserModeOnlyDiffSha256": "32668ce24f5fe64433c96041826cdbfdd526d4ff1b2d816cd84fb0c038a8c42f",
+  "remainingBytesIdentical": true,
+  "sourceChanged": false,
+  "thresholdsTimeoutsRetriesChanged": false
+}
