@@ -1,5 +1,15 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：已推送开发分支供新电脑接续（2026-10-24）
+
+用户明确授权将`codex/npr-farm-sample`推送GitHub，并指定之后以新电脑作为本项目主开发环境。本轮`git push -u origin codex/npr-farm-sample`成功创建远端分支并设置upstream；随后`git ls-remote --heads origin codex/npr-farm-sample main`实查，开发分支为`068ea851f83feb16f40452a1ff4bba6a8f4ce8b3`，`main`仍为`a45116b8fea9d696f482c936a4aabaf79c597f0c`。本节作为后续文档提交同步，不改变已推送的应用基线；没有合并main或部署。
+
+独立只读核对应用提交中的人物源码、两份完整FBX、NPR/CC0动作与许可、锁文件、素材行尾保护、MediaPipe模型/运行文件和1,177份QA均已入Git，不是依赖旧电脑目录的占位指针。未发现必须另从旧机取回的应用运行资产；历史两份独立QA脚本的旧机输入路径限制仍见下节。素材原来源与许可状态保留，本次上传不代表补齐原作者公开再分发许可。
+
+新电脑直接执行`git clone --branch codex/npr-farm-sample https://github.com/FaithZL/Tidal.git`，进入`Tidal`后运行`npm ci`→`npm run assets:sync`→`npm run assets:verify`→`npm run dev`，访问实际开发端口的`/?art=character-motion&rev=7`。浏览器测试首次另需`npx playwright install chromium`。必须显式取得该开发分支，默认main尚不含这批人物/NPR成果；之后从新电脑的现有工作区增量接续，不依赖旧机预览服务或绝对路径。
+
+本轮仅Git同步、文件在提交中的只读检查及进度记录，没有重跑应用测试/构建或新增真机证据；上一轮369单测、E2E分批通过及完整verify非零等限制原样保留。下一步为新电脑安装与本机验证，再停在第7版人物局部审阅；不自动扩展全农场或新增后续推送授权。
+
 ## 最新追加：按用户要求提交全部本地改动（2026-10-24）
 
 用户为跨电脑接续工作明确要求“把所有改动都提交”。本轮在当前`codex/npr-farm-sample`分支，将基于`a45116b`积累的源码、测试、文档、NPR/人物动作素材、用户原始FBX和历史QA一并整理为本地提交；原有忽略规则继续排除依赖、构建产物、临时报告、备份与环境密钥。本轮授权为本地commit，没有push、合并或对外部署；本地提交用户FBX不代表其公开再分发许可已确认。下方各轮“未提交”描述保留为当时记录。
