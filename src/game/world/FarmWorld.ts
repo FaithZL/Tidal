@@ -14,13 +14,13 @@ import {loadUserModel} from './userModel.js';
 import {UserHouseMount} from './userHouseMount.js';
 import {UserStaticCharacter} from './userStaticCharacter.js';
 import type {WorldActor} from './types.js';
-export interface GameView{readonly ready?:Promise<void>;destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;setInteractionEnabled(enabled:boolean):void}
+export interface GameView{readonly ready?:Promise<void>;destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;focusCastle():void;setInteractionEnabled(enabled:boolean):void}
 interface VisualActor{readonly root:T.Group;readonly visualRevision?:number;update(actor:WorldActor,chopping:boolean,deltaMs?:number):void;handPosition():T.Vector3}
 /** Three owns rendering, never business progress. */
 export class FarmWorld implements GameView{
  private readonly scene=new T.Scene();private readonly camera=new T.PerspectiveCamera(44,1,.1,220);
  private readonly renderer:T.WebGLRenderer;private readonly controls:OrbitControls;private readonly resources=new WorldResources();
- readonly ready?:Promise<void>;private palette?:NprPalette;private sampleBadge?:HTMLElement;private userHouse?:UserHouseMount;private userCharacter?:UserStaticCharacter;
+ readonly ready?:Promise<void>;private palette?:NprPalette;private sampleBadge?:HTMLElement;private userHouse?:UserHouseMount;private userCastle?:UserHouseMount;private userCharacter?:UserStaticCharacter;
  private readonly sample=new URLSearchParams(location.search).get('art')==='npr-sample';
  private readonly choreography:WorldChoreography;private readonly player:VisualActor;private readonly npc:VisualActor;
  private readonly cart:ReturnType<typeof makeCart>;private readonly trees:ReturnType<typeof makePine>[]=[];private logs:T.Group[]=[];
@@ -67,6 +67,8 @@ export class FarmWorld implements GameView{
    this.sampleBadge=document.createElement('span');this.sampleBadge.className='npr-sample-label';parent.appendChild(this.sampleBadge);
   }
   this.scene.add(buildEnvironment(this.resources,this.sample?{excludeSampleZone:true}:undefined));
+  parent.dataset.assets='loading';parent.dataset.castle='loading';
+  this.userCastle=new UserHouseMount(this.scene,loadUserModel('castle',import.meta.env.BASE_URL),[-24,.025,-9]);
   if(this.palette){
    this.scene.add(buildNprSampleEnvironment(this.resources,this.palette,{omitCottage:true}));
    this.userHouse=new UserHouseMount(this.scene,loadUserModel('house',import.meta.env.BASE_URL));
@@ -78,18 +80,22 @@ export class FarmWorld implements GameView{
   if(this.palette){
    const comparison=document.createElement('a');comparison.href=`${import.meta.env.BASE_URL}?art=npr-sample${prototype?'':'&model=prototype'}`;comparison.textContent=prototype?'查看导入人物':'原动作对照';
    this.sampleBadge!.append(prototype?'原动作人物对照 · 导入房屋 ':'用户人物/房屋 · 人物为无骨骼静态姿态 ',comparison);
-   this.ready=Promise.all([sampleTextures,this.userHouse!.ready,this.userCharacter?.ready]).then(()=>{
-    if(this.disposed||this.lost)throw new Error('User house loading cancelled');parent.dataset.assets='ready';parent.dataset.house='user-fbx';this.dirty=true;
-    parent.dataset.character=this.userCharacter?'user-fbx-static':'procedural-motion';
+  }
+  this.ready=Promise.all([this.userCastle.ready,sampleTextures,this.userHouse?.ready,this.userCharacter?.ready]).then(()=>{
+    if(this.disposed||this.lost)throw new Error('User scenery loading cancelled');
+    const castle=this.scene.getObjectByName('user-castle-model');if(!castle)throw new Error('用户城堡模型加载失败：场景对象缺失');
+    let triangles=0;castle.traverse(object=>{if(object instanceof T.Mesh)triangles+=(object.geometry.index?.count??object.geometry.getAttribute('position').count)/3;});
+    parent.dataset.castle='user-fbx';parent.dataset.castleTriangles=String(triangles);parent.dataset.castlePosition=castle.position.toArray().map(value=>value.toFixed(3)).join(',');
+    parent.dataset.assets='ready';this.dirty=true;
+    if(this.palette){parent.dataset.house='user-fbx';parent.dataset.character=this.userCharacter?'user-fbx-static':'procedural-motion';}
    }).catch((error:unknown)=>{
     if(!this.disposed&&!this.lost){
-     parent.dataset.assets='failed';this.userHouse?.dispose();this.userCharacter?.dispose();
-     const message=error instanceof Error&&/美术样板贴图加载失败|用户人物模型加载失败/.test(error.message)?error.message:'用户房屋模型加载失败，请检查本地模型与贴图后重新加载页面';
+     parent.dataset.assets='failed';parent.dataset.castle='failed';this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();
+     const message=error instanceof Error&&/美术样板贴图加载失败|用户人物模型加载失败|用户城堡模型加载失败/.test(error.message)?error.message:'用户房屋模型加载失败，请检查本地模型与贴图后重新加载页面';
      this.reportError(message);
     }
     throw error;
    });
-  }
   this.npc=this.palette?new NprCharacter3D(this.resources,this.palette,true):new Character3D(this.resources,true);this.scene.add(this.player.root,this.npc.root);
   this.npc.root.scale.setScalar(.88);this.cart=this.palette?makeNprCart(this.resources,this.palette):makeCart(this.resources);this.scene.add(this.cart.root);
   for(let i=0;i<config.treeCount;i++){const tree=this.palette?makeNprTree(this.resources,this.palette):makePine(this.resources);this.trees.push(tree);this.scene.add(tree.root);}
@@ -101,7 +107,7 @@ export class FarmWorld implements GameView{
   this.controls.saveState();
   this.controls.addEventListener('change',()=>{this.dirty=true;});
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(parent);this.resize();
-  this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.controls.enabled=false;this.userHouse?.dispose();this.userCharacter?.dispose();if(this.sample)this.parent.dataset.assets='failed';this.reportError('3D图形上下文已丢失，请重新加载页面后继续');},{signal:this.events.signal});
+  this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.controls.enabled=false;this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();this.parent.dataset.assets='failed';this.reportError('3D图形上下文已丢失，请重新加载页面后继续');},{signal:this.events.signal});
   this.subscriptions.push(controller.subscribe(s=>{this.snapshot=s;this.choreography.sync(s);}));
   this.subscriptions.push(controller.onEffect(e=>{
    this.snapshot=controller.getSnapshot();this.choreography.sync(this.snapshot);this.choreography.apply(e);
@@ -120,7 +126,7 @@ export class FarmWorld implements GameView{
   if(!error){error=document.createElement('div');error.id='renderError';error.setAttribute('role','alert');this.parent.appendChild(error);}
   error.textContent=message;this.onError(message);
  }
- private resize():void{const width=this.parent.clientWidth,height=this.parent.clientHeight;if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);this.dirty=true;}
+ private resize():void{const width=this.parent.clientWidth,height=this.parent.clientHeight;if(!width||!height)return;this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.renderer.setSize(width,height,false);if(this.parent.dataset.view==='castle')this.focusCastle();this.dirty=true;}
  private animate=(now:number):void=>{
   if(this.disposed)return;this.request=requestAnimationFrame(this.animate);
   if(this.lost||document.hidden){this.lastTime=0;this.paintedLastFrame=false;this.resolution.observe(0,false);return;}
@@ -138,6 +144,7 @@ export class FarmWorld implements GameView{
   const state=this.snapshot,home=state.phase==='home'||state.phase==='setup';
   const phase=home?'home':`${state.task}`;
   if(this.lastPhase!==phase){
+   if(this.parent.dataset.view==='castle'){this.parent.dataset.view='farm';this.setCastleFog(true);}
    this.lastPhase=phase;this.overview=home;const offset=this.camera.position.clone().sub(this.controls.target);
    this.controls.target.set(home?(this.sample?-2.5:14):state.task==='carry'?f.cart.x:f.player.position.x,home?(this.sample?1.2:0):1,home?(this.sample?-5:0):state.task==='carry'?f.cart.z:f.player.position.z);
    if(home){if(this.sample)this.camera.position.set(8,5.5,12);else this.camera.position.set(43,42,57);}else this.camera.position.copy(this.controls.target).add(offset.setLength(state.task==='carry'?13:state.task==='load'?11:12));this.dirty=true;
@@ -170,11 +177,27 @@ export class FarmWorld implements GameView{
   }
  };
  rotate(direction:number):void{if(!this.controls.enabled||this.disposed)return;const offset=this.camera.position.clone().sub(this.controls.target);offset.applyAxisAngle(new T.Vector3(0,1,0),direction*.25);this.camera.position.copy(this.controls.target).add(offset);this.controls.update();this.dirty=true;}
- resetView():void{if(this.disposed)return;this.overview=true;this.controls.reset();this.dirty=true;}
+ private setCastleFog(enabled:boolean):void{
+  this.scene.getObjectByName('user-castle-model')?.traverse(object=>{if(object instanceof T.Mesh){
+   for(const material of Array.isArray(object.material)?object.material:[object.material])if(material instanceof T.MeshToonMaterial&&material.fog!==enabled){material.fog=enabled;material.needsUpdate=true;}
+  }});
+ }
+ resetView():void{if(this.disposed)return;this.overview=true;this.setCastleFog(true);this.controls.reset();this.parent.dataset.view='farm';this.dirty=true;}
+ focusCastle():void{
+  if(this.disposed||this.lost||!this.controls.enabled)return;
+  const model=this.scene.getObjectByName('user-castle-model');if(!model)return;
+  // Portrait framing backs the camera away; keep the inspected model readable
+  // rather than letting the local NPR fog erase its untextured silhouette.
+  this.setCastleFog(false);
+  const bounds=new T.Box3().setFromObject(model),center=bounds.getCenter(new T.Vector3()),radius=bounds.getSize(new T.Vector3()).length()*.5;
+  const halfFov=Math.atan(Math.tan(T.MathUtils.degToRad(this.camera.fov*.5))*Math.min(1,this.camera.aspect));
+  const distance=Math.min(this.controls.maxDistance,radius/Math.sin(halfFov)*1.15);
+  this.overview=true;this.controls.target.copy(center);this.camera.position.copy(center).add(new T.Vector3(.8,.5,1).normalize().multiplyScalar(distance));this.controls.update();this.parent.dataset.view='castle';this.dirty=true;
+ }
  setInteractionEnabled(enabled:boolean):void{this.controls.enabled=enabled&&!this.lost&&!this.disposed;}
  destroy(removeCanvas=true):void{
   if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.request);this.events.abort();this.resizeObserver?.disconnect();this.subscriptions.forEach(stop=>stop());
-  this.controls?.dispose();this.choreography.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();this.scene.traverse(o=>{if(o instanceof T.InstancedMesh)o.dispose();});this.sun?.shadow.dispose();this.scene.clear();this.resources.dispose();this.renderer?.dispose();this.renderer?.forceContextLoss();
+  this.controls?.dispose();this.choreography.dispose();this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();this.scene.traverse(o=>{if(o instanceof T.InstancedMesh)o.dispose();});this.sun?.shadow.dispose();this.scene.clear();this.resources.dispose();this.renderer?.dispose();this.renderer?.forceContextLoss();
   if(removeCanvas)this.renderer?.domElement.remove();this.sampleBadge?.remove();this.logs=[];this.chips=[];this.parent.dataset.disposed='true';
  }
 }

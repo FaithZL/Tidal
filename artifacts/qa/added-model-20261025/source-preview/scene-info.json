@@ -1,0 +1,30 @@
+[
+  {
+    "file": "model2b63561bfbee01.fbx",
+    "size": [
+      141.8864369392395,
+      122.26275991535971,
+      179.79840574634375
+    ],
+    "bones": 0,
+    "animations": 0,
+    "meshes": [
+      {
+        "name": "model",
+        "type": "Mesh",
+        "vertices": 180000,
+        "triangles": 60000,
+        "materials": [
+          {
+            "name": "model",
+            "color": "808080",
+            "map": false,
+            "normalMap": false,
+            "bumpMap": false
+          }
+        ]
+      }
+    ],
+    "scale": 0.016685353730179032
+  }
+]

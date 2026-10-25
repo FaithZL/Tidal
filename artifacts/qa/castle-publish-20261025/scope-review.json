@@ -1,0 +1,24 @@
+{
+  "result": "Independent read-only commit scope review passed",
+  "scope": "Castle model, baked material, ready/error gates, responsive inspection, relevant tests, provenance, design/plan and all task QA",
+  "qaDirectories": {
+    "added-model-20261025": {
+      "files": 144,
+      "bytes": 87118394
+    },
+    "castle-texture-20261025": {
+      "files": 39,
+      "bytes": 12803607
+    }
+  },
+  "maximumFileBytes": 34704772,
+  "noOversizedFiles": true,
+  "noCredentialPatternHitsInTaskText": true,
+  "unrelatedWorkExcluded": [
+    "original 43-line PROGRESS block",
+    "artifacts/qa/local-handoff-20261025/",
+    "artifacts/qa/source-lifecycle-20261025/progress-before.md",
+    "original 110250431-byte trace.zip"
+  ],
+  "knownFullSuiteFailure": "Previously full E2E 81/82; prototype pause screenshot failure remains unresolved"
+}

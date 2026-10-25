@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userModel.test.ts tests/unit/userHouseMount.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  2 passed (2)
+      Tests  14 passed (14)
+   Start at  10:26:29
+   Duration  382ms (tests 81%, import 10%, transform 8%, worker 1%)
+

@@ -1,0 +1,122 @@
+[
+  {
+    "tool": "image_gen.imagegen",
+    "result": "New opaque four-quadrant material atlas generated; no input image/FBX upload; copied into project",
+    "prompt": "public/assets/user-models/castle-texture-prompt-v1.txt"
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userModel.test.ts",
+    "exitCode": 1,
+    "result": "4 failed, 9 passed; expected missing texture behavior",
+    "log": "runtime-red.log"
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userModel.test.ts",
+    "exitCode": 0,
+    "result": "13 passed",
+    "log": "runtime-green.log"
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "elapsedSeconds": 1.046
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint.log",
+    "elapsedSeconds": 1.053
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit-complete.log",
+    "elapsedSeconds": 4.334
+  },
+  {
+    "command": "node scripts/bake-castle-texture.mjs",
+    "exitCode": 1,
+    "log": "bake-first.log",
+    "elapsedSeconds": 0.32
+  },
+  {
+    "command": "node scripts/bake-castle-texture.mjs",
+    "exitCode": 0,
+    "log": "bake-render.log",
+    "elapsedSeconds": 1.879
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts tests/e2e/user-models.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-models.log",
+    "elapsedSeconds": 33.59
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-verify.log",
+    "elapsedSeconds": 0.201
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build.log",
+    "elapsedSeconds": 1.648
+  },
+  {
+    "command": "node artifacts/qa/castle-texture-20261025/capture-texture.mjs",
+    "exitCode": 1,
+    "log": "production-capture.log",
+    "elapsedSeconds": 3.636
+  },
+  {
+    "command": "node scripts/bake-castle-texture.mjs",
+    "exitCode": 0,
+    "log": "bake-refined.log",
+    "elapsedSeconds": 1.328
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-refined.log",
+    "elapsedSeconds": 1.421
+  },
+  {
+    "command": "node artifacts/qa/castle-texture-20261025/capture-texture.mjs",
+    "exitCode": 1,
+    "log": "production-resource-check.log",
+    "elapsedSeconds": 3.559
+  },
+  {
+    "command": "node artifacts/qa/castle-texture-20261025/capture-texture.mjs",
+    "exitCode": 0,
+    "log": "production-final.log",
+    "elapsedSeconds": 3.61
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-castle-final.log",
+    "elapsedSeconds": 7.162
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-final.log",
+    "elapsedSeconds": 0.164
+  },
+  {
+    "command": "git diff --check",
+    "exitCode": 0
+  },
+  {
+    "operation": "Verify all 1808 pre-existing workspace files, original FBX and progress suffix",
+    "result": "Only 8 intentional source/docs/test changes; all 1539 historical QA files match SHA256; no restoration needed"
+  },
+  {
+    "command": "curl --fail --silent -o /dev/null -w 'HTTP %{http_code}\\n' 'http://127.0.0.1:5173/?art=npr-sample'",
+    "exitCode": 0,
+    "result": "HTTP200; existing local dev preview running; temporary 4176 preview stopped"
+  }
+]

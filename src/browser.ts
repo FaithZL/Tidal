@@ -155,6 +155,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   setProperty($('liveMovementState'),'textContent',s.pauseReasons.length?'已暂停 · 运动不计时':phase==='rest'?(s.task==='load'?'休息 · 推车与归拢':'休息 · 固定货物'):phase==='countdown'?'准备开始':s.task==='carry'?(showCamera?(carryState==='holding'?'有效持姿 · 持续前进':carryState==='confirming'?'正在确认持姿':'放下 / 等待持姿'):'模拟持姿 · 持续前进'):movementContext===key?movementPhase:'准备姿态');
   setProperty($('livePrescription'),'textContent',s.task==='chop'?`挥砍 ${config.repsPerTree} 次 × ${config.treeCount} 棵 · 共 ${config.chopRepTarget} 次`:s.task==='load'?`深蹲 → 站起 → 推举 → 复位 · ${config.loadRepTarget} 次`:`有效持姿 ${Math.ceil(config.carryTargetMs/1000)} 秒 · 运送回家`);
   setProperty($<HTMLButtonElement>('acceptPlan'),'disabled',renderUnavailable);
+  setProperty($<HTMLButtonElement>('viewCastle'),'disabled',renderUnavailable);
   setProperty($<HTMLButtonElement>('beginDemo'),'disabled',renderUnavailable);
   setProperty($<HTMLButtonElement>('cameraStart'),'disabled',renderUnavailable);
   setProperty($<HTMLButtonElement>('pauseBtn'),'disabled',renderUnavailable);
@@ -276,6 +277,7 @@ $('cancelPlan').addEventListener('click', () => {
 });
 $('acceptPlan').addEventListener('click', () => {if(!renderUnavailable)controller.command({kind:'open-setup',mode:'keyboard'});});
 $('viewLeft').addEventListener('click',()=>game.rotate(-1));$('viewRight').addEventListener('click',()=>game.rotate(1));$('viewReset').addEventListener('click',()=>game.resetView());
+$('viewCastle').addEventListener('click',()=>game.focusCastle());
 $('audioToggle').addEventListener('click',async()=>{await audio.setEnabled(!audio.enabled);panel(controller.getSnapshot());});
 $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
 for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));

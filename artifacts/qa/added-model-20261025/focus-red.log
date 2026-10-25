@@ -1,0 +1,50 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g the supplied castle
+
+[WebServer] (node:40434) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40454) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:40523) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene (1.0m)
+
+
+  1) tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '城堡近景', exact: true })
+
+
+      13 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-castle-position','-10.000,0.025,-29.000');
+      14 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-inventory','0/0/0');
+    > 15 |   const before=await page.locator('#worldCanvas').getAttribute('data-camera');await page.getByRole('button',{name:'城堡近景',exact:true}).click();
+         |                                                                                                                                       ^
+      16 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-view','castle');
+      17 |   await expect(page.locator('#worldCanvas')).not.toHaveAttribute('data-camera',before!);
+      18 |   await expect(page.locator('#chopValue')).toHaveText('0/15');await page.locator('#viewReset').click();
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:15:135
+
+    Error Context: test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 

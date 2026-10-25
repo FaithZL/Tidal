@@ -1,0 +1,23 @@
+{
+  "status": "unresolved; no assertion or prototype changes",
+  "fullVerification": {
+    "exitCode": 1,
+    "unitPassed": 372,
+    "e2ePassed": 81,
+    "e2eTotal": 82
+  },
+  "failure": "tests/e2e/character-motion.spec.ts:25 paused canvas PNG buffers compare unequal",
+  "unchangedTargetedRecheck": {
+    "exitCode": 1,
+    "log": "character-pause-recheck.log"
+  },
+  "traceObservation": {
+    "time": "0.6001",
+    "blade": "-0.5912,0.4272,-0.1534",
+    "paints": "24",
+    "unchangedAcrossScreenshots": true,
+    "noCastleFarmWorldOrBrowserModuleRequests": true,
+    "consoleExceptions": 0
+  },
+  "limits": "The two PNG buffers are not preserved by this existing assertion; pixel-level cause remains unknown. Frozen time, blade and paint count do not establish the source of PNG byte differences. No evidence of castle association, but no causal claim of unrelatedness."
+}

@@ -1,0 +1,189 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userModel.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userModel.test.ts (13 tests | 4 failed) 565ms
+   ❯ user-supplied static FBX model (13)
+     × uses a white castle base for its supplied color map without changing source UVs 64ms
+     × waits for the local castle color response and complete image decoding, then owns the map once 79ms
+     × rejects a missing castle color image instead of returning the grey fallback 60ms
+     × releases a castle image and its object URL when full decoding fails 58ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > uses a white castle base for its supplied color map without changing source UVs
+AssertionError: expected 8421504 to be 16777215 // Object.is equality
+
+- Expected
++ Received
+
+- 16777215
++ 8421504
+
+ ❯ tests/unit/userModel.test.ts:49:86
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > waits for the local castle color response and complete image decoding, then owns the map once
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/userModel.test.ts:57:67
+     55|   vi.spyOn(T.TextureLoader.prototype,'load').mockImplementation((_url,…
+     56|   let ready=false;const loading=loadUserModel('castle','/tidal/').then…
+     57|   await new Promise(resolve=>setTimeout(resolve,0));expect(ready).toBe…
+       |                                                                   ^
+     58|   body.resolve(new Response('unit color fixture',{status:200}));await …
+     59|   decoded.resolve();const model=await loading;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > rejects a missing castle color image instead of returning the grey fallback
+AssertionError: promise resolved "{ root: Group{ …(32) }, …(3) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "dispose": [Function dispose],
++   "kind": "castle",
++   "motionSupport": "static",
++   "root": {
++     "metadata": {
++       "generator": "Object3D.toJSON",
++       "type": "Object",
++       "version": 4.7,
++     },
++     "object": {
++       "castShadow": false,
++       "frustumCulled": true,
++       "layers": 1,
++       "matrix": [
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++       ],
++       "matrixAutoUpdate": true,
++       "name": "user-castle-model",
++       "receiveShadow": false,
++       "renderOrder": 0,
++       "static": false,
++       "type": "Group",
++       "up": [
++         0,
++         1,
++         0,
++       ],
++       "uuid": "9bca0f49-bb10-47eb-ac44-5dd4827f01fe",
++       "visible": true,
++     },
++   },
+  }
+
+ ❯ tests/unit/userModel.test.ts:65:89
+     63|  it('rejects a missing castle color image instead of returning the gre…
+     64|   const fbx=await castleResponse();vi.stubGlobal('fetch',vi.fn((url:st…
+     65|   await expect(loadUserModel('castle','/').then(model=>{model.dispose(…
+       |                                                                                         ^
+     66|  });
+     67|  it('releases a castle image and its object URL when full decoding fai…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/userModel.test.ts > user-supplied static FBX model > releases a castle image and its object URL when full decoding fails
+AssertionError: promise resolved "{ root: Group{ …(32) }, …(3) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "dispose": [Function dispose],
++   "kind": "castle",
++   "motionSupport": "static",
++   "root": {
++     "metadata": {
++       "generator": "Object3D.toJSON",
++       "type": "Object",
++       "version": 4.7,
++     },
++     "object": {
++       "castShadow": false,
++       "frustumCulled": true,
++       "layers": 1,
++       "matrix": [
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++         0,
++         0,
++         0,
++         0,
++         1,
++       ],
++       "matrixAutoUpdate": true,
++       "name": "user-castle-model",
++       "receiveShadow": false,
++       "renderOrder": 0,
++       "static": false,
++       "type": "Group",
++       "up": [
++         0,
++         1,
++         0,
++       ],
++       "uuid": "d9156c3c-9036-41e2-a021-0f4ec6bd574f",
++       "visible": true,
++     },
++   },
+  }
+
+ ❯ tests/unit/userModel.test.ts:72:89
+     70|   vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:bad-castle-col…
+     71|   vi.spyOn(T.TextureLoader.prototype,'load').mockImplementation((_url,…
+     72|   await expect(loadUserModel('castle','/').then(model=>{model.dispose(…
+       |                                                                                         ^
+     73|   expect(disposed).toHaveBeenCalledTimes(1);expect(image.close).toHave…
+     74|  });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 9 passed (13)
+   Start at  16:05:09
+   Duration  656ms (tests 94%, import 4%, transform 2%)
+

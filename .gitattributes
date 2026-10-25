@@ -1,2 +1,3 @@
 # Keep source asset checksums identical across Git line-ending settings.
 public/assets/character-motion/** -text
+public/assets/user-models/** -text

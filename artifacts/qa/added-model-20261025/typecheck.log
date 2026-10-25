@@ -1,0 +1,4 @@
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+

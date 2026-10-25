@@ -48,3 +48,10 @@ test('a failed model rejects readiness and cannot silently mount the procedural 
  const failed=expect(mount.ready).rejects.toThrow('missing texture');loading.reject(new Error('missing texture'));await failed;
  expect(scene.children).toHaveLength(0);mount.dispose();
 });
+
+test('a background landmark uses its explicit placement without replacing existing scenery',async()=>{
+ const scene=new T.Scene(),existing=new T.Group();scene.add(existing);const model=house();
+ const mount=new UserHouseMount(scene,Promise.resolve(model),[-24,.025,-9]);await mount.ready;
+ expect(model.root.position.toArray()).toEqual([-24,.025,-9]);expect(scene.children).toEqual([existing,model.root]);
+ mount.dispose();expect(scene.children).toEqual([existing]);expect(model.disposed).toBe(1);
+});

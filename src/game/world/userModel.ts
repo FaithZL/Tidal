@@ -1,6 +1,6 @@
 import * as T from 'three';
 import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
-export type UserModelKind='character'|'house';
+export type UserModelKind='character'|'house'|'castle';
 export interface UserModel{readonly root:T.Group;readonly kind:UserModelKind;readonly motionSupport:'static';dispose():void}
 
 /** Own imported resources independently from the world's cached procedural art. */
@@ -20,7 +20,7 @@ function release(source:T.Object3D):void{
 
 /** Preserve the supplied shape/UVs; uniform scale and a separate parent establish farm coordinates. */
 export function prepareUserModel(source:T.Group,kind:UserModelKind):UserModel{
- const root=new T.Group(),orientation=new T.Group();root.name=`user-${kind}-model`;orientation.rotation.y=-Math.PI/2;orientation.add(source);root.add(orientation);root.updateMatrixWorld(true);
+ const root=new T.Group(),orientation=new T.Group();root.name=`user-${kind}-model`;orientation.rotation.y=kind==='castle'?0:-Math.PI/2;orientation.add(source);root.add(orientation);root.updateMatrixWorld(true);
  const owned=allocations(source);let vertices=0,invalid=false;
  source.traverse(object=>{if(object instanceof T.Mesh){const positions=object.geometry.getAttribute('position');if(positions){vertices+=positions.count;for(const value of positions.array)if(!Number.isFinite(value))invalid=true;}}});
  if(invalid){release(source);throw new Error('User FBX geometry contains invalid bounds');}
@@ -35,14 +35,15 @@ export function prepareUserModel(source:T.Group,kind:UserModelKind):UserModel{
    for(let i=0;i<positions.count;i++){point.fromBufferAttribute(positions,i).applyMatrix4(object.matrixWorld);if(point.y>bounds.min.y+size.y*.045)continue;soles.add(point);count++;}
   });if(count){origin.x=soles.x/count;origin.z=soles.z/count;}
  }
- const scale=(kind==='character'?2.05:5.4)/size.y;orientation.scale.setScalar(scale);orientation.position.copy(origin).multiplyScalar(-scale);
+ const height={character:2.05,house:5.4,castle:12}[kind];
+ const scale=height/size.y;orientation.scale.setScalar(scale);orientation.position.copy(origin).multiplyScalar(-scale);
  const replacements=new Map<T.Material,T.MeshToonMaterial>();
  source.traverse(object=>{
-  if(!(object instanceof T.Mesh))return;object.castShadow=true;object.receiveShadow=kind==='house';
+  if(!(object instanceof T.Mesh))return;object.castShadow=kind!=='castle';object.receiveShadow=kind!=='character';
   const styled=(Array.isArray(object.material)?object.material:[object.material]).map(material=>{
    const existing=replacements.get(material);if(existing)return existing;
    const phong=material instanceof T.MeshPhongMaterial?material:null;
-   const toon=new T.MeshToonMaterial({name:`user-${kind}-${material.name}`,color:0xffffff,map:phong?.map??null,normalMap:phong?.normalMap??null,normalScale:new T.Vector2(.35,.35),side:material.side,transparent:material.transparent,opacity:material.opacity,alphaTest:material.alphaTest});
+   const toon=new T.MeshToonMaterial({name:`user-${kind}-${material.name}`,color:kind==='castle'&&phong&&!phong.map?phong.color:0xffffff,map:phong?.map??null,normalMap:phong?.normalMap??null,normalScale:new T.Vector2(.35,.35),side:material.side,transparent:material.transparent,opacity:material.opacity,alphaTest:material.alphaTest});
    // Deliberately omit Phong specular: FBX roughness/metallic are not silently
    // claimed as PBR maps. Source bytes stay intact in the user-supplied FBX.
    toon.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <gradientmap_pars_fragment>',`vec3 getGradientIrradiance(vec3 n,vec3 l){float t=smoothstep(0.15,0.83,dot(n,l)*0.5+0.5);return mix(vec3(0.64,0.68,0.73),vec3(1.0,0.97,0.89),t);}`);};
@@ -58,10 +59,10 @@ export function prepareUserModel(source:T.Group,kind:UserModelKind):UserModel{
  }};
 }
 
-/** Load embedded images fully before opening the visual/start gate. No remote texture fallback. */
+/** Decode embedded images and the local castle color atlas before opening the visual/start gate. */
 export async function loadUserModel(kind:UserModelKind,baseUrl:string):Promise<UserModel>{
  const directory=`${baseUrl.replace(/\/?$/,'/')}assets/user-models/`,url=`${directory}${kind}.fbx`;
- const prefix=`用户${kind==='house'?'房屋':'人物'}模型加载失败`;
+ const prefix=`用户${{house:'房屋',character:'人物',castle:'城堡'}[kind]}模型加载失败`;
  const response=await fetch(url).catch(error=>{throw new Error(prefix,{cause:error});});if(!response.ok)throw new Error(`${prefix}（${response.status}）`);
  const bytes=await response.arrayBuffer().catch(error=>{throw new Error(prefix,{cause:error});}),manager=new T.LoadingManager(),urls=new Set<string>();let started=false,imageError='';
  let complete:()=>void=()=>{};const images=new Promise<void>(resolve=>{complete=resolve;});
@@ -71,6 +72,21 @@ export async function loadUserModel(kind:UserModelKind,baseUrl:string):Promise<U
  try{
   source=new FBXLoader(manager).parse(bytes,'');if(started)await images;
   if(imageError)throw new Error('用户模型内嵌贴图解码失败');
+  if(kind==='castle'){
+   const color=await fetch(`${directory}castle-soft-toon-v1.png`);if(!color.ok)throw new Error(`城堡颜色贴图加载失败（${color.status}）`);
+   const imageUrl=URL.createObjectURL(await color.blob());urls.add(imageUrl);let texture!:T.Texture;
+   const decoded=new Promise<void>((resolve,reject)=>{
+    texture=new T.TextureLoader(manager).load(imageUrl,loaded=>{
+     void(async()=>{const image:unknown=loaded.image;if(image&&typeof image==='object'&&'decode' in image&&typeof image.decode==='function')await image.decode();})()
+      .then(resolve,()=>reject(new Error('城堡颜色贴图解码失败')));
+    },undefined,()=>reject(new Error('城堡颜色贴图解码失败')));
+   });
+   texture.colorSpace=T.SRGBColorSpace;
+   // Attach before awaiting decoding so failure and late cancellation share the
+   // same resource owner as successful imports. The source FBX remains intact.
+   source.traverse(object=>{if(object instanceof T.Mesh)for(const material of Array.isArray(object.material)?object.material:[object.material])if(material instanceof T.MeshPhongMaterial)material.map=texture;});
+   await decoded;
+  }
   return prepareUserModel(source,kind);
  }catch(error){if(started)await images;if(source)release(source);throw new Error(`${prefix}：${error instanceof Error?error.message:'无法读取模型或贴图'}`,{cause:error});}
  finally{urls.forEach(url=>URL.revokeObjectURL(url));}

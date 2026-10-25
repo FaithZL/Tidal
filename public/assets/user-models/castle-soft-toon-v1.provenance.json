@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-25",
+  "scope": "User-approved local soft-toon castle material; no commit, push or deployment",
+  "sourceModel": {
+    "file": "castle.fbx",
+    "sha256": "9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede",
+    "originalBytesGeometryAndUVPreserved": true,
+    "redistributionLicense": "not provided; existing user FBX permission status unchanged"
+  },
+  "generation": {
+    "tool": "built-in image_gen.imagegen",
+    "mode": "new opaque material atlas",
+    "inputImages": [],
+    "userFBXUploaded": false,
+    "promptFile": "castle-texture-prompt-v1.txt",
+    "promptSha256": "1be46ebeba24a34d7eeaf8a436186c83b31f6997f1f1ba7e7cd49b725d5fbf17",
+    "quadrants": [
+      "top-left stone masonry",
+      "top-right natural rock",
+      "bottom-left dark timber",
+      "bottom-right sage moss"
+    ],
+    "licenseNote": "New generated art, not the missing original-author texture and not labelled CC0."
+  },
+  "images": [
+    {
+      "file": "castle-materials-v1.png",
+      "bytes": 2602902,
+      "sha256": "51c8f5ae39e8052a2852ed4bb3108bf9cac93a7350f7375800e08fb6dd91570c",
+      "width": 1254,
+      "height": 1254,
+      "colorSpace": "sRGB"
+    },
+    {
+      "file": "castle-soft-toon-v1.png",
+      "bytes": 7761436,
+      "sha256": "6dcce6629be39749c8f04b67e2ac94f7bb8f4310a65ee9f44e43b71cebd5c288",
+      "width": 2048,
+      "height": 2048,
+      "colorSpace": "sRGB"
+    }
+  ],
+  "bake": {
+    "script": "scripts/bake-castle-texture.mjs",
+    "scriptSha256": "79ae68b66dc5245b879c591874cb8acf351fa9e647c0761bd2759efe12b6907c",
+    "command": "node scripts/bake-castle-texture.mjs",
+    "method": "Offline UV-space WebGL bake of spatially projected material colors; original geometry and UV unchanged",
+    "height": 12,
+    "paddingPixels": 8,
+    "tileInsetPixels": 8,
+    "tileRepeat": "mirrored",
+    "colorSpace": "Input PNG sRGB decoded, linear material blending, explicit sRGB encoded output; no Three tone mapping or second gamma pass",
+    "semanticMask": {
+      "method": "Approximate spatial rear-rock mask and only existing small recessed facade patches for wood; no invented window patterns",
+      "woodPatches": 17,
+      "woodTriangles": 326,
+      "limits": "Geometric approximation for this fixed FBX, not authored semantic groups; no new window geometry"
+    },
+    "coverage": 0.5752291679382324
+  },
+  "runtime": {
+    "colorMap": "castle-soft-toon-v1.png",
+    "material": "existing MeshToonMaterial with soft light response",
+    "baseColor": "white to preserve texture colors",
+    "mapping": "original FBX UV; no runtime triplanar sampling",
+    "failure": "explicit error and closed farm start gate, no grey fallback",
+    "pbr": false
+  }
+}

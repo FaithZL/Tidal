@@ -1,5 +1,19 @@
 # 来源、参考图与可核查技术资料
 
+## 2026-10-25城堡新增柔和卡通贴图
+
+用户在确认两份FBX均无贴图后，明确选择“柔和卡通石堡”：浅灰石墙、深色门窗和少量苔藓山岩。通过内置imagegen生成`public/assets/user-models/castle-materials-v1.png`四区颜色素材（石墙/山岩/木板/苔藓，1254²），没有上传用户FBX或下载第三方纹理；完整提示词见同目录`castle-texture-prompt-v1.txt`。
+
+`scripts/bake-castle-texture.mjs`在本地将生成素材投射并烘焙到第一份城堡的原UV，输出2048²的`castle-soft-toon-v1.png`，运行时沿用现有Soft Toon。建筑/山岩和凹槽木色遮罩是依据几何的人工近似，不是原作者材质ID；颜色图不是法线、PBR或自动识别语义的证明。原FBX/UV/几何及无图来源记录保持，第二份仍未替换。本轮新图不称为恢复原图或CC0，源模型公开再分发许可仍待确认。来源/SHA/颜色空间和烘焙过程见`castle-soft-toon-v1.provenance.json`与本轮QA；不commit/push/部署。
+
+## 2026-10-25用户提供城堡FBX与第二版本检查
+
+用户提供`model2b63561bfbee01.fbx`并要求可打开则添加到场景。实际Three.js r186解析及浏览器正反面确认是带山体的灰色城堡；原文件2,538,316字节、60,000三角面、无骨骼/动画、无Texture/Video对象或外部贴图。`public/assets/user-models/castle.fbx`为逐字节副本，SHA256=`9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede`。运行时仅统一缩放、落地和远景放置，保留源灰色与几何/UV；没有生成贴图、假称贴图完整或新增动作。
+
+用户随后提供`modelabd4643519d001.fbx`并要求有贴图才替换。实际解析也为Texture=0、Video=0、灰色Phong，2,645,452字节、60,000三角面，但几何与第一份不同。其SHA256=`a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06`；因此按条件未替换，第二份没有收入应用。两份源文件均未修改；记录在`artifacts/qa/added-model-20261025/inspection.json`和`second-file-inspection.json`。
+
+只获本项目本地添加授权，原作者/公开再分发许可未提供，不标CC0；本轮不commit/push/购买/部署。灰色材质与静态结构是源文件限制，不是已完成最终美术或真实摄像头验收。
+
 ## 2026-10-22握斧与缓冲回收精修（最新）
 
 继续使用用户原FBX，没有新购/下载/上传素材。`userHandGrip.ts`只对既有手网格的指垫/拇指做本地小幅几何校正与法线修整，握轴按实际卷指开口拟合；不是新增假手、Leo、完整逐指三节骨架或动捕。原FBX、UV/图像、三角总数、手外法线保留；源烘焙棕色和低模角面仍是限制。动态握距在该样片略增，斧62%固定显示尺寸不变。

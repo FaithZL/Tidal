@@ -1,0 +1,71 @@
+{
+  "path": "/Users/zero/work/ai_ws/Tidal/public/assets/user-models/castle.fbx",
+  "sha256": "9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede",
+  "method": "Read-only Three.js FBXLoader UV and triangle analysis; UV islands estimated by geometric edge adjacency and matching endpoint UV values, rounded to 6/7 decimals.",
+  "reports": [
+    {
+      "mesh": "model",
+      "triangles": 60000,
+      "positions": 180000,
+      "uvCount": 180000,
+      "uvRange": {
+        "minU": 0.0009999871253967285,
+        "maxU": 0.9990000128746033,
+        "minV": 0.0009999871253967285,
+        "maxV": 0.9990000128746033
+      },
+      "nonFiniteVertices": 0,
+      "outsideUnitVertices": 0,
+      "uvZeroAreaTriangles": 0,
+      "uvZeroAreaRatio": 0,
+      "uvTinyAreaTriangles": 1,
+      "uvTinyAreaRatio": 0.000016666666666666667,
+      "geometryZeroAreaTriangles": 68,
+      "totalAbsoluteUVArea": 0.5751567957363792,
+      "uvAreaQuantiles": {
+        "min": 7.337909169180534e-10,
+        "p50": 0.0000034287098884533407,
+        "p95": 0.000028034333990234472,
+        "max": 0.011466731999323354
+      },
+      "uniqueUV": 36624,
+      "geometricVerticesWithMultipleUVs": 5301,
+      "geometricUniqueVertices": 29921,
+      "manifoldEdges": 89869,
+      "seamEdges": 6215,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 61,
+      "uvConnectedTriangleComponents": 504,
+      "largestComponents": [
+        2015,
+        1322,
+        1309,
+        1296,
+        1163,
+        1140,
+        1109,
+        1097,
+        1072,
+        1050,
+        1020,
+        1011,
+        992,
+        969,
+        963
+      ],
+      "occupiedCentroidGridCells": 931,
+      "centroidGridCellCount": 1024,
+      "materialTypes": [
+        {
+          "type": "MeshPhongMaterial",
+          "map": false,
+          "color": [
+            0.2140411404715882,
+            0.2140411404715882,
+            0.2140411404715882
+          ]
+        }
+      ]
+    }
+  ]
+}

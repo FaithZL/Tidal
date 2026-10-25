@@ -1,0 +1,98 @@
+{
+  "results": [
+    {
+      "name": "farm",
+      "renderScale": "1",
+      "assets": "ready",
+      "castle": "user-fbx",
+      "renderer": "Three.js r186",
+      "art": "tidal-farm-3d-v2",
+      "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+      "particles": "0",
+      "action": "ready",
+      "fallen": "0",
+      "effects": "",
+      "npc": "idle",
+      "inventory": "0/0/0",
+      "cartPosition": "3.000,0.000",
+      "worldLogs": "0",
+      "rope": "0.000",
+      "playerMode": "idle",
+      "camera": "-42.518,20.251,-40.379",
+      "probe": "-0.2522,0.0766,0.9974",
+      "castleTriangles": "60000",
+      "castlePosition": "-24.000,0.025,-9.000",
+      "view": "castle",
+      "cameraRequested": false
+    },
+    {
+      "name": "npr",
+      "renderScale": "1",
+      "assets": "ready",
+      "castle": "user-fbx",
+      "renderer": "Three.js r186",
+      "art": "tidal-npr-sample-v2",
+      "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+      "motionRevision": "1",
+      "particles": "0",
+      "action": "ready",
+      "fallen": "0",
+      "effects": "",
+      "npc": "idle",
+      "inventory": "0/0/0",
+      "cartPosition": "3.000,0.000",
+      "worldLogs": "0",
+      "rope": "0.000",
+      "playerMode": "idle",
+      "hand": "1.5500,0.9500,4.0000",
+      "camera": "-42.518,20.251,-40.379",
+      "probe": "-0.2522,0.0766,0.9974",
+      "castleTriangles": "60000",
+      "castlePosition": "-24.000,0.025,-9.000",
+      "house": "user-fbx",
+      "character": "user-fbx-static",
+      "view": "castle",
+      "cameraRequested": false
+    }
+  ],
+  "errors": [],
+  "consoleErrors": [
+    {
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:4176/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "browserIconErrors": [
+    {
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://127.0.0.1:4176/favicon.ico",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "unexpectedConsoleErrors": [],
+  "failedResources": [],
+  "external": [],
+  "textures": [
+    {
+      "url": "http://127.0.0.1:4176/assets/user-models/castle-soft-toon-v1.png",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4176/assets/user-models/castle-soft-toon-v1.png",
+      "status": 200
+    }
+  ],
+  "input": "manual home; no camera requested",
+  "material": "New generated colors baked to original UV; original FBX unmodified"
+}

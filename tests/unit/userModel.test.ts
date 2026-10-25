@@ -5,7 +5,7 @@ import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
 import {prepareUserModel,loadUserModel} from '../../src/game/world/userModel.js';
 
 afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
-async function fixture(kind:'character'|'house'):Promise<T.Group>{
+async function fixture(kind:'character'|'house'|'castle'):Promise<T.Group>{
  // Texture decoding is exercised by the browser tests. CPU tests retain the real
  // FBX geometry, object transforms, materials, map references and UVs.
  vi.spyOn(T.TextureLoader.prototype,'load').mockImplementation(()=>new T.Texture());
@@ -13,8 +13,16 @@ async function fixture(kind:'character'|'house'):Promise<T.Group>{
  const bytes=await readFile(new URL(`../../public/assets/user-models/${kind}.fbx`,import.meta.url));
  return new FBXLoader().parse(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
 }
+function deferred<Value>(){
+ let resolve!:(value:Value)=>void;
+ const promise=new Promise<Value>(yes=>{resolve=yes;});return {promise,resolve};
+}
+async function castleResponse(){
+ const bytes=await readFile(new URL('../../public/assets/user-models/castle.fbx',import.meta.url));
+ return {ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)};
+}
 describe('user-supplied static FBX model',()=>{
- for(const [kind,height,triangles] of [['character',2.05,4900],['house',5.4,4430]] as const){
+ for(const [kind,height,triangles] of [['character',2.05,4900],['house',5.4,4430],['castle',12,60000]] as const){
   it(`grounds and uniformly scales the actual ${kind} without inventing skin or animation`,async()=>{
    const source=await fixture(kind),model=prepareUserModel(source,kind);
    try{
@@ -28,6 +36,42 @@ describe('user-supplied static FBX model',()=>{
    }finally{model.dispose();}
   });
  }
+ it('preserves the textureless castle grey material and keeps its source geometry intact',async()=>{
+  const source=await fixture('castle'),mesh=source.children.find(object=>object instanceof T.Mesh) as T.Mesh;
+  const original=(mesh.material as T.MeshPhongMaterial).color.clone(),vertices=Array.from(mesh.geometry.getAttribute('position').array);
+  const model=prepareUserModel(source,'castle');
+  try{expect((mesh.material as T.MeshToonMaterial).color.equals(original)).toBe(true);expect((mesh.material as T.MeshToonMaterial).map).toBeNull();expect(mesh.castShadow).toBe(false);expect(Array.from(mesh.geometry.getAttribute('position').array)).toEqual(vertices);}finally{model.dispose();}
+ });
+ it('uses a white castle base for its supplied color map without changing source UVs',async()=>{
+  const source=await fixture('castle'),mesh=source.children.find(object=>object instanceof T.Mesh) as T.Mesh;
+  const original=mesh.material as T.MeshPhongMaterial,map=new T.Texture(),uv=Array.from(mesh.geometry.getAttribute('uv').array);original.map=map;
+  const model=prepareUserModel(source,'castle');
+  try{const styled=mesh.material as T.MeshToonMaterial;expect(styled.color.getHex()).toBe(0xffffff);expect(styled.map).toBe(map);expect(Array.from(mesh.geometry.getAttribute('uv').array)).toEqual(uv);}finally{model.dispose();}
+ });
+ it('waits for the local castle color response and complete image decoding, then owns the map once',async()=>{
+  const fbx=await castleResponse(),body=deferred<Response>(),decoded=deferred<void>(),image={decode:()=>decoded.promise,close:vi.fn()},texture=new T.Texture(image),disposed=vi.fn();texture.addEventListener('dispose',disposed);
+  vi.stubGlobal('fetch',vi.fn((url:string)=>url==='/tidal/assets/user-models/castle.fbx'?Promise.resolve(fbx):url==='/tidal/assets/user-models/castle-soft-toon-v1.png'?body.promise:Promise.reject(new Error('unexpected URL'))));
+  vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:castle-color');const revoke=vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
+  vi.spyOn(T.TextureLoader.prototype,'load').mockImplementation((_url,onLoad)=>{queueMicrotask(()=>onLoad?.(texture));return texture;});
+  let ready=false;const loading=loadUserModel('castle','/tidal/').then(model=>{ready=true;return model;});
+  await new Promise(resolve=>setTimeout(resolve,0));expect(ready).toBe(false);
+  body.resolve(new Response('unit color fixture',{status:200}));await new Promise(resolve=>setTimeout(resolve,0));expect(ready).toBe(false);
+  decoded.resolve();const model=await loading;
+  try{let map:T.Texture|null=null;model.root.traverse(object=>{if(object instanceof T.Mesh)map=(object.material as T.MeshToonMaterial).map;});expect(map).toBe(texture);expect(texture.colorSpace).toBe(T.SRGBColorSpace);expect(revoke).toHaveBeenCalledExactlyOnceWith('blob:castle-color');}finally{model.dispose();model.dispose();}
+  expect(disposed).toHaveBeenCalledTimes(1);expect(image.close).toHaveBeenCalledTimes(1);
+ });
+ it('rejects a missing castle color image instead of returning the grey fallback',async()=>{
+  const fbx=await castleResponse();vi.stubGlobal('fetch',vi.fn((url:string)=>Promise.resolve(url.endsWith('/castle.fbx')?fbx:new Response('missing',{status:404}))));
+  await expect(loadUserModel('castle','/').then(model=>{model.dispose();return model;})).rejects.toThrow('用户城堡模型加载失败');
+ });
+ it('releases a castle image and its object URL when full decoding fails',async()=>{
+  const fbx=await castleResponse(),image={decode:()=>Promise.reject(new Error('invalid PNG')),close:vi.fn()},texture=new T.Texture(image),disposed=vi.fn();texture.addEventListener('dispose',disposed);
+  vi.stubGlobal('fetch',vi.fn((url:string)=>Promise.resolve(url.endsWith('/castle.fbx')?fbx:new Response('unit color fixture',{status:200}))));
+  vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:bad-castle-color');const revoke=vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
+  vi.spyOn(T.TextureLoader.prototype,'load').mockImplementation((_url,onLoad)=>{queueMicrotask(()=>onLoad?.(texture));return texture;});
+  await expect(loadUserModel('castle','/').then(model=>{model.dispose();return model;})).rejects.toThrow('用户城堡模型加载失败');
+  expect(disposed).toHaveBeenCalledTimes(1);expect(image.close).toHaveBeenCalledTimes(1);expect(revoke).toHaveBeenCalledExactlyOnceWith('blob:bad-castle-color');
+ });
  it('preserves original texture and UVs while removing imported specular glare',async()=>{
   const source=await fixture('character'),mesh=source.children.find(object=>object instanceof T.Mesh) as T.Mesh;
   const original=mesh.material as T.MeshPhongMaterial,map=original.map,normal=original.normalMap,uv=Array.from(mesh.geometry.getAttribute('uv').array),model=prepareUserModel(source,'character');

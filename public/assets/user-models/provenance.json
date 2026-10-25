@@ -61,6 +61,51 @@
         { "semantic": "roughness", "name": "tripo_model_roughness.JPEG", "width": 2048, "height": 2048 },
         { "semantic": "metallic", "name": "tripo_model_metallic.JPEG", "width": 2048, "height": 2048 }
       ]
+    },
+    {
+      "id": "user-castle",
+      "file": "castle.fbx",
+      "sourceFileName": "model2b63561bfbee01.fbx",
+      "kind": "castle",
+      "description": "Static grey castle and attached rocky hillside; original source has no texture objects or images.",
+      "providedAt": "2026-10-25",
+      "bytes": 2538316,
+      "sha256": "9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede",
+      "format": "FBX binary",
+      "fbxVersion": 7400,
+      "meshCount": 1,
+      "triangles": 60000,
+      "rig": {
+        "bones": 0,
+        "skin": false,
+        "animations": 0
+      },
+      "embeddedTextures": [],
+      "externalTextureReferences": [],
+      "material": {
+        "type": "Phong",
+        "diffuseColor": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      "permission": "User supplied for local scene addition; original author and public redistribution license not provided.",
+      "runtimeColorMap": {
+        "file": "castle-soft-toon-v1.png",
+        "provenance": "castle-soft-toon-v1.provenance.json",
+        "origin": "New user-approved soft-toon material bake, separate from the textureless original FBX."
+      }
     }
-  ]
+  ],
+  "additionalInspection": {
+    "sourceFileName": "modelabd4643519d001.fbx",
+    "providedAt": "2026-10-25",
+    "bytes": 2645452,
+    "sha256": "a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06",
+    "textureObjects": 0,
+    "videoObjects": 0,
+    "triangles": 60000,
+    "decision": "Not used: user requested replacement only if this version has textures; neither version contains textures."
+  }
 }

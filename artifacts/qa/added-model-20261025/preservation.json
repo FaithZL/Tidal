@@ -1,0 +1,9 @@
+{
+  "originalProgressSuffixPreserved": true,
+  "originalCharacterHouseAndPrototypeBytesMatchHEAD": true,
+  "firstSourceAndCastleSHA256Match": true,
+  "secondSourceUnchanged": true,
+  "indexEmpty": true,
+  "HEAD": "94148c2caa14327625a7d5f7ae4f7eefd421f78d",
+  "noCommitPushOrDeploymentThisTask": true
+}

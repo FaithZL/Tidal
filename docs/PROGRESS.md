@@ -1,5 +1,90 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：城堡模型与贴图限定范围提交、推送main授权（2026-10-25）
+
+用户已确认“效果可以”，明确要求将本次城堡模型、贴图和对应验证记录提交并推送main，保留此前无关未提交工作、不部署。本次授权覆盖前述制作阶段“不提交/推送”的历史停点；未改变源模型公开许可状态，不购买、不部署、不修改旧素材许可。
+
+实查本机main与实时远端main均为`94148c2caa14327625a7d5f7ae4f7eefd421f78d`，没有需要同步的后续提交。提交范围为城堡接入、近景/窄屏视角、启动/素材门禁、独立颜色图集与烘焙工具、来源记录、相关单测/E2E、两份设计计划，以及`added-model-20261025/`、`castle-texture-20261025/`和本轮交付QA。两轮城堡QA共183文件，最大文件34,704,772字节，无超限文件；真实失败/中断trace和历史QA恢复清单均保留，不把失败改写成成功。独立只读范围审查通过。
+
+提交前对同一应用代码再次实际执行：typecheck、lint、**376/376单测、15/15模型相关E2E、assets:verify、build全部exit0**，入口仍为index-DCEqkxT-.js；日志/退出码见`artifacts/qa/castle-publish-20261025/commands.json`。未重跑完整verify；此前完整E2E81/82中的prototype暂停截图失败仍未解决，保留原失败证据，不扩展修复。已有FBX贴图支持警告与500KB构建提示不隐藏。
+
+对PROGRESS单独构造暂存版本，只收录HEAD已有记录、本次城堡新增记录及本节；此前43行接续/安装记录继续原字节留在工作区。整个`local-handoff-20261025/`、旧`source-lifecycle-20261025/progress-before.md`和旧110,250,431字节trace均排除提交，保存SHA并核对。采用明确文件清单暂存，普通提交/推送main，不强推、不reset/clean/重克隆；实际提交SHA、远端核对与剩余未提交工作由本聊天交付回执确认。预览仍可在本机5173访问，未对外部署。
+
+## 最新追加：城堡柔和卡通贴图已接入（2026-10-25）
+
+用户已选择“柔和卡通石堡（推荐）”，授权按石墙、深色门窗与少量苔藓山岩补做贴图。使用本机main、HEAD仍为`94148c2caa14327625a7d5f7ae4f7eefd421f78d`，在既有未提交城堡成果上增量处理；本轮未commit/stage/push/部署。短设计与实施计划见`docs/superpowers/specs/2026-10-25-castle-texture-design.md`和对应plans文件，不重新安装或生成项目。
+
+### 最终内容与边界
+
+内置imagegen按记录提示词生成`castle-materials-v1.png`（1254²，石墙/山岩/木板/苔藓四区），没有上传FBX。`scripts/bake-castle-texture.mjs`只读第一份城堡，离线投射并烘焙到原UV，输出`castle-soft-toon-v1.png`：**2048² sRGB、7,761,436字节**，SHA256=`6dcce6629be39749c8f04b67e2ac94f7bb8f4310a65ee9f44e43b71cebd5c288`。四区采样内缩8px并镜像重复，原UV空白扩展8px；颜色显式sRGB解码、线性混合再编码，不烘焙场景光照。现场查看首图后排除低层非门窗凹面木色、将后方山岩连续着岩色，原首图/图集/脚本与报告在`iterations/`保留。最终为17块几何近似凹槽木色（326三角），没有新增门窗网格；山岩/建筑分区仍是人工近似，不能称原作者语义材质。
+
+运行时仅城堡增加一张独立颜色图，仍使用原Soft Toon及原UV；有图时白色base保留图色，无图prepare仍保留源灰色。`loadUserModel`等待本地fetch、图片加载与decode后才放行ready，缺失/解码失败显式报错，不静默退灰模。新纹理在等待前交给源资源所有者，成功、失败与取消后的迟到结果均沿用释放路径，blob URL在finally撤销；取消仍为迟到后释放，未新增abort架构。人物/房屋加载分支、训练领域/输入/计数/计时、依赖与锁文件均未改。
+
+两份用户源文件、既有三份FBX字节/几何/UV不变；第二份仍因无贴图未替换。新材质是补做美术，不能恢复缺失原图，不标CC0或PBR。来源、完整提示词、两PNG/脚本SHA见`public/assets/user-models/castle-soft-toon-v1.provenance.json`与`castle-texture-prompt-v1.txt`，`assets:verify`新增相应尺寸/字节/SHA检查，没有更改旧资产校验值或许可。
+
+### 本轮真实验证
+
+证据在`artifacts/qa/castle-texture-20261025/`，实际命令/退出码见`commands.json`。
+
+| 命令/操作 | 实际结果 | 日志/证据 |
+|---|---|---|
+| 定向模型单测红绿验证 | RED exit1，4失败/9通过；GREEN exit0，13/13；保留源灰模断言 | runtime-red.log、runtime-green.log |
+| `npm run typecheck`、`npm run lint` | 均exit0 | typecheck.log、lint.log |
+| `npm run test:unit` | exit0，49文件**376/376** | unit-complete.log |
+| `npm run test:e2e -- tests/e2e/castle-model.spec.ts tests/e2e/user-models.spec.ts` | exit0，**15/15**；包含新PNG404与延迟ready门禁，原人物/房屋/URL撤销及迟到释放断言保留 | e2e-models.log |
+| 最终图集后`npm run test:e2e -- tests/e2e/castle-model.spec.ts` | exit0，**6/6**再次通过 | e2e-castle-final.log |
+| `npm run assets:verify` | 最终exit0，旧素材与两份新颜色PNG/提示词/烘焙脚本通过 | assets-final.log |
+| `npm run build` | 最后exit0，入口index-DCEqkxT-.js；旧500KB提示保留 | build-refined.log |
+| 本地UV烘焙`node scripts/bake-castle-texture.mjs` | 最终exit0，原件SHA未变、UV覆盖约57.52%、0外源/页面错误；首次因Three未导出package.json而exit1，改为既有入口定位后成功 | bake-first.log、bake-render.log、bake-refined.log、bake-report.json |
+| 4176实际生产构建运行`capture-texture.mjs` | 最终exit0，普通/NPR正反面与390×844窄屏共5PNG均已查看；2次颜色PNG响应200、0页面异常/外源/摄像头申请，本机Apple M4 Metal | production-final.log、production/capture.json及PNG |
+
+生产捕获的前两次exit1保留：首轮严格收集console发现404，补充资源URL后确认只有浏览器自动请求的`/favicon.ico`404；新捕获脚本仅单列这个精确URL/错误文本，原consoleError仍完整保存，其他错误仍使捕获失败。没有修改产品、旧测试或泛化放宽断言；不能写成“控制台零错误”。本轮没重跑完整verify/全量E2E，上一轮prototype暂停截图字节断言失败仍未解决，不用本轮15项通过替代全量结果。
+
+独立只读审查确认资源释放/颜色空间/来源和正反面未见阻塞，见`review.json`。对本轮前1,808个工作区文件记录SHA，其中**1,539份历史QA完全一致**，没有覆盖重生成、无需恢复；此前未提交的城堡代码/素材、PROGRESS全文和本机handoff等均保留。原FBX/其他素材SHA、旧断言及空暂存区核对见`preservation.json`。新增7.76MB静态PNG和6万面城堡没有性能达标结论；最终美术、真实手机/摄像头及约60fps仍待验。
+
+预览仍为本机5173的`/?art=npr-sample`或普通首页，关闭计划弹窗后点“城堡近景”；`npm run dev`可重启，按实际端口访问。临时4176生产检查后停止，5173保持本地预览；后续等待用户审阅贴图，不自动扩展其他待办或外部交付。
+
+## 最新追加：城堡补做贴图可行性核查（2026-10-25）
+
+用户询问能否给当前城堡加贴图。本轮只读检查确认原UV可用：180,000项与展开顶点对应，坐标约[.001,.999]，无非有限/越界，60,000三角中无零面积UV；共享边粗判约504个UV岛。原UV适合按模板制作/烘焙图集，直接套通用石纹不能保证各部位正确；三平面映射可用于平铺石纹，但门窗/山岩仍需区域区分。报告见`artifacts/qa/castle-texture-20261025/uv-inspection.json`。这只能补做新美术，不能恢复无贴图源文件中的原作者贴图。
+
+已询问卡通石堡/写实石堡外观偏好，推荐与现有田园场景协调的柔和卡通石墙、深色门窗与少量苔藓山岩；尚未生成贴图或修改产品代码。检查后FBX SHA未变，原有未提交工作保留；未跑与只读核查无关的测试、安装、commit/push或部署。下一步按用户确定的外观方向制作可审阅贴图效果。
+
+## 最新追加：用户城堡FBX入场与第二份贴图核查（2026-10-25）
+
+用户要求检查`model2b63561bfbee01.fbx`，能打开就加入场景；随后补充`modelabd4643519d001.fbx`，仅在有贴图时替换。继续使用本机main、HEAD `94148c2caa14327625a7d5f7ae4f7eefd421f78d`；该HEAD此前已推送，本轮未commit/push/部署，保留原有未提交工作。证据独立保存在`artifacts/qa/added-model-20261025/`。
+
+### 素材结论与场景范围
+
+两份都是可解析的FBX7400，各1网格/1灰色Phong材质、60,000三角面，无骨骼、Skin或动画；**两份均没有Texture/Video对象、内嵌图片或外部贴图引用**。第二份几何不同，但并非带贴图版本，所以按用户条件未替换、未收入应用素材。第一份原字节复制为`public/assets/user-models/castle.fbx`，SHA为`9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede`；第二份检查SHA为`a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06`。两份用户源文件及既有character/house原件未修改。保留灰色材质，没有生成或虚构贴图。公开再分发许可仍未确认。
+
+第一份城堡及附带山岩接入普通农场与NPR局部场景，在西侧空地`[-24,.025,-9]`统一缩放至12世界单位高并落地；原树木、道路、围栏与房屋未移动。沿用已有异步素材挂载/释放机制，不投射高面数阴影；素材未完成时关闭开始门禁，失败显式报错。新增“城堡近景”，按实际包围盒与窗口比例取景；近景仅关闭城堡自身雾效，返回全景或开始训练即恢复，窄屏重算取景。NPR人物仍为原静态适配，独立第7版动作样片未扩展到农场。SessionController、输入/姿态识别、计数/持姿规则和依赖锁文件均未改。
+
+对应文件：`userModel.ts`、`userHouseMount.ts`、`FarmWorld.ts`、`createGame.ts`、`browser.ts`、`index.html`及窄屏控制布局，素材清单/校验脚本、`.gitattributes`字节保护和来源记录。新增真实FBX规格与挂载单测，以及4项城堡E2E，覆盖真实模型、加载失败、训练切镜后缩放、启动门禁。审查发现并以失败测试复现两处问题后修复：训练切镜时清除城堡视角标记；初始HTML中的接受任务按钮保持disabled，等动态模块安装事件及素材就绪后由现有逻辑启用，避免inert启动期间丢失点击。原E2E断言、超时、重试、识别门限未改。独立只读审查见`review.json`。
+
+### 本轮实际验证（完整verify未通过）
+
+命令、退出码及中间失败/中断均保留在`commands.json`，不能用定向通过代替全量通过。
+
+| 命令/操作 | 实际结果 | 证据 |
+|---|---|---|
+| 真实源文件结构检查及浏览器前/后预览 | 第一份可打开；两份均无贴图 | inspection.json、second-file-inspection.json、source-preview/ |
+| 相关单测红绿验证 | 初次3失败，最小实现后14/14通过 | unit-red.log、unit-green.log |
+| `npm run test:e2e -- tests/e2e/castle-model.spec.ts`，最终启动门禁修复后 | exit0，4/4通过；此前各失败测试保留 | startup-green.log及对应red日志/trace |
+| `npm run verify`，最后完整轮 | **exit1**；typecheck/lint通过，49文件**372/372单测**；**81/82 E2E**，9.9分钟；链式尾部build未执行 | verify-complete.log、verify-complete-results/ |
+| 原样定向`npm run test:e2e -- tests/e2e/character-motion.spec.ts -g 'pause freezes rendered bones'` | **exit1**，同一暂停截图断言再次失败 | character-pause-recheck.log、character-pause-recheck-results/ |
+| `npm run build`，最后代码单独构建 | exit0，入口index-CjSGTE-J.js；原500KB提示保留 | build-complete.log |
+| `npm run assets:verify` | exit0，现有资产与3份用户FBX校验通过 | assets-complete.log |
+| 实际4176生产构建执行`capture-scene.mjs` | exit0；普通/NPR全景、城堡近景及390×844窄屏共5PNG，已实际查看；0页面错误、0外源、未申请摄像头；本机Apple M4 Metal | capture-complete.log、production/capture.json及PNG |
+
+完整轮中，城堡4项、摄像头整局与休息停帧原用例均通过。唯一失败为旧`model=prototype`人物页`character-motion.spec.ts:17`第25行，两次暂停canvas截图PNG字节不相等；时间断言已通过。trace显示暂停后的time=0.6001、斧头锚点和paints=24始终冻结，网络没有请求FarmWorld/browser或城堡，相关prototype实现/素材/CSS无diff。尚未确认PNG差异原因，不能据此断言骨骼仍在运动、归因为性能或声称与本轮无关；未修改该页或放宽断言，保留待查。详见`prototype-pause-observation.json`。
+
+另有两次早期完整verify被主动中断（exit130）：第一轮为处理审查发现的切镜标记问题，第二轮为处理启动丢点击问题。第二轮失败trace与确定性startup-red测试证明旧按钮在动态模块启动期间可接到无效点击，最小修复后本轮完整摄像头用例通过；这些中断均不记为完整通过。
+
+测试前备份1,395份既有QA；34份被重生成文件先另存本轮`regression/`，再恢复原字节，全部历史SHA一致，见`qa-restoration.json`。既有未提交PROGRESS全文及本机handoff证据保留，未暂存。未重新安装依赖或浏览器。真实摄像头/手机、最终美术、约60fps仍待验；新增60,000面城堡没有性能达标结论。
+
+预览：本轮实际执行`npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`，5173启动成功，`curl`检查NPR入口HTTP200/exit0；开发预览保留运行，临时4176生产服务已停止。打开`http://127.0.0.1:5173/?art=npr-sample`或普通首页，关闭计划弹窗后点击右上“城堡近景”；“全景视角”可返回。第二份没有贴图，当前继续展示第一份。后续等待用户提供带贴图版本或其他明确指令，不自动处理其他旧待办、提交、推送或部署。
+
 ## 最新追加：本轮E2E修复限定范围提交与main推送授权（2026-10-25）
 
 用户在上述验证完成后，明确要求仅提交这次E2E修复和对应验证记录并推送main，保留原有未提交工作，不部署。本轮提交范围为`source-lifecycle.spec.ts`的Chromium模式修复、上一节排查与验证记录及`artifacts/qa/source-lifecycle-20261025/`本轮证据；原有PROGRESS的43行本机接续/安装记录、整个`local-handoff-20261025/`、`progress-before.md`旧记录副本均不纳入提交，原字节保留。

@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/character-motion.spec.ts -g pause freezes rendered bones
+
+[WebServer] (node:45846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45935) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:45936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable (3.8s)
+
+
+  1) tests/e2e/character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      23 |  await page.waitForTimeout(250);
+      24 |  expect(await page.locator('#motionStage').getAttribute('data-time')).toBe(time);
+    > 25 |  expect((await page.locator('#motionCanvas').screenshot()).equals(before)).toBe(true);
+         |                                                                            ^
+      26 |  await page.getByRole('button',{name:'慢速 0.5×'}).click();
+      27 |  await expect(page.getByRole('button',{name:'慢速 0.5×'})).toHaveAttribute('aria-pressed','true');
+      28 |  await page.getByRole('button',{name:'重播动作'}).click();
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/character-motion.spec.ts:25:76
+
+    Error Context: test-results/character-motion-pause-fre-bdef7-on-and-replay-remain-usable/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/character-motion-pause-fre-bdef7-on-and-replay-remain-usable/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/character-motion-pause-fre-bdef7-on-and-replay-remain-usable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable 

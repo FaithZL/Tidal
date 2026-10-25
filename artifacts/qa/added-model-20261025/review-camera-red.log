@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g starting exercise exits castle
+
+[WebServer] (node:42835) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42855) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42903) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:42924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:40:1 › starting exercise exits castle inspection and resizing keeps the exercise camera (8.2s)
+
+
+  1) tests/e2e/castle-model.spec.ts:40:1 › starting exercise exits castle inspection and resizing keeps the exercise camera 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: "2.233,5.364,10.079"
+    Received: "22.460,35.062,49.075"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        18 × locator resolved to <div role="img" data-fallen="0" data-effects="" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-view="castle" data-assets="ready" data-action="ready" data-world-logs="0" data-render-scale="1" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="work" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-castle-triangles="60000" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="22.460,35.062,49.075" data-probe="0.6544,-0.44…>…</div>
+           - unexpected value "22.460,35.062,49.075"
+
+
+      47 |  await page.setViewportSize({width:390,height:844});
+      48 |  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    > 49 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-camera',camera!);
+         |                                             ^
+      50 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-view','farm');
+      51 |  await expect(page.locator('#chopValue')).toHaveText('0/15');
+      52 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:49:45
+
+    Error Context: test-results/castle-model-starting-exer-aa267-g-keeps-the-exercise-camera/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-starting-exer-aa267-g-keeps-the-exercise-camera/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-starting-exer-aa267-g-keeps-the-exercise-camera/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:40:1 › starting exercise exits castle inspection and resizing keeps the exercise camera 

@@ -1,0 +1,8 @@
+file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/castle-texture-20261025/capture-texture.mjs:25
+ if(errors.length||external.length||textures.length!==2||textures.some(t=>t.status!==200))throw new Error(JSON.stringify({errors,external,textures}));
+                                                                                                ^
+
+Error: {"errors":["Failed to load resource: the server responded with a status of 404 (Not Found)"],"external":[],"textures":[{"url":"http://127.0.0.1:4176/assets/user-models/castle-soft-toon-v1.png","status":200},{"url":"http://127.0.0.1:4176/assets/user-models/castle-soft-toon-v1.png","status":200}]}
+    at file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/castle-texture-20261025/capture-texture.mjs:25:97
+
+Node.js v24.14.0

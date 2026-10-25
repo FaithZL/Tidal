@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g a delayed castle
+
+[WebServer] (node:39603) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39623) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:39708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:39712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:22:1 › a delayed castle keeps the farm start gate closed and a missing castle fails explicitly (7.4s)
+
+
+  1) tests/e2e/castle-model.spec.ts:22:1 › a delayed castle keeps the farm start gate closed and a missing castle fails explicitly 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#acceptPlan')
+    Expected: disabled
+    Received: enabled
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#acceptPlan') with timeout 7000ms
+      - waiting for locator('#acceptPlan')
+        17 × locator resolved to <button class="primary" id="acceptPlan">…</button>
+           - unexpected value "enabled"
+
+
+      24 |  await page.route('**/assets/user-models/castle.fbx',async route=>{await gate;await route.fulfill({status:404,body:'missing fixture'});});
+      25 |  await page.goto('/',{waitUntil:'domcontentloaded'});
+    > 26 |  try{await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','loading');}finally{release();}
+         |                                                ^
+      27 |  await expect(page.locator('#renderError')).toContainText('用户城堡模型加载失败');
+      28 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','failed');
+      29 |  await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:26:48
+
+    Error Context: test-results/castle-model-a-delayed-cas-79aa4-ing-castle-fails-explicitly/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-a-delayed-cas-79aa4-ing-castle-fails-explicitly/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-a-delayed-cas-79aa4-ing-castle-fails-explicitly/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:22:1 › a delayed castle keeps the farm start gate closed and a missing castle fails explicitly 

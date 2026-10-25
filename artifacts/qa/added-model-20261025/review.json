@@ -1,0 +1,38 @@
+{
+  "reviewer": "independent read-only code and asset audit",
+  "result": "No remaining blocking findings after two verified fixes",
+  "sourceIntegrity": "castle.fbx matches first supplied source SHA; original character/house bytes unchanged; second textureless source not substituted",
+  "placement": {
+    "worldPosition": [
+      -24,
+      0.025,
+      -9
+    ],
+    "xzBoundsApprox": [
+      [
+        -30.96,
+        -17.04
+      ],
+      [
+        -17.82,
+        -0.18
+      ]
+    ],
+    "clearance": "Inside meadow; separate from forest, fence, road and local NPR slope"
+  },
+  "reviewFixes": [
+    {
+      "issue": "Stage transition retained castle inspection flag, so a later resize could return to castle",
+      "evidence": "review-camera-red.log and archived trace",
+      "fix": "Clear view flag and restore castle fog in existing stage-camera transition",
+      "validation": "e2e-review-green.log"
+    },
+    {
+      "issue": "Initial acceptPlan markup allowed a click during inert dynamic startup; click was lost",
+      "evidence": "verify-startup-failure-results and startup-red.log",
+      "fix": "Initial disabled attribute; existing ready/panel logic enables after handlers and model loading",
+      "validation": "startup-green.log 4/4"
+    }
+  ],
+  "scope": "No domain, input, pose, dependency or original E2E assertion changes; full verify-complete result recorded separately"
+}

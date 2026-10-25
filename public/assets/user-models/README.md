@@ -23,3 +23,17 @@ Three.js 0.186.1 FBXLoader会连接颜色和法线纹理，但源文件的Shinin
 
 - 人物：`de65c08a0c332fa1701e3d2f578f12cdc6d3bf61d19d8514cfda41fa83af1717`
 - 房屋：`e6bec4ad925df0dbd165b363452d95ad72047de56e1a7c8a0910e60d8ede34f7`
+
+## 2026-10-25追加：城堡静态远景
+
+`castle.fbx`是用户提供的`model2b63561bfbee01.fbx`逐字节副本，2,538,316字节、FBX7400、1网格/1材质、60,000三角面，无骨骼/Skin/动画。原文件没有Texture或Video对象、没有内嵌图片或外部贴图引用；保留源灰色材质，未伪称有贴图。运行时统一缩放到12世界单位高并落地，只加入一个远景实例，不投射高面数阴影，不参与训练规则。
+
+随后提供的`modelabd4643519d001.fbx`也没有贴图，三角数相同但几何不同。按“有贴图才换”的条件不作替换，没有收入应用素材。两份源文件均未修改；结构检查和实际第一份模型浏览器预览见`artifacts/qa/added-model-20261025/`。
+
+此授权仅用于本项目本地场景添加；原作者及公开再分发许可仍未提供，没有标为CC0。本轮不提交、推送或部署。原件SHA：`9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede`；第二份检查SHA：`a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06`。
+
+## 2026-10-25新增：独立柔和卡通颜色图集
+
+用户选择柔和卡通石堡后，新增`castle-materials-v1.png`（内置imagegen生成的石墙/岩石/木板/苔藓四区素材）与`castle-soft-toon-v1.png`（本地烘焙至城堡原UV的2048² sRGB颜色图）。完整提示词及SHA/过程见`castle-texture-prompt-v1.txt`、`castle-soft-toon-v1.provenance.json`。原FBX仍无内嵌贴图，文件字节、几何、UV及许可记录未改；新图集仅在运行时独立加载，不是原作者丢失贴图，也不宣称PBR或CC0。
+
+烘焙重现：在仓库根目录执行`node scripts/bake-castle-texture.mjs`，使用已安装的完整Chromium与锁定Three.js，不下载素材。输出与来源SHA记录在`artifacts/qa/castle-texture-20261025/bake-report.json`。建筑/山岩分区与既有凹槽木色为保守几何近似，未添加门窗网格；UV空白扩展8像素用于减小接缝。运行时新增一张颜色图，无三平面运行开销；缺失/解码失败显式报错，不能静默退回灰模。

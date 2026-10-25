@@ -1,0 +1,371 @@
+
+> tidal-farm-motion-demo@0.1.0 verify
+> npm run typecheck && npm run lint && npm run test:unit && npm run test:e2e && npm run build
+
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  49 passed (49)
+      Tests  372 passed (372)
+   Start at  10:39:28
+   Duration  3.88s (tests 93%, import 4%, transform 2%, worker 1%)
+
+    Isolate  49 workers spawned · ~101ms startup each (spawn + environment, per file)
+             at least ~448ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test
+
+[WebServer] (node:43496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:43523) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:43585) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:43612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 81 tests using 1 worker
+
+(node:43613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/boot.spec.ts:3:1 › Three.js farm boots, plan cancels and reopens without starting a session (2.3s)
+  ✓   2 tests/e2e/boot.spec.ts:19:1 › ordinary builds ignore URL acceleration flags (113ms)
+  ✓   3 tests/e2e/character-motion.spec.ts:5:1 › the local motion sample identifies its prototype and never starts exercise input (2.3s)
+  ✓   4 tests/e2e/character-motion.spec.ts:17:1 › pause freezes rendered bones; slow motion and replay remain usable (4.3s)
+[WebServer] 10:39:43 AM [vite] (client) [console.error] TypeError: Failed to fetch
+[WebServer]     at FileLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=749f4ded:31825:3)
+[WebServer]     at GLTFLoader.load (http://127.0.0.1:4173/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js?v=749f4ded:194:10)
+[WebServer]     at http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=749f4ded:31632:10
+[WebServer]     at new Promise (<anonymous>)
+[WebServer]     at GLTFLoader.loadAsync (http://127.0.0.1:4173/node_modules/.vite/deps/three.module-Bj7iJlUn.js?v=749f4ded:31631:10)
+[WebServer]     at loadSampleCharacter (http://127.0.0.1:4173/src/game/world/sampleCharacter.ts:504:10)
+[WebServer]     at start (http://127.0.0.1:4173/src/characterSample.ts:123:17)
+[WebServer]     at http://127.0.0.1:4173/src/characterSample.ts:243:6
+  ✓   5 tests/e2e/character-motion.spec.ts:35:1 › bone asset failure is visible and disables replay (546ms)
+  ✓   6 tests/e2e/character-motion.spec.ts:42:1 › face inspection changes the real camera without changing a paused pose or saved input preference (2.8s)
+  ✓   7 tests/e2e/character-motion.spec.ts:56:1 › switching to idle while paused redraws the bones immediately (2.9s)
+  ✓   8 tests/e2e/character-motion.spec.ts:68:1 › the review timeline selects an exact paused pose without advancing a workout (2.7s)
+  ✓   9 tests/e2e/character-motion.spec.ts:78:1 › the original farm cannot receive clicks before its dynamic module has installed handlers (2.0s)
+  ✓  10 tests/e2e/character-motion.spec.ts:89:1 › entry module download failure is explicit and leaves a usable reload link (94ms)
+  ✓  11 tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads automatically show the explicit demo without requesting a camera (10.8s)
+  ✓  12 tests/e2e/default-demo.spec.ts:24:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload (8.1s)
+  ✓  13 tests/e2e/default-demo.spec.ts:34:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads (5.6s)
+  ✓  14 tests/e2e/default-demo.spec.ts:44:1 › blocked browser storage still allows autoplay and a session-local off switch without errors (5.0s)
+[WebServer] 10:40:23 AM [vite] (client) [Unhandled rejection] Error: User house loading cancelled
+[WebServer]  > UserHouseMount.dispose src/game/world/userHouseMount.ts:22:14
+[WebServer]     20 |    if(this.closed)return;this.closed=true;
+[WebServer]     21 |    if(this.model){this.model.root.removeFromParent();this.model.dispose();this.model=null;}
+[WebServer]     22 |    this.cancel(new Error('User house loading cancelled'));
+[WebServer]        |                ^
+[WebServer]     23 |   }
+[WebServer]     24 |  }
+[WebServer]  > FarmWorld.destroy src/game/world/FarmWorld.ts:200:72
+[WebServer]  > new FarmWorld src/game/world/FarmWorld.ts:121:21
+[WebServer]  > createGame src/game/createGame.ts:7:13
+[WebServer]  > src/browser.ts:45:13
+[WebServer] 
+  ✓  15 tests/e2e/default-demo.spec.ts:53:1 › a renderer initialization failure keeps default autoplay at home with no hidden progression (825ms)
+  ✓  16 tests/e2e/demo-toggle.spec.ts:6:1 › no-camera demo is explicit, completes the full farm flow and resets with its chosen preference without camera requests (9.5s)
+  ✓  17 tests/e2e/demo-toggle.spec.ts:39:1 › turning demo off cancels partial input and pauses; manual mode can resume (4.3s)
+  ✓  18 tests/e2e/demo-toggle.spec.ts:51:1 › real camera stays separate after demo and errors never turn simulation back on (2.4s)
+  ✓  19 tests/e2e/demo-toggle.spec.ts:64:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off (8.8s)
+  ✓  20 tests/e2e/demo-toggle.spec.ts:86:1 › enabling simulation cancels a pending camera request and releases the late stream (2.9s)
+  ✓  21 tests/e2e/keyboard-flow.spec.ts:19:1 › two complete keyboard sessions with pauses, conserved inventory and reset (33.9s)
+  ✓  22 tests/e2e/keyboard-flow.spec.ts:52:1 › repeat keys, control focus and a reset during animation cannot add an extra rep (3.5s)
+  ✓  23 tests/e2e/keyboard-flow.spec.ts:68:1 › pointer cancel and blur release carry; returning requires explicit continue (17.0s)
+  ✓  24 tests/e2e/keyboard-flow.spec.ts:82:1 › Escape opens an exit confirmation; cancel preserves progress and existing pause (2.8s)
+  ✓  25 tests/e2e/keyboard-flow.spec.ts:95:1 › P works after clicking pause but cannot resume behind the exit dialog (2.4s)
+[WebServer] 10:41:54 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:41:54 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:41:54 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:41:54 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  26 tests/e2e/npr-sample.spec.ts:6:1 › NPR sample waits for its real local atlas before autoplay or manual start (4.1s)
+[WebServer] 10:41:58 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:41:58 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:41:58 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:41:58 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  27 tests/e2e/npr-sample.spec.ts:19:1 › the separate leaf cutout must also finish before the sample can start (3.6s)
+[WebServer] 10:42:01 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:01 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:01 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:01 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  28 tests/e2e/npr-sample.spec.ts:31:1 › a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay (2.8s)
+[WebServer] 10:42:04 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:04 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:04 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:04 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  29 tests/e2e/npr-sample.spec.ts:37:1 › NPR missing texture fails visibly and cannot advance a hidden session (2.9s)
+[WebServer] 10:42:07 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:07 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:07 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:07 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  30 tests/e2e/npr-sample.spec.ts:44:1 › reset while sample assets load cancels the deferred automatic start (4.0s)
+[WebServer] 10:42:11 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:11 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:11 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:11 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  31 tests/e2e/npr-sample.spec.ts:54:1 › late atlas completion cannot revive controls after graphics context loss and reset (3.0s)
+[WebServer] 10:42:14 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:14 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:14 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:14 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  32 tests/e2e/npr-sample.spec.ts:68:1 › sample keeps explicit real camera selection and never falls back to simulation on device failure (8.5s)
+[WebServer] 10:42:23 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:23 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  33 tests/e2e/npr-sample.spec.ts:78:1 › a rendered chop blends between poses, freezes mid-swing on pause and resumes without duplicate credit (10.6s)
+[WebServer] 10:42:33 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:33 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  34 tests/e2e/npr-sample.spec.ts:100:1 › reset during a partial swing immediately snaps the rendered hands to the new home pose (8.6s)
+[WebServer] 10:42:42 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:42 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:42 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:42 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  35 tests/e2e/npr-sample.spec.ts:121:1 › local NPR sample keeps pause, input switch, inventory and complete simulated results (14.1s)
+  ✓  36 tests/e2e/render-efficiency.spec.ts:4:1 › unchanged homepage HUD retains text nodes and does not mutate on every animation frame (2.3s)
+  ✓  37 tests/e2e/render-efficiency.spec.ts:21:1 › HUD optimization still shows action phases immediately and commits exactly one rep (3.0s)
+[WebServer] 10:42:59 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:59 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:42:59 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:42:59 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:05 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:05 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:05 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:05 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  38 tests/e2e/user-models.spec.ts:3:1 › the supplied character exposes local derived-bone motion and keeps the house review usable (6.8s)
+[WebServer] 10:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  39 tests/e2e/user-models.spec.ts:28:1 › derived user bones really move, freeze on pause and scrub without changing the saved mock preference (3.3s)
+[WebServer] 10:43:09 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:09 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:09 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:09 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  40 tests/e2e/user-models.spec.ts:57:1 › the original supplied fixed pose remains an explicitly static comparison (904ms)
+[WebServer] 10:43:10 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:10 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:10 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:10 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  41 tests/e2e/user-models.spec.ts:66:1 › hand and elbow inspection pauses the current pose and returns to stable full character framing (3.0s)
+[WebServer] 10:43:13 AM [vite] (client) [console.error] Error: 用户人物模型加载失败（404）
+[WebServer]     at loadUserModel (http://127.0.0.1:4173/src/game/world/userModel.ts:154:26)
+[WebServer]     at async Promise.all (index 0)
+[WebServer]     at async start (http://127.0.0.1:4173/src/userModelSample.ts:242:30)
+[WebServer] 10:43:13 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:13 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  42 tests/e2e/user-models.spec.ts:88:1 › a supplied FBX failure is visible and never silently uses the old model (452ms)
+[WebServer] 10:43:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  43 tests/e2e/user-models.spec.ts:97:1 › the farm waits for both supplied models and marks the fixed-pose character without changing inventory (3.3s)
+[WebServer] 10:43:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  44 tests/e2e/user-models.spec.ts:110:1 › a supplied house failure keeps the farm start gate closed (2.5s)
+[WebServer] 10:43:20 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:20 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:20 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:20 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  45 tests/e2e/user-models.spec.ts:125:1 › all eight embedded-image object URLs are revoked after actual browser decoding (1.6s)
+[WebServer] 10:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  46 tests/e2e/user-models.spec.ts:131:1 › a late model cannot reopen a viewer after context loss and still revokes its image URLs (803ms)
+  ✓  47 tests/e2e/visual-states.spec.ts:18:1 › farm actors replay real keyboard stages, committed effects, both NPC scripts and reset (1.3m)
+(node:43862) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  48 tests/e2e/calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate (2.7s)
+  ✓  49 tests/e2e/calibration.spec.ts:46:1 › synthetic Worker fixture traverses real UI calibration, then invalidation clears readiness without counting (15.7s)
+  ✓  50 tests/e2e/calibration.spec.ts:63:1 › leaving setup, changing source or hiding the page cancels calibration sampling (5.9s)
+(node:43881) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  51 tests/e2e/camera-errors.spec.ts:11:1 › denied permission is explicit and does not silently start keyboard (2.1s)
+  ✓  52 tests/e2e/camera-errors.spec.ts:22:1 › missing model is visible and closes the video tracks (2.2s)
+  ✓  53 tests/e2e/camera-errors.spec.ts:30:1 › local Worker model performs inference on synthetic camera; reset releases capture (2.5s)
+  ✓  54 tests/e2e/camera-errors.spec.ts:44:1 › immediate cancel never opens a late camera and retry remains possible (2.5s)
+  ✓  55 tests/e2e/camera-errors.spec.ts:57:3 › camera NotFoundError has an actionable device error (2.0s)
+  ✓  56 tests/e2e/camera-errors.spec.ts:57:3 › camera NotReadableError has an actionable device error (2.0s)
+  ✓  57 tests/e2e/camera-errors.spec.ts:57:3 › camera NotSupportedError has an actionable device error (2.0s)
+(node:43900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 10:45:22 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:45:22 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:45:22 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:45:22 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  58 tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene (1.6s)
+  ✓  59 tests/e2e/castle-model.spec.ts:29:1 › a delayed castle keeps the farm start gate closed and a missing castle fails explicitly (461ms)
+  ✓  60 tests/e2e/castle-model.spec.ts:40:1 › starting exercise exits castle inspection and resizing keeps the exercise camera (968ms)
+(node:43923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  61 tests/e2e/deployment.spec.ts:16:64 › desktop 1280x720 keeps controls visible through a complete simulated session (9.0s)
+  ✓  62 tests/e2e/deployment.spec.ts:16:64 › desktop 1366x768 keeps controls visible through a complete simulated session (9.0s)
+  ✓  63 tests/e2e/deployment.spec.ts:16:64 › desktop 1920x1080 keeps controls visible through a complete simulated session (10.2s)
+  ✓  64 tests/e2e/deployment.spec.ts:29:1 › audio requires explicit unlock, can mute and failure leaves the farm usable (4.3s)
+  ✓  65 tests/e2e/deployment.spec.ts:43:1 › ten camera start-exit-reset cycles release tracks workers timers and listeners without sustained heap growth (5.3s)
+  ✓  66 tests/e2e/deployment.spec.ts:104:3 › production under /tidal/ › the isolated character review loads its bones and textures under the same subpath (2.2s)
+  ✓  67 tests/e2e/deployment.spec.ts:113:3 › production under /tidal/ › the supplied character and house load locally under the same subpath (1.3s)
+  ✓  68 tests/e2e/deployment.spec.ts:124:3 › production under /tidal/ › all local assets and real MediaPipe inference work with external requests blocked (2.7s)
+  ✓  69 tests/e2e/deployment.spec.ts:134:83 › production under /tidal/ › models/pose_landmarker_lite.task 404 reports failure and releases capture (2.0s)
+  ✓  70 tests/e2e/deployment.spec.ts:134:83 › production under /tidal/ › mediapipe/wasm/*.wasm 404 reports failure and releases capture (2.1s)
+(node:43990) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  71 tests/e2e/source-lifecycle.spec.ts:6:1 › camera start stays disabled without calibration and simulation cannot enable it (1.0m)
+(node:44013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  72 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (2.5m)
+(node:44104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  73 tests/e2e/source-lifecycle.spec.ts:30:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (21.4s)
+  ✘  74 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (27.0s)
+
+
+  1) tests/e2e/source-lifecycle.spec.ts:6:1 › camera start stays disabled without calibration and simulation cannot enable it 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Browser logs:
+
+    <launching> /Users/zero/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --use-fake-device-for-media-stream --use-fake-ui-for-media-stream --user-data-dir=/var/folders/gm/zr6wg2cn0s131km1843yb1lw0000gn/T/playwright_chromiumdev_profile-qi5KYH --remote-debugging-pipe --no-startup-window
+    <launched> pid=43991
+    [pid=43991][err] [43999:862119:1025/104613.299279:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862181:1025/104613.299481:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862119:1025/104613.301578:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862181:1025/104613.301647:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862119:1025/104613.301767:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862181:1025/104613.301819:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862119:1025/104613.301909:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862181:1025/104613.301945:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862119:1025/104613.302032:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991][err] [43999:862181:1025/104613.302070:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=43991] <gracefully close start>
+    [pid=43991][err] [43991:862117:1025/104713.324641:ERROR:base/process/process_mac.cc:45] task_policy_set TASK_CATEGORY_POLICY: (os/kern) invalid argument (4)
+    [pid=43991][err] [43991:862117:1025/104713.324675:ERROR:base/process/process_mac.cc:90] task_policy_set TASK_SUPPRESSION_POLICY: (os/kern) invalid argument (4)
+    Call log:
+      - waiting for locator('#setupDemoToggle')
+        - locator resolved to <button role="switch" id="setupDemoToggle" aria-checked="false" class="secondary demo-toggle">无摄像头测试：关</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        111 × waiting for element to be visible, enabled and stable
+            - element is not visible
+          - retrying click action
+            - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+
+
+       6 | test('camera start stays disabled without calibration and simulation cannot enable it',async({page})=>{
+       7 |   await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await expect(page.locator('#beginCamera')).toBeDisabled();
+    >  8 |   await page.locator('#setupDemoToggle').click();await expect(page.locator('#beginCamera')).toBeHidden();
+         |                                          ^
+       9 | });
+      10 | test('synthetic camera pipeline completes the farm through real recognizers and releases resources',async({page})=>{
+      11 |   test.setTimeout(150000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await installPoseFixture(page);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/source-lifecycle.spec.ts:8:42
+
+    Error Context: test-results/source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-camera-st-e1c8e-simulation-cannot-enable-it/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources 
+
+    Test timeout of 150000ms exceeded.
+
+    Error Context: test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation 
+
+    Test was interrupted.
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#inputDebug')
+    - Expected substring  - 1
+    + Received string     + 4
+
+    -  · ready ·
+    + camera · run-1 · epoch 3 · chop-down · 等待/有效输入
+    + 游戏帧间隔 p95 16.8ms（最近120帧，非端到端延迟）
+    + 640×480 · 33 个关键点 · 15.2 Hz · 推理 p50/p95 0/0ms · 样本年龄 0ms · 人体关键点可用
+    + 右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px
+
+    Call log:
+      - Expect "toContainText" locator('#inputDebug') with timeout 7000ms
+      - waiting for locator('#inputDebug')
+        3 × locator resolved to <small id="inputDebug">camera · run-1 · epoch 3 · chop-down · 等待/有效输入↵游戏…</small>
+          - unexpected value "camera · run-1 · epoch 3 · chop-down · 等待/有效输入
+    游戏帧间隔 p95 16.8ms（最近120帧，非端到端延迟）
+    640×480 · 33 个关键点 · 15.2 Hz · 推理 p50/p95 0/0ms · 样本年龄 0ms · 人体关键点可用
+    右侧 · 置信度 0.99 · 膝 180.0° · 肘 168.7° · 腕相对髋 (0.19, 0.35) · 躯干 130px"
+      - Test ended.
+
+
+       at ../helpers/browserPoseFixture.ts:31
+
+      29 | /** Drive valid observed phases, not an assumed number of frames in a fixed sleep. */
+      30 | export async function completeSyntheticChop(page:Page,count:number){
+    > 31 |   await setPose(page,'raised',0);await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
+         |                                                                            ^
+      32 |   await setPose(page,'down',0);await expect(page.locator('#inputDebug')).toContainText(' · chop-down ·');
+      33 |   // Keep the real minimum-cycle protection; 450ms of commanded down can become
+      34 |   // only 396ms between confirmations after 15Hz sampling and smoothing.
+        at completeSyntheticChop (/Users/zero/work/ai_ws/Tidal/tests/helpers/browserPoseFixture.ts:31:76)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/source-lifecycle.spec.ts:53:25
+
+    Error Context: test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/source-lifecycle-a-stalled-a6719-ve-task-without-preparation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/source-lifecycle.spec.ts:6:1 › camera start stays disabled without calibration and simulation cannot enable it 
+    tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources 
+  1 interrupted
+    tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation 
+  7 did not run
+  71 passed (11.0m)

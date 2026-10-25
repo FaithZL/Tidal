@@ -1,0 +1,23 @@
+{
+  "selected": {
+    "source": "model2b63561bfbee01.fbx",
+    "bytes": 2538316,
+    "sha256": "9e9eb6ca8ed8de21894a9063fcf0b8d9ba09917298e6c6308584205fba831ede",
+    "triangles": 60000,
+    "textureObjects": 0,
+    "embeddedImages": 0,
+    "animations": 0,
+    "usedAs": "Local static castle landmark"
+  },
+  "conditionalReplacement": {
+    "source": "modelabd4643519d001.fbx",
+    "bytes": 2645452,
+    "sha256": "a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06",
+    "triangles": 60000,
+    "textureObjects": 0,
+    "embeddedImages": 0,
+    "animations": 0,
+    "used": false,
+    "reason": "User requested replacement only if textures are present; source geometry differs, still no textures"
+  }
+}

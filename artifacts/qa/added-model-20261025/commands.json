@@ -1,0 +1,217 @@
+[
+  {
+    "command": "file /Users/zero/Documents/model2b63561bfbee01.fbx",
+    "exitCode": 0,
+    "result": "FBX7400 binary"
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/preview-source.mjs",
+    "exitCode": 0,
+    "log": "preview-source.log",
+    "result": "Actual browser source preview; front/back PNGs reviewed"
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userModel.test.ts tests/unit/userHouseMount.test.ts",
+    "exitCode": 1,
+    "log": "unit-red.log",
+    "elapsedSeconds": 0.786
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'a delayed castle'",
+    "exitCode": 1,
+    "log": "e2e-red.log",
+    "elapsedSeconds": 10.419
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userModel.test.ts tests/unit/userHouseMount.test.ts",
+    "exitCode": 0,
+    "log": "unit-green.log",
+    "elapsedSeconds": 0.611
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "elapsedSeconds": 1.126
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-verify.log",
+    "elapsedSeconds": 0.164
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-target.log",
+    "elapsedSeconds": 4.811
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-review.log",
+    "elapsedSeconds": 1.436
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'the supplied castle'",
+    "exitCode": 1,
+    "log": "focus-red.log",
+    "elapsedSeconds": 61.804
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "focus-green.log",
+    "elapsedSeconds": 3.726
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-visual.log",
+    "elapsedSeconds": 1.525
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/capture-scene.mjs",
+    "exitCode": 0,
+    "log": "capture-scene.log",
+    "elapsedSeconds": 2.065
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-placement.log",
+    "elapsedSeconds": 1.377
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/capture-scene.mjs",
+    "exitCode": 0,
+    "log": "capture-placement.log",
+    "elapsedSeconds": 2.081
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'the supplied castle'",
+    "exitCode": 1,
+    "log": "resize-red.log",
+    "elapsedSeconds": 9.452
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-final-target.log",
+    "elapsedSeconds": 3.674
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-final-view.log",
+    "elapsedSeconds": 1.516
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/capture-scene.mjs",
+    "exitCode": 0,
+    "log": "capture-final-view.log",
+    "elapsedSeconds": 2.025
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-inspection.log",
+    "elapsedSeconds": 1.421
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/capture-scene.mjs",
+    "exitCode": 0,
+    "log": "capture-inspection.log",
+    "elapsedSeconds": 2.082
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'the supplied castle'",
+    "exitCode": 1,
+    "log": "narrow-controls-red.log",
+    "elapsedSeconds": 2.483
+  },
+  {
+    "command": "npm run verify",
+    "exitCode": 130,
+    "log": "verify.log",
+    "elapsedSeconds": 81.656
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'starting exercise exits castle'",
+    "exitCode": 1,
+    "log": "review-camera-red.log",
+    "elapsedSeconds": 9.851
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-review-green.log",
+    "elapsedSeconds": 4.88
+  },
+  {
+    "command": "npm run verify",
+    "exitCode": 130,
+    "log": "verify-final.log",
+    "elapsedSeconds": 667.587
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts -g 'accepting the plan waits'",
+    "exitCode": 1,
+    "log": "startup-red.log",
+    "elapsedSeconds": 8.881
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "startup-green.log",
+    "elapsedSeconds": 5.325
+  },
+  {
+    "command": "npm run verify",
+    "exitCode": 1,
+    "log": "verify-complete.log",
+    "elapsedSeconds": 597.393
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/character-motion.spec.ts -g 'pause freezes rendered bones'",
+    "exitCode": 1,
+    "log": "character-pause-recheck.log",
+    "elapsedSeconds": 5.144
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-complete.log",
+    "elapsedSeconds": 1.488
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-complete.log",
+    "elapsedSeconds": 0.139
+  },
+  {
+    "command": "node artifacts/qa/added-model-20261025/capture-scene.mjs",
+    "exitCode": 0,
+    "log": "capture-complete.log",
+    "elapsedSeconds": 2.276
+  },
+  {
+    "command": "Restore historical QA from backup and SHA256 verify",
+    "exitCode": 0,
+    "result": "1395/1395 original files match; 34 regenerated outputs archived under regression/"
+  },
+  {
+    "command": "git diff --check",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run dev -- --host 127.0.0.1 --port 5173 --strictPort",
+    "result": "Server ready at 5173; left running for local preview"
+  },
+  {
+    "command": "curl --fail --silent -o /dev/null -w 'HTTP %{http_code}\\n' 'http://127.0.0.1:5173/?art=npr-sample'",
+    "exitCode": 0,
+    "result": "HTTP 200"
+  }
+]

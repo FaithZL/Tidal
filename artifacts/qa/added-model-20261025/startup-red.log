@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g accepting the plan waits
+
+[WebServer] (node:44216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44289) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44310) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:44331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:55:1 › accepting the plan waits for dynamic startup handlers instead of losing an early click (7.3s)
+
+
+  1) tests/e2e/castle-model.spec.ts:55:1 › accepting the plan waits for dynamic startup handlers instead of losing an early click 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#acceptPlan')
+    Expected: disabled
+    Received: enabled
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#acceptPlan') with timeout 7000ms
+      - waiting for locator('#acceptPlan')
+        18 × locator resolved to <button class="primary" id="acceptPlan">…</button>
+           - unexpected value "enabled"
+
+
+      57 |  await page.route('**/src/browser.ts',async route=>{await gate;await route.continue();});
+      58 |  await page.goto('/',{waitUntil:'domcontentloaded'});
+    > 59 |  try{await expect(page.locator('#acceptPlan')).toBeDisabled();}finally{release();}
+         |                                                ^
+      60 |  await expect(page.locator('#acceptPlan')).toBeEnabled();await page.locator('#acceptPlan').click();
+      61 |  await expect(page.locator('#setupModal')).toBeVisible();
+      62 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:59:48
+
+    Error Context: test-results/castle-model-accepting-the-81f88-ad-of-losing-an-early-click/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-accepting-the-81f88-ad-of-losing-an-early-click/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-accepting-the-81f88-ad-of-losing-an-early-click/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:55:1 › accepting the plan waits for dynamic startup handlers instead of losing an early click 

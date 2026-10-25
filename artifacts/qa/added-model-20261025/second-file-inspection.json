@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-25",
+  "method": "Read-only binary FBX structure decode with zlib array decoding; no Blender, uploads, external imports or asset rewriting.",
+  "reports": [
+    {
+      "file": "/Users/zero/Documents/modelabd4643519d001.fbx",
+      "bytes": 2645452,
+      "sha256": "a515a25354b81a2a55cd129217aa67456b9e9dbfaa503bcf8aec51576b4b0c06",
+      "version": 7400,
+      "creator": "Blender (stable FBX IO) - 4.3.2 - 5.12.5",
+      "globalSettings": {
+        "UpAxis": [
+          1
+        ],
+        "UpAxisSign": [
+          1
+        ],
+        "FrontAxis": [
+          2
+        ],
+        "FrontAxisSign": [
+          1
+        ],
+        "CoordAxis": [
+          0
+        ],
+        "CoordAxisSign": [
+          1
+        ],
+        "OriginalUpAxis": [
+          -1
+        ],
+        "OriginalUpAxisSign": [
+          1
+        ],
+        "UnitScaleFactor": [
+          1
+        ],
+        "OriginalUnitScaleFactor": [
+          1
+        ],
+        "AmbientColor": [
+          0,
+          0,
+          0
+        ],
+        "DefaultCamera": [
+          "Producer Perspective"
+        ],
+        "TimeMode": [
+          11
+        ],
+        "TimeSpanStart": [
+          0
+        ],
+        "TimeSpanStop": [
+          46186158000
+        ],
+        "CustomFrameRate": [
+          24
+        ]
+      },
+      "objectCounts": {
+        "Geometry": 1,
+        "Model": 1,
+        "Material": 1
+      },
+      "geometries": [
+        {
+          "id": 496285852,
+          "name": "model::Geometry",
+          "type": "Mesh",
+          "controlPoints": 29872,
+          "polygonCorners": 180000,
+          "polygons": 60000,
+          "triangles": 60000,
+          "bounds": {
+            "min": [
+              -0.9162208437919617,
+              -0.7034101486206055,
+              -0.6093239188194275
+            ],
+            "max": [
+              0.8557447791099548,
+              0.7883388996124268,
+              0.6030668616294861
+            ]
+          },
+          "layers": [
+            {
+              "kind": "LayerElementNormal",
+              "mapping": "ByPolygonVertex",
+              "reference": "IndexToDirect"
+            },
+            {
+              "kind": "LayerElementUV",
+              "mapping": "ByPolygonVertex",
+              "reference": "IndexToDirect"
+            },
+            {
+              "kind": "LayerElementMaterial",
+              "mapping": "AllSame",
+              "reference": "IndexToDirect"
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "id": 968467586,
+          "name": "model::Model",
+          "type": "Mesh",
+          "properties": {
+            "Lcl Rotation": [
+              -90.00000250447816,
+              0,
+              0
+            ],
+            "Lcl Scaling": [
+              100,
+              100,
+              100
+            ],
+            "DefaultAttributeIndex": [
+              0
+            ],
+            "InheritType": [
+              1
+            ]
+          }
+        }
+      ],
+      "deformers": [],
+      "animationObjects": {},
+      "materials": [
+        {
+          "id": 410232361,
+          "name": "model::Material",
+          "shadingModel": "Phong",
+          "properties": {
+            "DiffuseColor": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "EmissiveColor": [
+              1,
+              1,
+              1
+            ],
+            "EmissiveFactor": [
+              0
+            ],
+            "AmbientColor": [
+              0.05087608844041824,
+              0.05087608844041824,
+              0.05087608844041824
+            ],
+            "AmbientFactor": [
+              0
+            ],
+            "BumpFactor": [
+              0
+            ],
+            "SpecularColor": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "SpecularFactor": [
+              0.25
+            ],
+            "Shininess": [
+              35.99999928474426
+            ],
+            "ShininessExponent": [
+              35.99999928474426
+            ],
+            "ReflectionColor": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "ReflectionFactor": [
+              0.05000000074505806
+            ]
+          }
+        }
+      ],
+      "textures": [],
+      "videos": [],
+      "connections": [
+        [
+          "OO",
+          968467586,
+          0
+        ],
+        [
+          "OO",
+          496285852,
+          968467586
+        ],
+        [
+          "OO",
+          410232361,
+          968467586
+        ]
+      ],
+      "cpuParse": {
+        "method": "Three.js FBXLoader r186 CPU parse; TextureLoader.load stubbed to return Texture without decoding or network. Browser render remains separate evidence.",
+        "warnings": [],
+        "worldBounds": {
+          "min": [
+            -91.62208437919617,
+            -60.9323953278816,
+            -78.83389259733167
+          ],
+          "max": [
+            85.57447791099548,
+            60.30668923765209,
+            70.34101752550002
+          ]
+        },
+        "animationClips": 0,
+        "meshes": [
+          {
+            "name": "model",
+            "type": "Mesh",
+            "positions": 180000,
+            "normals": 180000,
+            "uvCount": 180000,
+            "triangles": 60000,
+            "finitePositions": true,
+            "finiteNormals": true,
+            "finiteUV": true,
+            "skinIndex": false,
+            "skinWeight": false,
+            "materialTypes": [
+              {
+                "type": "MeshPhongMaterial",
+                "map": false,
+                "normalMap": false,
+                "shininess": 35.99999928474426
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

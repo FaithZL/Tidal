@@ -1,0 +1,23 @@
+{
+  "baselineFileCount": 1808,
+  "intentionalChangesToExistingPaths": [
+    "tests/unit/userModel.test.ts",
+    "tests/e2e/castle-model.spec.ts",
+    "docs/SOURCES.md",
+    "docs/PROGRESS.md",
+    "public/assets/user-models/provenance.json",
+    "public/assets/user-models/README.md",
+    "scripts/verify-assets.mjs",
+    "src/game/world/userModel.ts"
+  ],
+  "allOtherBaselineFileSHA256Match": true,
+  "historicalQAFileCount": 1539,
+  "allHistoricalQASHA256Match": true,
+  "restorationRequired": false,
+  "originalProgressSuffixPreserved": true,
+  "allThreeFBXAndBothSourceFilesPreserved": true,
+  "originalCharacterHouseMetadataPreserved": true,
+  "stagedFiles": [],
+  "HEAD": "94148c2caa14327625a7d5f7ae4f7eefd421f78d",
+  "noCommitPushOrDeploymentThisTask": true
+}

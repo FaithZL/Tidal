@@ -67,7 +67,7 @@
         <details class="developer-note"><summary>输入诊断</summary><small id="inputDebug">等待输入</small></details>
       </aside>
     </main>
-    <div class="view-controls" aria-label="三维视角控制"><span>拖拽旋转 · 滚轮缩放</span><button id="viewLeft" class="secondary" aria-label="向左旋转视角">↶</button><button id="viewRight" class="secondary" aria-label="向右旋转视角">↷</button><button id="viewReset" class="secondary">全景视角</button></div>
+    <div class="view-controls" aria-label="三维视角控制"><span>拖拽旋转 · 滚轮缩放</span><button id="viewLeft" class="secondary" aria-label="向左旋转视角">↶</button><button id="viewRight" class="secondary" aria-label="向右旋转视角">↷</button><button id="viewCastle" class="secondary" disabled>城堡近景</button><button id="viewReset" class="secondary">全景视角</button></div>
     <aside id="livePreview" class="media-pip" hidden aria-label="运动状态画中画">
       <div class="pip-heading"><span class="live-dot"></span><b id="liveSource">运动预览</b><span>MOVE WITH TIDAL</span></div>
       <div id="gamePreviewHost"></div>
@@ -88,7 +88,7 @@
       <div class="plan-card"><span class="plan-number">02</span><div><b>收集木材</b><small id="planLoad">深蹲推举 15 次 · 装车 15 份木材</small></div></div>
       <div class="plan-card"><span class="plan-number">03</span><div><b>推车回家</b><small id="planCarry">持续持姿 60 秒 · 返回农场</small></div></div>
       <div class="modal-info">今日为预设训练计划 · 概念演示，非 AI 自动规划。</div>
-      <div class="modal-actions"><button class="secondary" id="cancelPlan">稍后再说</button><button class="primary" id="acceptPlan">接受今天的任务 <span>→</span></button></div>
+      <div class="modal-actions"><button class="secondary" id="cancelPlan">稍后再说</button><button class="primary" id="acceptPlan" disabled>接受今天的任务 <span>→</span></button></div>
     </div>
   </div>
   <div class="modal-backdrop" id="setupModal" hidden>

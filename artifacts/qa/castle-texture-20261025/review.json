@@ -1,0 +1,22 @@
+{
+  "result": "No blocking findings after actual desktop/back/narrow visual review and independent code review",
+  "runtime": "Castle-only local PNG complete decode before ready; texture source owner and blob URL cleanup retained; character/house paths unchanged",
+  "visual": "Light stone and dark recessed timber; low facade false wood removed, rear continuous rock; source geometry remains intact",
+  "provenance": "New built-in imagegen material bake, not restored original material or CC0; FBX not uploaded",
+  "validation": {
+    "typecheck": 0,
+    "lint": 0,
+    "unit": "376/376",
+    "modelE2E": "15/15",
+    "finalCastleE2E": "6/6",
+    "build": 0,
+    "assetVerify": 0,
+    "productionCapture": 0
+  },
+  "limits": [
+    "7,761,436-byte new color PNG; no performance target claim",
+    "Approximate geometric material mask, final art awaits user review",
+    "Previous prototype pause screenshot failure remains; full verify not rerun",
+    "Browser favicon.ico404 retained separately in console record"
+  ]
+}

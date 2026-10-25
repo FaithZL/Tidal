@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g the supplied castle
+
+[WebServer] (node:41359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41427) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41447) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:41448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene (7.8s)
+
+
+  1) tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 
+
+    Error: expect(locator).not.toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: not "-1.239,20.251,19.451"
+    Received: "-1.239,20.251,19.451"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "not toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        - locator resolved to <div role="img" data-fallen="0" data-effects="" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-view="castle" data-assets="ready" data-action="ready" data-world-logs="0" data-render-scale="1" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="idle" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-castle-triangles="60000" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="-1.239,20.251,19.451" data-probe="0.4685,-1.23…>…</div>
+        17 × unexpected value "-1.239,20.251,19.451"
+           - locator resolved to <div role="img" data-fallen="0" data-effects="" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-view="castle" data-assets="ready" data-action="ready" data-world-logs="0" data-render-scale="1" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="idle" data-art="tidal-farm-3d-v2" data-renderer="Three.js r186" data-castle-triangles="60000" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面0、车上0、到家0。" data-camera="-1.239,20.251,19.451" data-probe="1.8034,-1.23…>…</div>
+        - unexpected value "-1.239,20.251,19.451"
+
+
+      19 |   await expect(page.locator('#chopValue')).toHaveText('0/15');
+      20 |   const desktopCamera=await page.locator('#worldCanvas').getAttribute('data-camera');await page.setViewportSize({width:390,height:844});
+    > 21 |   await expect(page.locator('#worldCanvas')).not.toHaveAttribute('data-camera',desktopCamera!);await page.locator('#viewReset').click();
+         |                                                  ^
+      22 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-view','farm');
+      23 |  }
+      24 |  expect(errors).toEqual([]);expect(external).toEqual([]);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:21:50
+
+    Error Context: test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 

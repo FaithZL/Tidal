@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/castle-model.spec.ts -g the supplied castle
+
+[WebServer] (node:42070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42090) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:42158) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:42159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene (871ms)
+
+
+  1) tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 119
+    Received:    154
+
+      21 |   await expect(page.locator('#worldCanvas')).not.toHaveAttribute('data-camera',desktopCamera!);
+      22 |   const control=await page.locator('#viewCastle').boundingBox(),title=await page.locator('.scene-head h1').boundingBox();
+    > 23 |   expect(control!.y+control!.height).toBeLessThanOrEqual(title!.y);await page.locator('#viewReset').click();
+         |                                      ^
+      24 |   await expect(page.locator('#worldCanvas')).toHaveAttribute('data-view','farm');
+      25 |  }
+      26 |  expect(errors).toEqual([]);expect(external).toEqual([]);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/castle-model.spec.ts:23:38
+
+    Error Context: test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/castle-model-the-supplied--eca23-he-farm-and-local-NPR-scene/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/castle-model.spec.ts:4:1 › the supplied castle is a real grounded mesh in the farm and local NPR scene 
