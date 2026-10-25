@@ -1,0 +1,2886 @@
+{
+  "url": "http://127.0.0.1:4176/?art=npr-sample",
+  "browser": "156.0.8078.4",
+  "input": "Existing default automatic demo, normal production timing; no controller/input/clock mutation",
+  "recording": "Actual WebGL canvas.captureStream(30) and MediaRecorder; synthetic 3D scene, no person or camera video",
+  "recordedAt": "2026-10-25T08:53:06.476Z",
+  "mimeType": "video/webm;codecs=vp9",
+  "bytes": 1352353,
+  "startedAt": 43198,
+  "endedAt": 46670.90000000596,
+  "elapsedMs": 3472.9000000059605,
+  "samples": [
+    {
+      "time": 43198.10000000894,
+      "action": "stand-up",
+      "hand": [
+        -1.2853,
+        1.2303,
+        -0.0601
+      ],
+      "motionRevision": "929",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43203.70000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.2878,
+        1.2877,
+        -0.0601
+      ],
+      "motionRevision": "930",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43220.10000000894,
+      "action": "press-up",
+      "hand": [
+        -1.2829,
+        1.3119,
+        -0.0601
+      ],
+      "motionRevision": "931",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43236.80000001192,
+      "action": "press-up",
+      "hand": [
+        -1.2793,
+        1.3759,
+        -0.0601
+      ],
+      "motionRevision": "932",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43253.30000001192,
+      "action": "press-up",
+      "hand": [
+        -1.2816,
+        1.4656,
+        -0.0601
+      ],
+      "motionRevision": "933",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43269.80000001192,
+      "action": "press-up",
+      "hand": [
+        -1.2925,
+        1.5672,
+        -0.0601
+      ],
+      "motionRevision": "934",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43286.70000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3102,
+        1.6654,
+        -0.06
+      ],
+      "motionRevision": "935",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43303.20000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3305,
+        1.7492,
+        -0.06
+      ],
+      "motionRevision": "936",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43320,
+      "action": "press-up",
+      "hand": [
+        -1.3637,
+        1.7967,
+        -0.0608
+      ],
+      "motionRevision": "937",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43336.70000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3845,
+        1.8202,
+        -0.0613
+      ],
+      "motionRevision": "938",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43353.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3559,
+        1.7881,
+        -0.0618
+      ],
+      "motionRevision": "939",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43370.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3178,
+        1.7392,
+        -0.0618
+      ],
+      "motionRevision": "940",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43386.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2771,
+        1.6754,
+        -0.0617
+      ],
+      "motionRevision": "941",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43403.5,
+      "action": "load-return",
+      "hand": [
+        -1.2407,
+        1.6013,
+        -0.0616
+      ],
+      "motionRevision": "942",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43418.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2132,
+        1.5237,
+        -0.0615
+      ],
+      "motionRevision": "943",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43436.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.1967,
+        1.4533,
+        -0.0616
+      ],
+      "motionRevision": "944",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43453.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.1892,
+        1.3992,
+        -0.0618
+      ],
+      "motionRevision": "945",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43470.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.1869,
+        1.3704,
+        -0.062
+      ],
+      "motionRevision": "946",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43486.5,
+      "action": "load-return",
+      "hand": [
+        -1.1867,
+        1.3653,
+        -0.0623
+      ],
+      "motionRevision": "947",
+      "loadValue": "0/15",
+      "inventory": "15/0/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43503.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.1866,
+        1.353,
+        -0.0624
+      ],
+      "motionRevision": "948",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43520.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.187,
+        1.3316,
+        -0.0625
+      ],
+      "motionRevision": "949",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43536,
+      "action": "load-return",
+      "hand": [
+        -1.1886,
+        1.3026,
+        -0.0624
+      ],
+      "motionRevision": "950",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43552.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1921,
+        1.2677,
+        -0.0623
+      ],
+      "motionRevision": "951",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43569.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1983,
+        1.2281,
+        -0.0621
+      ],
+      "motionRevision": "952",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43587,
+      "action": "load-return",
+      "hand": [
+        -1.2079,
+        1.1847,
+        -0.0618
+      ],
+      "motionRevision": "953",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43603.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2209,
+        1.1399,
+        -0.0616
+      ],
+      "motionRevision": "954",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43620,
+      "action": "load-return",
+      "hand": [
+        -1.2372,
+        1.0954,
+        -0.0612
+      ],
+      "motionRevision": "955",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43636.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.2564,
+        1.0523,
+        -0.0609
+      ],
+      "motionRevision": "956",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43653.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2774,
+        1.0127,
+        -0.0604
+      ],
+      "motionRevision": "957",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43670.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.299,
+        0.9775,
+        -0.0599
+      ],
+      "motionRevision": "958",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43686.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3295,
+        0.956,
+        -0.0598
+      ],
+      "motionRevision": "959",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43703.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43720.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43735.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43753.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43770.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43786.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43803.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43820.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43836.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43853.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43869.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43886.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43903.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43919.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43936.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43953.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43970.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "960",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 43987,
+      "action": "ready",
+      "hand": [
+        -1.3506,
+        0.9484,
+        -0.0598
+      ],
+      "motionRevision": "961",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44003.80000001192,
+      "action": "ready",
+      "hand": [
+        -1.3569,
+        0.9466,
+        -0.0599
+      ],
+      "motionRevision": "962",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44020.30000001192,
+      "action": "ready",
+      "hand": [
+        -1.3664,
+        0.9437,
+        -0.0599
+      ],
+      "motionRevision": "963",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44036,
+      "action": "ready",
+      "hand": [
+        -1.3783,
+        0.9402,
+        -0.06
+      ],
+      "motionRevision": "964",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44053.70000000298,
+      "action": "ready",
+      "hand": [
+        -1.3917,
+        0.9362,
+        -0.06
+      ],
+      "motionRevision": "965",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44070.5,
+      "action": "ready",
+      "hand": [
+        -1.4059,
+        0.9319,
+        -0.0601
+      ],
+      "motionRevision": "966",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44087,
+      "action": "ready",
+      "hand": [
+        -1.4197,
+        0.9277,
+        -0.0601
+      ],
+      "motionRevision": "967",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44103.80000001192,
+      "action": "ready",
+      "hand": [
+        -1.4324,
+        0.924,
+        -0.0601
+      ],
+      "motionRevision": "968",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44120.20000000298,
+      "action": "squat-down",
+      "hand": [
+        -1.3378,
+        0.9355,
+        -0.0601
+      ],
+      "motionRevision": "969",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44137,
+      "action": "squat-down",
+      "hand": [
+        -1.336,
+        0.8928,
+        -0.0602
+      ],
+      "motionRevision": "970",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44153.5,
+      "action": "squat-down",
+      "hand": [
+        -1.3455,
+        0.8384,
+        -0.0608
+      ],
+      "motionRevision": "971",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44170.30000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3572,
+        0.7747,
+        -0.0614
+      ],
+      "motionRevision": "972",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44186.80000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3696,
+        0.7096,
+        -0.0619
+      ],
+      "motionRevision": "973",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44203.40000000596,
+      "action": "squat-down",
+      "hand": [
+        -1.3816,
+        0.6499,
+        -0.0623
+      ],
+      "motionRevision": "974",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44220.30000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3918,
+        0.603,
+        -0.0626
+      ],
+      "motionRevision": "975",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44236.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3988,
+        0.5763,
+        -0.0627
+      ],
+      "motionRevision": "976",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44252.70000000298,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "977",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44269.20000000298,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "977",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44287.10000000894,
+      "action": "stand-up",
+      "hand": [
+        -1.3894,
+        0.5958,
+        -0.0625
+      ],
+      "motionRevision": "978",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44303.20000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.3649,
+        0.6537,
+        -0.0618
+      ],
+      "motionRevision": "979",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44320.30000001192,
+      "action": "stand-up",
+      "hand": [
+        -1.3303,
+        0.7416,
+        -0.0608
+      ],
+      "motionRevision": "980",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44336.90000000596,
+      "action": "stand-up",
+      "hand": [
+        -1.3048,
+        0.8619,
+        -0.0602
+      ],
+      "motionRevision": "981",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44353.70000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.2936,
+        0.9982,
+        -0.0602
+      ],
+      "motionRevision": "982",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44370.40000000596,
+      "action": "stand-up",
+      "hand": [
+        -1.2868,
+        1.1276,
+        -0.0601
+      ],
+      "motionRevision": "983",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44386.80000001192,
+      "action": "stand-up",
+      "hand": [
+        -1.2853,
+        1.2308,
+        -0.0601
+      ],
+      "motionRevision": "984",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44403.20000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.2878,
+        1.2875,
+        -0.0601
+      ],
+      "motionRevision": "985",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44420.20000000298,
+      "action": "press-up",
+      "hand": [
+        -1.2828,
+        1.312,
+        -0.0601
+      ],
+      "motionRevision": "986",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44437.20000000298,
+      "action": "press-up",
+      "hand": [
+        -1.2793,
+        1.3758,
+        -0.0601
+      ],
+      "motionRevision": "987",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44453.5,
+      "action": "press-up",
+      "hand": [
+        -1.2816,
+        1.4661,
+        -0.0601
+      ],
+      "motionRevision": "988",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44470,
+      "action": "press-up",
+      "hand": [
+        -1.2925,
+        1.5677,
+        -0.0601
+      ],
+      "motionRevision": "989",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44487,
+      "action": "press-up",
+      "hand": [
+        -1.3102,
+        1.6654,
+        -0.06
+      ],
+      "motionRevision": "990",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44505.20000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3305,
+        1.7492,
+        -0.06
+      ],
+      "motionRevision": "991",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44520.30000001192,
+      "action": "press-up",
+      "hand": [
+        -1.3639,
+        1.7969,
+        -0.0608
+      ],
+      "motionRevision": "992",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44536.70000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3846,
+        1.8202,
+        -0.0613
+      ],
+      "motionRevision": "993",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44552.5,
+      "action": "load-return",
+      "hand": [
+        -1.3561,
+        1.7884,
+        -0.0618
+      ],
+      "motionRevision": "994",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44570.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3178,
+        1.7393,
+        -0.0618
+      ],
+      "motionRevision": "995",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44586.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2773,
+        1.6759,
+        -0.0617
+      ],
+      "motionRevision": "996",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44603.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.2407,
+        1.6014,
+        -0.0616
+      ],
+      "motionRevision": "997",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44620.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2132,
+        1.5237,
+        -0.0615
+      ],
+      "motionRevision": "998",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44637,
+      "action": "load-return",
+      "hand": [
+        -1.1967,
+        1.4533,
+        -0.0616
+      ],
+      "motionRevision": "999",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44653.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1892,
+        1.3992,
+        -0.0618
+      ],
+      "motionRevision": "1000",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44670.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.1869,
+        1.3704,
+        -0.062
+      ],
+      "motionRevision": "1001",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44686.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1867,
+        1.3653,
+        -0.0623
+      ],
+      "motionRevision": "1002",
+      "loadValue": "1/15",
+      "inventory": "14/1/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44703.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.1866,
+        1.353,
+        -0.0624
+      ],
+      "motionRevision": "1003",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44720,
+      "action": "load-return",
+      "hand": [
+        -1.187,
+        1.3318,
+        -0.0625
+      ],
+      "motionRevision": "1004",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44736,
+      "action": "load-return",
+      "hand": [
+        -1.1886,
+        1.3028,
+        -0.0624
+      ],
+      "motionRevision": "1005",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44753.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.1921,
+        1.2677,
+        -0.0623
+      ],
+      "motionRevision": "1006",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44769.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.1983,
+        1.2281,
+        -0.0621
+      ],
+      "motionRevision": "1007",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44786.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2078,
+        1.185,
+        -0.0618
+      ],
+      "motionRevision": "1008",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44803.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2207,
+        1.1404,
+        -0.0616
+      ],
+      "motionRevision": "1009",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44820.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2372,
+        1.0954,
+        -0.0612
+      ],
+      "motionRevision": "1010",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44836.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.2563,
+        1.0525,
+        -0.0609
+      ],
+      "motionRevision": "1011",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44853.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2773,
+        1.0129,
+        -0.0604
+      ],
+      "motionRevision": "1012",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44870.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2988,
+        0.9777,
+        -0.0599
+      ],
+      "motionRevision": "1013",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44887.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3293,
+        0.9561,
+        -0.0598
+      ],
+      "motionRevision": "1014",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44903.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44919.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44936.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44953.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44969.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 44986.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45003.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45020.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45036.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45053.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45070.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45086.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45103.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45120,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45136.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45153.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45170.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1015",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45187,
+      "action": "ready",
+      "hand": [
+        -1.3506,
+        0.9484,
+        -0.0598
+      ],
+      "motionRevision": "1016",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45203.60000000894,
+      "action": "ready",
+      "hand": [
+        -1.3569,
+        0.9466,
+        -0.0599
+      ],
+      "motionRevision": "1017",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45220.10000000894,
+      "action": "ready",
+      "hand": [
+        -1.3664,
+        0.9438,
+        -0.0599
+      ],
+      "motionRevision": "1018",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45237,
+      "action": "ready",
+      "hand": [
+        -1.3783,
+        0.9402,
+        -0.06
+      ],
+      "motionRevision": "1019",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45253.5,
+      "action": "ready",
+      "hand": [
+        -1.3917,
+        0.9362,
+        -0.06
+      ],
+      "motionRevision": "1020",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45270,
+      "action": "ready",
+      "hand": [
+        -1.4058,
+        0.9319,
+        -0.0601
+      ],
+      "motionRevision": "1021",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45286.70000000298,
+      "action": "ready",
+      "hand": [
+        -1.4197,
+        0.9278,
+        -0.0601
+      ],
+      "motionRevision": "1022",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45303.5,
+      "action": "ready",
+      "hand": [
+        -1.4324,
+        0.924,
+        -0.0601
+      ],
+      "motionRevision": "1023",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45320.40000000596,
+      "action": "squat-down",
+      "hand": [
+        -1.3378,
+        0.9357,
+        -0.0601
+      ],
+      "motionRevision": "1024",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45336.40000000596,
+      "action": "squat-down",
+      "hand": [
+        -1.336,
+        0.8928,
+        -0.0602
+      ],
+      "motionRevision": "1025",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45353.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3454,
+        0.8388,
+        -0.0608
+      ],
+      "motionRevision": "1026",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45370.10000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3572,
+        0.7747,
+        -0.0614
+      ],
+      "motionRevision": "1027",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45386.80000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3696,
+        0.7096,
+        -0.0619
+      ],
+      "motionRevision": "1028",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45403.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3816,
+        0.6499,
+        -0.0623
+      ],
+      "motionRevision": "1029",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45420.10000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3918,
+        0.6033,
+        -0.0626
+      ],
+      "motionRevision": "1030",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45436.80000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3988,
+        0.5763,
+        -0.0627
+      ],
+      "motionRevision": "1031",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45453.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "1032",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45469.10000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "1032",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45487.20000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.3894,
+        0.5958,
+        -0.0625
+      ],
+      "motionRevision": "1033",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45503.70000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.3647,
+        0.6541,
+        -0.0618
+      ],
+      "motionRevision": "1034",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45520.20000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.3303,
+        0.7416,
+        -0.0608
+      ],
+      "motionRevision": "1035",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45536.70000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.3048,
+        0.8619,
+        -0.0602
+      ],
+      "motionRevision": "1036",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45553.70000000298,
+      "action": "stand-up",
+      "hand": [
+        -1.2935,
+        0.999,
+        -0.0602
+      ],
+      "motionRevision": "1037",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45570.10000000894,
+      "action": "stand-up",
+      "hand": [
+        -1.2868,
+        1.1276,
+        -0.0601
+      ],
+      "motionRevision": "1038",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45586.90000000596,
+      "action": "stand-up",
+      "hand": [
+        -1.2853,
+        1.2308,
+        -0.0601
+      ],
+      "motionRevision": "1039",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45603.40000000596,
+      "action": "stand-up",
+      "hand": [
+        -1.2878,
+        1.2877,
+        -0.0601
+      ],
+      "motionRevision": "1040",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45619.90000000596,
+      "action": "press-up",
+      "hand": [
+        -1.2829,
+        1.3119,
+        -0.0601
+      ],
+      "motionRevision": "1041",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45636.80000001192,
+      "action": "press-up",
+      "hand": [
+        -1.2793,
+        1.3759,
+        -0.0601
+      ],
+      "motionRevision": "1042",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45653.20000000298,
+      "action": "press-up",
+      "hand": [
+        -1.2817,
+        1.4662,
+        -0.0601
+      ],
+      "motionRevision": "1043",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45670,
+      "action": "press-up",
+      "hand": [
+        -1.2925,
+        1.5672,
+        -0.0601
+      ],
+      "motionRevision": "1044",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45685.80000001192,
+      "action": "press-up",
+      "hand": [
+        -1.3102,
+        1.6654,
+        -0.06
+      ],
+      "motionRevision": "1045",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45703.70000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3305,
+        1.7492,
+        -0.06
+      ],
+      "motionRevision": "1046",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45720.30000001192,
+      "action": "press-up",
+      "hand": [
+        -1.3637,
+        1.7967,
+        -0.0608
+      ],
+      "motionRevision": "1047",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45735.70000000298,
+      "action": "press-up",
+      "hand": [
+        -1.3846,
+        1.8202,
+        -0.0613
+      ],
+      "motionRevision": "1048",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45753.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3561,
+        1.7884,
+        -0.0618
+      ],
+      "motionRevision": "1049",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45770.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3181,
+        1.7396,
+        -0.0618
+      ],
+      "motionRevision": "1050",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45786.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2773,
+        1.6759,
+        -0.0617
+      ],
+      "motionRevision": "1051",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45803.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2407,
+        1.6014,
+        -0.0616
+      ],
+      "motionRevision": "1052",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45820.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.2133,
+        1.5242,
+        -0.0615
+      ],
+      "motionRevision": "1053",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45836,
+      "action": "load-return",
+      "hand": [
+        -1.1967,
+        1.4533,
+        -0.0616
+      ],
+      "motionRevision": "1054",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45853.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.1892,
+        1.3992,
+        -0.0618
+      ],
+      "motionRevision": "1055",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45870.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.1869,
+        1.3705,
+        -0.062
+      ],
+      "motionRevision": "1056",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45886.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.1867,
+        1.3654,
+        -0.0623
+      ],
+      "motionRevision": "1057",
+      "loadValue": "2/15",
+      "inventory": "13/2/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45903.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1866,
+        1.3531,
+        -0.0624
+      ],
+      "motionRevision": "1058",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45920.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.187,
+        1.3318,
+        -0.0625
+      ],
+      "motionRevision": "1059",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45936.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.1886,
+        1.3028,
+        -0.0624
+      ],
+      "motionRevision": "1060",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45953.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.1921,
+        1.2679,
+        -0.0623
+      ],
+      "motionRevision": "1061",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45970.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.1983,
+        1.2281,
+        -0.0621
+      ],
+      "motionRevision": "1062",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 45986.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2078,
+        1.185,
+        -0.0618
+      ],
+      "motionRevision": "1063",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46003.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2208,
+        1.1401,
+        -0.0616
+      ],
+      "motionRevision": "1064",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46020.20000000298,
+      "action": "load-return",
+      "hand": [
+        -1.2371,
+        1.0956,
+        -0.0612
+      ],
+      "motionRevision": "1065",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46036.80000001192,
+      "action": "load-return",
+      "hand": [
+        -1.2563,
+        1.0525,
+        -0.0609
+      ],
+      "motionRevision": "1066",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46053.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2774,
+        1.0127,
+        -0.0604
+      ],
+      "motionRevision": "1067",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46069.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.2988,
+        0.9777,
+        -0.0599
+      ],
+      "motionRevision": "1068",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46086.5,
+      "action": "load-return",
+      "hand": [
+        -1.3291,
+        0.9562,
+        -0.0598
+      ],
+      "motionRevision": "1069",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46103.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46119.5,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46136.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46153.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46169.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46186.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46203.30000001192,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46219.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46236.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46253.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46269.90000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46286.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46303.40000000596,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46319.70000000298,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46336.10000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46353.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46369.60000000894,
+      "action": "load-return",
+      "hand": [
+        -1.3483,
+        0.9491,
+        -0.0598
+      ],
+      "motionRevision": "1070",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46387,
+      "action": "ready",
+      "hand": [
+        -1.3506,
+        0.9484,
+        -0.0598
+      ],
+      "motionRevision": "1071",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46403.60000000894,
+      "action": "ready",
+      "hand": [
+        -1.3569,
+        0.9466,
+        -0.0599
+      ],
+      "motionRevision": "1072",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46420.20000000298,
+      "action": "ready",
+      "hand": [
+        -1.3664,
+        0.9437,
+        -0.0599
+      ],
+      "motionRevision": "1073",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46436.60000000894,
+      "action": "ready",
+      "hand": [
+        -1.3783,
+        0.9402,
+        -0.06
+      ],
+      "motionRevision": "1074",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46453.5,
+      "action": "ready",
+      "hand": [
+        -1.3918,
+        0.9362,
+        -0.06
+      ],
+      "motionRevision": "1075",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46470,
+      "action": "ready",
+      "hand": [
+        -1.4058,
+        0.9319,
+        -0.0601
+      ],
+      "motionRevision": "1076",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46486.70000000298,
+      "action": "ready",
+      "hand": [
+        -1.4198,
+        0.9277,
+        -0.0601
+      ],
+      "motionRevision": "1077",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46503,
+      "action": "ready",
+      "hand": [
+        -1.4324,
+        0.924,
+        -0.0601
+      ],
+      "motionRevision": "1078",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46519.80000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3378,
+        0.9355,
+        -0.0601
+      ],
+      "motionRevision": "1079",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46536.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.336,
+        0.8928,
+        -0.0602
+      ],
+      "motionRevision": "1080",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46553.30000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3455,
+        0.8381,
+        -0.0608
+      ],
+      "motionRevision": "1081",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46570,
+      "action": "squat-down",
+      "hand": [
+        -1.3571,
+        0.7751,
+        -0.0614
+      ],
+      "motionRevision": "1082",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46586.60000000894,
+      "action": "squat-down",
+      "hand": [
+        -1.3696,
+        0.7096,
+        -0.0619
+      ],
+      "motionRevision": "1083",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46603.5,
+      "action": "squat-down",
+      "hand": [
+        -1.3816,
+        0.6499,
+        -0.0623
+      ],
+      "motionRevision": "1084",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46620,
+      "action": "squat-down",
+      "hand": [
+        -1.3918,
+        0.6033,
+        -0.0626
+      ],
+      "motionRevision": "1085",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46635.80000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.3988,
+        0.5763,
+        -0.0627
+      ],
+      "motionRevision": "1086",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46653.30000001192,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "1087",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    },
+    {
+      "time": 46669.40000000596,
+      "action": "squat-down",
+      "hand": [
+        -1.4004,
+        0.5727,
+        -0.0627
+      ],
+      "motionRevision": "1087",
+      "loadValue": "3/15",
+      "inventory": "12/3/0",
+      "status": "训练中"
+    }
+  ],
+  "canvas": {
+    "width": 1366,
+    "height": 768
+  },
+  "fpsRequested": 30,
+  "frames": [
+    {
+      "phase": "ready",
+      "sample": {
+        "time": 44103.80000001192,
+        "action": "ready",
+        "hand": [
+          -1.4324,
+          0.924,
+          -0.0601
+        ],
+        "motionRevision": "968",
+        "loadValue": "1/15",
+        "inventory": "14/1/0",
+        "status": "训练中"
+      },
+      "requestedVideoTime": 0.905800000011921,
+      "decodedVideoTime": 0.9058,
+      "width": 1366,
+      "height": 768,
+      "file": "ready.png",
+      "source": "Decoded from normal-load.webm; not a new 3D render"
+    },
+    {
+      "phase": "squat-down",
+      "sample": {
+        "time": 44269.20000000298,
+        "action": "squat-down",
+        "hand": [
+          -1.4004,
+          0.5727,
+          -0.0627
+        ],
+        "motionRevision": "977",
+        "loadValue": "1/15",
+        "inventory": "14/1/0",
+        "status": "训练中"
+      },
+      "requestedVideoTime": 1.0712000000029802,
+      "decodedVideoTime": 1.0712,
+      "width": 1366,
+      "height": 768,
+      "file": "squat-down.png",
+      "source": "Decoded from normal-load.webm; not a new 3D render"
+    },
+    {
+      "phase": "stand-up",
+      "sample": {
+        "time": 44403.20000000298,
+        "action": "stand-up",
+        "hand": [
+          -1.2878,
+          1.2875,
+          -0.0601
+        ],
+        "motionRevision": "985",
+        "loadValue": "1/15",
+        "inventory": "14/1/0",
+        "status": "训练中"
+      },
+      "requestedVideoTime": 1.2052000000029803,
+      "decodedVideoTime": 1.2052,
+      "width": 1366,
+      "height": 768,
+      "file": "stand-up.png",
+      "source": "Decoded from normal-load.webm; not a new 3D render"
+    },
+    {
+      "phase": "press-up",
+      "sample": {
+        "time": 44536.70000000298,
+        "action": "press-up",
+        "hand": [
+          -1.3846,
+          1.8202,
+          -0.0613
+        ],
+        "motionRevision": "993",
+        "loadValue": "1/15",
+        "inventory": "14/1/0",
+        "status": "训练中"
+      },
+      "requestedVideoTime": 1.3387000000029803,
+      "decodedVideoTime": 1.3387,
+      "width": 1366,
+      "height": 768,
+      "file": "press-up.png",
+      "source": "Decoded from normal-load.webm; not a new 3D render"
+    },
+    {
+      "phase": "load-return",
+      "sample": {
+        "time": 44686.80000001192,
+        "action": "load-return",
+        "hand": [
+          -1.1867,
+          1.3653,
+          -0.0623
+        ],
+        "motionRevision": "1002",
+        "loadValue": "1/15",
+        "inventory": "14/1/0",
+        "status": "训练中"
+      },
+      "requestedVideoTime": 1.488800000011921,
+      "decodedVideoTime": 1.4888,
+      "width": 1366,
+      "height": 768,
+      "file": "load-return.png",
+      "source": "Decoded from normal-load.webm; not a new 3D render"
+    }
+  ],
+  "paused": {
+    "hand": "-1.3049,0.8611,-0.0602",
+    "motionRevision": "1091",
+    "loadValue": "3/15",
+    "inventory": "12/3/0"
+  },
+  "afterPause": {
+    "hand": "-1.3049,0.8611,-0.0602",
+    "motionRevision": "1091",
+    "loadValue": "3/15",
+    "inventory": "12/3/0"
+  },
+  "cameraCalls": 0,
+  "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+  "renderScale": "1",
+  "pageErrors": [],
+  "external": [],
+  "poseRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "allowedFavicon404": {
+    "http": [],
+    "console": []
+  },
+  "result": "pass"
+}

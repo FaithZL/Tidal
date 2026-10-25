@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (15 tests | 3 failed) 760ms
+   × the raised actual log clears the supplied head skin instead of crossing the face 72ms
+   × the released palms follow the upward throw for the first 80ms before lowering to recover 46ms
+   × standing begins with the hips before the supported palms finish lifting the load 37ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the raised actual log clears the supplied head skin instead of crossing the face
+AssertionError: head/log skin clearance at 100ms: expected -0.022109690149631517 to be greater than 0.02
+ ❯ tests/unit/userLoadMotion.test.ts:98:63
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the released palms follow the upward throw for the first 80ms before lowering to recover
+AssertionError: palm height at 30ms: expected 1.777028262244147 to be greater than or equal to 1.7984597179560082
+ ❯ tests/unit/userLoadMotion.test.ts:103:156
+    101| test('the released palms follow the upward throw for the first 80ms be…
+    102|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+    103|  for(let elapsed=10;elapsed<=80;elapsed+=10){motion.update({...actor,p…
+       |                                                                                                                                                            ^
+    104|  expect(motion.handPosition().z).toBeGreaterThan(released.z+.02);
+    105| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > standing begins with the hips before the supported palms finish lifting the load
+AssertionError: expected 0.03411432433414652 to be greater than 0.12
+ ❯ tests/unit/userLoadMotion.test.ts:111:35
+    109|  motion.update({...actor,pose:'squat-down'});motion.update({...actor,p…
+    110|  const hipProgress=(rig.bones.pelvis.position.y-lowHip)/(highHip-lowHi…
+    111|  expect(hipProgress-handProgress).toBeGreaterThan(.12);
+       |                                   ^
+    112| });
+    113|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 12 passed (15)
+   Start at  18:34:11
+   Duration  864ms (tests 95%, import 3%, transform 2%)
+

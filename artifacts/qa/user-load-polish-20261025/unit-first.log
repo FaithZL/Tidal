@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (15 tests | 3 failed) 781ms
+   × release follows forward before the actual hands settle back down instead of replaying a chop 55ms
+   × the raised actual log clears the supplied head skin instead of crossing the face 45ms
+   × the released palms follow the upward throw for the first 80ms before lowering to recover 39ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > release follows forward before the actual hands settle back down instead of replaying a chop
+AssertionError: expected 0.38377793525946846 to be greater than 0.4059275738337813
+ ❯ tests/unit/userLoadMotion.test.ts:47:20
+     45|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+     46|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);c…
+     47|  expect(forward.z).toBeGreaterThan(high.z+.15);
+       |                    ^
+     48|  for(let i=0;i<8;i++)motion.update({...actor,pose:'load-return'},30);c…
+     49|  expect(returned.z).toBeLessThan(forward.z-.1);expect(returned.y).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the raised actual log clears the supplied head skin instead of crossing the face
+AssertionError: head/log skin clearance at 100ms: expected 0.01981705478625928 to be greater than 0.02
+ ❯ tests/unit/userLoadMotion.test.ts:98:63
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the released palms follow the upward throw for the first 80ms before lowering to recover
+AssertionError: expected 0.2572440437107155 to be greater than 0.2759275738337813
+ ❯ tests/unit/userLoadMotion.test.ts:104:34
+    102|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+    103|  for(let elapsed=10;elapsed<=80;elapsed+=10){motion.update({...actor,p…
+    104|  expect(motion.handPosition().z).toBeGreaterThan(released.z+.02);
+       |                                  ^
+    105| });
+    106| test('standing begins with the hips before the supported palms finish …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 12 passed (15)
+   Start at  18:35:00
+   Duration  870ms (tests 95%, import 3%, transform 2%)
+

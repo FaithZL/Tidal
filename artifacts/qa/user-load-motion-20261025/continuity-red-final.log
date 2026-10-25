@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (6 tests | 1 failed) 384ms
+   × returning to ready after a settled throw does not pop the palms back upward 46ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > returning to ready after a settled throw does not pop the palms back upward
+AssertionError: expected 0.4081386027419624 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:57:37
+     55|  for(let i=0;i<12;i++){
+     56|   motion.update(actor,16);const next=motion.handPosition();
+     57|   expect(next.distanceTo(previous)).toBeLessThan(.08);expect(next.y).t…
+       |                                     ^
+     58|  }
+     59| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  16:48:12
+   Duration  475ms (tests 91%, import 5%, transform 4%)
+

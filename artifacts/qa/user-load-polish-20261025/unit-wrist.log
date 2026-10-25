@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (15 tests | 1 failed) 758ms
+   × release follows forward before the actual hands settle back down instead of replaying a chop 51ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > release follows forward before the actual hands settle back down instead of replaying a chop
+AssertionError: expected 0.4617384208719395 to be greater than 0.49459898184092554
+ ❯ tests/unit/userLoadMotion.test.ts:47:20
+     45|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+     46|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);c…
+     47|  expect(forward.z).toBeGreaterThan(high.z+.15);
+       |                    ^
+     48|  for(let i=0;i<8;i++)motion.update({...actor,pose:'load-return'},30);c…
+     49|  expect(returned.z).toBeLessThan(forward.z-.1);expect(returned.y).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  18:36:46
+   Duration  844ms (tests 95%, import 3%, transform 2%)
+

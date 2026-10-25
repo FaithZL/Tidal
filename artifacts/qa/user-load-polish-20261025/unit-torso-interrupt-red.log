@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (16 tests | 1 failed) 811ms
+   × interrupting the new torso follow-through preserves the displayed head position 37ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > interrupting the new torso follow-through preserves the displayed head position
+AssertionError: expected 0.06941654803962038 to be less than 0.01
+ ❯ tests/unit/userLoadMotion.test.ts:117:78
+    115|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);
+    116|  const before=rig.bones.head.getWorldPosition(new T.Vector3());motion.…
+    117|  expect(rig.bones.head.getWorldPosition(new T.Vector3()).distanceTo(be…
+       |                                                                              ^
+    118| });
+    119|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  18:40:12
+   Duration  895ms (tests 96%, import 2%, transform 2%)
+

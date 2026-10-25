@@ -1,0 +1,11 @@
+{
+  "baselineFiles": 1588,
+  "regeneratedFiles": [
+    "artifacts/qa/npr-refinement/load.png",
+    "artifacts/qa/npr-refinement/results.png",
+    "artifacts/qa/npr-refinement/home.png",
+    "artifacts/qa/npr-refinement/chop-paused.png"
+  ],
+  "allHistoricalSHA256Match": true,
+  "backup": "/tmp/tidal-user-load-npr-qa-20261025.tar"
+}

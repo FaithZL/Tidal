@@ -1,0 +1,151 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadCharacter.test.ts (6 tests | 6 failed) 80ms
+   × loading binds the actual FBX and load phases use the rendered two-palm center in world space 34ms
+   × load poses deform the real body while preserving source geometry UVs and materials 18ms
+   × zero invalid and long motion intervals freeze the body until an explicit presentation reset snaps the next state 10ms
+   × disposing the load adapter releases its skin skeleton and original model resources only once 9ms
+   × a model arriving after cancellation is disposed once and never mounted 9ms
+   × failed binding rejects readiness and releases the imported asset instead of mounting a static fallback 0ms
+ ❯ tests/unit/userLoadMotion.test.ts (5 tests | 4 failed) 346ms
+   × load stages articulate the actual supplied body and palms while preserving source geometry and UVs 98ms
+   × release follows forward before the actual hands settle back down instead of replaying a chop 39ms
+   × zero and unobserved intervals freeze the exact skin pose until a valid sample or explicit reset 69ms
+   × the held log anchor is the actual two-palm midpoint under translated rotated and scaled parents 42ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > loading binds the actual FBX and load phases use the rendered two-palm center in world space
+AssertionError: expected undefined to be an instance of SkinnedMesh
+ ❯ tests/unit/userLoadCharacter.test.ts:31:69
+     29|  const {value,source}=await character();value.update({...actor,pose:'s…
+     30|  const skin=value.root.getObjectByName('user-derived-skinned-body') as…
+     31|  expect(value.motionSupport).toBe('derived-load-only');expect(skin).to…
+       |                                                                     ^
+     32|  expect(source.visible).toBe(false);expect(skin.visible).toBe(true);ex…
+     33|  expect(value.root.position.toArray()).toEqual([2,.2,4]);expect(value.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > load poses deform the real body while preserving source geometry UVs and materials
+AssertionError: expected undefined to be an instance of SkinnedMesh
+ ❯ tests/unit/userLoadCharacter.test.ts:41:143
+     39| test('load poses deform the real body while preserving source geometry…
+     40|  const {value,source}=await character(),positions=Array.from(source.ge…
+     41|  value.update({...actor,pose:'ready'},false);const skin=value.root.get…
+       |                                                                                                                                               ^
+     42|  const before=Array.from({length:skin.geometry.getAttribute('position'…
+     43|  value.update({...actor,pose:'squat-down'},false);const moved=before.f…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > zero invalid and long motion intervals freeze the body until an explicit presentation reset snaps the next state
+AssertionError: expected 0 to be greater than 0.5
+ ❯ tests/unit/userLoadCharacter.test.ts:57:108
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > disposing the load adapter releases its skin skeleton and original model resources only once
+AssertionError: expected undefined to be an instance of SkinnedMesh
+ ❯ tests/unit/userLoadCharacter.test.ts:61:203
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > a model arriving after cancellation is disposed once and never mounted
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/userLoadCharacter.test.ts:69:98
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/unit/userLoadCharacter.test.ts > failed binding rejects readiness and releases the imported asset instead of mounting a static fallback
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/userLoadCharacter.test.ts:75:27
+     73| test('failed binding rejects readiness and releases the imported asset…
+     74|  const root=new T.Group(),dispose=vi.fn(),value=new UserLoadCharacter(…
+     75|  await expect(value.ready).rejects.toThrow(/用户人物|绑定|网格/);expect(dispos…
+       |                           ^
+     76| });
+     77|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > load stages articulate the actual supplied body and palms while preserving source geometry and UVs
+AssertionError: expected 0 to be less than -0.15
+ ❯ tests/unit/userLoadMotion.test.ts:28:16
+     26|  motion.update(actor);const ready=points(rig),hand=motion.handPosition…
+     27|  motion.update({...actor,pose:'squat-down'});const squat=points(rig),l…
+     28|  expect(low.y).toBeLessThan(hand.y-.15);expect(Math.max(...squat.map((…
+       |                ^
+     29|  const hip=rig.bones.pelvis.position.y;motion.update({...actor,pose:'s…
+     30|  expect(rig.bones.pelvis.position.y-hip).toBeGreaterThan(.2);expect(st…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > release follows forward before the actual hands settle back down instead of replaying a chop
+AssertionError: expected 0 to be greater than 0.15
+ ❯ tests/unit/userLoadMotion.test.ts:47:20
+     45|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+     46|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);c…
+     47|  expect(forward.z).toBeGreaterThan(high.z+.15);
+       |                    ^
+     48|  for(let i=0;i<8;i++)motion.update({...actor,pose:'load-return'},30);c…
+     49|  expect(returned.z).toBeLessThan(forward.z-.1);expect(returned.y).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > zero and unobserved intervals freeze the exact skin pose until a valid sample or explicit reset
+AssertionError: expected 0 to be greater than 1.6
+ ❯ tests/unit/userLoadMotion.test.ts:55:93
+     53|  for(const delta of [0,-1,101,1000,Number.NaN,Number.POSITIVE_INFINITY…
+     54|  expect(points(rig).map(point=>point.toArray())).toEqual(before.map(po…
+     55|  motion.reset();motion.update({...actor,pose:'press-up'},0);expect(mot…
+       |                                                                                             ^
+     56|  expect(motion.visualRevision).toBeGreaterThan(revision);
+     57| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the held log anchor is the actual two-palm midpoint under translated rotated and scaled parents
+AssertionError: expected 5.3204603017432115 to be less than 0.000001
+ ❯ tests/unit/userLoadMotion.test.ts:62:54
+     60|  for(const pose of ['ready','squat-down','stand-up','press-up','load-r…
+     61|   motion.update({...actor,pose});const expected=rig.bones.leftHand.loc…
+     62|   expect(motion.handPosition().distanceTo(expected)).toBeLessThan(.000…
+       |                                                      ^
+     63|  }
+     64| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  10 failed | 1 passed (11)
+   Start at  16:43:36
+   Duration  447ms (tests 83%, import 9%, transform 8%, worker 1%)
+

@@ -1,0 +1,66 @@
+[
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "unit-red.log",
+    "result": "3 new failures/12 original passes"
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts tests/unit/userLoadCharacter.test.ts",
+    "exitCode": 0,
+    "log": "unit-green.log",
+    "result": "22/22 final scoped tests"
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "elapsedSeconds": 1.017
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint.log",
+    "elapsedSeconds": 1.057
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit-all.log",
+    "elapsedSeconds": 4.212
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-motion.log",
+    "elapsedSeconds": 16.514
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets.log",
+    "elapsedSeconds": 0.163
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build.log",
+    "elapsedSeconds": 1.515
+  },
+  {
+    "command": "node artifacts/qa/user-load-polish-20261025/capture-production.mjs",
+    "exitCode": 0,
+    "log": "production.log",
+    "elapsedSeconds": 48.246
+  },
+  {
+    "operation": "Archive/restore four old load E2E outputs and verify 1664 historical QA SHA256",
+    "exitCode": 0,
+    "evidence": "qa-restoration.json"
+  },
+  {
+    "operation": "Verify original progress, domain/input/rig/assets and empty staging area",
+    "exitCode": 0,
+    "evidence": "preservation.json"
+  }
+]

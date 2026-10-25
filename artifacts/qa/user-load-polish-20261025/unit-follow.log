@@ -1,0 +1,38 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (15 tests | 2 failed) 757ms
+   × release follows forward before the actual hands settle back down instead of replaying a chop 55ms
+   × the raised actual log clears the supplied head skin instead of crossing the face 45ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > release follows forward before the actual hands settle back down instead of replaying a chop
+AssertionError: expected 0.4051495992950451 to be greater than 0.4134806165294823
+ ❯ tests/unit/userLoadMotion.test.ts:47:20
+     45|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+     46|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);c…
+     47|  expect(forward.z).toBeGreaterThan(high.z+.15);
+       |                    ^
+     48|  for(let i=0;i<8;i++)motion.update({...actor,pose:'load-return'},30);c…
+     49|  expect(returned.z).toBeLessThan(forward.z-.1);expect(returned.y).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the raised actual log clears the supplied head skin instead of crossing the face
+AssertionError: head/log skin clearance at 120ms: expected -0.006237388197124688 to be greater than 0.02
+ ❯ tests/unit/userLoadMotion.test.ts:98:63
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 13 passed (15)
+   Start at  18:35:50
+   Duration  843ms (tests 95%, import 3%, transform 2%)
+

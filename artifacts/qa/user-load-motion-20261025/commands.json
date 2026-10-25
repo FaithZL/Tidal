@@ -1,0 +1,212 @@
+[
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "unit-red.log",
+    "result": "10 failed/1 passed at initial missing-feature RED"
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 0,
+    "log": "unit-green.log",
+    "result": "11/11 first implementation"
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts -g 'the supplied'",
+    "exitCode": 1,
+    "log": "e2e-red.log",
+    "elapsedSeconds": 29.741
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "elapsedSeconds": 1.059
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint.log",
+    "elapsedSeconds": 1.048
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-motion.log",
+    "elapsedSeconds": 16.488
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "continuity-red.log",
+    "elapsedSeconds": 0.768
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "continuity-red-final.log",
+    "elapsedSeconds": 0.737
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 0,
+    "log": "continuity-green.log",
+    "elapsedSeconds": 0.742
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck-final.log",
+    "elapsedSeconds": 0.959
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint-final.log",
+    "elapsedSeconds": 0.827
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit-all.log",
+    "elapsedSeconds": 4.48
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "short-return-red.log",
+    "elapsedSeconds": 0.997
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts tests/e2e/user-models.spec.ts tests/e2e/npr-sample.spec.ts tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-related.log",
+    "elapsedSeconds": 113.671
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets.log",
+    "elapsedSeconds": 0.18
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build.log",
+    "elapsedSeconds": 1.642
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 0,
+    "log": "short-return-green.log",
+    "elapsedSeconds": 0.985
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit-final.log",
+    "elapsedSeconds": 4.677
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint-refined.log",
+    "elapsedSeconds": 1.13
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-refined.log",
+    "elapsedSeconds": 17.763
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-final.log",
+    "elapsedSeconds": 1.643
+  },
+  {
+    "command": "node artifacts/qa/user-load-motion-20261025/capture-production.mjs",
+    "exitCode": 0,
+    "log": "production-capture.log",
+    "elapsedSeconds": 48.302
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "next-cycle-red.log",
+    "elapsedSeconds": 0.957
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 1,
+    "log": "next-cycle-green.log",
+    "elapsedSeconds": 1.023
+  },
+  {
+    "command": "npm run test:unit -- tests/unit/userLoadCharacter.test.ts tests/unit/userLoadMotion.test.ts",
+    "exitCode": 0,
+    "log": "channel-green.log",
+    "elapsedSeconds": 1.057
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit-release.log",
+    "elapsedSeconds": 4.703
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint-release.log",
+    "elapsedSeconds": 1.079
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-release.log",
+    "elapsedSeconds": 16.818
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build-release.log",
+    "elapsedSeconds": 1.654
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets-release.log",
+    "elapsedSeconds": 0.181
+  },
+  {
+    "command": "node artifacts/qa/user-load-motion-20261025/capture-production.mjs",
+    "exitCode": 0,
+    "log": "production-release.log",
+    "elapsedSeconds": 48.403,
+    "environment": {
+      "TIDAL_LOAD_QA_DIR": "artifacts/qa/user-load-motion-20261025/production-final"
+    }
+  },
+  {
+    "operation": "Re-export first video with requestVideoFrameCallback",
+    "exitCode": 0,
+    "log": "frame-reexport-run.log",
+    "result": "Old PNG SHA unchanged; timeline hypothesis incomplete, evidence retained"
+  },
+  {
+    "operation": "Archive four regenerated NPR QA images, restore backups, verify 1588 historical SHA256",
+    "exitCode": 0,
+    "evidence": "qa-restoration.json"
+  },
+  {
+    "operation": "Preservation comparison first attempted uppercase SessionController Git path",
+    "exitCode": 128,
+    "result": "Case-sensitive Git object path absent; corrected to canonical tracked sessionController.ts; no source modification"
+  },
+  {
+    "operation": "Verify original input/rig/assets and unrelated work",
+    "exitCode": 0,
+    "evidence": "preservation.json"
+  }
+]

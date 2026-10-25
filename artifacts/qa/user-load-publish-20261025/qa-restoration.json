@@ -1,0 +1,11 @@
+{
+  "baselineFiles": 1701,
+  "regeneratedFiles": [
+    "artifacts/qa/user-load-motion-20261025/load-motion.json",
+    "artifacts/qa/user-load-motion-20261025/load-results.png",
+    "artifacts/qa/user-load-motion-20261025/load-paused.png",
+    "artifacts/qa/user-load-motion-20261025/pause-resume-reset.json"
+  ],
+  "allHistoricalSHA256Match": true,
+  "backup": "/tmp/tidal-user-load-polish-old-qa-20261025.tar"
+}

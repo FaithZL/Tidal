@@ -1,5 +1,69 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：装车抛木动作及精修提交、推送main授权（2026-10-25）
+
+用户明确要求“提交push”，本次纳入前两轮尚未提交的装车专用人物适配器、抛木/托举/腕部与胸肩精修、FarmWorld接入与真实手锚、对应测试/来源说明/两份计划，以及`user-load-motion-20261025/`、`user-load-polish-20261025/`和本轮交付验证记录。只操作main普通提交和推送，不部署。原素材/许可、领域/识别/输入参数不变。
+
+实查本地与实时远端main同为`f789265c3bc045eb4080d33cea2865428a78850b`。提交前重新运行typecheck、lint、**398/398单测、17/17装车/模型/城堡相关E2E、assets:verify及build，均exit0**，入口仍为index-0PGUqW7Z.js；实际命令/退出码见`artifacts/qa/user-load-publish-20261025/commands.json`。原完整验证的prototype暂停截图失败仍未解决，本轮不重跑全量verify或扩展修复。两轮任务QA共113文件，最大44,520,606字节，无超限文件；录像仅为合成WebGL画布，摄像头申请为0，无真人视频。独立只读范围审查通过。
+
+PROGRESS采用单独暂存版本：仅HEAD既有记录、本次装车新增记录和本节；旧安装/接续43行与本地城堡预览4行，共47行，继续原样保持未提交。旧`local-handoff-20261025/`、`source-lifecycle-20261025/progress-before.md`及旧110MB原trace均不纳入。新验证重生成的4份旧动作E2E输出先另存本轮regression，再按备份恢复；1,701份历史QA SHA均一致。原无关文件SHA与暂存范围核对见本轮preservation/scope记录。没有reset/clean/强推、重装依赖或更改旧证据；实际提交SHA、推送与远端一致性由本聊天交付回执确认。
+
+## 最新追加：装车抛木自然度与发力节奏精修（2026-10-25）
+
+用户确认摄像头模式已跑通，并明确选择“装车抛木：更自然、有力度”。本轮只精修装车表现，不改变摄像头标定/识别参数、计数、库存或输入契约；摄像头流程通过为用户报告，本轮没有额外采集真人视频或关键点轨迹，也不据合成录像宣称真人识别准确率提升。继续在main、HEAD `f789265`及前轮未提交工作上增量处理，无commit/push/部署。
+
+`userLoadMotion.ts`保留同一phaseMs与单一手Y/Z通道：举木目标前移0.22世界单位，腕部随托举连续转向（最大约0.6rad）；站起时手部170ms、髋腿原140ms，先展开髋膝再带起木材；离手前80ms轻前上随动并增加小幅胸肩前倾，随后前送并在360ms内回位。腕角和胸肩偏移都从当前显示值接续，早切下一动作不突然归零。未增加蹲深、改变脚底、骨长、原rig、源FBX/UV/贴图，其他动作范围保持不变。
+
+真实FBX新增4项断言：当前尺度下头部主要蒙皮顶点与实际0.86长/0.17最大半径木材包络的采样净空>2cm；离手前80ms掌心不下降超过2.5cm且继续前移；站起100ms髋的归一化展开进度领先掌心>0.12；胸肩前随被早切时头部不跳。原12项motion及6项adapter负例不改。初次3项新增失败，另捕获胸肩中断约6.94cm跳变；尝试从实际掌心重设目标会触发旧短回收连续性失败，已撤回并保留日志，最终沿用原连续目标通道并统一腕/胸肩衔接。净空只是局部顶点/包络代理，不是完整三角网格碰撞检测或逐指握持验证。
+
+证据在`artifacts/qa/user-load-polish-20261025/`，实际命令/结果见`commands.json`：
+
+| 命令/操作 | 实际结果 | 证据 |
+|---|---|---|
+| 精修真实FBX红绿验证 | 初次exit1，3失败/12通过；最终exit0，motion16+adapter6，**22/22** | unit-red.log、unit-green.log；中间试验及胸肩中断red日志保留 |
+| `npm run typecheck`、`npm run lint` | 均exit0 | typecheck.log、lint.log |
+| `npm run test:unit` | exit0，51文件**398/398** | unit-all.log |
+| `npm run test:e2e -- tests/e2e/user-load-motion.spec.ts` | exit0，**2/2**；15木整局、真实手锚变化、暂停/恢复/重置、库存守恒均通过 | e2e-motion.log |
+| `npm run assets:verify`、`npm run build` | 均exit0；入口index-0PGUqW7Z.js，旧FBX贴图支持警告和500KB提示保留 | assets.log、build.log |
+| 正常速度4176生产捕获 | exit0，约3.60秒合成WebGL录像、5张解码帧及暂停图已查看；0页面错误/外源/摄像头申请，暂停350ms手/计数冻结 | production.log、production/normal-load.webm及production.json |
+
+独立只读审查无阻塞，见`review.json`。记录1,664份既有QA SHA，4份旧装车E2E输出被重生成后先存本轮regression，再按备份恢复，全部历史SHA一致，见`qa-restoration.json`。原有PROGRESS全文、前轮装车代码/证据及旧handoff/trace均保留；原资产和领域/识别/输入/计时源码未改，见`preservation.json`。仅沿用既有依赖/浏览器，没有重新安装或升级。
+
+本轮没重跑完整verify，旧prototype暂停截图字节失败仍未处理；真人识别准确率、真实手机、完整握指/碰撞、最终美术和约60fps等限制不因本轮精修而自动通过。临时4176捕获后关闭，5173预览保持可用；刷新`/?art=npr-sample`后看装车动作，等待用户审阅。
+
+## 最新追加：NPR用户人物装车抛木动作（2026-10-25）
+
+用户指出当前NPR页“抛木头没有动作”，要求补上。实际浏览器失败测试复现：装车各阶段真实手锚高度变化为**0**（期望>0.04m），整局仍可结算；代码确认FarmWorld使用的`UserStaticCharacter`只更新位置/yaw，木头轨迹已有而人物不随装车阶段变形。本轮在main、HEAD `f789265c3bc045eb4080d33cea2865428a78850b`上增量处理，保留原有47行未提交PROGRESS及旧QA/trace；没有新的commit/push/部署。
+
+### 实现与范围
+
+新增`userLoadCharacter.ts/userLoadMotion.ts`，复用既有用户FBX派生17骨架，仅装车工作阶段显示派生身体并隐藏斧头，补上下蹲抱木→站起→举木→向车内抛送→收手。其他砍树/行走/推拉继续显示原静态网格；原静态适配器和独立第7版挥砍样片保留。没有新素材、依赖、源FBX/UV/贴图或许可改动；原始FBX仍无原生骨架/动画，这些是本地派生表现。
+
+手部使用一条显示位置通道，从当前Y/Z接续下一阶段；普通转换140ms，抛送140ms前随后至360ms回位。躯干继续复用NprMotion，双臂/腿IK保留肢长与脚底支撑。实际双掌世界中点接入已有木头持有/飞行锚点，既有600ms飞木和唯一库存提交规则不改。暂停/无效/长间隔不补动画；会话、任务实例或sourceEpoch变化显式复位半次表现，迟到加载/失败/销毁沿用单一资源所有者释放。未修改SessionController、输入或识别门限。
+
+审查与真实FBX负例复现了完整回收→ready上跳、短回收→ready后退、下一下蹲接续不一致；局部补丁未覆盖所有边界，最终统一显示手通道解决，所有负例保留。原测试只更新2处被用户新动作替代的静态人物标识为`user-fbx-load-motion`，没有删除或放宽业务断言。NPR标签明确“装车局部动作，其余静态”。实施计划见`docs/superpowers/plans/2026-10-25-user-load-motion.md`。
+
+### 本轮真实验证
+
+证据：`artifacts/qa/user-load-motion-20261025/`；`commands.json`保留实际命令/退出码，失败和中间结果均不当作最终成功。
+
+| 验证 | 实际结果 | 证据 |
+|---|---|---|
+| 原NPR装车浏览器复现 | exit1，手锚高度变化0，明确命中缺失人物动作 | e2e-red.log、e2e-red-results/ |
+| 真实FBX动作/生命周期红绿测试 | 初次10失败/1通过；首次实现11/11；追加连续性负例后最终**18/18通过**，失败日志保留 | unit-red.log、unit-green.log、continuity-*.log、short-return-*.log、next-cycle-*.log、channel-green.log |
+| 最终`npm run test:unit` | exit0，51文件**394/394** | unit-release.log |
+| typecheck/lint及最终build | exit0，最终入口index-D64wH9nD.js；build包含strict类型检查，旧500KB提示保留 | typecheck-final.log、lint-release.log、build-release.log |
+| 模型/城堡/NPR/新装车4文件E2E | exit0，**27/27**，1.9分钟；此后连续通道精修仅影响新装车表现 | e2e-related.log |
+| 最终通道后装车E2E再次运行 | exit0，**2/2**；15木整局、实际手锚移动、暂停/恢复/重置及库存守恒均到达 | e2e-release.log、load-results.png及样本JSON |
+| 最终`npm run assets:verify` | exit0，原件/贴图/许可校验通过 | assets-release.log |
+| 4176生产构建正常速度自动演示 | exit0，等真实流程到装车后录合成WebGL画布约3.61秒，5张解码帧与暂停截图已实际查看；0页面错误/外源/摄像头请求，暂停350ms手锚/计数不变 | production-release.log、production-final/normal-load.webm、production-final/production.json |
+
+首轮录像也真实完成，但导出姿态标签与画面落后一阶段。尝试等待requestVideoFrameCallback后PNG字节仍相同，原假设不成立，原录像/帧和有限诊断均保留。进一步检查发现时间原点用异步MediaRecorder.onstart，较start请求晚约127ms；改为start前同步记录并分别保存事件/停止时刻，最终重新录制并核对下蹲、举木、离手飞行画面。没有修改业务速度或按猜测给录像加固定偏移。录像只含合成3D画布，无真人视频/音频；不能当作真人输入验收。
+
+独立只读审查最终无阻塞，见`review.json`。测试前记录**1,588份**历史QA SHA，4张NPR截图被重生成后先存本轮regression，再按备份原字节恢复，全部历史SHA一致，见`qa-restoration.json`。原有未提交PROGRESS全文、旧handoff和trace及所有原FBX/贴图均保留，见`preservation.json`。未重新安装依赖、升级版本、提交/推送或部署。
+
+限制：没有完整逐指握木、衣物/全身自碰撞，其他农场阶段仍静态；最终美术、真人摄像头/手机与约60fps仍待验。本轮未重跑全量verify，先前prototype暂停截图字节断言失败仍未修复，不用27项范围通过代替全量。5173开发预览保持可用，刷新`/?art=npr-sample`后在装车阶段查看；临时4176检查后关闭。
+
 ## 最新追加：城堡模型与贴图限定范围提交、推送main授权（2026-10-25）
 
 用户已确认“效果可以”，明确要求将本次城堡模型、贴图和对应验证记录提交并推送main，保留此前无关未提交工作、不部署。本次授权覆盖前述制作阶段“不提交/推送”的历史停点；未改变源模型公开许可状态，不购买、不部署、不修改旧素材许可。

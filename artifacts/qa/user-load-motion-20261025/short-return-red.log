@@ -1,0 +1,56 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (9 tests | 3 failed) 641ms
+   × a new action after 120ms of return continues from the displayed forward reach 46ms
+   × a new action after 135ms of return continues from the displayed forward reach 46ms
+   × a new action after 240ms of return continues from the displayed forward reach 54ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 120ms of return continues from the displayed forward reach
+AssertionError: expected 0.09735270609663617 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| test('zero and unobserved intervals freeze the exact skin pose until a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 135ms of return continues from the displayed forward reach
+AssertionError: expected 0.10281483889699414 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| test('zero and unobserved intervals freeze the exact skin pose until a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 240ms of return continues from the displayed forward reach
+AssertionError: expected 0.11094838964641518 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| test('zero and unobserved intervals freeze the exact skin pose until a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  16:50:57
+   Duration  738ms (tests 94%, import 3%, transform 2%)
+

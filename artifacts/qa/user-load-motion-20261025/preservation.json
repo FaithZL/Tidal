@@ -1,0 +1,28 @@
+{
+  "HEAD": "f789265c3bc045eb4080d33cea2865428a78850b",
+  "stagedFiles": [],
+  "all1588HistoricalQASHA256Match": true,
+  "fourRegeneratedNprImagesArchivedThenRestored": true,
+  "originalProgressSuffixAnd47UncommittedLinesPreserved": true,
+  "original74UnrelatedFileSHA256Match": true,
+  "unchangedSourceAndAssetPaths": [
+    "src/domain/sessionController.ts",
+    "src/input/keyboardActionSource.ts",
+    "src/input/autoDemoSource.ts",
+    "src/game/world/choreography.ts",
+    "src/game/world/userCharacterRig.ts",
+    "src/game/world/userCharacterMotion.ts",
+    "src/game/world/userStaticCharacter.ts",
+    "src/game/world/nprMotion.ts",
+    "src/userModelSample.ts",
+    "package.json",
+    "package-lock.json",
+    ".gitattributes",
+    "public/assets/user-models/character.fbx",
+    "public/assets/user-models/house.fbx",
+    "public/assets/user-models/castle.fbx",
+    "public/assets/user-models/castle-soft-toon-v1.png",
+    "public/assets/user-models/castle-materials-v1.png"
+  ],
+  "noCommitPushOrDeployment": true
+}

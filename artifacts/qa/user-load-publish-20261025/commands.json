@@ -1,0 +1,38 @@
+[
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "elapsedSeconds": 1.09
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 0,
+    "log": "lint.log",
+    "elapsedSeconds": 1.051
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "log": "unit.log",
+    "elapsedSeconds": 3.901
+  },
+  {
+    "command": "npm run test:e2e -- tests/e2e/user-load-motion.spec.ts tests/e2e/user-models.spec.ts tests/e2e/castle-model.spec.ts",
+    "exitCode": 0,
+    "log": "e2e-related.log",
+    "elapsedSeconds": 45.342
+  },
+  {
+    "command": "npm run assets:verify",
+    "exitCode": 0,
+    "log": "assets.log",
+    "elapsedSeconds": 0.182
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "log": "build.log",
+    "elapsedSeconds": 1.55
+  }
+]

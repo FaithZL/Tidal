@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (12 tests | 1 failed) 626ms
+   × the next squat after 210ms ready continues from the current palm position 39ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the next squat after 210ms ready continues from the current palm position
+AssertionError: expected 0.11141938759592689 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:71:51
+     69|  for(let elapsed=0;elapsed<duration;elapsed+=16)motion.update(actor,Ma…
+     70|  const before=motion.handPosition();motion.update({...actor,pose:'squa…
+     71|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     72| });
+     73| test('zero and unobserved intervals freeze the exact skin pose until a…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 passed (12)
+   Start at  16:59:59
+   Duration  720ms (tests 94%, import 3%, transform 2%)
+

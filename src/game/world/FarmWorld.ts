@@ -12,7 +12,7 @@ import {NprCharacter3D,makeNprCart,makeNprLog,makeNprTree} from './nprModels.js'
 import {buildNprSampleEnvironment} from './nprEnvironment.js';
 import {loadUserModel} from './userModel.js';
 import {UserHouseMount} from './userHouseMount.js';
-import {UserStaticCharacter} from './userStaticCharacter.js';
+import {UserLoadCharacter} from './userLoadCharacter.js';
 import type {WorldActor} from './types.js';
 export interface GameView{readonly ready?:Promise<void>;destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;focusCastle():void;setInteractionEnabled(enabled:boolean):void}
 interface VisualActor{readonly root:T.Group;readonly visualRevision?:number;update(actor:WorldActor,chopping:boolean,deltaMs?:number):void;handPosition():T.Vector3}
@@ -20,7 +20,7 @@ interface VisualActor{readonly root:T.Group;readonly visualRevision?:number;upda
 export class FarmWorld implements GameView{
  private readonly scene=new T.Scene();private readonly camera=new T.PerspectiveCamera(44,1,.1,220);
  private readonly renderer:T.WebGLRenderer;private readonly controls:OrbitControls;private readonly resources=new WorldResources();
- readonly ready?:Promise<void>;private palette?:NprPalette;private sampleBadge?:HTMLElement;private userHouse?:UserHouseMount;private userCastle?:UserHouseMount;private userCharacter?:UserStaticCharacter;
+ readonly ready?:Promise<void>;private palette?:NprPalette;private sampleBadge?:HTMLElement;private userHouse?:UserHouseMount;private userCastle?:UserHouseMount;private userCharacter?:UserLoadCharacter;
  private readonly sample=new URLSearchParams(location.search).get('art')==='npr-sample';
  private readonly choreography:WorldChoreography;private readonly player:VisualActor;private readonly npc:VisualActor;
  private readonly cart:ReturnType<typeof makeCart>;private readonly trees:ReturnType<typeof makePine>[]=[];private logs:T.Group[]=[];
@@ -75,11 +75,11 @@ export class FarmWorld implements GameView{
   }
   const prototype=new URLSearchParams(location.search).get('model')==='prototype';
   if(this.palette&&!prototype){
-   this.userCharacter=new UserStaticCharacter(loadUserModel('character',import.meta.env.BASE_URL));this.player=this.userCharacter;
+   this.userCharacter=new UserLoadCharacter(loadUserModel('character',import.meta.env.BASE_URL));this.player=this.userCharacter;
   }else this.player=this.palette?new NprCharacter3D(this.resources,this.palette):new Character3D(this.resources);
   if(this.palette){
    const comparison=document.createElement('a');comparison.href=`${import.meta.env.BASE_URL}?art=npr-sample${prototype?'':'&model=prototype'}`;comparison.textContent=prototype?'查看导入人物':'原动作对照';
-   this.sampleBadge!.append(prototype?'原动作人物对照 · 导入房屋 ':'用户人物/房屋 · 人物为无骨骼静态姿态 ',comparison);
+   this.sampleBadge!.append(prototype?'原动作人物对照 · 导入房屋 ':'用户人物/房屋 · 装车局部动作，其余静态 ',comparison);
   }
   this.ready=Promise.all([this.userCastle.ready,sampleTextures,this.userHouse?.ready,this.userCharacter?.ready]).then(()=>{
     if(this.disposed||this.lost)throw new Error('User scenery loading cancelled');
@@ -87,7 +87,7 @@ export class FarmWorld implements GameView{
     let triangles=0;castle.traverse(object=>{if(object instanceof T.Mesh)triangles+=(object.geometry.index?.count??object.geometry.getAttribute('position').count)/3;});
     parent.dataset.castle='user-fbx';parent.dataset.castleTriangles=String(triangles);parent.dataset.castlePosition=castle.position.toArray().map(value=>value.toFixed(3)).join(',');
     parent.dataset.assets='ready';this.dirty=true;
-    if(this.palette){parent.dataset.house='user-fbx';parent.dataset.character=this.userCharacter?'user-fbx-static':'procedural-motion';}
+    if(this.palette){parent.dataset.house='user-fbx';parent.dataset.character=this.userCharacter?'user-fbx-load-motion':'procedural-motion';}
    }).catch((error:unknown)=>{
     if(!this.disposed&&!this.lost){
      parent.dataset.assets='failed';parent.dataset.castle='failed';this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();
@@ -108,9 +108,9 @@ export class FarmWorld implements GameView{
   this.controls.addEventListener('change',()=>{this.dirty=true;});
   this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(parent);this.resize();
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.controls.enabled=false;this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();this.parent.dataset.assets='failed';this.reportError('3D图形上下文已丢失，请重新加载页面后继续');},{signal:this.events.signal});
-  this.subscriptions.push(controller.subscribe(s=>{this.snapshot=s;this.choreography.sync(s);}));
+  this.subscriptions.push(controller.subscribe(s=>this.syncSnapshot(s)));
   this.subscriptions.push(controller.onEffect(e=>{
-   this.snapshot=controller.getSnapshot();this.choreography.sync(this.snapshot);this.choreography.apply(e);
+   this.syncSnapshot(controller.getSnapshot());this.choreography.apply(e);
    // Reset effects precede snapshot subscriptions, so clear presentation state here explicitly.
    if(e.kind==='session-reset'){const f=this.choreography.frame;this.player.update(f.player,false);this.npc.update(f.npc,false);this.choreography.setHandAnchor(this.player.handPosition());}
    this.dirty=true;
@@ -119,6 +119,14 @@ export class FarmWorld implements GameView{
   const gl=this.renderer.getContext(),debug=gl.getExtension('WEBGL_debug_renderer_info');parent.dataset.gpu=debug?String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)):'WebGL2 renderer unavailable';
   this.request=requestAnimationFrame(this.animate);
   }catch(error){this.destroy(true);throw error;}
+ }
+ private syncSnapshot(snapshot:Readonly<SessionSnapshot>):void{
+  const previous=this.snapshot;this.snapshot=snapshot;this.choreography.sync(snapshot);
+  if(this.userCharacter&&(previous.sessionId!==snapshot.sessionId||previous.taskRunId!==snapshot.taskRunId||previous.sourceEpoch!==snapshot.sourceEpoch)){
+   this.userCharacter.resetPresentation();
+   this.player.update(this.choreography.frame.player,snapshot.task==='chop');
+   this.choreography.setHandAnchor(this.player.handPosition());this.dirty=true;
+  }
  }
  private reportError(message:string):void{
   this.parent.dataset.error=message;

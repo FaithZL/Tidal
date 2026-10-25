@@ -1,0 +1,12 @@
+{
+  "result": "Independent read-only scope review passed",
+  "taskQAFileCount": 113,
+  "taskQABytes": 82990270,
+  "largestFileBytes": 44520606,
+  "noOver100MiBFiles": true,
+  "noOriginalProgressFullTextCopyInTaskQA": true,
+  "webmSources": "Synthetic #worldCanvas.captureStream; no audio, no cameraCalls",
+  "noCredentialPatternHits": true,
+  "scope": "Load-only actor, refined motion, FarmWorld mount, three new tests plus two existing character-label assertions, docs/plans and QA",
+  "knownOldFullSuiteFailure": "Prototype paused PNG byte mismatch remains unresolved; scoped validation is not full verify"
+}

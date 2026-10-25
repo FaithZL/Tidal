@@ -1,0 +1,82 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userLoadMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userLoadMotion.test.ts (15 tests | 5 failed) 750ms
+   × release follows forward before the actual hands settle back down instead of replaying a chop 43ms
+   × a new action after 120ms of return continues from the displayed forward reach 43ms
+   × a new action after 135ms of return continues from the displayed forward reach 40ms
+   × a new action after 240ms of return continues from the displayed forward reach 43ms
+   × the released palms follow the upward throw for the first 80ms before lowering to recover 38ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > release follows forward before the actual hands settle back down instead of replaying a chop
+AssertionError: expected 0.45211670638527823 to be greater than 0.49459898184092554
+ ❯ tests/unit/userLoadMotion.test.ts:47:20
+     45|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+     46|  for(let i=0;i<4;i++)motion.update({...actor,pose:'load-return'},30);c…
+     47|  expect(forward.z).toBeGreaterThan(high.z+.15);
+       |                    ^
+     48|  for(let i=0;i<8;i++)motion.update({...actor,pose:'load-return'},30);c…
+     49|  expect(returned.z).toBeLessThan(forward.z-.1);expect(returned.y).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 120ms of return continues from the displayed forward reach
+AssertionError: expected 0.09832155609196275 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| for(const duration of [128,140,210])test(`the next squat after ${durat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 135ms of return continues from the displayed forward reach
+AssertionError: expected 0.09559368560388354 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| for(const duration of [128,140,210])test(`the next squat after ${durat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > a new action after 240ms of return continues from the displayed forward reach
+AssertionError: expected 0.0841118100706645 to be less than 0.08
+ ❯ tests/unit/userLoadMotion.test.ts:64:51
+     62|  for(let elapsed=0;elapsed<duration;elapsed+=30)motion.update({...acto…
+     63|  const before=motion.handPosition();motion.update(actor,16);
+     64|  expect(motion.handPosition().distanceTo(before)).toBeLessThan(.08);
+       |                                                   ^
+     65| });
+     66| for(const duration of [128,140,210])test(`the next squat after ${durat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/unit/userLoadMotion.test.ts > the released palms follow the upward throw for the first 80ms before lowering to recover
+AssertionError: palm height at 10ms: expected 1.7518096444512836 to be greater than or equal to 1.764221095227795
+ ❯ tests/unit/userLoadMotion.test.ts:103:156
+    101| test('the released palms follow the upward throw for the first 80ms be…
+    102|  const {motion}=await fixture();motion.update({...actor,pose:'press-up…
+    103|  for(let elapsed=10;elapsed<=80;elapsed+=10){motion.update({...actor,p…
+       |                                                                                                                                                            ^
+    104|  expect(motion.handPosition().z).toBeGreaterThan(released.z+.02);
+    105| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 10 passed (15)
+   Start at  18:37:41
+   Duration  839ms (tests 95%, import 3%, transform 2%)
+
