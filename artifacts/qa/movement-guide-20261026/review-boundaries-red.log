@@ -1,0 +1,6 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/movement-guide.spec.ts -g desktop|changing to reduced --output artifacts/qa/movement-guide-20261026/review-red-results
+
+Error: http://127.0.0.1:4173 is already used, make sure that nothing is running on the port/url or set reuseExistingServer:true in config.webServer.
+

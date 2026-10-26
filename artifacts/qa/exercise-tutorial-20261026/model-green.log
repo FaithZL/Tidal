@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/exerciseTutorialModel.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/exerciseTutorialModel.test.ts (16 tests | 1 failed) 11ms
+   ❯ TutorialClock (12)
+     × selecting a step immediately freezes its target, then play begins that step from its prior target 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > selecting a step immediately freezes its target, then play begins that step from its prior target
+AssertionError: expected { head: { x: 0.5, y: 0.16 }, …(13) } to deeply equal { head: { x: 0.5, y: 0.16 }, …(13) }
+
+- Expected
++ Received
+
+@@ -23,11 +23,11 @@
+      "x": 0.39,
+      "y": 0.3,
+    },
+    "leftWrist": {
+      "x": 0.36,
+-     "y": 0.075,
++     "y": 0.07500000000000001,
+    },
+    "neck": {
+      "x": 0.5,
+      "y": 0.26,
+    },
+@@ -51,8 +51,8 @@
+      "x": 0.61,
+      "y": 0.3,
+    },
+    "rightWrist": {
+      "x": 0.64,
+-     "y": 0.075,
++     "y": 0.07500000000000001,
+    },
+  }
+
+ ❯ tests/unit/exerciseTutorialModel.test.ts:159:29
+    157|     const selected = clock.frame, stepStart = steps.slice(0, 3).reduce…
+    158|     expect(selected).toMatchObject({ stepIndex: 3, stepProgress: 1, pl…
+    159|     expect(selected.points).toEqual(steps[3].points);expect(selected.e…
+       |                             ^
+    160|     clock.advance(200);expect(clock.frame).toEqual(selected);
+    161|     clock.pause();clock.play();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  13:56:31
+   Duration  82ms (transform 40%, tests 38%, import 17%, worker 5%)
+

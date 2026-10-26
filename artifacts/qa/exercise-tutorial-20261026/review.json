@@ -1,0 +1,21 @@
+{
+  "result": "Independent read-only follow-up review found no remaining blockers",
+  "initialFindings": [
+    "P2 selected final step restarted entire lesson",
+    "P2 reduced-motion reopen render cache skipped active-step initialization",
+    "P2 short visibility gap could be filled without a hidden rAF callback"
+  ],
+  "actualReproductions": [
+    "lifecycle-red.log: active step count0",
+    "lifecycle-red-exact.log: expected step2 received0",
+    "background-red.log: expected time0 received150"
+  ],
+  "fixes": [
+    "Call clock.play before fallback replay",
+    "Invalidate cache per lesson/reopen and include step in key",
+    "Reset lastTime on visibilitychange using owned abort signal"
+  ],
+  "testCorrection": "Initial polling assertion could wait for full lesson to return to final step; replaced with immediate state assertion. Wall-clock background test could drop long GPU frame, so use actual panel with controlled legal rAF schedule. Original attempts retained.",
+  "cameraOwnership": "Existing SetupPanel/Worker continue; teaching uses controller user pause, never creates camera or recognizer input",
+  "contentScope": "Application gesture sequence and personal calibration, not clinical instruction or load/health validation"
+}

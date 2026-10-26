@@ -1,0 +1,5 @@
+{
+  "input": "Fake video and authored pose landmarks; not physical camera",
+  "workers": 1,
+  "result": "Preparation remains required; no simulated fallback"
+}

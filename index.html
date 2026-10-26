@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#142e2f" />
   <title>TIDAL · 映动农场 | Web Demo</title>
   <link rel="stylesheet" href="/web/world.css" />
+  <link rel="stylesheet" href="/web/tutorial.css" />
+  <link rel="stylesheet" href="/web/movement-guide.css" />
 </head>
 <body inert data-boot="loading">
   <div id="app">
@@ -18,6 +20,7 @@
         <div id="testModeBadge" class="pill warn" hidden>本地测试加速模式</div>
         <div id="modeBadge" class="pill">⌨ 键盘演示 · 非真实动作识别</div>
         <button id="demoToggle" class="secondary demo-toggle" role="switch" aria-checked="false">无摄像头测试：关</button>
+        <button id="tutorialOpen" class="secondary">动作教学</button>
         <button id="audioToggle" class="secondary demo-toggle" aria-pressed="false">开启音效</button>
         <button id="useKeyboard" class="secondary" hidden>切换键盘</button>
         <button id="recalibrate" class="secondary" hidden>重新标定</button>
@@ -68,6 +71,12 @@
       </aside>
     </main>
     <div class="view-controls" aria-label="三维视角控制"><span>拖拽旋转 · 滚轮缩放</span><button id="viewLeft" class="secondary" aria-label="向左旋转视角">↶</button><button id="viewRight" class="secondary" aria-label="向右旋转视角">↷</button><button id="viewCastle" class="secondary" disabled>城堡近景</button><button id="viewReset" class="secondary">全景视角</button></div>
+    <aside id="movementGuide" class="movement-guide" hidden aria-label="标准动作示范">
+      <header><span class="live-dot"></span><b>标准动作示范</b></header>
+      <svg role="img" aria-label="标准动作骨骼示范"></svg>
+      <div class="movement-guide-copy"><b data-guide-task></b><span data-guide-step></span></div>
+      <small data-guide-note>动作示意 · 按个人标定范围跟做</small>
+    </aside>
     <aside id="livePreview" class="media-pip" hidden aria-label="运动状态画中画">
       <div class="pip-heading"><span class="live-dot"></span><b id="liveSource">运动预览</b><span>MOVE WITH TIDAL</span></div>
       <div id="gamePreviewHost"></div>
@@ -88,6 +97,7 @@
       <div class="plan-card"><span class="plan-number">02</span><div><b>收集木材</b><small id="planLoad">深蹲推举 15 次 · 装车 15 份木材</small></div></div>
       <div class="plan-card"><span class="plan-number">03</span><div><b>推车回家</b><small id="planCarry">持续持姿 60 秒 · 返回农场</small></div></div>
       <div class="modal-info">今日为预设训练计划 · 概念演示，非 AI 自动规划。</div>
+      <button class="secondary full-width tutorial-entry" id="planTutorial">先看动作教学</button>
       <div class="modal-actions"><button class="secondary" id="cancelPlan">稍后再说</button><button class="primary" id="acceptPlan" disabled>接受今天的任务 <span>→</span></button></div>
     </div>
   </div>
@@ -95,6 +105,7 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="setupHeading">
       <div class="modal-eyebrow">CHOOSE YOUR INPUT</div>
       <h2 id="setupHeading">选择演示输入方式</h2>
+      <button class="secondary full-width tutorial-entry" id="setupTutorial">查看动作教学</button>
       <p>键盘与模拟可完整演示。摄像头需完成标定后手动启动姿态代理；真机准确率尚待验证。</p>
       <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
       <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
@@ -149,6 +160,7 @@
       <p class="harvest-note">木材已送达农舍。每一份收获，都来自本局完整提交的动作。</p>
       </section></div>
       <div class="actual-metrics"><b>本次运行记录（输入来源见下方，不是生理测量）</b><div id="actualMetrics">完成 15 次砍伐，15 次装车</div><small>心率和卡路里：未接入测量设备，无法提供真实数据。66 天连续打卡与 500 卡等数据仅为原方案示意。</small></div>
+      <button id="resultsTutorial" class="secondary full-width tutorial-entry">再看动作教学</button>
       <button id="resultsHome" class="primary full-width">返回农场首页</button>
     </div>
   </div>
@@ -158,6 +170,26 @@
       <p>本局进度将重置。选择继续训练可保留当前进度。</p>
       <div class="modal-actions"><button class="secondary" id="cancelExit">继续训练</button><button class="primary" id="confirmExit">结束并重置</button></div>
     </div>
+  </div>
+  <div id="tutorialModal" class="tutorial-backdrop" hidden>
+    <section class="tutorial-panel" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle" aria-describedby="tutorialSessionNote" tabindex="-1">
+      <header class="tutorial-heading"><div><span class="tutorial-eyebrow">LEARN THE MOVEMENT</span><h2 id="tutorialTitle">动作教学</h2></div><button id="tutorialClose" class="tutorial-close" aria-label="关闭教学">×</button></header>
+      <p id="tutorialSessionNote" class="tutorial-session-note">先看示范，再按准备页完成标定。教学不计训练成果。</p>
+      <nav id="tutorialTabs" class="tutorial-tabs" aria-label="教学动作">
+        <button data-task="chop" aria-pressed="true">挥砍</button><button data-task="load" aria-pressed="false">装车</button><button data-task="carry" aria-pressed="false">拉车持姿</button>
+      </nav>
+      <p id="tutorialSummary" class="tutorial-summary"></p>
+      <div class="tutorial-layout">
+        <div class="tutorial-visual"><span class="tutorial-demo-badge">动作示意 · 不计训练成果</span><svg id="tutorialFigure" role="img" aria-label="动作分步示意图"></svg><span class="tutorial-view-note">正面示意 · 主手以本人左右为准</span></div>
+        <div class="tutorial-instructions"><span id="tutorialStepCount" class="tutorial-eyebrow"></span><h3 id="tutorialStepTitle"></h3><p id="tutorialCue"></p><ol id="tutorialStepList" class="tutorial-steps" aria-label="分步示范"></ol><div class="tutorial-tips"><h4>动作要点</h4><ul id="tutorialTips"></ul></div></div>
+      </div>
+      <div class="tutorial-controls" aria-label="教学播放控制">
+        <button id="tutorialPrev">上一步</button><button id="tutorialPlay" class="tutorial-play">暂停示范</button><button id="tutorialNext">下一步</button><button id="tutorialReplay">重播</button>
+        <label for="tutorialSpeed">播放速度 <select id="tutorialSpeed"><option value="1">1× 正常</option><option value="0.5">0.5× 慢动作</option><option value="0.25">0.25× 慢动作</option></select></label>
+      </div>
+      <progress id="tutorialProgress" max="1" value="0" aria-label="教学示范进度"></progress>
+      <p class="tutorial-footnote">示范用于说明本应用的动作顺序，以个人标定范围为准；不需要真实斧头或木材，也不检测器械重量。</p>
+    </section>
   </div>
   <script type="module" src="/src/entry.ts"></script>
 </body>

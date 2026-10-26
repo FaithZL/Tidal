@@ -12,6 +12,8 @@ import { AudioFeedback } from './ui/audioFeedback.js';
 import {GamePreview} from './ui/gamePreview.js';
 import {readDemoPreference,saveDemoPreference} from './ui/demoPreference.js';
 import {setProperty,setAttribute,setClass} from './ui/domUpdates.js';
+import {ExerciseTutorialPanel} from './ui/exerciseTutorialPanel.js';
+import {MovementGuide} from './ui/movementGuide.js';
 import type { SessionSnapshot, TaskKind } from './domain/types.js';
 
 const elements=new Map<string,HTMLElement>();
@@ -76,8 +78,20 @@ let preferredDemo=readDemoPreference();
 let demoEnabled = preferredDemo;
 let demoUsed = false;
 preview.setEnabled(demoEnabled);
+const movementGuide=new MovementGuide($('movementGuide'));
 let previousFrameMs=0,diagnosticAtMs=0;
 const frameIntervals:number[]=[];
+let tutorialOpened=false;
+const tutorial=new ExerciseTutorialPanel($('tutorialModal'),{
+  onOpen(){tutorialOpened=true;stopHold();if(running(current))controller.command({kind:'pause',reason:'user'});panel(current);},
+  onClose(){
+    panel(current);
+    if(!$('setupModal').hidden)return $('setupTutorial');
+    if(!$('planModal').hidden)return $('planTutorial');
+    if(!$('resultsModal').hidden)return $('resultsTutorial');
+    return $('tutorialOpen');
+  },
+});
 
 const instructions: Record<TaskKind, string> = {
   chop: '空格触发一次“上举 → 下挥 → 复位”，完整循环后记数。',
@@ -140,6 +154,7 @@ function niceTask(task: TaskKind | null): string {
 }
 function panel(s: Readonly<SessionSnapshot>): void {
   current = s;
+  movementGuide.sync(s,!renderUnavailable);
   setProperty($('audioToggle'),'textContent',audio.error||(audio.enabled?'音效：开 · 点击静音':'开启音效'));
   setAttribute($('audioToggle'),'aria-pressed',String(audio.enabled));
   void syncSource(s);
@@ -196,7 +211,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   setProperty($('planModal'),'hidden',phase !== 'home' || planDismissed);
   setProperty($('setupModal'),'hidden',phase !== 'setup'&&!cameraPreparation);
   setProperty($('resultsModal'),'hidden',phase !== 'results');
-  game.setInteractionEnabled($('setupModal').hidden&&$('resultsModal').hidden&&$('exitModal').hidden&&!renderUnavailable);
+  game.setInteractionEnabled($('tutorialModal').hidden&&$('setupModal').hidden&&$('resultsModal').hidden&&$('exitModal').hidden&&!renderUnavailable);
   setProperty($('pauseBtn'),'hidden',!(['countdown', 'active', 'rest'] as string[]).includes(phase));
   setProperty($('pauseBtn'),'textContent',s.pauseReasons.length ? '继续' : '暂停');
   const status = s.pauseReasons.length ? '已暂停' : phase === 'home' ? '未开始'
@@ -278,6 +293,7 @@ $('cancelPlan').addEventListener('click', () => {
 $('acceptPlan').addEventListener('click', () => {if(!renderUnavailable)controller.command({kind:'open-setup',mode:'keyboard'});});
 $('viewLeft').addEventListener('click',()=>game.rotate(-1));$('viewRight').addEventListener('click',()=>game.rotate(1));$('viewReset').addEventListener('click',()=>game.resetView());
 $('viewCastle').addEventListener('click',()=>game.focusCastle());
+for(const id of ['tutorialOpen','planTutorial','setupTutorial','resultsTutorial'])$(id).addEventListener('click',()=>tutorial.open(current.task??'chop',running(current)));
 $('audioToggle').addEventListener('click',async()=>{await audio.setEnabled(!audio.enabled);panel(controller.getSnapshot());});
 $('backHome').addEventListener('click', () => controller.command({kind:'reset'}));
 for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));
@@ -311,7 +327,7 @@ $('pauseBtn').addEventListener('click',()=>{
 const actionBtn=$('actionBtn') as HTMLButtonElement;
 $('cancelExit').addEventListener('click', () => {
   $('exitModal').hidden = true;
-  game.setInteractionEnabled($('setupModal').hidden&&$('resultsModal').hidden&&!renderUnavailable);
+  game.setInteractionEnabled($('tutorialModal').hidden&&$('setupModal').hidden&&$('resultsModal').hidden&&!renderUnavailable);
   if (!renderUnavailable&&!exitWasUserPaused) controller.command({ kind: 'resume', reason: 'user' });
   actionBtn.focus();
 });
@@ -328,6 +344,7 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture']) {
   actionBtn.addEventListener(eventName,()=>{ if(heldPointer){heldPointer=false;input.holdEnd();} });
 }
 window.addEventListener('keydown',e=>{
+  if(tutorial.isOpen)return;
   if (e.code === 'Escape' && !e.repeat && ['active', 'countdown', 'rest'].includes(current.phase)) {
     e.preventDefault();
     if (!$('exitModal').hidden) return;
@@ -369,14 +386,15 @@ function animate(now:number):void {
     $('inputDebug').textContent=`${current.inputMode} · ${current.taskRunId??'无任务实例'} · epoch ${current.sourceEpoch} · ${debug.phase} · ${debug.reason??'等待/有效输入'}\n游戏帧间隔 p95 ${p95.toFixed(1)}ms（最近120帧，非端到端延迟）${current.inputMode==='camera'?`\n${$('cameraMetrics').textContent}\n${$('calibrationFeatures').textContent}`:''}`;
   }
   preview.update(now, current);
+  movementGuide.update(now);
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-window.addEventListener('pagehide', () => { gamePreview.dispose();void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
+window.addEventListener('pagehide', () => { movementGuide.dispose();tutorial.dispose();gamePreview.dispose();void audio.dispose();void sourceManager.dispose();void cameraInput.dispose();void cameraPanel.dispose(); void input.dispose(); void autoInput.dispose(); preview.dispose(); controller.dispose(); game.destroy(true); });
 // Start once per page load. Reset/results return home without starting another run.
 // Renderer initialization reports failure in an earlier microtask, before this gate.
 const startDefaultDemo=()=>{
-  if(!demoEnabled||renderUnavailable||current.phase!=='home'||current.sessionId!==initialSessionId)return;
+  if(tutorialOpened||!demoEnabled||renderUnavailable||current.phase!=='home'||current.sessionId!==initialSessionId)return;
   controller.command({kind:'open-setup',mode:'keyboard'});
   controller.command({kind:'setup-ready'});
   if(document.hidden)controller.command({kind:'pause',reason:'visibility'});

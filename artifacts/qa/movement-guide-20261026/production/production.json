@@ -1,0 +1,514 @@
+{
+  "input": "Normal-speed production UI only; no clock/controller mutation",
+  "media": "Authored SVG and synthetic farm PNGs only; no video or real person",
+  "browser": "156.0.8078.4",
+  "frames": [
+    {
+      "file": "chop-down.png",
+      "task": "chop",
+      "step": "2",
+      "points": [
+        {
+          "joint": "head",
+          "x": 108,
+          "y": 51.92
+        },
+        {
+          "joint": "neck",
+          "x": 110,
+          "y": 76.32000000000001
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 86.08
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 130,
+          "y": 83.64
+        },
+        {
+          "joint": "leftElbow",
+          "x": 78,
+          "y": 127.56
+        },
+        {
+          "joint": "rightElbow",
+          "x": 134,
+          "y": 125.11999999999999
+        },
+        {
+          "joint": "leftWrist",
+          "x": 102,
+          "y": 164.16
+        },
+        {
+          "joint": "rightWrist",
+          "x": 114,
+          "y": 156.84
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 149.51999999999998
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 149.51999999999998
+        },
+        {
+          "joint": "leftKnee",
+          "x": 96,
+          "y": 193.44
+        },
+        {
+          "joint": "rightKnee",
+          "x": 127.99999999999999,
+          "y": 193.44
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    },
+    {
+      "file": "load-squat.png",
+      "task": "load",
+      "step": "1",
+      "points": [
+        {
+          "joint": "head",
+          "x": 112,
+          "y": 73.88000000000001
+        },
+        {
+          "joint": "neck",
+          "x": 112,
+          "y": 98.28
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 134,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "leftElbow",
+          "x": 72,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "rightElbow",
+          "x": 152,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "leftWrist",
+          "x": 80,
+          "y": 183.68
+        },
+        {
+          "joint": "rightWrist",
+          "x": 144,
+          "y": 183.68
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "leftKnee",
+          "x": 72,
+          "y": 198.32
+        },
+        {
+          "joint": "rightKnee",
+          "x": 152,
+          "y": 198.32
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    },
+    {
+      "file": "layout-1920x1080.png",
+      "task": "load",
+      "step": "1",
+      "points": [
+        {
+          "joint": "head",
+          "x": 112,
+          "y": 73.88000000000001
+        },
+        {
+          "joint": "neck",
+          "x": 112,
+          "y": 98.28
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 134,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "leftElbow",
+          "x": 72,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "rightElbow",
+          "x": 152,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "leftWrist",
+          "x": 80,
+          "y": 183.68
+        },
+        {
+          "joint": "rightWrist",
+          "x": 144,
+          "y": 183.68
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "leftKnee",
+          "x": 72,
+          "y": 198.32
+        },
+        {
+          "joint": "rightKnee",
+          "x": 152,
+          "y": 198.32
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "file": "layout-601x768.png",
+      "task": "load",
+      "step": "1",
+      "points": [
+        {
+          "joint": "head",
+          "x": 112,
+          "y": 73.88000000000001
+        },
+        {
+          "joint": "neck",
+          "x": 112,
+          "y": 98.28
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 134,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "leftElbow",
+          "x": 72,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "rightElbow",
+          "x": 152,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "leftWrist",
+          "x": 80,
+          "y": 183.68
+        },
+        {
+          "joint": "rightWrist",
+          "x": 144,
+          "y": 183.68
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "leftKnee",
+          "x": 72,
+          "y": 198.32
+        },
+        {
+          "joint": "rightKnee",
+          "x": 152,
+          "y": 198.32
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 601,
+        "height": 768
+      }
+    },
+    {
+      "file": "layout-390x844.png",
+      "task": "load",
+      "step": "1",
+      "points": [
+        {
+          "joint": "head",
+          "x": 112,
+          "y": 73.88000000000001
+        },
+        {
+          "joint": "neck",
+          "x": 112,
+          "y": 98.28
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 134,
+          "y": 108.03999999999999
+        },
+        {
+          "joint": "leftElbow",
+          "x": 72,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "rightElbow",
+          "x": 152,
+          "y": 144.64000000000001
+        },
+        {
+          "joint": "leftWrist",
+          "x": 80,
+          "y": 183.68
+        },
+        {
+          "joint": "rightWrist",
+          "x": 144,
+          "y": 183.68
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 176.35999999999999
+        },
+        {
+          "joint": "leftKnee",
+          "x": 72,
+          "y": 198.32
+        },
+        {
+          "joint": "rightKnee",
+          "x": 152,
+          "y": 198.32
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "carry-hold.png",
+      "task": "carry",
+      "step": "1",
+      "points": [
+        {
+          "joint": "head",
+          "x": 112,
+          "y": 47.04
+        },
+        {
+          "joint": "neck",
+          "x": 112,
+          "y": 71.44
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 90,
+          "y": 81.2
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 134,
+          "y": 81.2
+        },
+        {
+          "joint": "leftElbow",
+          "x": 66,
+          "y": 115.36
+        },
+        {
+          "joint": "rightElbow",
+          "x": 158,
+          "y": 115.36
+        },
+        {
+          "joint": "leftWrist",
+          "x": 92,
+          "y": 137.32
+        },
+        {
+          "joint": "rightWrist",
+          "x": 132,
+          "y": 137.32
+        },
+        {
+          "joint": "leftHip",
+          "x": 98,
+          "y": 149.51999999999998
+        },
+        {
+          "joint": "rightHip",
+          "x": 125.99999999999999,
+          "y": 149.51999999999998
+        },
+        {
+          "joint": "leftKnee",
+          "x": 96,
+          "y": 193.44
+        },
+        {
+          "joint": "rightKnee",
+          "x": 127.99999999999999,
+          "y": 193.44
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 92,
+          "y": 234.92000000000002
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 132,
+          "y": 234.92000000000002
+        }
+      ],
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    }
+  ],
+  "waiting": {
+    "phase": "active",
+    "chop": "0/15",
+    "load": "0/15",
+    "carry": "0.0/60s",
+    "inventory": "0/0/0"
+  },
+  "carryPause": {
+    "phase": "active",
+    "chop": "15/15",
+    "load": "15/15",
+    "carry": "0.4/60s",
+    "inventory": "0/15/0"
+  },
+  "cameraCalls": 0,
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "poseRequests": [],
+  "external": [],
+  "result": "pass"
+}

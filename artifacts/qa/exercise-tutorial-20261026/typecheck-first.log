@@ -1,0 +1,8 @@
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+src/ui/exerciseTutorialPanel.ts(23,23): error TS2488: Type 'NodeListOf<HTMLButtonElement>' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/exerciseTutorialPanel.ts(38,24): error TS2488: Type 'HTMLCollection' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/exerciseTutorialPanel.ts(56,23): error TS2488: Type 'NodeListOf<HTMLButtonElement>' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/ui/exerciseTutorialPanel.ts(78,24): error TS2488: Type 'NodeListOf<HTMLButtonElement>' must have a '[Symbol.iterator]()' method that returns an iterator.

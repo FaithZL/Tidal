@@ -1,0 +1,57 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-26T08:35:35.138521+00:00",
+    "finishedUTC": "2026-10-26T08:35:36.315454+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-26T08:35:36.315603+00:00",
+    "finishedUTC": "2026-10-26T08:35:37.440530+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-26T08:35:37.440731+00:00",
+    "finishedUTC": "2026-10-26T08:35:42.612336+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "log": "assets.log",
+    "startedUTC": "2026-10-26T08:35:42.612518+00:00",
+    "finishedUTC": "2026-10-26T08:35:42.802078+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-26T08:35:42.802268+00:00",
+    "finishedUTC": "2026-10-26T08:35:44.346297+00:00",
+    "exitCode": 0
+  }
+]

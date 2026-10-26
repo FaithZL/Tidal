@@ -1,0 +1,20 @@
+{
+  "historicalFiles": 1818,
+  "regeneratedThenArchived": [
+    "artifacts/qa/keyboard-results.png",
+    "artifacts/qa/3d/orbit.png",
+    "artifacts/qa/3d/results.png",
+    "artifacts/qa/3d/camera-pip-synthetic.png",
+    "artifacts/qa/3d/home.png",
+    "artifacts/qa/demo-toggle/setup.png",
+    "artifacts/qa/demo-toggle/running.png",
+    "artifacts/qa/user-load-motion-20261025/load-motion.json",
+    "artifacts/qa/user-load-motion-20261025/load-results.png",
+    "artifacts/qa/user-load-motion-20261025/load-paused.png",
+    "artifacts/qa/user-load-motion-20261025/pause-resume-reset.json",
+    "artifacts/qa/user-farm-motion-20261026/farm-motion.json",
+    "artifacts/qa/user-farm-motion-20261026/farm-results.png",
+    "artifacts/qa/t09/synthetic-camera-results.png"
+  ],
+  "allHistoricalSHA256Restored": true
+}

@@ -1,0 +1,47 @@
+{
+  "scope": [
+    "src/ui/movementGuideClock.ts",
+    "src/ui/movementGuide.ts",
+    "web/movement-guide.css",
+    "browser/index delta against task-start copies",
+    "new unit/E2E"
+  ],
+  "readOnly": true,
+  "findings": [
+    {
+      "priority": "P2",
+      "issue": "Dynamic reduced-motion setting froze an interpolation instead of a key pose",
+      "reproduced": "rightWrist cy150.26465681044556 vs112.92 expected; review-boundaries-red-recheck.log",
+      "fix": "Reset current task and paint key pose immediately on preference change",
+      "status": "closed"
+    },
+    {
+      "priority": "P2",
+      "issue": "Card obscured desktop percentage",
+      "reproduced": "1366x768 guide covered #scenePercent; retained RED trace",
+      "fix": "Raise card above existing percentage; narrow layout explicitly positions original percentage between cards",
+      "status": "closed"
+    },
+    {
+      "priority": "P2",
+      "issue": "601–648px guide obscured left-side control area",
+      "reproduced": "601x768 independent actual-CSS fixture: guide x194–348, action x25–229",
+      "fix": "Stack from680px and test601/620/650",
+      "status": "closed"
+    },
+    {
+      "priority": "P2",
+      "issue": "390x600 load input copy was taller and overlapped guide",
+      "reproduced": "Real15-chop→load layout test RED, load-short-layout-red.log",
+      "fix": "Short-screen guide bottom310, percentage bottom275; final reviewer fixture guide bottom290, percentage298–316, preview top333.109",
+      "status": "closed"
+    }
+  ],
+  "finalAssessment": "No remaining blockers; final tests and visual inspection owned by root",
+  "notAccepted": [
+    "Physical camera recognition",
+    "Physical phone",
+    "60fps performance",
+    "Final art acceptance"
+  ]
+}

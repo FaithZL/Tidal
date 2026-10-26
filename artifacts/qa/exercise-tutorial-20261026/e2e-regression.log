@@ -1,0 +1,79 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/demo-toggle.spec.ts tests/e2e/source-lifecycle.spec.ts tests/e2e/keyboard-flow.spec.ts tests/e2e/world3d.spec.ts tests/e2e/user-farm-motion.spec.ts tests/e2e/user-load-motion.spec.ts --output artifacts/qa/exercise-tutorial-20261026/regression-results
+
+[WebServer] (node:78750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:78770) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:78818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:78838) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 25 tests using 1 worker
+
+(node:78839) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/demo-toggle.spec.ts:6:1 › no-camera demo is explicit, completes the full farm flow and resets with its chosen preference without camera requests (10.5s)
+  ✓   2 tests/e2e/demo-toggle.spec.ts:39:1 › turning demo off cancels partial input and pauses; manual mode can resume (4.3s)
+  ✓   3 tests/e2e/demo-toggle.spec.ts:51:1 › real camera stays separate after demo and errors never turn simulation back on (2.5s)
+  ✓   4 tests/e2e/demo-toggle.spec.ts:64:1 › automatic carry freezes on blur, resumes with fresh samples and stops when toggled off (8.9s)
+  ✓   5 tests/e2e/demo-toggle.spec.ts:86:1 › enabling simulation cancels a pending camera request and releases the late stream (3.1s)
+  ✓   6 tests/e2e/keyboard-flow.spec.ts:19:1 › two complete keyboard sessions with pauses, conserved inventory and reset (34.6s)
+  ✓   7 tests/e2e/keyboard-flow.spec.ts:52:1 › repeat keys, control focus and a reset during animation cannot add an extra rep (3.6s)
+  ✓   8 tests/e2e/keyboard-flow.spec.ts:68:1 › pointer cancel and blur release carry; returning requires explicit continue (17.6s)
+  ✓   9 tests/e2e/keyboard-flow.spec.ts:82:1 › Escape opens an exit confirmation; cancel preserves progress and existing pause (3.1s)
+  ✓  10 tests/e2e/keyboard-flow.spec.ts:95:1 › P works after clicking pause but cannot resume behind the exit dialog (2.5s)
+(node:79333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 tests/e2e/source-lifecycle.spec.ts:6:1 › camera start stays disabled without calibration and simulation cannot enable it (903ms)
+  ✓  12 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.3m)
+  ✓  13 tests/e2e/source-lifecycle.spec.ts:30:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (21.1s)
+  ✓  14 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (46.6s)
+(node:80127) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 2:25:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 2:25:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  15 tests/e2e/user-farm-motion.spec.ts:31:1 › the supplied farm character chops and takes real steps through walk push pull while preserving fifteen logs (6.6s)
+[WebServer] 2:25:11 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:11 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 2:25:11 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:11 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  16 tests/e2e/user-farm-motion.spec.ts:49:1 › pausing a real downstroke freezes blade feet and progress and reset clears the half action (7.5s)
+[WebServer] 2:25:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 2:25:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  17 tests/e2e/user-load-motion.spec.ts:72:1 › the supplied NPR character moves its real hand through load phases and delivers only fifteen logs (6.5s)
+[WebServer] 2:25:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 2:25:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 2:25:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  18 tests/e2e/user-load-motion.spec.ts:105:1 › pausing the first moving load freezes the hand and count; resume and reset preserve inventory (8.0s)
+(node:80439) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 tests/e2e/world3d.spec.ts:5:1 › real 3D farm renders and orbiting changes camera and projected geometry without adding exercise (5.9s)
+  ✓  20 tests/e2e/world3d.spec.ts:18:1 › full farm homepage has a small notification and results give exercise and rewards equal space (10.5s)
+  ✓  21 tests/e2e/world3d.spec.ts:31:1 › camera PiP reuses the same playing video and stream during training and re-preparation (16.5s)
+  ✓  22 tests/e2e/world3d.spec.ts:46:1 › pause stops automatic camera drift and reset view restores the farm overview during a task (3.9s)
+  ✓  23 tests/e2e/world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=false (4.4s)
+  ✓  24 tests/e2e/world3d.spec.ts:54:37 › losing WebGL context blocks every resume and input path, automatic=true (4.7s)
+[WebServer] 2:26:19 PM [vite] (client) [Unhandled rejection] Error: User house loading cancelled
+[WebServer]  > UserHouseMount.dispose src/game/world/userHouseMount.ts:22:14
+[WebServer]     20 |    if(this.closed)return;this.closed=true;
+[WebServer]     21 |    if(this.model){this.model.root.removeFromParent();this.model.dispose();this.model=null;}
+[WebServer]     22 |    this.cancel(new Error('User house loading cancelled'));
+[WebServer]        |                ^
+[WebServer]     23 |   }
+[WebServer]     24 |  }
+[WebServer]  > FarmWorld.destroy src/game/world/FarmWorld.ts:213:72
+[WebServer]  > new FarmWorld src/game/world/FarmWorld.ts:121:21
+[WebServer]  > createGame src/game/createGame.ts:7:13
+[WebServer]  > src/browser.ts:46:13
+[WebServer] 
+  ✓  25 tests/e2e/world3d.spec.ts:69:1 › a failure after allocating WebGL releases the canvas and GPU context before showing recovery (528ms)
+
+  25 passed (5.3m)

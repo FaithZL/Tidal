@@ -1,0 +1,48 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/exercise-tutorial.spec.ts -g short background --output artifacts/qa/exercise-tutorial-20261026/background-red-results
+
+[WebServer] (node:77693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:77713) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:77761) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:77781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:77791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/exercise-tutorial.spec.ts:73:1 › a short background interval with no hidden animation frame never fills tutorial playback (253ms)
+
+
+  1) tests/e2e/exercise-tutorial.spec.ts:73:1 › a short background interval with no hidden animation frame never fills tutorial playback 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0.00"
+    Received: "150.00"
+
+      88 |   callbacks.shift()!(1150);const after=root.dataset.timeMs;panel.dispose();return {before,after};
+      89 |  });
+    > 90 |  expect(observation.after).toBe(observation.before);
+         |                            ^
+      91 | });
+      92 |
+      93 | test.describe('automatic training',()=>{
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/exercise-tutorial.spec.ts:90:28
+
+    Error Context: artifacts/qa/exercise-tutorial-20261026/background-red-results/exercise-tutorial-a-short--38b05-ver-fills-tutorial-playback/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/exercise-tutorial-20261026/background-red-results/exercise-tutorial-a-short--38b05-ver-fills-tutorial-playback/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/exercise-tutorial-20261026/background-red-results/exercise-tutorial-a-short--38b05-ver-fills-tutorial-playback/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/exercise-tutorial.spec.ts:73:1 › a short background interval with no hidden animation frame never fills tutorial playback 

@@ -1,0 +1,10 @@
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+/Users/zero/work/ai_ws/Tidal/src/ui/movementGuide.ts
+  44:13  error  '_link' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+

@@ -1,0 +1,28 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/exerciseTutorialModel.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/exerciseTutorialModel.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts [ tests/unit/exerciseTutorialModel.test.ts ]
+Error: Cannot find module '../../src/ui/exerciseTutorialModel.js' imported from /Users/zero/work/ai_ws/Tidal/tests/unit/exerciseTutorialModel.test.ts
+ ❯ tests/unit/exerciseTutorialModel.test.ts:2:1
+      1| import { describe, expect, test } from 'vitest';
+      2| import {
+       | ^
+      3|   TutorialClock, tutorialLessons,
+      4|   type TutorialJoint, type TutorialPoint, type TutorialSpeed,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  13:54:41
+   Duration  78ms (worker 97%, environment 3%)
+

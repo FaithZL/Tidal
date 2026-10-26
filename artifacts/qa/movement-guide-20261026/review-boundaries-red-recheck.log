@@ -1,0 +1,89 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/movement-guide.spec.ts -g desktop|changing to reduced --output artifacts/qa/movement-guide-20261026/review-red-recheck-results
+
+[WebServer] (node:86953) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:86973) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:87029) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:87049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:87050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 3:13:45 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:13:45 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 3:13:45 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:13:45 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls (6.9s)
+(node:87072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/e2e/movement-guide.spec.ts:57:1 › changing to reduced motion immediately shows a complete key pose instead of a half squat (7.1s)
+
+
+  1) tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      48 |   expect(result.overflow).toBe(false);expect(result.guide.left).toBeGreaterThanOrEqual(0);expect(result.guide.right).toBeLessThanOrEqual(size.width);
+      49 |   expect(result.guide.top).toBeGreaterThanOrEqual(0);expect(result.guide.bottom).toBeLessThanOrEqual(size.height);
+    > 50 |   expect(intersects(result.guide,result.preview)).toBe(false);expect(intersects(result.guide,result.action)).toBe(false);expect(intersects(result.guide,result.timeline)).toBe(false);expect(intersects(result.guide,result.percent)).toBe(false);
+         |                                                                                                                                                                                                                                       ^
+      51 |   expect(intersects(result.percent,result.preview)).toBe(false);expect(result.percent.right).toBeLessThanOrEqual(size.width);
+      52 |   observations.push({size,...result});await mkdir(output,{recursive:true});await page.screenshot({path:`${output}/layout-${size.width}x${size.height}.png`});
+      53 |  }
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/movement-guide.spec.ts:50:231
+
+    Error Context: artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/movement-guide.spec.ts:57:1 › changing to reduced motion immediately shows a complete key pose instead of a half squat 
+
+    Error: expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 112.92
+    Received: 150.26465681044556
+
+    Expected precision:    5
+    Expected difference: < 0.000005
+    Received difference:   37.34465681044556
+
+    Call Log:
+    - Timeout 7000ms exceeded while waiting on the predicate
+
+      68 |  expect(mid).toBeGreaterThan(130);expect(mid).toBeLessThan(180);
+      69 |  await page.emulateMedia({reducedMotion:'reduce'});
+    > 70 |  await expect.poll(async()=>Number(await page.locator('[data-joint="rightWrist"]').getAttribute('cy'))).toBeCloseTo(112.92,5);
+         |                                                                                                         ^
+      71 |  await expect(page.locator('#movementGuide')).toHaveAttribute('data-time-ms','0');await expect(page.locator('[data-guide-note]')).toContainText('关键姿态');
+      72 | });
+      73 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/movement-guide.spec.ts:70:105
+
+    Error Context: artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-changing-to-c6153-ose-instead-of-a-half-squat/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-changing-to-c6153-ose-instead-of-a-half-squat/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/movement-guide-20261026/review-red-recheck-results/movement-guide-changing-to-c6153-ose-instead-of-a-half-squat/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls 
+    tests/e2e/movement-guide.spec.ts:57:1 › changing to reduced motion immediately shows a complete key pose instead of a half squat 

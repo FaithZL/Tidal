@@ -1,0 +1,20 @@
+Command: npm run test:unit -- tests/unit/movementGuideClock.test.ts tests/unit/exerciseTutorialModel.test.ts
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/movementGuideClock.test.ts tests/unit/exerciseTutorialModel.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  2 passed (2)
+      Tests  29 passed (29)
+   Start at  15:00:27
+   Duration  495ms (tests 94%, transform 3%, import 2%, worker 1%)
+
+
+Exit code: 0
+
+Command: node_modules/.bin/eslint src/ui/movementGuideClock.ts
+
+Exit code: 0

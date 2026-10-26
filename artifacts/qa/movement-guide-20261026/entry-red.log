@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/movement-guide.spec.ts -g independently --output artifacts/qa/movement-guide-20261026/entry-red-results
+
+[WebServer] (node:84516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:84536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:84584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:84604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:84605) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 3:02:26 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:02:26 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 3:02:26 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:02:26 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/movement-guide.spec.ts:12:1 › a standard skeleton moves independently while keyboard training waits and freezes on pause (12.2s)
+
+
+  1) tests/e2e/movement-guide.spec.ts:12:1 › a standard skeleton moves independently while keyboard training waits and freezes on pause 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('complementary', { name: '标准动作示范', exact: true })
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('complementary', { name: '标准动作示范', exact: true }) with timeout 7000ms
+      - waiting for getByRole('complementary', { name: '标准动作示范', exact: true })
+
+
+      12 | test('a standard skeleton moves independently while keyboard training waits and freezes on pause',async({page})=>{
+      13 |  await begin(page);const guide=page.getByRole('complementary',{name:'标准动作示范',exact:true});
+    > 14 |  await expect(guide).toBeVisible();await expect(guide).toHaveAttribute('data-task','chop');await expect(guide.locator('circle[data-joint]')).toHaveCount(14);
+         |                      ^
+      15 |  await expect(guide).toHaveAttribute('data-step','2');const a=await joints(page);await page.waitForTimeout(400);expect(await joints(page)).not.toEqual(a);
+      16 |  await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#worldCanvas')).toHaveAttribute('data-inventory','0/0/0');
+      17 |  await page.locator('#pauseBtn').click();const frozen=await joints(page),time=await guide.getAttribute('data-time-ms');await page.waitForTimeout(250);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/movement-guide.spec.ts:14:22
+
+    Error Context: artifacts/qa/movement-guide-20261026/entry-red-results/movement-guide-a-standard--c0420--waits-and-freezes-on-pause/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/movement-guide-20261026/entry-red-results/movement-guide-a-standard--c0420--waits-and-freezes-on-pause/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/movement-guide-20261026/entry-red-results/movement-guide-a-standard--c0420--waits-and-freezes-on-pause/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/movement-guide.spec.ts:12:1 › a standard skeleton moves independently while keyboard training waits and freezes on pause 

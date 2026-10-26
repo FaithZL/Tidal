@@ -1,0 +1,307 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/entry-red-results"
+    ],
+    "exitCode": 1,
+    "log": "entry-red.log",
+    "seconds": 63.505
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/exerciseTutorialModel.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "model-red.log",
+    "seconds": 0.342
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/exerciseTutorialModel.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "model-semantic-red.log",
+    "seconds": 0.315
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/exerciseTutorialModel.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "model-green.log",
+    "seconds": 0.321
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/exerciseTutorialModel.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "model-green-final.log",
+    "seconds": 0.319
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "model-lint.log",
+    "seconds": 2.567
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "log": "model-typecheck.log",
+    "seconds": 2.846
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "model-unit-all.log",
+    "seconds": 5.261
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 2,
+    "log": "typecheck-first.log",
+    "seconds": 1.009
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "seconds": 1.28
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/e2e-first-results"
+    ],
+    "exitCode": 1,
+    "log": "e2e-first.log",
+    "seconds": 1.136
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "-g",
+      "reopening|selected final|short background",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/lifecycle-red-results"
+    ],
+    "exitCode": 1,
+    "log": "lifecycle-red.log",
+    "seconds": 17.812
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "-g",
+      "selected final|short background",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/lifecycle-red-exact-results"
+    ],
+    "exitCode": 1,
+    "log": "lifecycle-red-exact.log",
+    "seconds": 5.431
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "-g",
+      "short background",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/background-red-results"
+    ],
+    "exitCode": 1,
+    "log": "background-red.log",
+    "seconds": 1.906
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/e2e-green-first-results"
+    ],
+    "exitCode": 0,
+    "log": "e2e-green-first.log",
+    "seconds": 61.926
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "lint-final.log",
+    "seconds": 2.439
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "log": "typecheck-final.log",
+    "seconds": 2.728
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "unit-final.log",
+    "seconds": 5.266
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/demo-toggle.spec.ts",
+      "tests/e2e/source-lifecycle.spec.ts",
+      "tests/e2e/keyboard-flow.spec.ts",
+      "tests/e2e/world3d.spec.ts",
+      "tests/e2e/user-farm-motion.spec.ts",
+      "tests/e2e/user-load-motion.spec.ts",
+      "--output",
+      "artifacts/qa/exercise-tutorial-20261026/regression-results"
+    ],
+    "exitCode": 0,
+    "log": "e2e-regression.log",
+    "seconds": 315.401
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "exitCode": 0,
+    "log": "assets.log",
+    "seconds": 0.317
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "build.log",
+    "seconds": 1.829
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/exercise-tutorial-20261026/capture-production.mjs"
+    ],
+    "exitCode": 0,
+    "log": "production.log",
+    "seconds": 9.523
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "build-copy-final.log",
+    "seconds": 4.892
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "unit-copy-final.log",
+    "seconds": 5.838
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/exercise-tutorial-20261026/capture-production.mjs"
+    ],
+    "exitCode": 0,
+    "log": "production-final.log",
+    "seconds": 9.483
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "lint-copy-final.log",
+    "seconds": 1.066
+  }
+]

@@ -1,0 +1,234 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/exerciseTutorialModel.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/exerciseTutorialModel.test.ts (16 tests | 16 failed) 6ms
+   ❯ tutorial lesson diagrams (4)
+     × each lesson supplies visible whole-body joints and the complete number of teaching steps 3ms
+     × chop first raises the hand to the shoulder, moves it down and returns fully to the ready pose 0ms
+     × load bends both knees and lowers the hips before standing, raising both hands and resetting 0ms
+     × carry holds a stable bent-arm pose then visibly releases both arms 0ms
+   ❯ TutorialClock (12)
+     × starts paused at the first chop pose and cannot advance until played 0ms
+     × switching lessons resets to the first pose and autoplays while retaining the chosen speed 0ms
+     × interpolates the actual joints from the previous pose towards the current step target 0ms
+     × speed 0.5 progresses proportionally over the same observed time without altering lesson duration 0ms
+     × speed 0.25 progresses proportionally over the same observed time without altering lesson duration 0ms
+     × changing speed preserves the displayed pose and uses the new rate only for subsequent time 0ms
+     × ordinary pause and play preserve exact progress and do not restart a partially observed step 0ms
+     × invalid and long intervals are discarded entirely, and the next valid frame never catches them up 0ms
+     × selecting a step immediately freezes its target, then play begins that step from its prior target 0ms
+     × invalid step selections preserve the current animation and selection state 0ms
+     × replay returns to the beginning, clears a manual selection and preserves the playback rate 0ms
+     × a completed lesson stops at the final target and never loops or accumulates beyond its duration 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > tutorial lesson diagrams > each lesson supplies visible whole-body joints and the complete number of teaching steps
+AssertionError: expected [] to have a length of 4 but got +0
+
+- Expected
++ Received
+
+- 4
++ 0
+
+ ❯ tests/unit/exerciseTutorialModel.test.ts:30:40
+     28|   test('each lesson supplies visible whole-body joints and the complet…
+     29|     expect(Object.keys(tutorialLessons).sort()).toEqual(['carry', 'cho…
+     30|     expect(tutorialLessons.chop.steps).toHaveLength(4);
+       |                                        ^
+     31|     expect(tutorialLessons.load.steps).toHaveLength(5);
+     32|     expect(tutorialLessons.carry.steps).toHaveLength(3);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > tutorial lesson diagrams > chop first raises the hand to the shoulder, moves it down and returns fully to the ready pose
+TypeError: Cannot read properties of undefined (reading 'points')
+ ❯ tests/unit/exerciseTutorialModel.test.ts:53:18
+     51|   test('chop first raises the hand to the shoulder, moves it down and …
+     52|     const [standing, ready, down, reset] = tutorialLessons.chop.steps;
+     53|     expect(ready.points.rightWrist.y).toBeLessThan(standing.points.rig…
+       |                  ^
+     54|     expect(Math.abs(ready.points.rightWrist.y - ready.points.rightShou…
+     55|     expect(down.points.rightWrist.y).toBeGreaterThan(ready.points.righ…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > tutorial lesson diagrams > load bends both knees and lowers the hips before standing, raising both hands and resetting
+TypeError: Cannot read properties of undefined (reading 'points')
+ ❯ tests/unit/exerciseTutorialModel.test.ts:65:43
+     63|       const hip = `${side}Hip` as const, knee = `${side}Knee` as const…
+     64|       const shoulder = `${side}Shoulder` as const, wrist = `${side}Wri…
+     65|       const standingKnee = angle(standing.points[hip], standing.points…
+       |                                           ^
+     66|       expect(angle(squat.points[hip], squat.points[knee], squat.points…
+     67|       expect(squat.points[hip].y).toBeGreaterThan(standing.points[hip]…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > tutorial lesson diagrams > carry holds a stable bent-arm pose then visibly releases both arms
+TypeError: Cannot read properties of undefined (reading 'points')
+ ❯ tests/unit/exerciseTutorialModel.test.ts:80:17
+     78|   test('carry holds a stable bent-arm pose then visibly releases both …
+     79|     const [ready, hold, released] = tutorialLessons.carry.steps;
+     80|     expect(hold.points).toEqual(ready.points);
+       |                 ^
+     81|     for (const side of ['left', 'right'] as const) {
+     82|       const shoulder = `${side}Shoulder` as const, elbow = `${side}Elb…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > starts paused at the first chop pose and cannot advance until played
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:94:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > switching lessons resets to the first pose and autoplays while retaining the chosen speed
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:103:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > interpolates the actual joints from the previous pose towards the current step target
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:112:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > speed 0.5 progresses proportionally over the same observed time without altering lesson duration
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > speed 0.25 progresses proportionally over the same observed time without altering lesson duration
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:123:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > changing speed preserves the displayed pose and uses the new rate only for subsequent time
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:131:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > ordinary pause and play preserve exact progress and do not restart a partially observed step
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:139:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > invalid and long intervals are discarded entirely, and the next valid frame never catches them up
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:146:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > selecting a step immediately freezes its target, then play begins that step from its prior target
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:155:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > invalid step selections preserve the current animation and selection state
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:168:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > replay returns to the beginning, clears a manual selection and preserves the playback rate
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:177:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/16]⎯
+
+ FAIL  tests/unit/exerciseTutorialModel.test.ts > TutorialClock > a completed lesson stops at the final target and never loops or accumulates beyond its duration
+Error: Tutorial clock is not implemented
+ ❯ new TutorialClock src/ui/exerciseTutorialModel.ts:36:58
+     34|
+     35| export class TutorialClock {
+     36|   constructor(task: TaskKind = 'chop') { void task;throw new Error('Tu…
+       |                                                          ^
+     37|   get frame(): TutorialFrame { throw new Error('Tutorial clock is not …
+     38|   setTask(task: TaskKind): void { void task; }
+ ❯ tests/unit/exerciseTutorialModel.test.ts:184:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/16]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  16 failed (16)
+   Start at  13:55:00
+   Duration  89ms (transform 42%, tests 28%, import 23%, worker 7%)
+

@@ -1,0 +1,576 @@
+{
+  "input": "Normal-speed production app; actual lesson/UI controls; no controller/clock mutation",
+  "media": "Only synthetic SVG/3D UI screenshots; no video recording, no person or camera",
+  "browser": "156.0.8078.4",
+  "frames": [
+    {
+      "file": "chop-ready.png",
+      "task": "chop",
+      "step": 1,
+      "points": [
+        {
+          "joint": "head",
+          "x": 180,
+          "y": 91,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 180,
+          "y": 126,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 126.8,
+          "y": 175,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 188.4,
+          "y": 150.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 210.79999999999998,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 244.4,
+          "y": 171.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 202.39999999999998,
+          "y": 129.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 157.6,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 202.39999999999998,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    },
+    {
+      "file": "chop-down.png",
+      "task": "chop",
+      "step": 2,
+      "points": [
+        {
+          "joint": "head",
+          "x": 174.4,
+          "y": 98,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 177.2,
+          "y": 133,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 147,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 132.4,
+          "y": 206.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 166,
+          "y": 259,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 205.2,
+          "y": 143.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 210.79999999999998,
+          "y": 203,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 182.8,
+          "y": 248.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 157.6,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 202.39999999999998,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    },
+    {
+      "file": "load-squat.png",
+      "task": "load",
+      "step": 1,
+      "points": [
+        {
+          "joint": "head",
+          "x": 180,
+          "y": 129.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 180,
+          "y": 164.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 178.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 124,
+          "y": 231.00000000000003,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 135.2,
+          "y": 287,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 210.79999999999998,
+          "y": 178.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 236,
+          "y": 231.00000000000003,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 224.8,
+          "y": 287,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 276.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 276.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 124,
+          "y": 308,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 236,
+          "y": 308,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    },
+    {
+      "file": "load-press.png",
+      "task": "load",
+      "step": 3,
+      "points": [
+        {
+          "joint": "head",
+          "x": 180,
+          "y": 91,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 180,
+          "y": 126,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 132.4,
+          "y": 101.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 140.8,
+          "y": 61.25,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 210.79999999999998,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 227.60000000000002,
+          "y": 101.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 219.20000000000002,
+          "y": 61.25,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 157.6,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 202.39999999999998,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    },
+    {
+      "file": "carry-hold.png",
+      "task": "carry",
+      "step": 1,
+      "points": [
+        {
+          "joint": "head",
+          "x": 180,
+          "y": 91,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 180,
+          "y": 126,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 115.60000000000001,
+          "y": 189,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 152,
+          "y": 220.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 210.79999999999998,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 244.4,
+          "y": 189,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 208,
+          "y": 220.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 157.6,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 202.39999999999998,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    },
+    {
+      "file": "carry-release.png",
+      "task": "carry",
+      "step": 2,
+      "points": [
+        {
+          "joint": "head",
+          "x": 180,
+          "y": 91,
+          "highlighted": "false"
+        },
+        {
+          "joint": "neck",
+          "x": 180,
+          "y": 126,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftShoulder",
+          "x": 149.2,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftElbow",
+          "x": 129.60000000000002,
+          "y": 206.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftWrist",
+          "x": 121.19999999999999,
+          "y": 273,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightShoulder",
+          "x": 210.79999999999998,
+          "y": 140,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightElbow",
+          "x": 230.4,
+          "y": 206.5,
+          "highlighted": "true"
+        },
+        {
+          "joint": "rightWrist",
+          "x": 238.79999999999998,
+          "y": 273,
+          "highlighted": "true"
+        },
+        {
+          "joint": "leftHip",
+          "x": 160.39999999999998,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightHip",
+          "x": 199.6,
+          "y": 238,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftKnee",
+          "x": 157.6,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "leftAnkle",
+          "x": 152,
+          "y": 360.5,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightKnee",
+          "x": 202.39999999999998,
+          "y": 301,
+          "highlighted": "false"
+        },
+        {
+          "joint": "rightAnkle",
+          "x": 208,
+          "y": 360.5,
+          "highlighted": "false"
+        }
+      ]
+    }
+  ],
+  "halfSpeedObservedMs": 366.6500000000001,
+  "wallIntervalMs": 700,
+  "beforeTraining": {
+    "phase": "home",
+    "chop": "0/15",
+    "load": "0/15",
+    "carry": "0.0/60s",
+    "inventory": "0/0/0"
+  },
+  "paused": {
+    "phase": "active",
+    "chop": "0/15",
+    "load": "0/15",
+    "carry": "0.0/60s",
+    "inventory": "0/0/0"
+  },
+  "cameraCalls": 0,
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "poseRequests": [],
+  "external": [],
+  "result": "pass"
+}

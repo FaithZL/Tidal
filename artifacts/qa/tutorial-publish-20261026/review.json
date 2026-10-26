@@ -1,0 +1,18 @@
+{
+  "readOnly": true,
+  "verdict": "pass",
+  "scope": "Two task source/docs/QA; publishing QA checked by root",
+  "taskQAFiles": 157,
+  "taskQABytes": 241199928,
+  "largestBytes": 45060672,
+  "allBelow50MiB": true,
+  "symlinksOrUnsafeZIPPaths": false,
+  "traceZIPsInspected": 9,
+  "embeddedTypeScriptFiles": 10,
+  "embeddedBinaryResourcesMatchExistingPublicFBX": 21,
+  "externalReusableCredentialsFound": false,
+  "tokenOccurrences": "7 historical localhost Vite HMR websocket requests; no external host or account credential",
+  "realPersonVideoFound": false,
+  "unrelatedFilesSHA256Preserved": 74,
+  "excludedProgressLinesSHA256Preserved": 53
+}

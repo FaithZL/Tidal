@@ -1,0 +1,282 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/movementGuideClock.test.ts",
+      "tests/unit/exerciseTutorialModel.test.ts"
+    ],
+    "log": "clock-green.log",
+    "exitCode": 0,
+    "recordedBy": "isolated clock implementer; exact command/exit retained in log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/movementGuideClock.test.ts"
+    ],
+    "log": "clock-red.log",
+    "exitCode": 1,
+    "recordedBy": "isolated clock implementer; exact command/exit retained in log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "-g",
+      "independently",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/entry-red-results"
+    ],
+    "log": "entry-red.log",
+    "startedUTC": "2026-10-26T07:02:20.644340+00:00",
+    "finishedUTC": "2026-10-26T07:02:36.021615+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck-first.log",
+    "startedUTC": "2026-10-26T07:03:50.216695+00:00",
+    "finishedUTC": "2026-10-26T07:03:51.359449+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/e2e-first-results"
+    ],
+    "log": "e2e-first.log",
+    "startedUTC": "2026-10-26T07:04:12.614663+00:00",
+    "finishedUTC": "2026-10-26T07:04:44.732120+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-first.log",
+    "startedUTC": "2026-10-26T07:04:46.357450+00:00",
+    "finishedUTC": "2026-10-26T07:04:47.577702+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-all.log",
+    "startedUTC": "2026-10-26T07:04:56.608136+00:00",
+    "finishedUTC": "2026-10-26T07:05:02.397134+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-final.log",
+    "startedUTC": "2026-10-26T07:07:02.603575+00:00",
+    "finishedUTC": "2026-10-26T07:07:04.397459+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-26T07:07:02.604103+00:00",
+    "finishedUTC": "2026-10-26T07:07:05.354997+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "-g",
+      "desktop|changing to reduced",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/review-red-results"
+    ],
+    "log": "review-boundaries-red.log",
+    "startedUTC": "2026-10-26T07:10:24.751279+00:00",
+    "finishedUTC": "2026-10-26T07:10:25.092023+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "tests/e2e/demo-toggle.spec.ts",
+      "tests/e2e/keyboard-flow.spec.ts",
+      "tests/e2e/source-lifecycle.spec.ts",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/regression-results"
+    ],
+    "log": "e2e-regression.log",
+    "startedUTC": "2026-10-26T07:05:19.634054+00:00",
+    "finishedUTC": "2026-10-26T07:10:25.729003+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "-g",
+      "desktop|changing to reduced",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/review-red-recheck-results"
+    ],
+    "log": "review-boundaries-red-recheck.log",
+    "startedUTC": "2026-10-26T07:13:40.744889+00:00",
+    "finishedUTC": "2026-10-26T07:13:57.649185+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/e2e-final-results"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T07:35:59.302359+00:00",
+    "finishedUTC": "2026-10-26T07:36:52.291871+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/e2e-final-recheck-results"
+    ],
+    "log": "e2e-final-recheck.log",
+    "startedUTC": "2026-10-26T07:41:08.925820+00:00",
+    "finishedUTC": "2026-10-26T07:41:41.892212+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-release.log",
+    "startedUTC": "2026-10-26T07:41:43.473229+00:00",
+    "finishedUTC": "2026-10-26T07:41:46.672427+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-26T07:41:43.473887+00:00",
+    "finishedUTC": "2026-10-26T07:41:49.955729+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "-g",
+      "desktop",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/load-layout-red-results"
+    ],
+    "log": "load-short-layout-red.log",
+    "startedUTC": "2026-10-26T07:44:37.690709+00:00",
+    "finishedUTC": "2026-10-26T07:44:57.681294+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/movement-guide.spec.ts",
+      "--output",
+      "artifacts/qa/movement-guide-20261026/e2e-release-results"
+    ],
+    "log": "e2e-release.log",
+    "startedUTC": "2026-10-26T07:45:32.120081+00:00",
+    "finishedUTC": "2026-10-26T07:46:13.724111+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "log": "assets.log",
+    "startedUTC": "2026-10-26T07:46:37.632687+00:00",
+    "finishedUTC": "2026-10-26T07:46:37.832307+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-release.log",
+    "startedUTC": "2026-10-26T07:47:17.106392+00:00",
+    "finishedUTC": "2026-10-26T07:47:19.023962+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/movement-guide-20261026/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T07:47:55.626944+00:00",
+    "finishedUTC": "2026-10-26T07:49:22.807866+00:00",
+    "exitCode": 0
+  }
+]

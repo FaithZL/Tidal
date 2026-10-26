@@ -1,0 +1,76 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/movement-guide.spec.ts --output artifacts/qa/movement-guide-20261026/e2e-final-results
+
+[WebServer] (node:88331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:88351) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:88403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:88423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:88424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 3:36:05 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:05 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 3:36:05 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:05 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  1 tests/e2e/movement-guide.spec.ts:12:1 › a standard skeleton moves independently while keyboard training waits and freezes on pause (7.8s)
+[WebServer] 3:36:12 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:12 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 3:36:12 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:12 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  2 tests/e2e/movement-guide.spec.ts:25:1 › the guide switches through all tasks without changing the automatic inventory flow (16.5s)
+[WebServer] 3:36:29 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:29 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 3:36:29 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 3:36:29 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  3 tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls (24.5s)
+(node:88500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/e2e/movement-guide.spec.ts:57:1 › changing to reduced motion immediately shows a complete key pose instead of a half squat (141ms)
+  ✓  5 tests/e2e/movement-guide.spec.ts:74:1 › the real guide clears short hidden, paused and changed-context intervals without a hidden rAF (65ms)
+
+
+  1) tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('#movementGuide')
+    Expected: visible
+    Received: hidden
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('#movementGuide') with timeout 7000ms
+      - waiting for locator('#movementGuide')
+        18 × locator resolved to <aside hidden="" data-step="1" data-time-ms="0" data-task="carry" id="movementGuide" aria-label="标准动作示范" class="movement-guide">…</aside>
+           - unexpected value "hidden"
+
+
+      39 |  const observations=[];
+      40 |  for(const size of [{width:1920,height:1080},{width:1366,height:768},{width:1280,height:720},{width:601,height:768},{width:620,height:768},{width:650,height:768},{width:390,height:844},{width:390,height:600}]){
+    > 41 |   await page.setViewportSize(size);const guide=page.locator('#movementGuide');await expect(guide).toBeVisible();
+         |                                                                                                   ^
+      42 |   const time=await guide.getAttribute('data-time-ms');await page.waitForTimeout(100);await expect(guide).toHaveAttribute('data-time-ms',time!);
+      43 |   const result=await page.evaluate(()=>{
+      44 |    const box=(id:string)=>{const r=document.getElementById(id)!.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/movement-guide.spec.ts:41:99
+
+    Error Context: artifacts/qa/movement-guide-20261026/e2e-final-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/movement-guide-20261026/e2e-final-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/movement-guide-20261026/e2e-final-results/movement-guide-desktop-and-b46ca-preview-and-action-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/movement-guide.spec.ts:36:1 › desktop and narrow layouts keep the skeleton separate from input preview and action controls 
+  4 passed (52.4s)

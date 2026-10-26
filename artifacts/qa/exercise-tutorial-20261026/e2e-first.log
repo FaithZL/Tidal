@@ -1,0 +1,37 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/exercise-tutorial.spec.ts --output artifacts/qa/exercise-tutorial-20261026/e2e-first-results
+
+[WebServer] (node:76638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:76658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:76706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:76726) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+Cannot use({ launchOptions }) in a describe group, because it forces a new worker.
+Make it top-level in the test file or put in the configuration file.
+
+   at exercise-tutorial.spec.ts:93
+
+  91 |
+  92 | test.describe('camera integration with synthetic test frames',()=>{
+> 93 |  test.use({launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
+     |       ^
+  94 |  test.setTimeout(90000);
+  95 |  async function startCamera(page:Page){
+  96 |   await installPoseFixture(page);await page.goto('/?e2e=1&art=npr-sample');await prepareCamera(page);await page.locator('#beginCamera').click();await expect(page.locator('#statusTag')).toHaveText('训练中');
+Cannot use({ launchOptions }) in a describe group, because it forces a new worker.
+Make it top-level in the test file or put in the configuration file.
+
+   at exercise-tutorial.spec.ts:93
+
+  91 |
+  92 | test.describe('camera integration with synthetic test frames',()=>{
+> 93 |  test.use({launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
+     |       ^
+  94 |  test.setTimeout(90000);
+  95 |  async function startCamera(page:Page){
+  96 |   await installPoseFixture(page);await page.goto('/?e2e=1&art=npr-sample');await prepareCamera(page);await page.locator('#beginCamera').click();await expect(page.locator('#statusTag')).toHaveText('训练中');
+

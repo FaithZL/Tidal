@@ -1,5 +1,72 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：动作教学与标准骨骼示范限定范围提交、推送main授权（2026-10-26）
+
+用户明确要求“提交push”，授权将前两轮尚未提交的完整动作教学、场景常驻标准骨骼示范及对应源码/测试/文档/计划/验证记录普通提交并推送main，不部署。原动作教学制作阶段“不提交/push”的停点被本轮明确授权覆盖；不修改原素材、许可、识别/领域规则或依赖。
+
+实查本地与实时远端main均为`1f69eebab150c6af9debb04258862bdce14c8f54`。提交前同一应用代码重新运行typecheck、lint、**449/449单测**、assets:verify和build，全部exit0；命令/退出码见`artifacts/qa/tutorial-publish-20261026/commands.json`。最终14份JS/CSS/HTML构建文件逐份SHA与前轮已实际打开的生产版本一致，167份源码/样式/测试及入口指纹不变，因此沿用刚完成的30项相关E2E和正常生产截图，不重复重生成QA。未重跑全量verify，旧prototype暂停PNG失败及真人/手机/性能待验保留。已有500KB提示不隐藏。
+
+两轮任务QA共157文件、241,199,928字节，最大45,060,672字节，无超过50MiB文件；截图仅原创SVG/合成农场，无真人录像。保留真实失败日志/trace、正常生产截图和SHA恢复清单；旧trace中的localhost开发服务临时nonce不是外部可复用账户凭据，原始证据不改写。原有53行无关PROGRESS（旧安装/接续43行、城堡预览4行、装车启动预览6行）用单独暂存文本排除，继续原字节保留本地；旧74份handoff/trace均不纳入，SHA逐项核对。提交前1,975份历史QA均保持原SHA，没有再生或覆盖。
+
+明确文件清单、可重复构建及独立只读范围审查见本轮scope/reproducibility/preservation记录。无reset/clean/强推、重克隆或重装；实际提交SHA、推送及远端一致性由本聊天交付回执确认。5173本机预览保留，未部署。
+
+## 最新追加：场景常驻标准骨骼动作示范（2026-10-26）
+
+用户以截图标出右下输入预览左侧，要求加入正确动作动画，只需右侧绿线/金节点骨架样式。在main、HEAD `1f69eeb`和上轮尚未提交的完整动作教学上增量实现；保留原有未提交源码、记录、QA，不stage/commit/push/部署，不新增素材或依赖。设计/计划见`docs/superpowers/specs/2026-10-26-movement-guide-design.md`及对应plans文件。
+
+新增`movementGuideClock.ts`复用原教学坐标：挥砍只循环上肩→下挥→复位，装车循环站立→下蹲→站起→上举→复位，各段75%完成插值后短暂保持；拉车始终稳定持姿，不循环放下。新增`movementGuide.ts`绘制14金节点、绿色骨骼/头圈、深绿网格，明确“标准动作示范”，与右侧输入反馈区分；只消费快照并接现有browser rAF，无ExerciseSignal/成果写入、摄像头或第二渲染器。倒计时/活动/休息可见，休息示范下一项，暂停/后台冻结、context变化复位，reset隐藏；减少动态效果显示关键姿态。完整教学、模拟偏好和标定识别契约不改。
+
+桌面卡片位于原输入预览左侧，680px以下移至上方；百分比保持可见。初始审查发现动态减少动效冻结中间姿态、桌面遮百分比及601px遮左侧按钮，均由真实RED闭环；继续审查发现390×600装车文案比挥砍更高，原仅挥砍布局测试漏检，补为真实15次挥砍进入装车后暂停，再复现/修正短屏排布。保留断言，不通过隐藏输入预览或百分比掩盖重叠。
+
+本轮命令/退出码见`artifacts/qa/movement-guide-20261026/commands.json`，失败/中间trace保留：
+
+| 验证 | 真实结果 | 证据 |
+|---|---|---|
+| 纯循环时钟RED→GREEN | 初次13/13语义失败；随后clock13+旧tutorial16，29/29通过 | clock-red.log、clock-green.log |
+| 新示范E2E | 入口缺失RED；最终exit0，**5/5**；实际SVG节点变化/完整切任务、等待不计次、暂停/短后台/context复位、动态reduce、8尺寸装车布局均通过 | e2e-release.log、layout.json、PNG |
+| 原教学/演示/键盘/摄像头来源E2E | exit0，**25/25，5.1分钟**；包含两项历史source-lifecycle及同一轨道/Worker/失效准备；合计30项范围E2E | e2e-regression.log |
+| 全unit、lint、typecheck | 最终exit0，55文件**449/449单测**；lint通过；最终build内strict类型再次通过 | unit-release.log、lint-release.log、build-release.log |
+| assets:verify、build | exit0；入口index-BBM0Vmey.js、browser-rQyfURKR.js；已有500KB提示保留 | assets.log、build-release.log |
+| 正常4176生产构建捕获 | exit0，6张合成UI PNG；实际挥砍、下蹲、持姿和暂停；0摄像头申请/姿态请求/外源/页面错误，暂停400ms节点及成果不动 | production.log、production/production.json及PNG |
+
+初次lint因无用循环变量exit1，局部改为索引循环；一次边界RED因并行回归占4173被拒，顺序复跑才命中真实失败；扩展布局首轮因自动演示在尺寸循环中自然结算，修正测试为暂停状态后继续，未改生产流程或断言。独立只读审查最终无阻塞，细节见review.json与execution-ledger.md。
+
+测试前保留1,906份历史QA；6份旧输出重生成后另存本轮regression并恢复，全部原SHA一致。原未提交教学源码、旧74份handoff/trace与进度全文保留，见qa-restoration.json及preservation.json。只用已有依赖/浏览器；素材/许可、领域/输入/识别源码未改。
+
+正常生产构建已查看桌面与390×844的骨骼示范；4176临时预览捕获后关闭，5173开发服务继续保留。入口仍为`http://127.0.0.1:5173/?art=npr-sample`，训练过程中可直接看到常驻示范。限制：摄像头回归采用假视频/合成关键点，不能当作本轮真人验收；真实手机、准确率/性能与最终美术仍待验。未重跑完整verify，旧prototype暂停PNG失败仍保留，不把范围通过当全量通过。下一步等待用户查看，不提交/push/部署。
+
+## 最新追加：挥砍、装车与拉车持姿的分步教学（2026-10-26）
+
+用户要求增加三类动作的分步示范、慢动作、要点，训练前可看、随时重看，并明确“先不要提交或push”；随后选择“人体动作图与关节提示”。本轮基线main、HEAD `1f69eeb`，实时远端main起始也一致。在既有目录增量实现，保留原53行未提交进度及旧74份handoff/trace；未重新安装、改素材/许可/锁文件、commit/push或部署。设计与计划见`docs/superpowers/specs/2026-10-26-exercise-tutorial-design.md`及对应plans文件。
+
+### 内容与交互
+
+新增`exerciseTutorialModel.ts`的挥砍4步、装车5步、拉车持姿3步，以及独立纯播放时钟；`tutorialFigure.ts`绘制原创SVG人体与14关节点，金色双圈强调本步关注部位。`exerciseTutorialPanel.ts`提供步骤定格、前后步、播放/暂停、重播与1×/0.5×/0.25×；原生DOM/CSS适配桌面与窄屏，不引入第二个3D渲染器、外源媒体、真人姿态数据或依赖。内容说明本应用手势和个人标定范围，不宣称专业负重教学/临床姿态纠正，不替代九步标定；来源和新增验收点已追加到SOURCES/DEVELOPMENT_GUIDE/ACCEPTANCE。
+
+顶栏、计划、准备页和结算页可打开同一教学面板。运行中打开只走SessionController既有user暂停、停止按住输入；关闭保持暂停，由用户继续，不清除tracking/visibility/source-error。教学不提交ExerciseSignal或计次/库存/有效持姿时间；现有摄像头/Worker不重开，失效仍须准备。背景inert、Tab焦点循环、Escape仅关教学、Space/P不穿透；按当前准备/计划/结果状态恢复焦点。资源就绪前已主动打开过教学时，不在背后默认开局，不改保存的自动演示偏好。本局经过时间仍按原定义包含暂停，不把它误作有效时间冻结断言。
+
+### 实际验证
+
+完整命令/退出码见`artifacts/qa/exercise-tutorial-20261026/commands.json`，所有失败/中间日志保留。
+
+| 命令/验证 | 退出码与实际结果 | 证据 |
+|---|---|---|
+| 新入口RED、纯模型RED | 入口exit1（无教学按钮）；模型语义16/16失败，随后16/16通过 | entry-red.log、model-semantic-red.log、model-green-final.log |
+| 独立审查边界RED→GREEN | 复开高亮丢失、最后一步播放跳回0、短后台空档0→150ms均真实复现并修复；新11项E2E最终通过 | lifecycle-red*.log、background-red.log、e2e-green-first.log、review.json |
+| typecheck、lint、全部unit | 最终exit0；54文件**436/436单测**；文案改为面向用户的简单说明后再次436/436、lint通过 | typecheck.log、lint-copy-final.log、unit-copy-final.log |
+| 新教学`test:e2e -- tests/e2e/exercise-tutorial.spec.ts` | exit0，**11/11**，含真实SVG变化/慢放、准备/结算重看、焦点/快捷键、自动开局竞态、持姿冻结、同一摄像头轨道/Worker与失效准备 | e2e-green-first.log、clock-observation.json、synthetic-camera-boundary.json |
+| 原流程`test:e2e -- tests/e2e/demo-toggle.spec.ts tests/e2e/source-lifecycle.spec.ts tests/e2e/keyboard-flow.spec.ts tests/e2e/world3d.spec.ts tests/e2e/user-farm-motion.spec.ts tests/e2e/user-load-motion.spec.ts` | exit0，**25/25，5.3分钟**；合计36项范围E2E通过；未修改原有断言或超时 | e2e-regression.log |
+| assets:verify、build | exit0，最终入口index-CynxqEdq.js，strict类型检查再次通过；既有500KB提示保留 | assets.log、build-copy-final.log |
+| 4176正常生产构建教学检查 | 最终exit0，10张合成UI PNG；0摄像头申请/外源/页面错误，0.5×在约700ms观察窗口推进约366.65ms，训练中查看500ms计数/持姿/库存不动，关闭仍暂停；桌面三类示范及390×844控件可达 | production-final.log、production/production.json及PNG |
+
+初次新E2E配置在describe内使用worker级launchOptions被Playwright拒绝，移至新测试文件顶层；未更改全局配置。首版边界测试的轮询会等待整课再次到最后一步，墙钟后台用例也可能因GPU长帧被丢弃而漏检，已改为即时步骤断言与真实面板的受控合法rAF日程，确证失败后修复，没有放宽断言。模型严格端点测试发现浮点末值误差，保留断言并直接返回端点；首次typecheck提示项目未启用DOM.Iterable，改用Array.from，没有改tsconfig掩盖错误。三项UI修复分别为重置/补全渲染缓存键、先按所选步骤play再处理自然结束重播、visibilitychange即时清播放时间基准。
+
+正常生产构建已查看挥砍、下蹲、持姿及窄屏控件；最终文案将“样本/提交计数”等实现措辞改为普通动作提示，原10图另存production/iterations后重新捕获成功。图片只含合成图形/农场，不录视频。已在5173可见浏览器从结算页打开教学，选装车下蹲定格及0.5×并保留标签页，入口仍为`http://127.0.0.1:5173/?art=npr-sample`；手机布局可向下滚动访问播放和速度。临时4176生产服务检查后关闭，既有5173服务保留。
+
+测试前备份1,818份历史QA，14份重生成输出另存本轮regression，再恢复所有原路径SHA；全部一致，见qa-restoration.json。原未提交进度正文、74份旧文件及源素材均保留，见preservation.json。独立只读审查的三项P2已由失败用例闭环，复核未见新阻塞。
+
+限制：新摄像头用例使用假视频/合成关键点，不是本轮真人验收；真实手机、识别稳定性、最终教学/美术批准及约60fps仍待验。未重跑全量verify，既有prototype暂停PNG失败仍保留待查；不把36项范围通过写成全量通过。下一步等待用户查看教学效果或给出后续任务，尚未commit/push/部署。
+
 ## 最新追加：挥砍与行走动作限定范围提交、推送main授权（2026-10-26）
 
 用户明确要求“提交并push”。本轮只纳入现有挥砍与walk/push/pull动作、装车兼容/阶段接续负例、FarmWorld接入与准确标签、来源/设计/计划及`user-farm-motion-20261026/`和本轮交付QA，普通提交和推送main，不部署。实查本地与实时远端main均为`043a2ec525b5d0729cb456bdd079b30adc5f65d6`；没有待同步的远端后续提交，也没有重装依赖、改变原素材字节/许可或领域规则。

@@ -1,0 +1,210 @@
+Command: npm run test:unit -- tests/unit/movementGuideClock.test.ts
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/movementGuideClock.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/movementGuideClock.test.ts (13 tests | 13 failed) 7ms
+   ❯ MovementGuideClock (13)
+     × starts chopping at the shoulder and cycles through down and return without a neutral introduction 4ms
+     × load keeps the complete standing, squat, stand, lift and reset order with original durations 0ms
+     × smoothly bends both knees and moves the wrists, reaching the target at 75% then holding it 0ms
+     × load visibly raises both wrists above the head and returns to the original standing pose 0ms
+     × carry continuously demonstrates stable holding and never periodically releases the arms 0ms
+     × chop wraps exactly and preserves its displayed pose across the cycle boundary 0ms
+     × load wraps exactly and preserves its displayed pose across the cycle boundary 0ms
+     × carry wraps exactly and preserves its displayed pose across the cycle boundary 0ms
+     × rejects invalid or unobserved intervals and accepts exactly 200 ms without later catch-up 0ms
+     × reset clears elapsed time even for the same task and selects the new task initial pose 0ms
+     × chop remains finite and within its cycle through repeated fractional frame wraps 0ms
+     × load remains finite and within its cycle through repeated fractional frame wraps 0ms
+     × carry remains finite and within its cycle through repeated fractional frame wraps 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > starts chopping at the shoulder and cycles through down and return without a neutral introduction
+AssertionError: expected { task: 'chop', stepIndex: +0, …(4) } to match object { task: 'chop', stepIndex: 1, …(3) }
+(15 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "elapsedMs": 0,
+-   "stepIndex": 1,
++   "stepIndex": 0,
+    "task": "chop",
+-   "title": "上肩准备",
+-   "totalMs": 5000,
++   "title": "站稳与入镜",
++   "totalMs": 0,
+  }
+
+ ❯ tests/unit/movementGuideClock.test.ts:18:25
+     16|   test('starts chopping at the shoulder and cycles through down and re…
+     17|     const clock = new MovementGuideClock();
+     18|     expect(clock.frame).toMatchObject({
+       |                         ^
+     19|       task: 'chop', stepIndex: 1, title: '上肩准备', elapsedMs: 0, totalMs…
+     20|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > load keeps the complete standing, squat, stand, lift and reset order with original durations
+AssertionError: expected +0 to be 7600 // Object.is equality
+
+- Expected
++ Received
+
+- 7600
++ 0
+
+ ❯ tests/unit/movementGuideClock.test.ts:40:33
+     38|   test('load keeps the complete standing, squat, stand, lift and reset…
+     39|     const clock = new MovementGuideClock('load');
+     40|     expect(clock.frame.totalMs).toBe(7600);
+       |                                 ^
+     41|     const checkpoints = [
+     42|       { delta: 0, stepIndex: 0, title: '自然站立', previous: 4, elapsedMs:…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > smoothly bends both knees and moves the wrists, reaching the target at 75% then holding it
+AssertionError: expected 0.43 to be close to 0.4753125, received difference is 0.04531250000000003, but expected 5e-11
+ ❯ tests/unit/movementGuideClock.test.ts:60:45
+     58|     advanceBy(clock, 1337.5);
+     59|     // One quarter of the 1350 ms movement: smoothstep(.25) = .15625.
+     60|     expect(clock.frame.points.rightWrist.y).toBeCloseTo(.4753125, 10);
+       |                                             ^
+     61|     expect(clock.frame.points.rightKnee.x).toBeCloseTo(.59875, 10);
+     62|     expect(clock.frame.points.leftKnee.x).toBeCloseTo(.40125, 10);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > load visibly raises both wrists above the head and returns to the original standing pose
+AssertionError: expected +0 to be 3 // Object.is equality
+
+- Expected
++ Received
+
+- 3
++ 0
+
+ ❯ tests/unit/movementGuideClock.test.ts:80:35
+     78|     const clock = new MovementGuideClock('load');
+     79|     advanceBy(clock, 5600);
+     80|     expect(clock.frame.stepIndex).toBe(3);
+       |                                   ^
+     81|     expect(clock.frame.points.leftWrist.y).toBe(.075);
+     82|     expect(clock.frame.points.rightWrist.y).toBe(.075);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > carry continuously demonstrates stable holding and never periodically releases the arms
+AssertionError: expected +0 to be 2600 // Object.is equality
+
+- Expected
++ Received
+
+- 2600
++ 0
+
+ ❯ tests/unit/movementGuideClock.test.ts:91:33
+     89|   test('carry continuously demonstrates stable holding and never perio…
+     90|     const clock = new MovementGuideClock('carry');
+     91|     expect(clock.frame.totalMs).toBe(2600);
+       |                                 ^
+     92|     for (let sample = 0; sample < 60; sample++) {
+     93|       expect(clock.frame).toMatchObject({ task: 'carry', stepIndex: 1,…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > chop wraps exactly and preserves its displayed pose across the cycle boundary
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > load wraps exactly and preserves its displayed pose across the cycle boundary
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > carry wraps exactly and preserves its displayed pose across the cycle boundary
+AssertionError: expected +0 to be -1 // Object.is equality
+
+- Expected
++ Received
+
+- -1
++ 0
+
+ ❯ tests/unit/movementGuideClock.test.ts:104:34
+    102|     advanceBy(clock, initial.totalMs - 1);
+    103|     const beforeWrap = clock.frame;
+    104|     expect(beforeWrap.elapsedMs).toBe(initial.totalMs - 1);
+       |                                  ^
+    105|     clock.advance(1);
+    106|     expect(clock.frame).toEqual(initial);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > rejects invalid or unobserved intervals and accepts exactly 200 ms without later catch-up
+AssertionError: expected +0 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 0
+
+ ❯ tests/unit/movementGuideClock.test.ts:117:35
+    115|     const clock = new MovementGuideClock('load');
+    116|     clock.advance(200);
+    117|     expect(clock.frame.elapsedMs).toBe(200);
+       |                                   ^
+    118|     const before = clock.frame;
+    119|     for (const delta of [0, -1, -200, 200.01, 5000, Number.NaN, Number…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > reset clears elapsed time even for the same task and selects the new task initial pose
+AssertionError: expected { task: 'load', stepIndex: +0, …(4) } to match object { task: 'load', stepIndex: +0, …(2) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "elapsedMs": 0,
+    "stepIndex": 0,
+    "task": "load",
+-   "totalMs": 7600,
++   "totalMs": 0,
+  }
+
+ ❯ tests/unit/movementGuideClock.test.ts:133:25
+    131|     advanceBy(clock, 2100);
+    132|     clock.reset('load');
+    133|     expect(clock.frame).toMatchObject({ task: 'load', stepIndex: 0, el…
+       |                         ^
+    134|     expect(clock.frame.points).toEqual(tutorialLessons.load.steps[4].p…
+    135|     clock.advance(200);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯
+
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > chop remains finite and within its cycle through repeated fractional frame wraps
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > load remains finite and within its cycle through repeated fractional frame wraps
+ FAIL  tests/unit/movementGuideClock.test.ts > MovementGuideClock > carry remains finite and within its cycle through repeated fractional frame wraps
+AssertionError: expected 0 to be less than 0
+ ❯ tests/unit/movementGuideClock.test.ts:151:31
+    149|       const frame = clock.frame;
+    150|       expect(frame.elapsedMs).toBeGreaterThanOrEqual(0);
+    151|       expect(frame.elapsedMs).toBeLessThan(frame.totalMs);
+       |                               ^
+    152|       expect(Object.keys(frame.points)).toHaveLength(14);
+    153|       for (const point of Object.values(frame.points)) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  13 failed (13)
+   Start at  15:00:00
+   Duration  103ms (transform 50%, tests 25%, import 18%, worker 7%)
+
+
+Exit code: 1
