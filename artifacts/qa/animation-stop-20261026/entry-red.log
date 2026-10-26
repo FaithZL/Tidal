@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/animation-stop.spec.ts -g one click freezes --output artifacts/qa/animation-stop-20261026/entry-red-results
+
+[WebServer] (node:96706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:96726) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:96786) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:96808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:96809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 5:39:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 5:39:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 5:39:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 5:39:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes (9.2s)
+
+
+  1) tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#animationStop')
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#animationStop') with timeout 7000ms
+      - waiting for locator('#animationStop')
+
+
+      11 | test('one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes',async({page})=>{
+      12 |  await enter(page);await expect(page.locator('#statusTag')).toHaveText('训练中');
+    > 13 |  await expect(page.locator('#animationStop')).toBeVisible();await page.locator('#animationStop').click();await expect(page.locator('#animationStop')).toHaveText('继续播放');
+         |                                               ^
+      14 |  await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#animationStop')).toHaveAttribute('aria-pressed','true');
+      15 |  const frozen=await observe(page);await page.waitForTimeout(450);expect(await observe(page)).toEqual(frozen);
+      16 |  await page.keyboard.press('p');await expect(page.locator('#statusTag')).toHaveText('已暂停');expect(await observe(page)).toEqual(frozen);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/animation-stop.spec.ts:13:47
+
+    Error Context: artifacts/qa/animation-stop-20261026/entry-red-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/animation-stop-20261026/entry-red-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/animation-stop-20261026/entry-red-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes 

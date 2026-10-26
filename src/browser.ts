@@ -46,7 +46,7 @@ const preview = new SyntheticPreview([
 ]);
 const game = createGame($('worldCanvas'), controller, config,message=>{
   displayError=message;renderUnavailable=true;renderFailed=true;stopHold();cameraInput.clearProfile();calibrationPanel.reset();
-  controller.command({kind:'pause',reason:'user'});void cameraPanel.stop();panel(controller.getSnapshot());
+  pauseForUser();void cameraPanel.stop();panel(controller.getSnapshot());
 });
 const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCanvasElement>('poseOverlay'),
   $('cameraStatus'), $('cameraMetrics'), $('cameraFrames'), $<HTMLButtonElement>('cameraStart'),
@@ -82,8 +82,10 @@ const movementGuide=new MovementGuide($('movementGuide'));
 let previousFrameMs=0,diagnosticAtMs=0;
 const frameIntervals:number[]=[];
 let tutorialOpened=false;
+let animationsStopped=false,animationOwnsUserPause=false;
+const animationStopButtons=Array.from(document.querySelectorAll<HTMLButtonElement>('[data-animation-stop]'));
 const tutorial=new ExerciseTutorialPanel($('tutorialModal'),{
-  onOpen(){tutorialOpened=true;stopHold();if(running(current))controller.command({kind:'pause',reason:'user'});panel(current);},
+  onOpen(){tutorialOpened=true;stopHold();if(running(current))pauseForUser();panel(current);},
   onClose(){
     panel(current);
     if(!$('setupModal').hidden)return $('setupTutorial');
@@ -103,6 +105,24 @@ function active(s: Readonly<SessionSnapshot>): boolean {
 }
 function stopHold(): void { heldKeyboard = false; heldPointer = false; input.holdEnd(); }
 function running(s:Readonly<SessionSnapshot>):boolean{return ['countdown','active','rest'].includes(s.phase);}
+function pauseForUser():void{
+  // Another action now needs this pause, even if our stop added it first.
+  animationOwnsUserPause=false;controller.command({kind:'pause',reason:'user'});
+}
+function setAnimationsStopped(stopped:boolean):void{
+  if(animationsStopped===stopped)return;
+  animationsStopped=stopped;stopHold();
+  game.setAnimationPaused(stopped);preview.setSuspended(stopped);tutorial.setSuspended(stopped);
+  if(stopped){
+    animationOwnsUserPause=running(current)&&!current.pauseReasons.includes('user');
+    if(animationOwnsUserPause)controller.command({kind:'pause',reason:'user'});
+  }else{
+    const resume=animationOwnsUserPause;animationOwnsUserPause=false;
+    if(resume)controller.command({kind:'resume',reason:'user'});
+  }
+  panel(controller.getSnapshot());
+  if(!stopped)startDefaultDemo();
+}
 function updateCameraButton():void {
   setProperty($<HTMLButtonElement>('beginCamera'),'disabled',renderUnavailable||calibrationPanel.getProfile()===null);
 }
@@ -133,7 +153,7 @@ async function syncSource(s: Readonly<SessionSnapshot>): Promise<void> {
 }
 function switchKeyboard():void{
   if(renderUnavailable)return;
-  stopHold();if(running(current))controller.command({kind:'pause',reason:'user'});
+  stopHold();if(running(current))pauseForUser();
   cameraPreparation=false;displayError='';controller.command({kind:'switch-source',mode:'keyboard'});
   controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});
   void cameraPanel.stop();
@@ -144,7 +164,7 @@ function setDemo(enabled: boolean): void {
   if (demoEnabled === enabled) return;
   stopHold();
   // Cancel a partial cycle before changing source, then invalidate its context.
-  if (['countdown', 'active', 'rest'].includes(current.phase)) controller.command({ kind: 'pause', reason: 'user' });
+  if (['countdown', 'active', 'rest'].includes(current.phase)) pauseForUser();
   demoEnabled = enabled;preview.setEnabled(enabled);
   if(enabled||current.inputMode==='camera')switchKeyboard();
   else controller.command({ kind: 'switch-source', mode: 'keyboard' });
@@ -153,7 +173,12 @@ function niceTask(task: TaskKind | null): string {
   return task === 'chop' ? '砍伐杉树' : task === 'load' ? '把木材装上手推车' : task === 'carry' ? '推车返回农场' : '农场计划';
 }
 function panel(s: Readonly<SessionSnapshot>): void {
+  if(animationsStopped&&running(s)&&!s.pauseReasons.includes('user')){
+    animationOwnsUserPause=true;controller.command({kind:'pause',reason:'user'});return;
+  }
   current = s;
+  setProperty($('app').dataset,'animationsStopped',String(animationsStopped));
+  for(const button of animationStopButtons){setProperty(button,'textContent',animationsStopped?'继续播放':'停止动画');setAttribute(button,'aria-pressed',String(animationsStopped));}
   movementGuide.sync(s,!renderUnavailable);
   setProperty($('audioToggle'),'textContent',audio.error||(audio.enabled?'音效：开 · 点击静音':'开启音效'));
   setAttribute($('audioToggle'),'aria-pressed',String(audio.enabled));
@@ -173,7 +198,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   setProperty($<HTMLButtonElement>('viewCastle'),'disabled',renderUnavailable);
   setProperty($<HTMLButtonElement>('beginDemo'),'disabled',renderUnavailable);
   setProperty($<HTMLButtonElement>('cameraStart'),'disabled',renderUnavailable);
-  setProperty($<HTMLButtonElement>('pauseBtn'),'disabled',renderUnavailable);
+  setProperty($<HTMLButtonElement>('pauseBtn'),'disabled',renderUnavailable||animationsStopped);
   setProperty($('modeBadge'),'textContent',demoEnabled ? '▶ 自动模拟 · 非真实动作识别'
     : s.inputMode === 'camera' ? '📷 摄像头姿态代理 · 真机待验证' : '⌨ 键盘演示 · 非真实动作识别');
   for (const id of ['demoToggle', 'setupDemoToggle']) {
@@ -317,12 +342,14 @@ $('beginCamera').addEventListener('click',()=>{
   }catch(error){displayError=`标定不可用：${error instanceof Error?error.message:String(error)}。请重做标定或切换键盘。`;$('cameraStatus').textContent=displayError;}
 });
 $('resetBtn').addEventListener('click', () => {stopHold();controller.command({kind:'reset'});});
+for(const button of animationStopButtons)button.addEventListener('click',()=>setAnimationsStopped(!animationsStopped));
 $('resultsHome').addEventListener('click',()=>{stopHold();controller.command({kind:'reset'});});
 $('pauseBtn').addEventListener('click',()=>{
   if(renderUnavailable)return;
   stopHold();
   if (current.pauseReasons.includes('visibility')) controller.command({kind:'resume',reason:'visibility'});
-  else controller.command(current.pauseReasons.includes('user')?{kind:'resume',reason:'user'}:{kind:'pause',reason:'user'});
+  else if(current.pauseReasons.includes('user'))controller.command({kind:'resume',reason:'user'});
+  else pauseForUser();
 });
 const actionBtn=$('actionBtn') as HTMLButtonElement;
 $('cancelExit').addEventListener('click', () => {
@@ -344,15 +371,17 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture']) {
   actionBtn.addEventListener(eventName,()=>{ if(heldPointer){heldPointer=false;input.holdEnd();} });
 }
 window.addEventListener('keydown',e=>{
+  const target=e.target;
+  const editing=target instanceof HTMLElement&&(target.isContentEditable||target.matches('input, textarea, select'));
+  if(e.code==='KeyP'&&e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey&&!e.repeat&&!editing){e.preventDefault();setAnimationsStopped(!animationsStopped);return;}
   if(tutorial.isOpen)return;
   if (e.code === 'Escape' && !e.repeat && ['active', 'countdown', 'rest'].includes(current.phase)) {
     e.preventDefault();
     if (!$('exitModal').hidden) return;
     exitWasUserPaused = current.pauseReasons.includes('user');
-    stopHold(); controller.command({ kind: 'pause', reason: 'user' });
+    stopHold();pauseForUser();
     $('exitModal').hidden = false;game.setInteractionEnabled(false); $('cancelExit').focus(); return;
   }
-  const target=e.target;
   if (!$('exitModal').hidden) return;
   if(target instanceof HTMLElement && (target.isContentEditable || target.matches('input, textarea, select'))) return;
   if(e.code==='KeyP'&&!e.repeat&&(['active','countdown','rest'] as string[]).includes(current.phase)){
@@ -394,7 +423,7 @@ window.addEventListener('pagehide', () => { movementGuide.dispose();tutorial.dis
 // Start once per page load. Reset/results return home without starting another run.
 // Renderer initialization reports failure in an earlier microtask, before this gate.
 const startDefaultDemo=()=>{
-  if(tutorialOpened||!demoEnabled||renderUnavailable||current.phase!=='home'||current.sessionId!==initialSessionId)return;
+  if(tutorialOpened||animationsStopped||!demoEnabled||renderUnavailable||current.phase!=='home'||current.sessionId!==initialSessionId)return;
   controller.command({kind:'open-setup',mode:'keyboard'});
   controller.command({kind:'setup-ready'});
   if(document.hidden)controller.command({kind:'pause',reason:'visibility'});

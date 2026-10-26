@@ -1,0 +1,17 @@
+{
+  "readOnly": true,
+  "verdict": "pass",
+  "corePaths": 13,
+  "taskQAFiles": 51,
+  "taskQABytes": 70144048,
+  "largestBytes": 32230592,
+  "allUnder50MiB": true,
+  "scanUnitsIncludingZIPContents": 232,
+  "symlinksOrUnsafeZIPEntries": false,
+  "credentialsOrAuthCookieHeadersFound": false,
+  "traceRequests": "Local127.0.0.1:4174/blob/assets only",
+  "realPersonDataFound": false,
+  "old74FilesSHA256Verified": true,
+  "prior63ProgressLinesVerified": true,
+  "releaseQAAndIndexCheckedByRoot": true
+}

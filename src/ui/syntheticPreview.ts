@@ -31,11 +31,16 @@ function points(task: TaskKind, phase: PoseName): Point[] {
 
 export class SyntheticPreview {
   private enabled = false;
+  private suspended = false;
   private elapsed = 0;
   private lastTime: number | null = null;
   private painted = '';
   private action: { key: string; phase: ActionPhase } | null = null;
   constructor(private readonly targets: readonly { canvas: HTMLCanvasElement; label: HTMLElement }[]) {}
+  setSuspended(suspended: boolean): void {
+    if (typeof suspended !== 'boolean' || this.suspended === suspended) return;
+    this.suspended = suspended;this.lastTime = null;
+  }
   setEnabled(enabled: boolean): void {
     this.enabled = enabled;this.elapsed = 0;this.lastTime = null;this.painted = '';this.action = null;
     if (!enabled) for (const { canvas, label } of this.targets) {
@@ -46,7 +51,7 @@ export class SyntheticPreview {
     if (this.enabled && effect.kind === 'action-phase') this.action = { key: `${effect.sessionId}/${effect.taskRunId}/${effect.sourceEpoch}`, phase: effect.phase };
   }
   update(now: number, s: Readonly<SessionSnapshot>): void {
-    if (!this.enabled) return;
+    if (!this.enabled || this.suspended) return;
     const delta = this.lastTime === null ? 0 : now - this.lastTime;this.lastTime = now;
     if (document.hidden || s.pauseReasons.length) return;
     if (delta >= 0 && delta < 200) this.elapsed += delta;

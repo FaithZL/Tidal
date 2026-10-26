@@ -1,5 +1,40 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：手动停止/继续动画限定范围提交、推送main授权（2026-10-26）
+
+用户明确要求“提交push”，本轮将手动停止/继续、Shift+P、各页面入口、独立播放器与GameView表现门禁、暂停所有权修复，以及对应测试/设计/文档/QA普通提交并推送main，不部署。此前制作阶段“不提交/push”的停点由本轮明确授权覆盖。实查本地与实时远端main均为`db0307a3d1fd9d889a78698f2439f97149788d3f`。
+
+提交前重新运行typecheck、lint、**449/449单测**、assets:verify与build，全部exit0，见`artifacts/qa/animation-stop-publish-20261026/commands.json`。169份源码/样式/测试和入口指纹不变，14份构建JS/CSS/HTML逐份SHA与前轮已实际检查的生产版本一致，因此沿用已通过的32项相关E2E及正常生产截图，不无故重生成旧QA。未重跑全量verify；旧prototype暂停PNG失败、真人/真实手机/性能及窄屏截屏底部重复影像待验状态均保留，既有500KB提示不隐藏。
+
+功能QA共51文件、70,144,048字节，最大32,230,592字节，均低于50MiB；保留真实RED/中间结果、6项播放器边界、最终回归/生产证据和13份QA恢复输出。仅合成农场/原创SVG截图，无真人录像；不改变模型、许可、识别、领域规则或依赖。原有63行无关PROGRESS（53行旧本机记录及10行此前只读核对）用独立暂存文本排除，继续保留本地；原74份旧文件均不纳入且SHA保持一致。提交前2,037份历史QA全部SHA不变。
+
+本轮scope/reproducibility/preservation与独立只读审查记录保存明确文件清单、可重复构建和原工作保留结果。没有reset/clean/强推/重新安装；实际提交SHA及远端一致性由本聊天回执核对。5173本机预览保留，未部署。
+
+## 最新追加：手动随时停止与继续动画（2026-10-26）
+
+用户要求“先添加一个随时停止动画的功能”，随后明确选择“手动一键停止，可继续播放”。本轮在main、HEAD `db0307a`上增量实现；保留原53行进度、两条只读核对记录及74份旧QA，不stage/commit/push/部署。设计/计划见`docs/superpowers/specs/2026-10-26-animation-stop-design.md`及对应plans文件。
+
+新增常驻“停止动画 / 继续播放”和Shift+P，准备、教学、结算内也可操作。停止角色/NPC/车/特效及标准骨骼示范，并通过SessionController原user暂停冻结计次/有效持姿/库存；GameView加表现门禁覆盖首页/结果阶段，SyntheticPreview与独立教学各有suspended门禁，切换清时间基准且不补空档。教学保留原播放/选步状态，停止期间本地播放/重播不可绕过，仍可静态点步骤。原暂停/P保留，全局停止时原训练继续入口禁用；摄像头视频、跟踪/标定监测和手动视角检查保留，不新增轨道/Worker或自动切模拟。
+
+停止支持资源未就绪前阻止背后默认开局，明确继续后沿原条件开始；reset保留停止，不自动再开局，不更改保存的模拟偏好。恢复只移除本次拥有的user暂停，保留已有user/visibility/tracking/source-error；继续沿旧sourceEpoch规则清半次输入、保留已提交成果。
+
+独立审查发现“先停止→打开教学→继续”会移除后来教学请求的同名user暂停，真实RED在教学背后直接跑到结算；补第6项用例后由统一pauseForUser()将教学/退出/模式或来源变化/普通暂停/渲染失败的暂停所有权从动画开关移交，避免误恢复。未更改SessionController、识别阈值或旧断言。复核无剩余P1/P2，见本轮review.json。
+
+证据：`artifacts/qa/animation-stop-20261026/`，真实命令与退出码见commands.json：
+
+| 验证 | 实际结果 | 证据 |
+|---|---|---|
+| 缺少入口、播放器边界RED→GREEN | 入口exit1；播放器实际模块初次0/6，修改后6/6、exit0；短停止无补时、选步/复开及相位保留 | entry-red.log、players-red.log、players-green.log及脚本 |
+| 新停止E2E/暂停所有权RED | 首次5/5；新增顺序负例真实失败后最小修复；最终6项包含完整守恒、停止/恢复、加载/reset、模态、其他暂停原因和假摄像头跟踪失效 | e2e-first.log、ownership-red.log及trace |
+| 最终相关E2E | exit0，**32/32，3.9分钟**：新增6+原keyboard-flow/exercise-tutorial/movement-guide/demo-toggle26；旧断言不改 | e2e-release.log |
+| typecheck/lint/全unit/build | 最终exit0，55文件**449/449单测**；build内strict类型再次通过；入口index-DcBVg294.js、browser-CKPiCf-d.js，既有500KB提示保留 | unit-release.log、lint-release.log、build.log |
+| assets:verify | exit0，源模型/本地运行资源/贴图/许可校验通过 | assets.log |
+| 4176正常速度生产捕获 | exit0，5张合成UI PNG；停止500ms人物/骨架/成果不变，恢复后计次变化；教学停止350ms不动、教学继续不误开训练；390px按钮可达、无横向溢出；0摄像头申请/外源/页面或控制台错误 | production.log、production/production.json及PNG |
+
+测试前备份1,986份历史QA；13份重生成结果另存本轮regression后恢复，全部原SHA一致，见qa-restoration.json。已有未提交进度正文、两条研究记录、旧74文件和其他源码/资产保留，见preservation.json。临时4176与播放器边界4178服务均结束，5173原开发服务保留。预览入口`http://127.0.0.1:5173/?art=npr-sample`。
+
+限制：这是手动停止/继续，不是摄像头连续停动驱动或动作标准评分；摄像头回归仍是假视频/合成关键点。真实手机、真人停动延迟/准确率、约60fps和最终美术未验；未重跑全量verify，旧prototype暂停PNG失败仍待查。窄屏截图底部有与前轮同类的重复头部影像，原因未证实，仅按DOM控件可达/无横向溢出记录，不当作手机实机观感通过。本轮不提交/push/部署，等待用户查看。
+
 ## 最新追加：动作教学与标准骨骼示范限定范围提交、推送main授权（2026-10-26）
 
 用户明确要求“提交push”，授权将前两轮尚未提交的完整动作教学、场景常驻标准骨骼示范及对应源码/测试/文档/计划/验证记录普通提交并推送main，不部署。原动作教学制作阶段“不提交/push”的停点被本轮明确授权覆盖；不修改原素材、许可、识别/领域规则或依赖。

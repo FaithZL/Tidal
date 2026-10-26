@@ -1,0 +1,71 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/animation-stop.spec.ts -g opening teaching or exit --output artifacts/qa/animation-stop-20261026/ownership-red-results
+
+[WebServer] (node:99299) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:99319) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:99370) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:99390) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:99391) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 5:50:59 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 5:50:59 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 5:50:59 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 5:50:59 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/animation-stop.spec.ts:60:1 › opening teaching or exit after stop transfers the user pause and never resumes training behind a dialog (9.0s)
+
+
+  1) tests/e2e/animation-stop.spec.ts:60:1 › opening teaching or exit after stop transfers the user pause and never resumes training behind a dialog 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "已暂停"
+    Received: "已完成"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        6 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        - locator resolved to <span id="statusTag" class="subtag">休息时间</span>
+        - unexpected value "休息时间"
+        3 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        - locator resolved to <span id="statusTag" class="subtag">倒计时</span>
+        - unexpected value "倒计时"
+        2 × locator resolved to <span id="statusTag" class="subtag">训练中</span>
+          - unexpected value "训练中"
+        5 × locator resolved to <span id="statusTag" class="subtag">已完成</span>
+          - unexpected value "已完成"
+
+
+      60 | test('opening teaching or exit after stop transfers the user pause and never resumes training behind a dialog',async({page})=>{
+      61 |  await enter(page);await expect(page.locator('#statusTag')).toHaveText('训练中');await page.locator('#animationStop').click();
+    > 62 |  await page.locator('#tutorialOpen').click();await page.locator('#tutorialAnimationStop').click();await expect(page.locator('#statusTag')).toHaveText('已暂停');
+         |                                                                                                                                            ^
+      63 |  const before=await observe(page);await page.waitForTimeout(350);expect(await observe(page)).toEqual(before);await expect(page.locator('#tutorialModal')).toHaveAttribute('data-playing','true');
+      64 |  await page.locator('#tutorialClose').click();await expect(page.locator('#statusTag')).toHaveText('已暂停');await page.locator('#pauseBtn').click();
+      65 |  await page.locator('#animationStop').click();await page.keyboard.press('Escape');await expect(page.locator('#exitModal')).toBeVisible();await page.keyboard.press('Shift+P');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/animation-stop.spec.ts:62:140
+
+    Error Context: artifacts/qa/animation-stop-20261026/ownership-red-results/animation-stop-opening-tea-46b37-es-training-behind-a-dialog/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/animation-stop-20261026/ownership-red-results/animation-stop-opening-tea-46b37-es-training-behind-a-dialog/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/animation-stop-20261026/ownership-red-results/animation-stop-opening-tea-46b37-es-training-behind-a-dialog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/animation-stop.spec.ts:60:1 › opening teaching or exit after stop transfers the user pause and never resumes training behind a dialog 

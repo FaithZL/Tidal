@@ -1,0 +1,13 @@
+{
+  "readOnly": true,
+  "initialFinding": {
+    "priority": "P2",
+    "issue": "Global continue removed a later independent user pause, advancing training behind teaching/exit dialogs",
+    "RED": "ownership-red.log; training incorrectly reached results behind teaching",
+    "fix": "pauseForUser relinquishes animation pause ownership for every independent user request",
+    "test": "new E2E case6 covers teaching, exit and source setting after stop"
+  },
+  "finalVerdict": "No remaining P1/P2; final verification by root",
+  "camera": "Video/worker readiness monitoring continues; no physical camera requested",
+  "deferred": "Automatic camera-to-avatar continuous movement sync is outside this explicitly manual stop feature"
+}

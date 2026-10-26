@@ -14,7 +14,7 @@ import {loadUserModel} from './userModel.js';
 import {UserHouseMount} from './userHouseMount.js';
 import {UserLoadCharacter} from './userLoadCharacter.js';
 import type {WorldActor} from './types.js';
-export interface GameView{readonly ready?:Promise<void>;destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;focusCastle():void;setInteractionEnabled(enabled:boolean):void}
+export interface GameView{readonly ready?:Promise<void>;destroy(removeCanvas?:boolean):void;rotate(direction:number):void;resetView():void;focusCastle():void;setInteractionEnabled(enabled:boolean):void;setAnimationPaused(paused:boolean):void}
 interface VisualActor{readonly root:T.Group;readonly visualRevision?:number;update(actor:WorldActor,chopping:boolean,deltaMs?:number):void;handPosition():T.Vector3}
 /** Three owns rendering, never business progress. */
 export class FarmWorld implements GameView{
@@ -28,6 +28,7 @@ export class FarmWorld implements GameView{
  private readonly resolution=new AdaptiveResolution(devicePixelRatio);private paintedLastFrame=false;
  private readonly resizeObserver:ResizeObserver;private readonly events=new AbortController();private subscriptions:(()=>void)[]=[];
  private snapshot:Readonly<SessionSnapshot>;private request=0;private lastTime=0;private lastPaint='';private lastPhase='home';private overview=true;private dirty=true;private disposed=false;private lost=false;
+ private animationPaused=false;
  constructor(private readonly parent:HTMLElement,controller:SessionController,config:Readonly<DemoConfig>,private readonly onError:(message:string)=>void){
   this.snapshot=controller.getSnapshot();this.choreography=new WorldChoreography(config);this.choreography.sync(this.snapshot);
   try{
@@ -139,10 +140,10 @@ export class FarmWorld implements GameView{
   if(this.disposed)return;this.request=requestAnimationFrame(this.animate);
   if(this.lost||document.hidden){this.lastTime=0;this.paintedLastFrame=false;this.resolution.observe(0,false);return;}
   const elapsed=this.lastTime?now-this.lastTime:0;
-  const ratio=this.resolution.observe(elapsed,this.paintedLastFrame&&!this.snapshot.pauseReasons.length);this.paintedLastFrame=false;
+  const ratio=this.resolution.observe(elapsed,this.paintedLastFrame&&!this.snapshot.pauseReasons.length&&!this.animationPaused);this.paintedLastFrame=false;
   if(ratio!==this.renderer.getPixelRatio()){this.renderer.setPixelRatio(ratio);this.parent.dataset.renderScale=String(ratio);this.dirty=true;}
-  const delta=Math.min(100,elapsed);this.lastTime=now;this.choreography.advance(delta);
-  let f=this.choreography.frame;const motionDelta=this.snapshot.pauseReasons.length||elapsed>100?0:delta;
+  const delta=Math.min(100,elapsed);this.lastTime=now;if(!this.animationPaused)this.choreography.advance(delta);
+  let f=this.choreography.frame;const motionDelta=this.animationPaused||this.snapshot.pauseReasons.length||elapsed>100?0:delta;
   const playerRevision=this.player.visualRevision,npcRevision=this.npc.visualRevision;
   this.player.update(f.player,this.snapshot.task==='chop',motionDelta);this.npc.update(f.npc,false,motionDelta);
   if(this.player.visualRevision!==playerRevision||this.npc.visualRevision!==npcRevision){
@@ -157,7 +158,7 @@ export class FarmWorld implements GameView{
    this.controls.target.set(home?(this.sample?-2.5:14):state.task==='carry'?f.cart.x:f.player.position.x,home?(this.sample?1.2:0):1,home?(this.sample?-5:0):state.task==='carry'?f.cart.z:f.player.position.z);
    if(home){if(this.sample)this.camera.position.set(8,5.5,12);else this.camera.position.set(43,42,57);}else this.camera.position.copy(this.controls.target).add(offset.setLength(state.task==='carry'?13:state.task==='load'?11:12));this.dirty=true;
   }
-  if(!home&&!this.overview&&!state.pauseReasons.length){const target=new T.Vector3(state.task==='carry'?f.cart.x:f.player.position.x,1,state.task==='carry'?f.cart.z:f.player.position.z);const shift=target.sub(this.controls.target).multiplyScalar(.09);if(shift.length()>.002){this.controls.target.add(shift);this.camera.position.add(shift);this.dirty=true;}}
+  if(!home&&!this.overview&&!state.pauseReasons.length&&!this.animationPaused){const target=new T.Vector3(state.task==='carry'?f.cart.x:f.player.position.x,1,state.task==='carry'?f.cart.z:f.player.position.z);const shift=target.sub(this.controls.target).multiplyScalar(.09);if(shift.length()>.002){this.controls.target.add(shift);this.camera.position.add(shift);this.dirty=true;}}
   this.controls.update();
   const paint=JSON.stringify(f);if(paint!==this.lastPaint){
    this.lastPaint=paint;this.dirty=true;this.cart.root.position.set(f.cart.x,f.cart.y,f.cart.z);
@@ -208,6 +209,7 @@ export class FarmWorld implements GameView{
   this.overview=true;this.controls.target.copy(center);this.camera.position.copy(center).add(new T.Vector3(.8,.5,1).normalize().multiplyScalar(distance));this.controls.update();this.parent.dataset.view='castle';this.dirty=true;
  }
  setInteractionEnabled(enabled:boolean):void{this.controls.enabled=enabled&&!this.lost&&!this.disposed;}
+ setAnimationPaused(paused:boolean):void{if(this.animationPaused!==paused){this.animationPaused=paused;this.lastTime=0;}}
  destroy(removeCanvas=true):void{
   if(this.disposed)return;this.disposed=true;cancelAnimationFrame(this.request);this.events.abort();this.resizeObserver?.disconnect();this.subscriptions.forEach(stop=>stop());
   this.controls?.dispose();this.choreography.dispose();this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();this.scene.traverse(o=>{if(o instanceof T.InstancedMesh)o.dispose();});this.sun?.shadow.dispose();this.scene.clear();this.resources.dispose();this.renderer?.dispose();this.renderer?.forceContextLoss();

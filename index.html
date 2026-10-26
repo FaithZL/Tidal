@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/web/world.css" />
   <link rel="stylesheet" href="/web/tutorial.css" />
   <link rel="stylesheet" href="/web/movement-guide.css" />
+  <link rel="stylesheet" href="/web/animation-stop.css" />
 </head>
 <body inert data-boot="loading">
   <div id="app">
@@ -20,6 +21,7 @@
         <div id="testModeBadge" class="pill warn" hidden>本地测试加速模式</div>
         <div id="modeBadge" class="pill">⌨ 键盘演示 · 非真实动作识别</div>
         <button id="demoToggle" class="secondary demo-toggle" role="switch" aria-checked="false">无摄像头测试：关</button>
+        <button id="animationStop" class="secondary animation-stop-control" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P" title="停止或继续全部动画（Shift+P）">停止动画</button>
         <button id="tutorialOpen" class="secondary">动作教学</button>
         <button id="audioToggle" class="secondary demo-toggle" aria-pressed="false">开启音效</button>
         <button id="useKeyboard" class="secondary" hidden>切换键盘</button>
@@ -106,6 +108,7 @@
       <div class="modal-eyebrow">CHOOSE YOUR INPUT</div>
       <h2 id="setupHeading">选择演示输入方式</h2>
       <button class="secondary full-width tutorial-entry" id="setupTutorial">查看动作教学</button>
+      <button id="setupAnimationStop" class="secondary animation-stop-control full-width" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P">停止动画</button>
       <p>键盘与模拟可完整演示。摄像头需完成标定后手动启动姿态代理；真机准确率尚待验证。</p>
       <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
       <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
@@ -161,6 +164,7 @@
       </section></div>
       <div class="actual-metrics"><b>本次运行记录（输入来源见下方，不是生理测量）</b><div id="actualMetrics">完成 15 次砍伐，15 次装车</div><small>心率和卡路里：未接入测量设备，无法提供真实数据。66 天连续打卡与 500 卡等数据仅为原方案示意。</small></div>
       <button id="resultsTutorial" class="secondary full-width tutorial-entry">再看动作教学</button>
+      <button id="resultsAnimationStop" class="secondary animation-stop-control full-width" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P">停止动画</button>
       <button id="resultsHome" class="primary full-width">返回农场首页</button>
     </div>
   </div>
@@ -173,7 +177,7 @@
   </div>
   <div id="tutorialModal" class="tutorial-backdrop" hidden>
     <section class="tutorial-panel" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle" aria-describedby="tutorialSessionNote" tabindex="-1">
-      <header class="tutorial-heading"><div><span class="tutorial-eyebrow">LEARN THE MOVEMENT</span><h2 id="tutorialTitle">动作教学</h2></div><button id="tutorialClose" class="tutorial-close" aria-label="关闭教学">×</button></header>
+      <header class="tutorial-heading"><div><span class="tutorial-eyebrow">LEARN THE MOVEMENT</span><h2 id="tutorialTitle">动作教学</h2></div><div class="tutorial-heading-actions"><button id="tutorialClose" class="tutorial-close" aria-label="关闭教学">×</button><button id="tutorialAnimationStop" class="secondary animation-stop-control" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P">停止动画</button></div></header>
       <p id="tutorialSessionNote" class="tutorial-session-note">先看示范，再按准备页完成标定。教学不计训练成果。</p>
       <nav id="tutorialTabs" class="tutorial-tabs" aria-label="教学动作">
         <button data-task="chop" aria-pressed="true">挥砍</button><button data-task="load" aria-pressed="false">装车</button><button data-task="carry" aria-pressed="false">拉车持姿</button>

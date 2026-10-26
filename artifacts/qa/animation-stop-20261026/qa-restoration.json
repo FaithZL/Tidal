@@ -1,0 +1,19 @@
+{
+  "historicalFiles": 1986,
+  "regeneratedThenArchived": [
+    "artifacts/qa/keyboard-results.png",
+    "artifacts/qa/demo-toggle/setup.png",
+    "artifacts/qa/demo-toggle/running.png",
+    "artifacts/qa/exercise-tutorial-20261026/clock-observation.json",
+    "artifacts/qa/exercise-tutorial-20261026/tutorial-mobile.png",
+    "artifacts/qa/movement-guide-20261026/layout-1920x1080.png",
+    "artifacts/qa/movement-guide-20261026/layout-601x768.png",
+    "artifacts/qa/movement-guide-20261026/layout-390x844.png",
+    "artifacts/qa/movement-guide-20261026/layout-1280x720.png",
+    "artifacts/qa/movement-guide-20261026/layout-650x768.png",
+    "artifacts/qa/movement-guide-20261026/layout-620x768.png",
+    "artifacts/qa/movement-guide-20261026/layout-1366x768.png",
+    "artifacts/qa/movement-guide-20261026/layout-390x600.png"
+  ],
+  "allHistoricalSHA256Restored": true
+}

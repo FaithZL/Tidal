@@ -1,0 +1,8 @@
+5:51:41 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+PASS tutorial freeze and resume does not fill a short unobserved interval
+PASS tutorial disables playback/replay and keeps a selected paused pose
+PASS tutorial open/reopen and task changes remain suspended
+PASS tutorial ignores invalid/no-op flags without resetting a running baseline
+PASS synthetic preview freezes and resumes its retained sample interval
+PASS synthetic preview retains active action and ignores invalid/no-op flags
+6/6 helper boundary checks passed

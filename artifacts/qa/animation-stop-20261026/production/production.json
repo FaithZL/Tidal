@@ -1,0 +1,157 @@
+{
+  "input": "Normal production UI controls; no controller/clock mutation",
+  "media": "Synthetic PNGs only, no recording or physical camera",
+  "browser": "156.0.8078.4",
+  "frames": [
+    {
+      "file": "world-stopped.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "phase": "active",
+        "chop": "0/15",
+        "load": "0/15",
+        "carry": "0.0/60s",
+        "inventory": "0/0/0",
+        "hand": "-4.7394,1.4375,0.7646",
+        "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+        "blade": "-5.4506,2.3590,0.9019",
+        "cart": "3.000,0.000",
+        "guide": "199.89999999999964"
+      }
+    },
+    {
+      "file": "world-resumed.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "phase": "active",
+        "chop": "1/15",
+        "load": "0/15",
+        "carry": "0.0/60s",
+        "inventory": "0/0/0",
+        "hand": "-4.6517,1.2161,0.8008",
+        "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+        "blade": "-5.2834,0.2354,0.9145",
+        "cart": "3.000,0.000",
+        "guide": "599.8999999999996"
+      }
+    },
+    {
+      "file": "teaching-stopped.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "state": {
+        "phase": "active",
+        "chop": "1/15",
+        "load": "0/15",
+        "carry": "0.0/60s",
+        "inventory": "0/0/0",
+        "hand": "-4.6517,1.2161,0.8008",
+        "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+        "blade": "-5.2834,0.2354,0.9145",
+        "cart": "3.000,0.000",
+        "guide": "633.1999999999998"
+      }
+    },
+    {
+      "file": "mobile-teaching.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "phase": "active",
+        "chop": "1/15",
+        "load": "0/15",
+        "carry": "0.0/60s",
+        "inventory": "0/0/0",
+        "hand": "-4.6517,1.2161,0.8008",
+        "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+        "blade": "-5.2834,0.2354,0.9145",
+        "cart": "3.000,0.000",
+        "guide": "633.1999999999998"
+      }
+    },
+    {
+      "file": "mobile-world.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "phase": "active",
+        "chop": "1/15",
+        "load": "0/15",
+        "carry": "0.0/60s",
+        "inventory": "0/0/0",
+        "hand": "-4.6517,1.2161,0.8008",
+        "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+        "blade": "-5.2834,0.2354,0.9145",
+        "cart": "3.000,0.000",
+        "guide": "633.1999999999998"
+      }
+    }
+  ],
+  "stopped": {
+    "phase": "active",
+    "chop": "0/15",
+    "load": "0/15",
+    "carry": "0.0/60s",
+    "inventory": "0/0/0",
+    "hand": "-4.7394,1.4375,0.7646",
+    "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+    "blade": "-5.4506,2.3590,0.9019",
+    "cart": "3.000,0.000",
+    "guide": "199.89999999999964"
+  },
+  "trainingBehindTeachingRemainsPaused": {
+    "phase": "active",
+    "chop": "1/15",
+    "load": "0/15",
+    "carry": "0.0/60s",
+    "inventory": "0/0/0",
+    "hand": "-4.6517,1.2161,0.8008",
+    "foot": "-0.2992,0.1900,-0.3697,-1.0792,0.1600,0.0303",
+    "blade": "-5.2834,0.2354,0.9145",
+    "cart": "3.000,0.000",
+    "guide": "633.1999999999998"
+  },
+  "teachingTimeFrozen": "466.70",
+  "layout": {
+    "button": {
+      "x": 254.4375,
+      "y": 12,
+      "width": 54.796875,
+      "height": 31,
+      "top": 12,
+      "right": 309.234375,
+      "bottom": 43,
+      "left": 254.4375
+    },
+    "view": {
+      "x": 209.8125,
+      "y": 110,
+      "width": 168.1875,
+      "height": 29,
+      "top": 110,
+      "right": 378,
+      "bottom": 139,
+      "left": 209.8125
+    },
+    "width": 390,
+    "overflow": false
+  },
+  "cameraCalls": 0,
+  "errors": [],
+  "external": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "result": "pass"
+}

@@ -1,0 +1,8 @@
+5:42:39 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+FAIL tutorial freeze and resume does not fill a short unobserved interval: page.evaluate: Error: suspended tutorial advanced
+FAIL tutorial disables playback/replay and keeps a selected paused pose: page.evaluate: Error: effective playing stayed true
+FAIL tutorial open/reopen and task changes remain suspended: page.evaluate: Error: open escaped suspension
+FAIL tutorial ignores invalid/no-op flags without resetting a running baseline: page.evaluate: Error: repeated resume reset baseline
+FAIL synthetic preview freezes and resumes its retained sample interval: page.evaluate: Error: resume filled the short stopped interval
+FAIL synthetic preview retains active action and ignores invalid/no-op flags: page.evaluate: Error: suspended context change repainted
+0/6 helper boundary checks passed

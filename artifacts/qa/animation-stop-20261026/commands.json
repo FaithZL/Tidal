@@ -1,0 +1,195 @@
+[
+  {
+    "command": [
+      "node",
+      "/tmp/tidal-animation-player-boundary.mjs"
+    ],
+    "log": "players-red.log",
+    "exitCode": 1,
+    "result": "0/6 semantic checks passed before the helper implementation",
+    "recordedBy": "player subagent; original raw output retained"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/animation-stop.spec.ts",
+      "-g",
+      "one click freezes",
+      "--output",
+      "artifacts/qa/animation-stop-20261026/entry-red-results"
+    ],
+    "log": "entry-red.log",
+    "startedUTC": "2026-10-26T09:39:01.368265+00:00",
+    "finishedUTC": "2026-10-26T09:39:13.725039+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-26T09:44:08.296016+00:00",
+    "finishedUTC": "2026-10-26T09:44:09.922783+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/animation-stop.spec.ts",
+      "--output",
+      "artifacts/qa/animation-stop-20261026/e2e-first-results"
+    ],
+    "log": "e2e-first.log",
+    "startedUTC": "2026-10-26T09:44:08.296151+00:00",
+    "finishedUTC": "2026-10-26T09:44:42.418998+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-26T09:45:54.179426+00:00",
+    "finishedUTC": "2026-10-26T09:45:56.769661+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-26T09:45:54.179431+00:00",
+    "finishedUTC": "2026-10-26T09:45:59.867841+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/keyboard-flow.spec.ts",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "tests/e2e/movement-guide.spec.ts",
+      "tests/e2e/demo-toggle.spec.ts",
+      "--output",
+      "artifacts/qa/animation-stop-20261026/regression-results"
+    ],
+    "log": "regression.log",
+    "startedUTC": "2026-10-26T09:45:54.179415+00:00",
+    "finishedUTC": "2026-10-26T09:49:08.381990+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/animation-stop.spec.ts",
+      "-g",
+      "opening teaching or exit",
+      "--output",
+      "artifacts/qa/animation-stop-20261026/ownership-red-results"
+    ],
+    "log": "ownership-red.log",
+    "startedUTC": "2026-10-26T09:50:57.199661+00:00",
+    "finishedUTC": "2026-10-26T09:51:08.385241+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/animation-stop-20261026/players-boundary.mjs"
+    ],
+    "log": "players-green.log",
+    "startedUTC": "2026-10-26T09:51:41.428751+00:00",
+    "finishedUTC": "2026-10-26T09:51:43.246603+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-release.log",
+    "startedUTC": "2026-10-26T09:54:42.589512+00:00",
+    "finishedUTC": "2026-10-26T09:54:45.550083+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-26T09:54:42.589512+00:00",
+    "finishedUTC": "2026-10-26T09:54:48.507954+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/animation-stop.spec.ts",
+      "tests/e2e/keyboard-flow.spec.ts",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "tests/e2e/movement-guide.spec.ts",
+      "tests/e2e/demo-toggle.spec.ts",
+      "--output",
+      "artifacts/qa/animation-stop-20261026/e2e-release-results"
+    ],
+    "log": "e2e-release.log",
+    "startedUTC": "2026-10-26T09:52:25.081465+00:00",
+    "finishedUTC": "2026-10-26T09:56:16.830913+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "log": "assets.log",
+    "startedUTC": "2026-10-26T09:57:05.338456+00:00",
+    "finishedUTC": "2026-10-26T09:57:05.537411+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-26T09:57:05.335275+00:00",
+    "finishedUTC": "2026-10-26T09:57:07.224315+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/animation-stop-20261026/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T09:57:30.209268+00:00",
+    "finishedUTC": "2026-10-26T09:57:38.971156+00:00",
+    "exitCode": 0
+  }
+]

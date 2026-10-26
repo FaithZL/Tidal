@@ -1,0 +1,7 @@
+button.animation-stop-control{border:1px solid #f0d295;background:#704e35;color:#fff0cf;font-weight:750}
+button.animation-stop-control:hover{background:#825d3d}
+button.animation-stop-control[aria-pressed="true"]{background:#f0d295;color:#304937}
+button.animation-stop-control:focus-visible{outline:3px solid #fff0c0;outline-offset:3px}
+.tutorial-heading-actions{display:flex;align-items:center;gap:8px;flex:none}.tutorial-heading-actions .tutorial-close{order:2}.tutorial-heading-actions .animation-stop-control{padding:10px 12px;font-size:12px;border-radius:9px}
+#setupAnimationStop,#resultsAnimationStop{margin-bottom:10px;padding:10px;font-size:12px}
+@media(max-width:600px){.view-controls{top:110px}.tutorial-heading-actions{gap:5px}.tutorial-heading-actions .animation-stop-control{font-size:11px;padding:9px 8px}}

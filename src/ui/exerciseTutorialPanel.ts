@@ -7,15 +7,16 @@ interface TutorialHooks{onOpen():void;onClose():HTMLElement|undefined}
 export class ExerciseTutorialPanel{
  private readonly clock=new TutorialClock();private readonly figure:TutorialFigure;
  private readonly events=new AbortController();private readonly background=new Map<HTMLElement,boolean>();
- private origin?:HTMLElement;private request=0;private lastTime:number|null=null;private lastStep='';private lastFrame='';private disposed=false;
+ private origin?:HTMLElement;private request=0;private lastTime:number|null=null;private lastStep='';private lastFrame='';private suspended=false;private disposed=false;
  constructor(private readonly root:HTMLElement,private readonly hooks:TutorialHooks){
   this.figure=new TutorialFigure(this.node<SVGSVGElement>('tutorialFigure'));
   const options={signal:this.events.signal};
   this.node('tutorialClose').addEventListener('click',()=>this.close(),options);
   this.node('tutorialPlay').addEventListener('click',()=>{
+   if(this.suspended)return;
    if(this.clock.frame.playing)this.clock.pause();else{this.clock.play();if(!this.clock.frame.playing)this.clock.replay();}this.render();
   },options);
-  this.node('tutorialReplay').addEventListener('click',()=>{this.clock.replay();this.lastTime=null;this.render();},options);
+  this.node('tutorialReplay').addEventListener('click',()=>{if(this.suspended)return;this.clock.replay();this.lastTime=null;this.render();},options);
   for(const [id,direction] of [['tutorialPrev',-1],['tutorialNext',1]] as const)this.node(id).addEventListener('click',()=>{this.clock.selectStep(this.clock.frame.stepIndex+direction);this.render();},options);
   this.node<HTMLSelectElement>('tutorialSpeed').addEventListener('change',()=>{
    const value=this.node<HTMLSelectElement>('tutorialSpeed').value;this.clock.setSpeed(value==='0.25'?.25:value==='0.5'?.5:1);this.render();
@@ -32,6 +33,10 @@ export class ExerciseTutorialPanel{
   document.addEventListener('visibilitychange',()=>{this.lastTime=null;},options);
  }
  get isOpen():boolean{return !this.root.hidden;}
+ setSuspended(suspended:boolean):void{
+  if(this.disposed||typeof suspended!=='boolean'||this.suspended===suspended)return;
+  this.suspended=suspended;this.lastTime=null;if(this.isOpen)this.render();
+ }
  open(task:TaskKind='chop',duringTraining=false):void{
   if(this.disposed||this.isOpen)return;
   this.origin=document.activeElement instanceof HTMLElement?document.activeElement:undefined;
@@ -59,17 +64,19 @@ export class ExerciseTutorialPanel{
  }
  private animate=(now:number):void=>{
   if(this.disposed||!this.isOpen)return;
-  if(document.hidden)this.lastTime=null;
-  else{if(this.lastTime!==null)this.clock.advance(now-this.lastTime);this.lastTime=now;this.render();}
+  if(document.hidden||this.suspended)this.lastTime=null;
+  else{if(this.lastTime!==null)this.clock.advance(now-this.lastTime);this.lastTime=now;}
+  this.render();
   this.request=requestAnimationFrame(this.animate);
  };
  private render():void{
-  const frame=this.clock.frame,key=`${frame.task}/${frame.stepIndex}/${frame.stepProgress}/${frame.elapsedMs}/${frame.playing}/${frame.speed}`;
+  const frame=this.clock.frame,playing=frame.playing&&!this.suspended,key=`${frame.task}/${frame.stepIndex}/${frame.stepProgress}/${frame.elapsedMs}/${frame.playing}/${frame.speed}/${this.suspended}`;
   if(key===this.lastFrame)return;this.lastFrame=key;
   const lesson=tutorialLessons[frame.task],step=lesson.steps[frame.stepIndex],stepKey=`${frame.task}/${frame.stepIndex}`;
-  this.root.dataset.task=frame.task;this.root.dataset.timeMs=frame.elapsedMs.toFixed(2);this.root.dataset.playing=String(frame.playing);
+  this.root.dataset.task=frame.task;this.root.dataset.timeMs=frame.elapsedMs.toFixed(2);this.root.dataset.playing=String(playing);
   this.root.dataset.speed=String(frame.speed);this.root.dataset.step=String(frame.stepIndex);
-  this.node<HTMLButtonElement>('tutorialPlay').textContent=frame.playing?'暂停示范':'播放示范';
+  this.node<HTMLButtonElement>('tutorialPlay').textContent=playing?'暂停示范':'播放示范';
+  this.node<HTMLButtonElement>('tutorialPlay').disabled=this.suspended;this.node<HTMLButtonElement>('tutorialReplay').disabled=this.suspended;
   this.node<HTMLButtonElement>('tutorialPrev').disabled=frame.stepIndex===0;this.node<HTMLButtonElement>('tutorialNext').disabled=frame.stepIndex===lesson.steps.length-1;
   this.node<HTMLSelectElement>('tutorialSpeed').value=String(frame.speed);this.node<HTMLProgressElement>('tutorialProgress').value=frame.elapsedMs/frame.totalMs;
   if(stepKey!==this.lastStep){
