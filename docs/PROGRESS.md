@@ -1,5 +1,13 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：归档历史记录并清理工作区显示（2026-10-26）
+
+用户要求剩余修改“要么提交要么ignore”，本轮明确将此前保留的63行历史安装/接续、预览及只读核对记录原样归档。旧失败与人工待验仍为当时的历史结果，不改写成新验证通过；此前排除提交的停点由本轮清理授权覆盖。
+
+74份旧未跟踪文件均为本机接续证据、回归截图、旧进度全文副本及冗余原始trace。新增三条根路径精确.gitignore规则：local-handoff-20261025目录、source-lifecycle-20261025/progress-before.md及该批次density-half原始trace.zip；不忽略整个QA或已跟踪文档，不使用skip-worktree/assume-unchanged隐藏修改，也不删除文件。原始110,250,431字节trace已有3个受跟踪分片及清单，逐片与拼接SHA已核对可恢复；本地原件继续保留。
+
+本轮只改.gitignore与PROGRESS并做本地清理提交。git check-ignore核对74份目标全部被覆盖、源码/测试/已归档QA/分卷不被新规则屏蔽；旧74份文件SHA原样保留，git diff --check检查文档与规则格式。未修改应用或依赖、未重跑软件测试/构建，不把前轮结果当本轮验收；不部署、不自动push。提交后工作区状态与提交SHA由聊天回执确认。
+
 ## 最新追加：手动停止/继续动画限定范围提交、推送main授权（2026-10-26）
 
 用户明确要求“提交push”，本轮将手动停止/继续、Shift+P、各页面入口、独立播放器与GameView表现门禁、暂停所有权修复，以及对应测试/设计/文档/QA普通提交并推送main，不部署。此前制作阶段“不提交/push”的停点由本轮明确授权覆盖。实查本地与实时远端main均为`db0307a3d1fd9d889a78698f2439f97149788d3f`。
@@ -34,6 +42,16 @@
 测试前备份1,986份历史QA；13份重生成结果另存本轮regression后恢复，全部原SHA一致，见qa-restoration.json。已有未提交进度正文、两条研究记录、旧74文件和其他源码/资产保留，见preservation.json。临时4176与播放器边界4178服务均结束，5173原开发服务保留。预览入口`http://127.0.0.1:5173/?art=npr-sample`。
 
 限制：这是手动停止/继续，不是摄像头连续停动驱动或动作标准评分；摄像头回归仍是假视频/合成关键点。真实手机、真人停动延迟/准确率、约60fps和最终美术未验；未重跑全量verify，旧prototype暂停PNG失败仍待查。窄屏截图底部有与前轮同类的重复头部影像，原因未证实，仅按DOM控件可达/无横向溢出记录，不当作手机实机观感通过。本轮不提交/push/部署，等待用户查看。
+
+## 最新追加：标准动作差异反馈可行性只读核对（2026-10-26）
+
+用户询问能否判断真人动作与标准动作的差异。本轮只读features/pose.worker/setupPanel/姿态类型并查MediaPipe官方Web文档（https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js）：当前实际传回33个图像归一化landmarks，已计算躯干归一化手腕位置、肘/膝二维角度及髋高度，未把模型worldLandmarks接入本项目特征。可增量做按阶段对齐的角度/轨迹偏差及关节颜色提示；低可见度应显示无法判断，机位及参考允许范围需确认。现有个人标定只能定义本人示范范围，原创教学骨架也只是示意，两者不能直接当成动作标准或医学安全评分的证据。没有采集真人、改源码/阈值、实现评分或跑测试；仅追加研究记录，未新commit/push/部署。
+
+## 最新追加：摄像头与角色停动同步只读核对（2026-10-26）
+
+用户询问“人停了，角色就停”是否有保证。基线main、HEAD `db0307a`，仅核对实际代码：挥砍/装车识别器输出离散阶段和固定progress，用户FBX动画按阶段做110–360ms设定时长的短过渡，不能保证任意中途姿势逐帧停住；有效静止帧不触发会话暂停。拉车是稳定持姿代理，保持姿态不动仍累计有效时间并推进车，放下/失效才停止；休息中的走路/整理和标准教学骨骼按各自表现时钟，不是连续真人动捕。
+
+已核对chop/load/carry recognizers、cameraActionSource、sessionController、browser、world choreography/FarmWorld及用户人物动作：暂停/后台/跟踪失效有冻结和旧事件隔离，200ms样本间隔/300ms数据年龄阈值不是已实测的端到端停动延迟保证。实际执行git status/rev-parse、rg文件定位及源码读取；首次旧推测目录检索exit2，按现有world目录核对完成。没有修改生产源码、阈值或测试，未请求摄像头、跑测试、录制数据或做真人验收；原53行进度及74份旧QA保留。仅追加本核对记录，未新commit/push/部署。若用户要求任意中途停动一致，需要另行实现连续动作进度/停动驱动并实测验证。
 
 ## 最新追加：动作教学与标准骨骼示范限定范围提交、推送main授权（2026-10-26）
 
@@ -149,6 +167,12 @@
 
 本轮已读相关指南/契约并委派只读接入调查：可利用现有17骨架、局部rev7挥砍与`WorldActor.mode/pose/stride`；rev7固定7.1秒样片不能自动循环代替输入阶段。其握指适配会修改派生几何，跨回装车/步行须恢复；局部木桩刀尖与现有树干摆位不同，需实际接触适配后再验证，不能原样挂上宣称对准。未运行测试、未新增依赖或外部素材，未commit/push/部署；原有未提交记录和QA保留。下一步范围确认后形成小设计、失败断言和最小实现，继续验证暂停/复位、手脚接触、阶段切换与装车回归。
 
+## 最新追加：启动装车动画预览（2026-10-26）
+
+用户要求启动查看动画。实际核对本机目录、main与HEAD `043a2ec`，原有PROGRESS及旧handoff/trace未提交工作保留。`lsof -nP -iTCP:5173 -sTCP:LISTEN` exit0，既有Node进程PID46450仍监听127.0.0.1:5173；Python urllib请求`http://127.0.0.1:5173/?art=npr-sample`返回HTTP200、检查脚本exit0，因此沿用既有服务，没有重复启动或安装。
+
+已在Codex浏览器打开并实际操作页面：接受训练计划，开启明确标识的无摄像头测试，开始自动模拟演示；确认页面进入砍树阶段且计数推进至14/15，后续按既有流程进入装车抛木。保留预览标签页，未申请摄像头或录制真人数据。仅追加本启动记录，未修改应用、素材或测试，未重跑验证、commit/push或部署；前轮测试结果不记为本轮重测。预览地址仍为`http://127.0.0.1:5173/?art=npr-sample`，可用页面暂停/重新开始控制播放。
+
 ## 最新追加：装车抛木动作及精修提交、推送main授权（2026-10-25）
 
 用户明确要求“提交push”，本次纳入前两轮尚未提交的装车专用人物适配器、抛木/托举/腕部与胸肩精修、FarmWorld接入与真实手锚、对应测试/来源说明/两份计划，以及`user-load-motion-20261025/`、`user-load-polish-20261025/`和本轮交付验证记录。只操作main普通提交和推送，不部署。原素材/许可、领域/识别/输入参数不变。
@@ -212,6 +236,10 @@ PROGRESS采用单独暂存版本：仅HEAD既有记录、本次装车新增记�
 独立只读审查最终无阻塞，见`review.json`。测试前记录**1,588份**历史QA SHA，4张NPR截图被重生成后先存本轮regression，再按备份原字节恢复，全部历史SHA一致，见`qa-restoration.json`。原有未提交PROGRESS全文、旧handoff和trace及所有原FBX/贴图均保留，见`preservation.json`。未重新安装依赖、升级版本、提交/推送或部署。
 
 限制：没有完整逐指握木、衣物/全身自碰撞，其他农场阶段仍静态；最终美术、真人摄像头/手机与约60fps仍待验。本轮未重跑全量verify，先前prototype暂停截图字节断言失败仍未修复，不用27项范围通过代替全量。5173开发预览保持可用，刷新`/?art=npr-sample`后在装车阶段查看；临时4176检查后关闭。
+
+## 最新追加：本地城堡效果预览检查（2026-10-25）
+
+用户要求启动查看效果。实际curl检查`http://127.0.0.1:5173/?art=npr-sample`为HTTP200/exit0，lsof确认既有Node进程PID46450监听5173，因此沿用正在运行的开发服务，没有重复启动或安装。已请求在Codex浏览器面板打开该地址（工具返回queued）；进入后关闭计划弹窗并点击“城堡近景”。仅追加本预览记录，保留原有未提交工作；未修改应用、运行测试、commit/push或部署。
 
 ## 最新追加：城堡模型与贴图限定范围提交、推送main授权（2026-10-25）
 
@@ -338,6 +366,49 @@ PROGRESS采用单独暂存版本：仅HEAD既有记录、本次装车新增记�
 本轮修复测试浏览器选择，不能据此声称默认headless-shell的软件GL负载已优化，也不能把合成视频/关键点通过当成真人识别、真实手机、端到端延迟、约60fps或最终美术验收。其他机器的完整Chromium也不保证硬件GPU；仅安装`--only-shell`的环境需按既有`npx playwright install chromium`安装完整浏览器。本机当前已具备，无需重装。
 
 继续停在`/?art=character-motion&rev=7`人物局部审阅；未扩展全农场、处理其他Minor、购买或部署。无commit/push/合并，HEAD与分支不变。启动仍在本目录运行`npm run dev`并按实际端口访问；本轮不保持预览服务。下一步等待用户开发指令。
+
+## 最新追加：接续状态核实（2026-10-25）
+
+本轮按用户交接仅核实当前工作区并等待具体开发任务。已读取AGENTS、PROGRESS最新记录、DEVELOPMENT_GUIDE第0–9节、ACCEPTANCE、SOURCES、3D_FARM_DESIGN及3D_FARM_IMPLEMENTATION。实际`pwd`、`git branch --show-current`、`git remote -v`、`git rev-parse HEAD`、`git status --short`与`git ls-remote origin refs/heads/main`均exit0：目录为`/Users/zero/work/ai_ws/Tidal`，分支main，origin为`https://github.com/FaithZL/Tidal.git`，本地HEAD及实时远端main均为`20aceb2ee6e3ae98d9fdce0032b30eacb85e15cf`，无需同步。初始未提交内容仅既有PROGRESS与`artifacts/qa/local-handoff-20261025/`；实际检查PROGRESS差异及commands.json、environment.json、qa-restoration.json存在，保留原记录和证据。
+
+本轮只新增本接续记录，未改源码、测试、素材、许可或配置，未安装依赖、重跑测试、启动预览、commit/push/合并或部署。前轮本机369单测通过、E2E76/78及两项定向再次失败、单独build成功仍为历史实测，不记为本轮通过；根因未证实，真机/手机/硬件GPU/最终美术及性能限制不变。继续停在`/?art=character-motion&rev=7`人物局部审阅，下一步等待用户具体开发指令，不自动扩展全农场或修复待办；按需先检查服务再运行`npm run dev`。
+
+
+## 最新追加：新会话接续提示词（2026-10-25）
+
+按用户要求生成仓库外文本`/Users/zero/work/ai_ws/Tidal-新会话接续提示词.txt`，包含本机路径、main基线、未提交记录、安装与真实失败结果、证据、规则及等待下一任务的停点。生成前核对HEAD仍为`20aceb2`，Git改动仅前轮PROGRESS与新QA；本轮不重跑测试、不改应用。检查5173的`curl -s -o /dev/null -w 'preview HTTP %{http_code}\n' 'http://127.0.0.1:5173/?art=character-motion&rev=7'`实际HTTP000/exit7，当前不可访问；提示词明确下会话按需检查并重新启动dev，前轮“保持运行”为当时状态，不承诺跨会话存活。无commit/push/部署，继续等待具体开发任务。
+
+## 最新追加：本机主开发环境接手与验证（2026-10-25，macOS）
+
+用户明确要求本机作为后续主开发环境，从GitHub最新main接续，本轮仅安装、验证、启动并停在第7版人物局部审阅。项目新克隆于`/Users/zero/work/ai_ws/Tidal`，分支`main`，HEAD与实查`origin/main`均为`20aceb2ee6e3ae98d9fdce0032b30eacb85e15cf`；`git merge-base --is-ancestor`指定基线退出0。未重复合并历史分支、未reset/clean/覆盖现有工作。以后使用本机目录与GitHub main，不依赖旧机预览或绝对路径。
+
+已先读AGENTS，再读PROGRESS最新记录、DEVELOPMENT_GUIDE第0–9节、ACCEPTANCE、SOURCES、3D_FARM_DESIGN和3D_FARM_IMPLEMENTATION。环境为macOS27.0.1/arm64、Git2.54.0（Apple Git-157）、Node24.14.0、npm11.9.0、Playwright Chromium156.0.8078.4。所有本轮证据在`artifacts/qa/local-handoff-20261025/`，命令/退出码见`commands.json`，环境和远端记录见`environment.json`。
+
+| 实际命令 | 退出码与结果 | 日志 |
+|---|---|---|
+| `git clone --branch main https://github.com/FaithZL/Tidal.git` | 0，main初始干净 | 本轮终端及environment.json |
+| `npm ci` | 0，146包，audit147，0漏洞，未升级依赖或更换包管理器 | npm-ci.log |
+| `npm run assets:sync` | 0，同步锁定MediaPipe与Three许可 | assets-sync.log |
+| `npm run assets:verify` | 0，模型、4份运行文件、2SVG、Three许可、2NPR图片、9份CC0文件/许可、2份用户FBX通过 | assets-verify.log |
+| `npx playwright install chromium` | 0，首次下载浏览器完成 | playwright-install.log |
+| 首次`npm run verify` | 1；typecheck/lint通过，368/369单测通过，sampleShoulder.test.ts:73密集几何测试超过默认5000ms；未进入E2E/build | verify.log |
+| `npm run test:unit -- tests/unit/sampleShoulder.test.ts` | 0，原样4/4通过，总4.43秒 | shoulder-reproduce.log |
+| 再次`npm run verify` | 1；typecheck/lint、369/369单测通过，E2E **76/78通过（8.2分钟）**；链式尾部build未执行 | verify-recheck.log |
+| `npm run test:e2e -- tests/e2e/source-lifecycle.spec.ts -g "synthetic camera pipeline\|a stalled camera"` | 1，原样定向两项均再次失败 | source-recheck.log |
+| `npm run build` | 0；保留已有500KB体积提示，入口index-D08wYbcD.js | build.log |
+| 设置`TIDAL_GRIP_QA_DIR=artifacts/qa/local-handoff-20261025/production`、`TIDAL_GRIP_RECORD=0`运行`node artifacts/qa/user-grip/capture-grip.mjs` | 0；实际4176生产构建，六阶段逐帧、特写/旋转/房屋/窄屏截图，0页面或控制台错误、0外源，未录像 | production-capture.log、production/capture.json及15PNG |
+
+### 本机验证阻塞与证据边界
+
+两项E2E是source-lifecycle.spec.ts:9合成摄像头整局及:40休息停帧用例。完整轮均在5/15砍树后等待`inputDebug`的ready超时；现场为跟踪/标定失效暂停、源stopped、需要重新准备。定向复跑第一项在2/15、第二项在5/15同类失败，均尚未到目标整局或休息停帧断言。现场分别在`e2e-first-failures/`、`source-recheck-failures/`，含trace.zip和error-context.md。尚未证实导致失效的底层原因，不把它直接归为性能、真实摄像头故障或已定位业务bug。本轮限安装接手，没有修改生产源码、测试断言、识别门限、超时或重试配置；完整verify仍未通过，不能用旧机78/78记录替代。本机首次单测超时在随后两次原样运行（定向、完整）均通过，保留首次失败，系统原因未证实。
+
+### 预览、历史证据与下一步
+
+实际`npm run dev`完成predev Worker构建并启动于5173，保持运行，已在可见应用内浏览器打开`http://127.0.0.1:5173/?art=character-motion&rev=7`并保留标签页。实际查看用户人物/房屋、动作播放，操作暂停/继续、0.5×、重播、4.15秒逐帧、手肘特写、拖拽旋转和滚轮缩放，恢复正常速度播放。临时生产服务4176用于上述dist检查，检查完成后停止，5173为交付预览地址。自动测试通过与实际查看均不代表最终美术批准或真实设备验收。
+
+测试前备份1,235份历史QA；33份被重生成文件先另存本轮`regression/`，再恢复原字节，全部历史文件SHA一致，见qa-restoration.json。恢复脚本最初因本机Python tarfile不支持filter参数退出1，随后改为按备份清单读取成员原字节写回并成功核对；未改历史许可或素材。源码、测试、锁文件、素材、许可与.gitattributes无改动，仅追加本轮进度和新QA；没有commit/push/合并/购买/部署。
+
+继续停在人物第7版局部审阅，等待用户下一项任务，不自动接入全农场。真实摄像头/手机、硬件GPU、最终美术、原P01约60fps未达标状态保留；旧prototype BFCache恢复/阴影释放两项Minor与两份旧机路径QA脚本保留待办，需重跑时再适配。用户FBX公开再分发许可仍未确认，上传记录不视作第三方授权。后续若获具体修复任务，优先从上述可重复E2E失效现场继续调查并最小修复。
 
 ## 最新追加：审查、完整验证后合入并推送main（2026-10-24）
 

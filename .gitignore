@@ -11,3 +11,8 @@ public/worker/
 .env
 .env.*
 !.env.example
+
+# Retained local handoff evidence and redundant raw copies; keep other QA tracked.
+/artifacts/qa/local-handoff-20261025/
+/artifacts/qa/source-lifecycle-20261025/progress-before.md
+/artifacts/qa/source-lifecycle-20261025/density-half-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
