@@ -1,0 +1,77 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userFarmCharacter.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userFarmCharacter.test.ts (4 tests | 3 failed) 255ms
+   × farm scope articulates the actual axe and hands for the existing chop phases 81ms
+   × farm walk push and pull move the real feet instead of sliding the static source pose 53ms
+   × invalid or paused samples cannot change farm mode or its displayed bones before an explicit reset 54ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userFarmCharacter.test.ts > farm scope articulates the actual axe and hands for the existing chop phases
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/userFarmCharacter.test.ts:26:25
+     24| test('farm scope articulates the actual axe and hands for the existing…
+     25|  const {value,source,skin}=await fixture();value.update(actor,true);co…
+     26|  expect(source.visible).toBe(false);expect(skin.visible).toBe(true);ex…
+       |                         ^
+     27|  settle(value,{...actor,pose:'chop-down'},true);const low=value.handPo…
+     28|  expect(high.y-low.y).toBeGreaterThan(.5);expect(value.root.getObjectB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/userFarmCharacter.test.ts > farm walk push and pull move the real feet instead of sliding the static source pose
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/unit/userFarmCharacter.test.ts:40:26
+     38|   const before=node(value.root,'user-leftFoot');
+     39|   value.update({...state,stride:Math.PI/2},false,16);
+     40|   expect(source.visible).toBe(false);expect(skin.visible).toBe(true);
+       |                          ^
+     41|   expect(node(value.root,'user-leftFoot').distanceTo(before),mode).toB…
+     42|   expect(value.root.getObjectByName('user-rigid-source-axe')!.visible)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/userFarmCharacter.test.ts > invalid or paused samples cannot change farm mode or its displayed bones before an explicit reset
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/userFarmCharacter.test.ts:59:148
+     57|  const before=skin.skeleton.bones.map(bone=>bone.matrixWorld.toArray()…
+     58|  for(const delta of [0,-1,101,NaN,Infinity])value.update({...actor,mod…
+     59|  expect(skin.skeleton.bones.map(bone=>bone.matrixWorld.toArray())).toE…
+       |                                                                                                                                                    ^
+     60|  value.resetPresentation();value.update({...actor,mode:'walk',stride:0…
+     61| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  12:12:49
+   Duration  355ms (tests 85%, import 8%, transform 6%, worker 1%)
+

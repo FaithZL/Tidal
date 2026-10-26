@@ -123,3 +123,15 @@ test.each([4.15,4.4])('head absorption eases its velocity across %ss without a s
  const center=at(boundary),before=center.clone().sub(at(boundary-epsilon)).divideScalar(epsilon),after=at(boundary+epsilon).sub(center).divideScalar(epsilon);
  expect(before.distanceTo(after)).toBeLessThan(.01);
 });
+
+test('an interrupted stroke can retract without losing either real grasp or the planted feet',async()=>{
+ const {rig,motion}=await fixture();motion.sample(3.8);motion.beginTransition();
+ for(const blend of [0,.1,.25,.5,.75,1]){
+  motion.sampleTransition(5.6,blend);
+  for(const side of ['left','right'] as const){
+   const foot=`${side}Foot` as const,grip=side==='left'?rig.axe.grips.upper:rig.axe.grips.lower;
+   expect(motion.handPosition(side).distanceTo(rig.axe.root.localToWorld(grip.clone())),`${side} at ${blend}`).toBeLessThan(.006);
+   expect(rig.bones[foot].getWorldPosition(new T.Vector3()).distanceTo(rig.root.localToWorld(rig.rest[foot].worldPosition.clone()))).toBeLessThan(.0001);
+  }
+ }
+});

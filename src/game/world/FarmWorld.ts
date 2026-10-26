@@ -75,11 +75,11 @@ export class FarmWorld implements GameView{
   }
   const prototype=new URLSearchParams(location.search).get('model')==='prototype';
   if(this.palette&&!prototype){
-   this.userCharacter=new UserLoadCharacter(loadUserModel('character',import.meta.env.BASE_URL));this.player=this.userCharacter;
+   this.userCharacter=new UserLoadCharacter(loadUserModel('character',import.meta.env.BASE_URL),'farm');this.player=this.userCharacter;
   }else this.player=this.palette?new NprCharacter3D(this.resources,this.palette):new Character3D(this.resources);
   if(this.palette){
    const comparison=document.createElement('a');comparison.href=`${import.meta.env.BASE_URL}?art=npr-sample${prototype?'':'&model=prototype'}`;comparison.textContent=prototype?'查看导入人物':'原动作对照';
-   this.sampleBadge!.append(prototype?'原动作人物对照 · 导入房屋 ':'用户人物/房屋 · 装车局部动作，其余静态 ',comparison);
+   this.sampleBadge!.append(prototype?'原动作人物对照 · 导入房屋 ':'用户人物/房屋 · 挥砍 / 装车 / 行走动作 ',comparison);
   }
   this.ready=Promise.all([this.userCastle.ready,sampleTextures,this.userHouse?.ready,this.userCharacter?.ready]).then(()=>{
     if(this.disposed||this.lost)throw new Error('User scenery loading cancelled');
@@ -87,7 +87,7 @@ export class FarmWorld implements GameView{
     let triangles=0;castle.traverse(object=>{if(object instanceof T.Mesh)triangles+=(object.geometry.index?.count??object.geometry.getAttribute('position').count)/3;});
     parent.dataset.castle='user-fbx';parent.dataset.castleTriangles=String(triangles);parent.dataset.castlePosition=castle.position.toArray().map(value=>value.toFixed(3)).join(',');
     parent.dataset.assets='ready';this.dirty=true;
-    if(this.palette){parent.dataset.house='user-fbx';parent.dataset.character=this.userCharacter?'user-fbx-load-motion':'procedural-motion';}
+    if(this.palette){parent.dataset.house='user-fbx';parent.dataset.character=this.userCharacter?'user-fbx-farm-motion':'procedural-motion';}
    }).catch((error:unknown)=>{
     if(!this.disposed&&!this.lost){
      parent.dataset.assets='failed';parent.dataset.castle='failed';this.userCastle?.dispose();this.userHouse?.dispose();this.userCharacter?.dispose();
@@ -180,6 +180,11 @@ export class FarmWorld implements GameView{
   if(this.dirty){
    this.renderer.render(this.scene,this.camera);this.dirty=false;this.paintedLastFrame=true;
    if(this.sample)this.parent.dataset.hand=this.player.handPosition().toArray().map(n=>n.toFixed(4)).join(',');
+   const landmarks=this.userCharacter?.landmarks;
+   if(landmarks){
+    this.parent.dataset.footPose=[landmarks.leftFoot,landmarks.rightFoot].flatMap(point=>this.player.root.worldToLocal(point).toArray()).map(n=>n.toFixed(4)).join(',');
+    if(landmarks.blade)this.parent.dataset.blade=landmarks.blade.toArray().map(n=>n.toFixed(4)).join(',');else delete this.parent.dataset.blade;
+   }
    this.parent.dataset.camera=this.camera.position.toArray().map(n=>n.toFixed(3)).join(',');
    const projected=new T.Vector3(-6,1,1).project(this.camera);this.parent.dataset.probe=projected.toArray().map(n=>n.toFixed(4)).join(',');
   }

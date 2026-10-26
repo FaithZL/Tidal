@@ -1,0 +1,69 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "lint.log",
+    "seconds": 2.651
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "log": "typecheck.log",
+    "seconds": 2.932
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "unit.log",
+    "seconds": 5.601
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/user-farm-motion.spec.ts",
+      "tests/e2e/user-load-motion.spec.ts",
+      "tests/e2e/user-models.spec.ts",
+      "tests/e2e/castle-model.spec.ts",
+      "--output",
+      "artifacts/qa/user-farm-publish-20261026/e2e-results"
+    ],
+    "exitCode": 0,
+    "log": "e2e-related.log",
+    "seconds": 63.699
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "exitCode": 0,
+    "log": "assets.log",
+    "seconds": 0.203
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "build.log",
+    "seconds": 1.513
+  }
+]

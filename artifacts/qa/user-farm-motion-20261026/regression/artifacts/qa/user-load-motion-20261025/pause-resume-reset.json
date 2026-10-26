@@ -1,0 +1,1286 @@
+{
+  "input": "Existing automatic demo and pause/reset UI",
+  "paused": {
+    "hand": "-1.3305,0.9724,-0.0601",
+    "revision": "136",
+    "load": "0/15",
+    "inventory": "15/0/0"
+  },
+  "samples": [
+    {
+      "action": "ready",
+      "hand": [
+        -1.3451,
+        0.9484,
+        -0.0601
+      ],
+      "revision": "131",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 2724.2999999970198
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.3454,
+        0.9314,
+        -0.0601
+      ],
+      "revision": "134",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 2725.3999999910593
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.3435,
+        0.9401,
+        -0.0601
+      ],
+      "revision": "135",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 2741.8999999910593
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.3305,
+        0.9724,
+        -0.0601
+      ],
+      "revision": "136",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 2758.7999999970198
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.3451,
+        0.9484,
+        -0.0601
+      ],
+      "revision": "136",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 4023.5
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.332,
+        0.9803,
+        -0.0601
+      ],
+      "revision": "139",
+      "inventory": "15/0/0",
+      "load": "0/15",
+      "at": 4041.8999999910593
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.332,
+        0.9803,
+        -0.0601
+      ],
+      "revision": "139",
+      "inventory": "15/0/0",
+      "load": "1/15",
+      "at": 4057.7999999970198
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.3224,
+        0.9889,
+        -0.0601
+      ],
+      "revision": "140",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4058.7000000029802
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.3001,
+        1.0092,
+        -0.0601
+      ],
+      "revision": "141",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4075
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2748,
+        1.0327,
+        -0.0601
+      ],
+      "revision": "142",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4091.7999999970198
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.2774,
+        1.0293,
+        -0.0601
+      ],
+      "revision": "143",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4108.20000000298
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.2775,
+        1.0356,
+        -0.0601
+      ],
+      "revision": "144",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4125.0999999940395
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.2682,
+        1.0656,
+        -0.0601
+      ],
+      "revision": "145",
+      "inventory": "14/1/0",
+      "load": "1/15",
+      "at": 4141.20000000298
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.2682,
+        1.0656,
+        -0.0601
+      ],
+      "revision": "145",
+      "inventory": "14/1/0",
+      "load": "2/15",
+      "at": 4157.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2597,
+        1.0743,
+        -0.06
+      ],
+      "revision": "146",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4158.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2402,
+        1.0947,
+        -0.06
+      ],
+      "revision": "147",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4175.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2182,
+        1.1181,
+        -0.06
+      ],
+      "revision": "148",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4191.899999991059
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.2227,
+        1.1114,
+        -0.06
+      ],
+      "revision": "149",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4208.29999999702
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.2272,
+        1.0874,
+        -0.06
+      ],
+      "revision": "150",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4224.899999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.2208,
+        1.1162,
+        -0.06
+      ],
+      "revision": "151",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4241.79999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2131,
+        1.1248,
+        -0.06
+      ],
+      "revision": "152",
+      "inventory": "13/2/0",
+      "load": "2/15",
+      "at": 4258.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.2131,
+        1.1248,
+        -0.06
+      ],
+      "revision": "152",
+      "inventory": "13/2/0",
+      "load": "3/15",
+      "at": 4274.0999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1957,
+        1.1446,
+        -0.06
+      ],
+      "revision": "153",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4275
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1866,
+        1.1706,
+        -0.0605
+      ],
+      "revision": "154",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4291.899999991059
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1903,
+        1.1617,
+        -0.0604
+      ],
+      "revision": "155",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4308.5
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.196,
+        1.1361,
+        -0.0604
+      ],
+      "revision": "156",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4325.0999999940395
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1873,
+        1.1613,
+        -0.0602
+      ],
+      "revision": "157",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4342
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1844,
+        1.1707,
+        -0.0604
+      ],
+      "revision": "158",
+      "inventory": "12/3/0",
+      "load": "3/15",
+      "at": 4358.70000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1844,
+        1.1707,
+        -0.0604
+      ],
+      "revision": "158",
+      "inventory": "12/3/0",
+      "load": "4/15",
+      "at": 4374.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1784,
+        1.1922,
+        -0.0608
+      ],
+      "revision": "159",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4375.5999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1722,
+        1.2162,
+        -0.0613
+      ],
+      "revision": "160",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4392
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1756,
+        1.2062,
+        -0.0612
+      ],
+      "revision": "161",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4408.5
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1806,
+        1.1793,
+        -0.0612
+      ],
+      "revision": "162",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4425.20000000298
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1812,
+        1.1816,
+        -0.0611
+      ],
+      "revision": "163",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4442
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.179,
+        1.1903,
+        -0.0612
+      ],
+      "revision": "164",
+      "inventory": "11/4/0",
+      "load": "4/15",
+      "at": 4458.70000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.179,
+        1.1903,
+        -0.0612
+      ],
+      "revision": "164",
+      "inventory": "11/4/0",
+      "load": "5/15",
+      "at": 4474.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1741,
+        1.2105,
+        -0.0617
+      ],
+      "revision": "165",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4475.70000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1692,
+        1.2331,
+        -0.0622
+      ],
+      "revision": "166",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4489.79999999702
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1723,
+        1.2229,
+        -0.062
+      ],
+      "revision": "167",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4506.899999991059
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1769,
+        1.1964,
+        -0.0619
+      ],
+      "revision": "168",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4525.79999999702
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1776,
+        1.1983,
+        -0.0618
+      ],
+      "revision": "169",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4541.29999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1757,
+        1.2066,
+        -0.062
+      ],
+      "revision": "170",
+      "inventory": "10/5/0",
+      "load": "5/15",
+      "at": 4558
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1757,
+        1.2066,
+        -0.062
+      ],
+      "revision": "170",
+      "inventory": "10/5/0",
+      "load": "6/15",
+      "at": 4574.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1716,
+        1.2258,
+        -0.0624
+      ],
+      "revision": "171",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4575.5999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1675,
+        1.2473,
+        -0.0629
+      ],
+      "revision": "172",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4590
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1645,
+        1.2642,
+        -0.0632
+      ],
+      "revision": "173",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4608.29999999702
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1683,
+        1.2369,
+        -0.0631
+      ],
+      "revision": "174",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4624.79999999702
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1693,
+        1.2381,
+        -0.0629
+      ],
+      "revision": "175",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4641.70000000298
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1652,
+        1.2581,
+        -0.0628
+      ],
+      "revision": "176",
+      "inventory": "9/6/0",
+      "load": "6/15",
+      "at": 4658.399999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1652,
+        1.2581,
+        -0.0628
+      ],
+      "revision": "176",
+      "inventory": "9/6/0",
+      "load": "7/15",
+      "at": 4674.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1641,
+        1.2655,
+        -0.0629
+      ],
+      "revision": "177",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4675.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1618,
+        1.2824,
+        -0.0633
+      ],
+      "revision": "178",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4691.70000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1594,
+        1.3015,
+        -0.0638
+      ],
+      "revision": "179",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4708.5
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1624,
+        1.2736,
+        -0.0636
+      ],
+      "revision": "180",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4724.899999991059
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1635,
+        1.2742,
+        -0.0635
+      ],
+      "revision": "181",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4741.79999999702
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1606,
+        1.2929,
+        -0.0633
+      ],
+      "revision": "182",
+      "inventory": "8/7/0",
+      "load": "7/15",
+      "at": 4758.399999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1606,
+        1.2929,
+        -0.0633
+      ],
+      "revision": "182",
+      "inventory": "8/7/0",
+      "load": "8/15",
+      "at": 4774.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1598,
+        1.2998,
+        -0.0635
+      ],
+      "revision": "183",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4775.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1581,
+        1.3155,
+        -0.0639
+      ],
+      "revision": "184",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4792
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1564,
+        1.3332,
+        -0.0643
+      ],
+      "revision": "185",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4808.29999999702
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1587,
+        1.305,
+        -0.0641
+      ],
+      "revision": "186",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4824.70000000298
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1598,
+        1.305,
+        -0.064
+      ],
+      "revision": "187",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4842.0999999940395
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1578,
+        1.3224,
+        -0.0638
+      ],
+      "revision": "188",
+      "inventory": "7/8/0",
+      "load": "8/15",
+      "at": 4858.899999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1578,
+        1.3224,
+        -0.0638
+      ],
+      "revision": "188",
+      "inventory": "7/8/0",
+      "load": "9/15",
+      "at": 4873.0999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1572,
+        1.3288,
+        -0.064
+      ],
+      "revision": "189",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4874.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1561,
+        1.3434,
+        -0.0644
+      ],
+      "revision": "190",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4891.899999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1548,
+        1.3599,
+        -0.0648
+      ],
+      "revision": "191",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4908.29999999702
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1561,
+        1.3482,
+        -0.0645
+      ],
+      "revision": "192",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4923.70000000298
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1573,
+        1.3474,
+        -0.0644
+      ],
+      "revision": "193",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4941.899999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.156,
+        1.3631,
+        -0.0642
+      ],
+      "revision": "194",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4958.29999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1557,
+        1.3688,
+        -0.0644
+      ],
+      "revision": "195",
+      "inventory": "6/9/0",
+      "load": "9/15",
+      "at": 4975.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1557,
+        1.3688,
+        -0.0644
+      ],
+      "revision": "195",
+      "inventory": "6/9/0",
+      "load": "10/15",
+      "at": 4991.0999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.155,
+        1.3819,
+        -0.0648
+      ],
+      "revision": "196",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 4992
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1543,
+        1.3967,
+        -0.0652
+      ],
+      "revision": "197",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 5007.899999991059
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1552,
+        1.3844,
+        -0.0649
+      ],
+      "revision": "198",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 5025.0999999940395
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1564,
+        1.3558,
+        -0.0647
+      ],
+      "revision": "199",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 5042.5
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1555,
+        1.371,
+        -0.0645
+      ],
+      "revision": "200",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 5059.29999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1552,
+        1.3766,
+        -0.0647
+      ],
+      "revision": "201",
+      "inventory": "5/10/0",
+      "load": "10/15",
+      "at": 5074.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1552,
+        1.3766,
+        -0.0647
+      ],
+      "revision": "201",
+      "inventory": "5/10/0",
+      "load": "11/15",
+      "at": 5090.5999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1546,
+        1.3895,
+        -0.0651
+      ],
+      "revision": "202",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5091.79999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1539,
+        1.4039,
+        -0.0655
+      ],
+      "revision": "203",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5108.5
+    },
+    {
+      "action": "ready",
+      "hand": [
+        -1.1546,
+        1.3919,
+        -0.0652
+      ],
+      "revision": "204",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5125.0999999940395
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1557,
+        1.3629,
+        -0.0649
+      ],
+      "revision": "205",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5141.899999991059
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.155,
+        1.3775,
+        -0.0648
+      ],
+      "revision": "206",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5158.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1548,
+        1.3829,
+        -0.0649
+      ],
+      "revision": "207",
+      "inventory": "4/11/0",
+      "load": "11/15",
+      "at": 5175.70000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1548,
+        1.3829,
+        -0.0649
+      ],
+      "revision": "207",
+      "inventory": "4/11/0",
+      "load": "12/15",
+      "at": 5191.0999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1542,
+        1.3954,
+        -0.0653
+      ],
+      "revision": "208",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5192.399999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1536,
+        1.4097,
+        -0.0657
+      ],
+      "revision": "209",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5206.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1528,
+        1.4211,
+        -0.066
+      ],
+      "revision": "210",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5223.79999999702
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1534,
+        1.3928,
+        -0.0657
+      ],
+      "revision": "211",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5241.29999999702
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1545,
+        1.3916,
+        -0.0656
+      ],
+      "revision": "212",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5257.29999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1546,
+        1.3966,
+        -0.0657
+      ],
+      "revision": "213",
+      "inventory": "3/12/0",
+      "load": "12/15",
+      "at": 5275.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1546,
+        1.3966,
+        -0.0657
+      ],
+      "revision": "213",
+      "inventory": "3/12/0",
+      "load": "13/15",
+      "at": 5289.79999999702
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1547,
+        1.4082,
+        -0.066
+      ],
+      "revision": "214",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5290.899999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1547,
+        1.4215,
+        -0.0664
+      ],
+      "revision": "215",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5308.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1546,
+        1.4321,
+        -0.0667
+      ],
+      "revision": "216",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5324.899999991059
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1549,
+        1.4044,
+        -0.0664
+      ],
+      "revision": "217",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5341.5999999940395
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.156,
+        1.4031,
+        -0.0662
+      ],
+      "revision": "218",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5358.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1561,
+        1.4078,
+        -0.0664
+      ],
+      "revision": "219",
+      "inventory": "2/13/0",
+      "load": "13/15",
+      "at": 5375.20000000298
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1561,
+        1.4078,
+        -0.0664
+      ],
+      "revision": "219",
+      "inventory": "2/13/0",
+      "load": "14/15",
+      "at": 5391.0999999940395
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1563,
+        1.4187,
+        -0.0667
+      ],
+      "revision": "220",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5391.899999991059
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1566,
+        1.4311,
+        -0.067
+      ],
+      "revision": "221",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5408.5
+    },
+    {
+      "action": "load-return",
+      "hand": [
+        -1.1566,
+        1.4413,
+        -0.0673
+      ],
+      "revision": "222",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5425.0999999940395
+    },
+    {
+      "action": "squat-down",
+      "hand": [
+        -1.1567,
+        1.4145,
+        -0.067
+      ],
+      "revision": "223",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5439.899999991059
+    },
+    {
+      "action": "stand-up",
+      "hand": [
+        -1.1578,
+        1.4131,
+        -0.0668
+      ],
+      "revision": "224",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5458.70000000298
+    },
+    {
+      "action": "press-up",
+      "hand": [
+        -1.1576,
+        1.4248,
+        -0.0666
+      ],
+      "revision": "225",
+      "inventory": "1/14/0",
+      "load": "14/15",
+      "at": 5475.20000000298
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "poseRequests": []
+}

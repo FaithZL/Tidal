@@ -1,5 +1,52 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：挥砍与行走动作限定范围提交、推送main授权（2026-10-26）
+
+用户明确要求“提交并push”。本轮只纳入现有挥砍与walk/push/pull动作、装车兼容/阶段接续负例、FarmWorld接入与准确标签、来源/设计/计划及`user-farm-motion-20261026/`和本轮交付QA，普通提交和推送main，不部署。实查本地与实时远端main均为`043a2ec525b5d0729cb456bdd079b30adc5f65d6`；没有待同步的远端后续提交，也没有重装依赖、改变原素材字节/许可或领域规则。
+
+提交前对同一源码再次执行typecheck、lint、**420/420单测、19/19动作/模型/城堡相关E2E、build、assets:verify，均exit0**；入口仍为index-DMp403iC.js，既有500KB提示保留。命令/退出码见`artifacts/qa/user-farm-publish-20261026/commands.json`。未无故重录前轮已完成的正常速度生产QA，源码SHA与本轮开始一致；未重跑全量verify，旧prototype暂停PNG失败及真人/手机/最终美术/性能待验状态保留，不用范围通过代替全量通过。
+
+独立只读范围审查通过：任务QA82文件、82,370,236字节，最大43,720,719字节，无超过50MiB文件；9份WebM均合成画布、非真人录像，未发现外部可复用账户凭据或原PROGRESS全文副本。原始失败trace保留测试服务的localhost Vite临时WebSocket nonce，未改写原始证据；4173/4174测试服务结束后已核查关闭。原有53行无关PROGRESS（43行旧安装/接续、4行城堡预览、6行本次开发前启动预览）用单独暂存版本排除，继续保留本地；旧74份handoff/trace文件均不纳入，SHA逐一核对。复核前备份1,799份历史QA，重生成文件另存本轮regression后按备份恢复，全部SHA一致，见qa-restoration.json；明确文件清单与保留核对见scope/preservation记录。未reset/clean/强推，实际提交SHA、推送及远端一致性由聊天交付回执确认。
+
+## 最新追加：用户人物现有挥砍与行走动作接入（2026-10-26）
+
+用户澄清“锄地”指现有挥砍，并选择补挥砍和行走。本轮在main、HEAD `043a2ec`上增量实现，不新增训练任务或识别动作。设计/计划见`docs/superpowers/specs/2026-10-26-user-farm-motion-design.md`与对应plans文件；保留原有未提交PROGRESS和旧handoff/trace，未安装、提交、推送或部署。
+
+### 实现
+
+`UserLoadCharacter`新增显式farm范围，旧默认load适配与原断言保留；NPR农场启用farm，同一原FBX/17派生骨架显示挥砍、装车与行走。新增`UserFarmChopMotion`按现有ready/chop-down/chop-return驱动有限准备/下挥/回收区间，阶段停留不会自动循环；由实际刀尖测量修正树干近侧落点，退出挥砍恢复局部握指几何。`UserWalkMotion`消费既有stride，交替抬脚/摆臂，测量原鞋底并以保长IK维持足底高度；push/pull双掌接既有车把。FarmWorld只更新表现接入、准确标签与真实手/脚/刀尖诊断，路径、控制器、识别门限、计次、库存及有效持姿时长不变。
+
+独立审查发现提前回收会跨过样片未显示的下挥；真实FBX在16/50/67ms下挥后回收均复现触木。新增负例保留，改为从当前显示骨骼/工具姿态直接回收，并重新约束手脚IK。首次以刀尖插值产生左握点约5.98cm偏差，严格握持断言失败后改用实际上握点为插值支点；早回收中再次准备/下挥仍从显示姿势接续。旧第7版正常采样路径和装车动作不重做，原挥砍/装车/负例全部保留。
+
+### 本轮验证与证据
+
+证据根目录`artifacts/qa/user-farm-motion-20261026/`；完整实际命令/退出码见`commands.json`。
+
+| 命令/检查 | 退出码与结果 | 记录 |
+|---|---|---|
+| farm真实FBX缺失动作复现 | exit1，3失败/1通过，命中挥砍/步行仍为静态；浏览器红测手高范围0（期望>.04m） | farm-red.log、farm-e2e-red.log及e2e-red-results/ |
+| locomotion几何与接续红绿 | 首轮8/10失败，最终exit0、12/12；推车切入握点偏离11.1cm负例保留 | walk-*.log |
+| 提前回收与握持红绿 | 提前回收3失败；首次插值握持1失败；最终34/34范围通过 | early-return-*.log、grip-transition*.log |
+| `npm run typecheck`、`npm run lint` | exit0；最终build内再次strict类型检查，最终lint通过 | typecheck-first.log、lint-final.log、build-final.log |
+| `npm run test:unit` | 最终exit0，53文件**420/420** | unit-final.log |
+| `npm run test:e2e -- tests/e2e/user-farm-motion.spec.ts tests/e2e/user-load-motion.spec.ts tests/e2e/user-models.spec.ts tests/e2e/castle-model.spec.ts --output artifacts/qa/user-farm-motion-20261026/e2e-final-results` | 最终exit0，**19/19**，含真实刀尖/局部脚步变化、暂停/恢复/重置、15份木材守恒及模型/资源负例 | e2e-final.log、farm-motion.json、farm-pause-reset.json |
+| `npm run assets:verify`、`npm run build` | exit0；入口index-DMp403iC.js，原500KB提示保留 | assets.log、build-final.log |
+| 4176生产构建正常速度画布捕获 | 最终exit0；挥砍3.6秒、walk/push14秒、装车3.6秒、pull3.6秒，共4份合成WebM、8张解码帧及暂停截图；0页面错误/外源/摄像头申请，pull暂停350ms身体/进度冻结 | production-final.log、production/production.json、WebM/PNG |
+
+正常速度实际查看了举斧、触木、回收、步行、推车、拉车与装车画面。捕获脚本前两次exit1：首次静止阶段rAF时间没有对应的新视频帧，严格解码拒绝；改为只选实际绘制revision。第二次用“推车”标题子串等待carry却匹配到装车标题，正确因缺少pull样本失败；改为等待实际pull模式后完整成功。原录像、成功局部导出和失败日志保留在production/iterations与相应log，未改业务时钟/速度、放宽断言或伪造截图。
+
+测试前备份**1,717**份历史QA；4份旧装车输出重生成后另存本轮regression，再恢复原SHA，全部一致，见qa-restoration.json。原源码素材/许可不改，SOURCES及用户模型README只追加来源/派生说明。独立只读审查及执行记录见review.json、execution-ledger.md。
+
+已在Codex可见浏览器重新打开`http://127.0.0.1:5173/?art=npr-sample`并确认自动模拟推进至15/15挥砍及休息推车，实际DOM为user-fbx-farm-motion、assets=ready；保留标签页和既有5173服务。初始异步资源未完成时界面短暂显示不可用文案，资源就绪后自动进入流程，无持续错误；未扩展处理这个既有加载文案。临时4176生产预览已停止。
+
+限制：本轮仅范围验证，未重跑全量verify，旧prototype暂停PNG断言失败仍待处理；真实摄像头/手机、最终美术及约60fps仍未作本轮验收。步态是既有stride驱动的程序IK，不是动捕、完整世界接触锁定或全身碰撞；已有路径的瞬移/转向安排不被本轮重写。下一步由用户查看动作效果决定精修，未commit/push/部署。
+
+## 最新追加：挥工具与行走动作需求核对（2026-10-26，待范围确认）
+
+用户查看预览后提出“锄地的动作没有，步行的动作也没有，请加上”。只读核对确认`UserLoadCharacter`仅在`mode=work && !chopping`显示派生骨架，其余使用原静态人物；现有流程为砍树/装车/拉车，没有独立锄地任务。已询问“锄地”指现有挥砍还是新增任务，建议先补现有挥砍与各段行走，等待用户澄清；尚未修改生产源码、测试、素材或领域流程。
+
+本轮已读相关指南/契约并委派只读接入调查：可利用现有17骨架、局部rev7挥砍与`WorldActor.mode/pose/stride`；rev7固定7.1秒样片不能自动循环代替输入阶段。其握指适配会修改派生几何，跨回装车/步行须恢复；局部木桩刀尖与现有树干摆位不同，需实际接触适配后再验证，不能原样挂上宣称对准。未运行测试、未新增依赖或外部素材，未commit/push/部署；原有未提交记录和QA保留。下一步范围确认后形成小设计、失败断言和最小实现，继续验证暂停/复位、手脚接触、阶段切换与装车回归。
+
 ## 最新追加：装车抛木动作及精修提交、推送main授权（2026-10-25）
 
 用户明确要求“提交push”，本次纳入前两轮尚未提交的装车专用人物适配器、抛木/托举/腕部与胸肩精修、FarmWorld接入与真实手锚、对应测试/来源说明/两份计划，以及`user-load-motion-20261025/`、`user-load-polish-20261025/`和本轮交付验证记录。只操作main普通提交和推送，不部署。原素材/许可、领域/识别/输入参数不变。

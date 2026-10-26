@@ -1,0 +1,334 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userFarmCharacter.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "farm-red.log",
+    "seconds": 0.667
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "walk-red.log",
+    "seconds": 0.339
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "walk-behavior-red.log",
+    "seconds": 0.774
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "walk-sole-red.log",
+    "seconds": 0.803
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "walk-first.log",
+    "seconds": 0.898
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "walk-transition-red.log",
+    "seconds": 0.944
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "walk-transition-green.log",
+    "seconds": 0.966
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "walk-transition-green2.log",
+    "seconds": 0.947
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userWalkMotion.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "walk-green.log",
+    "seconds": 1.036
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userFarmCharacter.test.ts",
+      "tests/unit/userLoadCharacter.test.ts",
+      "tests/unit/userLoadMotion.test.ts",
+      "tests/unit/userCharacterMotion.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "farm-green-first.log",
+    "seconds": 2.619
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/user-farm-motion.spec.ts",
+      "-g",
+      "chops and takes",
+      "--output",
+      "artifacts/qa/user-farm-motion-20261026/e2e-red-results"
+    ],
+    "exitCode": 1,
+    "log": "farm-e2e-red.log",
+    "seconds": 24.184
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "log": "typecheck-first.log",
+    "seconds": 1.029
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "lint-first.log",
+    "seconds": 2.077
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "unit-all-first.log",
+    "seconds": 4.553
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/user-farm-motion.spec.ts",
+      "tests/e2e/user-load-motion.spec.ts",
+      "tests/e2e/user-models.spec.ts",
+      "tests/e2e/castle-model.spec.ts",
+      "--output",
+      "artifacts/qa/user-farm-motion-20261026/e2e-results"
+    ],
+    "exitCode": 0,
+    "log": "e2e-first.log",
+    "seconds": 60.711
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "assets:verify"
+    ],
+    "exitCode": 0,
+    "log": "assets.log",
+    "seconds": 0.206
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "build-first.log",
+    "seconds": 1.533
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userFarmCharacter.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "early-return-red.log",
+    "seconds": 1.016
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userFarmCharacter.test.ts",
+      "tests/unit/userCharacterMotion.test.ts",
+      "tests/unit/userLoadMotion.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "early-return-green.log",
+    "seconds": 2.167
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userCharacterMotion.test.ts",
+      "tests/unit/userFarmCharacter.test.ts"
+    ],
+    "exitCode": 1,
+    "log": "grip-transition.log",
+    "seconds": 2.214
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/userCharacterMotion.test.ts",
+      "tests/unit/userFarmCharacter.test.ts"
+    ],
+    "exitCode": 0,
+    "log": "grip-transition-green.log",
+    "seconds": 2.278
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "exitCode": 0,
+    "log": "lint-final.log",
+    "seconds": 2.138
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "build-final.log",
+    "seconds": 3.583
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "exitCode": 0,
+    "log": "unit-final.log",
+    "seconds": 5.003
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/user-farm-motion.spec.ts",
+      "tests/e2e/user-load-motion.spec.ts",
+      "tests/e2e/user-models.spec.ts",
+      "tests/e2e/castle-model.spec.ts",
+      "--output",
+      "artifacts/qa/user-farm-motion-20261026/e2e-final-results"
+    ],
+    "exitCode": 0,
+    "log": "e2e-final.log",
+    "seconds": 60.041
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/user-farm-motion-20261026/capture-production.mjs"
+    ],
+    "exitCode": 1,
+    "log": "production.log",
+    "seconds": 19.96
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/user-farm-motion-20261026/capture-production.mjs"
+    ],
+    "exitCode": 1,
+    "log": "production-recheck.log",
+    "seconds": 50.923
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/user-farm-motion-20261026/capture-production.mjs"
+    ],
+    "exitCode": 0,
+    "log": "production-final.log",
+    "seconds": 85.307
+  }
+]

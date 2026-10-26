@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userWalkMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  12:18:59
+   Duration  738ms (tests 95%, import 3%, transform 2%)
+

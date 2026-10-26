@@ -1,0 +1,11 @@
+{
+  "historicalFiles": 1799,
+  "regeneratedThenArchived": [
+    "artifacts/qa/user-load-motion-20261025/load-motion.json",
+    "artifacts/qa/user-load-motion-20261025/load-results.png",
+    "artifacts/qa/user-load-motion-20261025/load-paused.png",
+    "artifacts/qa/user-load-motion-20261025/pause-resume-reset.json",
+    "artifacts/qa/user-farm-motion-20261026/farm-motion.json"
+  ],
+  "allHistoricalSHA256Restored": true
+}

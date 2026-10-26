@@ -1,0 +1,97 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userWalkMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userWalkMotion.test.ts (10 tests | 8 failed) 502ms
+   × walking deforms the supplied skin with opposite forward and backward steps without editing its geometry 85ms
+   × walk alternates the actual grounded and raised sole skin 57ms
+   × push alternates the actual grounded and raised sole skin 50ms
+   × pull alternates the actual grounded and raised sole skin 56ms
+   × push fixes both actual palms to the existing handles under transformed and scaled parents 41ms
+   × pull fixes both actual palms to the existing handles under transformed and scaled parents 39ms
+   × walking swings real arms and has bounded pelvis and head follow 38ms
+   × invalid intervals freeze exact bones and revision even when mode changes; reset permits a new snapshot 40ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > walking deforms the supplied skin with opposite forward and backward steps without editing its geometry
+AssertionError: expected 0 to be greater than 0.35
+ ❯ tests/unit/userWalkMotion.test.ts:39:72
+     37|  const left=rig.bones.leftFoot.getWorldPosition(new T.Vector3()),right…
+     38|  motion.update({...actor,stride:Math.PI},16);
+     39|  expect(left.z-rig.bones.leftFoot.getWorldPosition(new T.Vector3()).z)…
+       |                                                                        ^
+     40|  expect(rig.bones.rightFoot.getWorldPosition(new T.Vector3()).z-right.…
+     41|  expect(Math.max(...before.map((point,i)=>localVertex(rig,i).distanceT…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > walk alternates the actual grounded and raised sole skin
+ FAIL  tests/unit/userWalkMotion.test.ts > push alternates the actual grounded and raised sole skin
+ FAIL  tests/unit/userWalkMotion.test.ts > pull alternates the actual grounded and raised sole skin
+AssertionError: expected 0.05553048104047781 to be less than 0.02
+ ❯ tests/unit/userWalkMotion.test.ts:48:67
+     46|  motion.update({...actor,mode,stride:Math.PI/2},16);
+     47|  const low=(indices:number[])=>Math.min(...indices.map(i=>localVertex(…
+     48|  expect(low(left)).toBeGreaterThanOrEqual(-.02);expect(low(left)).toBe…
+       |                                                                   ^
+     49|  motion.update({...actor,mode,stride:3*Math.PI/2},16);
+     50|  expect(low(right)).toBeGreaterThanOrEqual(-.02);expect(low(right)).to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > push fixes both actual palms to the existing handles under transformed and scaled parents
+AssertionError: expected 0.6267064703671092 to be less than 0.00001
+ ❯ tests/unit/userWalkMotion.test.ts:68:48
+     66|   for(const side of ['left','right'] as const){
+     67|    const expected=rig.root.localToWorld(new T.Vector3(side==='left'?.3…
+     68|    expect(palm(rig,side).distanceTo(expected)).toBeLessThan(.00001);
+       |                                                ^
+     69|   }
+     70|   expect(motion.handPosition().distanceTo(palm(rig,'left').add(palm(ri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > pull fixes both actual palms to the existing handles under transformed and scaled parents
+AssertionError: expected 0.5955216200945186 to be less than 0.00001
+ ❯ tests/unit/userWalkMotion.test.ts:68:48
+     66|   for(const side of ['left','right'] as const){
+     67|    const expected=rig.root.localToWorld(new T.Vector3(side==='left'?.3…
+     68|    expect(palm(rig,side).distanceTo(expected)).toBeLessThan(.00001);
+       |                                                ^
+     69|   }
+     70|   expect(motion.handPosition().distanceTo(palm(rig,'left').add(palm(ri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > walking swings real arms and has bounded pelvis and head follow
+AssertionError: expected 0 to be greater than 0.1
+ ❯ tests/unit/userWalkMotion.test.ts:76:36
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > invalid intervals freeze exact bones and revision even when mode changes; reset permits a new snapshot
+AssertionError: expected [ [ 0.16, 0.93, -0.27, …(4) ], …(16) ] to not deeply equal [ [ 0.16, 0.93, -0.27, …(4) ], …(16) ]
+
+Compared values have no visual difference.
+
+ ❯ tests/unit/userWalkMotion.test.ts:84:79
+     82|  for(const delta of [0,-1,101,1000,Number.NaN,Number.POSITIVE_INFINITY…
+     83|  expect(pose(rig)).toEqual(before);expect(motion.visualRevision).toBe(…
+     84|  motion.reset();motion.update({...actor,mode:'push'},0);expect(pose(ri…
+       |                                                                               ^
+     85|  expect(palm(rig,'left').distanceTo(new T.Vector3(.35,1.04,.5))).toBeL…
+     86| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 2 passed (10)
+   Start at  12:16:06
+   Duration  587ms (tests 93%, import 4%, transform 3%)
+

@@ -1,0 +1,7 @@
+{
+  "initialReview": "P2 early return crossed the unplayed strike; reproduced on actual FBX at16/50/67ms, fixed with captured-pose recovery",
+  "followupReview": "Independent actual-FBX diagnostics found early return and interruption continuous; no further blocker found",
+  "additionalBoundaryTest": "First blade-anchored blend lost left grasp by5.98cm; retained failed grip-transition.log, switched to actual upper-grip anchored interpolation,34 scoped tests passed",
+  "preservedNegatives": "All original load and standalone sample assertions retained; old E2E character/label assertions updated only for authorized farm animation scope",
+  "reviewMode": "Read-only independent review; no camera/real-person capture"
+}

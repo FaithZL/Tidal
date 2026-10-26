@@ -1,0 +1,13 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: Error: Presented frame timeout: return at 2.1381s
+    at eval (eval at evaluate (:370:30), <anonymous>:40:70)
+    at decodeRecordedFrames (/Users/zero/work/ai_ws/Tidal/artifacts/qa/user-load-polish-20261025/decode-recorded-frames.mjs:3:14)
+    at record (/Users/zero/work/ai_ws/Tidal/artifacts/qa/user-farm-motion-20261026/capture-production.mjs:43:22)
+    at async file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/user-farm-motion-20261026/capture-production.mjs:48:2 {
+  log: []
+}
+
+Node.js v24.14.0

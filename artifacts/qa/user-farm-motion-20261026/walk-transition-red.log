@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userWalkMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userWalkMotion.test.ts (11 tests | 1 failed) 643ms
+   × entering a push or pull while the torso is transitioning still reaches both handles 41ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts > entering a push or pull while the torso is transitioning still reaches both handles
+AssertionError: expected 0.11117730871786832 to be less than 0.00001
+ ❯ tests/unit/userWalkMotion.test.ts:78:147
+     76|   motion.update({...actor,mode,stride:i*.3},16);
+     77|   if(mode==='walk')continue;
+     78|   for(const side of ['left','right'] as const)expect(palm(rig,side).di…
+       |                                                                                                                                                   ^
+     79|  }
+     80| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  12:18:08
+   Duration  730ms (tests 94%, import 3%, transform 2%)
+

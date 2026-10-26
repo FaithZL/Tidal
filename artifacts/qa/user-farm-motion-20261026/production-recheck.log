@@ -1,0 +1,21 @@
+{"name":"chop","bytes":576383,"frames":["chop-ready.png","chop-impact.png","chop-return.png"]}
+{"name":"walk-push","bytes":5238307,"frames":["walk-push-walk.png","walk-push-push.png"]}
+{"name":"load","bytes":1188549,"frames":["load-squat.png","load-raise.png"]}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missed step; do not fabricate a pose
+    at file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/user-farm-motion-20261026/capture-production.mjs:43:11
+    at Array.map (<anonymous>)
+    at record (file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/user-farm-motion-20261026/capture-production.mjs:41:28)
+    at async file:///Users/zero/work/ai_ws/Tidal/artifacts/qa/user-farm-motion-20261026/capture-production.mjs:55:36 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.14.0

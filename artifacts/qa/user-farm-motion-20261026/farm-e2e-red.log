@@ -1,0 +1,55 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/user-farm-motion.spec.ts -g chops and takes --output artifacts/qa/user-farm-motion-20261026/e2e-red-results
+
+[WebServer] (node:68702) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:68722) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:68778) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:68798) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:68799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:19:52 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:19:52 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:19:52 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:19:52 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/user-farm-motion.spec.ts:31:1 › the supplied farm character chops and takes real steps through walk push pull while preserving fifteen logs (20.3s)
+
+
+  1) tests/e2e/user-farm-motion.spec.ts:31:1 › the supplied farm character chops and takes real steps through walk push pull while preserving fifteen logs 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0.04
+    Received:   0
+
+    Call Log:
+    - Timeout 20000ms exceeded while waiting on the predicate
+
+      31 | test('the supplied farm character chops and takes real steps through walk push pull while preserving fifteen logs',async({page})=>{
+      32 |  const evidence=await observe(page);await page.goto('/?e2e=1&art=npr-sample');
+    > 33 |  await expect.poll(()=>page.evaluate(()=>{const heights=window.farmMotionQA.samples.filter(s=>s.task.includes('砍')).map(s=>s.hand[1]).filter(Number.isFinite);return heights.length?Math.max(...heights)-Math.min(...heights):0;}),{timeout:20000}).toBeGreaterThan(.04);
+         |                                                                                                                                                                                                                                                     ^
+      34 |  await expect(page.locator('#resultsModal')).toBeVisible({timeout:25000});
+      35 |  const qa=await page.evaluate(()=>window.farmMotionQA),chop=qa.samples.filter(s=>s.task.includes('砍'));
+      36 |  expect(range(chop,'blade',1)).toBeGreaterThan(.1);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/user-farm-motion.spec.ts:33:245
+
+    Error Context: artifacts/qa/user-farm-motion-20261026/e2e-red-results/user-farm-motion-the-suppl-48214-ile-preserving-fifteen-logs/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/user-farm-motion-20261026/e2e-red-results/user-farm-motion-the-suppl-48214-ile-preserving-fifteen-logs/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/user-farm-motion-20261026/e2e-red-results/user-farm-motion-the-suppl-48214-ile-preserving-fifteen-logs/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/user-farm-motion.spec.ts:31:1 › the supplied farm character chops and takes real steps through walk push pull while preserving fifteen logs 

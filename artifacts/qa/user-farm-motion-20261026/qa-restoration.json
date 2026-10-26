@@ -1,0 +1,23 @@
+{
+  "historicalFiles": 1717,
+  "regeneratedThenArchived": [
+    {
+      "path": "artifacts/qa/user-load-motion-20261025/load-motion.json",
+      "regeneratedSHA256": "0d8da0621ca121f8f0068c80c173016f6575aefc8f34aace22de8ff8cf02b975"
+    },
+    {
+      "path": "artifacts/qa/user-load-motion-20261025/load-results.png",
+      "regeneratedSHA256": "16ba3e24274b8e6c8abcbf9833256e7be6c4b1698ff216c0891d5589cdff8cb1"
+    },
+    {
+      "path": "artifacts/qa/user-load-motion-20261025/load-paused.png",
+      "regeneratedSHA256": "5985a79c495acf013fbd59cdb9bba8866cd996b5524488656840578276d6e645"
+    },
+    {
+      "path": "artifacts/qa/user-load-motion-20261025/pause-resume-reset.json",
+      "regeneratedSHA256": "7c6eb1c138f01eedbe16df28bf8fcbdccba36fcf5d7ae4d66e91c7c72f404d44"
+    }
+  ],
+  "allHistoricalHashesRestored": true,
+  "failed": []
+}

@@ -78,9 +78,9 @@ test('the supplied NPR character moves its real hand through load phases and del
   return heights.length?Math.max(...heights)-Math.min(...heights):0;
  }),{timeout:25000}).toBeGreaterThan(.04);
  const world=page.locator('#worldCanvas');
- await expect(world).toHaveAttribute('data-character','user-fbx-load-motion');
- await expect(page.locator('.npr-sample-label')).toContainText('装车局部动作');
- await expect(page.locator('.npr-sample-label')).toContainText('其余静态');
+ await expect(world).toHaveAttribute('data-character','user-fbx-farm-motion');
+ await expect(page.locator('.npr-sample-label')).toContainText('装车');
+ await expect(page.locator('.npr-sample-label')).toContainText('行走动作');
  await expect(page.locator('#resultsModal')).toBeVisible({timeout:25000});
  const samples=await page.evaluate(()=>window.userLoadMotionQA.samples);
  expect(handHeightRange(samples)).toBeGreaterThan(.04);

@@ -1,0 +1,5 @@
+{"name":"chop","bytes":573073,"frames":["chop-ready.png","chop-impact.png","chop-return.png"]}
+{"name":"walk-push","bytes":5202710,"frames":["walk-push-walk.png","walk-push-push.png"]}
+{"name":"load","bytes":1177879,"frames":["load-squat.png","load-raise.png"]}
+{"name":"pull","bytes":1301251,"frames":["pull-step.png"]}
+{"result":"pass","cameraCalls":0,"errors":[],"external":[]}

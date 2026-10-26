@@ -21,7 +21,7 @@ test('the supplied character exposes local derived-bone motion and keeps the hou
  await expect(page.locator('#worldCanvas')).toHaveCount(0);
  expect(await page.evaluate(()=>localStorage.getItem('tidal.demo.enabled'))).toBeNull();
  await page.getByRole('link',{name:'← 返回农场'}).click();
- await expect(page.locator('#worldCanvas')).toHaveAttribute('data-character','user-fbx-load-motion');
+ await expect(page.locator('#worldCanvas')).toHaveAttribute('data-character','user-fbx-farm-motion');
  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-house','user-fbx');
 });
 
@@ -94,16 +94,16 @@ test('a supplied FBX failure is visible and never silently uses the old model',a
  await expect(page.getByRole('button',{name:'人物近景',exact:true})).toBeDisabled();
 });
 
-test('the farm waits for both supplied models and marks the fixed-pose character without changing inventory',async({page})=>{
+test('the farm waits for both supplied models and marks the derived farm character without changing inventory',async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/assets/user-models/character.fbx',async route=>{await gate;await route.continue();});
  await page.goto('/?art=npr-sample',{waitUntil:'domcontentloaded'});
  try{await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','loading');await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');}finally{release();}
  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-assets','ready');
- await expect(page.locator('#worldCanvas')).toHaveAttribute('data-character','user-fbx-load-motion');
+ await expect(page.locator('#worldCanvas')).toHaveAttribute('data-character','user-fbx-farm-motion');
  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-house','user-fbx');
- await expect(page.locator('.npr-sample-label')).toContainText('静态');
+ await expect(page.locator('.npr-sample-label')).toContainText('挥砍 / 装车 / 行走动作');
  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-inventory','0/0/0');
 });
 

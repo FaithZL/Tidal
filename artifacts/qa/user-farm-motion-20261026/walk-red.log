@@ -1,0 +1,29 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/userWalkMotion.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/userWalkMotion.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/userWalkMotion.test.ts [ tests/unit/userWalkMotion.test.ts ]
+Error: Cannot find module '../../src/game/world/userWalkMotion.js' imported from /Users/zero/work/ai_ws/Tidal/tests/unit/userWalkMotion.test.ts
+ ❯ tests/unit/userWalkMotion.test.ts:7:1
+      5| import {prepareUserModel} from '../../src/game/world/userModel.js';
+      6| import {createUserCharacterRig,type UserCharacterRig} from '../../src/…
+      7| import {UserWalkMotion} from '../../src/game/world/userWalkMotion.js';
+       | ^
+      8| import type {WorldActor} from '../../src/game/world/types.js';
+      9|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  12:15:18
+   Duration  88ms (worker 96%, environment 4%)
+

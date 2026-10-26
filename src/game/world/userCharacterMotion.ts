@@ -21,6 +21,7 @@ export class UserCharacterMotion{
  private readonly impactBlade:T.Vector3;
  private readonly idleBlade:T.Vector3;
  private readonly hands:UserHandGrip;
+ private transitionFrom?:{bones:{name:UserBoneName;position:T.Vector3;quaternion:T.Quaternion}[];rotation:T.Quaternion;grip:T.Vector3};
  constructor(private readonly rig:UserCharacterRig){
   this.hands=createUserHandGrip(rig);
   rig.axe.root.scale.setScalar(.62);
@@ -57,17 +58,40 @@ export class UserCharacterMotion{
   const absorb=!idleOnly&&t>=4.15&&t<4.4?Math.sin((t-4.15)/.25*Math.PI)**2*.035:0;
   this.rotate('neck',-.08+absorb*.35,0);this.rotate('head',-.025+absorb,-twist*.25);
   rig.root.updateMatrixWorld(true);
-  const rootRotation=rig.root.getWorldQuaternion(new T.Quaternion()),rootScale=rig.root.getWorldScale(new T.Vector3());
-  for(const side of ['left','right'] as const){
-   const foot=side==='left'?'leftFoot':'rightFoot';
-   const target=rig.root.localToWorld(rig.rest[foot].worldPosition.clone());
-   this.solve(side==='left'?'leftThigh':'rightThigh',side==='left'?'leftShin':'rightShin',foot,target,rig.root.localToWorld(new T.Vector3(side==='left'?.5:-.15,.5,.65)));
-   this.worldRotation(foot,rootRotation.clone().multiply(rig.rest[foot].worldQuaternion));
-  }
+  this.plantFeet();
   const {rotation:toolRotation,grip}=this.toolPose(t,idleOnly);
   rig.axe.root.quaternion.copy(toolRotation);
   rig.axe.root.position.copy(grip).sub(rig.axe.grips.upper.clone().multiply(rig.axe.root.scale).applyQuaternion(toolRotation));
   rig.root.updateMatrixWorld(true);
+  this.gripTool();
+  rig.root.updateMatrixWorld(true);rig.skeleton.update();return {phase};
+ }
+
+ /** Capture the rendered pose, including a previous interrupted transition. */
+ beginTransition():void{
+  const rig=this.rig;
+  this.transitionFrom={bones:(Object.keys(rig.bones) as UserBoneName[]).map(name=>({name,position:rig.bones[name].position.clone(),quaternion:rig.bones[name].quaternion.clone()})),rotation:rig.axe.root.quaternion.clone(),grip:this.localGrip()};
+ }
+ /** Retract directly from a partial stroke without playing its missing impact. */
+ sampleTransition(timeSec:number,blend:number):void{
+  const from=this.transitionFrom;if(!from){this.sample(timeSec);return;}
+  this.sample(timeSec);const rig=this.rig,u=T.MathUtils.clamp(blend,0,1),rotation=rig.axe.root.quaternion.clone(),grip=this.localGrip();
+  for(const pose of from.bones){const bone=rig.bones[pose.name],target=bone.quaternion.clone();bone.position.lerpVectors(pose.position,bone.position,u);bone.quaternion.copy(pose.quaternion).slerp(target,u);}
+  rig.axe.root.quaternion.copy(from.rotation).slerp(rotation,u);
+  rig.axe.root.position.copy(from.grip).lerp(grip,u).sub(rig.axe.grips.upper.clone().multiply(rig.axe.root.scale).applyQuaternion(rig.axe.root.quaternion));
+  rig.root.updateMatrixWorld(true);this.plantFeet();this.gripTool();rig.root.updateMatrixWorld(true);rig.skeleton.update();
+ }
+ private localGrip():T.Vector3{return this.rig.axe.grips.upper.clone().multiply(this.rig.axe.root.scale).applyQuaternion(this.rig.axe.root.quaternion).add(this.rig.axe.root.position);}
+ private plantFeet():void{
+  const rig=this.rig,rootRotation=rig.root.getWorldQuaternion(new T.Quaternion());
+  for(const side of ['left','right'] as const){
+   const foot=`${side}Foot` as const,target=rig.root.localToWorld(rig.rest[foot].worldPosition.clone());
+   this.solve(`${side}Thigh`,`${side}Shin`,foot,target,rig.root.localToWorld(new T.Vector3(side==='left'?.5:-.15,.5,.65)));
+   this.worldRotation(foot,rootRotation.clone().multiply(rig.rest[foot].worldQuaternion));
+  }
+ }
+ private gripTool():void{
+  const rig=this.rig,toolRotation=rig.axe.root.quaternion,rootRotation=rig.root.getWorldQuaternion(new T.Quaternion()),rootScale=rig.root.getWorldScale(new T.Vector3());
   for(const side of ['left','right'] as const){
    const hand=side==='left'?'leftHand':'rightHand';
    const toolDelta=toolRotation.clone().multiply(this.hands.frames[side].clone().invert());
@@ -78,7 +102,6 @@ export class UserCharacterMotion{
    this.solve(side==='left'?'leftUpperArm':'rightUpperArm',side==='left'?'leftForeArm':'rightForeArm',hand,target,pole);
    this.worldRotation(hand,handRotation);
   }
-  rig.root.updateMatrixWorld(true);rig.skeleton.update();return {phase};
  }
 
  private toolPose(t:number,idleOnly:boolean):{rotation:T.Quaternion;grip:T.Vector3}{
@@ -134,4 +157,6 @@ export class UserCharacterMotion{
  }
  bladePosition():T.Vector3{return this.rig.axe.root.localToWorld(this.rig.axe.blade.clone());}
  handPosition(side:'left'|'right'):T.Vector3{return this.rig.bones[side==='left'?'leftHand':'rightHand'].localToWorld(this.hands.centers[side].clone());}
+ /** Restore the local grasp adaptation before another motion uses this skin. */
+ restoreHandGrip():void{this.hands.restore();}
 }
