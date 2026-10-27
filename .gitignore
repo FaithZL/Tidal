@@ -12,16 +12,5 @@ public/worker/
 .env.*
 !.env.example
 
-# Retained local handoff evidence and redundant raw copies; keep other QA tracked.
-/artifacts/qa/local-handoff-20261025/
-/artifacts/qa/source-lifecycle-20261025/progress-before.md
-/artifacts/qa/source-lifecycle-20261025/density-half-results/source-lifecycle-synthetic-2ab52-zers-and-releases-resources/trace.zip
-
-# Keep large raw traces local; corresponding summaries and SHA manifest remain tracked.
-/artifacts/qa/anchor-recovery-20261027/**/trace.zip
-/artifacts/qa/calibration-recovery-20261027/**/trace.zip
-/artifacts/qa/hold-diagnostics-20261027/**/trace.zip
-/artifacts/qa/preparation-feedback-20261026/**/trace.zip
-/artifacts/qa/preparation-recovery-20261027/**/trace.zip
-/artifacts/qa/recognition-controls-20261026/**/trace.zip
-/artifacts/qa/upper-body-flow-20261026/**/trace.zip
+# Local generated evidence: do not add new artifacts to version control.
+/artifacts/
