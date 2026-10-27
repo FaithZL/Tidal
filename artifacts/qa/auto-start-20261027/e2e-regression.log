@@ -1,0 +1,335 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-finish.spec.ts tests/e2e/completed-recovery.spec.ts tests/e2e/preparation-diagnostics.spec.ts tests/e2e/anchor-recovery.spec.ts tests/e2e/upper-body-flow.spec.ts tests/e2e/recognition-off.spec.ts tests/e2e/preparation-recovery.spec.ts tests/e2e/default-off.spec.ts --grep-invert rest waits for recovered tracking and carry interruption|upper-body full farm flow
+
+[WebServer] (node:59565) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59585) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59647) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59675) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 38 tests using 1 worker
+
+(node:59680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:03:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:03:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   1 tests/e2e/anchor-recovery.spec.ts:12:1 › explicitly paused completed preparation keeps 3/3 and blocks start until returning to the original position (11.9s)
+[WebServer] 1:03:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:03:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   2 tests/e2e/anchor-recovery.spec.ts:21:1 › active position change cannot count or carry a half rep across recovery (13.3s)
+[WebServer] 1:03:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:03:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   3 tests/e2e/anchor-recovery.spec.ts:35:1 › returning to the original position cannot release a manual animation stop (6.9s)
+(node:59776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:03:39 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:39 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:03:39 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:39 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   4 tests/e2e/completed-recovery.spec.ts:14:50 › explicitly stopped completed calibration survives outside before a fresh valid manual start (11.7s)
+[WebServer] 1:03:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:03:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:03:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   5 tests/e2e/completed-recovery.spec.ts:14:50 › explicitly stopped completed calibration survives absent before a fresh valid manual start (11.1s)
+[WebServer] 1:04:01 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:01 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:01 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:01 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   6 tests/e2e/completed-recovery.spec.ts:18:1 › active loss drops the half rep, retains calibration, and resumes through a fresh source epoch (14.1s)
+[WebServer] 1:04:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   7 tests/e2e/completed-recovery.spec.ts:22:1 › visibility keeps explicitly stopped completed calibration and cannot authorize automatic resume (15.5s)
+[WebServer] 1:04:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   8 tests/e2e/completed-recovery.spec.ts:25:1 › a position mismatch blocks readiness while only explicit camera stop clears completed calibration (5.7s)
+[WebServer] 1:04:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   9 tests/e2e/completed-recovery.spec.ts:29:1 › initial countdown is restarted safely after lost tracking without forgetting calibration (6.9s)
+[WebServer] 1:04:43 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:43 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  10 tests/e2e/completed-recovery.spec.ts:32:1 › a paused video feed recovers from fresh observations and never triggers recalibration (7.6s)
+[WebServer] 1:04:51 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:51 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:51 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:51 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  11 tests/e2e/completed-recovery.spec.ts:35:1 › tracking recovery cannot release a manual animation stop (6.8s)
+[WebServer] 1:04:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:04:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:04:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  12 tests/e2e/completed-recovery.spec.ts:42:1 › active visibility recovery keeps the manual pause, then Continue binds a working fresh source (8.4s)
+[WebServer] 1:05:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:06 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  13 tests/e2e/completed-recovery.spec.ts:46:1 › manual setup Start after visibility recovery still respects an explicit animation stop (8.5s)
+[WebServer] 1:05:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:15 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  14 tests/e2e/completed-recovery.spec.ts:49:1 › explicit camera Stop discards saved calibration and cannot revive an explicitly stopped preparation (10.0s)
+(node:59929) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:05:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  15 tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off (10.9s)
+  ✓  16 tests/e2e/default-off.spec.ts:24:1 › an unrecognized saved preference does not enable automatic play (716ms)
+(node:59963) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:05:38 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:38 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:38 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:38 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  17 tests/e2e/preparation-diagnostics.spec.ts:11:1 › reports the reset source independently of subsequent low confidence and names the current joint (4.9s)
+[WebServer] 1:05:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  18 tests/e2e/preparation-diagnostics.spec.ts:21:1 › explains hold separation and sampling without changing preparation or counting (4.7s)
+[WebServer] 1:05:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:05:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:05:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  19 tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (initial setup) (11.7s)
+(node:59992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:06:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  20 tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (demo entry) (12.8s)
+(node:60012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:06:13 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:13 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:13 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:13 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  21 tests/e2e/preparation-diagnostics.spec.ts:41:1 › completed visibility loss preserves a deliberate animation stop and cannot start or count (9.1s)
+[WebServer] 1:06:22 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:22 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:22 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:22 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  22 tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state (11.7s)
+(node:60036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:06:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  23 tests/e2e/preparation-diagnostics.spec.ts:50:1 › actual active training invalidates live readiness, saves calibration and pauses on visible blur (6.6s)
+[WebServer] 1:06:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:42 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  24 tests/e2e/preparation-diagnostics.spec.ts:53:1 › full-body preparation keeps its original reset policy on visible blur (3.7s)
+(node:60062) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:06:46 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:46 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:46 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:46 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  25 tests/e2e/preparation-finish.spec.ts:13:1 › completion automatically exits preparation after blur and keeps the same live camera for a real recognized rep (8.6s)
+[WebServer] 1:06:54 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:54 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:06:54 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:06:54 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  26 tests/e2e/preparation-finish.spec.ts:22:1 › the finish shortcut cannot bypass lost tracking or an explicit animation stop (9.2s)
+[WebServer] 1:07:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  27 tests/e2e/preparation-finish.spec.ts:29:34 › completion releases only the pause owned by preparation (existing user pause: false) (6.5s)
+[WebServer] 1:07:10 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:10 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:10 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:10 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  28 tests/e2e/preparation-finish.spec.ts:29:34 › completion releases only the pause owned by preparation (existing user pause: true) (6.6s)
+(node:60112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:07:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  29 tests/e2e/preparation-recovery.spec.ts:9:1 › brief loss at step two pauses sampling and resumes the same step without restarting completed evidence (7.6s)
+[WebServer] 1:07:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:25 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  30 tests/e2e/preparation-recovery.spec.ts:15:1 › sustained loss clears the checkpoint and cannot turn partial preparation into readiness (6.2s)
+(node:60145) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:07:32 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:32 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:32 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:32 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  31 tests/e2e/recognition-off.spec.ts:22:1 › third pose keeps recognition live but cannot override animation stop or count invalid motion (15.8s)
+[WebServer] 1:07:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:07:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:07:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  32 tests/e2e/recognition-off.spec.ts:35:1 › completion keeps the camera live but tutorial exit alone cannot authorize training (11.8s)
+(node:60176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:08:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:00 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  33 tests/e2e/upper-body-flow.spec.ts:12:1 › upper body is the default formal camera plan and preparation starts training without capture/start clicks (9.5s)
+[WebServer] 1:08:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  34 tests/e2e/upper-body-flow.spec.ts:18:1 › unchanged posture and missing arm cannot finish automatic preparation (9.1s)
+[WebServer] 1:08:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:18 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  35 tests/e2e/upper-body-flow.spec.ts:23:1 › automatic preparation cannot override manual animation stop (9.1s)
+[WebServer] 1:08:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  36 tests/e2e/upper-body-flow.spec.ts:27:1 › stopping before the third pose prevents any deferred automatic start (9.8s)
+[WebServer] 1:08:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  37 tests/e2e/upper-body-flow.spec.ts:31:1 › an existing user pause is never owned by automatic preparation (10.1s)
+[WebServer] 1:08:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:08:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:08:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  38 tests/e2e/upper-body-flow.spec.ts:35:1 › choosing camera from automatic play resumes only its own preparation pause (6.0s)
+
+
+  1) tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (initial setup) 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#upperBodySuspendNotice')
+    Expected substring: "保留准备进度"
+    Received string:    "继续完成三步，保存后自动进入训练，无需点击开始。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#upperBodySuspendNotice') with timeout 7000ms
+      - waiting for locator('#upperBodySuspendNotice')
+        18 × locator resolved to <p role="status" class="upper-body-suspend" id="upperBodySuspendNotice">继续完成三步，保存后自动进入训练，无需点击开始。</p>
+           - unexpected value "继续完成三步，保存后自动进入训练，无需点击开始。"
+
+
+      34 |  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+      35 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await expect(page.locator('#upperBodyStepCount')).toContainText('2/3');
+    > 36 |  await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');
+         |                                                        ^
+      37 |  await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+      38 |  await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#chopValue')).toHaveText(countsBefore!);
+      39 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:36:56
+
+    Error Context: test-results/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (demo entry) 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#upperBodySuspendNotice')
+    Expected substring: "保留准备进度"
+    Received string:    "继续完成三步，保存后自动进入训练，无需点击开始。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#upperBodySuspendNotice') with timeout 7000ms
+      - waiting for locator('#upperBodySuspendNotice')
+        18 × locator resolved to <p role="status" class="upper-body-suspend" id="upperBodySuspendNotice">继续完成三步，保存后自动进入训练，无需点击开始。</p>
+           - unexpected value "继续完成三步，保存后自动进入训练，无需点击开始。"
+
+
+      34 |  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+      35 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await expect(page.locator('#upperBodyStepCount')).toContainText('2/3');
+    > 36 |  await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');
+         |                                                        ^
+      37 |  await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+      38 |  await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#chopValue')).toHaveText(countsBefore!);
+      39 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:36:56
+
+    Error Context: test-results/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#upperBodySuspendNotice')
+    Expected substring: "保留准备进度"
+    Received string:    "继续完成三步，保存后自动进入训练，无需点击开始。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#upperBodySuspendNotice') with timeout 7000ms
+      - waiting for locator('#upperBodySuspendNotice')
+        18 × locator resolved to <p role="status" class="upper-body-suspend" id="upperBodySuspendNotice">继续完成三步，保存后自动进入训练，无需点击开始。</p>
+           - unexpected value "继续完成三步，保存后自动进入训练，无需点击开始。"
+
+
+      45 |
+      46 | test('a later timeout replaces the visible-blur preservation notice with the real reset state',async({page})=>{
+    > 47 |  await thirdStep(page);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');await page.evaluate(()=>{window.upperFixture.low=true;});await page.waitForTimeout(3300);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodySuspendNotice')).not.toContainText('保留准备进度');await expect(page.locator('#upperBodyLastReset')).toContainText('有效数据中断超过3秒');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                               ^
+      48 |  await page.evaluate(()=>{window.upperFixture.low=false;window.upperFixture.pose='lowered';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#setupModal')).toBeHidden();
+      49 | });
+      50 | test('actual active training invalidates live readiness, saves calibration and pauses on visible blur',async({page})=>{
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:47:143
+
+    Error Context: test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (initial setup) 
+    tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (demo entry) 
+    tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 
+  35 passed (5.8m)

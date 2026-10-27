@@ -1,0 +1,16 @@
+{
+  "request": "Only cancel repeated preparation; retain actual recognized motion counts for the full farm session",
+  "observedUi": "Existing real-camera session had chop15/15, load15/15, carry0/60, saved3/3 with person-moved and visibility pause; setup modal was not open. No real-camera pixels/landmarks stored.",
+  "confirmedCodePaths": [
+    "Normal task transition does not explicitly reset preparation, but completed recovery still requires 1200ms/12 stable samples.",
+    "Training runtime resized frame erased saved3/3 to0/3 in the new browser RED. This injected fault is reproducible; it is not asserted to be the cause of the user’s specific live incident."
+  ],
+  "change": "Explicit startTraining separates prestart acquisition from running-session readiness. Invalid data disables counts, preserving original templates; fresh valid data restores eligibility without reacquisition.",
+  "unchanged": [
+    "Initial three-step sampling and prestart revalidation",
+    "recognizer confirmation, complete reps, valid-adjacent hold timing",
+    "metadata/order/quality/anchor gates",
+    "manual pause ownership and camera lifecycle"
+  ],
+  "automatedInput": "Authored synthetic six-point frames and fake browser video only; no physical accuracy claim"
+}

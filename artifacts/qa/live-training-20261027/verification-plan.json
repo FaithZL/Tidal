@@ -1,0 +1,22 @@
+{
+  "requestedBehavior": "Prepare once at start, then keep camera live and count actual motion for entire farm; no-camera demo default off",
+  "implementation": [
+    "Remove erroneous complete->keyboard/stop shortcut",
+    "Use existing profile/startTraining/auto-start path",
+    "Keep template retention and SetupPanel epoch guards",
+    "Correct misleading UI and current contracts"
+  ],
+  "verification": [
+    "RED worker expected1 received0",
+    "7 core E2E including default-off and live-recognizer rep",
+    "9 related E2E files including both task transitions and carry valid-time",
+    "239 related unit tests",
+    "Typecheck/lint/build and normal production fake-camera preview",
+    "Preserve historical QA SHA and prior unrelated work"
+  ],
+  "notAuthorized": [
+    "commit",
+    "push",
+    "deploy"
+  ]
+}

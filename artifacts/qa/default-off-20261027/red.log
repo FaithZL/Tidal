@@ -1,0 +1,150 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/default-off.spec.ts tests/e2e/default-demo.spec.ts -g fresh visits|all three poses|unrecognized saved
+
+[WebServer] (node:49793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49883) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49905) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:49906) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access (10.0s)
+(node:49941) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:52:39 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 11:52:39 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 11:52:39 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 11:52:39 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input (13.9s)
+(node:49971) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play (8.1s)
+
+
+  1) tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#demoToggle')
+    Expected: "false"
+    Received: "true"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#demoToggle') with timeout 7000ms
+      - waiting for locator('#demoToggle')
+        14 × locator resolved to <button role="switch" id="demoToggle" aria-checked="true" class="secondary demo-toggle">无摄像头测试：开</button>
+           - unexpected value "true"
+
+
+      11 |  await expect(page.locator('#livePreview')).toBeHidden();await expect(page.locator('#planModal')).toBeVisible();
+      12 |  await page.waitForTimeout(700);await expect(page.locator('#app')).toHaveAttribute('data-phase','home');await expect(page.locator('#chopValue')).toHaveText('0/15');
+    > 13 |  await page.reload();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+         |                                                                ^
+      14 |  await page.waitForTimeout(700);await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#resultsModal')).toBeHidden();
+      15 |  await mkdir('artifacts/qa/default-off-20261027',{recursive:true});await page.screenshot({path:'artifacts/qa/default-off-20261027/initial-off.png'});
+      16 |  expect(await page.locator('html').getAttribute('data-camera-requested')).toBeNull();expect(poseRequests).toEqual([]);expect(errors).toEqual([]);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-demo.spec.ts:13:64
+
+    Error Context: test-results/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-demo-fresh-visits--05577-rogression-or-camera-access/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-demo-fresh-visits--05577-rogression-or-camera-access/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#demoToggle')
+    Expected: "false"
+    Received: "true"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#demoToggle') with timeout 7000ms
+      - waiting for locator('#demoToggle')
+        18 × locator resolved to <button role="switch" id="demoToggle" aria-checked="true" class="secondary demo-toggle">无摄像头测试：开</button>
+           - unexpected value "true"
+
+
+       7 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await page.evaluate(()=>{window.upperFixture.pose='raised';});
+       8 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});
+    >  9 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-finished','true');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+         |                                                                                                                                        ^
+      10 |  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(0);await expect(page.locator('#cameraVideo')).toHaveJSProperty('srcObject',null);
+      11 |  await expect(page.locator('#statusTag')).toHaveText('训练中');await page.evaluate(()=>{window.upperFixture.pose='raised';window.upperFixture.low=true;});
+      12 |  await page.waitForTimeout(1500);await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#loadValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-off.spec.ts:9:136
+
+    Error Context: test-results/default-off-completing-all-1c355-s-for-explicit-manual-input/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-off-completing-all-1c355-s-for-explicit-manual-input/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-off-completing-all-1c355-s-for-explicit-manual-input/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#app')
+    Expected: "home"
+    Received: "results"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#app') with timeout 7000ms
+      - waiting for locator('#app')
+        2 × locator resolved to <div id="app" data-phase="countdown" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+          - unexpected value "countdown"
+        5 × locator resolved to <div id="app" data-phase="active" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+          - unexpected value "active"
+        - locator resolved to <div id="app" data-phase="countdown" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+        - unexpected value "countdown"
+        3 × locator resolved to <div id="app" data-phase="active" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+          - unexpected value "active"
+        - locator resolved to <div id="app" data-phase="countdown" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+        - unexpected value "countdown"
+        2 × locator resolved to <div id="app" data-phase="active" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+          - unexpected value "active"
+        4 × locator resolved to <div id="app" data-phase="results" data-animations-stopped="false" data-camera-exercise="upper-body">…</div>
+          - unexpected value "results"
+
+
+      17 | test('an unrecognized saved preference does not enable automatic play',async({page})=>{
+      18 |  await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','invalid'));await page.goto('/?e2e=1');
+    > 19 |  await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');await page.waitForTimeout(500);await expect(page.locator('#app')).toHaveAttribute('data-phase','home');await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                                      ^
+      20 | });
+      21 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-off.spec.ts:19:150
+
+    Error Context: test-results/default-off-an-unrecognize-220ef-s-not-enable-automatic-play/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-off-an-unrecognize-220ef-s-not-enable-automatic-play/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-off-an-unrecognize-220ef-s-not-enable-automatic-play/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access 
+    tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input 
+    tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play 

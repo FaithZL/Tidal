@@ -1,0 +1,13 @@
+{
+  "cause": "Completion shortcut called finishUpperBodyRecognition, switched to keyboard and stopped live video/worker",
+  "red": "After complete workers expected 1, received 0",
+  "fix": "Restore existing beginCameraTraining/profile/startTraining pipeline; close only preparation UI, retain source camera and one-session templates",
+  "retained": [
+    "default off preference",
+    "SetupPanel epoch checks",
+    "training template retention",
+    "source isolation",
+    "recognition thresholds and counts",
+    "pause ownership"
+  ]
+}

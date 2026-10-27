@@ -1,0 +1,20 @@
+{
+  "livePageTextOnly": [
+    "3/3 saved",
+    "prestart recovery progress0, arms outside/low confidence",
+    "suspend notice requests manual continue",
+    "camera worker returning ~15Hz"
+  ],
+  "codeCause": [
+    "Every suspend canceled cameraAutoStart even during permission/setup",
+    "Extra3-second ready cue before startTraining allowed quality loss to keep user in prestart mode"
+  ],
+  "fix": [
+    "Start training on third-completion frame; retain camera live",
+    "Arm intent once after synchronous stop within cameraPanel.start; no post-await rearm",
+    "Pending preparation survives ordinary blur/hidden; requires visible page and fresh profile",
+    "Resume only preparation-owned visibility/user pause and camera recovery reasons; explicit stop/pause/tutorial still cancel"
+  ],
+  "privacy": "Read current accessibility text only; no real camera image or landmarks saved",
+  "red": "4 new cases failed before implementation; fifth restart case added subsequently, then5/5 green"
+}

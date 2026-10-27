@@ -1,0 +1,91 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (37 tests | 4 failed) 11ms
+   × stopping from calibration callback cannot repaint or publish the ending frame 4ms
+   × stopping from frame callback cannot repaint or publish the ending frame 1ms
+   × restarting from calibration callback invalidates the old frame before new initialization 0ms
+   × restarting from frame callback invalidates the old frame before new initialization 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > stopping from calibration callback cannot repaint or publish the ending frame
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:49:29
+     47|   try {
+     48|     f.draw();expect(stopping).toBeDefined();await stopping;
+     49|     expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+       |                             ^
+     50|     expect(f.frames.textContent).toBe('0');expect(f.metrics.textConten…
+     51|     expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > stopping from frame callback cannot repaint or publish the ending frame
+AssertionError: expected '1' to be '0' // Object.is equality
+
+Expected: "0"
+Received: "1"
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:50:34
+     48|     f.draw();expect(stopping).toBeDefined();await stopping;
+     49|     expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+     50|     expect(f.frames.textContent).toBe('0');expect(f.metrics.textConten…
+       |                                  ^
+     51|     expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+     52|     expect(f.preview.dataset.feedback).toBe('unavailable');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > restarting from calibration callback invalidates the old frame before new initialization
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:64:29
+     62|     f.draw();expect(restarting).toBeDefined();
+     63|     // The ending frame must be discarded synchronously, before anothe…
+     64|     expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+       |                             ^
+     65|     expect(f.frames.textContent).toBe('0');expect(f.metrics.textConten…
+     66|     expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > restarting from frame callback invalidates the old frame before new initialization
+AssertionError: expected '1' to be '0' // Object.is equality
+
+Expected: "0"
+Received: "1"
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:65:34
+     63|     // The ending frame must be discarded synchronously, before anothe…
+     64|     expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+     65|     expect(f.frames.textContent).toBe('0');expect(f.metrics.textConten…
+       |                                  ^
+     66|     expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+     67|     expect(f.preview.dataset.feedback).toBe('unavailable');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 33 passed (37)
+   Start at  11:20:19
+   Duration  110ms (transform 51%, tests 26%, import 19%, worker 4%)
+

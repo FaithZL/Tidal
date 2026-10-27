@@ -1,0 +1,14 @@
+{
+  "reviewer": "anchor_browser_review",
+  "mode": "read-only; no tests by reviewer",
+  "findings": [],
+  "checks": [
+    "startTraining after valid apply; prestart remains strict",
+    "task transitions reuse session profile; no preparation reset",
+    "recovery tokens preserve pause ownership and half-rep/hold reset",
+    "runtime frame guards and immutable references; watermarks survive stream resets",
+    "UI runtime progress hidden and no repeated 1200ms cue"
+  ],
+  "testSuggestion": "Assert progress.hidden itself, not only ancestor visibility",
+  "resolution": "New E2E hidden JS property/data-training assertions passed in final21/21. Final production prompt also visually checked."
+}

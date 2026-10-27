@@ -1,0 +1,8 @@
+{
+  "head": "2cf5325418151c46480f1d71b2a3883d1ca8f88d",
+  "branch": "main",
+  "cleanAtStart": true,
+  "historicalQaFiles": 2497,
+  "observedLiveUi": "chop15/15 load15/15 carry0/60; saved3/3; position mismatch plus visibility pause; setupModal not open",
+  "request": "One preparation per session; continue real motion counts, no automatic demo; no new commit/push/deploy authorization."
+}

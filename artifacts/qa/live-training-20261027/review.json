@@ -1,0 +1,27 @@
+{
+  "reviewer": "live_camera_audit",
+  "mode": "read-only source review; no tests run by reviewer",
+  "findings": [],
+  "checks": [
+    "No finishUpperBodyRecognition, preparation-complete branch, isFinished shutdown bypass, or shutdown message remains in src/index.html",
+    "browser.ts matches pre-shutdown known state except clarified camera-entry instruction",
+    "UpperBodyPreparationPanel exactly matches pre-shutdown version; startTraining and runtime tracking remain intact",
+    "Camera completion uses applyCameraProfile -> startTraining -> camera source/readiness -> setup-ready, without stopping SetupPanel",
+    "Default demo preference is still strict saved true opt-in; missing/invalid/blocked remain false",
+    "SetupPanel draw epoch checks retained after calibration callback and onFrame callback",
+    "Task transition only rebinds SourceManager context; live camera continues and template persists",
+    "Runtime invalid/stale/anchor/size observations stop counting/hold and preserve training template; recovery cannot carry half reps",
+    "Explicit stop/switch/reset/results/pagehide still release resources",
+    "Tests exercise same live video track/Worker, valid complete rep, invalid input freeze, manual/tutorial/animation pause ownership, explicit demo opt-in shutdown, and full farm transitions"
+  ],
+  "reviewedFileSha256": {
+    "src/browser.ts": "cf33f0b6ecddc9c3607872f38ed565103197c1cd4e06f9ab979b4dbbb8fb75d9",
+    "src/ui/upperBodyPreparationPanel.ts": "2d223f6799002ce77bdb0d66aa644131abdd061d494dadf7afe578e176796fd8",
+    "src/ui/demoPreference.ts": "ca20e8efc80e72c05bf6300ca5d89dc64165bf0996987d7f5bf10dbe6dd1c65a",
+    "src/ui/setupPanel.ts": "bfef8d07bef847d2d483f6cf6934ab3b837ea29087c930885ac018b77a92078d",
+    "src/pose/upperBody.ts": "6ca3cc8d0c64433e0befaa370f6c5fa507c6ab0f65bcdfe4a5082cc8f96d1c35",
+    "tests/e2e/default-off.spec.ts": "85080db4e09c40649ca279ba49f0b126d826dba4d39885b7cc71efd1de611934",
+    "tests/e2e/recognition-off.spec.ts": "ac9d590ed1fa813bf3e1357de87beb0749979db52538a3d4bb467707a8ff7c5d",
+    "tests/e2e/session-preparation.spec.ts": "0442f68dc5153d5ab3aa025eabf57851b7c2ff0a66af3342ac060630171050e6"
+  }
+}

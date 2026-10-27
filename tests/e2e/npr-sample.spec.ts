@@ -4,6 +4,7 @@ test.use({baseURL:'http://127.0.0.1:4174'});
 const sample='/?e2e=1&art=npr-sample';
 
 test('NPR sample waits for its real local atlas before autoplay or manual start',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/assets/npr/pastoral-atlas-v1.png',async route=>{await gate;await route.continue();});
  await page.goto(sample,{waitUntil:'domcontentloaded'});
@@ -17,6 +18,7 @@ test('NPR sample waits for its real local atlas before autoplay or manual start'
 });
 
 test('the separate leaf cutout must also finish before the sample can start',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>{release=resolve;});let requested=false;
  await page.route('**/assets/npr/leaf-bough-v2.png',async route=>{requested=true;await gate;await route.continue();});
  await page.goto(sample,{waitUntil:'domcontentloaded'});
@@ -29,12 +31,14 @@ test('the separate leaf cutout must also finish before the sample can start',asy
 });
 
 test('a missing leaf cutout is explicit failure, not a blank tree or fallback autoplay',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  await page.route('**/assets/npr/leaf-bough-v2.png',route=>route.abort('failed'));
  await page.goto(sample);await expect(page.locator('#renderError')).toContainText('美术样板贴图加载失败');
  await page.waitForTimeout(300);await expect(page.locator('#acceptPlan')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
 });
 
 test('NPR missing texture fails visibly and cannot advance a hidden session',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  await page.route('**/assets/npr/pastoral-atlas-v1.png',route=>route.abort('failed'));
  await page.goto(sample);await expect(page.locator('#renderError')).toContainText('美术样板贴图加载失败');
  await page.waitForTimeout(400);await expect(page.locator('#acceptPlan')).toBeDisabled();
@@ -42,6 +46,7 @@ test('NPR missing texture fails visibly and cannot advance a hidden session',asy
 });
 
 test('reset while sample assets load cancels the deferred automatic start',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/assets/npr/pastoral-atlas-v1.png',async route=>{await gate;await route.continue();});
  await page.goto(sample,{waitUntil:'domcontentloaded'});
@@ -52,6 +57,7 @@ test('reset while sample assets load cancels the deferred automatic start',async
 });
 
 test('late atlas completion cannot revive controls after graphics context loss and reset',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  let release:()=>void=()=>{};const gate=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/assets/npr/pastoral-atlas-v1.png',async route=>{await gate;await route.continue();});
  await page.goto(sample,{waitUntil:'domcontentloaded'});
@@ -66,6 +72,7 @@ test('late atlas completion cannot revive controls after graphics context loss a
 });
 
 test('sample keeps explicit real camera selection and never falls back to simulation on device failure',async({page})=>{
+ await page.addInitScript(()=>{if(localStorage.getItem('tidal.demo.enabled')===null)localStorage.setItem('tidal.demo.enabled','true');});
  await page.addInitScript(()=>{navigator.mediaDevices.getUserMedia=async()=>{throw new DOMException('no physical camera','NotFoundError');};});
  await page.goto(sample);await expect(page.locator('#statusTag')).toHaveText('训练中');
  await page.locator('#resetBtn').click();await page.locator('#acceptPlan').click();await page.locator('#cameraStart').click();

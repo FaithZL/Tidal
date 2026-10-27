@@ -97,8 +97,11 @@ export class SetupPanel {
     void this.stop(); this.status.textContent = message;this.events.onError?.(message);
   }
   private draw(frame: PoseFrame): void {
+    const epoch = this.epoch;
     this.calibration.accept(frame);
+    if (epoch !== this.epoch) return;
     this.events.onFrame?.(frame);
+    if (epoch !== this.epoch) return;
     const indices = this.upperBodyEnabled ? [...upperBodyIndices] : Array.from({ length: frame.landmarks.length }, (_, index) => index);
     const valid = frame.valid && Number.isSafeInteger(frame.frameId) && frame.frameId >= 0 &&
       Number.isFinite(frame.capturedAtMs) && frame.capturedAtMs >= 0 &&

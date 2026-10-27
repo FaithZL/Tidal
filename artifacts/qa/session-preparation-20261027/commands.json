@@ -1,0 +1,154 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/session-preparation.spec.ts",
+      "-g",
+      "rejected runtime frame"
+    ],
+    "log": "session-e2e-red.log",
+    "startedUTC": "2026-10-27T02:38:57.673900+00:00",
+    "finishedUTC": "2026-10-27T02:39:20.458088+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-27T02:44:22.890337+00:00",
+    "finishedUTC": "2026-10-27T02:44:28.488562+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T02:44:35.810368+00:00",
+    "finishedUTC": "2026-10-27T02:44:37.175812+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T02:44:36.961668+00:00",
+    "finishedUTC": "2026-10-27T02:44:38.317484+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/session-preparation.spec.ts"
+    ],
+    "log": "session-e2e-green.log",
+    "startedUTC": "2026-10-27T02:43:47.374880+00:00",
+    "finishedUTC": "2026-10-27T02:45:30.427540+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/anchor-recovery.spec.ts",
+      "tests/e2e/preparation-finish.spec.ts",
+      "tests/e2e/session-preparation.spec.ts"
+    ],
+    "log": "e2e-regression.log",
+    "startedUTC": "2026-10-27T02:45:43.874260+00:00",
+    "finishedUTC": "2026-10-27T02:52:01.630280+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T02:52:50.762100+00:00",
+    "finishedUTC": "2026-10-27T02:52:52.445361+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/session-preparation-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T02:53:14.622354+00:00",
+    "finishedUTC": "2026-10-27T02:53:35.590955+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "diff-check.log",
+    "startedUTC": "2026-10-27T02:54:54.646741+00:00",
+    "finishedUTC": "2026-10-27T02:54:54.664425+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-27T02:56:00.142324+00:00",
+    "finishedUTC": "2026-10-27T02:56:02.129214+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-final.log",
+    "startedUTC": "2026-10-27T02:56:15.198462+00:00",
+    "finishedUTC": "2026-10-27T02:56:16.311338+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/session-preparation-20261027/capture-production.mjs"
+    ],
+    "log": "production-final.log",
+    "startedUTC": "2026-10-27T02:56:16.328814+00:00",
+    "finishedUTC": "2026-10-27T02:56:37.088928+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "diff-final.log",
+    "startedUTC": "2026-10-27T02:58:34.800884+00:00",
+    "finishedUTC": "2026-10-27T02:58:34.818267+00:00",
+    "exitCode": 0
+  }
+]

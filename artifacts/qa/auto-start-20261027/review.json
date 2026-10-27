@@ -1,0 +1,34 @@
+{
+  "reviewer": "auto_start_policy_audit",
+  "mode": "read-only source/test review; no tests run by reviewer",
+  "findings": [],
+  "checks": [
+    "SetupPanel.start invokes stop/onStop synchronously before first await; automatic intent is armed only afterward",
+    "No async post-start continuation can recreate intent after explicit stop, source switch, reset, tutorial or animation stop",
+    "CameraService and SetupPanel epochs still discard canceled initialization and late frames; no generation weakening in those classes",
+    "Automatic start requires matching session and active upper-body preparation, fresh profile, visible document and pause ownership",
+    "Third-pose completion invokes the existing profile/startTraining path before cameraInput.accept; normal domain countdown prevents calibration frame from counting",
+    "Successful start consumes the pending intent, hides preparation and clears old suspend notice without stopping live camera",
+    "Initial setup owns incidental visibility; a running-session preparation preserves pre-existing visibility and explicit user pause",
+    "Camera tracking/source-error reasons can resume only after fresh profile; unrelated user/animation/tutorial stops still block",
+    "After intent is consumed, active-session blur/hidden behavior remains unchanged",
+    "Default demo opt-in preference, input source isolation, SetupPanel epoch guards and retained training model unchanged",
+    "New tests cover immediate completion, visible blur, hidden setup recovery, camera permission blur and source-error restart"
+  ],
+  "checkedFiles": {
+    "src/browser.ts": "d505e892e3d02a110a7c50556df6bd90d245d3d25e32688acd2a08dbdc8dea25",
+    "src/ui/upperBodyPreparationPanel.ts": "f9cea27fa26c6e6de2d52d8e75809d1fd562b5a4ca7b004baa6a1658bbdd293a",
+    "src/ui/setupPanel.ts": "bfef8d07bef847d2d483f6cf6934ab3b837ea29087c930885ac018b77a92078d",
+    "src/pose/upperBody.ts": "6ca3cc8d0c64433e0befaa370f6c5fa507c6ab0f65bcdfe4a5082cc8f96d1c35",
+    "src/ui/demoPreference.ts": "ca20e8efc80e72c05bf6300ca5d89dc64165bf0996987d7f5bf10dbe6dd1c65a",
+    "tests/e2e/preparation-autostart.spec.ts": "2cbdf535b2506b5e2642c07da8eae3db9b2e48a0a58162fd2ef73e9bf0d88845"
+  },
+  "postReviewChange": {
+    "scope": "Preparation suspension notice wording only; preserves explicit window blur and kept-checkpoint diagnostic text",
+    "reviewedLine": [
+      "if(automaticPreparation)upperBodyPanel.setSuspendNotice(document.hidden?'准备暂时暂停；回到页面并完成三步后自动进入训练，无需点击开始。':keep?'窗口失焦，保留准备进度；完成三步后自动进入训练，无需点击开始。':'继续完成三步，保存后自动进入训练，无需点击开始。');"
+    ],
+    "logicChanged": false,
+    "testsRunByReviewer": false
+  }
+}

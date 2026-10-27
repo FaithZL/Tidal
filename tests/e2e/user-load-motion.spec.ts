@@ -17,6 +17,7 @@ test.setTimeout(60000);
 /** Observe published real-world hand anchors; only the existing UI can pause the demo. */
 async function observeLoadMotion(page:Page,pauseOnMotion=false):Promise<void>{
  await page.addInitScript(({pauseOnMotion})=>{
+  localStorage.setItem('tidal.demo.enabled','true');
   const state:LoadMotionQA={samples:[],pauseTriggered:false,cameraCalls:0};
   window.userLoadMotionQA=state;
   navigator.mediaDevices.getUserMedia=async()=>{state.cameraCalls++;throw new Error('Automatic load sample must not request a camera');};

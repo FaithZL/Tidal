@@ -1,0 +1,12 @@
+{
+  "reviewer": "recognition_shutdown_audit",
+  "findings": [],
+  "checks": [
+    "Only exact stored true enables demo; missing/invalid/blocked defaults false",
+    "Completion keeps keyboard manual source and preview off",
+    "Source generations/epochs and camera stop unchanged",
+    "Manual/tutorial/animation/visibility pause ownership unchanged",
+    "Every startDefaultDemo entry checks demoEnabled"
+  ],
+  "testsRunByReviewer": false
+}

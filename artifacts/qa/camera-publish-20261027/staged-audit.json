@@ -1,0 +1,40 @@
+{
+  "stagedFilesBeforeFinalAuditRecords": 221,
+  "stagedBytes": 22700452,
+  "codeAndDocsWhitespaceExitCode": 0,
+  "allPathsWhitespaceExitCode": 2,
+  "allPathWarnings": "Only raw generated QA logs and error-context source snippets; bytes preserved, see raw-evidence-whitespace.log",
+  "sourceHashes": {
+    "AGENTS.md": "ccb373fccc64005f55f4386221f1c7d5f47b93c8df810204ec4bc9e964a5df96",
+    "docs/ACCEPTANCE.md": "973f127b3b7c337d8c326349516ac98d8d6226b9bedb563f8d13dd68806bae95",
+    "docs/PROGRESS.md": "716cd64ef1a479bf3b6f800f9a762347eb40c8492344fdf070eb3ba86c913340",
+    "docs/superpowers/plans/2026-10-27-session-preparation.md": "f26055eb77a3d0044c18b42f1e05c9d6255e384abc4290627760fc89fd43e78b",
+    "src/browser.ts": "d505e892e3d02a110a7c50556df6bd90d245d3d25e32688acd2a08dbdc8dea25",
+    "src/pose/upperBody.ts": "6ca3cc8d0c64433e0befaa370f6c5fa507c6ab0f65bcdfe4a5082cc8f96d1c35",
+    "src/ui/demoPreference.ts": "ca20e8efc80e72c05bf6300ca5d89dc64165bf0996987d7f5bf10dbe6dd1c65a",
+    "src/ui/setupPanel.ts": "bfef8d07bef847d2d483f6cf6934ab3b837ea29087c930885ac018b77a92078d",
+    "src/ui/upperBodyPreparationPanel.ts": "f9cea27fa26c6e6de2d52d8e75809d1fd562b5a4ca7b004baa6a1658bbdd293a",
+    "tests/e2e/anchor-recovery.spec.ts": "ede72ab859b2e778b6fdee124bc7c45bf247574ccf8d50f72caddcb67958a30f",
+    "tests/e2e/completed-recovery.spec.ts": "1f2a469f4b7e3a245d8697b72b4c3c6aa070751cdad01c8a1ec137286ffb1918",
+    "tests/e2e/default-demo.spec.ts": "51116827fcfe935c214114b0a0ca5967cb095c6aa364bbbd716080d2df21273f",
+    "tests/e2e/default-off.spec.ts": "85080db4e09c40649ca279ba49f0b126d826dba4d39885b7cc71efd1de611934",
+    "tests/e2e/npr-sample.spec.ts": "02f4913745ad20bc56b07bc5c30dd21d216b80d4c3c812395b0450e4c84fa98b",
+    "tests/e2e/preparation-autostart.spec.ts": "2cbdf535b2506b5e2642c07da8eae3db9b2e48a0a58162fd2ef73e9bf0d88845",
+    "tests/e2e/preparation-diagnostics.spec.ts": "b14eed8d9db292c573d3558f2ef929ee698fbb1501e880dfa34e6198330f4e17",
+    "tests/e2e/preparation-finish.spec.ts": "d98b61e828bf9665edc9e90bcea7732e356e585fbd84c947698db3430d99f593",
+    "tests/e2e/recognition-off.spec.ts": "ac9d590ed1fa813bf3e1357de87beb0749979db52538a3d4bb467707a8ff7c5d",
+    "tests/e2e/session-preparation.spec.ts": "0442f68dc5153d5ab3aa025eabf57851b7c2ff0a66af3342ac060630171050e6",
+    "tests/e2e/upper-body-flow.spec.ts": "e5f52bea6a26b8d3b04c03c0bab636fa662c2f3c1c0813258a29d58c06fd42bc",
+    "tests/e2e/user-farm-motion.spec.ts": "9f1f99752518d2c329aa05aa6866aec01602ee9b391907a23af0e99285546320",
+    "tests/e2e/user-load-motion.spec.ts": "9aebae4cc4c4c2f76c2dd21fd9d6edbf7506f4012a634597de9df2bcba1dbbd5",
+    "tests/helpers/browserUpperBodyFixture.ts": "6e864de2f4f1538b1b8ff29f07733bd11ccdcb72e5b6054f3c594fcd067229bd",
+    "tests/unit/setupPanelFeedback.test.ts": "10b1e2be2b96954a7968ed6d3a55ecdbdb991f2aa125efa04c3f0db78f76ad77",
+    "tests/unit/upperBodyTrainingSession.test.ts": "daddb7b7eed57b614a61fb0d5d6b3d100fd653a36b7de0b4f6ee8c2ca67453f3"
+  },
+  "remainingTrackedUnstaged": [
+    "docs/DEVELOPMENT_GUIDE.md"
+  ],
+  "noRawTraceStaged": true,
+  "noUnusedHelperOrObsoletePlanStaged": true,
+  "noDeployActions": true
+}

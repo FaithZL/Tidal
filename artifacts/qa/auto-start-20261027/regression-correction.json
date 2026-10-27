@@ -1,0 +1,12 @@
+{
+  "initialResult": "35/38 passed",
+  "failures": "Three diagnostic cases expected explicit retained-progress notice; underlying checkpoint state correct",
+  "correction": "Restore retained-progress wording when keepVisiblePreparation is true; reset notice remains truthful",
+  "unchanged": "No test assertions/timeouts/retries or pose thresholds altered",
+  "finalVerification": {
+    "log": "final-entry.log",
+    "passed": 13,
+    "exitCode": 0,
+    "includesAllThreePreviouslyFailingCases": true
+  }
+}

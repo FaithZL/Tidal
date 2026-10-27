@@ -1,0 +1,90 @@
+{
+  "policy": "Retained unchanged locally, excluded from this commit; no ignore rules or files removed",
+  "traces": [
+    {
+      "path": "artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-retu-d7774-quires-fresh-complete-poses/trace.zip",
+      "bytes": 31212106,
+      "sha256": "ed202f0bea3afe9724c7b402f8ee7bf0e2d6fb430fd437eca4e8e62d60e6e739"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-visi-b5ffe-t-after-all-poses-are-saved/trace.zip",
+      "bytes": 29648370,
+      "sha256": "a4a69b295203539477a88d4810916071f69f21d33ee147a69b460662df09ab8b"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-a-ca-fff8f-require-another-Start-click/trace.zip",
+      "bytes": 29331302,
+      "sha256": "20433447c341f93ccacca67a5c937d2558c462fd1ad884bdda0a6ca4e0f599d8"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-the--c7b53-ut-a-second-start-countdown/trace.zip",
+      "bytes": 31219485,
+      "sha256": "b6b9eda5524fc149bcf699d38dee671bacabd90c5b50aa5ecffc7044b105bf49"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/trace.zip",
+      "bytes": 28502626,
+      "sha256": "69bf51df2ef6560e23014b7e864fc744e3fa8c1d17ced2971ce59e4f91e91bf2"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip",
+      "bytes": 28555878,
+      "sha256": "001198193dc3170c2f918a9cd01069d60877f02c8f860bc18e6046ffe31ba884"
+    },
+    {
+      "path": "artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/trace.zip",
+      "bytes": 28898328,
+      "sha256": "7331b8aadef82b1dff481786b82f611268bcb4f3b6c85675cd25609563a42549"
+    },
+    {
+      "path": "artifacts/qa/live-training-20261027/red-failures/default-off-completing-all-b2164--while-simulation-stays-off/trace.zip",
+      "bytes": 37295698,
+      "sha256": "8ff77dde462bb3568ae2b4067d70006d33d3fa39a6692243c0cce9cf7c039bca"
+    },
+    {
+      "path": "artifacts/qa/live-training-20261027/regression-first-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/trace.zip",
+      "bytes": 27305933,
+      "sha256": "7dc92f4bdff7ee2fcae9e8571cdb17ddce3314789959b0fafc033aaf68b38f70"
+    },
+    {
+      "path": "artifacts/qa/session-preparation-20261027/e2e-red-failures/session-preparation-a-reje-77a9e--a-half-rep-across-recovery/trace.zip",
+      "bytes": 35971334,
+      "sha256": "d91e8d8bb4f6c58af80a753dbf1fb981bc256b3aa3267569f89f78890ba36a8b"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/trace.zip",
+      "bytes": 10779462,
+      "sha256": "1498133ec40a9c1d6cec38a90a34cdaa3804ef39bdff0ec816df137ddd3d3e01"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/trace.zip",
+      "bytes": 10895131,
+      "sha256": "bf4d6a14b3156e7d245c6f4726767598fbaf1bf48a45dba50600c1a0a137229f"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/trace.zip",
+      "bytes": 10589929,
+      "sha256": "2383e3dbb7ddd0689beb3b20084fdc74626c1c422b38b95d526b3684c6038a0d"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/red-failures/default-off-completing-all-1c355-s-for-explicit-manual-input/trace.zip",
+      "bytes": 33177581,
+      "sha256": "e26d6d950c20f913b1eb9daf979e5360c87b2435626b43565b1865fa6754c23f"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/trace.zip",
+      "bytes": 12284301,
+      "sha256": "499c0ea9c0e2777eef2301d3b3cf3d01731c818f7913643d9e61b2abd035fb2a"
+    },
+    {
+      "path": "artifacts/qa/default-off-20261027/red-failures/default-off-an-unrecognize-220ef-s-not-enable-automatic-play/trace.zip",
+      "bytes": 13789726,
+      "sha256": "f4c50a0477cba31aad2d5288e9a65fd20ece7ec39e4035a9cb7b9bb612c78f43"
+    },
+    {
+      "path": "artifacts/qa/recognition-off-20261027/e2e-red-failures/recognition-off-third-pose-aa2f4-imation-playback-is-stopped/trace.zip",
+      "bytes": 28619379,
+      "sha256": "0ae6a10a41e31af231959fdfa0f92f8659a3639e43fad1ec773feabb70d1052f"
+    }
+  ]
+}

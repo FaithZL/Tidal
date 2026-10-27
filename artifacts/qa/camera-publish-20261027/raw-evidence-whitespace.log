@@ -1,0 +1,199 @@
+artifacts/qa/auto-start-20261027/build.log:39: trailing whitespace.
++[plugin builtin:vite-reporter] 
+artifacts/qa/auto-start-20261027/e2e-regression.log:226: trailing whitespace.
++  1) tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (initial setup) 
+artifacts/qa/auto-start-20261027/e2e-regression.log:261: trailing whitespace.
++  2) tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (demo entry) 
+artifacts/qa/auto-start-20261027/e2e-regression.log:296: trailing whitespace.
++  3) tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 
+artifacts/qa/auto-start-20261027/e2e-regression.log:332: trailing whitespace.
++    tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (initial setup) 
+artifacts/qa/auto-start-20261027/e2e-regression.log:333: trailing whitespace.
++    tests/e2e/preparation-diagnostics.spec.ts:29:36 › visible blur keeps incomplete preparation checkpoints and automatic start (demo entry) 
+artifacts/qa/auto-start-20261027/e2e-regression.log:334: trailing whitespace.
++    tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 
+artifacts/qa/auto-start-20261027/lint-final.log:4: new blank line at EOF.
+artifacts/qa/auto-start-20261027/lint.log:4: new blank line at EOF.
+artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-a-ca-fff8f-require-another-Start-click/error-context.md:88: trailing whitespace.
++  51 | 
+artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-retu-d7774-quires-fresh-complete-poses/error-context.md:88: trailing whitespace.
++  51 | 
+artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-the--c7b53-ut-a-second-start-countdown/error-context.md:133: trailing whitespace.
++  44 | 
+artifacts/qa/auto-start-20261027/red-failures/preparation-autostart-visi-b5ffe-t-after-all-poses-are-saved/error-context.md:88: trailing whitespace.
++  51 | 
+artifacts/qa/auto-start-20261027/red.log:46: trailing whitespace.
++  1) tests/e2e/preparation-autostart.spec.ts:20:1 › the frame that saves the third pose enters training immediately without a second start countdown 
+artifacts/qa/auto-start-20261027/red.log:83: trailing whitespace.
++  2) tests/e2e/preparation-autostart.spec.ts:28:1 › visible blur during preparation cannot revoke the automatic start after all poses are saved 
+artifacts/qa/auto-start-20261027/red.log:119: trailing whitespace.
++  3) tests/e2e/preparation-autostart.spec.ts:35:1 › returning from a hidden preparation page preserves start intent but requires fresh complete poses 
+artifacts/qa/auto-start-20261027/red.log:155: trailing whitespace.
++  4) tests/e2e/preparation-autostart.spec.ts:41:1 › a camera permission blur during initialization does not require another Start click 
+artifacts/qa/auto-start-20261027/red.log:192: trailing whitespace.
++    tests/e2e/preparation-autostart.spec.ts:20:1 › the frame that saves the third pose enters training immediately without a second start countdown 
+artifacts/qa/auto-start-20261027/red.log:193: trailing whitespace.
++    tests/e2e/preparation-autostart.spec.ts:28:1 › visible blur during preparation cannot revoke the automatic start after all poses are saved 
+artifacts/qa/auto-start-20261027/red.log:194: trailing whitespace.
++    tests/e2e/preparation-autostart.spec.ts:35:1 › returning from a hidden preparation page preserves start intent but requires fresh complete poses 
+artifacts/qa/auto-start-20261027/red.log:195: trailing whitespace.
++    tests/e2e/preparation-autostart.spec.ts:41:1 › a camera permission blur during initialization does not require another Start click 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md:64: trailing whitespace.
++  28 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md:76: trailing whitespace.
++  40 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md:81: trailing whitespace.
++  45 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/error-context.md:64: trailing whitespace.
++  28 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/error-context.md:77: trailing whitespace.
++  40 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/error-context.md:82: trailing whitespace.
++  45 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-44d95-automatic-start-demo-entry-/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/error-context.md:64: trailing whitespace.
++  28 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/error-context.md:77: trailing whitespace.
++  40 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/error-context.md:82: trailing whitespace.
++  45 | 
+artifacts/qa/auto-start-20261027/regression-first-failures/preparation-diagnostics-vi-d26f7-omatic-start-initial-setup-/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/auto-start-20261027/typecheck.log:4: new blank line at EOF.
+artifacts/qa/auto-start-20261027/unit-related.log:13: new blank line at EOF.
+artifacts/qa/camera-publish-20261027/lint.log:4: new blank line at EOF.
+artifacts/qa/camera-publish-20261027/typecheck.log:4: new blank line at EOF.
+artifacts/qa/camera-publish-20261027/unit-related.log:13: new blank line at EOF.
+artifacts/qa/default-off-20261027/build.log:38: trailing whitespace.
++[plugin builtin:vite-reporter] 
+artifacts/qa/default-off-20261027/default-final.log:34: trailing whitespace.
++[WebServer] 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:40: trailing whitespace.
++  4  | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:54: trailing whitespace.
++  18 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:64: trailing whitespace.
++  28 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:74: trailing whitespace.
++  38 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:85: trailing whitespace.
++  48 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:40: trailing whitespace.
++  4  | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:54: trailing whitespace.
++  18 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:64: trailing whitespace.
++  28 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:75: trailing whitespace.
++  38 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:85: trailing whitespace.
++  48 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:40: trailing whitespace.
++  4  | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:54: trailing whitespace.
++  18 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:65: trailing whitespace.
++  28 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:75: trailing whitespace.
++  38 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:85: trailing whitespace.
++  48 | 
+artifacts/qa/default-off-20261027/first-green-failures/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/default-off-20261027/green.log:40: trailing whitespace.
++[WebServer] 
+artifacts/qa/default-off-20261027/green.log:52: trailing whitespace.
++  1) tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload 
+artifacts/qa/default-off-20261027/green.log:87: trailing whitespace.
++  2) tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads 
+artifacts/qa/default-off-20261027/green.log:122: trailing whitespace.
++  3) tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation 
+artifacts/qa/default-off-20261027/green.log:158: trailing whitespace.
++    tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload 
+artifacts/qa/default-off-20261027/green.log:159: trailing whitespace.
++    tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads 
+artifacts/qa/default-off-20261027/green.log:160: trailing whitespace.
++    tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation 
+artifacts/qa/default-off-20261027/lint-final.log:4: new blank line at EOF.
+artifacts/qa/default-off-20261027/lint.log:4: new blank line at EOF.
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:40: trailing whitespace.
++  4  | 
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:55: trailing whitespace.
++  18 | 
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:65: trailing whitespace.
++  28 | 
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:75: trailing whitespace.
++  38 | 
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:85: trailing whitespace.
++  48 | 
+artifacts/qa/default-off-20261027/red-failures/default-demo-fresh-visits--05577-rogression-or-camera-access/error-context.md:93: trailing whitespace.
++  56 | 
+artifacts/qa/default-off-20261027/red-failures/default-off-an-unrecognize-220ef-s-not-enable-automatic-play/error-context.md:91: trailing whitespace.
++  21 | 
+artifacts/qa/default-off-20261027/red-failures/default-off-completing-all-1c355-s-for-explicit-manual-input/error-context.md:58: trailing whitespace.
++  21 | 
+artifacts/qa/default-off-20261027/red.log:31: trailing whitespace.
++  1) tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access 
+artifacts/qa/default-off-20261027/red.log:66: trailing whitespace.
++  2) tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input 
+artifacts/qa/default-off-20261027/red.log:101: trailing whitespace.
++  3) tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play 
+artifacts/qa/default-off-20261027/red.log:148: trailing whitespace.
++    tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access 
+artifacts/qa/default-off-20261027/red.log:149: trailing whitespace.
++    tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input 
+artifacts/qa/default-off-20261027/red.log:150: trailing whitespace.
++    tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play 
+artifacts/qa/default-off-20261027/typecheck.log:4: new blank line at EOF.
+artifacts/qa/default-off-20261027/unit-related.log:13: new blank line at EOF.
+artifacts/qa/live-training-20261027/build.log:39: trailing whitespace.
++[plugin builtin:vite-reporter] 
+artifacts/qa/live-training-20261027/core-green.log:34: trailing whitespace.
++[WebServer] 
+artifacts/qa/live-training-20261027/e2e-regression.log:253: trailing whitespace.
++  1) tests/e2e/completed-recovery.spec.ts:10:50 › saved completed calibration survives absent before start and resumes its authorized automatic start 
+artifacts/qa/live-training-20261027/e2e-regression.log:290: trailing whitespace.
++    tests/e2e/completed-recovery.spec.ts:10:50 › saved completed calibration survives absent before start and resumes its authorized automatic start 
+artifacts/qa/live-training-20261027/lint.log:4: new blank line at EOF.
+artifacts/qa/live-training-20261027/red-failures/default-off-completing-all-b2164--while-simulation-stays-off/error-context.md:157: trailing whitespace.
++  28 | 
+artifacts/qa/live-training-20261027/red.log:25: trailing whitespace.
++  1) tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off 
+artifacts/qa/live-training-20261027/red.log:55: trailing whitespace.
++    tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off 
+artifacts/qa/live-training-20261027/regression-first-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/error-context.md:69: trailing whitespace.
++  24 | 
+artifacts/qa/live-training-20261027/regression-first-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/error-context.md:82: trailing whitespace.
++  37 | 
+artifacts/qa/live-training-20261027/regression-first-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/error-context.md:86: trailing whitespace.
++  41 | 
+artifacts/qa/live-training-20261027/regression-first-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/error-context.md:93: trailing whitespace.
++  48 | 
+artifacts/qa/live-training-20261027/typecheck.log:4: new blank line at EOF.
+artifacts/qa/live-training-20261027/unit-related.log:13: new blank line at EOF.
+artifacts/qa/recognition-off-20261027/setup-green.log:13: new blank line at EOF.
+artifacts/qa/recognition-off-20261027/setup-red.log:91: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/build-final.log:39: trailing whitespace.
++[plugin builtin:vite-reporter] 
+artifacts/qa/session-preparation-20261027/build.log:39: trailing whitespace.
++[plugin builtin:vite-reporter] 
+artifacts/qa/session-preparation-20261027/e2e-red-failures/session-preparation-a-reje-77a9e--a-half-rep-across-recovery/error-context.md:85: trailing whitespace.
++  48 | 
+artifacts/qa/session-preparation-20261027/lint-final.log:4: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/lint.log:4: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/model-green.log:13: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/model-red.log:176: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/progress-entry.txt:24: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/session-e2e-red.log:25: trailing whitespace.
++  1) tests/e2e/session-preparation.spec.ts:17:1 › a rejected runtime frame cannot erase this session calibration or carry a half rep across recovery 
+artifacts/qa/session-preparation-20261027/session-e2e-red.log:61: trailing whitespace.
++    tests/e2e/session-preparation.spec.ts:17:1 › a rejected runtime frame cannot erase this session calibration or carry a half rep across recovery 
+artifacts/qa/session-preparation-20261027/typecheck.log:4: new blank line at EOF.
+artifacts/qa/session-preparation-20261027/unit-final.log:16: new blank line at EOF.

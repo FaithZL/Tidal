@@ -1,0 +1,6 @@
+{
+  "head": "2cf5325418151c46480f1d71b2a3883d1ca8f88d",
+  "branch": "main",
+  "status": " M docs/ACCEPTANCE.md\n M docs/DEVELOPMENT_GUIDE.md\n M docs/PROGRESS.md\n M src/browser.ts\n M src/pose/upperBody.ts\n M src/ui/upperBodyPreparationPanel.ts\n M tests/helpers/browserUpperBodyFixture.ts\n?? artifacts/qa/session-preparation-20261027/\n?? docs/superpowers/plans/2026-10-27-session-preparation.md\n?? tests/e2e/session-preparation.spec.ts\n?? tests/unit/upperBodyTrainingSession.test.ts\n",
+  "stagedPaths": []
+}

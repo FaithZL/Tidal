@@ -1,0 +1,55 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/default-off.spec.ts -g keeps the live camera
+
+[WebServer] (node:55859) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55879) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55929) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:55970) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:21:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:21:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:21:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:21:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off (13.8s)
+
+
+  1) tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 7000ms exceeded while waiting on the predicate
+
+       8 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});
+       9 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+    > 10 |  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(1);
+         |                                                                        ^
+      11 |  expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks.every(t=>t.readyState==='live'))).toBe(true);
+      12 |  await expect(page.locator('#cameraVideo')).not.toHaveJSProperty('srcObject',null);
+      13 |  await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#modeBadge')).toContainText('上半身');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-off.spec.ts:10:72
+
+    Error Context: test-results/default-off-completing-all-b2164--while-simulation-stays-off/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-off-completing-all-b2164--while-simulation-stays-off/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-off-completing-all-b2164--while-simulation-stays-off/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off 

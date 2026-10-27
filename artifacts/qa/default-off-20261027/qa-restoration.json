@@ -1,0 +1,21 @@
+{
+  "historicalFiles": 2580,
+  "regeneratedFiles": [
+    "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+    "artifacts/qa/upper-body-flow-20261026/full-flow.json",
+    "artifacts/qa/npr-refinement/load.png",
+    "artifacts/qa/npr-refinement/results.png",
+    "artifacts/qa/npr-refinement/home.png",
+    "artifacts/qa/npr-refinement/chop-paused.png",
+    "artifacts/qa/preparation-feedback-20261026/preparation-partial-synthetic.png",
+    "artifacts/qa/preparation-recovery-20261027/recovering-synthetic.png",
+    "artifacts/qa/user-load-motion-20261025/load-motion.json",
+    "artifacts/qa/user-load-motion-20261025/load-results.png",
+    "artifacts/qa/user-load-motion-20261025/load-paused.png",
+    "artifacts/qa/user-load-motion-20261025/pause-resume-reset.json",
+    "artifacts/qa/user-farm-motion-20261026/farm-motion.json",
+    "artifacts/qa/user-farm-motion-20261026/farm-results.png"
+  ],
+  "remainingMismatches": [],
+  "result": "pass"
+}

@@ -1,0 +1,22 @@
+{
+  "input": "Normal production build; fresh profile, then fake video and authored landmarks for preparation",
+  "result": "pass",
+  "defaultOff": true,
+  "noInitialCameraRequest": true,
+  "noAutomaticProgress": true,
+  "threePoseCompletionKeepsDemoOff": true,
+  "cameraAndWorkerStopped": true,
+  "manualInputCountsOne": true,
+  "explicitEnableWorks": true,
+  "manualOffSurvivesReload": true,
+  "mobileOverflow": false,
+  "screenshots": [
+    "default-off-desktop.png",
+    "default-off-mobile.png",
+    "after-three-still-off.png"
+  ],
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

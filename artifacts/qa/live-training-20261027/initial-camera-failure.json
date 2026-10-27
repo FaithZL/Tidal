@@ -1,0 +1,16 @@
+{
+  "case": "saved completed calibration survives absent before start and resumes its authorized automatic start",
+  "failure": "Initial lowered to raised, before any injected absent frame",
+  "traceEvidence": [
+    "cameraMode and acceptPlan enabled before click",
+    "cameraStart enters requesting video permission",
+    "Final status maps to NotReadableError, camera frames remain0"
+  ],
+  "unknown": "Cannot distinguish getUserMedia from video.play boundary; actual device occupancy not proven",
+  "action": "Rerun exact case unchanged; no threshold/timeout/assertion/fixture modification",
+  "unchangedRecheck": {
+    "log": "camera-start-recheck.log",
+    "passed": 1,
+    "exitCode": 0
+  }
+}

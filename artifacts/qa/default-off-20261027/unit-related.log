@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/autoDemoSource.test.ts tests/unit/sourceManager.test.ts tests/unit/session.test.mjs
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  3 passed (3)
+      Tests  22 passed (22)
+   Start at  11:58:43
+   Duration  119ms (import 36%, tests 30%, transform 22%, worker 11%)
+

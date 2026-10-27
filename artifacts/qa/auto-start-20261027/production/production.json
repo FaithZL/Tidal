@@ -1,0 +1,29 @@
+{
+  "input": "Normal production build; fake video and authored six landmarks, not physical-camera accuracy",
+  "result": "pass",
+  "permissionBlurRetainsAutoStart": true,
+  "startsOnCompletionFrame": true,
+  "noPostCalibrationClicks": true,
+  "defaultDemoOff": true,
+  "liveCameraContinuesAfterPreparation": true,
+  "noIdleProgress": true,
+  "sameStreamAndWorker": true,
+  "initialPreparationRequired": true,
+  "sessionTemplateRetained": true,
+  "invalidFramesCannotCount": true,
+  "halfRepDiscarded": true,
+  "newFullRepCount": 1,
+  "preparationProgressHidden": true,
+  "refreshRequiresNewPreparation": true,
+  "mobileOverflow": false,
+  "screenshots": [
+    "runtime-waiting-desktop-synthetic.png",
+    "runtime-waiting-mobile-synthetic.png",
+    "fresh-full-rep-synthetic.png",
+    "live-camera-mobile-synthetic.png"
+  ],
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T05:22:34.323328+00:00",
+    "finishedUTC": "2026-10-27T05:22:35.712625+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T05:22:35.748895+00:00",
+    "finishedUTC": "2026-10-27T05:22:37.025706+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/setupPanelFeedback.test.ts",
+      "tests/unit/cameraService.test.ts",
+      "tests/unit/sourceManager.test.ts",
+      "tests/unit/cameraReadiness.test.ts",
+      "tests/unit/upperBodyTrainingSession.test.ts",
+      "tests/unit/session.test.mjs"
+    ],
+    "log": "unit-related.log",
+    "startedUTC": "2026-10-27T05:22:37.061179+00:00",
+    "finishedUTC": "2026-10-27T05:22:37.458437+00:00",
+    "exitCode": 0
+  }
+]

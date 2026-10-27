@@ -8,7 +8,8 @@ import { upperFrame } from '../helpers/upperBodyPose.js';
 
 const green = '#77e3a0', red = '#ff6b69', gray = '#9baeb4';
 interface Painted { color: string; points: number[] }
-function fixture(feedback: RecognitionFeedback | null = null, unavailableMessage?:string) {
+interface FrameInterruption { at: 'calibration' | 'frame'; run(panel: SetupPanel): void }
+function fixture(feedback: RecognitionFeedback | null = null, unavailableMessage?:string, interruption?: FrameInterruption) {
   const documentEvents = new EventTarget(), windowEvents = new EventTarget();
   const label = { textContent: '', style: { color: '' } }, preview = { dataset: {} as Record<string, string> };
   vi.stubGlobal('document', Object.assign(documentEvents, { getElementById: (id: string) => id === 'cameraFeedbackStatus' ? label : null }));
@@ -24,19 +25,48 @@ function fixture(feedback: RecognitionFeedback | null = null, unavailableMessage
   };
   const overlay = { width: 640, height: 480, parentElement: preview, getContext: () => context };
   const element = () => ({ textContent: '' });
+  const metrics = element(), frames = element();let frameEvents = 0;
   const video = { srcObject: null, pause() {} };
   const calibrationResets: { close: boolean | undefined; reason: string | undefined }[] = [];
   const suspensions: (string | undefined)[] = [];
-  const calibration = { accept() {}, reset(close?: boolean, reason?: string) { calibrationResets.push({ close, reason }); }, tick() {}, activate() {}, dispose() {} };
+  const calibration = { accept() { if (interruption?.at === 'calibration') interruption.run(panel); }, reset(close?: boolean, reason?: string) { calibrationResets.push({ close, reason }); }, tick() {}, activate() {}, dispose() {} };
   const panel = new SetupPanel(video as unknown as HTMLVideoElement, overlay as unknown as HTMLCanvasElement,
-    element() as HTMLElement, element() as HTMLElement, element() as HTMLElement,
+    element() as HTMLElement, metrics as HTMLElement, frames as HTMLElement,
     { disabled: false } as HTMLButtonElement, calibration as unknown as CalibrationPanel,
-    { onFrame() { panel.setFeedback(feedback);if(feedback===null&&unavailableMessage)label.textContent=unavailableMessage; }, onSuspend(reason?: string) { suspensions.push(reason); } });
+    { onFrame() { frameEvents++;panel.setFeedback(feedback);if(feedback===null&&unavailableMessage)label.textContent=unavailableMessage;if (interruption?.at === 'frame') interruption.run(panel); }, onSuspend(reason?: string) { suspensions.push(reason); } });
   const draw = (frame = syntheticFrame(50, 'raised')) => (panel as unknown as { draw(frame: PoseFrame): void }).draw(frame);
   const point = (frame: PoseFrame, index: number) => [frame.landmarks[index].x * frame.width, frame.landmarks[index].y * frame.height];
-  return { panel, draw, preview, label, strokes, fills, documentEvents, windowEvents, point, calibrationResets, suspensions };
+  return { panel, draw, preview, label, strokes, fills, documentEvents, windowEvents, point, calibrationResets, suspensions, metrics, frames, frameEvents: () => frameEvents };
 }
 afterEach(() => vi.unstubAllGlobals());
+
+test.each(['calibration', 'frame'] as const)('stopping from %s callback cannot repaint or publish the ending frame', async at => {
+  let stopping: Promise<void> | undefined;
+  const f = fixture({ status: 'matched', message: '匹配', joints: { 16: 'matched' } }, undefined,
+    { at, run(panel) { stopping = panel.stop(); } });
+  try {
+    f.draw();expect(stopping).toBeDefined();await stopping;
+    expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+    expect(f.frames.textContent).toBe('0');expect(f.metrics.textContent).toBe('');
+    expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+    expect(f.preview.dataset.feedback).toBe('unavailable');
+  } finally { await f.panel.dispose(); }
+});
+
+test.each(['calibration', 'frame'] as const)('restarting from %s callback invalidates the old frame before new initialization', async at => {
+  vi.stubGlobal('navigator', { mediaDevices: { getUserMedia: async () => { throw new DOMException('Synthetic missing device', 'NotFoundError'); } } });
+  let restarting: Promise<void> | undefined;
+  const f = fixture({ status: 'matched', message: '匹配', joints: { 16: 'matched' } }, undefined,
+    { at, run(panel) { restarting = panel.start(); } });
+  try {
+    f.draw();expect(restarting).toBeDefined();
+    // The ending frame must be discarded synchronously, before another start can run.
+    expect(f.frameEvents()).toBe(at === 'calibration' ? 0 : 1);
+    expect(f.frames.textContent).toBe('0');expect(f.metrics.textContent).toBe('');
+    expect(f.strokes).toEqual([]);expect(f.fills).toEqual([]);
+    expect(f.preview.dataset.feedback).toBe('unavailable');
+  } finally { await restarting;await f.panel.dispose(); }
+});
 
 test('invalid preparation frame preserves its specific diagnostic when feedback is already unavailable',()=>{
  const f=fixture(null,'肩、肘或手腕不够清晰');f.panel.setUpperBodyEnabled(true);f.draw(replacePoint(upperFrame(50),16,{visibility:.1}));

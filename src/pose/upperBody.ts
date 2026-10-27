@@ -111,6 +111,7 @@ export class UpperBodyPreparation {
   private lastReset: UpperBodyDiagnostics['lastReset'] = null;
   private lastSampleRejection: UpperBodyDiagnostics['lastSampleRejection'] = null;
   private completedRevalidation = false;
+  private training = false;
   constructor(private readonly config: RecognitionConfig = recognitionConfig, private readonly recoveryWindowMs = 0,
     private readonly retainCompleted = false) {
     if (!Number.isFinite(recoveryWindowMs) || recoveryWindowMs < 0 || recoveryWindowMs > 3000) throw new RangeError('Invalid preparation recovery window');
@@ -118,6 +119,7 @@ export class UpperBodyPreparation {
   }
   accept(frame: PoseFrame, nowMs: number): void {
     this.observeQuality(frame);
+    if (this.training) { this.acceptTraining(frame, nowMs);return; }
     if (this.recoveryWindowMs > 0 || this.retainCompleted) {
       if (this.expireRecovery(nowMs)) return;
       const hardIssue = this.recoveryHeaderIssue(frame, nowMs);
@@ -173,6 +175,33 @@ export class UpperBodyPreparation {
     if (this.step === 'lowered') this.reference = { width: mean.width, height: mean.height, center: { ...mean.center }, scalePx: mean.scalePx };
     this.step = this.step === 'lowered' ? 'raised' : this.step === 'raised' ? 'hold' : 'complete';
     this.samples = [];this.progress = this.step === 'complete' ? 1 : 0;
+  }
+  /** One ready personal template serves this training session until an explicit reset. */
+  startTraining(): boolean {
+    if (!this.retainCompleted || !this.getProfile()) return false;
+    this.training = true;return true;
+  }
+  private acceptTraining(frame: PoseFrame, nowMs: number): void {
+    const issue = this.recoveryHeaderIssue(frame, nowMs);
+    if (issue) {
+      // Valid but mismatched observations still consume their sequence numbers. Bad metadata
+      // never advances (or rolls back) the watermark, even when the stream is reset below.
+      if (issue === 'resized' || issue === 'person-moved') this.lastHeader = { time: frame.capturedAtMs, id: frame.frameId };
+      this.suspendTraining(issue);return;
+    }
+    this.lastHeader = { time: frame.capturedAtMs, id: frame.frameId };
+    const observed = this.stream.read(frame, nowMs);
+    if (!observed) {
+      this.suspendTraining(!frame.valid ? 'missing-points' : this.stream.reason ?? 'invalid-data');return;
+    }
+    const anchorIssue = this.reference && referenceIssue(observed.raw, this.reference, this.config);
+    if (anchorIssue) { this.suspendTraining(anchorIssue);return; }
+    // The recognizer owns action confirmation and counting; this only restores fresh tracking.
+    this.latest = observed.raw;this.available = true;this.progress = 1;this.reason = null;
+    this.completedRevalidation = false;this.lastSampleRejection = null;
+  }
+  private suspendTraining(reason: string): void {
+    this.beginCompletedRevalidation(reason);this.stream.reset();
   }
   private poseIssue(f: UpperBodyVector): string | null {
     if (this.step === 'lowered') return f.left.y >= .25 && f.right.y >= .25 ? null : 'not-lowered';
@@ -249,21 +278,26 @@ export class UpperBodyPreparation {
     if (this.qualityCapturedAt !== null && Number.isFinite(nowMs) && nowMs - this.qualityCapturedAt > this.config.trackingMaxAgeMs) {
       this.jointQuality = this.jointQuality.map(joint => ({ ...joint, state: 'stale' }));
     }
-    if (!Number.isFinite(nowMs) || nowMs < 0) { this.invalidate('invalid-data');this.stream.reset(); }
+    if (!Number.isFinite(nowMs) || nowMs < 0) {
+      if (this.training) this.suspendTraining('invalid-data');
+      else { this.invalidate('invalid-data');this.stream.reset(); }
+    }
     else if (this.expireRecovery(nowMs)) this.stream.reset();
     else if (this.latest && nowMs - this.latest.capturedAtMs > this.config.trackingMaxAgeMs) {
-      this.rejectObservation('stale', nowMs);if (this.recoveryDeadline === null) this.stream.reset();
+      if (this.training) this.suspendTraining('stale');
+      else { this.rejectObservation('stale', nowMs);if (this.recoveryDeadline === null) this.stream.reset(); }
     }
   }
   private invalidate(reason: string | null, diagnosticReason = reason ?? 'unknown'): void {
     if (this.step !== 'lowered') this.lastReset = { sequence: ++this.resetSequence, fromStep: this.step,
       completedSteps: this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : 3, reason: diagnosticReason };
     this.step = 'lowered';this.samples = [];this.examples = {};this.radii = {};this.reference = null;
-    this.available = false;this.progress = 0;this.reason = reason;this.latest = null;this.recoveryDeadline = null;this.completedRevalidation = false;
+    this.available = false;this.progress = 0;this.reason = reason;this.latest = null;this.recoveryDeadline = null;this.completedRevalidation = false;this.training = false;
   }
   reset(reason = 'manual-reset'): void { this.invalidate(null, reason);this.stream.reset();this.lastHeader = null; }
   /** Visibility or tracking suspension invalidates live readiness without erasing an opted-in completed template. */
   suspendTracking(reason: string): void {
+    if (this.training) { this.suspendTraining(reason);return; }
     if (!this.retainsCompleted()) { this.reset(reason);return; }
     this.beginCompletedRevalidation(reason);this.stream.reset();
   }
@@ -333,9 +367,10 @@ export class UpperBodyPreparation {
     };
     return { left: arm('left'), right: arm('right') };
   }
-  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null; recovering: boolean; revalidating: boolean; ready: boolean; completedSteps: 0 | 1 | 2 | 3 } {
+  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null; recovering: boolean; revalidating: boolean; ready: boolean; completedSteps: 0 | 1 | 2 | 3; training: boolean } {
     return { step: this.step, progress: this.progress, available: this.available, reason: this.reason,
       recovering: this.recoveryDeadline !== null, revalidating: this.completedRevalidation,
+      training: this.training,
       ready: this.step === 'complete' && this.available && !this.completedRevalidation,
       completedSteps: this.step === 'lowered' ? 0 : this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : 3 };
   }

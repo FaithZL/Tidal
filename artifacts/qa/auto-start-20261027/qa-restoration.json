@@ -1,0 +1,9 @@
+{
+  "historicalFiles": 2692,
+  "regeneratedFiles": [
+    "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+    "artifacts/qa/preparation-recovery-20261027/recovering-synthetic.png"
+  ],
+  "remainingMismatches": [],
+  "result": "pass"
+}

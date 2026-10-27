@@ -1,7 +1,7 @@
 import type {Page} from '@playwright/test';
 import type {WorkerRequest,WorkerResponse} from '../../src/pose/types.js';
 export type UpperPose='lowered'|'raised'|'hold'|'left-only';
-declare global{interface Window{upperFixture:{pose:UpperPose;low:boolean;stalled:boolean;outside?:boolean;absent?:boolean;moved?:boolean;tracks:MediaStreamTrack[];workers:number;maxWorkers:number}}}
+declare global{interface Window{upperFixture:{pose:UpperPose;low:boolean;stalled:boolean;outside?:boolean;absent?:boolean;moved?:boolean;resized?:boolean;tracks:MediaStreamTrack[];workers:number;maxWorkers:number}}}
 /** Fake video + six authored upper-body landmarks; excluded lower body is deliberately unavailable. */
 export async function installUpperBodyFixture(page:Page){
  const points=(pose:UpperPose)=>Array.from({length:33},(_,i)=>{
@@ -18,7 +18,7 @@ export async function installUpperBodyFixture(page:Page){
   class UpperWorker{
    onmessage:((event:MessageEvent<WorkerResponse>)=>void)|null=null;onerror=null;private epoch=0;private closed=false;
    constructor(){window.upperFixture.workers++;window.upperFixture.maxWorkers=Math.max(window.upperFixture.maxWorkers,window.upperFixture.workers);}
-   postMessage(m:WorkerRequest){if(m.kind==='init'){this.epoch=m.sourceEpoch;this.reply({kind:'ready',sourceEpoch:this.epoch});}else if(m.kind==='dispose')this.reply({kind:'disposed'});else{m.bitmap.close();if(window.upperFixture.stalled)return;const landmarks=structuredClone(poses[window.upperFixture.pose]);if(window.upperFixture.low)landmarks[16].visibility=.1;if(window.upperFixture.outside)landmarks[16].x=1.02;if(window.upperFixture.moved)for(const p of landmarks)p.x+=.3;if(window.upperFixture.absent)landmarks.length=0;this.reply({kind:'frame',sourceEpoch:this.epoch,requestId:m.requestId,frame:{frameId:m.requestId,capturedAtMs:m.capturedAtMs,width:m.width,height:m.height,valid:!window.upperFixture.absent,landmarks,inferenceMs:0}});}}
+   postMessage(m:WorkerRequest){if(m.kind==='init'){this.epoch=m.sourceEpoch;this.reply({kind:'ready',sourceEpoch:this.epoch});}else if(m.kind==='dispose')this.reply({kind:'disposed'});else{m.bitmap.close();if(window.upperFixture.stalled)return;const landmarks=structuredClone(poses[window.upperFixture.pose]);if(window.upperFixture.low)landmarks[16].visibility=.1;if(window.upperFixture.outside)landmarks[16].x=1.02;if(window.upperFixture.moved)for(const p of landmarks)p.x+=.3;if(window.upperFixture.absent)landmarks.length=0;this.reply({kind:'frame',sourceEpoch:this.epoch,requestId:m.requestId,frame:{frameId:m.requestId,capturedAtMs:m.capturedAtMs,width:window.upperFixture.resized?m.width*2:m.width,height:m.height,valid:!window.upperFixture.absent,landmarks,inferenceMs:0}});}}
    private reply(data:WorkerResponse){queueMicrotask(()=>{if(!this.closed)this.onmessage?.({data} as MessageEvent<WorkerResponse>);});}
    terminate(){if(!this.closed){this.closed=true;window.upperFixture.workers--;}}
   }

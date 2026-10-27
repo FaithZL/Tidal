@@ -1,0 +1,48 @@
+{
+  "purpose": "Immediate automatic camera training after final saved pose; incidental preparation focus changes do not require clicks",
+  "tests": [
+    {
+      "path": "tests/e2e/preparation-diagnostics.spec.ts",
+      "before": "artifacts/qa/auto-start-20261027/contract-before/tests/e2e/preparation-diagnostics.spec.ts",
+      "beforeSha256": "657b5510efa752feb479c32ccb2f08dc8dd41279fabaf5c4812e5d9d3c0d743f",
+      "afterSha256": "b14eed8d9db292c573d3558f2ef929ee698fbb1501e880dfa34e6198330f4e17",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7
+    },
+    {
+      "path": "tests/e2e/completed-recovery.spec.ts",
+      "before": "artifacts/qa/auto-start-20261027/contract-before/tests/e2e/completed-recovery.spec.ts",
+      "beforeSha256": "1484398bd0bdf25aa796a570e0cba05ee6cb8786894ef0de0892a1b7f9fea2bd",
+      "afterSha256": "1f2a469f4b7e3a245d8697b72b4c3c6aa070751cdad01c8a1ec137286ffb1918",
+      "testDefinitionsBefore": 11,
+      "testDefinitionsAfter": 11
+    },
+    {
+      "path": "tests/e2e/upper-body-flow.spec.ts",
+      "before": "artifacts/qa/auto-start-20261027/contract-before/tests/e2e/upper-body-flow.spec.ts",
+      "beforeSha256": "6626e4a47911102422e228210f932adba364b82cc03b6b1b6c80fceef29d35d7",
+      "afterSha256": "e5f52bea6a26b8d3b04c03c0bab636fa662c2f3c1c0813258a29d58c06fd42bc",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7
+    },
+    {
+      "path": "tests/e2e/preparation-finish.spec.ts",
+      "before": "artifacts/qa/auto-start-20261027/contract-before/tests/e2e/preparation-finish.spec.ts",
+      "beforeSha256": "905f8e4a9bde95069dc20db16eb353162e22c7e388c3dee2015d3c54c0775063",
+      "afterSha256": "d98b61e828bf9665edc9e90bcea7732e356e585fbd84c947698db3430d99f593",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3
+    },
+    {
+      "path": "tests/e2e/anchor-recovery.spec.ts",
+      "before": "artifacts/qa/auto-start-20261027/contract-before/tests/e2e/anchor-recovery.spec.ts",
+      "beforeSha256": "8eabeec6b191b99b0d1932b9b3f24492a0a6834950031c2ee48adb3f78aa09ac",
+      "afterSha256": "ede72ab859b2e778b6fdee124bc7c45bf247574ccf8d50f72caddcb67958a30f",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3
+    }
+  ],
+  "newTest": "tests/e2e/preparation-autostart.spec.ts",
+  "newCases": 5,
+  "note": "Existing prestart completed-state negatives intentionally stop animation before third pose now that ordinary completion immediately enters training. Existing manual/animation/tutorial/active visibility negatives retained. Normal completion and incomplete visible blur now assert automatic entry. No removed scenarios, skips, timeout/retry/threshold relaxation. Tests not executed by agent."
+}

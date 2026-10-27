@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTrainingSession.test.ts tests/unit/upperBody.test.ts tests/unit/upperBodyRecognizer.test.ts tests/unit/upperBodyCompletedRecovery.test.ts tests/unit/upperBodyAnchorRecovery.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/setupPanelFeedback.test.ts tests/unit/cameraActionSource.test.ts tests/unit/cameraReadiness.test.ts tests/unit/carryTiming.test.ts tests/unit/sourceManager.test.ts tests/unit/session.test.mjs
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  12 passed (12)
+      Tests  239 passed (239)
+   Start at  12:25:06
+   Duration  225ms (tests 61%, import 19%, transform 16%, worker 4%)
+

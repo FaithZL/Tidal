@@ -1,0 +1,15 @@
+{
+  "entryCases": 5,
+  "regressionSelection": "8 files,38 cases; excludes two unchanged long full-farm cases tested last round because current change only concerns entry and pause ownership",
+  "excludedNames": [
+    "rest waits for recovered tracking and carry interruption",
+    "upper-body full farm flow"
+  ],
+  "unitCases": 84,
+  "normalProduction": "permission blur -> save thirdpose -> sameframe training state -> camera count, no post-calibration click",
+  "notClaimed": [
+    "full verify",
+    "full unit suite",
+    "physical camera accuracy"
+  ]
+}

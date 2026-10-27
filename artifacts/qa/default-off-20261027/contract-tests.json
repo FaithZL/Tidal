@@ -1,0 +1,103 @@
+{
+  "purpose": "Preserve existing E2E contracts before adapting explicit automatic-demo opt-in and preparation completion to default-off",
+  "tests": [
+    {
+      "path": "tests/e2e/anchor-recovery.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/anchor-recovery.spec.ts",
+      "sha256": "ea25fe50fb1a4772fa44b79d867f66828567ca07277bee95be5d1d588eff5e33",
+      "afterSha256": "70971fdcae7b955bb2fec074510aa20f8cdceb91714170f961642b6d7bd9e039",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3
+    },
+    {
+      "path": "tests/e2e/completed-recovery.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/completed-recovery.spec.ts",
+      "sha256": "ac04ec81706d4343e04388d92f6e290753624b04ce6b07565346844db216ee13",
+      "afterSha256": "f2f78c0e0169314bea8cd00d3dee4e6198c7b5989f26421d92659ba43bbe65c9",
+      "testDefinitionsBefore": 11,
+      "testDefinitionsAfter": 11
+    },
+    {
+      "path": "tests/e2e/preparation-finish.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/preparation-finish.spec.ts",
+      "sha256": "a6671b26f7571a2a077db1575fccf9f78c89dff02da69fcd63536eb0eecfb870",
+      "afterSha256": "fc1ec5608e5b6da0c2fe57b7260e51fe6aa2cc5bad7a13c21852221926bb6759",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3
+    },
+    {
+      "path": "tests/e2e/upper-body-flow.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/upper-body-flow.spec.ts",
+      "sha256": "7036a3186ed99a22da52b5a3bf720c07adf094ff39152e98848b259978792f05",
+      "afterSha256": "513ecab986e240c384adfcf2d4a2ac0df68310ed112e97834206763118564242",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7
+    },
+    {
+      "path": "tests/e2e/session-preparation.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/session-preparation.spec.ts",
+      "sha256": "54a20b280b0c2b8c6f8917ae616abec95dfa7ba64b8f19262503f322bc6a02bd",
+      "afterSha256": "661ac8eda1c68a22184c14684b642fbd03368d63dc8648c162bab566c22e7c01",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2
+    },
+    {
+      "path": "tests/e2e/preparation-feedback.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/preparation-feedback.spec.ts",
+      "sha256": "ce8cf67febfab9aa4339df672f2859a96f074c5e3aa0f543e82d2e6f3180b70c",
+      "afterSha256": "6cca66ab7fcdbab79fcc7766a464423bc75c62473fe62485964ff6ac1dbba484",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3
+    },
+    {
+      "path": "tests/e2e/preparation-recovery.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/preparation-recovery.spec.ts",
+      "sha256": "7648cb928702724c09a09c44d4006d92f80e3c31b3f8d664d9f3231d6f836bf5",
+      "afterSha256": "3584f693cf3cf5255be3b70a81a96c72b046c8245bc7a0de40a23649f7ea1ca2",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2
+    },
+    {
+      "path": "tests/e2e/preparation-diagnostics.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/preparation-diagnostics.spec.ts",
+      "sha256": "82e451365495cd6a0e255f44c6036aa1b0ba3e971077c21c18d3a71cc2fc73b6",
+      "afterSha256": "7bd3092e5b6e184135ce36c1947e74a0b36c26f64d377fd5abc45ce56971b5af",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7
+    },
+    {
+      "path": "tests/e2e/recognition-off.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/recognition-off.spec.ts",
+      "sha256": "411347bdf386be4e3471359895d957dfc02b38a3eb506f2ac945b5e2880d3a79",
+      "afterSha256": "6952d64009a5caefed1bc31bc5a5a3cca2bea9bd6c8e5c030577803045e68a0a",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2
+    },
+    {
+      "path": "tests/e2e/npr-sample.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/npr-sample.spec.ts",
+      "sha256": "84d9aecbb6abba141994ec18355e105ba6196ee8120b4b015abbd534fd79685a",
+      "afterSha256": "02f4913745ad20bc56b07bc5c30dd21d216b80d4c3c812395b0450e4c84fa98b",
+      "testDefinitionsBefore": 10,
+      "testDefinitionsAfter": 10
+    },
+    {
+      "path": "tests/e2e/user-farm-motion.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/user-farm-motion.spec.ts",
+      "sha256": "6cfd1bba771d2b439b302c1d3a24457fdd4ca793f3e03c1415a8d5277ec2da5c",
+      "afterSha256": "9f1f99752518d2c329aa05aa6866aec01602ee9b391907a23af0e99285546320",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2
+    },
+    {
+      "path": "tests/e2e/user-load-motion.spec.ts",
+      "before": "artifacts/qa/default-off-20261027/contract-before/tests/e2e/user-load-motion.spec.ts",
+      "sha256": "7c25c8298e28771052cfbe6e8a45e71664fece79e6fdf6dbc64cd9c47b97b831",
+      "afterSha256": "9aebae4cc4c4c2f76c2dd21fd9d6edbf7506f4012a634597de9df2bcba1dbbd5",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2
+    }
+  ],
+  "addedHelper": "tests/helpers/explicitAutoDemo.ts",
+  "note": "Automatic-flow cases explicitly opt in after verifying 3/3 and default off. This existing explicit source switch resets preparation display; later checks assert 0/3 and closed camera resources. Case counts and resource/pause negatives retained."
+}

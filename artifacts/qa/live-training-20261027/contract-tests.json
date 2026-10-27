@@ -1,0 +1,98 @@
+{
+  "purpose": "Restore real camera training after one initial preparation while keeping explicit automatic-demo opt-in; latest user corrects mistaken camera shutdown",
+  "tests": [
+    {
+      "path": "tests/e2e/anchor-recovery.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/anchor-recovery.spec.ts",
+      "beforeSha256": "70971fdcae7b955bb2fec074510aa20f8cdceb91714170f961642b6d7bd9e039",
+      "afterSha256": "8eabeec6b191b99b0d1932b9b3f24492a0a6834950031c2ee48adb3f78aa09ac",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/anchor-recovery.spec.ts"
+    },
+    {
+      "path": "tests/e2e/completed-recovery.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/completed-recovery.spec.ts",
+      "beforeSha256": "f2f78c0e0169314bea8cd00d3dee4e6198c7b5989f26421d92659ba43bbe65c9",
+      "afterSha256": "1484398bd0bdf25aa796a570e0cba05ee6cb8786894ef0de0892a1b7f9fea2bd",
+      "testDefinitionsBefore": 11,
+      "testDefinitionsAfter": 11,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/completed-recovery.spec.ts"
+    },
+    {
+      "path": "tests/e2e/default-off.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/default-off.spec.ts",
+      "beforeSha256": "fc580dbd196ff495d0a762913fa528ee168dc8d12dc56cccb12b5c4dd3f68155",
+      "afterSha256": "85080db4e09c40649ca279ba49f0b126d826dba4d39885b7cc71efd1de611934",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "adaptation": "Keeps default-off and invalid preference coverage; completed preparation keeps live camera and real reps, tracking failure cannot count; explicit user switch to demo stops camera."
+    },
+    {
+      "path": "tests/e2e/preparation-diagnostics.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/preparation-diagnostics.spec.ts",
+      "beforeSha256": "7bd3092e5b6e184135ce36c1947e74a0b36c26f64d377fd5abc45ce56971b5af",
+      "afterSha256": "657b5510efa752feb479c32ccb2f08dc8dd41279fabaf5c4812e5d9d3c0d743f",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/preparation-diagnostics.spec.ts"
+    },
+    {
+      "path": "tests/e2e/preparation-feedback.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/preparation-feedback.spec.ts",
+      "beforeSha256": "6cca66ab7fcdbab79fcc7766a464423bc75c62473fe62485964ff6ac1dbba484",
+      "afterSha256": "9cbaa77d1c50923d7915822e518708d6ccba993be01d967ceec048351ac87ef9",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/preparation-feedback.spec.ts"
+    },
+    {
+      "path": "tests/e2e/preparation-finish.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/preparation-finish.spec.ts",
+      "beforeSha256": "fc1ec5608e5b6da0c2fe57b7260e51fe6aa2cc5bad7a13c21852221926bb6759",
+      "afterSha256": "905f8e4a9bde95069dc20db16eb353162e22c7e388c3dee2015d3c54c0775063",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/preparation-finish.spec.ts"
+    },
+    {
+      "path": "tests/e2e/preparation-recovery.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/preparation-recovery.spec.ts",
+      "beforeSha256": "3584f693cf3cf5255be3b70a81a96c72b046c8245bc7a0de40a23649f7ea1ca2",
+      "afterSha256": "a91f50ecfa60c34a98f168fca85efebff3ab66d093e2d1fb1bb5fa06add0ad09",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/preparation-recovery.spec.ts"
+    },
+    {
+      "path": "tests/e2e/recognition-off.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/recognition-off.spec.ts",
+      "beforeSha256": "6952d64009a5caefed1bc31bc5a5a3cca2bea9bd6c8e5c030577803045e68a0a",
+      "afterSha256": "ac9d590ed1fa813bf3e1357de87beb0749979db52538a3d4bb467707a8ff7c5d",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "adaptation": "Two pause/stop scenarios now require live camera after preparation; animation stop/tutorial still suppress automatic start, real motion counts after explicit continuation, explicit reset ends tracks/worker."
+    },
+    {
+      "path": "tests/e2e/session-preparation.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/session-preparation.spec.ts",
+      "beforeSha256": "661ac8eda1c68a22184c14684b642fbd03368d63dc8648c162bab566c22e7c01",
+      "afterSha256": "0442f68dc5153d5ab3aa025eabf57851b7c2ff0a66af3342ac060630171050e6",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/session-preparation.spec.ts"
+    },
+    {
+      "path": "tests/e2e/upper-body-flow.spec.ts",
+      "before": "artifacts/qa/live-training-20261027/contract-before/tests/e2e/upper-body-flow.spec.ts",
+      "beforeSha256": "513ecab986e240c384adfcf2d4a2ac0df68310ed112e97834206763118564242",
+      "afterSha256": "6626e4a47911102422e228210f932adba364b82cc03b6b1b6c80fceef29d35d7",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7,
+      "restoredLiveCameraContractFrom": "artifacts/qa/recognition-off-20261027/contract-before/upper-body-flow.spec.ts",
+      "adaptation": "Existing-user-pause automatic-play fixture explicitly opts into demo; restores other original real-recognizer assertions."
+    }
+  ],
+  "testsExecutedByAgent": false,
+  "note": "No scenarios skipped/deleted and no timeout, retry or recognition threshold relaxation. Two prior added shutdown tests migrated to opposite live-camera contract with pause/reset negatives. Previous snapshots remain archived."
+}

@@ -1,0 +1,161 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/default-off.spec.ts tests/e2e/default-demo.spec.ts
+
+[WebServer] (node:50330) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:50350) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:50398) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:50418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:50440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access (4.8s)
+  ✘  2 tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload (9.1s)
+(node:50477) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads (9.5s)
+(node:50486) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation (9.8s)
+(node:50699) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:55:04 AM [vite] (client) [Unhandled rejection] Error: User house loading cancelled
+[WebServer]  > UserHouseMount.dispose src/game/world/userHouseMount.ts:22:14
+[WebServer]     20 |    if(this.closed)return;this.closed=true;
+[WebServer]     21 |    if(this.model){this.model.root.removeFromParent();this.model.dispose();this.model=null;}
+[WebServer]     22 |    this.cancel(new Error('User house loading cancelled'));
+[WebServer]        |                ^
+[WebServer]     23 |   }
+[WebServer]     24 |  }
+[WebServer]  > FarmWorld.destroy src/game/world/FarmWorld.ts:215:72
+[WebServer]  > new FarmWorld src/game/world/FarmWorld.ts:122:21
+[WebServer]  > createGame src/game/createGame.ts:7:13
+[WebServer]  > src/browser.ts:73:13
+[WebServer] 
+  ✓  5 tests/e2e/default-demo.spec.ts:49:1 › a renderer initialization failure keeps default autoplay at home with no hidden progression (924ms)
+(node:50704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:55:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 11:55:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 11:55:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 11:55:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  6 tests/e2e/default-off.spec.ts:4:1 › completing all three poses leaves simulation off and waits for explicit manual input (7.6s)
+  ✓  7 tests/e2e/default-off.spec.ts:17:1 › an unrecognized saved preference does not enable automatic play (713ms)
+
+
+  1) tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "未开始"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        14 × locator resolved to <span id="statusTag" class="subtag">未开始</span>
+           - unexpected value "未开始"
+
+
+      18 |
+      19 | test('turning simulation off survives reload, and explicitly enabling it survives the next reload',async({page})=>{
+    > 20 |  await page.goto('/?e2e=1');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');await page.locator('#demoToggle').click();await page.reload();await expect(page.locator('#statusTag')).toHaveText('训练中');
+         |                                                                                                                                                                                                                      ^
+      21 |  await page.locator('#demoToggle').click();await expect(page.locator('#statusTag')).toHaveText('已暂停');
+      22 |  const stopped=await page.locator('#chopValue').textContent();await page.waitForTimeout(350);await expect(page.locator('#chopValue')).toHaveText(stopped!);
+      23 |  await page.reload();await expect(page.locator('#planModal')).toBeVisible();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-demo.spec.ts:20:214
+
+    Error Context: test-results/default-demo-turning-simul-4e495-it-survives-the-next-reload/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-demo-turning-simul-4e495-it-survives-the-next-reload/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-demo-turning-simul-4e495-it-survives-the-next-reload/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "未开始"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        14 × locator resolved to <span id="statusTag" class="subtag">未开始</span>
+           - unexpected value "未开始"
+
+
+      29 | test('choosing real camera opts out of autoplay even when the device fails and the page reloads',async({page})=>{
+      30 |  await page.addInitScript(()=>{navigator.mediaDevices.getUserMedia=async()=>{document.documentElement.dataset.cameraRequested='true';throw new DOMException('no physical camera','NotFoundError');};});
+    > 31 |  await page.goto('/?e2e=1');await page.locator('#demoToggle').click();await page.reload();await expect(page.locator('#statusTag')).toHaveText('训练中');
+         |                                                                                                                                    ^
+      32 |  await page.locator('#resetBtn').click();await page.locator('#acceptPlan').click();await page.locator('#cameraStart').click();
+      33 |  await expect(page.locator('#cameraStatus')).toContainText('未找到摄像头');await expect(page.locator('#setupDemoToggle')).toHaveAttribute('aria-checked','false');
+      34 |  await page.reload();await expect(page.locator('#planModal')).toBeVisible();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-demo.spec.ts:31:132
+
+    Error Context: test-results/default-demo-choosing-real-46e60--fails-and-the-page-reloads/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-demo-choosing-real-46e60--fails-and-the-page-reloads/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-demo-choosing-real-46e60--fails-and-the-page-reloads/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#demoToggle')
+    Expected: "false"
+    Received: "true"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#demoToggle') with timeout 7000ms
+      - waiting for locator('#demoToggle')
+        18 × locator resolved to <button role="switch" id="demoToggle" aria-checked="true" class="secondary demo-toggle">无摄像头测试：开</button>
+           - unexpected value "true"
+
+
+      43 |  await page.locator('#demoToggle').click();await page.locator('#acceptPlan').click();await page.locator('#beginDemo').click();await expect(page.locator('#statusTag')).toHaveText('训练中');
+      44 |  await page.locator('#demoToggle').click();await page.locator('#resetBtn').click();
+    > 45 |  await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');await expect(page.locator('#planModal')).toBeVisible();
+         |                                            ^
+      46 |  await page.reload();await expect(page.locator('#statusTag')).toHaveText('未开始');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');expect(errors).toEqual([]);
+      47 | });
+      48 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/default-demo.spec.ts:45:44
+
+    Error Context: test-results/default-demo-blocked-brows-a1730-it-session-local-simulation/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/default-demo-blocked-brows-a1730-it-session-local-simulation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/default-demo-blocked-brows-a1730-it-session-local-simulation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload 
+    tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads 
+    tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation 
+  4 passed (45.9s)

@@ -1,0 +1,145 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/default-off.spec.ts",
+      "-g",
+      "keeps the live camera"
+    ],
+    "log": "red.log",
+    "startedUTC": "2026-10-27T04:21:31.963093+00:00",
+    "finishedUTC": "2026-10-27T04:21:49.664563+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/default-off.spec.ts",
+      "tests/e2e/default-demo.spec.ts"
+    ],
+    "log": "core-green.log",
+    "startedUTC": "2026-10-27T04:22:36.970042+00:00",
+    "finishedUTC": "2026-10-27T04:23:22.737459+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T04:24:41.677292+00:00",
+    "finishedUTC": "2026-10-27T04:24:42.997089+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T04:24:41.682078+00:00",
+    "finishedUTC": "2026-10-27T04:24:43.003339+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTrainingSession.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecognizer.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/setupPanelFeedback.test.ts",
+      "tests/unit/cameraActionSource.test.ts",
+      "tests/unit/cameraReadiness.test.ts",
+      "tests/unit/carryTiming.test.ts",
+      "tests/unit/sourceManager.test.ts",
+      "tests/unit/session.test.mjs"
+    ],
+    "log": "unit-related.log",
+    "startedUTC": "2026-10-27T04:25:06.662814+00:00",
+    "finishedUTC": "2026-10-27T04:25:07.123832+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-off.spec.ts",
+      "tests/e2e/session-preparation.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "tests/e2e/preparation-finish.spec.ts",
+      "tests/e2e/anchor-recovery.spec.ts",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "tests/e2e/preparation-diagnostics.spec.ts"
+    ],
+    "log": "e2e-regression.log",
+    "startedUTC": "2026-10-27T04:24:51.627535+00:00",
+    "finishedUTC": "2026-10-27T04:35:30.419409+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "-g",
+      "survives absent before start"
+    ],
+    "log": "camera-start-recheck.log",
+    "startedUTC": "2026-10-27T04:36:08.861336+00:00",
+    "finishedUTC": "2026-10-27T04:36:24.846862+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T04:37:19.495227+00:00",
+    "finishedUTC": "2026-10-27T04:37:21.467622+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/live-training-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T04:38:34.057551+00:00",
+    "finishedUTC": "2026-10-27T04:38:55.917368+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "diff-final.log",
+    "startedUTC": "2026-10-27T04:40:41.059016+00:00",
+    "finishedUTC": "2026-10-27T04:40:41.079478+00:00",
+    "exitCode": 0
+  }
+]

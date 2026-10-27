@@ -1,0 +1,195 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-autostart.spec.ts
+
+[WebServer] (node:58827) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:58847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:58901) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:58931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:58934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:59:02 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:02 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:59:02 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:02 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-autostart.spec.ts:20:1 › the frame that saves the third pose enters training immediately without a second start countdown (14.1s)
+(node:58991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:59:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:59:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/preparation-autostart.spec.ts:28:1 › visible blur during preparation cannot revoke the automatic start after all poses are saved (17.4s)
+(node:59021) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:59:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:59:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:35 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  3 tests/e2e/preparation-autostart.spec.ts:35:1 › returning from a hidden preparation page preserves start intent but requires fresh complete poses (19.0s)
+(node:59047) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:59:56 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:56 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:59:56 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:59:56 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  4 tests/e2e/preparation-autostart.spec.ts:41:1 › a camera permission blur during initialization does not require another Start click (16.8s)
+
+
+  1) tests/e2e/preparation-autostart.spec.ts:20:1 › the frame that saves the third pose enters training immediately without a second start countdown 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "true"
+    Received: "false"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        9 × locator resolved to <section data-ready="true" data-step="complete" aria-label="上半身自动准备" data-training="false" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation" data-started-at-completion="false">…</section>
+          - unexpected value "false"
+        9 × locator resolved to <section data-ready="true" data-step="complete" aria-label="上半身自动准备" data-training="true" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation" data-started-at-completion="false">…</section>
+          - unexpected value "false"
+
+
+      24 |   observer.observe(node,{attributes:true,attributeFilter:['data-step']});
+      25 |  });
+    > 26 |  await finishPoses(page);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-started-at-completion','true');await liveTraining(page);
+         |                                                                              ^
+      27 | });
+      28 | test('visible blur during preparation cannot revoke the automatic start after all poses are saved',async({page})=>{
+      29 |  await start(page);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodyStepCount')).toContainText('1/3');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:26:78
+
+    Error Context: test-results/preparation-autostart-the--c7b53-ut-a-second-start-countdown/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-autostart-the--c7b53-ut-a-second-start-countdown/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-autostart-the--c7b53-ut-a-second-start-countdown/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/preparation-autostart.spec.ts:28:1 › visible blur during preparation cannot revoke the automatic start after all poses are saved 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "已暂停"
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 10000ms
+      - waiting for locator('#statusTag')
+        24 × locator resolved to <span id="statusTag" class="subtag">已暂停</span>
+           - unexpected value "已暂停"
+
+
+      13 | }
+      14 | async function liveTraining(page:Page,expectedTracks=1){
+    > 15 |  await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();
+         |                                           ^
+      16 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-training','true');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+      17 |  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(expectedTracks);expect(await page.evaluate(()=>window.upperFixture.tracks.at(-1)!.readyState)).toBe('live');
+      18 |  await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#modeBadge')).toContainText('上半身');
+        at liveTraining (/Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:15:43)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:30:32
+
+    Error Context: test-results/preparation-autostart-visi-b5ffe-t-after-all-poses-are-saved/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-autostart-visi-b5ffe-t-after-all-poses-are-saved/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-autostart-visi-b5ffe-t-after-all-poses-are-saved/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/preparation-autostart.spec.ts:35:1 › returning from a hidden preparation page preserves start intent but requires fresh complete poses 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "已暂停"
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 10000ms
+      - waiting for locator('#statusTag')
+        24 × locator resolved to <span id="statusTag" class="subtag">已暂停</span>
+           - unexpected value "已暂停"
+
+
+      13 | }
+      14 | async function liveTraining(page:Page,expectedTracks=1){
+    > 15 |  await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();
+         |                                           ^
+      16 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-training','true');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+      17 |  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(expectedTracks);expect(await page.evaluate(()=>window.upperFixture.tracks.at(-1)!.readyState)).toBe('live');
+      18 |  await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#modeBadge')).toContainText('上半身');
+        at liveTraining (/Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:15:43)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:39:122
+
+    Error Context: test-results/preparation-autostart-retu-d7774-quires-fresh-complete-poses/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-autostart-retu-d7774-quires-fresh-complete-poses/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-autostart-retu-d7774-quires-fresh-complete-poses/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/preparation-autostart.spec.ts:41:1 › a camera permission blur during initialization does not require another Start click 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "已暂停"
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 10000ms
+      - waiting for locator('#statusTag')
+        24 × locator resolved to <span id="statusTag" class="subtag">已暂停</span>
+           - unexpected value "已暂停"
+
+
+      13 | }
+      14 | async function liveTraining(page:Page,expectedTracks=1){
+    > 15 |  await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();
+         |                                           ^
+      16 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-training','true');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+      17 |  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(expectedTracks);expect(await page.evaluate(()=>window.upperFixture.tracks.at(-1)!.readyState)).toBe('live');
+      18 |  await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#modeBadge')).toContainText('上半身');
+        at liveTraining (/Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:15:43)
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-autostart.spec.ts:42:55
+
+    Error Context: test-results/preparation-autostart-a-ca-fff8f-require-another-Start-click/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-autostart-a-ca-fff8f-require-another-Start-click/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-autostart-a-ca-fff8f-require-another-Start-click/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/e2e/preparation-autostart.spec.ts:20:1 › the frame that saves the third pose enters training immediately without a second start countdown 
+    tests/e2e/preparation-autostart.spec.ts:28:1 › visible blur during preparation cannot revoke the automatic start after all poses are saved 
+    tests/e2e/preparation-autostart.spec.ts:35:1 › returning from a hidden preparation page preserves start intent but requires fresh complete poses 
+    tests/e2e/preparation-autostart.spec.ts:41:1 › a camera permission blur during initialization does not require another Start click 

@@ -1,0 +1,25 @@
+{
+  "earlierUncommittedFilesUnchanged": {
+    "src/pose/upperBody.ts": true,
+    "src/ui/setupPanel.ts": true,
+    "tests/helpers/browserUpperBodyFixture.ts": true,
+    "tests/unit/setupPanelFeedback.test.ts": true,
+    "tests/unit/upperBodyTrainingSession.test.ts": true,
+    "docs/superpowers/plans/2026-10-27-recognition-off.md": true,
+    "docs/superpowers/plans/2026-10-27-session-preparation.md": true
+  },
+  "trackedPathsUnchangedFromHead": [
+    "src/domain",
+    "src/input",
+    "src/worker",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.ts",
+    "vite.config.ts",
+    ".gitattributes",
+    ".gitignore",
+    "public/assets"
+  ],
+  "overlappingFiles": "Incremental changes only; earlier versions saved under /tmp/tidal-default-off-20261027/before and contract-before",
+  "historicalQa": "qa-restoration.json"
+}

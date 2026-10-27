@@ -1,0 +1,27 @@
+{
+  "earlierUncommittedFilesUnchanged": {
+    "src/pose/upperBody.ts": true,
+    "src/ui/setupPanel.ts": true,
+    "src/ui/demoPreference.ts": true,
+    "tests/helpers/browserUpperBodyFixture.ts": true,
+    "tests/unit/setupPanelFeedback.test.ts": true,
+    "tests/unit/upperBodyTrainingSession.test.ts": true,
+    "tests/e2e/default-demo.spec.ts": true,
+    "tests/e2e/npr-sample.spec.ts": true,
+    "tests/e2e/user-farm-motion.spec.ts": true,
+    "tests/e2e/user-load-motion.spec.ts": true
+  },
+  "trackedPathsUnchangedFromHead": [
+    "src/domain",
+    "src/input",
+    "src/worker",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.ts",
+    "vite.config.ts",
+    ".gitattributes",
+    ".gitignore",
+    "public/assets"
+  ],
+  "historicalQa": "qa-restoration.json"
+}

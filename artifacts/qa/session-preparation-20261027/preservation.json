@@ -1,0 +1,62 @@
+{
+  "src/config/recognitionConfig.ts": {
+    "unchanged": true,
+    "sha256": "1b7122cee1e9d81e67eb4604b545031bc87e136583fd61d3debeeb9e4e8c5d7a"
+  },
+  "src/input/sourceManager.ts": {
+    "unchanged": true,
+    "sha256": "1dc9ff7f2653f7884345e4210992b5e848f539af51a91ec7afaacdf5f6ecc7a2"
+  },
+  "src/domain/sessionController.ts": {
+    "unchanged": true,
+    "sha256": "e7fb66d18de7e39648a00cd2f0db47ac177e9ae49202b66240630c8e05b02195"
+  },
+  "src/ui/setupPanel.ts": {
+    "unchanged": true,
+    "sha256": "6f3c70f6ae280187fd7d1e6eb2f9b7a7414a6efa30c7fc02785850573151d0a2"
+  },
+  "src/pose/poseWorkerClient.ts": {
+    "unchanged": true,
+    "sha256": "109c0d94e5bdb8c6b90b2ece6e6b8ae01c93effc41a8bd7a05ab3ac4a3ef0b61"
+  },
+  "package.json": {
+    "unchanged": true,
+    "sha256": "782ea037bb6f6fb38c563ae280da918357fdf62a612b095c1e3f6322c11aaaec"
+  },
+  "package-lock.json": {
+    "unchanged": true,
+    "sha256": "556d4f05c25e988759a65b6d3537c9daf195bd61071d8b9d32f75b2271919ca0"
+  },
+  ".gitattributes": {
+    "unchanged": true,
+    "sha256": "cfb30a8e0a47b98ab133e434389dbc0e20a3240eed1406b09792015409bb32ab"
+  },
+  ".gitignore": {
+    "unchanged": true,
+    "sha256": "16bc9d07a929cbba49923950f38bf7568166d735a92437e030b94dc0a9610de7"
+  },
+  "playwright.config.ts": {
+    "unchanged": true,
+    "sha256": "d47aaac5713486d4935179482ea7d2bb2571cc18ee894436a71f40b87ade4b66"
+  },
+  "UpperBodyStream": {
+    "unchanged": true,
+    "sha256": "374a23e881c8b0093aeaa85e89df83e0cfe990ea453b5f572cef756162ad7706"
+  },
+  "poseIssue/holdIssue": {
+    "unchanged": true,
+    "sha256": "9633ffbed7c575194c79ab6e3744d53b8d28d957367df78bfad13718ce9da92e"
+  },
+  "reference/geometry": {
+    "unchanged": true,
+    "sha256": "3c2865a511c599d2605a07df66a12fbe6899afc7fc7f8a18497cfcadb454372f"
+  },
+  "src/input/cameraActionSource.ts": {
+    "unchanged": true,
+    "sha256": "6bd6aea7664bf291b58ae075693373a64876db0e6d87ebfe3c47e517a5fd9b0a"
+  },
+  "src/pose/recognizers/upperBodyRecognizer.ts": {
+    "unchanged": true,
+    "sha256": "be5ef99280da4850ec8d462a81dcd2e1fbf2bcefdbb9aba0294eb70a644c8bf3"
+  }
+}

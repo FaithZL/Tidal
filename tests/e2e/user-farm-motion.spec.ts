@@ -10,6 +10,7 @@ async function observe(page:Page,pause=false){
  const errors:string[]=[],external:string[]=[];
  page.on('pageerror',error=>errors.push(error.message));page.on('request',request=>{const address=new URL(request.url());if(address.protocol!=='data:'&&address.origin!==origin)external.push(address.href);});
  await page.addInitScript(({pause})=>{
+  localStorage.setItem('tidal.demo.enabled','true');
   const qa:FarmMotionQA={samples:[],cameraCalls:0,paused:false};window.farmMotionQA=qa;
   navigator.mediaDevices.getUserMedia=async()=>{qa.cameraCalls++;throw new Error('Farm animation preview must not request a camera');};
   let observed:HTMLElement|null=null,last='';

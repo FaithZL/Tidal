@@ -1,0 +1,16 @@
+{
+  "development": {
+    "port": 5173,
+    "httpStatus": 200,
+    "preserved": true
+  },
+  "production": {
+    "command": "npm run preview -- --host 127.0.0.1 --port 4176 --strictPort",
+    "started": true,
+    "stoppedAfterVerification": "Ctrl-C",
+    "expectedTermination": true,
+    "terminationExitCode": 1,
+    "listenerAfterStop": false
+  },
+  "deployment": false
+}

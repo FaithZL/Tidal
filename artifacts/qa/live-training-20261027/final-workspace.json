@@ -1,0 +1,18 @@
+{
+  "branch": "main",
+  "head": "2cf5325418151c46480f1d71b2a3883d1ca8f88d",
+  "staged": "",
+  "status": " M AGENTS.md\n M docs/ACCEPTANCE.md\n M docs/DEVELOPMENT_GUIDE.md\n M docs/PROGRESS.md\n M src/browser.ts\n M src/pose/upperBody.ts\n M src/ui/demoPreference.ts\n M src/ui/setupPanel.ts\n M src/ui/upperBodyPreparationPanel.ts\n M tests/e2e/default-demo.spec.ts\n M tests/e2e/npr-sample.spec.ts\n M tests/e2e/upper-body-flow.spec.ts\n M tests/e2e/user-farm-motion.spec.ts\n M tests/e2e/user-load-motion.spec.ts\n M tests/helpers/browserUpperBodyFixture.ts\n M tests/unit/setupPanelFeedback.test.ts\n?? artifacts/qa/default-off-20261027/\n?? artifacts/qa/live-training-20261027/\n?? artifacts/qa/recognition-off-20261027/\n?? artifacts/qa/session-preparation-20261027/\n?? docs/superpowers/plans/2026-10-27-recognition-off.md\n?? docs/superpowers/plans/2026-10-27-session-preparation.md\n?? tests/e2e/default-off.spec.ts\n?? tests/e2e/recognition-off.spec.ts\n?? tests/e2e/session-preparation.spec.ts\n?? tests/helpers/explicitAutoDemo.ts\n?? tests/unit/upperBodyTrainingSession.test.ts\n",
+  "oldProgressBodyPreserved": true,
+  "commitPushDeploy": false,
+  "services": {
+    "5173": {
+      "http": "200",
+      "exitCode": 0
+    },
+    "4176": {
+      "http": "000",
+      "exitCode": 7
+    }
+  }
+}

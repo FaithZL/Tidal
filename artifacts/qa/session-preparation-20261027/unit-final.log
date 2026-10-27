@@ -1,0 +1,16 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  69 passed (69)
+      Tests  744 passed (744)
+   Start at  10:44:23
+   Duration  5.24s (tests 94%, import 4%, transform 1%, worker 1%)
+
+    Isolate  69 workers spawned · ~98ms startup each (spawn + environment, per file)
+             at least ~655ms faster with isolate: false — reuses workers across files instead of one per file
+

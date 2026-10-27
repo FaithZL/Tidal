@@ -1,0 +1,176 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTrainingSession.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTrainingSession.test.ts (26 tests | 26 failed) 23ms
+   × only an opted-in complete and currently ready preparation can enter the training session 2ms
+   × training low-confidence loss keeps the original template while revoking live readiness 3ms
+   × training missing loss keeps the original template while revoking live readiness 1ms
+   × training absent loss keeps the original template while revoking live readiness 1ms
+   × training gap loss keeps the original template while revoking live readiness 1ms
+   × training stale loss keeps the original template while revoking live readiness 1ms
+   × training future loss keeps the original template while revoking live readiness 2ms
+   × training invalid-clock loss keeps the original template while revoking live readiness 1ms
+   × training invalid-id loss keeps the original template while revoking live readiness 1ms
+   × training invalid-time loss keeps the original template while revoking live readiness 1ms
+   × training duplicate loss keeps the original template while revoking live readiness 1ms
+   × training resized loss keeps the original template while revoking live readiness 1ms
+   × training invalid-size loss keeps the original template while revoking live readiness 1ms
+   × training moved loss keeps the original template while revoking live readiness 1ms
+   × small shoulder geometry revokes training readiness without deleting the session template 1ms
+   × continuous resized frames never reanchor or authorize training 1ms
+   × continuous moved frames never reanchor or authorize training 1ms
+   × fresh valid tracking restores a training session without recollecting a 1200ms pose window 1ms
+   × a rejected invalid-clock frame cannot poison training time or ID watermarks 1ms
+   × a rejected invalid-id frame cannot poison training time or ID watermarks 1ms
+   × a rejected invalid-time frame cannot poison training time or ID watermarks 1ms
+   × a rejected future frame cannot poison training time or ID watermarks 0ms
+   × a rejected resized frame still prevents replay of its valid timestamp or ID 1ms
+   × a rejected moved frame still prevents replay of its valid timestamp or ID 0ms
+   × training staleness and invalid clocks revoke readiness, and explicit suspension retains the session 1ms
+   × explicit reset clears the training session and its saved targets 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 26 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > only an opted-in complete and currently ready preparation can enter the training session
+TypeError: p.startTraining is not a function
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:45:12
+     43| test('only an opted-in complete and currently ready preparation can en…
+     44|   const p = new UpperBodyPreparation(undefined, 3000, true);
+     45|   expect(p.startTraining()).toBe(false);
+       |            ^
+     46|   const time = sample(p, 'lowered', 0); expect(p.startTraining()).toBe…
+     47|   sample(p, 'raised', time); expect(p.startTraining()).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training low-confidence loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training missing loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training absent loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training gap loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training stale loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training future loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training invalid-clock loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training invalid-id loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training invalid-time loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training duplicate loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training resized loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training invalid-size loss keeps the original template while revoking live readiness
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training moved loss keeps the original template while revoking live readiness
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:56:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > small shoulder geometry revokes training readiness without deleting the session template
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:65:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > continuous resized frames never reanchor or authorize training
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > continuous moved frames never reanchor or authorize training
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:75:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > fresh valid tracking restores a training session without recollecting a 1200ms pose window
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:86:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected invalid-clock frame cannot poison training time or ID watermarks
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected invalid-id frame cannot poison training time or ID watermarks
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected invalid-time frame cannot poison training time or ID watermarks
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected future frame cannot poison training time or ID watermarks
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:95:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected resized frame still prevents replay of its valid timestamp or ID
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > a rejected moved frame still prevents replay of its valid timestamp or ID
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:104:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > training staleness and invalid clocks revoke readiness, and explicit suspension retains the session
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:118:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/26]⎯
+
+ FAIL  tests/unit/upperBodyTrainingSession.test.ts > explicit reset clears the training session and its saved targets
+TypeError: result.p.startTraining is not a function
+ ❯ training tests/unit/upperBodyTrainingSession.test.ts:19:19
+     17| function training(config?: RecognitionConfig) {
+     18|   const result = completed(true, config);
+     19|   expect(result.p.startTraining()).toBe(true);
+       |                   ^
+     20|   return result;
+     21| }
+ ❯ tests/unit/upperBodyTrainingSession.test.ts:128:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/26]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  26 failed (26)
+   Start at  09:44:59
+   Duration  144ms (tests 45%, transform 34%, import 16%, worker 4%)
+

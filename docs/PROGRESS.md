@@ -1,5 +1,114 @@
 # Tidal 开发进度（2026-10-24，局部NPR与人物样片归档）
 
+## 最新追加：自动开局与持续摄像头修复提交范围（2026-10-27）
+
+用户明确授权将“标定后自动开始、摄像头持续识别”的修复提交并push到main，保留无关未提交工作、不部署。fetch后main/远端main均为`2cf5325418151c46480f1d71b2a3883d1ca8f88d`、无分叉。只读范围审查确认：当前修复依赖整局标定保留模型，并需一并保持默认关闭模拟、相机回调epoch保护和对应测试，避免仅提交最后browser片段造成行为/依赖不完整。
+
+本次提交包含相关源码、测试、当前规则、整局准备计划，以及auto-start/live-training/session-preparation/default-off四轮验证记录；recognition-off目录只选5份setup回调保护验证记录。已废弃的关闭识别计划、其余旧关闭识别证据、未使用的explicitAutoDemo辅助文件保持本地未提交。DEVELOPMENT_GUIDE第7节末将旧关闭识别方案称为“最新”的一段不进入提交版本，工作区原文仍保留。17份原始trace.zip共428,076,569字节原地保留未提交，不删除或扩大ignore；路径/大小/SHA见`artifacts/qa/camera-publish-20261027/local-traces.json`。
+
+提交前重新typecheck、lint与相关84/84单测均exit0；当前源码SHA与最终只读审查记录一致，沿用刚完成的对应E2E及正常生产构建证据，保留RED、中间失败、修正、复跑和真人待验限制，不宣称全verify通过。发布核验记录位于`artifacts/qa/camera-publish-20261027/`。本条记录用户授权与提交范围，实际commit/push结果另由Git确认后在会话报告，不预写成功；未执行部署。
+
+## 最新追加：标定保存后立即自动开始，无需再点击（2026-10-27）
+
+用户再次明确“标定保存了之后就直接开始，不要继续让用户操作”。只读当前页面辅助文字确认：3/3已保存、准备页仍显示追踪恢复0%和“手动继续”，六点里肘出框/腕低置信，Worker约15Hz仍返回；没有保存真人截图或姿态序列。源码确认任何onSuspend都会取消自动开始许可，且原完成后还有额外3秒准备等待，失焦/权限弹窗与这段等待都能阻断开局。本轮从main `2cf5325418151c46480f1d71b2a3883d1ca8f88d`继续，保存此前未提交工作和2,692份历史QA。
+
+三步成功保存的当前onFrame直接进入已有beginCameraTraining→startTraining→原训练倒计时；只关闭准备页，摄像头继续识别，不要求再次点击开始/继续。移除额外3秒准备cue，不修改领域原训练倒计时。自动开始许可在cameraPanel.start的同步清理之后建立一次，异步返回不再重建许可；准备期普通失焦/权限弹窗不取消，后台等待返回且有新有效profile再开始。只释放准备拥有的visibility/user暂停与重新标定已解决的相机tracking/source-error；显式停止、用户暂停、教学、换源/重置/异常仍取消，已经开始训练后的后台/失焦规则保留。更新准备提示和当前规则；默认无摄像头测试关闭、持续实时计数、整局模板保留、源隔离和SetupPanel防重入均不变。
+
+证据：`artifacts/qa/auto-start-20261027/`；commands.json为真实命令/退出码，cause.json、verification-scope.json与review.json说明原因、验证范围及只读复核。
+
+- 新自动开始用例先真实RED：4/4失败（完成当帧未开始、准备失焦、后台返回、权限窗口失焦），red.log/red-failures保留。随后补设备出错重新标定场景，核心5/5、exit0；core-green.log。覆盖不再额外点按钮、相机仍live、真实识别路径计1次、故障重开不会要求额外继续。
+- 8文件入口/恢复/暂停相关38项首轮35/38、exit1、5.8分钟；3项仅因新的失焦提示漏说“保留准备进度”，步骤保留状态断言已通过。保留原断言，按keepVisiblePreparation补回正确提示，未改阈值/超时/重试；regression-first-failures、regression-correction.json保留。最终核心5+准备诊断8共13/13、exit0、1.6分钟，final-entry.log；本轮43个不同相关场景分轮通过，不称首次38/38。两项上一轮已执行、此次不涉及的长整局循环未重跑，筛选命令与用例名在verification-scope.json。
+- 5个既有测试文件共31个定义保留。旧“完成但尚未开局”的负例现在显式停止动画建立前提，再检验原丢点/暂停/停止规则；普通完成和准备期失焦改为无点击自动进入。原文件/SHA及语义迁移见contract-before、contract-tests.json，无跳过/删负例。
+- 6文件84/84相关单测、exit0；typecheck、最终lint、build、diff检查通过。build再次strict检查，index-C-T3gzsD.js、browser-BA1LGkTw.js，既有500KB提示保留。本轮未跑全量unit/verify，也不把历史真人准确率当新证据。
+- 正常4176生产构建实际运行exit0：主动注入权限窗口blur，第三步完成帧立即进入训练状态，保存之后没有开始/继续点击，相机同一live视频/Worker保持；待机不增长、错误尺寸停计数保留模板、旧半次丢弃、新完整动作计1次，默认模拟关闭。桌面/390px共4张合成截图，0页面/控制台/HTTP错误及外源、无横向溢出，production.log、production/production.json。输入是假视频/人工六点，真人效果仍待重试。
+- 独立复核许可生命周期、暂停所有权、同步完成与回调隔离，无剩余P1/P2；最后提示调整只改变文案，review.json已更新最终源码SHA。
+
+2份重生成历史QA转存本轮regression后恢复，2,692份历史SHA全部一致。10份未涉及的此前源码/单测/夹具/动画测试逐字节不变，领域、输入、Worker、素材、许可、依赖和锁文件未动；qa-restoration.json、preservation.json。原PROGRESS正文保留，未stage/commit/push/部署；临时4176已停止，原5173保留。
+
+查看方式：刷新 http://127.0.0.1:5173/?art=npr-sample ，开启一次摄像头并完成三步，随后自动倒计时开始，不用再碰开始/继续按钮；镜头持续识别，三个运动阶段不重复准备。明确手动停止/暂停仍按用户选择保持。原手机/GPU/约60fps、最终美术与素材公开许可待验不变。
+
+## 最新追加：纠正三步完成关闭相机，恢复整局实时动作识别（2026-10-27）
+
+用户明确指出“识别完了之后，开始运动，就没有镜头识别了”，截图显示键盘模式和“摄像头与动作识别已关闭”。本轮纠正此前将“结束准备”解释为停止全部识别的错误：三步仅用于开局准备，完成后只关闭准备页，正式砍树/装车/拉车继续使用摄像头实际计数；整局不重复准备。无摄像头测试默认关闭及手动偏好保持。本条覆盖下面两轮关于完成后关闭识别的历史记录。
+
+从main `2cf5325418151c46480f1d71b2a3883d1ca8f88d`继续，先备份全部已有未提交文件及2,646份历史QA。根因确认：browser的onFrame和beginCameraTraining提前调用finishUpperBodyRecognition，将来源改成keyboard并stop视频/Worker；新失败测试在第三步完成后实际观测Worker应为1、却为0。选择性撤销这条关闭路径与Panel.finished状态，接回已有applyCameraProfile→startTraining→camera-readiness→setup-ready，沿用原3秒自动开始提示和暂停所有权。更新入口说明与当前规则；不更改模型、阈值、计数、持姿时序或依赖。此前SetupPanel两处epoch防重入、整局模板保留和默认关闭修改均保留。
+
+证据：`artifacts/qa/live-training-20261027/`；commands.json记录实际命令和退出码，cause.json、verification-plan.json记录范围与原因。
+
+- 先RED：新“完成后保持live camera”用例exit1，Worker0；red.log与red-failures保留。修复后核心7/7 E2E、exit0，包含默认关闭、同一视频流/Worker继续运行、无动作不计数、完整新动作计1次、无效观测不加次数，以及显式切模拟才释放相机；core-green.log。
+- 9文件相关E2E首轮42/43、10.6分钟、exit1。完整15次挥砍→15次装车→拉车、两个阶段切换、无效帧/半次清理/持姿不补算、暂停所有权均通过。唯一失败发生在completed-recovery的absent用例最初开启摄像头，尚未采完第一步或注入故障；trace确认启动已执行、帧数0、界面映射NotReadableError，不是过早点击，也不能证明实际设备被占用，无法区分getUserMedia或video.play底层来源。保留regression-first-failures，原样定向复跑1/1、exit0；e2e-regression.log、camera-start-recheck.log及initial-camera-failure.json。不能写成这一轮43/43全部通过。
+- 10个相关测试文件按最新语义恢复/迁移，42个测试定义数量保留（参数展开后另计），无跳过、删除负例或放宽超时/重试/门槛。原版本及SHA见contract-before、contract-tests.json；旧自动播放前提改为显式保存开启，默认关闭不回退。此前未再使用的explicitAutoDemo辅助文件保持原样，不清理无关工作。
+- 12文件239/239相关单测、exit0；typecheck、lint、build及diff检查通过。构建再次strict检查，index-CggBBHDi.js、browser-DHbssGgo.js，既有500KB提示保留。本轮未跑全量unit/verify；核心渲染器故障负例仍输出已记录的house加载取消错误，不混为正常生产结果。
+- 正常4176生产构建实际运行通过，桌面/390px共4张合成截图：准备后同一live视频/Worker持续，模拟关闭，待机不增长；异常尺寸不计次且保留3/3、无需重新准备，旧半次丢弃，全新完整动作计1次；刷新须新开相机准备。0页面/控制台/HTTP错误及外源，无横向溢出；production.log、production/production.json。这些是假视频与人工六点验证，不是物理摄像头准确率验收。
+- 独立只读复核无剩余P1/P2；运行代码无旧关闭路径/文案，任务转换不stop/reset模板，显式停止/切源/重置/结算仍释放资源，review.json。
+
+3份重生成QA已转存本轮regression并按原SHA恢复，2,646份全部一致。模型、SetupPanel、默认偏好、此前单测/夹具及非本轮动画测试等10份未涉及文件逐字节不变，领域/输入/Worker/素材/许可/锁文件/配置保持；qa-restoration.json、preservation.json。原PROGRESS正文保留，未stage/commit/push/部署。临时4176已停止，原5173开发服务保留。
+
+重新查看：刷新 http://127.0.0.1:5173/?art=npr-sample ，点摄像头识别并完成一次三步准备；开始运动后应继续显示相机预览与“上半身识别”，按实际动作推进。当前旧页的相机已经被旧实现关闭，需要用户显式重新开启一次；不自动申请设备。真人效果仍待本轮重试，原手机/GPU/约60fps、最终美术与素材公开许可待验保留。
+
+## 最新追加：无摄像头测试默认关闭（2026-10-27）
+
+用户明确要求“无摄像头测试，默认关闭！”，覆盖下述历史默认开启及三步完成后临时自动开启的行为。本轮从main `2cf5325418151c46480f1d71b2a3883d1ca8f88d`继续，先保存全部已有未提交文件与2,580份历史QA；不提交、push或部署。
+
+`readDemoPreference`仅在保存值严格为`true`时开启，首次访问、无效值和localStorage不可用均关闭并停留首页；用户明确保存的开启/关闭偏好仍有效。三步识别完成仍立即停止摄像头track、采样及Worker，清空实时识别，但不再强制开启自动模拟；按钮/空格可手动操作，自动模拟须由用户自行开启。保持此前停止重入修复、源隔离、暂停所有权与计数规则，未改动作阈值、依赖或素材。同步完成提示、AGENTS、开发指南和验收标准，历史正文保留。
+
+证据目录：`artifacts/qa/default-off-20261027/`，真实命令/时间/退出码见commands.json。
+
+- 新契约先RED：首次默认、非法保存值及三步后关闭3项均失败，red.log与red-failures保留。首轮GREEN为4/7、exit1；3项是新增用例在渲染器就绪前点击开关，被已有保护忽略。仅修正测试先等原acceptPlan可用及开关状态，不改产品门禁/超时/重试；green.log、first-green-failures与first-green-diagnosis.json保留。最终默认开关相关7/7、exit0，default-final.log。
+- 相关12文件57/57 E2E、7.4分钟、exit0，e2e-regression.log。原自动演示用例改为显式保存true或点击开启；三步后的完成/资源关闭断言迁移为手动关闭状态。原场景数量、暂停/失效负例与库存守恒保留，无跳过或放宽超时；旧文件及逐文件SHA/用例数见contract-before与contract-tests.json。
+- AutoDemoSource、SourceManager、SessionController相关22/22单测、exit0；typecheck、最终lint、build均exit0。构建再次执行strict检查，index-DxQ8EopC.js、browser-DN2aDTz4.js，原500KB提示保留。本轮未跑全量unit或verify，不能沿用上一轮748项为本轮结果。
+- 正常4176生产构建实际运行通过：首次关闭且不申请相机、不自动增加进度；三步完成仍关闭/Worker0/视频流断开/track ended，后续合成动作不计次；手动操作计1次，显式开启模拟可继续，关闭后刷新仍关闭。桌面与390px共3张截图，无横向溢出，0页面/控制台/HTTP错误与外源；production.log、production/production.json。测试输入是假视频与人工关键点，不代表真人准确率验证。
+- 核心测试中故意注入渲染器初始化失败的负例仍输出既有house加载取消错误；负例通过，正常生产无此错误，分别记录，不把负例控制台写成全轮零错误。独立只读审查未发现P1/P2，review.json。
+
+14份重生成QA已转存本轮regression，再恢复历史原路径；全部2,580份SHA一致，qa-restoration.json。此前模型、停止重入单测与夹具等7份未涉及文件逐字节保持；领域/输入/Worker、锁文件、配置、素材/.gitattributes/.gitignore未变，preservation.json。原PROGRESS正文按字节保留，临时4176已停止，原5173开发服务保留。本轮未stage/commit/push/部署，原真人/手机/GPU与最终美术待验不变。
+
+查看方式：刷新 http://127.0.0.1:5173/?art=npr-sample 。没有显式保存开启偏好时显示“无摄像头测试：关”；若此前手动开启过，仍尊重保存选择，可点关闭并记住。三步识别结束不会自行打开该开关。
+
+## 最新追加：三个姿态完成后立即关闭所有识别（2026-10-27）
+
+用户最新明确要求“三个识别完成之后立刻关闭识别功能，无论用户做什么动作都不要继续识别”，覆盖上一轮“只取消重复准备，仍按动作计数”的入口行为。本轮从main `2cf5325418151c46480f1d71b2a3883d1ca8f88d`继续，保留上轮全部未提交工作，先备份2,534份历史QA。按已有完整农场播放意图，完成后沿用明确标注的本局自动演示；这是本轮开头说明的实施选择，不是假称仍在识别真实运动，不是摄像头故障自动回退。没有新的commit/push/部署授权。
+
+第三步完成的当前onFrame先清CameraActionSource/profile和恢复令牌，切到keyboard/既有AutoDemoSource，再调用SetupPanel.stop，立即停止视频track、采样定时器和推理Worker；不依赖会被失焦/动画停止取消的自动开始许可，不等原3秒cue。只读3/3完成提示保留、ready=false、Panel不再accept/tick。后续动作、离开画面、无效数据不再影响本局；再次识别须显式开启。完成后关闭准备页并显示“摄像头与动作识别已关闭”，后续进度与奖励明确标注模拟。本局临时打开demoEnabled，不写入长期模拟偏好；只解除准备入口自己拥有的暂停，手动/教学/动画停止/visibility暂停保持。原全身方案、未完成准备规则、识别门槛和领域计数不改。
+
+同时修复确认的停止重入问题：SetupPanel.draw原本在calibration.accept/onFrame中stop后还会继续回写帧数和骨架。新增两处epoch检查，发生stop/restart立即结束当前draw。4个新单测真实RED（4失败、原33通过）后最小3行修复，SetupPanel/Worker/CameraService/SourceManager相关44/44通过；旧33项断言保留。底层Worker和SourceManager的旧回调隔离没有放宽。
+
+证据：`artifacts/qa/recognition-off-20261027/`；root命令/退出码见commands.json，停止重入见setup-commands.json，计划见docs/superpowers/plans/2026-10-27-recognition-off.md。
+
+- 新浏览器用例先RED：完成后Worker仍为1；接线后2/2通过。最终9文件43/43、5.6分钟、exit0，e2e-contract.log；涵盖完成即关闭、视频流为空/track ended/Worker0/帧数0、暂停与教学、后续无效动作不影响、15/15/持姿暂停与奖励守恒、原未完成及全身负例。
+- 用户改变了完成后的产品契约，8个已有E2E文件按新语义迁移，原41个场景数量保留，不跳过/删例、不放宽超时或门槛；旧文件完整存contract-before，逐例旧/新映射见contract-tests.json。原“后续真实动作计数”改为“关闭后不再接收动作、模拟流程及暂停守恒”，不能宣称这些断言原样不变。上一轮模型与其26个新单测保留未改。
+- 首轮全unit为747/748、exit1：`sampleShoulder.test.ts:73`既有密集几何测试超过5000ms。原样定向4/4、exit0，再原样全unit为69文件748/748、exit0。unit.log、shoulder-recheck.log、unit-recheck.log全部保留；超时根因未证实，没有修改该测试或超时配置。
+- typecheck、lint、build及diff检查通过；build再次strict类型检查，index-DzMKQKCF.js/browser-DhZcN9Tc.js。原500KB与FBX map提示保留，未改素材或依赖。
+- 正常4176生产构建实际运行，3张桌面/390px截图与资源断开、动作忽略、自动演示、模拟偏好/重置检查通过；0页面/控制台/HTTP错误或外源，无横向溢出。production-final.log、production/production.json。初次新截图脚本误写TS非空断言到.mjs，解析退出1、浏览器尚未启动；仅修正脚本后node --check和实际运行通过。另一次文档Python heredoc编码解析失败未改文件，改用apply_patch完成；probe-corrections.json记录，不隐去尝试失败。
+- 独立只读审查完成接线、暂停所有权、最后帧重入、旧回调和显式重开，无剩余P1/P2。完成横幅去掉会随手动转键盘而过时的固定模式承诺，当前输入由原modeBadge显示；review.json。
+
+4份重生成历史QA转存本轮regression后按原SHA恢复，2,534份全部一致，qa-restoration.json。此前源码模型、新单测、夹具、计划等未涉及部分逐字节保留，原PROGRESS正文保留；preservation.json。未stage/commit/push/部署，未改素材/许可/依赖/锁文件/.gitattributes/.gitignore，未重装或清理仓库。临时4176已停止，原5173开发服务保留。
+
+本轮自动化为假视频与人工关键点，未使用或保存真人影像，不声称真人准确率已验；未跑全量verify。原真实手机、硬件GPU/约60fps、最终美术、prototype与用户FBX再分发许可待验保留。刷新 http://127.0.0.1:5173/?art=npr-sample 后开启摄像头完成三步，之后会立即关闭识别；农场自动演示可手动暂停，身体动作不会再控制游戏。
+
+## 最新追加：整局只在开头准备一次，持续按真实动作计数（2026-10-27）
+
+用户明确选择“只取消重复准备，仍按我的动作计数”。本轮基于main `2cf5325418151c46480f1d71b2a3883d1ca8f88d`增量修改，起始工作区干净；本轮无新的提交/push/部署授权。先只读真实页面文字：当时砍树15/15、装车15/15、拉车0/60，3/3已保存，位置失配加visibility暂停，未见准备弹窗；未保存真人图像或姿态序列。源码确认普通任务转换没有主动清模板，但运行期恢复仍用1200ms/12帧准备窗口；新E2E另外稳定复现异常尺寸帧把活动中的3/3清为0/3。这是合成故障复现，不能倒推为用户现场的唯一原因。
+
+修改仅在有效模板成功应用并进入上半身训练时启用`startTraining()`。本局砍树→装车→拉车沿用原三姿态和肩部参考；运行期无效帧/时钟/尺寸/位置/质量/断档仍立即撤销ready、清半次、停止持姿计时，但保留模板。后续新观测通过原尺寸、参考位置、质量、时效与顺序门禁即可恢复输入资格，不再重新采1200ms稳定准备窗口；实际动作仍由原Recognizer确认完整循环或相邻有效持姿，不能靠保存的模板自动计数。合法但错尺寸/位置的帧消耗水位，坏元数据/未来/乱序帧不能污染水位；模板不自动漂移。初始三步和完成未开局的准备策略、strict默认及显式停止/换方案/重置/结束的清理保持，手动/visibility/动画停止暂停保持。CameraActionSource、SourceManager、SessionController及动作门槛未改。
+
+界面区分开局准备和运行期追踪，运行期隐藏采集进度与采样门槛，提示“本局标定已保存、当前不计次/不计时、有效画面恢复后继续、无需重复准备”。生产视检后同步左侧旧“保持稳定后自动继续”文字为“画面有效后自动继续”；纯派生文案，未改恢复逻辑。更新开发指南及验收D14/D15，旧历史正文保留。
+
+证据：`artifacts/qa/session-preparation-20261027/`；实际命令、退出码在commands.json及model-commands.json，计划在docs/superpowers/plans/2026-10-27-session-preparation.md。
+
+| 验证 | 本轮真实结果 |
+|---|---|
+| 先失败后修复 | 新26项模型先RED，再与相关旧例共196/196；新浏览器异常尺寸例先RED（3/3→0/3），实现后新2/2通过 |
+| 全单测 | 69文件、744/744，exit0，unit-final.log；原718项保留，新26项涵盖各类坏帧、不可污染水位、原模板不可变、fresh恢复及显式reset |
+| 相关浏览器回归 | 4文件、21/21、6.3分钟、exit0，e2e-regression.log；包含初次准备/完成入口、原位置和时序失效、暂停所有权、两个任务转换、完整15+15+持姿/库存守恒、半次丢弃与持姿无补算。原E2E断言/超时/重试未改，新fixture只增尺寸故障选项 |
+| 静态与构建 | typecheck、lint、git diff --check、build均exit0；最终build再次strict检查，入口index-BLdF0ezC.js、browser-DaIag19Y.js，原500KB及FBX map提示保留 |
+| 正常生产构建 | 4176非e2e构建两轮均exit0，最终3张桌面/390pxPNG；初次准备仍必需、活动异常保留3/3且不计次、半次丢弃、全新完整动作只计1次、刷新清模板；0页面/控制台/HTTP错误及外源，无横向溢出。production-final.log和production/production.json；初轮画面保存在production-before-prompt |
+| 独立审查与保留 | 只读审查模型水位/参考、browser任务恢复token/暂停所有权与UI，无剩余P1/P2；采集条断言增强为元素自身hidden属性，避免仅靠父弹窗隐藏通过。2,497份历史QA先备份后逐SHA核对，0份改变，qa-restoration.json；固定保护证据preservation.json |
+
+未stage/commit/push/部署，未改素材/许可/依赖/锁文件/.gitattributes/.gitignore，未重装、克隆、reset或clean。原PROGRESS正文按字节保留；临时4176检查后停止，原5173开发服务保留且HTTP200。以上自动化使用假视频与人工六点，不代表真人准确率已验；本轮未跑全量verify。原真实手机、硬件GPU/约60fps、最终美术、prototype与用户FBX再分发许可待验保留。
+
+下一步真人重试：刷新 http://127.0.0.1:5173/?art=npr-sample ，重新开启一次摄像头，完成开头三步；后续按实际动作完成砍树、装车和拉车，阶段切换不再重复准备。临时丢点仍停计数，回到准备时位置且有效画面恢复后继续；手动暂停或后台暂停仍需手动继续。
+
+
 ## 最新追加：识别功能提交推送授权与交付范围（2026-10-27）
 
 用户明确要求“先提交push”，随后重申“直接提交”“push”。本轮按授权将连续未提交的识别宽松度/关节反馈、上半身正式训练、准备诊断/恢复及结束准备入口连同测试、设计与验证记录整体交付main；它们存在源码依赖，不拆成缺少基础的最后一个修复。只读审查未发现其他无关未提交源码。远端fetch成功：origin/main为e382bf6，本地main为13a7113且领先1个此前已完成的整理提交，无分叉；推送包含该既有提交。本条记录交付范围，实际提交/推送结果由Git确认后在会话报告，不预写成功。

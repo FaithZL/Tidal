@@ -1,0 +1,7 @@
+{
+  "result": "4/7 pass, 3 new opt-in setup paths failed",
+  "cause": "New tests clicked before renderer was ready; existing setDemo renderUnavailable guard ignores the click. The tests then assumed the switch had enabled.",
+  "correction": "Wait for acceptPlan enabled, and assert aria-checked true before reload/start. No production guard, timeout or retry change.",
+  "recheck": "default-final.log:7/7 pass",
+  "expectedInjectedError": "Renderer-initialization failure negative case logs User house loading cancelled; it is deliberate failure injection, not a normal production preview error."
+}

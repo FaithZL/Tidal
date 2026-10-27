@@ -1,0 +1,33 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTrainingSession.test.ts"
+    ],
+    "exitCode": 1,
+    "durationSeconds": 0.451,
+    "log": "model-red.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts",
+      "tests/unit/upperBodyRecognizer.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyTeaching.test.ts",
+      "tests/unit/upperBodyTrainingSession.test.ts"
+    ],
+    "exitCode": 0,
+    "durationSeconds": 0.396,
+    "log": "model-green.log"
+  }
+]

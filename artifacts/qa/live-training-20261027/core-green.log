@@ -1,0 +1,45 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/default-off.spec.ts tests/e2e/default-demo.spec.ts
+
+[WebServer] (node:56181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:56201) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:56262) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:56290) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:56291) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads leave simulation off without hidden progression or camera access (4.9s)
+  ✓  2 tests/e2e/default-demo.spec.ts:19:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload (9.9s)
+  ✓  3 tests/e2e/default-demo.spec.ts:29:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads (7.6s)
+  ✓  4 tests/e2e/default-demo.spec.ts:39:1 › blocked browser storage defaults off and still permits explicit session-local simulation (5.1s)
+[WebServer] 12:23:07 PM [vite] (client) [Unhandled rejection] Error: User house loading cancelled
+[WebServer]  > UserHouseMount.dispose src/game/world/userHouseMount.ts:22:14
+[WebServer]     20 |    if(this.closed)return;this.closed=true;
+[WebServer]     21 |    if(this.model){this.model.root.removeFromParent();this.model.dispose();this.model=null;}
+[WebServer]     22 |    this.cancel(new Error('User house loading cancelled'));
+[WebServer]        |                ^
+[WebServer]     23 |   }
+[WebServer]     24 |  }
+[WebServer]  > FarmWorld.destroy src/game/world/FarmWorld.ts:215:72
+[WebServer]  > new FarmWorld src/game/world/FarmWorld.ts:122:21
+[WebServer]  > createGame src/game/createGame.ts:7:13
+[WebServer]  > src/browser.ts:71:13
+[WebServer] 
+  ✓  5 tests/e2e/default-demo.spec.ts:49:1 › a renderer initialization failure keeps default autoplay at home with no hidden progression (908ms)
+(node:56376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:23:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:23:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:23:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:23:09 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  6 tests/e2e/default-off.spec.ts:4:1 › completing all three poses keeps the live camera counting while simulation stays off (13.5s)
+  ✓  7 tests/e2e/default-off.spec.ts:24:1 › an unrecognized saved preference does not enable automatic play (732ms)
+
+  7 passed (45.4s)

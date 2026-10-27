@@ -1,21 +1,22 @@
 import {test,expect,type Page} from '@playwright/test';
 import {installUpperBodyFixture} from '../helpers/browserUpperBodyFixture.js';
 test.use({baseURL:'http://127.0.0.1:4174',channel:'chromium',launchOptions:{args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}});
-async function prepare(page:Page){
+async function prepare(page:Page,explicitStop=false){
  await installUpperBodyFixture(page);await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
  await page.goto('/?e2e=1&art=npr-sample');await page.locator('#cameraMode').click();await page.locator('#cameraStart').click();
  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');
  await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');
+ if(explicitStop)await page.locator('#setupAnimationStop').click();
  await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
 }
-test('completed preparation keeps 3/3 after a position change but starts only after returning to the original position',async({page})=>{
- await prepare(page);await page.evaluate(()=>{window.upperFixture.moved=true;});
+test('explicitly paused completed preparation keeps 3/3 and blocks start until returning to the original position',async({page})=>{
+ await prepare(page,true);await page.evaluate(()=>{window.upperFixture.moved=true;});
  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-ready','false');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');
  await expect(page.locator('#upperBodyReason')).toContainText('位置');await expect(page.locator('#upperBodyCue')).toContainText('原位置');
  await page.waitForTimeout(3400);await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#beginCamera')).toBeDisabled();
  await expect(page.locator('#app')).toHaveAttribute('data-phase','setup');await expect(page.locator('#chopValue')).toHaveText('0/15');
  await page.evaluate(()=>{window.upperFixture.moved=false;});await page.waitForTimeout(500);await expect(page.locator('#beginCamera')).toBeDisabled();
- await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:12000});await expect(page.locator('#chopValue')).toHaveText('0/15');
+ await expect(page.locator('#beginCamera')).toBeEnabled();await expect(page.locator('#statusTag')).not.toHaveText('训练中');await page.locator('#beginCamera').click();await page.locator('#animationStop').click();await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:12000});await expect(page.locator('#chopValue')).toHaveText('0/15');
 });
 test('active position change cannot count or carry a half rep across recovery',async({page})=>{
  await prepare(page);await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});

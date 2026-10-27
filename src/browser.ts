@@ -46,8 +46,8 @@ const sourceManager = new SourceManager();
 const audio = new AudioFeedback();
 const calibrationPanel = new CalibrationPanel($<HTMLDetailsElement>('calibrationPanel'));
 const upperBodyPanel=new UpperBodyPreparationPanel($('upperBodyPreparation'));
-let upperBodyMode=true,cameraEntryOwnsPause=false,cameraStartGeneration=0,cameraAutoReadyAt:number|null=null;
-let cameraAutoStart:{sessionId:string;ownsUserPause:boolean}|null=null;
+let upperBodyMode=true,cameraEntryOwnsPause=false;
+let cameraAutoStart:{sessionId:string;ownsUserPause:boolean;ownsVisibilityPause:boolean}|null=null;
 let cameraTrackingRecovery:{sessionId:string;sourceEpoch:number;returnToTraining:boolean;resumeTracking:boolean}|null=null;
 let upperCalibrationWasSaved=false;
 const cameraPreparationPanel={
@@ -79,6 +79,7 @@ const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCan
       if(renderUnavailable)return;
       updateCameraButton();
       monitorUpperBodyTracking();
+      tryAutomaticCameraStart();
       if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!cameraTrackingRecovery&&!hasCameraProfile())handleCameraTrackingLoss('跟踪或标定已失效，请重新准备',true);
       cameraInput.accept(frame);
       updateCameraFeedback();
@@ -86,14 +87,16 @@ const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCan
     onError: message => requireCameraPreparation(message,'source-error'),
     onSuspend: reason => {
       const keep=keepVisiblePreparation(reason),saved=canRecoverUpperBodyTracking();
-      cancelCameraAutoStart();cameraInput.clearProfile();
+      const automaticPreparation=hasAutomaticCameraPreparation();
+      if(!automaticPreparation)cancelCameraAutoStart();cameraInput.clearProfile();
       if(saved){
         beginCameraTrackingRecovery('页面失焦或进入后台；动作模板已保存，请恢复追踪后手动继续。');
         controller.command({kind:'pause',reason:'visibility'});
       }else if(keep)upperBodyPanel.setSuspendNotice('窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。');
-      else if(current.inputMode==='camera'&&running(current))requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');
+      else if(current.inputMode==='camera'&&running(current)&&!automaticPreparation)requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');
+      if(automaticPreparation)upperBodyPanel.setSuspendNotice(document.hidden?'准备暂时暂停；回到页面并完成三步后自动进入训练，无需点击开始。':keep?'窗口失焦，保留准备进度；完成三步后自动进入训练，无需点击开始。':'继续完成三步，保存后自动进入训练，无需点击开始。');
     },
-    onStop: () => {clearCameraTrackingRecovery();upperCalibrationWasSaved=false;cameraAutoStart=null;cameraAutoReadyAt=null;cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
+    onStop: () => {clearCameraTrackingRecovery();upperCalibrationWasSaved=false;cameraAutoStart=null;cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
   });
 const gamePreview=new GamePreview($('cameraPreview'),$<HTMLVideoElement>('cameraVideo'),$('setupPreviewHost'),$('gamePreviewHost'),message=>requireCameraPreparation(message,'source-error'));
 cameraPanel.setUpperBodyEnabled(upperBodyMode);
@@ -145,7 +148,20 @@ function pauseForUser():void{
   cancelCameraAutoStart();cameraEntryOwnsPause=false;
   animationOwnsUserPause=false;controller.command({kind:'pause',reason:'user'});
 }
-function cancelCameraAutoStart():void{cameraAutoStart=null;cameraAutoReadyAt=null;cameraStartGeneration++;upperBodyPanel.setStartMessage('');}
+function cancelCameraAutoStart():void{cameraAutoStart=null;upperBodyPanel.setStartMessage('');}
+function hasAutomaticCameraPreparation():boolean{return !!cameraAutoStart&&cameraAutoStart.sessionId===current.sessionId&&usingUpperBodyPreparation();}
+function cameraAutoStartBlocked():boolean{
+  const permit=cameraAutoStart;
+  return !permit||animationsStopped||tutorial.isOpen||current.pauseReasons.some(reason=>
+    reason==='user'?!permit.ownsUserPause:reason==='visibility'?!permit.ownsVisibilityPause:reason!=='tracking'&&reason!=='source-error');
+}
+function tryAutomaticCameraStart():void{
+  if(!cameraAutoStart)return;
+  if(!hasAutomaticCameraPreparation()){cancelCameraAutoStart();return;}
+  if(cameraAutoStartBlocked()){cancelCameraAutoStart();upperBodyPanel.setStartMessage('保留你的手动暂停，可在准备完成后继续。');return;}
+  if(document.hidden||!hasCameraProfile())return;
+  beginCameraTraining(true);
+}
 function setAnimationsStopped(stopped:boolean):void{
   if(animationsStopped===stopped)return;
   animationsStopped=stopped;stopHold();
@@ -193,9 +209,11 @@ function setCameraTrackingStatus(message:string):void{
 function clearCameraTrackingRecovery():void{
   cameraTrackingRecovery=null;setCameraTrackingStatus('');
 }
+function trackingRecoveryMessage(message:string):string{
+  return upperBodyPanel.getTrackingState().training?$('upperBodyReason').textContent??message:`${message} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`;
+}
 function beginCameraTrackingRecovery(message:string,trackingWasPaused=current.pauseReasons.includes('tracking')):void{
   if(!canRecoverUpperBodyTracking())return;
-  cameraAutoReadyAt=null;
   if(!cameraTrackingRecovery){
     const returnToTraining=running(current)&&!cameraPreparation;
     cameraTrackingRecovery={sessionId:current.sessionId,sourceEpoch:current.sourceEpoch,returnToTraining,
@@ -203,7 +221,7 @@ function beginCameraTrackingRecovery(message:string,trackingWasPaused=current.pa
   }
   cameraInput.clearProfile();cameraPanel.setFeedback(null);
   displayError=message;
-  setCameraTrackingStatus(`${message} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`);
+  setCameraTrackingStatus(trackingRecoveryMessage(message));
   controller.command({kind:'camera-readiness',ready:false});
   if(cameraTrackingRecovery.returnToTraining)controller.command({kind:'pause',reason:'tracking'});
   updateCameraButton();updateCameraFeedback();
@@ -229,7 +247,7 @@ function monitorUpperBodyTracking():void{
   if(!upperBodyPanel.getProfile()){
     const reason=$('upperBodyReason').textContent?.trim()||'上半身追踪暂时中断。';
     if(!cameraTrackingRecovery)beginCameraTrackingRecovery(reason);
-    else setCameraTrackingStatus(`${reason} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`);
+    else setCameraTrackingStatus(trackingRecoveryMessage(reason));
     return;
   }
   const recovery=cameraTrackingRecovery;
@@ -305,7 +323,7 @@ function openCameraPreparation():void{
   else controller.command({kind:'switch-source',mode:'camera'});
   cameraPreparation=running(current);
   cameraEntryOwnsPause=ownsPause;
-  recognitionSettingMessage=cameraPreparation?(ownsPause?'训练已暂停。准备完成后点击“结束准备，进入训练”即可继续。':'准备完成后可返回训练；保留你原有的暂停。'):'';
+  recognitionSettingMessage=upperBodyMode?'开局只做一次三步准备；完成后关闭准备页，摄像头继续按动作计数，砍树、装车和拉车之间不再重复准备。':cameraPreparation?(ownsPause?'训练已暂停。准备完成后点击“结束准备，进入训练”即可继续。':'准备完成后可返回训练；保留你原有的暂停。'):'';
   restoreCameraProfile();panel(controller.getSnapshot());
 }
 function restoreCameraProfile():void{
@@ -431,7 +449,7 @@ function panel(s: Readonly<SessionSnapshot>): void {
   setProperty(action,'textContent',s.inputMode==='camera'&&running(s)?'由摄像头姿态控制':demoEnabled&&phase!=='home'?'自动模拟已开启':phase === 'home' && planDismissed ? '查看今日计划' : s.task === 'carry' ? '按住拉车' : s.task === 'chop' ? '🪓 模拟一次挥砍' : s.task === 'load' ? '🪵 模拟一次装车' : '等待任务开始');
   setProperty($('actionPrompt'),'textContent',renderUnavailable?'3D画面不可用，请重新加载页面。':phase === 'countdown' ? `即将开始：${niceTask(s.task)}`
     : phase === 'rest' ? `休息 ${Math.ceil(s.remainingMs/1000)} 秒 · 下一个任务：${niceTask(s.task)}`
-    : trackingOnly ? '标定已保存，重新入镜并保持稳定后自动继续。'
+    : trackingOnly ? upperBodyPanel.getTrackingState().training?'本局标定已保存，画面有效后自动继续。':'标定已保存，重新入镜并保持稳定后自动继续。'
     : s.pauseReasons.length ? '当前已暂停，按继续按钮恢复。'
     : demoEnabled ? '自动演示中，可随时暂停或关闭无摄像头测试。'
     : usable && s.task ? instructions[s.task] : '准备开始今天的劳作。');
@@ -519,11 +537,13 @@ $('cameraExerciseMode').addEventListener('change',()=>{
   if(current.inputMode==='camera'){controller.command({kind:'camera-readiness',ready:false});if(running(current))cameraPreparation=true;}
   void cameraPanel.stop();panel(controller.getSnapshot());
 });
-$('cameraStart').addEventListener('click',async()=>{
+$('cameraStart').addEventListener('click',()=>{
   if(renderUnavailable)return;clearCameraTrackingRecovery();upperCalibrationWasSaved=false;const ownsUserPause=cameraEntryOwnsPause;
   setDemo(false);controller.command({kind:'switch-source',mode:'camera'});
-  const generation=++cameraStartGeneration,sessionId=current.sessionId;await cameraPanel.start();
-  if(generation===cameraStartGeneration&&upperBodyMode&&current.sessionId===sessionId&&$<HTMLVideoElement>('cameraVideo').srcObject&&!animationsStopped){cameraAutoStart={sessionId,ownsUserPause};cameraAutoReadyAt=null;}
+  // start() synchronously clears the previous request before awaiting device/model startup.
+  // Arm once here so a permission-window blur cannot cancel or later revive this request.
+  void cameraPanel.start();
+  if(upperBodyMode&&!animationsStopped&&!tutorial.isOpen)cameraAutoStart={sessionId:current.sessionId,ownsUserPause,ownsVisibilityPause:current.phase==='setup'||!current.pauseReasons.includes('visibility')};
 });
 $('cameraStop').addEventListener('click', () => { cancelCameraAutoStart();void cameraPanel.stop(); });
 $('beginDemo').addEventListener('click', () => {
@@ -537,10 +557,12 @@ function beginCameraTraining(automatic=false):void{
   const manualSetupStart=!automatic&&current.phase==='setup'&&!document.hidden;
   const permit=cameraAutoStart;
   const resumePreparationPause=!automatic&&cameraEntryOwnsPause&&!animationsStopped&&!tutorial.isOpen&&!document.hidden;
-  if(automatic&&(!permit||permit.sessionId!==current.sessionId||current.inputMode!=='camera'||animationsStopped||tutorial.isOpen||document.hidden||current.pauseReasons.some(reason=>reason!=='user'||!permit.ownsUserPause)))return;
+  if(automatic&&(!hasAutomaticCameraPreparation()||cameraAutoStartBlocked()||document.hidden))return;
   if(!hasCameraProfile())return;
   try{
-    if(!applyCameraProfile())return;clearCameraTrackingRecovery();cancelCameraAutoStart();cameraEntryOwnsPause=false;cameraPreparation=false;displayError='';
+    if(!applyCameraProfile())return;
+    if(upperBodyMode&&!upperBodyPanel.startTraining())return;
+    clearCameraTrackingRecovery();cancelCameraAutoStart();upperBodyPanel.setSuspendNotice('');cameraEntryOwnsPause=false;cameraPreparation=false;displayError='';
     controller.command({kind:'switch-source',mode:'camera'});
     controller.command({kind:'camera-readiness',ready:true});
     if(current.phase==='setup'){
@@ -548,6 +570,7 @@ function beginCameraTraining(automatic=false):void{
       if(manualSetupStart)controller.command({kind:'resume',reason:'visibility'});
     }
     else{controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});}
+    if(automatic&&permit?.ownsVisibilityPause)controller.command({kind:'resume',reason:'visibility'});
     if(automatic&&permit?.ownsUserPause||resumePreparationPause)controller.command({kind:'resume',reason:'user'});
   }catch(error){displayError=`标定不可用：${error instanceof Error?error.message:String(error)}。请重做标定或切换键盘。`;$('cameraStatus').textContent=displayError;}
 }
@@ -620,16 +643,7 @@ function animate(now:number):void {
   }
   controller.tick(now);
   cameraInput.tick(now);
-  if(cameraAutoStart){
-    if(cameraAutoStart.sessionId!==current.sessionId||current.inputMode!=='camera'||!['setup','countdown','active','rest'].includes(current.phase))cancelCameraAutoStart();
-    else if(!hasCameraProfile())cameraAutoReadyAt=null;
-    else if(animationsStopped||tutorial.isOpen||document.hidden||current.pauseReasons.some(reason=>reason!=='user'||!cameraAutoStart?.ownsUserPause)){
-      cancelCameraAutoStart();upperBodyPanel.setStartMessage('准备完成，保留当前暂停。请手动开始或继续。');
-    }else{
-      cameraAutoReadyAt??=now;upperBodyPanel.setStartMessage(`准备完成，${Math.max(0,Math.ceil((3000-now+cameraAutoReadyAt)/1000))} 秒后进入训练。`);
-      if(now-cameraAutoReadyAt>=3000)beginCameraTraining(true);
-    }
-  }
+  tryAutomaticCameraStart();
   if(previousFrameMs&&now>previousFrameMs){frameIntervals.push(now-previousFrameMs);if(frameIntervals.length>120)frameIntervals.shift();}previousFrameMs=now;
   if(now-diagnosticAtMs>=500){
     diagnosticAtMs=now;const debug=cameraInput.getDebug(),sorted=[...frameIntervals].sort((a,b)=>a-b);
