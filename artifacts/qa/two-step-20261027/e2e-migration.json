@@ -1,0 +1,90 @@
+{
+  "scope": "Existing upper-body E2E migration to user-requested two-step initial preparation; no test execution by migration agent. Parent owns autostart/start-once/new two-step tests.",
+  "preserved": "All case definitions, timeouts/retries and business negative assertions; full-body tests untouched. No helper edits.",
+  "definitionsBefore": 42,
+  "definitionsAfter": 42,
+  "files": [
+    {
+      "file": "tests/e2e/anchor-recovery.spec.ts",
+      "beforeSHA256": "ede72ab859b2e778b6fdee124bc7c45bf247574ccf8d50f72caddcb67958a30f",
+      "afterSHA256": "1bf51236a29f638760078136762aecb35c6dc2067697200ebaffa256ff004a5a",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "migration": "Saved 3/3 becomes 2/2; explicit animation stop is installed before final raised pose; position recovery/half-rep/zero progress retained."
+    },
+    {
+      "file": "tests/e2e/completed-recovery.spec.ts",
+      "beforeSHA256": "c2c314aef738d1eb43fecde36af701ec4b842512644a4813f074c1fa7673ecd8",
+      "afterSHA256": "d98caabc729860d2d9219d17f483e0e871625a73d44adf137147f7a2d545d403",
+      "testDefinitionsBefore": 11,
+      "testDefinitionsAfter": 11,
+      "migration": "Preparation completes on raised; manual stop and countdown fault observer are installed before final pose. All soft-loss, hard stop, manual pause, full-flow and carry no-backfill assertions retained. Existing prior countdown-resumes rename preserved."
+    },
+    {
+      "file": "tests/e2e/default-off.spec.ts",
+      "beforeSHA256": "85080db4e09c40649ca279ba49f0b126d826dba4d39885b7cc71efd1de611934",
+      "afterSHA256": "7e925ef7d195a323396fc7ebb23823b9cdf97181601cc70ff33efcf702bc7a79",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "migration": "Completion requires only lowered/raised; live camera/worker, no idle count, real full rep, simulation opt-in and cleanup retained."
+    },
+    {
+      "file": "tests/e2e/recognition-off.spec.ts",
+      "beforeSHA256": "ac9d590ed1fa813bf3e1357de87beb0749979db52538a3d4bb467707a8ff7c5d",
+      "afterSHA256": "80cdbec86695a9cdbcb78de20b1af15f81f00b0615dff5ec1508fd9f6816d3a4",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "migration": "Second-step checkpoint replaces third-step checkpoint; stop/tutorial precedes final raised pose. Live resources, invalid motion rejection, manual finish, recognized rep and explicit reset cleanup retained."
+    },
+    {
+      "file": "tests/e2e/preparation-feedback.spec.ts",
+      "beforeSHA256": "9cbaa77d1c50923d7915822e518708d6ccba993be01d967ceec048351ac87ef9",
+      "afterSHA256": "de45a2552e5d66b049a098439a5091125948746462933a16cc4953f9d0b22947",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "migration": "Skip removed third preparation wait; original joint color, quality, stale-feed and single-invalid-frame negatives retained; completed counter now2/2."
+    },
+    {
+      "file": "tests/e2e/preparation-finish.spec.ts",
+      "beforeSHA256": "d98b61e828bf9665edc9e90bcea7732e356e585fbd84c947698db3430d99f593",
+      "afterSHA256": "028f7e954a1a0971a4e05dce8865196ca4a207777b788296a456c2000ec8bb63",
+      "testDefinitionsBefore": 3,
+      "testDefinitionsAfter": 3,
+      "migration": "Stop moved before final raised pose and blur, preserving pause ownership; final raised pose completes preparation; original same-stream/manual finish/invalid readiness checks retained."
+    },
+    {
+      "file": "tests/e2e/preparation-recovery.spec.ts",
+      "beforeSHA256": "a91f50ecfa60c34a98f168fca85efebff3ab66d093e2d1fb1bb5fa06add0ad09",
+      "afterSHA256": "d5b0253c88318af6d4c97bf48b75e13f7bb244dfdf180981e943d22dc8319853",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "migration": "Two brief losses now both interrupt the still-incomplete second step, including partial positive sampling before the second loss; retains1/2 and reobserves second step. Sustained loss remains0/2 and cannot start."
+    },
+    {
+      "file": "tests/e2e/preparation-diagnostics.spec.ts",
+      "beforeSHA256": "b14eed8d9db292c573d3558f2ef929ee698fbb1501e880dfa34e6198330f4e17",
+      "afterSHA256": "78355537740b64bea4aa63e4f7558e15a4064781a8dd3eabc8496abb56790af1",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7,
+      "migration": "Third-step insufficient-hold-separation diagnostic migrated to insufficient-raised-range diagnostic at1/2; checkpoint/visibility cases now run before final raised pose. Completed, timeout, low-confidence, no-count and full-body unchanged-policy negatives retained.",
+      "initialMigrationSHA256": "fcfcf583c1d32c18f0766efd5bc42a93ec4933e85cd21d15c9d00f84d526959a",
+      "laterCorrection": "Synchronous blur-task capture preserves immediate readiness invalidation assertion; next frame may restore ready but cannot clear visibility pause. See regression-diagnosis.json."
+    },
+    {
+      "file": "tests/e2e/upper-body-flow.spec.ts",
+      "beforeSHA256": "e5f52bea6a26b8d3b04c03c0bab636fa662c2f3c1c0813258a29d58c06fd42bc",
+      "afterSHA256": "5e82559ef632f74cce18b55f702ddd01c5ad18c6c6b0e3c072831194ffe809bf",
+      "testDefinitionsBefore": 7,
+      "testDefinitionsAfter": 7,
+      "migration": "Entry omits third hold sample; manual stop happens before final raised pose. Full15/15/carry no-backfill, incomplete/unchanged pose, explicit pause and source-transition assertions retained."
+    },
+    {
+      "file": "tests/e2e/session-preparation.spec.ts",
+      "beforeSHA256": "0442f68dc5153d5ab3aa025eabf57851b7c2ff0a66af3342ac060630171050e6",
+      "afterSHA256": "5dbfe0b561af11bf634bd73b84cd4cfafe50c98a8cad4a31559279cbeb83db2b",
+      "testDefinitionsBefore": 2,
+      "testDefinitionsAfter": 2,
+      "migration": "Entry only observes lowered/raised, all runtime-loss/half-rep/drop old input/full farm task transitions and carry no-backfill assertions retained; saved counter2/2."
+    }
+  ]
+}

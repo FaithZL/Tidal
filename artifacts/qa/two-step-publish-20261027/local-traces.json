@@ -1,0 +1,37 @@
+{
+  "reason": "Raw synthetic Playwright traces remain local and uncommitted; corresponding logs, contexts and summaries included",
+  "count": 6,
+  "totalBytes": 217485999,
+  "files": [
+    {
+      "path": "artifacts/qa/start-once-20261027/entry-red-failures/start-once-repeated-tracki-b6f9d-aved-three-step-preparation/trace.zip",
+      "size": 39291682,
+      "sha256": "606326b8b8a02ca96795114ead416e4e55caf0f350ea3b55f74689a886d8a9dc"
+    },
+    {
+      "path": "artifacts/qa/start-once-20261027/entry-first-green-failures/start-once-repeated-tracki-b6f9d-aved-three-step-preparation/trace.zip",
+      "size": 51169407,
+      "sha256": "bbedf3cfc2d96d892f8511202bf4a9f8f5d82e2f30fa57230af1960db93cd7cb"
+    },
+    {
+      "path": "artifacts/qa/two-step-20261027/two-step-red-failures/two-step-preparation-only--0053c-ore-automatic-live-training/trace.zip",
+      "size": 28393330,
+      "sha256": "1c5920f0b8f65421facaabf3acd0fdac48571ec13b6ba4db2c715eebf553932f"
+    },
+    {
+      "path": "artifacts/qa/two-step-20261027/regression-first-failures/upper-body-flow-stopping-b-adefe-ny-deferred-automatic-start/trace.zip",
+      "size": 27307020,
+      "sha256": "0a2661bbb94376c214381992d72cf9a0c83f49d2263e4e5523c9845a8b702a59"
+    },
+    {
+      "path": "artifacts/qa/two-step-20261027/regression-first-failures/preparation-diagnostics-ac-79d43--and-pauses-on-visible-blur/trace.zip",
+      "size": 33378975,
+      "sha256": "d9f7ea869fa65b1da68c6f60e947833889d5c3a3e5b34d9795b8c8079a8a5f23"
+    },
+    {
+      "path": "artifacts/qa/countdown-reentry-20261027/continuity-red-failures/countdown-continuity-camer-9265b-ated-tracking-interruptions/trace.zip",
+      "size": 37945585,
+      "sha256": "6668b7cb0ee081706e8071fc169d403bb8dec5acef3d9f96fd98f701e04f2fab"
+    }
+  ]
+}

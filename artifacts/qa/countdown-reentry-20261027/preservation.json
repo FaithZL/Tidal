@@ -1,0 +1,17 @@
+{
+  "priorPendingFiles": 172,
+  "byteIdentical": 166,
+  "intentionalExtensions": [
+    "docs/PROGRESS.md",
+    "docs/ACCEPTANCE.md",
+    "src/domain/sessionController.ts",
+    "index.html",
+    "docs/DEVELOPMENT_GUIDE.md",
+    "src/browser.ts"
+  ],
+  "unexpectedChanges": [],
+  "originalDocumentBodiesPreserved": true,
+  "existingTestFilesModified": false,
+  "historicalQA": "2837 files SHA restored; one regenerated image archived under regression",
+  "result": "pass"
+}

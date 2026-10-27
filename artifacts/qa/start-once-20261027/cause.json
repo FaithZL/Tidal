@@ -1,0 +1,15 @@
+{
+  "head": "0fd886749f8dc8a64c72cdba7c39eff70f7b6bc2",
+  "confirmed": "camera-readiness:false reset a partially elapsed countdown to 5000ms on every tracking interruption",
+  "liveReadOnlyObservation": {
+    "phase": "active",
+    "savedSteps": "3/3",
+    "training": true,
+    "lastReset": "recovery-timeout: 1/3 -> 0/3",
+    "currentPause": "visibility plus tracking loss",
+    "realImagesOrLandmarksSaved": false
+  },
+  "calibrationResetLimitation": "No completed 3/3 -> 0/3 transition observed in the live page this round. Do not attribute prior user report to an unproven preview replay race. Verify saved calibration during repeated interruptions and full task transitions.",
+  "scope": "Freeze/resume the same countdown, block unready countdown advancement, exclude gaps; keep camera, preparation, source isolation and all manual pause policies unchanged.",
+  "review": "Independent read-only review found no P1/P2 issue in domain change and new regression coverage."
+}

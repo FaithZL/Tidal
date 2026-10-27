@@ -21,7 +21,8 @@ export class UpperBodyRecognizer implements Recognizer {
   constructor(profile: UpperBodyProfile, private readonly task: TaskKind, config: RecognitionConfig = recognitionConfig) {
     this.config = createRecognitionConfig(config);
     const reference = profile.reference;
-    const all = [profile.lowered, profile.raised, profile.hold].flatMap(vector => (['left', 'right'] as const)
+    const targets = profile.hold === null ? [profile.lowered, profile.raised] : [profile.lowered, profile.raised, profile.hold];
+    const all = targets.flatMap(vector => (['left', 'right'] as const)
       .flatMap(side => [vector[side].x, vector[side].y, vector[side].elbowDeg]));
     if (!all.every(Number.isFinite) || ![reference.width, reference.height, reference.scalePx].every(value => Number.isFinite(value) && value > 0) ||
       ![reference.center.x, reference.center.y].every(Number.isFinite) || reference.center.x < 0 || reference.center.x > reference.width ||
@@ -30,7 +31,7 @@ export class UpperBodyRecognizer implements Recognizer {
     for (const side of ['left', 'right'] as const) {
       if (profile.lowered[side].y - profile.raised[side].y < this.config.minPressTravelTorso)
         throw new Error('Upper-body raised calibration is not separable');
-      if (this.distance(profile.hold[side], profile.lowered[side]) <= Math.max(this.config.minPoseSeparation, this.config.minCarrySeparation / Math.sqrt(3)))
+      if (profile.hold !== null && this.distance(profile.hold[side], profile.lowered[side]) <= Math.max(this.config.minPoseSeparation, this.config.minCarrySeparation / Math.sqrt(3)))
         throw new Error('Upper-body hold calibration is not separable');
     }
     this.profile = structuredClone(profile);this.stream = new UpperBodyStream(this.config, this.profile.reference);
@@ -114,6 +115,14 @@ export class UpperBodyRecognizer implements Recognizer {
   }
   private holdInside(side: 'left' | 'right', ratio: number): boolean {
     if (!this.latest) return false;
+    if (this.profile.hold === null) {
+      // This front-view proxy is relative to the shoulders, not the midpoint of
+      // an asymmetric personal raising range. Neither sampled endpoint is a hold.
+      return [this.latest.raw, this.latest.smooth].every(f => Math.abs(f[side].y - .15) <= ratio &&
+        Math.abs(f[side].x) <= .5 + ratio && f[side].elbowDeg / 180 <= 1 - (1 - ratio) * .25 &&
+        this.distance(f[side], this.profile.lowered[side]) > this.config.minPoseSeparation &&
+        this.distance(f[side], this.profile.raised[side]) > this.config.minPoseSeparation);
+    }
     const target = this.profile.hold[side], release = this.profile.lowered[side], separation = this.distance(target, release);
     return [this.latest.raw, this.latest.smooth].every(f => this.distance(f[side], target) <= ratio * separation &&
       this.distance(f[side], target) < this.distance(f[side], release));

@@ -1,0 +1,14 @@
+{
+  "src/domain/sessionController.ts": {
+    "before": "821b950df31234aab2dfe18303e5dd454e24b931cc5250a51b18740113f51f1c",
+    "after": "821b950df31234aab2dfe18303e5dd454e24b931cc5250a51b18740113f51f1c"
+  },
+  "tests/unit/countdownRecovery.test.ts": {
+    "before": "7f37230c2728440c7fc8e176fa8e85a95255e29d8e42aff8c702469ce12e806c",
+    "after": "7f37230c2728440c7fc8e176fa8e85a95255e29d8e42aff8c702469ce12e806c"
+  },
+  "tests/unit/cameraReadiness.test.ts": {
+    "before": "779506d47f186b8abe420cd188f97e4957c6a6423510614a2f07408dffd16323",
+    "after": "779506d47f186b8abe420cd188f97e4957c6a6423510614a2f07408dffd16323"
+  }
+}

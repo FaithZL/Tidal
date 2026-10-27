@@ -1,0 +1,12 @@
+{
+  "request": "Remove third initial calibration; keep only lowered and raised.",
+  "selected": "Two observed calibration steps; direct automatic start on completion, saved2/2. Front-arm carry remains live standard-posture proxy using the calibrated vertical range and current joints, without fabricated personal hold example.",
+  "alternativesRejected": [
+    "Simply hide step3 still blocks profile availability.",
+    "Reuse raised as hold would change exercise to overhead holding."
+  ],
+  "carryLimit": "2D shoulder/elbow/wrist posture proxy, not confirmation of actual forward depth or weight; live gates and no-gap timing remain.",
+  "preserved": "Prior countdown-continuation fix and all unrelated pending work; no commit/push/deploy.",
+  "carryRule": "Raw and smooth wrist y relative to shoulders: abs(y-.15)<=hold ratio; lateral offset<=.5+ratio; elbowDeg/180<=1-(1-ratio)*.25; distance from both observed endpoints>minPoseSeparation. Existing entry/exit/confirmation/gap rules remain.",
+  "reviewAdjustment": "Rejected personal low/high midpoint after real-sample asymmetry regression; use shoulder/chest band instead."
+}

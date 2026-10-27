@@ -1,0 +1,152 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownRecovery.test.ts"
+    ],
+    "log": "countdown-red.log",
+    "startedUTC": "2026-10-27T05:37:11.299539+00:00",
+    "finishedUTC": "2026-10-27T05:37:11.715953+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/start-once.spec.ts"
+    ],
+    "log": "entry-red.log",
+    "startedUTC": "2026-10-27T05:37:38.585409+00:00",
+    "finishedUTC": "2026-10-27T05:37:52.534688+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownRecovery.test.ts"
+    ],
+    "log": "countdown-gap-red.log",
+    "startedUTC": "2026-10-27T05:38:15.860139+00:00",
+    "finishedUTC": "2026-10-27T05:38:16.228270+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownRecovery.test.ts",
+      "tests/unit/cameraReadiness.test.ts",
+      "tests/unit/sessionController.test.ts"
+    ],
+    "log": "domain-green.log",
+    "startedUTC": "2026-10-27T05:38:16.377168+00:00",
+    "finishedUTC": "2026-10-27T05:38:16.886132+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T05:38:43.403211+00:00",
+    "finishedUTC": "2026-10-27T05:38:44.612807+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T05:39:02.897173+00:00",
+    "finishedUTC": "2026-10-27T05:39:04.096121+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T05:39:45.500823+00:00",
+    "finishedUTC": "2026-10-27T05:39:47.370815+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-27T05:40:12.372471+00:00",
+    "finishedUTC": "2026-10-27T05:40:17.798179+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/start-once.spec.ts",
+      "tests/e2e/preparation-autostart.spec.ts",
+      "tests/e2e/session-preparation.spec.ts"
+    ],
+    "log": "entry-green.log",
+    "startedUTC": "2026-10-27T05:38:16.945661+00:00",
+    "finishedUTC": "2026-10-27T05:40:48.369506+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/start-once.spec.ts",
+      "tests/e2e/completed-recovery.spec.ts",
+      "-g",
+      "repeated tracking loss|initial countdown|tracking recovery cannot|active visibility recovery"
+    ],
+    "log": "entry-final.log",
+    "startedUTC": "2026-10-27T05:41:14.321603+00:00",
+    "finishedUTC": "2026-10-27T05:41:53.741791+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/start-once-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T05:42:12.848559+00:00",
+    "finishedUTC": "2026-10-27T05:42:33.723774+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "diff-check.log",
+    "startedUTC": "2026-10-27T05:43:33.229759+00:00",
+    "finishedUTC": "2026-10-27T05:43:33.245759+00:00",
+    "exitCode": 0
+  }
+]

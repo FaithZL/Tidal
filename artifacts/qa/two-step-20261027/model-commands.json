@@ -1,0 +1,106 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts"
+    ],
+    "log": "model-red.log",
+    "startedUTC": "2026-10-27T05:57:45.935668+00:00",
+    "finishedUTC": "2026-10-27T05:57:46.387970+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecognizer.test.ts",
+      "tests/unit/upperBodyTrainingSession.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts",
+      "tests/unit/upperCameraSource.test.ts"
+    ],
+    "log": "model-green.log",
+    "startedUTC": "2026-10-27T05:58:07.663467+00:00",
+    "finishedUTC": "2026-10-27T05:58:08.370713+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecognizer.test.ts",
+      "tests/unit/upperBodyTrainingSession.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts",
+      "tests/unit/upperCameraSource.test.ts"
+    ],
+    "log": "model-final.log",
+    "startedUTC": "2026-10-27T05:58:36.040762+00:00",
+    "finishedUTC": "2026-10-27T05:58:36.505346+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts"
+    ],
+    "log": "model-shoulder-band-red.log",
+    "startedUTC": "2026-10-27T06:03:37.867044+00:00",
+    "finishedUTC": "2026-10-27T06:03:38.189293+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts",
+      "-t",
+      "asymmetric"
+    ],
+    "log": "model-shoulder-observed-red.log",
+    "startedUTC": "2026-10-27T06:04:43.083014+00:00",
+    "finishedUTC": "2026-10-27T06:04:43.398152+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTwoStep.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecognizer.test.ts",
+      "tests/unit/upperBodyTrainingSession.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts",
+      "tests/unit/upperCameraSource.test.ts"
+    ],
+    "log": "model-shoulder-final.log",
+    "startedUTC": "2026-10-27T06:04:43.455153+00:00",
+    "finishedUTC": "2026-10-27T06:04:44.002887+00:00",
+    "exitCode": 0
+  }
+]

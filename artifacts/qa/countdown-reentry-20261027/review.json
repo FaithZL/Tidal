@@ -1,0 +1,21 @@
+{
+  "reviewer": "/root/repeated_start_audit",
+  "result": "No remaining P1/P2 in source/test review",
+  "checks": [
+    "loss/pause callback ordering only credits once",
+    "duplicate invalidation and pause do not double-charge",
+    "zero reached at loss edge does not start task",
+    "manual and visibility pauses retained",
+    "no gap backfill",
+    "keyboard/rest/next-task countdown retained",
+    "countdown numeral DOM retained through tracking loss"
+  ],
+  "limitation": "No real-camera accuracy or numeric2-to5 live reproduction proved",
+  "finalSHA256": {
+    "src/domain/sessionController.ts": "d8f5b1cf32715fa2e30058acfdec5453add30a9e74ebef81fcff97045d1dc6ba",
+    "src/browser.ts": "dcc7eb624ba06c26c67c0e9f35fe9b40a9318cf79d182e6cd5b433609e7e5d20",
+    "index.html": "cfbf89cbce0be8cbd7de4e7e4f584102f16373205247c42ffaed3eed76e1ce73",
+    "tests/unit/countdownEdges.test.ts": "0cb35ed64fe55be12bb52f712fa3a2fbb30e1fb1a19ebd670e30aa214044568e",
+    "tests/e2e/countdown-continuity.spec.ts": "744c710133db80cbf03c95bf9ccc206895f56ca4d4781a6871685fd1bced4298"
+  }
+}

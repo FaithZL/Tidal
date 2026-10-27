@@ -1,0 +1,96 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/countdownRecovery.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/countdownRecovery.test.ts (3 tests | 3 failed) 6ms
+   × repeated tracking loss freezes the elapsed countdown instead of starting five seconds again 4ms
+   × unready countdown cannot run before a pause callback and cannot backfill the lost interval 0ms
+   × tracking recovery preserves remaining time without releasing user or visibility pauses 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/countdownRecovery.test.ts > repeated tracking loss freezes the elapsed countdown instead of starting five seconds again
+AssertionError: expected { sessionId: 'session-1', …(18) } to match object { sessionId: 'session-1', …(3) }
+(15 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "chopReps": 0,
+    "phase": "countdown",
+-   "remainingMs": 2000,
++   "remainingMs": 5000,
+    "sessionId": "session-1",
+  }
+
+ ❯ tests/unit/countdownRecovery.test.ts:21:36
+     19|   controller.command({kind:'camera-readiness',ready:false});
+     20|   controller.command({kind:'pause',reason:'tracking'});tick(5000);
+     21|   expect(controller.getSnapshot()).toMatchObject({sessionId,phase:'cou…
+       |                                    ^
+     22|   controller.command({kind:'camera-readiness',ready:false});
+     23|   controller.command({kind:'camera-readiness',ready:true});
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/countdownRecovery.test.ts > unready countdown cannot run before a pause callback and cannot backfill the lost interval
+AssertionError: expected { sessionId: 'session-2', …(18) } to match object { phase: 'countdown', …(1) }
+(17 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "phase": "countdown",
+-   "remainingMs": 2000,
++   "phase": "active",
++   "remainingMs": 0,
+  }
+
+ ❯ tests/unit/countdownRecovery.test.ts:39:35
+     37|  const {controller,tick}=fixture();tick(3000);
+     38|  controller.command({kind:'camera-readiness',ready:false});tick(8000);
+     39|  expect(controller.getSnapshot()).toMatchObject({phase:'countdown',rem…
+       |                                   ^
+     40|  controller.command({kind:'camera-readiness',ready:true});tick(1999);
+     41|  expect(controller.getSnapshot()).toMatchObject({phase:'countdown',rem…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/countdownRecovery.test.ts > tracking recovery preserves remaining time without releasing user or visibility pauses
+AssertionError: expected { sessionId: 'session-3', …(18) } to match object { phase: 'countdown', …(2) }
+(16 matching properties omitted from actual)
+
+- Expected
++ Received
+
+@@ -2,7 +2,7 @@
+    "pauseReasons": [
+      "user",
+      "visibility",
+    ],
+    "phase": "countdown",
+-   "remainingMs": 2000,
++   "remainingMs": 5000,
+  }
+
+ ❯ tests/unit/countdownRecovery.test.ts:50:35
+     48|  controller.command({kind:'camera-readiness',ready:false});tick(5000);
+     49|  controller.command({kind:'camera-readiness',ready:true});controller.c…
+     50|  expect(controller.getSnapshot()).toMatchObject({phase:'countdown',rem…
+       |                                   ^
+     51|  controller.command({kind:'resume',reason:'user'});controller.command(…
+     52|  expect(controller.getSnapshot().phase).toBe('active');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  13:37:11
+   Duration  90ms (transform 49%, tests 24%, import 19%, worker 8%)
+

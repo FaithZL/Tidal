@@ -1,0 +1,144 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownEdges.test.ts"
+    ],
+    "log": "edges-red.log",
+    "startedUTC": "2026-10-27T06:32:00.054719+00:00",
+    "finishedUTC": "2026-10-27T06:32:00.524842+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/countdown-continuity.spec.ts"
+    ],
+    "log": "continuity-red.log",
+    "startedUTC": "2026-10-27T06:32:00.585608+00:00",
+    "finishedUTC": "2026-10-27T06:32:17.561526+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownEdges.test.ts"
+    ],
+    "log": "edges-boundary-red.log",
+    "startedUTC": "2026-10-27T06:32:44.085570+00:00",
+    "finishedUTC": "2026-10-27T06:32:44.471477+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownEdges.test.ts",
+      "tests/unit/countdownRecovery.test.ts",
+      "tests/unit/cameraReadiness.test.ts",
+      "tests/unit/session.test.mjs"
+    ],
+    "log": "edges-green.log",
+    "startedUTC": "2026-10-27T06:33:16.690489+00:00",
+    "finishedUTC": "2026-10-27T06:33:17.265853+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T06:33:56.582778+00:00",
+    "finishedUTC": "2026-10-27T06:33:57.984457+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T06:33:56.579945+00:00",
+    "finishedUTC": "2026-10-27T06:33:58.002899+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/countdown-continuity.spec.ts",
+      "tests/e2e/start-once.spec.ts",
+      "tests/e2e/preparation-autostart.spec.ts",
+      "tests/e2e/two-step-preparation.spec.ts"
+    ],
+    "log": "continuity-green.log",
+    "startedUTC": "2026-10-27T06:33:17.325077+00:00",
+    "finishedUTC": "2026-10-27T06:34:25.498678+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T06:34:27.059099+00:00",
+    "finishedUTC": "2026-10-27T06:34:28.771760+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-27T06:35:02.224354+00:00",
+    "finishedUTC": "2026-10-27T06:35:07.290946+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/animation-stop.spec.ts",
+      "tests/e2e/keyboard-flow.spec.ts",
+      "-g",
+      "initial countdown|rest waits|active visibility|manual setup|continue preserves|stopping before assets|two complete keyboard|P works|Escape opens"
+    ],
+    "log": "regression.log",
+    "startedUTC": "2026-10-27T06:35:31.000891+00:00",
+    "finishedUTC": "2026-10-27T06:37:59.151733+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/countdown-reentry-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T06:39:08.974995+00:00",
+    "finishedUTC": "2026-10-27T06:39:27.443091+00:00",
+    "exitCode": 0
+  }
+]

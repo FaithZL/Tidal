@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/countdownEdges.test.ts tests/unit/countdownRecovery.test.ts tests/unit/cameraReadiness.test.ts tests/unit/upperBodyTwoStep.test.ts tests/unit/upperBodyTeachingAlignment.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  5 passed (5)
+      Tests  65 passed (65)
+   Start at  14:44:55
+   Duration  184ms (tests 42%, import 26%, transform 26%, worker 5%)
+

@@ -8,8 +8,7 @@ async function start(page:Page,blurDuringOpen=false){
  await page.locator('#cameraStart').click();await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');
 }
 async function finishPoses(page:Page){
- await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');
- await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+ await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
 }
 async function liveTraining(page:Page,expectedTracks=1){
  await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();
@@ -17,7 +16,7 @@ async function liveTraining(page:Page,expectedTracks=1){
  await expect.poll(()=>page.evaluate(()=>window.upperFixture.workers)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(expectedTracks);expect(await page.evaluate(()=>window.upperFixture.tracks.at(-1)!.readyState)).toBe('live');
  await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#modeBadge')).toContainText('上半身');
 }
-test('the frame that saves the third pose enters training immediately without a second start countdown',async({page})=>{
+test('the frame that saves the second pose enters training immediately without a second start countdown',async({page})=>{
  await start(page);await page.evaluate(()=>{
   const node=document.getElementById('upperBodyPreparation')!;
   const observer=new MutationObserver(()=>{if(node.dataset.step==='complete'){observer.disconnect();requestAnimationFrame(()=>{node.dataset.startedAtCompletion=String(node.dataset.training==='true'&&document.getElementById('app')!.dataset.phase!=='setup');});}});
@@ -26,7 +25,7 @@ test('the frame that saves the third pose enters training immediately without a 
  await finishPoses(page);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-started-at-completion','true');await liveTraining(page);
 });
 test('visible blur during preparation cannot revoke the automatic start after all poses are saved',async({page})=>{
- await start(page);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodyStepCount')).toContainText('1/3');
+ await start(page);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodyStepCount')).toContainText('1/2');
  await finishPoses(page);await liveTraining(page);await expect(page.locator('#upperBodySuspendNotice')).not.toContainText('手动');
  await page.evaluate(()=>{window.upperFixture.pose='lowered';});await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
  await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#inputDebug')).toContainText(' · chop-down ·');await page.waitForTimeout(400);

@@ -1,0 +1,63 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/two-step-preparation.spec.ts
+
+[WebServer] (node:64660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:64680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:64746) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:64773) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:64779) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:57:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:57:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:57:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:57:31 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/two-step-preparation.spec.ts:5:1 › only lowered and raised preparation are required before automatic live training (12.3s)
+
+
+  1) tests/e2e/two-step-preparation.spec.ts:5:1 › only lowered and raised preparation are required before automatic live training 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "complete"
+    Received: "hold"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        7 × locator resolved to <section data-step="raised" data-ready="false" aria-label="上半身自动准备" data-training="false" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>
+          - unexpected value "raised"
+        11 × locator resolved to <section data-step="hold" data-ready="false" aria-label="上半身自动准备" data-training="false" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation" data-requested-third-step="true">…</section>
+           - unexpected value "hold"
+
+
+      14 |   window.upperFixture.pose='raised';
+      15 |  });
+    > 16 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+         |                                                      ^
+      17 |  await expect(page.locator('#upperBodyStepCount')).toContainText('2/2');
+      18 |  expect(await page.locator('#upperBodyPreparation').getAttribute('data-requested-third-step')).toBeNull();
+      19 |  await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#setupModal')).toBeHidden();
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/two-step-preparation.spec.ts:16:54
+
+    Error Context: test-results/two-step-preparation-only--0053c-ore-automatic-live-training/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/two-step-preparation-only--0053c-ore-automatic-live-training/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/two-step-preparation-only--0053c-ore-automatic-live-training/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/two-step-preparation.spec.ts:5:1 › only lowered and raised preparation are required before automatic live training 

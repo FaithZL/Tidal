@@ -1,0 +1,7 @@
+{
+  "firstGreen": "220/222, two new probe assertions failed; all legacy tests passed",
+  "corrections": [
+    "Use 12-digit approximate equality for arithmetic mean 0.9444444444444445 vs fixture rational 0.9444444444444444.",
+    "Stale frames never advance the stream watermark; explicitly expect returning first frame gap rejection, then require full fresh 500ms confirmation. No recognizer timing relaxed."
+  ]
+}

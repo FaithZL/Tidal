@@ -1,0 +1,13 @@
+{
+  "reviewer": "repeated_start_audit",
+  "result": "no P1/P2 found",
+  "source": "src/domain/sessionController.ts",
+  "sourceSHA256": "821b950df31234aab2dfe18303e5dd454e24b931cc5250a51b18740113f51f1c",
+  "findings": [
+    "Readiness changes preserve countdown remainder and exclude gaps.",
+    "Duplicate ready signals do not continually reset the time baseline.",
+    "Unready countdown cannot advance if the pause callback has not run.",
+    "User/visibility pause and active source isolation unchanged.",
+    "No speculative GamePreview change; native relocation did not reproduce a failure."
+  ]
+}

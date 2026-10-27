@@ -1,0 +1,25 @@
+{
+  "reviewer": "/root/repeated_start_audit",
+  "result": "No remaining P1/P2 from read-only source/test review",
+  "resolved": [
+    "Asymmetric personal raise range no longer shifts front-hold target above shoulders",
+    "Both tutorial renderer joint coordinates align with all five hold levels",
+    "No unsampled third personal template or stale teaching claims"
+  ],
+  "preserved": [
+    "live camera recognition",
+    "original quality and confirmation rules",
+    "interruption no-backfill protection"
+  ],
+  "limitation": "Source and test coverage review only, not physical-camera accuracy",
+  "finalSHA256": {
+    "src/pose/upperBody.ts": "781e4077ac3420ab55e7591355e95e188c7301d937363d847aace2993467d752",
+    "src/pose/recognizers/upperBodyRecognizer.ts": "eb2a72829349bceee6383eded60b473c29da2648f924aee165b6b311dbbcdd32",
+    "src/ui/upperBodyPreparationPanel.ts": "5c7dab79c66f9944dd4bb914a0e237824773eb58a3bd66adf3e4534bc13c8da6",
+    "src/ui/exerciseTutorialModel.ts": "935776837b00f1aa7cbe8f4555c552d5c4034f27a274ee74fec00ea67b84a85a",
+    "src/browser.ts": "91da5e3429f15b8be0893a7ad62d7de2591f60fc899067cee5542b175f2e6c30",
+    "index.html": "2f69ca71e4a0b3b07b807a522e254c21ed4fb2b75108259760217aa28b8b38d0",
+    "tests/unit/upperBodyTwoStep.test.ts": "3cf94903ccbe6cec690569cec7d5d16d31434b605620e74c91ede103f6831c0d",
+    "tests/unit/upperBodyTeachingAlignment.test.ts": "cacc2c216fd2871b48250ad8e624985e3d8326d2e31aacd883e8b273df26b9e3"
+  }
+}

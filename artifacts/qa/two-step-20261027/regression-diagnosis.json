@@ -1,0 +1,15 @@
+{
+  "firstRun": "43/45 passed, exit1, 9.0 minutes; three full farm flow cases passed",
+  "failures": [
+    {
+      "test": "preparation-diagnostics: actual active training ... visible blur",
+      "cause": "Async locator check missed instantaneous ready=false; next valid camera frame already restored ready=true while visibility pause and zero counts correctly remained.",
+      "correction": "Capture ready=false, step complete and begin disabled synchronously in the blur event task; preserve all three assertions, then verify recovered readiness cannot resume training or count."
+    },
+    {
+      "test": "upper-body-flow: stopping before the final raised pose",
+      "cause": "Before first preparation pose: camera request made, zero returned frames, NotReadableError-mapped UI at cleanup. Underlying browser/video initialization cause not proven; no physical-camera occupancy claim.",
+      "correction": "Product/test unchanged; targeted original rerun, no timeout/retry changes."
+    }
+  ]
+}

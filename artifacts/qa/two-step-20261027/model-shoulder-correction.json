@@ -1,0 +1,9 @@
+{
+  "reason": "A midpoint of an asymmetric lowered/raised range can sit above the shoulders and reject an actual chest-height front hold.",
+  "reproduction": "Three tests (left/right/both) actually prepare accepted in-frame samples with shoulders y280, asymmetric lowered wrist y334 and raised wrist y28; then front wrist y298 has tracking ready but holding=false before fix.",
+  "fix": "Standard front proxy uses abs(wristY-0.15)<=hold ratio in shoulder-width units, with distance from both observed endpoints greater than minPoseSeparation. Lateral/bend/quality/raw+smooth/confirmation/gap gates retained.",
+  "newNegatives": "Bent-elbow lowered or raised endpoints still cannot count even when inside the standard shoulder band.",
+  "testMigration": "New leniency hysteresis test now chooses shoulder-space drift between enter/exit bands, retaining warm-hold/cold-no-start and endpoint release assertions.",
+  "results": "3 targeted RED failures, then 227/227 related unit tests pass.",
+  "recognizerSHA256": "eb2a72829349bceee6383eded60b473c29da2648f924aee165b6b311dbbcdd32"
+}

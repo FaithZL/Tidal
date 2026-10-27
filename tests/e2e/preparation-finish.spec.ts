@@ -5,10 +5,8 @@ async function savedAfterBlur(page:Page,explicitStop=false){
  await installUpperBodyFixture(page);await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
  await page.goto('/?e2e=1&art=npr-sample');await page.locator('#cameraMode').click();await page.locator('#cameraStart').click();
  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await expect(page.locator('#finishUpperPreparation')).toBeHidden();
- await page.evaluate(()=>{window.dispatchEvent(new Event('blur'));window.upperFixture.pose='raised';});
- await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');
  if(explicitStop)await page.locator('#setupAnimationStop').click();
- await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+ await page.evaluate(()=>{window.dispatchEvent(new Event('blur'));window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
 }
 test('completion automatically exits preparation after blur and keeps the same live camera for a real recognized rep',async({page})=>{
  await savedAfterBlur(page);await expect(page.locator('#setupModal')).toBeHidden();
@@ -31,7 +29,7 @@ for(const paused of [false,true])test(`completion releases only the pause owned 
  await expect(page.locator('#statusTag')).toHaveText('训练中');if(paused)await page.locator('#pauseBtn').click();
  await page.locator('#cameraMode').click();const before=await page.locator('#chopValue').textContent();await page.locator('#cameraStart').click();
  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await page.evaluate(()=>{window.upperFixture.pose='raised';});
- await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});
+ await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
  if(paused){await expect(page.locator('#setupModal')).toBeVisible();await expect(page.locator('#finishUpperPreparation')).toBeEnabled();await page.locator('#finishUpperPreparation').click();}
  await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#statusTag')).toHaveText(paused?'已暂停':'训练中');await expect(page.locator('#chopValue')).toHaveText(before!);
  expect(await page.evaluate(()=>window.upperFixture.tracks[0].readyState)).toBe('live');

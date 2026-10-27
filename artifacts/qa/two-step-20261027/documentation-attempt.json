@@ -1,0 +1,5 @@
+{
+  "command": "Python heredoc for current rules and acceptance edits",
+  "exitCode": 1,
+  "result": "Non-UTF-8 SyntaxError while parsing stdin; no document was written. Applied exact edits with apply_patch afterward."
+}

@@ -100,6 +100,14 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
       coins: config.coinReward, stamina: config.staminaReward, reward: 'tshirt' });
   }
   function isPaused(): boolean { return snapshot.pauseReasons.length > 0; }
+  function settleCameraCountdown(): void {
+    if (snapshot.phase !== 'countdown' || snapshot.inputMode !== 'camera' || !cameraReady || isPaused()) return;
+    const delta = clock.nowMs() - lastTickMs;
+    // Preserve the short ready interval before a loss edge, even if no render tick
+    // occurred inside it. Never backfill a stale gap or start a task on a loss callback.
+    if (Number.isFinite(delta) && delta > 0 && delta <= config.trackingMaxAgeMs)
+      snapshot.remainingMs = Math.max(0, snapshot.remainingMs - delta);
+  }
   function getSnapshot(): Readonly<SessionSnapshot> {
     return Object.freeze({ ...snapshot, pauseReasons: Object.freeze([...snapshot.pauseReasons]) });
   }
@@ -129,11 +137,14 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
       lastTickMs = clock.nowMs();
       countdown('chop');
     } else if (cmd.kind === 'camera-readiness') {
-      cameraReady = cmd.ready;
-      if (!cameraReady && snapshot.inputMode === 'camera' && snapshot.phase === 'countdown') {
-        snapshot.remainingMs = config.startCountdownMs;
+      if (cameraReady !== cmd.ready && snapshot.inputMode === 'camera' && snapshot.phase === 'countdown') {
+        // Recovery continues the same countdown; never charge an unobserved gap.
+        if (!cmd.ready) settleCameraCountdown();
+        lastTickMs = clock.nowMs();
       }
+      cameraReady = cmd.ready;
     } else if (cmd.kind === 'pause' && snapshot.phase !== 'home' && snapshot.phase !== 'results') {
+      settleCameraCountdown();
       const restTracking = cmd.reason === 'tracking' && snapshot.inputMode === 'camera' && snapshot.phase === 'rest';
       if (cmd.reason === 'tracking' && snapshot.inputMode === 'camera') cameraReady = false;
       if (!restTracking && !snapshot.pauseReasons.includes(cmd.reason)) snapshot.pauseReasons = [...snapshot.pauseReasons, cmd.reason];
@@ -233,7 +244,7 @@ export function createSessionController(config: Readonly<DemoConfig>, clock: Clo
     if (snapshot.sessionStartedAtMs !== null && snapshot.phase !== 'results') {
       snapshot.sessionElapsedMs = Math.max(0, nowMs - snapshot.sessionStartedAtMs);
     }
-    if (isPaused()) return;
+    if (isPaused() || (snapshot.phase === 'countdown' && snapshot.inputMode === 'camera' && !cameraReady)) return;
     if (snapshot.phase === 'active') {
       if (snapshot.task === 'carry') {
         if (nowMs - carrySampleAtMs > config.trackingMaxAgeMs) {

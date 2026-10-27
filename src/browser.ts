@@ -94,7 +94,7 @@ const cameraPanel = new SetupPanel($<HTMLVideoElement>('cameraVideo'), $<HTMLCan
         controller.command({kind:'pause',reason:'visibility'});
       }else if(keep)upperBodyPanel.setSuspendNotice('窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。');
       else if(current.inputMode==='camera'&&running(current)&&!automaticPreparation)requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');
-      if(automaticPreparation)upperBodyPanel.setSuspendNotice(document.hidden?'准备暂时暂停；回到页面并完成三步后自动进入训练，无需点击开始。':keep?'窗口失焦，保留准备进度；完成三步后自动进入训练，无需点击开始。':'继续完成三步，保存后自动进入训练，无需点击开始。');
+      if(automaticPreparation)upperBodyPanel.setSuspendNotice(document.hidden?'准备暂时暂停；回到页面并完成两步后自动进入训练，无需点击开始。':keep?'窗口失焦，保留准备进度；完成两步后自动进入训练，无需点击开始。':'继续完成两步，保存后自动进入训练，无需点击开始。');
     },
     onStop: () => {clearCameraTrackingRecovery();upperCalibrationWasSaved=false;cameraAutoStart=null;cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
   });
@@ -210,7 +210,7 @@ function clearCameraTrackingRecovery():void{
   cameraTrackingRecovery=null;setCameraTrackingStatus('');
 }
 function trackingRecoveryMessage(message:string):string{
-  return upperBodyPanel.getTrackingState().training?$('upperBodyReason').textContent??message:`${message} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`;
+  return upperBodyPanel.getTrackingState().training?$('upperBodyReason').textContent??message:`${message} 已保存2/2；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做两个姿态。`;
 }
 function beginCameraTrackingRecovery(message:string,trackingWasPaused=current.pauseReasons.includes('tracking')):void{
   if(!canRecoverUpperBodyTracking())return;
@@ -323,7 +323,7 @@ function openCameraPreparation():void{
   else controller.command({kind:'switch-source',mode:'camera'});
   cameraPreparation=running(current);
   cameraEntryOwnsPause=ownsPause;
-  recognitionSettingMessage=upperBodyMode?'开局只做一次三步准备；完成后关闭准备页，摄像头继续按动作计数，砍树、装车和拉车之间不再重复准备。':cameraPreparation?(ownsPause?'训练已暂停。准备完成后点击“结束准备，进入训练”即可继续。':'准备完成后可返回训练；保留你原有的暂停。'):'';
+  recognitionSettingMessage=upperBodyMode?'开局只做一次两步准备；完成后关闭准备页，摄像头继续按动作计数，砍树、装车和拉车之间不再重复准备。':cameraPreparation?(ownsPause?'训练已暂停。准备完成后点击“结束准备，进入训练”即可继续。':'准备完成后可返回训练；保留你原有的暂停。'):'';
   restoreCameraProfile();panel(controller.getSnapshot());
 }
 function restoreCameraProfile():void{
@@ -462,13 +462,18 @@ function panel(s: Readonly<SessionSnapshot>): void {
     : phase === 'active' && s.task ? instructions[s.task]
     : '从一件小事开始，让这座农场苏醒。');
   const countdown = $('countdown');
-  setClass(countdown,'compact',phase === 'rest' || s.pauseReasons.length > 0);
+  setClass(countdown,'compact',phase === 'rest' || phase !== 'countdown' && s.pauseReasons.length > 0);
   setProperty(countdown,'hidden',phase !== 'rest' && phase !== 'countdown' && !s.pauseReasons.length);
-  if(renderUnavailable)setProperty(countdown,'innerHTML','画面不可用<small>请重新加载页面</small>');
-  else if(trackingOnly)setProperty(countdown,'innerHTML','等待追踪<small>重新入镜后自动继续</small>');
-  else if(s.pauseReasons.length) setProperty(countdown,'innerHTML','已暂停<small>点击继续后恢复</small>');
-  else if(phase === 'rest') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}s<small>休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}</small>`);
-  else if(phase === 'countdown') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}<small>做好准备，即将开始</small>`);
+  // Keep one countdown and its remaining numeral on screen through interruptions.
+  // Replacing the whole card with "waiting" made the same 5 look like a fresh start.
+  const countdownValue=renderUnavailable?'画面不可用':phase==='countdown'?String(Math.ceil(s.remainingMs/1000))
+    :trackingOnly?'等待追踪':s.pauseReasons.length?'已暂停':phase==='rest'?`${Math.ceil(s.remainingMs/1000)}s`:'';
+  const countdownHint=renderUnavailable?'请重新加载页面':phase==='countdown'
+    ?trackingOnly?'等待追踪 · 恢复后接着倒计时':s.pauseReasons.length?'倒计时已暂停 · 点击继续后恢复':'做好准备，即将开始'
+    :trackingOnly?'重新入镜后自动继续':s.pauseReasons.length?'点击继续后恢复'
+    :phase==='rest'?`休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}`:'';
+  setProperty($('countdownValue'),'textContent',countdownValue);
+  setProperty($('countdownHint'),'textContent',countdownHint);
   const idx = s.task === 'chop' ? 0 : s.task === 'load' ? 1 : s.task === 'carry' ? 2 : phase === 'results' ? 3 : -1;
   (['chop','load','carry'] as TaskKind[]).forEach((t,i) => {
     const node = $(`step-${t}`);setClass(node,'current',idx===i);setClass(node,'done',idx>i);

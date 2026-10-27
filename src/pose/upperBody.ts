@@ -4,7 +4,7 @@ import { landmarkConfidence } from './features.js';
 import type { RecognitionFeedback } from './recognitionFeedback.js';
 export interface UpperBodyVector { left: { x: number; y: number; elbowDeg: number }; right: { x: number; y: number; elbowDeg: number } }
 export interface UpperBodyFeatures extends UpperBodyVector { frameId: number; capturedAtMs: number; width: number; height: number; center: { x: number; y: number }; scalePx: number }
-export interface UpperBodyProfile { lowered: UpperBodyVector; raised: UpperBodyVector; hold: UpperBodyVector; reference: { width: number; height: number; center: { x: number; y: number }; scalePx: number } }
+export interface UpperBodyProfile { lowered: UpperBodyVector; raised: UpperBodyVector; /** Null selects the standard front-hold proxy; no third posture was sampled. */ hold: UpperBodyVector | null; reference: { width: number; height: number; center: { x: number; y: number }; scalePx: number } }
 type Point = { x: number; y: number };
 type Reference = UpperBodyProfile['reference'];
 type PreparationStep = 'lowered' | 'raised' | 'hold' | 'complete';
@@ -113,8 +113,9 @@ export class UpperBodyPreparation {
   private completedRevalidation = false;
   private training = false;
   constructor(private readonly config: RecognitionConfig = recognitionConfig, private readonly recoveryWindowMs = 0,
-    private readonly retainCompleted = false) {
+    private readonly retainCompleted = false, private readonly preparationSteps: 2 | 3 = 3) {
     if (!Number.isFinite(recoveryWindowMs) || recoveryWindowMs < 0 || recoveryWindowMs > 3000) throw new RangeError('Invalid preparation recovery window');
+    if (preparationSteps !== 2 && preparationSteps !== 3) throw new RangeError('Invalid preparation steps');
     this.stream = new UpperBodyStream(config);
   }
   accept(frame: PoseFrame, nowMs: number): void {
@@ -173,7 +174,7 @@ export class UpperBodyPreparation {
     this.examples[this.step] = { left: { ...mean.left }, right: { ...mean.right } };this.radii[this.step] = radius;
     this.lastSampleRejection = null;
     if (this.step === 'lowered') this.reference = { width: mean.width, height: mean.height, center: { ...mean.center }, scalePx: mean.scalePx };
-    this.step = this.step === 'lowered' ? 'raised' : this.step === 'raised' ? 'hold' : 'complete';
+    this.step = this.step === 'lowered' ? 'raised' : this.step === 'raised' && this.preparationSteps === 3 ? 'hold' : 'complete';
     this.samples = [];this.progress = this.step === 'complete' ? 1 : 0;
   }
   /** One ready personal template serves this training session until an explicit reset. */
@@ -290,7 +291,7 @@ export class UpperBodyPreparation {
   }
   private invalidate(reason: string | null, diagnosticReason = reason ?? 'unknown'): void {
     if (this.step !== 'lowered') this.lastReset = { sequence: ++this.resetSequence, fromStep: this.step,
-      completedSteps: this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : 3, reason: diagnosticReason };
+      completedSteps: this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : this.preparationSteps, reason: diagnosticReason };
     this.step = 'lowered';this.samples = [];this.examples = {};this.radii = {};this.reference = null;
     this.available = false;this.progress = 0;this.reason = reason;this.latest = null;this.recoveryDeadline = null;this.completedRevalidation = false;this.training = false;
   }
@@ -302,7 +303,8 @@ export class UpperBodyPreparation {
     this.beginCompletedRevalidation(reason);this.stream.reset();
   }
   getSavedProfile(): UpperBodyProfile | null {
-    return this.step === 'complete' && this.reference ? structuredClone({ lowered: this.examples.lowered!, raised: this.examples.raised!, hold: this.examples.hold!, reference: this.reference }) : null;
+    return this.step === 'complete' && this.reference ? structuredClone({ lowered: this.examples.lowered!, raised: this.examples.raised!,
+      hold: this.preparationSteps === 2 ? null : this.examples.hold!, reference: this.reference }) : null;
   }
   getProfile(): UpperBodyProfile | null { return this.available && !this.completedRevalidation ? this.getSavedProfile() : null; }
   /** Pose guidance only: reading feedback never collects samples or completes a step. */
@@ -331,7 +333,7 @@ export class UpperBodyPreparation {
   /** In-memory scalar summaries only; no coordinates, image data or additional pose history. */
   getDiagnostics(): UpperBodyDiagnostics {
     return structuredClone({ sampleCount: this.samples.length, observedMs: this.observedSampleMs(), joints: this.jointQuality,
-      lastReset: this.lastReset, lastSampleRejection: this.lastSampleRejection, hold: this.latest ? this.describeHold(this.latest, 0) : null });
+      lastReset: this.lastReset, lastSampleRejection: this.lastSampleRejection, hold: this.preparationSteps === 3 && this.latest ? this.describeHold(this.latest, 0) : null });
   }
   private observedSampleMs(): number {
     return this.samples.length > 1 ? this.samples.at(-1)!.capturedAtMs - this.samples[0].capturedAtMs : 0;
@@ -367,11 +369,12 @@ export class UpperBodyPreparation {
     };
     return { left: arm('left'), right: arm('right') };
   }
-  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null; recovering: boolean; revalidating: boolean; ready: boolean; completedSteps: 0 | 1 | 2 | 3; training: boolean } {
+  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null; recovering: boolean; revalidating: boolean; ready: boolean; completedSteps: 0 | 1 | 2 | 3; totalSteps: 2 | 3; training: boolean } {
     return { step: this.step, progress: this.progress, available: this.available, reason: this.reason,
       recovering: this.recoveryDeadline !== null, revalidating: this.completedRevalidation,
       training: this.training,
       ready: this.step === 'complete' && this.available && !this.completedRevalidation,
-      completedSteps: this.step === 'lowered' ? 0 : this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : 3 };
+      totalSteps: this.preparationSteps,
+      completedSteps: this.step === 'lowered' ? 0 : this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : this.preparationSteps };
   }
 }

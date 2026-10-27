@@ -1,0 +1,12 @@
+{
+  "historicalFiles": 2782,
+  "regeneratedFiles": [
+    "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+    "artifacts/qa/preparation-feedback-20261026/preparation-partial-synthetic.png",
+    "artifacts/qa/exercise-tutorial-20261026/clock-observation.json",
+    "artifacts/qa/exercise-tutorial-20261026/tutorial-mobile.png",
+    "artifacts/qa/preparation-recovery-20261027/recovering-synthetic.png"
+  ],
+  "remainingMismatches": [],
+  "result": "pass"
+}

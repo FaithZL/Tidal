@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeachingAlignment.test.ts"
+    ],
+    "startedAt": "2026-10-27T14:10:27.024590+08:00",
+    "exitCode": 1,
+    "log": "teaching-red.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeachingAlignment.test.ts"
+    ],
+    "startedAt": "2026-10-27T14:15:26.213067+08:00",
+    "exitCode": 0,
+    "log": "teaching-green.log"
+  }
+]

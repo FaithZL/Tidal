@@ -1,0 +1,18 @@
+{
+  "userChoice": "Keep five-second countdown; fix repeat display",
+  "confirmed": [
+    "Readiness edges reset last tick before crediting a short valid interval entirely between render ticks",
+    "Countdown numeral is replaced by waiting text and compact styling during tracking loss, then reinserted on recovery"
+  ],
+  "notConfirmed": [
+    "No observed actual lower numeral to5 transition in current live page",
+    "Synthetic starvation conditions do not prove user physical-camera root cause"
+  ],
+  "fix": [
+    "Credit bounded short ready intervals once before loss/pause, without emitting or entering active",
+    "Do not backfill delta exceeding trackingMaxAgeMs",
+    "Retain numeral node/position while changing waiting/pause hint; no compact switch during countdown"
+  ],
+  "tests": "4 new unit cases, one new E2E; existing negative assertions/config unchanged",
+  "probeAdjustment": "Initial zero-boundary test used an unobserved five-second gap; corrected it to tick4999 then loss at5000 and added separate long-gap negative before implementation; first and corrected RED logs retained"
+}

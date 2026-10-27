@@ -1,0 +1,7 @@
+{
+  "source": "Explicit user reply in this chat after refreshing and retesting",
+  "question": "数字还会从4/3/2跳回5吗？",
+  "answer": "不再跳回，已经正常开始",
+  "scope": "User reports start/countdown symptom resolved on this local page; does not verify all real-camera movements, mobile, GPU performance or accuracy",
+  "imagesOrPoseSequencesSaved": false
+}

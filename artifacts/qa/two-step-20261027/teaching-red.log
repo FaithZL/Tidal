@@ -1,0 +1,58 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTeachingAlignment.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTeachingAlignment.test.ts (20 tests | 10 failed) 44ms
+   × tutorial rendered front-hold pose starts carry after two-step preparation at leniency 1 8ms
+   × tutorial rendered front-hold pose starts carry after two-step preparation at leniency 2 2ms
+   × tutorial rendered front-hold pose starts carry after two-step preparation at leniency 3 2ms
+   × tutorial rendered front-hold pose starts carry after two-step preparation at leniency 4 1ms
+   × tutorial rendered front-hold pose starts carry after two-step preparation at leniency 5 2ms
+   × guide rendered front-hold pose starts carry after two-step preparation at leniency 1 2ms
+   × guide rendered front-hold pose starts carry after two-step preparation at leniency 2 1ms
+   × guide rendered front-hold pose starts carry after two-step preparation at leniency 3 2ms
+   × guide rendered front-hold pose starts carry after two-step preparation at leniency 4 1ms
+   × guide rendered front-hold pose starts carry after two-step preparation at leniency 5 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > tutorial rendered front-hold pose starts carry after two-step preparation at leniency 1
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > tutorial rendered front-hold pose starts carry after two-step preparation at leniency 2
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > tutorial rendered front-hold pose starts carry after two-step preparation at leniency 3
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > tutorial rendered front-hold pose starts carry after two-step preparation at leniency 4
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > tutorial rendered front-hold pose starts carry after two-step preparation at leniency 5
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > guide rendered front-hold pose starts carry after two-step preparation at leniency 1
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > guide rendered front-hold pose starts carry after two-step preparation at leniency 2
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > guide rendered front-hold pose starts carry after two-step preparation at leniency 3
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > guide rendered front-hold pose starts carry after two-step preparation at leniency 4
+ FAIL  tests/unit/upperBodyTeachingAlignment.test.ts > guide rendered front-hold pose starts carry after two-step preparation at leniency 5
+AssertionError: expected { kind: 'hold-sample', …(3) } to match object { holding: true }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "holding": true,
++   "holding": false,
+  }
+
+ ❯ tests/unit/upperBodyTeachingAlignment.test.ts:91:37
+     89|     const r=replay(renderer,level);
+     90|     expect(r.feed('hold',10).at(-1)).toMatchObject({holding:false});
+     91|     expect(r.feed('hold',2).at(-1)).toMatchObject({holding:true});
+       |                                     ^
+     92|     expect(r.recognizer.getFeedback()?.status).toBe('matched');
+     93|     expect(r.feed('lowered',1).at(-1)).toMatchObject({holding:false});
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  10 failed | 10 passed (20)
+   Start at  14:10:27
+   Duration  152ms (tests 62%, transform 23%, import 13%, worker 2%)
+

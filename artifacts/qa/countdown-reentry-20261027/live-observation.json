@@ -1,0 +1,27 @@
+{
+  "input": "Read-only current user page DOM/diagnostic text; no images or pose coordinates saved",
+  "url": "http://127.0.0.1:5173/?art=npr-sample",
+  "before": {
+    "phase": "countdown",
+    "taskRunId": null,
+    "epoch": 2,
+    "savedSteps": "2/2",
+    "training": true,
+    "ready": false,
+    "lastReset": "none",
+    "countdownText": "已暂停 点击继续后恢复",
+    "reasonsObserved": [
+      "person-moved",
+      "out-of-frame"
+    ]
+  },
+  "userClarification": "倒计时数字回到5",
+  "action": "Clicked existing Continue once without resetting preparation or restarting camera",
+  "after": "Same countdown/epoch2; Waiting for tracking, later visibility paused again",
+  "limitations": [
+    "No numeric2-to5 transition captured in this observation",
+    "Three-second read-only sampling attempt exceeded browser evaluation timeout; no sequence returned",
+    "Served module contains remaining-time-preserving fix; active loaded closure source not directly inspected"
+  ],
+  "pendingHypothesis": "Repeated readiness losses during initial countdown can re-display same remaining numeral without progressing. Synthetic clock probe pending."
+}

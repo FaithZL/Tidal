@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/countdownEdges.test.ts",
+      "tests/unit/countdownRecovery.test.ts",
+      "tests/unit/cameraReadiness.test.ts",
+      "tests/unit/upperBodyTwoStep.test.ts",
+      "tests/unit/upperBodyTeachingAlignment.test.ts"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-27T06:44:55.619684+00:00",
+    "finishedUTC": "2026-10-27T06:44:56.063537+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T06:44:55.624577+00:00",
+    "finishedUTC": "2026-10-27T06:44:56.763935+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T06:44:55.621007+00:00",
+    "finishedUTC": "2026-10-27T06:44:56.925406+00:00",
+    "exitCode": 0
+  }
+]

@@ -42,7 +42,7 @@
         </div>
         <div class="canvas-shell">
           <div id="worldCanvas" role="img" aria-label="可旋转的三维农场"></div>
-          <div id="countdown" class="countdown" hidden></div>
+          <div id="countdown" class="countdown" hidden><span id="countdownValue"></span><small id="countdownHint"></small></div>
           <div class="canvas-bottom">
             <div class="live-note"><span class="live-dot"></span><span id="sceneHint">从一件小事开始，让这座农场苏醒。</span></div>
             <div class="small-progress"><span id="scenePercent">0%</span><div class="progress-track"><span id="progressFill"></span></div></div>
@@ -113,7 +113,7 @@
       <h2 id="setupHeading">选择演示输入方式</h2>
       <button class="secondary full-width tutorial-entry" id="setupTutorial">查看动作教学</button>
       <button id="setupAnimationStop" class="secondary animation-stop-control full-width" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P">停止动画</button>
-      <p>电脑前可坐着完成上半身训练。开启摄像头后按提示摆三个姿态，准备完成自动开始；真实识别准确率仍待验证。</p>
+      <p>电脑前可坐着完成上半身训练。开启摄像头后只需放下双手、双手举起两步，完成后自动开始；真实识别准确率仍待验证。</p>
       <label class="camera-exercise-choice">摄像头训练方案 <select id="cameraExerciseMode"><option value="upper-body">电脑前 · 上半身（默认）</option><option value="full-body">原全身 · 挥砍 / 下蹲 / 持姿</option></select></label>
       <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
       <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
@@ -124,7 +124,7 @@
       </div>
       <div id="cameraDiagnostics">
       <section id="upperBodyPreparation" class="upper-body-preparation" data-step="lowered" aria-label="上半身自动准备">
-        <div class="upper-body-heading"><span>无需点击采集</span><b id="upperBodyStepCount">已完成 0/3</b></div>
+        <div class="upper-body-heading"><span>无需点击采集</span><b id="upperBodyStepCount">已完成 0/2</b></div>
         <h3 id="upperBodyStep">放下双手</h3><p id="upperBodyCue">双肩、双肘与双手入镜，按提示保持姿态。</p>
         <button id="finishUpperPreparation" class="primary full-width" hidden disabled>结束准备，进入训练 →</button>
         <progress id="upperBodyProgress" max="1" value="0" aria-label="当前上半身姿态采集进度"></progress>
@@ -133,14 +133,14 @@
         <p id="upperBodyLastReset" class="upper-body-reset" role="status" hidden></p>
         <div id="upperBodyJointQuality" class="upper-body-joints" aria-label="当前六个关节的追踪质量"></div>
         <details class="upper-body-sampling"><summary>查看采集状态</summary><p id="upperBodySampleStatus"></p><p id="upperBodyHoldGate"></p><p id="upperBodySampleRejection"></p><small>只显示当前追踪质量与最近一次中断原因，不保存影像或动作轨迹。</small></details>
-        <small>砍树 / 装车：双手放下 → 举起 → 放下。拉车：双臂前举保持。只识别上半身，不测器械重量。</small>
+        <small>只需准备放下、举起两个动作。砍树 / 装车：双手放下 → 举起 → 放下。拉车：双臂屈肘前举保持，无需另做标定。只识别上半身，不测器械重量。</small>
       </section>
       <fieldset id="recognitionControls" class="recognition-controls">
         <legend>识别宽松度</legend>
         <div class="recognition-level"><span>严格</span><output id="recognitionLeniencyValue" for="recognitionLeniency">第 3 档 · 标准</output><span>宽松</span></div>
         <input id="recognitionLeniency" type="range" min="1" max="5" step="1" value="3" aria-label="识别宽松度" aria-describedby="recognitionLevelHelp" />
         <div class="recognition-presets"><button type="button" data-leniency="1" aria-pressed="false">严格</button><button type="button" data-leniency="3" aria-pressed="true">标准</button><button type="button" data-leniency="5" aria-pressed="false">宽松</button></div>
-        <small id="recognitionLevelHelp">按个人标定调整幅度与持姿容差，仍需完成动作并复位。训练中修改会暂停，已完成进度保留。颜色仅对照个人标定与当前步骤，不代表专业动作评分。</small>
+        <small id="recognitionLevelHelp">调整动作幅度与持姿容差，仍需完成动作并复位。训练中修改会暂停，已完成进度保留。颜色对照当前动作规则，不代表专业动作评分。</small>
         <small id="recognitionSettingStatus" role="status"></small>
       </fieldset>
       <div id="setupPreviewHost"><div id="cameraPreview" class="camera-preview" data-feedback="unavailable"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体动作匹配骨架：绿色匹配，红色需调整，灰色待判断"></canvas><div class="recognition-legend" aria-label="绿色匹配、红色需调整、灰色待判断"><span class="matched">● 匹配</span><span class="adjust">● 调整</span><span class="unknown">● 待判断</span></div></div></div>
@@ -218,7 +218,7 @@
         <label for="tutorialSpeed">播放速度 <select id="tutorialSpeed"><option value="1">1× 正常</option><option value="0.5">0.5× 慢动作</option><option value="0.25">0.25× 慢动作</option></select></label>
       </div>
       <progress id="tutorialProgress" max="1" value="0" aria-label="教学示范进度"></progress>
-      <p class="tutorial-footnote">示范用于说明本应用的动作顺序，以个人标定范围为准；不需要真实斧头或木材，也不检测器械重量。</p>
+      <p class="tutorial-footnote">示范用于说明本应用的动作顺序，请按当前提示在舒适范围内完成；不需要真实斧头或木材，也不检测器械重量。</p>
     </section>
   </div>
   <script type="module" src="/src/entry.ts"></script>

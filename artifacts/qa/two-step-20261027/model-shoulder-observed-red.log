@@ -1,0 +1,45 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTwoStep.test.ts -t asymmetric
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts (35 tests | 3 failed | 32 skipped) 9ms
+   × front hold stays at shoulder/chest height with an asymmetric left calibration range 6ms
+   × front hold stays at shoulder/chest height with an asymmetric right calibration range 1ms
+   × front hold stays at shoulder/chest height with an asymmetric both calibration range 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > front hold stays at shoulder/chest height with an asymmetric left calibration range
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > front hold stays at shoulder/chest height with an asymmetric right calibration range
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > front hold stays at shoulder/chest height with an asymmetric both calibration range
+AssertionError: expected { kind: 'hold-sample', …(3) } to match object { holding: true, valid: true }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "holding": true,
++   "holding": false,
+    "valid": true,
+  }
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:142:24
+    140|  const events=feed(r,t=>lowerCameraFrame(frontHeight(t,.10)));
+    141|  expect(events.some(e=>e.kind==='tracking'&&e.status==='lost')).toBe(f…
+    142|  expect(events.at(-1)).toMatchObject({holding:true,valid:true});
+       |                        ^
+    143| });
+    144|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 32 skipped (35)
+   Start at  14:04:43
+   Duration  98ms (transform 48%, import 24%, tests 24%, worker 3%)
+

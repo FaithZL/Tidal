@@ -1,0 +1,168 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/two-step-preparation.spec.ts"
+    ],
+    "log": "two-step-red.log",
+    "startedUTC": "2026-10-27T05:57:27.835264+00:00",
+    "finishedUTC": "2026-10-27T05:57:43.919836+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "typecheck.log",
+    "startedUTC": "2026-10-27T05:58:54.873280+00:00",
+    "finishedUTC": "2026-10-27T05:58:56.119831+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint.log",
+    "startedUTC": "2026-10-27T06:00:04.590866+00:00",
+    "finishedUTC": "2026-10-27T06:00:07.318983+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit.log",
+    "startedUTC": "2026-10-27T06:00:03.196151+00:00",
+    "finishedUTC": "2026-10-27T06:00:09.102038+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/two-step-preparation.spec.ts",
+      "tests/e2e/preparation-autostart.spec.ts",
+      "tests/e2e/start-once.spec.ts"
+    ],
+    "log": "core-green.log",
+    "startedUTC": "2026-10-27T05:59:25.842004+00:00",
+    "finishedUTC": "2026-10-27T06:00:21.885799+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T06:05:19.034304+00:00",
+    "finishedUTC": "2026-10-27T06:05:20.896893+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-27T06:05:20.166409+00:00",
+    "finishedUTC": "2026-10-27T06:05:25.569663+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/anchor-recovery.spec.ts",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/default-off.spec.ts",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/preparation-finish.spec.ts",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "tests/e2e/recognition-off.spec.ts",
+      "tests/e2e/session-preparation.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts"
+    ],
+    "log": "regression.log",
+    "startedUTC": "2026-10-27T06:05:45.607320+00:00",
+    "finishedUTC": "2026-10-27T06:14:44.395845+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-final.log",
+    "startedUTC": "2026-10-27T06:16:07.533683+00:00",
+    "finishedUTC": "2026-10-27T06:16:10.068270+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-27T06:16:07.531350+00:00",
+    "finishedUTC": "2026-10-27T06:16:11.917404+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-27T06:16:07.527902+00:00",
+    "finishedUTC": "2026-10-27T06:16:13.241195+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "tests/e2e/movement-guide.spec.ts",
+      "-g",
+      "actual active training|stopping before the final raised|step selection changes real|reopening under reduced|a standard skeleton moves"
+    ],
+    "log": "final-boundaries.log",
+    "startedUTC": "2026-10-27T06:16:34.474337+00:00",
+    "finishedUTC": "2026-10-27T06:17:00.666440+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/two-step-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T06:19:22.966948+00:00",
+    "finishedUTC": "2026-10-27T06:19:42.061998+00:00",
+    "exitCode": 0
+  }
+]

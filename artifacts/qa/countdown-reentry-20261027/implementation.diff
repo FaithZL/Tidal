@@ -1,0 +1,68 @@
+--- before/src/domain/sessionController.ts
++++ after/src/domain/sessionController.ts
+@@ -100,6 +100,14 @@
+       coins: config.coinReward, stamina: config.staminaReward, reward: 'tshirt' });
+   }
+   function isPaused(): boolean { return snapshot.pauseReasons.length > 0; }
++  function settleCameraCountdown(): void {
++    if (snapshot.phase !== 'countdown' || snapshot.inputMode !== 'camera' || !cameraReady || isPaused()) return;
++    const delta = clock.nowMs() - lastTickMs;
++    // Preserve the short ready interval before a loss edge, even if no render tick
++    // occurred inside it. Never backfill a stale gap or start a task on a loss callback.
++    if (Number.isFinite(delta) && delta > 0 && delta <= config.trackingMaxAgeMs)
++      snapshot.remainingMs = Math.max(0, snapshot.remainingMs - delta);
++  }
+   function getSnapshot(): Readonly<SessionSnapshot> {
+     return Object.freeze({ ...snapshot, pauseReasons: Object.freeze([...snapshot.pauseReasons]) });
+   }
+@@ -131,10 +139,12 @@
+     } else if (cmd.kind === 'camera-readiness') {
+       if (cameraReady !== cmd.ready && snapshot.inputMode === 'camera' && snapshot.phase === 'countdown') {
+         // Recovery continues the same countdown; never charge an unobserved gap.
++        if (!cmd.ready) settleCameraCountdown();
+         lastTickMs = clock.nowMs();
+       }
+       cameraReady = cmd.ready;
+     } else if (cmd.kind === 'pause' && snapshot.phase !== 'home' && snapshot.phase !== 'results') {
++      settleCameraCountdown();
+       const restTracking = cmd.reason === 'tracking' && snapshot.inputMode === 'camera' && snapshot.phase === 'rest';
+       if (cmd.reason === 'tracking' && snapshot.inputMode === 'camera') cameraReady = false;
+       if (!restTracking && !snapshot.pauseReasons.includes(cmd.reason)) snapshot.pauseReasons = [...snapshot.pauseReasons, cmd.reason];
+--- before/src/browser.ts
++++ after/src/browser.ts
+@@ -462,13 +462,18 @@
+     : phase === 'active' && s.task ? instructions[s.task]
+     : '从一件小事开始，让这座农场苏醒。');
+   const countdown = $('countdown');
+-  setClass(countdown,'compact',phase === 'rest' || s.pauseReasons.length > 0);
++  setClass(countdown,'compact',phase === 'rest' || phase !== 'countdown' && s.pauseReasons.length > 0);
+   setProperty(countdown,'hidden',phase !== 'rest' && phase !== 'countdown' && !s.pauseReasons.length);
+-  if(renderUnavailable)setProperty(countdown,'innerHTML','画面不可用<small>请重新加载页面</small>');
+-  else if(trackingOnly)setProperty(countdown,'innerHTML','等待追踪<small>重新入镜后自动继续</small>');
+-  else if(s.pauseReasons.length) setProperty(countdown,'innerHTML','已暂停<small>点击继续后恢复</small>');
+-  else if(phase === 'rest') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}s<small>休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}</small>`);
+-  else if(phase === 'countdown') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}<small>做好准备，即将开始</small>`);
++  // Keep one countdown and its remaining numeral on screen through interruptions.
++  // Replacing the whole card with "waiting" made the same 5 look like a fresh start.
++  const countdownValue=renderUnavailable?'画面不可用':phase==='countdown'?String(Math.ceil(s.remainingMs/1000))
++    :trackingOnly?'等待追踪':s.pauseReasons.length?'已暂停':phase==='rest'?`${Math.ceil(s.remainingMs/1000)}s`:'';
++  const countdownHint=renderUnavailable?'请重新加载页面':phase==='countdown'
++    ?trackingOnly?'等待追踪 · 恢复后接着倒计时':s.pauseReasons.length?'倒计时已暂停 · 点击继续后恢复':'做好准备，即将开始'
++    :trackingOnly?'重新入镜后自动继续':s.pauseReasons.length?'点击继续后恢复'
++    :phase==='rest'?`休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}`:'';
++  setProperty($('countdownValue'),'textContent',countdownValue);
++  setProperty($('countdownHint'),'textContent',countdownHint);
+   const idx = s.task === 'chop' ? 0 : s.task === 'load' ? 1 : s.task === 'carry' ? 2 : phase === 'results' ? 3 : -1;
+   (['chop','load','carry'] as TaskKind[]).forEach((t,i) => {
+     const node = $(`step-${t}`);setClass(node,'current',idx===i);setClass(node,'done',idx>i);
+--- before/index.html
++++ after/index.html
+@@ -42,7 +42,7 @@
+         </div>
+         <div class="canvas-shell">
+           <div id="worldCanvas" role="img" aria-label="可旋转的三维农场"></div>
+-          <div id="countdown" class="countdown" hidden></div>
++          <div id="countdown" class="countdown" hidden><span id="countdownValue"></span><small id="countdownHint"></small></div>
+           <div class="canvas-bottom">
+             <div class="live-note"><span class="live-dot"></span><span id="sceneHint">从一件小事开始，让这座农场苏醒。</span></div>
+             <div class="small-progress"><span id="scenePercent">0%</span><div class="progress-track"><span id="progressFill"></span></div></div>

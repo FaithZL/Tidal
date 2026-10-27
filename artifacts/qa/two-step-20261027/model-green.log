@@ -1,0 +1,72 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTwoStep.test.ts tests/unit/upperBody.test.ts tests/unit/upperBodyRecognizer.test.ts tests/unit/upperBodyTrainingSession.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBodyCompletedRecovery.test.ts tests/unit/upperBodyAnchorRecovery.test.ts tests/unit/upperBodyDiagnostics.test.ts tests/unit/upperCameraSource.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts (30 tests | 2 failed) 39ms
+   × two-step preparation completes from observed lowered and raised samples without a hold target 10ms
+   × standard front hold stale loss cannot bridge confirmation 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > two-step preparation completes from observed lowered and raised samples without a hold target
+AssertionError: expected { left: { x: +0, …(2) }, …(1) } to deeply equal { left: { x: +0, …(2) }, …(1) }
+
+- Expected
++ Received
+
+  {
+    "left": {
+      "elbowDeg": 180,
+      "x": 0,
+-     "y": 0.9444444444444444,
++     "y": 0.9444444444444445,
+    },
+    "right": {
+      "elbowDeg": 180,
+      "x": 0,
+-     "y": 0.9444444444444444,
++     "y": 0.9444444444444445,
+    },
+  }
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:48:24
+     46|  observe(p,'raised',next+1300);expect(p.getSnapshot()).toMatchObject({…
+     47|  const saved=p.getProfile()!;expect(saved.hold).toBeNull();expect(p.ge…
+     48|  expect(saved.lowered).toEqual(upperProfile().lowered);expect(saved.ra…
+       |                        ^
+     49|  saved.lowered.left.y=999;expect(p.getProfile()!.lowered.left.y).not.t…
+     50|  expect(p.startTraining()).toBe(true);expect(p.getSnapshot().training)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold stale loss cannot bridge confirmation
+AssertionError: expected { kind: 'hold-sample', …(3) } to match object { holding: true }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "holding": true,
++   "holding": false,
+  }
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:128:43
+    126|  expect(r.update(frame,now)).toContainEqual(expect.objectContaining({k…
+    127|  time=now+50;expect(feed(r,front,time,time+450).at(-1)).toMatchObject(…
+    128|  expect(r.update(front(time+500)).at(-1)).toMatchObject({holding:true}…
+       |                                           ^
+    129| });
+    130|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  2 failed | 220 passed (222)
+   Start at  13:58:08
+   Duration  342ms (tests 43%, transform 42%, import 12%, worker 2%)
+

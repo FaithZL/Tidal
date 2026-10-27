@@ -14,7 +14,7 @@ test('lost tracking does not freeze a rest, but the next countdown waits for fre
   expect(h.controller.getSnapshot()).toMatchObject({phase:'countdown',remainingMs:1});
   h.tick(1);expect(h.controller.getSnapshot()).toMatchObject({phase:'active',task:'load'});
 });
-test('readiness cannot clear user/background pauses, and an invalid countdown restarts in full',()=>{
+test('readiness cannot clear user/background pauses or advance a paused countdown',()=>{
   const h=sessionHarness();h.controller.command({kind:'open-setup',mode:'camera'});h.controller.command({kind:'setup-ready',calibrated:{chop:true,load:true,carry:true}});
   h.controller.command({kind:'pause',reason:'user'});h.controller.command({kind:'pause',reason:'visibility'});
   h.controller.command({kind:'camera-readiness',ready:false});h.controller.command({kind:'pause',reason:'tracking'});

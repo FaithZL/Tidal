@@ -1,0 +1,18 @@
+{
+  "reviewer": "/root/publish_scope_review",
+  "result": "No P1/P2 or required source/test dependency omissions",
+  "baseHEAD": "0fd886749f8dc8a64c72cdba7c39eff70f7b6bc2",
+  "scope": [
+    "two-step calibration with continuing real camera recognition",
+    "preserved five-second countdown with pause continuity and short-interval accounting",
+    "related tests and three QA runs"
+  ],
+  "excluded": [
+    "DEVELOPMENT_GUIDE old recognition-off paragraph",
+    "old recognition-off QA and plan",
+    "unused explicitAutoDemo helper",
+    "17 older uncommitted raw traces",
+    "6 new raw traces listed separately"
+  ],
+  "existingVerification": "Reviewed final 811 unit,8+9 E2E logs and normal production/user-retest evidence; current runtime files match latest review hashes"
+}

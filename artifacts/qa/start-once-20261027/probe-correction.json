@@ -1,0 +1,4 @@
+{
+  "initialGreen": "7/8 passed; all countdown monotonicity and full farm assertions passed. New observer also legitimately recorded setup before countdown; expected history omitted this initial state.",
+  "correction": "New test records initial setup explicitly and expects exact setup -> countdown -> active once, so return to setup/restart still fails. No product/timeout/retry/old assertion changes."
+}

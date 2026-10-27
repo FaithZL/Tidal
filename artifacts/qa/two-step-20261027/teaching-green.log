@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTeachingAlignment.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  14:15:26
+   Duration  294ms (tests 58%, transform 27%, import 13%, worker 2%)
+

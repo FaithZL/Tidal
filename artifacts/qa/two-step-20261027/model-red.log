@@ -1,0 +1,230 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTwoStep.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts (30 tests | 26 failed) 15ms
+   × two-step preparation completes from observed lowered and raised samples without a hold target 4ms
+   × both stable arms and the original sample window remain required before two-step completion 3ms
+   × completed two-step training preserves 2/2 on low and explicit reset reports 2/2 1ms
+   × completed two-step training preserves 2/2 on gap and explicit reset reports 2/2 1ms
+   × completed two-step training preserves 2/2 on moved and explicit reset reports 2/2 1ms
+   × completed two-step training preserves 2/2 on resized and explicit reset reports 2/2 1ms
+   × completed two-step training preserves 2/2 on hidden and explicit reset reports 2/2 1ms
+   × the default legacy preparation still requires a real third sample 1ms
+   × a two-step profile validates every camera task without inventing a third personal posture 1ms
+   × two-step chop still needs a complete lowered-raised-lowered loop 1ms
+   × two-step load still needs a complete lowered-raised-lowered loop 0ms
+   × standard front hold confirms both observed arms and releases immediately without using smooth history 0ms
+   × standard front hold cannot start from lowered observations 0ms
+   × standard front hold cannot start from raised observations 0ms
+   × standard front hold cannot start from one-arm observations 0ms
+   × standard front hold cannot start from straight observations 0ms
+   × standard front hold cannot start from sideways observations 0ms
+   × standard front hold uses level 1 entry and exit bands without accepting endpoints 0ms
+   × standard front hold uses level 2 entry and exit bands without accepting endpoints 0ms
+   × standard front hold uses level 3 entry and exit bands without accepting endpoints 0ms
+   × standard front hold uses level 4 entry and exit bands without accepting endpoints 0ms
+   × standard front hold uses level 5 entry and exit bands without accepting endpoints 0ms
+   × standard front hold low loss cannot bridge confirmation 0ms
+   × standard front hold gap loss cannot bridge confirmation 0ms
+   × standard front hold stale loss cannot bridge confirmation 0ms
+   × standard front hold duplicate loss cannot bridge confirmation 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 26 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > two-step preparation completes from observed lowered and raised samples without a hold target
+AssertionError: expected { step: 'lowered', progress: +0, …(7) } to match object { totalSteps: 2, completedSteps: +0 }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "completedSteps": 0,
+-   "totalSteps": 2,
+  }
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:43:26
+     41| test('two-step preparation completes from observed lowered and raised …
+     42|  const p=new UpperBodyPreparation(undefined,3000,true,2);
+     43|  expect(p.getSnapshot()).toMatchObject({totalSteps:2,completedSteps:0}…
+       |                          ^
+     44|  const next=observe(p,'lowered');expect(p.getSnapshot()).toMatchObject…
+     45|  observe(p,'lowered',next);expect(p.getProfile()).toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > both stable arms and the original sample window remain required before two-step completion
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:62:83
+     60|  expect(p.getSnapshot()).toMatchObject({step:'raised',completedSteps:1…
+     61|  observe(p,'raised',time,1100);expect(p.getProfile()).toBeNull();
+     62|  p.accept(upperFrame(time+1200,'raised'),time+1200);expect(p.getSnapsh…
+       |                                                                                   ^
+     63| });
+     64|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > completed two-step training preserves 2/2 on low and explicit reset reports 2/2
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > completed two-step training preserves 2/2 on gap and explicit reset reports 2/2
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > completed two-step training preserves 2/2 on moved and explicit reset reports 2/2
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > completed two-step training preserves 2/2 on resized and explicit reset reports 2/2
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > completed two-step training preserves 2/2 on hidden and explicit reset reports 2/2
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:66:66
+     64|
+     65| test.each(['low','gap','moved','resized','hidden'] as const)('complete…
+     66|  const {preparation:p,time}=prepared();expect(p.startTraining()).toBe(…
+       |                                                                  ^
+     67|  const frame=upperFrame(time,'lowered');let now=time;
+     68|  if(fault==='low')frame.landmarks[16].visibility=.1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > the default legacy preparation still requires a real third sample
+AssertionError: expected { step: 'hold', progress: +0, …(7) } to match object { step: 'hold', totalSteps: 3, …(2) }
+(6 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "completedSteps": 2,
+    "ready": false,
+    "step": "hold",
+-   "totalSteps": 3,
+  }
+
+ ❯ tests/unit/upperBodyTwoStep.test.ts:82:26
+     80| test('the default legacy preparation still requires a real third sampl…
+     81|  const p=new UpperBodyPreparation(undefined,3000,true);const time=obse…
+     82|  expect(p.getSnapshot()).toMatchObject({step:'hold',totalSteps:3,compl…
+       |                          ^
+     83| });
+     84|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > a two-step profile validates every camera task without inventing a third personal posture
+AssertionError: expected null not to be null
+ ❯ tests/unit/upperBodyTwoStep.test.ts:87:39
+     85| test('a two-step profile validates every camera task without inventing…
+     86|  const {preparation}=prepared(),source=new CameraActionSource(()=>0);
+     87|  expect(preparation.getProfile()).not.toBeNull();expect(()=>source.set…
+       |                                       ^
+     88| });
+     89|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > two-step chop still needs a complete lowered-raised-lowered loop
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > two-step load still needs a complete lowered-raised-lowered loop
+TypeError: Cannot read properties of null (reading 'left')
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:25
+     23|     const reference = profile.reference;
+     24|     const all = [profile.lowered, profile.raised, profile.hold].flatMa…
+     25|       .flatMap(side => [vector[side].x, vector[side].y, vector[side].e…
+       |                         ^
+     26|     if (!all.every(Number.isFinite) || ![reference.width, reference.he…
+     27|       ![reference.center.x, reference.center.y].every(Number.isFinite)…
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:8
+ ❯ new UpperBodyRecognizer src/pose/recognizers/upperBodyRecognizer.ts:24:65
+ ❯ tests/unit/upperBodyTwoStep.test.ts:91:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold confirms both observed arms and releases immediately without using smooth history
+TypeError: Cannot read properties of null (reading 'left')
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:25
+     23|     const reference = profile.reference;
+     24|     const all = [profile.lowered, profile.raised, profile.hold].flatMa…
+     25|       .flatMap(side => [vector[side].x, vector[side].y, vector[side].e…
+       |                         ^
+     26|     if (!all.every(Number.isFinite) || ![reference.width, reference.he…
+     27|       ![reference.center.x, reference.center.y].every(Number.isFinite)…
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:8
+ ❯ new UpperBodyRecognizer src/pose/recognizers/upperBodyRecognizer.ts:24:65
+ ❯ tests/unit/upperBodyTwoStep.test.ts:98:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold cannot start from lowered observations
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold cannot start from raised observations
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold cannot start from one-arm observations
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold cannot start from straight observations
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold cannot start from sideways observations
+TypeError: Cannot read properties of null (reading 'left')
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:25
+     23|     const reference = profile.reference;
+     24|     const all = [profile.lowered, profile.raised, profile.hold].flatMa…
+     25|       .flatMap(side => [vector[side].x, vector[side].y, vector[side].e…
+       |                         ^
+     26|     if (!all.every(Number.isFinite) || ![reference.width, reference.he…
+     27|       ![reference.center.x, reference.center.y].every(Number.isFinite)…
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:8
+ ❯ new UpperBodyRecognizer src/pose/recognizers/upperBodyRecognizer.ts:24:65
+ ❯ tests/unit/upperBodyTwoStep.test.ts:107:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold uses level 1 entry and exit bands without accepting endpoints
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold uses level 2 entry and exit bands without accepting endpoints
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold uses level 3 entry and exit bands without accepting endpoints
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold uses level 4 entry and exit bands without accepting endpoints
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold uses level 5 entry and exit bands without accepting endpoints
+TypeError: Cannot read properties of null (reading 'left')
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:25
+     23|     const reference = profile.reference;
+     24|     const all = [profile.lowered, profile.raised, profile.hold].flatMa…
+     25|       .flatMap(side => [vector[side].x, vector[side].y, vector[side].e…
+       |                         ^
+     26|     if (!all.every(Number.isFinite) || ![reference.width, reference.he…
+     27|       ![reference.center.x, reference.center.y].every(Number.isFinite)…
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:8
+ ❯ new UpperBodyRecognizer src/pose/recognizers/upperBodyRecognizer.ts:24:65
+ ❯ tests/unit/upperBodyTwoStep.test.ts:114:48
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/26]⎯
+
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold low loss cannot bridge confirmation
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold gap loss cannot bridge confirmation
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold stale loss cannot bridge confirmation
+ FAIL  tests/unit/upperBodyTwoStep.test.ts > standard front hold duplicate loss cannot bridge confirmation
+TypeError: Cannot read properties of null (reading 'left')
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:25
+     23|     const reference = profile.reference;
+     24|     const all = [profile.lowered, profile.raised, profile.hold].flatMa…
+     25|       .flatMap(side => [vector[side].x, vector[side].y, vector[side].e…
+       |                         ^
+     26|     if (!all.every(Number.isFinite) || ![reference.width, reference.he…
+     27|       ![reference.center.x, reference.center.y].every(Number.isFinite)…
+ ❯ src/pose/recognizers/upperBodyRecognizer.ts:25:8
+ ❯ new UpperBodyRecognizer src/pose/recognizers/upperBodyRecognizer.ts:24:65
+ ❯ tests/unit/upperBodyTwoStep.test.ts:123:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/26]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  26 failed | 4 passed (30)
+   Start at  13:57:46
+   Duration  169ms (transform 49%, tests 25%, import 22%, worker 4%)
+

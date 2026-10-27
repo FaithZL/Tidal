@@ -5,8 +5,7 @@ async function active(page:Page){
  await installUpperBodyFixture(page);await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));
  await page.goto('/?e2e=1&art=npr-sample');await page.locator('#cameraMode').click();await page.locator('#cameraStart').click();
  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');
- await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');
- await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});
+ await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});
 }
 async function loop(page:Page,task:'chop'|'load',count:number){
  await page.evaluate(()=>{window.upperFixture.pose='lowered';});await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
@@ -18,7 +17,7 @@ test('a rejected runtime frame cannot erase this session calibration or carry a 
  await active(page);await page.evaluate(()=>{window.upperFixture.pose='lowered';});await expect(page.locator('#inputDebug')).toContainText(' · ready ·');
  await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#inputDebug')).toContainText(' · chop-down ·');
  await page.evaluate(()=>{window.upperFixture.resized=true;});await expect(page.locator('#statusTag')).not.toHaveText('训练中');
- await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#setupModal')).toBeHidden();
+ await expect(page.locator('#upperBodyStepCount')).toContainText('2/2');await expect(page.locator('#setupModal')).toBeHidden();
  await expect(page.locator('#cameraTrackingStatus')).not.toContainText('1200');await expect(page.locator('#upperBodyProgress')).toHaveJSProperty('hidden',true);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-training','true');
  await page.waitForTimeout(1500);await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-ready','false');
  await page.evaluate(()=>{window.upperFixture.resized=false;window.upperFixture.pose='lowered';});
@@ -31,10 +30,10 @@ test('one initial preparation survives both task transitions and carry loss whil
  for(const task of ['chop','load'] as const){
   for(let i=1;i<=15;i++)await loop(page,task,i);
   await expect(page.locator('#app')).toHaveAttribute('data-phase','rest');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-ready','false');
-  await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#setupModal')).toBeHidden();
+  await expect(page.locator('#upperBodyStepCount')).toContainText('2/2');await expect(page.locator('#setupModal')).toBeHidden();
   await page.waitForTimeout(700);await expect(page.locator('#app')).toHaveAttribute('data-phase','rest');
   await page.evaluate(()=>{window.upperFixture.resized=false;window.upperFixture.pose='lowered';});await expect(page.locator('#statusTag')).toHaveText('训练中');
-  await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');
+  await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#upperBodyStepCount')).toContainText('2/2');
  }
  await expect(page.locator('#missionTitle')).toContainText('返回');await page.evaluate(()=>{window.upperFixture.pose='hold';});
  await expect.poll(async()=>parseFloat((await page.locator('#carryValue').textContent())!)).toBeGreaterThan(.1);

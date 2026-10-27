@@ -1,0 +1,16 @@
+{
+  "priorPendingFiles": 97,
+  "byteIdentical": 92,
+  "intentionalExtensions": [
+    "tests/e2e/start-once.spec.ts",
+    "docs/ACCEPTANCE.md",
+    "docs/DEVELOPMENT_GUIDE.md",
+    "docs/PROGRESS.md",
+    "tests/e2e/completed-recovery.spec.ts"
+  ],
+  "unexpectedChanges": [],
+  "priorProgressBodyPreserved": true,
+  "priorDevelopmentGuideBodyPreserved": true,
+  "priorCountdownSourceAndTests": "Exact SHA preserved; see prior-countdown-preserved.json",
+  "result": "pass"
+}
