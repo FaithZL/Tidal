@@ -1,0 +1,41 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyRecognizer.test.ts tests/unit/upperCameraSource.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts (37 tests | 1 failed) 57ms
+   × Carry hysteresis accepts a bounded established drift but cannot start from that band or the released center 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > Carry hysteresis accepts a bounded established drift but cannot start from that band or the released center
+AssertionError: expected { kind: 'hold-sample', …(3) } to match object { holding: true, valid: true }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "holding": true,
++   "holding": false,
+    "valid": true,
+  }
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:124:39
+    122|       ...point, x: point.x + .43 * (low.landmarks[index].x - point.x),…
+    123|     }) };
+    124|     expect(warm.update(frame).at(-1)).toMatchObject({ holding: true, v…
+       |                                       ^
+    125|     expect(cold.update(frame).at(-1)).toMatchObject({ holding: false, …
+    126|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 45 passed (46)
+   Start at  22:29:02
+   Duration  146ms (tests 51%, transform 33%, import 14%, worker 2%)
+

@@ -1,0 +1,8 @@
+npm run typecheck && npx eslint src/browser.ts && git diff --check
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+exit 0
+
+Release recheck after 3 RED-driven corrections: same command, exit 0.

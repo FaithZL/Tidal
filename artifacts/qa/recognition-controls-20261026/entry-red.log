@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/recognition-controls.spec.ts -g camera entry pauses --output artifacts/qa/recognition-controls-20261026/entry-red-results
+
+[WebServer] (node:7188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7213) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:7295) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:06:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:06:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:06:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:06:17 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/recognition-controls.spec.ts:13:1 › camera entry pauses automatic play without permission and a denied camera stays explicit (9.0s)
+
+
+  1) tests/e2e/recognition-controls.spec.ts:13:1 › camera entry pauses automatic play without permission and a denied camera stays explicit 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#cameraMode')
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#cameraMode') with timeout 7000ms
+      - waiting for locator('#cameraMode')
+
+
+      13 | test('camera entry pauses automatic play without permission and a denied camera stays explicit',async({page})=>{
+      14 |  await page.addInitScript(()=>{(window as unknown as {cameraCalls:number}).cameraCalls=0;navigator.mediaDevices.getUserMedia=async()=>{(window as unknown as {cameraCalls:number}).cameraCalls++;throw new DOMException('Denied','NotAllowedError');};});
+    > 15 |  await enter(page,true);await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#cameraMode')).toBeVisible();await page.locator('#cameraMode').click();
+         |                                                                                                                              ^
+      16 |  await expect(page.locator('#setupModal')).toBeVisible();await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+      17 |  const before=await outcomes(page);await page.waitForTimeout(300);expect(await outcomes(page)).toEqual(before);expect(await page.evaluate(()=>(window as unknown as {cameraCalls:number}).cameraCalls)).toBe(0);
+      18 |  await page.locator('#cameraStart').click();await expect(page.locator('#cameraStatus')).toContainText('权限被拒绝');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#demoToggle')).toHaveAttribute('aria-checked','false');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/recognition-controls.spec.ts:15:126
+
+    Error Context: artifacts/qa/recognition-controls-20261026/entry-red-results/recognition-controls-camer-2df34-enied-camera-stays-explicit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/recognition-controls-20261026/entry-red-results/recognition-controls-camer-2df34-enied-camera-stays-explicit/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/recognition-controls-20261026/entry-red-results/recognition-controls-camer-2df34-enied-camera-stays-explicit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/recognition-controls.spec.ts:13:1 › camera entry pauses automatic play without permission and a denied camera stays explicit 

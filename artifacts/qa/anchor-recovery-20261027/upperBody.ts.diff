@@ -1,0 +1,38 @@
+--- before/src/pose/upperBody.ts
++++ src/pose/upperBody.ts
+@@ -121,7 +121,14 @@
+     if (this.recoveryWindowMs > 0 || this.retainCompleted) {
+       if (this.expireRecovery(nowMs)) return;
+       const hardIssue = this.recoveryHeaderIssue(frame, nowMs);
+-      if (hardIssue) { this.invalidate(hardIssue);return; }
++      if (hardIssue) {
++        if (hardIssue === 'person-moved' && this.retainsCompleted()) {
++          // The frame header is valid even though its anchor is not; do not permit a replay on return.
++          this.lastHeader = { time: frame.capturedAtMs, id: frame.frameId };
++          this.suspendTracking(hardIssue);
++        } else this.invalidate(hardIssue);
++        return;
++      }
+       this.lastHeader = { time: frame.capturedAtMs, id: frame.frameId };
+     }
+     const observed = this.stream.read(frame, nowMs);
+@@ -132,7 +139,7 @@
+     const f = observed.raw;
+     if (this.reference) {
+       const issue = referenceIssue(f, this.reference, this.config);
+-      if (issue) { this.invalidate(issue);return; }
++      if (issue) { this.rejectObservation(issue, nowMs);return; }
+     }
+     this.recoveryDeadline = null;this.latest = f;
+     if (this.step === 'complete' && this.completedRevalidation) { this.acceptCompletedRevalidation(f);return; }
+@@ -204,7 +211,9 @@
+   }
+   private rejectObservation(reason: string | null, nowMs: number): void {
+     const recoverable = ['low-confidence', 'out-of-frame', 'missing-points', 'degenerate-arm', 'gap', 'stale'];
+-    if (this.retainsCompleted() && reason && recoverable.includes(reason)) { this.beginCompletedRevalidation(reason);return; }
++    if (this.retainsCompleted() && reason && (recoverable.includes(reason) || reason === 'person-moved')) {
++      this.beginCompletedRevalidation(reason);return;
++    }
+     if (this.recoveryWindowMs <= 0 || !this.reference || this.step !== 'raised' && this.step !== 'hold' ||
+       !reason || !recoverable.includes(reason)) { this.invalidate(reason);return; }
+     const deadline = this.recoveryDeadline ?? (this.latest ? this.latest.capturedAtMs + this.recoveryWindowMs : null);

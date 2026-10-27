@@ -1,0 +1,23 @@
+{
+  "src/browser.ts": "4cdbe6e62e835cb47ba883d4226b6d9052967163e1cd389f8360f5f0c8262be2",
+  "src/pose/upperBody.ts": "0d8cd432c5f2aac74f986f2bca69a851876a14286143f453e90bec30147eb91c",
+  "src/ui/upperBodyPreparationPanel.ts": "b3940a3cc794e7dfc3ecf3845d6800d1a6c9edbd32c1350daf7373edc872f0e2",
+  "src/ui/setupPanel.ts": "9fb3d974784a0dd3c063336dda76eef493bcdbdb6e45cb133c9b17eeaa72aaf5",
+  "tests/unit/upperBody.test.ts": "9832512417a2b57664db71b2e338de843e4df60621f0ecdbfde931ea4107a991",
+  "tests/unit/setupPanelFeedback.test.ts": "faba7293b2215b143d4e86e8fc1dbd4cb2252ec603d91617a827897fcc1620d9",
+  "tests/e2e/preparation-feedback.spec.ts": "50b14e50a802e00108a66b502911f157012477b79526811373ad8fd66188f5ef",
+  "dist/index.html": "da146028977f6c9f776411cc81b48d6d4a185a018402015fc893a63b10126baf",
+  "dist/mediapipe/wasm/vision_wasm_nosimd_internal.js": "9f8fc960e363f0fb2f42f7937b97ae9cf9a5630490f71031fa90caa9bb121938",
+  "dist/mediapipe/wasm/vision_wasm_internal.js": "6f6b86509cf9e163ea1cfec7edc8cf53732699c04781e4c21c557c1ba402310e",
+  "dist/worker/pose.js": "d54efe5a92f535a77393dac25446e7ce16a59af5c415b298809f4e7d8c009bd5",
+  "dist/assets/OrbitControls-BWIrCJhk.js": "684becaf827448292752392eb7f03f52724e02cbe060a108160f9fac1fe90789",
+  "dist/assets/index-BWmxB3wi.css": "a6a490f091575c9f38f8923a41972f255971a6483abb1b0f53c65b08f634e46d",
+  "dist/assets/userCharacterMotion-DUytOKfo.js": "faa02f7f374ff1c3a1654eb79fc1a01a741520e31f2a2187d5577218e32610fc",
+  "dist/assets/nprMaterials-D_gzCDo6.js": "b192565b39e76bf46cdde718d840b411e6a18cc878ae3becea01025917a77585",
+  "dist/assets/userModelSample-Cf2w0Ewi.js": "3fdd1206bc236f215a944964b173861d359018a9ba805d9d0ee82425379fbee4",
+  "dist/assets/character-sample-B7C_ML0E.css": "81f2f88d79b494bc1dd5bd5f2494fe8d4d7b5372dc4d045988c08ea22d395dcc",
+  "dist/assets/character-sample-CePOScfc.js": "07bfe392b27a06dbb884517114911aeb0b46ff28ae5fdf864ac7d0b512ff0cbe",
+  "dist/assets/browser-DabyEDjA.js": "10e8dcd217c9716e8890394707abe1f2b116c166f96eab73d9b5a5227c1ab1f1",
+  "dist/assets/index-Bw5rWiu3.js": "04602bac9ee42947d5d09e4693cd1d18ff52f1db417109c432be6307835367d1",
+  "dist/assets/characterSample-YFcqW6No.js": "cb3b44b9e50612400ca435f0b08d6187cda6985c4b45d34454c28e8ac467bba9"
+}

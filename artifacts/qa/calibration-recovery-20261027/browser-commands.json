@@ -1,0 +1,46 @@
+{
+  "recordedAfterCompletionUTC": "2026-10-26T17:38:14.173037+00:00",
+  "commands": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "npx",
+        "eslint",
+        "src/browser.ts"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "combinedExecution": "npm run typecheck && npx eslint src/browser.ts && git diff --check",
+  "modifiedFiles": [
+    "src/browser.ts"
+  ],
+  "unitOrE2ERunByBrowserWorker": false,
+  "sourceOrDomainProductionChanged": false,
+  "log": "browser-static.log",
+  "releaseStaticCheck": {
+    "recordedAfterCompletionUTC": "2026-10-26T17:44:41.704685+00:00",
+    "command": "npm run typecheck && npx eslint src/browser.ts && git diff --check",
+    "exitCode": 0,
+    "changesSinceFirstCheck": [
+      "manual visible setup start explicitly resumes only visibility after setup-ready",
+      "tracking recovery restores the specific feedback reason after all clearing commands",
+      "known source stale-clock message canonicalized for diagnostic translation"
+    ]
+  }
+}

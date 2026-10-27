@@ -1,0 +1,81 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (23 tests | 10 failed) 6ms
+   × explicit upper mode keeps matched feedback when only shoulders/elbows/wrists are finite 1ms
+   × explicit upper mode keeps adjust feedback when only shoulders/elbows/wrists are finite 0ms
+   × upper mode draws only the six measured joints even when the rest of the body has valid coordinates 0ms
+   × upper mode never retains colors if required joint 11 is low-confidence or non-finite 0ms
+   × upper mode never retains colors if required joint 12 is low-confidence or non-finite 0ms
+   × upper mode never retains colors if required joint 13 is low-confidence or non-finite 0ms
+   × upper mode never retains colors if required joint 14 is low-confidence or non-finite 0ms
+   × upper mode never retains colors if required joint 15 is low-confidence or non-finite 0ms
+   × upper mode never retains colors if required joint 16 is low-confidence or non-finite 0ms
+   × switching drawing modes clears old feedback and restores the full-body observation guard 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > explicit upper mode keeps matched feedback when only shoulders/elbows/wrists are finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > explicit upper mode keeps adjust feedback when only shoulders/elbows/wrists are finite
+TypeError: f.panel.setUpperBodyEnabled is not a function
+ ❯ tests/unit/setupPanelFeedback.test.ts:103:11
+    101| test.each(['matched', 'adjust'] as const)('explicit upper mode keeps %…
+    102|   const f = fixture({ status, message: '双臂位置匹配', joints: { 11: 'matche…
+    103|   f.panel.setUpperBodyEnabled(true);f.draw(upperFrame(50));
+       |           ^
+    104|   expect(f.preview.dataset.feedback).toBe(status);expect(f.fills).toHa…
+    105|   expect(f.fills.some(item => item.color === green)).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode draws only the six measured joints even when the rest of the body has valid coordinates
+TypeError: f.panel.setUpperBodyEnabled is not a function
+ ❯ tests/unit/setupPanelFeedback.test.ts:117:31
+    115|
+    116| test('upper mode draws only the six measured joints even when the rest…
+    117|   const f = fixture();f.panel.setUpperBodyEnabled(true);f.draw(synthet…
+       |                               ^
+    118|   expect(f.fills).toHaveLength(6);expect(f.strokes).toHaveLength(5);
+    119| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 11 is low-confidence or non-finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 12 is low-confidence or non-finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 13 is low-confidence or non-finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 14 is low-confidence or non-finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 15 is low-confidence or non-finite
+ FAIL  tests/unit/setupPanelFeedback.test.ts > upper mode never retains colors if required joint 16 is low-confidence or non-finite
+TypeError: f.panel.setUpperBodyEnabled is not a function
+ ❯ tests/unit/setupPanelFeedback.test.ts:124:13
+    122|   for (const change of [{ visibility: .59 }, { presence: .59 }, { x: N…
+    123|     const f = fixture({ status: 'matched', message: '双臂位置匹配', joints: …
+    124|     f.panel.setUpperBodyEnabled(true);f.draw(upperFrame(50));expect(f.…
+       |             ^
+    125|     f.draw(replacePoint(upperFrame(100), index, change));
+    126|     expect(f.preview.dataset.feedback).toBe('unavailable');expect([...…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > switching drawing modes clears old feedback and restores the full-body observation guard
+TypeError: f.panel.setUpperBodyEnabled is not a function
+ ❯ tests/unit/setupPanelFeedback.test.ts:132:11
+    130| test('switching drawing modes clears old feedback and restores the ful…
+    131|   const f = fixture({ status: 'matched', message: '双臂位置匹配', joints: { …
+    132|   f.panel.setUpperBodyEnabled(true);f.draw(upperFrame(50));expect(f.pr…
+       |           ^
+    133|   f.panel.setUpperBodyEnabled(false);expect(f.preview.dataset.feedback…
+    134|   f.draw(upperFrame(100));expect(f.preview.dataset.feedback).toBe('una…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  10 failed | 13 passed (23)
+   Start at  22:33:33
+   Duration  90ms (transform 52%, tests 22%, import 21%, worker 4%)
+

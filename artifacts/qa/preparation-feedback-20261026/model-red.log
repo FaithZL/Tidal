@@ -1,0 +1,122 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBody.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBody.test.ts (41 tests | 14 failed) 18ms
+   × preparation feedback immediately judges the lowered target and repeated reads cannot sample or mutate it 2ms
+   × lowered feedback uses the inclusive shoulder-width boundary independently for each arm 0ms
+   × raised feedback requires both shoulder height and the configured personal range per arm 0ms
+   × hold feedback marks the arm still at its lowered reference without blaming the other arm 0ms
+   × hold feedback marks the arm still at its raised reference without blaming the other arm 1ms
+   × hold feedback retains the stored reference-noise separation gate 1ms
+   × preparation feedback is unknown immediately on low 0ms
+   × preparation feedback is unknown immediately on stale 0ms
+   × preparation feedback is unknown immediately on gap 0ms
+   × preparation feedback is unknown immediately on duplicate 0ms
+   × preparation feedback is unknown immediately on future 0ms
+   × preparation feedback is unknown immediately on out-of-frame 0ms
+   × preparation feedback is unknown immediately on reset 0ms
+   × completed preparation feedback stays neutral instead of judging arbitrary subsequent poses green 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback immediately judges the lowered target and repeated reads cannot sample or mutate it
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:163:70
+    161|
+    162| test('preparation feedback immediately judges the lowered target and r…
+    163|   const preparation = new UpperBodyPreparation(); expect(preparation.g…
+       |                                                                      ^
+    164|   const sample = frame(50), before = JSON.stringify(sample); preparati…
+    165|   const snapshot = preparation.getSnapshot();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > lowered feedback uses the inclusive shoulder-width boundary independently for each arm
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:177:22
+    175|   const preparation = new UpperBodyPreparation(), short = frame(50);
+    176|   short.landmarks = short.landmarks.map((p, i) => i === 15 ? { ...p, y…
+    177|   expect(preparation.getFeedback()).toMatchObject({ status: 'adjust', …
+       |                      ^
+    178|   expect(preparation.getSnapshot()).toMatchObject({ step: 'lowered', p…
+    179|   const boundary = frame(100); boundary.landmarks = boundary.landmarks…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > raised feedback requires both shoulder height and the configured personal range per arm
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:188:22
+    186|   const mixed = frame(time, 'raised'); mixed.landmarks = mixed.landmar…
+    187|   preparation.accept(mixed, time);
+    188|   expect(preparation.getFeedback()).toMatchObject({ status: 'adjust', …
+       |                      ^
+    189|   expect(preparation.getSnapshot()).toMatchObject({ step: 'raised', pr…
+    190|   preparation.accept(frame(time + 100, 'raised'), time + 100); expect(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > hold feedback marks the arm still at its lowered reference without blaming the other arm
+ FAIL  tests/unit/upperBody.test.ts > hold feedback marks the arm still at its raised reference without blaming the other arm
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:197:22
+    195|   const mixed = frame(time, 'hold'), old = frame(time, unchanged);
+    196|   mixed.landmarks = mixed.landmarks.map((p, i) => [12, 14, 16].include…
+    197|   expect(preparation.getFeedback()).toMatchObject({ status: 'adjust', …
+       |                      ^
+    198|   expect(preparation.getSnapshot()).toMatchObject({ step: 'hold', prog…
+    199|   preparation.accept(frame(time + 100, 'hold'), time + 100); expect(pr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > hold feedback retains the stored reference-noise separation gate
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:210:22
+    208|   const time = observe(preparation, 'raised', 1400); preparation.accep…
+    209|   expect(preparation.getSnapshot()).toMatchObject({ step: 'hold', reas…
+    210|   expect(preparation.getFeedback()).toMatchObject({ status: 'adjust', …
+       |                      ^
+    211| });
+    212|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on low
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on stale
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on gap
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on duplicate
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on future
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on out-of-frame
+ FAIL  tests/unit/upperBody.test.ts > preparation feedback is unknown immediately on reset
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:214:105
+    212|
+    213| test.each(['low', 'stale', 'gap', 'duplicate', 'future', 'out-of-frame…
+    214|   const preparation = new UpperBodyPreparation(); preparation.accept(f…
+       |                                                                                                         ^
+    215|   let next = frame(100), now = 100;
+    216|   if (fault === 'low') next.landmarks = next.landmarks.map((p, i) => i…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > completed preparation feedback stays neutral instead of judging arbitrary subsequent poses green
+TypeError: preparation.getFeedback is not a function
+ ❯ tests/unit/upperBody.test.ts:229:22
+    227| test('completed preparation feedback stays neutral instead of judging …
+    228|   const preparation = new UpperBodyPreparation(); let time = observe(p…
+    229|   expect(preparation.getFeedback()).toMatchObject({ status: 'moving', …
+       |                      ^
+    230|   preparation.accept(frame(time, 'lowered'), time);
+    231|   expect(preparation.getFeedback()).toMatchObject({ status: 'moving', …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/14]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  14 failed | 27 passed (41)
+   Start at  23:31:40
+   Duration  137ms (transform 40%, tests 39%, import 17%, worker 4%)
+

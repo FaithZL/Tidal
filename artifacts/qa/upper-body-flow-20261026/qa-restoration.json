@@ -1,0 +1,36 @@
+{
+  "baselineFiles": 2131,
+  "regeneratedAndRestored": [
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/feedback-green-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/recognition-controls-20261026/feedback-green-synthetic.png"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/feedback-red-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/recognition-controls-20261026/feedback-red-synthetic.png"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/full-flow-synthetic.json",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/recognition-controls-20261026/full-flow-synthetic.json"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/settings-mobile.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/recognition-controls-20261026/settings-mobile.png"
+    },
+    {
+      "path": "artifacts/qa/exercise-tutorial-20261026/tutorial-mobile.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/exercise-tutorial-20261026/tutorial-mobile.png"
+    },
+    {
+      "path": "artifacts/qa/t09/synthetic-camera-results.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/t09/synthetic-camera-results.png"
+    },
+    {
+      "path": "artifacts/qa/t06/calibrated-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/upper-body-flow-20261026/regression/t06/calibrated-synthetic.png"
+    }
+  ],
+  "mismatches": [],
+  "newFilesOutsideCurrentQA": [],
+  "result": "pass"
+}

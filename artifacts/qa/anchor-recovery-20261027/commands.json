@@ -1,0 +1,207 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/anchor-recovery.spec.ts"
+    ],
+    "log": "anchor-e2e-red.log",
+    "startedUTC": "2026-10-27T01:03:21.711990+00:00",
+    "finishedUTC": "2026-10-27T01:03:58.890889+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-27T01:05:40.705556+00:00",
+    "finishedUTC": "2026-10-27T01:05:46.683012+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-final.log",
+    "startedUTC": "2026-10-27T01:06:11.780622+00:00",
+    "finishedUTC": "2026-10-27T01:06:12.788307+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/anchor-recovery.spec.ts",
+      "tests/e2e/completed-recovery.spec.ts"
+    ],
+    "log": "anchor-e2e-green.log",
+    "startedUTC": "2026-10-27T01:05:39.569038+00:00",
+    "finishedUTC": "2026-10-27T01:10:05.914046+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-27T01:10:36.093253+00:00",
+    "finishedUTC": "2026-10-27T01:10:37.962225+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-finish.spec.ts"
+    ],
+    "log": "finish-e2e-red.log",
+    "startedUTC": "2026-10-27T01:11:59.283373+00:00",
+    "finishedUTC": "2026-10-27T01:12:31.442521+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-finish.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "-g",
+      "completion offers|finish shortcut|upper body is the default|stopping during|automatic preparation cannot override"
+    ],
+    "log": "finish-e2e-green.log",
+    "startedUTC": "2026-10-27T01:13:23.373917+00:00",
+    "finishedUTC": "2026-10-27T01:14:14.376727+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint && git diff --check"
+    ],
+    "log": "static-release.log",
+    "startedUTC": "2026-10-27T01:14:23.142029+00:00",
+    "finishedUTC": "2026-10-27T01:14:26.938850+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-27T01:14:24.299738+00:00",
+    "finishedUTC": "2026-10-27T01:14:29.512615+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-finish.spec.ts",
+      "-g",
+      "manual completion releases"
+    ],
+    "log": "finish-owned-pause-red.log",
+    "startedUTC": "2026-10-27T01:15:13.759964+00:00",
+    "finishedUTC": "2026-10-27T01:15:37.358520+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-finish.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "-g",
+      "completion offers|finish shortcut|manual completion releases|upper body is the default|stopping during|automatic preparation cannot override|existing user pause|choosing camera"
+    ],
+    "log": "finish-release.log",
+    "startedUTC": "2026-10-27T01:15:51.168963+00:00",
+    "finishedUTC": "2026-10-27T01:17:14.140808+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run lint && git diff --check"
+    ],
+    "log": "lint-release.log",
+    "startedUTC": "2026-10-27T01:17:45.676016+00:00",
+    "finishedUTC": "2026-10-27T01:17:46.734059+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-release.log",
+    "startedUTC": "2026-10-27T01:17:45.678304+00:00",
+    "finishedUTC": "2026-10-27T01:17:47.486695+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/anchor-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-27T01:18:01.509743+00:00",
+    "finishedUTC": "2026-10-27T01:18:39.994284+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/anchor-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production-release.log",
+    "startedUTC": "2026-10-27T01:19:41.591332+00:00",
+    "finishedUTC": "2026-10-27T01:20:15.990848+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/anchor-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production-original-recheck.log",
+    "startedUTC": "2026-10-27T01:20:58.330306+00:00",
+    "finishedUTC": "2026-10-27T01:21:37.027936+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "log": "final-diff-check.log",
+    "startedUTC": "2026-10-27T01:22:58.444656+00:00",
+    "finishedUTC": "2026-10-27T01:22:58.460787+00:00",
+    "exitCode": 0
+  }
+]

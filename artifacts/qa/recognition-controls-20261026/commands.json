@@ -1,0 +1,192 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/recognitionPreference.test.ts"
+    ],
+    "log": "preference-red.log",
+    "startedUTC": "2026-10-26T13:02:01.677873+00:00",
+    "finishedUTC": "2026-10-26T13:02:01.997047+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/recognitionPreference.test.ts"
+    ],
+    "log": "preference-green.log",
+    "startedUTC": "2026-10-26T13:06:14.419810+00:00",
+    "finishedUTC": "2026-10-26T13:06:14.725231+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-controls.spec.ts",
+      "-g",
+      "camera entry pauses",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/entry-red-results"
+    ],
+    "log": "entry-red.log",
+    "startedUTC": "2026-10-26T13:06:14.773144+00:00",
+    "finishedUTC": "2026-10-26T13:06:26.787395+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "integrated-types",
+    "startedUTC": "2026-10-26T13:11:15.102652+00:00",
+    "finishedUTC": "2026-10-26T13:11:16.152141+00:00",
+    "exitCode": 2
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "integrated-types.log",
+    "startedUTC": "2026-10-26T13:13:44.507042+00:00",
+    "finishedUTC": "2026-10-26T13:13:45.555583+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-controls.spec.ts",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/new-e2e-first-results"
+    ],
+    "log": "new-e2e-first.log",
+    "startedUTC": "2026-10-26T13:13:44.511076+00:00",
+    "finishedUTC": "2026-10-26T13:15:17.126935+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-controls.spec.ts",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/new-e2e-recheck-results"
+    ],
+    "log": "new-e2e-recheck.log",
+    "startedUTC": "2026-10-26T13:15:55.943550+00:00",
+    "finishedUTC": "2026-10-26T13:18:26.664963+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-26T13:19:03.458423+00:00",
+    "finishedUTC": "2026-10-26T13:19:08.509694+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/source-lifecycle.spec.ts",
+      "tests/e2e/calibration.spec.ts",
+      "tests/e2e/camera-errors.spec.ts",
+      "tests/e2e/default-demo.spec.ts",
+      "tests/e2e/animation-stop.spec.ts",
+      "tests/e2e/recognition-controls.spec.ts",
+      "--grep-invert",
+      "camera entry pauses|real recognizer feedback|changing tolerance|a stalled camera clears|wide tolerance",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/regression-results"
+    ],
+    "log": "e2e-regression.log",
+    "startedUTC": "2026-10-26T13:20:35.387131+00:00",
+    "finishedUTC": "2026-10-26T13:25:56.263165+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-controls.spec.ts",
+      "-g",
+      "camera entry is gated",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results"
+    ],
+    "log": "camera-entry-gate-red.log",
+    "startedUTC": "2026-10-26T13:28:11.173377+00:00",
+    "finishedUTC": "2026-10-26T13:28:20.080879+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/recognition-controls.spec.ts",
+      "tests/e2e/animation-stop.spec.ts",
+      "--grep",
+      "recognition-controls|one click freezes",
+      "--output",
+      "artifacts/qa/recognition-controls-20261026/final-results"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T13:28:46.835762+00:00",
+    "finishedUTC": "2026-10-26T13:31:28.752596+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-26T13:31:50.478427+00:00",
+    "finishedUTC": "2026-10-26T13:31:52.365130+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/recognition-controls-20261026/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T13:32:28.811713+00:00",
+    "finishedUTC": "2026-10-26T13:32:36.126507+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run typecheck && npm run lint && npm run assets:verify",
+    "log": "static-checks.log",
+    "exitCode": 0,
+    "capture": "Combined output from exec_command initial+completion chunks; all three completed."
+  }
+]

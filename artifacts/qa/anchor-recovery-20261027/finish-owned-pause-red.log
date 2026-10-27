@@ -1,0 +1,69 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-finish.spec.ts -g manual completion releases
+
+[WebServer] (node:40939) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41007) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:41027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:41028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:15:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:15:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:15:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:15:16 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-finish.spec.ts:29:34 › manual completion releases only the pause owned by preparation (existing user pause: false) (14.3s)
+(node:41075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:15:31 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:15:31 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:15:31 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:15:31 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓  2 tests/e2e/preparation-finish.spec.ts:29:34 › manual completion releases only the pause owned by preparation (existing user pause: true) (6.7s)
+
+
+  1) tests/e2e/preparation-finish.spec.ts:29:34 › manual completion releases only the pause owned by preparation (existing user pause: false) 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "已暂停"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        18 × locator resolved to <span id="statusTag" class="subtag">已暂停</span>
+           - unexpected value "已暂停"
+
+
+      34 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});
+      35 |  await expect(page.locator('#finishUpperPreparation')).toBeEnabled();await page.locator('#finishUpperPreparation').click();await expect(page.locator('#setupModal')).toBeHidden();
+    > 36 |  await expect(page.locator('#statusTag')).toHaveText(paused?'已暂停':'训练中');await expect(page.locator('#chopValue')).toHaveText(before!);
+         |                                           ^
+      37 |  expect(await page.evaluate(()=>window.upperFixture.tracks[0].readyState)).toBe('live');
+      38 | });
+      39 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-finish.spec.ts:36:43
+
+    Error Context: test-results/preparation-finish-manual--9851b--existing-user-pause-false-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-finish-manual--9851b--existing-user-pause-false-/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-finish-manual--9851b--existing-user-pause-false-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/preparation-finish.spec.ts:29:34 › manual completion releases only the pause owned by preparation (existing user pause: false) 
+  1 passed (23.3s)

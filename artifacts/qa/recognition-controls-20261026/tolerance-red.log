@@ -1,0 +1,148 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/cameraTolerance.test.ts (4 tests | 4 failed) 11ms
+   × equal configuration is a no-op and invalid configuration cannot interrupt an active cycle 5ms
+   × an actual configuration change synchronously closes the source, discards half a rep and requires profile validation 1ms
+   × source copies validated configuration and applies loose range to actual camera frames 3ms
+   × changing configuration clears an in-progress Carry confirmation and never backfills it 1ms
+ ❯ tests/unit/recognitionTolerance.test.ts (8 tests | 3 failed) 22ms
+   × five named integer levels preserve the exact standard configuration 3ms
+   × leniency widens only the five runtime pose gates and retains separate regions 0ms
+   × a complete reduced-range chop counts on loose while standard still requires its original range 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/cameraTolerance.test.ts > equal configuration is a no-op and invalid configuration cannot interrupt an active cycle
+AssertionError: expected error to be instance of RangeError
+
+- Expected:
+[Function RangeError]
+
++ Received:
+TypeError {
+  "message": "h.source.setRecognitionConfig is not a function",
+}
+
+ ❯ tests/unit/cameraTolerance.test.ts:24:91
+     22|   const h = harness(); h.source.setProfile(syntheticProfile()); await …
+     23|   h.pose('raised'); h.pose('down');
+     24|   expect(() => h.source.setRecognitionConfig({ ...recognitionConfig, m…
+       |                                                                                           ^
+     25|   h.source.setRecognitionConfig({ ...recognitionConfig });
+     26|   h.pose('raised');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/unit/cameraTolerance.test.ts > an actual configuration change synchronously closes the source, discards half a rep and requires profile validation
+TypeError: h.source.setRecognitionConfig is not a function
+ ❯ tests/unit/cameraTolerance.test.ts:33:12
+     31|   const h = harness(); h.source.setProfile(syntheticProfile()); await …
+     32|   h.pose('raised'); h.pose('down');
+     33|   h.source.setRecognitionConfig(createLeniencyConfig(5));
+       |            ^
+     34|   const before = h.events.length; h.pose('raised'); expect(h.events).t…
+     35|   await expect(h.source.start({ ...context, sourceEpoch: 2 }, () => {}…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/unit/cameraTolerance.test.ts > source copies validated configuration and applies loose range to actual camera frames
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/cameraTolerance.test.ts:55:60
+     53|   }
+     54|   h.pose('raised', 800);
+     55|   expect(h.events.filter(e => e.kind === 'rep-completed')).toHaveLengt…
+       |                                                            ^
+     56| });
+     57|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/unit/cameraTolerance.test.ts > changing configuration clears an in-progress Carry confirmation and never backfills it
+TypeError: h.source.setRecognitionConfig is not a function
+ ❯ tests/unit/cameraTolerance.test.ts:62:12
+     60|   h.source.setProfile(syntheticProfile()); await h.source.start(carry,…
+     61|   h.pose('hold', 400); expect(h.events.at(-1)).toMatchObject({ holding…
+     62|   h.source.setRecognitionConfig(createLeniencyConfig(5)); h.source.set…
+       |            ^
+     63|   await h.source.start({ ...carry, sourceEpoch: 2 }, e => h.events.pus…
+     64|   h.pose('hold', 500); expect(h.events.every(e => e.kind !== 'hold-sam…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/unit/recognitionTolerance.test.ts > five named integer levels preserve the exact standard configuration
+AssertionError: expected [ '标准', '标准', '标准', '标准', '标准' ] to deeply equal [ '严格', '偏严格', '标准', '偏宽松', '宽松' ]
+
+- Expected
++ Received
+
+  [
+-   "严格",
+-   "偏严格",
+    "标准",
+-   "偏宽松",
+-   "宽松",
++   "标准",
++   "标准",
++   "标准",
++   "标准",
+  ]
+
+ ❯ tests/unit/recognitionTolerance.test.ts:13:57
+     11| test('five named integer levels preserve the exact standard configurat…
+     12|   expect(defaultRecognitionLeniency).toBe(3);
+     13|   expect([1, 2, 3, 4, 5].map(recognitionLeniencyLabel)).toEqual(['严格',…
+       |                                                         ^
+     14|   expect([1, 2, 3, 4, 5].every(isRecognitionLeniency)).toBe(true);
+     15|   expect(createLeniencyConfig(3)).toBe(recognitionConfig);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/unit/recognitionTolerance.test.ts > leniency widens only the five runtime pose gates and retains separate regions
+AssertionError: expected 0.7 to be close to 0.78, received difference is 0.08000000000000007, but expected 0.005
+ ❯ tests/unit/recognitionTolerance.test.ts:26:32
+     24|   const adjustable = new Set(['repEnterRatio', 'repReturnRatio', 'retu…
+     25|   const strict = createLeniencyConfig(1), loose = createLeniencyConfig…
+     26|   expect(strict.repEnterRatio).toBeCloseTo(.78); expect(loose.repEnter…
+       |                                ^
+     27|   expect(strict.repReturnRatio).toBeCloseTo(.22); expect(loose.repRetu…
+     28|   expect(strict.returnWristTolerance).toBeCloseTo(.24); expect(loose.r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/unit/recognitionTolerance.test.ts > a complete reduced-range chop counts on loose while standard still requires its original range
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/recognitionTolerance.test.ts:58:57
+     56|   expect(run(3).filter(e => e.kind === 'rep-completed')).toHaveLength(…
+     57|   const loose = run(5);
+     58|   expect(loose.filter(e => e.kind === 'rep-completed')).toHaveLength(1…
+       |                                                         ^
+     59|   expect(loose.filter(e => e.kind === 'impact')).toHaveLength(1);
+     60|   expect(loose.filter(e => e.kind === 'phase').map(e => e.phase)).toEq…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed | 5 passed (12)
+   Start at  20:57:38
+   Duration  115ms (transform 44%, tests 35%, import 17%, worker 4%)
+

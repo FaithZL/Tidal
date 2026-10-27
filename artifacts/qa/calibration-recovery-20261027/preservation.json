@@ -1,0 +1,20 @@
+{
+  "oldProgressBytesPreserved": true,
+  "baselineQA": 2348,
+  "QASHA_mismatches": [],
+  "protectedTrackedFilesUnchanged": [
+    "package.json",
+    "package-lock.json",
+    ".gitattributes",
+    ".gitignore",
+    "public",
+    "src/domain",
+    "src/config/recognitionConfig.ts"
+  ],
+  "inputSourceAndSetupPanelBytesUnchanged": true,
+  "stagedFiles": [],
+  "gitDeliveries": [],
+  "branch": "main",
+  "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "physicalCameraImagesOrTrajectoriesSaved": false
+}

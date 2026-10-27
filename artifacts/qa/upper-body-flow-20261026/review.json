@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only integrated review by separate task; no domain state mutation added",
+  "verified": [
+    "Automatic permission binds camera start generation and session id; mode/stop/reset/blur/settings revoke it",
+    "Only camera entry owned user pause can resume; pre-existing user/tracking/visibility/source-error pause is preserved",
+    "Upper/full profiles are explicit and mutually exclusive, validated before start; CameraActionSource retains epoch/seq isolation",
+    "Upper-body recognizer emits original protocol; SessionController remains sole outcome writer"
+  ],
+  "fixedFindings": [
+    {
+      "priority": "P2",
+      "issue": "Cancelled auto-start left X seconds message visible",
+      "red": "countdown-cancel-red.log: actual expected not 秒后 but received3秒后 failure",
+      "fix": "cancelCameraAutoStart synchronously clears panel startMessage; fallback copy states manual start if cancelled; blocked pause text set after cancellation",
+      "verification": "e2e-final.log: all32pass including new countdown cancellation and existing pause tests"
+    },
+    {
+      "priority": "P2",
+      "issue": "Original33point drawing guard cleared six-point feedback when lower body hadNaN",
+      "red": "upper-drawing-red.log: expected matched/adjust but received unavailable, among10failed/13passed",
+      "fix": "Explicit SetupPanel.setUpperBodyEnabled defaultsfalse; upper checks/draws only11–16, full retains old33point guard; initialized and switched before frames",
+      "verification": "23/23 drawing unit passes, included in615/615 fullunit"
+    }
+  ],
+  "oldAssertions": "Existing full-body tests choose full-body explicitly before cameraStart; original assertions/thresholds/timeouts preserved",
+  "limitations": "Synthetic six-point fixtures and DOM/canvas observations; not physical camera, real phone, health or motion-capture validation.",
+  "result": "No remaining known P1/P2 after fixes and final32E2E/615unit"
+}

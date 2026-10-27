@@ -1,0 +1,30 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyCompletedRecovery.test.ts tests/unit/upperBody.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBodyDiagnostics.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts (26 tests | 1 failed) 54ms
+   × revalidation accepts any stable upper-body pose with twelve fresh samples and never relearns its saved targets 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > revalidation accepts any stable upper-body pose with twelve fresh samples and never relearns its saved targets
+Error: Invalid Chai property: toBeFalse. Did you mean "toBeFalsy"?
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:47:52
+     45|   expect(p.getProfile()).toEqual(saved); expect(p.getSavedProfile()).t…
+     46|   const clone = p.getSavedProfile()!; clone.hold.left.y = 900; expect(…
+     47|   p.tick(next + 201); expect(p.getSnapshot().ready).toBeFalse(); expec…
+       |                                                    ^
+     48| });
+     49|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 100 passed (101)
+   Start at  01:32:52
+   Duration  240ms (tests 38%, transform 37%, import 20%, worker 4%)
+

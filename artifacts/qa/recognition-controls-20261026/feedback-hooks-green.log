@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  20:58:54
+   Duration  74ms (transform 58%, import 26%, tests 11%, worker 5%)
+

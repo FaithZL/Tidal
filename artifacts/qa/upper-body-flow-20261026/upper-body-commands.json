@@ -1,0 +1,18 @@
+{
+  "scope": ["src/pose/upperBody.ts", "tests/unit/upperBody.test.ts"],
+  "commands": [
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "upper-body-red.log", "exitCode": 1, "result": "22/22 semantic failures against interface scaffold: valid six-point observations returned null and automatic preparation never advanced."},
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "upper-body-green-first.log", "exitCode": 0, "result": "22/22 passed after initial implementation."},
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "upper-body-boundaries.log", "exitCode": 0, "result": "25/25 passed including ignored lower-body coordinates, inclusive temporal boundaries, smoothing/copy isolation, instability and stale completion."},
+    {"command": "./node_modules/.bin/eslint src/pose/upperBody.ts", "log": "upper-body-lint.log", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run typecheck", "log": "upper-body-typecheck.log", "exitCode": 2, "result": "Only concurrent upperBodyRecognizer scaffold unused profile/task/config properties (TS6138); no upperBody.ts errors."},
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "upper-body-per-arm-red.log", "exitCode": 1, "result": "25 passed, 2 failed: aggregate hold separation incorrectly completed preparation when one arm stayed at its lowered or raised reference."},
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "upper-body-per-arm-green.log", "exitCode": 0, "result": "27/27 passed after enforcing configured RMS separation independently for both arms against both references."},
+    {"command": "npm run test:unit", "log": "upper-body-unit-all.log", "exitCode": 1, "result": "595 passed, 1 concurrent upperCameraSource test failed: syntheticFrame(50) produced valid tracking ready while the test expected lost. Reported to source owner for fixture/reference investigation; no failures in this scope."},
+    {"command": "./node_modules/.bin/eslint src/pose/upperBody.ts", "log": "upper-body-lint-final.log", "exitCode": 0, "result": "Passed after per-arm correction."},
+    {"command": "git diff --check", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run typecheck", "log": "upper-body-typecheck-final.log", "exitCode": 0, "result": "Passed after concurrent recognizer implementation appeared."}
+  ],
+  "constraints": "Only landmarks 11–16 are read. Fixed 1200ms/at-least-12-fresh-sample preparation; source confidence/gap/age/future/order/framing/position/scale checks remain active. Preparation never writes ExerciseSignal or business state. Profile and reference are copied. Existing full-body implementation and tests are unchanged.",
+  "limitations": "Authored synthetic six-point poses establish software behavior only; no physical camera, real-person accuracy, latency or medical-form validation. No E2E, install, asset regeneration, commit, push or external operation was performed by this subtask."
+}

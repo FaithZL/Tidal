@@ -1,0 +1,127 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeaching.test.ts"
+    ],
+    "log": "teaching-red.log",
+    "startedUTC": "2026-10-26T14:22:07.944948+00:00",
+    "finishedUTC": "2026-10-26T14:22:08.264372+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeaching.test.ts",
+      "tests/unit/exerciseTutorialModel.test.ts",
+      "tests/unit/movementGuideClock.test.ts"
+    ],
+    "log": "teaching-green-first.log",
+    "startedUTC": "2026-10-26T14:23:06.623946+00:00",
+    "finishedUTC": "2026-10-26T14:23:07.332878+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "teaching-typecheck.log",
+    "startedUTC": "2026-10-26T14:23:14.218821+00:00",
+    "finishedUTC": "2026-10-26T14:23:15.316870+00:00",
+    "exitCode": 2
+  },
+  {
+    "command": [
+      "npx",
+      "eslint",
+      "src/ui/exerciseTutorialModel.ts",
+      "src/ui/exerciseTutorialPanel.ts",
+      "src/ui/movementGuideClock.ts",
+      "src/ui/movementGuide.ts",
+      "src/ui/tutorialFigure.ts"
+    ],
+    "log": "teaching-lint.log",
+    "startedUTC": "2026-10-26T14:23:15.351686+00:00",
+    "finishedUTC": "2026-10-26T14:23:16.154333+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeaching.test.ts",
+      "tests/unit/exerciseTutorialModel.test.ts",
+      "tests/unit/movementGuideClock.test.ts"
+    ],
+    "log": "teaching-players-first.log",
+    "startedUTC": "2026-10-26T14:24:56.681774+00:00",
+    "finishedUTC": "2026-10-26T14:24:57.393035+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeaching.test.ts",
+      "tests/unit/exerciseTutorialModel.test.ts",
+      "tests/unit/movementGuideClock.test.ts"
+    ],
+    "log": "teaching-players-green.log",
+    "startedUTC": "2026-10-26T14:25:07.193425+00:00",
+    "finishedUTC": "2026-10-26T14:25:07.903895+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyTeaching.test.ts",
+      "tests/unit/exerciseTutorialModel.test.ts",
+      "tests/unit/movementGuideClock.test.ts"
+    ],
+    "log": "teaching-final.log",
+    "startedUTC": "2026-10-26T14:25:15.807770+00:00",
+    "finishedUTC": "2026-10-26T14:25:16.508718+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npx",
+      "eslint",
+      "src/ui/exerciseTutorialModel.ts",
+      "src/ui/exerciseTutorialPanel.ts",
+      "src/ui/movementGuideClock.ts",
+      "src/ui/movementGuide.ts",
+      "src/ui/tutorialFigure.ts"
+    ],
+    "log": "teaching-lint-final.log",
+    "startedUTC": "2026-10-26T14:25:16.543247+00:00",
+    "finishedUTC": "2026-10-26T14:25:16.996063+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "artifacts/qa/upper-body-flow-20261026/capture-production.mjs"
+    ],
+    "log": "production-script-syntax.log",
+    "startedUTC": "2026-10-26T14:35:42.459044+00:00",
+    "finishedUTC": "2026-10-26T14:35:42.481983+00:00",
+    "exitCode": 0
+  }
+]

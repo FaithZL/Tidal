@@ -1,0 +1,13 @@
+{
+  "scope": "Only SetupPanel reset-reason propagation and added setupPanelFeedback unit cases; existing assertions and blur/visibility reset behavior retained",
+  "commands": [
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "setup-red.log", "exitCode": 1, "result": "6 new reason-propagation cases failed / 24 existing cases passed; reset reasons were undefined" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "setup-green.log", "exitCode": 0, "result": "30/30 passed after adding reason labels" },
+    { "command": "npx eslint src/ui/setupPanel.ts", "log": "setup-lint.log", "exitCode": 0, "result": "No diagnostics" },
+    { "command": "npm run typecheck", "log": "setup-typecheck.log", "exitCode": 0, "result": "TypeScript strict check passed" },
+    { "command": "git diff --check -- src/ui/setupPanel.ts tests/unit/setupPanelFeedback.test.ts", "log": "setup-diff-check.log", "exitCode": 0, "result": "No diagnostics" }
+  ],
+  "behavior": "Calibration port reset now accepts optional close/reason arguments. Window blur forwards reset(false,window-blur), visibility hidden forwards reset(false,page-hidden), and visibility visible forwards reset(false,page-visible). These events still reset preparation and clear feedback. stop() defaults to reset(true,camera-stop), and start() labels its initial stop camera-restart.",
+  "integration": "Existing browser cameraStop listener was inspected read-only and already uses an arrow wrapper calling cameraPanel.stop(), so DOM Event is not passed as the reason. Root owns the calibration wrapper and upper-panel reason recording.",
+  "limits": "Unit adapter and an explicitly failing fake getUserMedia device only; no actual camera permission, E2E, install, commit, push or deployment in this subtask."
+}

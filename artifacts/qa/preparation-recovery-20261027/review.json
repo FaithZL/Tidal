@@ -1,0 +1,15 @@
+{
+  "policy": "Opt-in3000ms incomplete-only checkpoint; strict default0. Completed profiles never recover.",
+  "verified": [
+    "Deadline latest capturedAt+window, never sliding; no invalid/lost time samples",
+    "Recovery clears partial samples/latest/available and cannot return a profile",
+    "Fresh same reference pose must refill full1200ms and12samples",
+    "Header watermark rejects duplicate/future/size/geometry faults before stale/gap soft classification",
+    "Soft ticks retain stream ordering; explicit reset clears all",
+    "Browser missingprofile cancels auto-ready timing; training reprepare does not gain permission to resume"
+  ],
+  "reviewer": "upper_body_teaching read-only independent review",
+  "remainingKnownP1P2": [],
+  "evidence": "653unit;12E2E;build;2normal-production synthetic UI PNGs",
+  "physicalLimits": "Read-only current UI was low-confidence; actual transition moment not recorded, no accuracy or hardware claim"
+}

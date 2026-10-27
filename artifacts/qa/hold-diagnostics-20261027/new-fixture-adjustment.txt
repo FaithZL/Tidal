@@ -1,0 +1,1 @@
+The new demo-entry test initially expected 0/15 after default auto-demo had already produced 3/15 before camera entry. Fix the new test to capture the existing count after camera entry, and require exact preservation across blur/preparation. No existing assertions or product counting changed. See diagnostics-and-blur-e2e-green.log (exit1; 3/4 passed).

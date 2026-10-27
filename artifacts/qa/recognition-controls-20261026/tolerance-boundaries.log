@@ -1,0 +1,41 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/recognitionTolerance.test.ts (14 tests | 1 failed) 35ms
+   × loose Carry accepts bounded drift while the released pose always ends it 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/recognitionTolerance.test.ts > loose Carry accepts bounded drift while the released pose always ends it
+AssertionError: expected { kind: 'hold-sample', …(3) } to match object { holding: true, valid: true }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "holding": true,
++   "holding": false,
+    "valid": true,
+  }
+
+ ❯ tests/unit/recognitionTolerance.test.ts:75:27
+     73|   }
+     74|   expect(standard.at(-1)).toMatchObject({ holding: false, valid: true …
+     75|   expect(tolerant.at(-1)).toMatchObject({ holding: true, valid: true }…
+       |                           ^
+     76|   expect(loose.update(syntheticFrame(1050, 'standing')).at(-1)).toMatc…
+     77| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 19 passed (20)
+   Start at  21:01:23
+   Duration  118ms (tests 45%, transform 36%, import 16%, worker 3%)
+

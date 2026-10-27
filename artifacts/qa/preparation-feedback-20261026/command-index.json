@@ -1,0 +1,9 @@
+{
+  "root": "commands.json",
+  "model": "model-commands.json",
+  "review": "review.json",
+  "production": "production/production.json",
+  "history": "qa-restoration.json",
+  "preservation": "preservation.json",
+  "scope": "630unit/10distinct selectedE2E over2green runs/build; no fullverify, real-camera accuracy or asset changes claimed"
+}

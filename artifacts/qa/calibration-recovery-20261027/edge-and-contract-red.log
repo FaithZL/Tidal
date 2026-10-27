@@ -1,0 +1,236 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/completed-recovery.spec.ts tests/e2e/preparation-diagnostics.spec.ts tests/e2e/preparation-feedback.spec.ts -g visibility interrupts|paused video|completed profile still|actual active training|single invalid active
+
+[WebServer] (node:32425) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:32537) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:42:24 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:42:24 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:42:24 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:42:24 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/completed-recovery.spec.ts:18:1 › visibility interrupts completed calibration without discarding it or authorizing automatic resume (21.9s)
+(node:32591) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:42:47 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:42:47 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:42:47 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:42:47 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/completed-recovery.spec.ts:28:1 › a paused video feed recovers from fresh observations and never triggers recalibration (17.6s)
+(node:32615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:06 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  3 tests/e2e/preparation-diagnostics.spec.ts:41:1 › a completed profile still resets on blur and cannot silently start or count (13.6s)
+(node:32634) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:21 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  4 tests/e2e/preparation-diagnostics.spec.ts:49:1 › actual active training still invalidates its profile and pauses on visible blur (17.6s)
+(node:32663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:43:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:43:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:43:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  5 tests/e2e/preparation-feedback.spec.ts:20:1 › a single invalid active frame retains its reason when returning to preparation without later frames (17.6s)
+
+
+  1) tests/e2e/completed-recovery.spec.ts:18:1 › visibility interrupts completed calibration without discarding it or authorizing automatic resume 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#statusTag')
+    Expected: "训练中"
+    Received: "已暂停"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#statusTag') with timeout 7000ms
+      - waiting for locator('#statusTag')
+        18 × locator resolved to <span id="statusTag" class="subtag">已暂停</span>
+           - unexpected value "已暂停"
+
+
+      17 | });
+      18 | test('visibility interrupts completed calibration without discarding it or authorizing automatic resume',async({page})=>{
+    > 19 |  await prepare(page);await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await expect(page.locator('#beginCamera')).toBeDisabled();await page.waitForTimeout(3300);await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('#beginCamera')).toBeEnabled({timeout:6000});await page.waitForTimeout(3400);await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await page.locator('#beginCamera').click();await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+      20 | });
+      21 | test('a real anchor change or explicit camera stop still clears completed calibration',async({page})=>{
+      22 |  await prepare(page);await page.evaluate(()=>{window.upperFixture.moved=true;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodyLastReset')).toContainText('身体或机位变化');await expect(page.locator('#beginCamera')).toBeDisabled();await page.locator('#cameraStop').click();await expect(page.locator('#upperBodyStepCount')).toContainText('0/3');await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/completed-recovery.spec.ts:19:894
+
+    Error Context: test-results/completed-recovery-visibil-437a0-uthorizing-automatic-resume/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/completed-recovery-visibil-437a0-uthorizing-automatic-resume/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/completed-recovery-visibil-437a0-uthorizing-automatic-resume/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/completed-recovery.spec.ts:28:1 › a paused video feed recovers from fresh observations and never triggers recalibration 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#cameraFeedbackStatus')
+    Expected substring: "没有新数据"
+    Received string:    "暂无法判断"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#cameraFeedbackStatus') with timeout 7000ms
+      - waiting for locator('#cameraFeedbackStatus')
+        18 × locator resolved to <p role="status" id="cameraFeedbackStatus">暂无法判断</p>
+           - unexpected value "暂无法判断"
+
+
+      27 | });
+      28 | test('a paused video feed recovers from fresh observations and never triggers recalibration',async({page})=>{
+    > 29 |  await active(page);await page.locator('#cameraVideo').evaluate((video:HTMLVideoElement)=>video.pause());await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','unavailable');await expect(page.locator('#cameraFeedbackStatus')).toContainText('没有新数据');await page.waitForTimeout(500);await expect(page.locator('#chopValue')).toHaveText('0/15');await page.locator('#cameraVideo').evaluate((video:HTMLVideoElement)=>video.play());await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:6000});await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                                                                                                                                                                                                                                                                                ^
+      30 | });
+      31 | test('tracking recovery cannot release a manual animation stop',async({page})=>{
+      32 |  await active(page);await page.evaluate(()=>{window.upperFixture.low=true;});await expect(page.locator('#statusTag')).not.toHaveText('训练中');await page.locator('#animationStop').click();await page.evaluate(()=>{window.upperFixture.low=false;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-ready','true',{timeout:6000});await page.waitForTimeout(500);await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#animationStop')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#chopValue')).toHaveText('0/15');await page.locator('#animationStop').click();await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/completed-recovery.spec.ts:29:384
+
+    Error Context: test-results/completed-recovery-a-pause-3c6af-ever-triggers-recalibration/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/completed-recovery-a-pause-3c6af-ever-triggers-recalibration/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/completed-recovery-a-pause-3c6af-ever-triggers-recalibration/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/preparation-diagnostics.spec.ts:41:1 › a completed profile still resets on blur and cannot silently start or count 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "lowered"
+    Received: "complete"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        6 × locator resolved to <section data-ready="false" data-step="complete" aria-label="上半身自动准备" data-recovering="false" data-revalidating="true" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+          - unexpected value "complete"
+        12 × locator resolved to <section data-ready="true" data-step="complete" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>
+           - unexpected value "complete"
+
+
+      41 | test('a completed profile still resets on blur and cannot silently start or count',async({page})=>{
+      42 |  await thirdStep(page);await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+    > 43 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodyLastReset')).toContainText('窗口失焦');await expect(page.locator('#upperBodyLastReset')).toContainText('3/3 → 0/3');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                      ^
+      44 | });
+      45 |
+      46 | test('a later timeout replaces the visible-blur preservation notice with the real reset state',async({page})=>{
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:43:54
+
+    Error Context: test-results/preparation-diagnostics-a--ea206-not-silently-start-or-count/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-a--ea206-not-silently-start-or-count/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-a--ea206-not-silently-start-or-count/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/preparation-diagnostics.spec.ts:49:1 › actual active training still invalidates its profile and pauses on visible blur 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "lowered"
+    Received: "complete"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        6 × locator resolved to <section data-ready="false" data-step="complete" aria-label="上半身自动准备" data-recovering="false" data-revalidating="true" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+          - unexpected value "complete"
+        12 × locator resolved to <section data-ready="true" data-step="complete" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>
+           - unexpected value "complete"
+
+
+      48 | });
+      49 | test('actual active training still invalidates its profile and pauses on visible blur',async({page})=>{
+    > 50 |  await thirdStep(page);await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});const before=await page.locator('#chopValue').textContent();await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#upperBodyLastReset')).toContainText('3/3 → 0/3');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText(before!);
+         |                                                                                                                                                                                                                                                                                                                                                ^
+      51 | });
+      52 | test('full-body preparation keeps its original reset policy on visible blur',async({page})=>{
+      53 |  await installPoseFixture(page);await page.addInitScript(()=>localStorage.setItem('tidal.demo.enabled','false'));await page.goto('/?e2e=1&art=npr-sample');await page.locator('#cameraMode').click();await page.locator('#cameraExerciseMode').selectOption('full-body');await page.locator('#cameraStart').click();await expect(page.locator('#calibrationCapture')).toBeEnabled();await page.locator('#calibrationCapture').click();await expect(page.locator('#calibrationPanel')).toHaveAttribute('data-step','chop-raised');await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#calibrationPanel')).toHaveAttribute('data-step','standing');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:50:336
+
+    Error Context: test-results/preparation-diagnostics-ac-5df08--and-pauses-on-visible-blur/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-ac-5df08--and-pauses-on-visible-blur/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-ac-5df08--and-pauses-on-visible-blur/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/e2e/preparation-feedback.spec.ts:20:1 › a single invalid active frame retains its reason when returning to preparation without later frames 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('#setupModal')
+    Expected: visible
+    Received: hidden
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('#setupModal') with timeout 7000ms
+      - waiting for locator('#setupModal')
+        18 × locator resolved to <div hidden="" id="setupModal" class="modal-backdrop">…</div>
+           - unexpected value "hidden"
+
+
+      21 |  await setup(page);await page.evaluate(()=>{window.upperFixture.pose='lowered';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});
+      22 |  await page.evaluate(()=>{const frames=document.getElementById('cameraFrames')!;const observer=new MutationObserver(()=>{window.upperFixture.stalled=true;observer.disconnect();});observer.observe(frames,{childList:true});window.upperFixture.low=true;});
+    > 23 |  await expect(page.locator('#setupModal')).toBeVisible();await expect(page.locator('#upperBodyReason')).toContainText('不够清晰');await expect(page.locator('#cameraFeedbackStatus')).toContainText('不够清晰');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','unavailable');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                            ^
+      24 | });
+      25 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-feedback.spec.ts:23:44
+
+    Error Context: test-results/preparation-feedback-a-sin-30144-ration-without-later-frames/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-feedback-a-sin-30144-ration-without-later-frames/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-feedback-a-sin-30144-ration-without-later-frames/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    tests/e2e/completed-recovery.spec.ts:18:1 › visibility interrupts completed calibration without discarding it or authorizing automatic resume 
+    tests/e2e/completed-recovery.spec.ts:28:1 › a paused video feed recovers from fresh observations and never triggers recalibration 
+    tests/e2e/preparation-diagnostics.spec.ts:41:1 › a completed profile still resets on blur and cannot silently start or count 
+    tests/e2e/preparation-diagnostics.spec.ts:49:1 › actual active training still invalidates its profile and pauses on visible blur 
+    tests/e2e/preparation-feedback.spec.ts:20:1 › a single invalid active frame retains its reason when returning to preparation without later frames 

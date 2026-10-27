@@ -1,0 +1,59 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/upper-body-flow.spec.ts -g upper body is the default --output artifacts/qa/upper-body-flow-20261026/entry-red-results
+
+[WebServer] (node:15304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:15392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:15393) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 10:23:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:23:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:23:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:23:44 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/upper-body-flow.spec.ts:12:1 › upper body is the default formal camera plan and preparation starts training without capture/start clicks (9.1s)
+
+
+  1) tests/e2e/upper-body-flow.spec.ts:12:1 › upper body is the default formal camera plan and preparation starts training without capture/start clicks 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: locator('#cameraExerciseMode')
+    Expected: "upper-body"
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" locator('#cameraExerciseMode') with timeout 7000ms
+      - waiting for locator('#cameraExerciseMode')
+
+
+      11 |
+      12 | test('upper body is the default formal camera plan and preparation starts training without capture/start clicks',async({page})=>{
+    > 13 |  await enter(page);await expect(page.locator('#cameraExerciseMode')).toHaveValue('upper-body');expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(0);await prepare(page);await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#modeBadge')).toContainText('上半身');
+         |                                                                      ^
+      14 |  await pose(page,'left-only');await page.waitForTimeout(800);await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','adjust');await loop(page,'chop',1);
+      15 |  await mkdir(output,{recursive:true});await page.screenshot({path:`output`});
+      16 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/upper-body-flow.spec.ts:13:70
+
+    Error Context: artifacts/qa/upper-body-flow-20261026/entry-red-results/upper-body-flow-upper-body-4e0ef-ithout-capture-start-clicks/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/upper-body-flow-20261026/entry-red-results/upper-body-flow-upper-body-4e0ef-ithout-capture-start-clicks/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/upper-body-flow-20261026/entry-red-results/upper-body-flow-upper-body-4e0ef-ithout-capture-start-clicks/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/upper-body-flow.spec.ts:12:1 › upper body is the default formal camera plan and preparation starts training without capture/start clicks 

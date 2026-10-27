@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/web/tutorial.css" />
   <link rel="stylesheet" href="/web/movement-guide.css" />
   <link rel="stylesheet" href="/web/animation-stop.css" />
+  <link rel="stylesheet" href="/web/recognition-controls.css" />
+  <link rel="stylesheet" href="/web/upper-body.css" />
 </head>
 <body inert data-boot="loading">
   <div id="app">
@@ -21,6 +23,7 @@
         <div id="testModeBadge" class="pill warn" hidden>本地测试加速模式</div>
         <div id="modeBadge" class="pill">⌨ 键盘演示 · 非真实动作识别</div>
         <button id="demoToggle" class="secondary demo-toggle" role="switch" aria-checked="false">无摄像头测试：关</button>
+        <button id="cameraMode" class="secondary" disabled>摄像头识别</button>
         <button id="animationStop" class="secondary animation-stop-control" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P" title="停止或继续全部动画（Shift+P）">停止动画</button>
         <button id="tutorialOpen" class="secondary">动作教学</button>
         <button id="audioToggle" class="secondary demo-toggle" aria-pressed="false">开启音效</button>
@@ -30,6 +33,7 @@
         <button id="resetBtn" class="secondary">重新开始</button>
       </div>
     </header>
+    <p id="cameraTrackingStatus" class="camera-tracking-status" role="status" hidden></p>
     <main class="layout">
       <section class="stage">
         <div class="scene-head">
@@ -109,16 +113,38 @@
       <h2 id="setupHeading">选择演示输入方式</h2>
       <button class="secondary full-width tutorial-entry" id="setupTutorial">查看动作教学</button>
       <button id="setupAnimationStop" class="secondary animation-stop-control full-width" data-animation-stop aria-pressed="false" aria-keyshortcuts="Shift+P">停止动画</button>
-      <p>键盘与模拟可完整演示。摄像头需完成标定后手动启动姿态代理；真机准确率尚待验证。</p>
+      <p>电脑前可坐着完成上半身训练。开启摄像头后按提示摆三个姿态，准备完成自动开始；真实识别准确率仍待验证。</p>
+      <label class="camera-exercise-choice">摄像头训练方案 <select id="cameraExerciseMode"><option value="upper-body">电脑前 · 上半身（默认）</option><option value="full-body">原全身 · 挥砍 / 下蹲 / 持姿</option></select></label>
       <div id="keyboardChoice" class="mode-choice selected"><div><b>⌨ 键盘演示模式</b><small>空格触发运动循环；拉车阶段长按空格</small></div><span class="mode-check">✓</span></div>
       <div class="demo-option"><button class="secondary demo-toggle" id="setupDemoToggle" role="switch" aria-checked="false">无摄像头测试：关</button><small>打开可预览合成骨架，开始后自动完成农场流程。</small></div>
-      <div class="camera-actions"><button class="secondary" id="cameraStart">开启摄像头诊断</button><button class="secondary" id="cameraStop">停止 / 取消</button></div>
+      <div class="camera-actions"><button class="secondary" id="cameraStart">开启摄像头识别</button><button class="secondary" id="cameraStop">停止 / 取消</button></div>
       <div id="demoPreviewSetup" class="synthetic-preview" hidden>
         <canvas id="demoSetupCanvas" width="360" height="240" aria-label="脚本合成骨架动作预览"></canvas>
         <div><b>合成骨架 · 非摄像头 / 非识别结果</b><span id="demoSetupPhase"></span><small>只展示脚本姿态，不请求摄像头、不参与标定；准备页不计成果。</small></div>
       </div>
       <div id="cameraDiagnostics">
-      <div id="setupPreviewHost"><div id="cameraPreview" class="camera-preview"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体骨架诊断"></canvas></div></div>
+      <section id="upperBodyPreparation" class="upper-body-preparation" data-step="lowered" aria-label="上半身自动准备">
+        <div class="upper-body-heading"><span>无需点击采集</span><b id="upperBodyStepCount">已完成 0/3</b></div>
+        <h3 id="upperBodyStep">放下双手</h3><p id="upperBodyCue">双肩、双肘与双手入镜，按提示保持姿态。</p>
+        <button id="finishUpperPreparation" class="primary full-width" hidden disabled>结束准备，进入训练 →</button>
+        <progress id="upperBodyProgress" max="1" value="0" aria-label="当前上半身姿态采集进度"></progress>
+        <p id="upperBodyReason" role="status">开启摄像头后自动采集。</p>
+        <p id="upperBodySuspendNotice" class="upper-body-suspend" role="status"></p>
+        <p id="upperBodyLastReset" class="upper-body-reset" role="status" hidden></p>
+        <div id="upperBodyJointQuality" class="upper-body-joints" aria-label="当前六个关节的追踪质量"></div>
+        <details class="upper-body-sampling"><summary>查看采集状态</summary><p id="upperBodySampleStatus"></p><p id="upperBodyHoldGate"></p><p id="upperBodySampleRejection"></p><small>只显示当前追踪质量与最近一次中断原因，不保存影像或动作轨迹。</small></details>
+        <small>砍树 / 装车：双手放下 → 举起 → 放下。拉车：双臂前举保持。只识别上半身，不测器械重量。</small>
+      </section>
+      <fieldset id="recognitionControls" class="recognition-controls">
+        <legend>识别宽松度</legend>
+        <div class="recognition-level"><span>严格</span><output id="recognitionLeniencyValue" for="recognitionLeniency">第 3 档 · 标准</output><span>宽松</span></div>
+        <input id="recognitionLeniency" type="range" min="1" max="5" step="1" value="3" aria-label="识别宽松度" aria-describedby="recognitionLevelHelp" />
+        <div class="recognition-presets"><button type="button" data-leniency="1" aria-pressed="false">严格</button><button type="button" data-leniency="3" aria-pressed="true">标准</button><button type="button" data-leniency="5" aria-pressed="false">宽松</button></div>
+        <small id="recognitionLevelHelp">按个人标定调整幅度与持姿容差，仍需完成动作并复位。训练中修改会暂停，已完成进度保留。颜色仅对照个人标定与当前步骤，不代表专业动作评分。</small>
+        <small id="recognitionSettingStatus" role="status"></small>
+      </fieldset>
+      <div id="setupPreviewHost"><div id="cameraPreview" class="camera-preview" data-feedback="unavailable"><video id="cameraVideo" muted playsinline aria-label="本机实时摄像头预览"></video><canvas id="poseOverlay" aria-label="人体动作匹配骨架：绿色匹配，红色需调整，灰色待判断"></canvas><div class="recognition-legend" aria-label="绿色匹配、红色需调整、灰色待判断"><span class="matched">● 匹配</span><span class="adjust">● 调整</span><span class="unknown">● 待判断</span></div></div></div>
+      <p id="cameraFeedbackStatus" role="status">完成标定并开始训练后，显示当前步骤的关节提示。</p>
       <p id="cameraStatus" role="status">点击开启诊断才请求视频权限；仅在本机处理。</p>
       <small id="cameraMetrics"></small><small>已返回推理帧：<span id="cameraFrames">0</span></small>
       <details id="calibrationPanel" class="calibration-panel">

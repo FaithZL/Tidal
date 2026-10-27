@@ -1,0 +1,13 @@
+{
+  "firstExit": 1,
+  "location": "new finish-button production probe, after setupModal was confirmed hidden",
+  "observed": "statusTag remained countdown at default expect deadline 5000ms",
+  "contract": "src/config/demoConfig.ts startCountdownMs=5000; normal build does not use accelerated e2e timing",
+  "correction": "New probe now explicitly asserts countdown and zero count, then awaits active with a 10000ms deadline. No app timing/recognition threshold or existing E2E timeout changed. Original script/log/images retained.",
+  "secondAttempt": {
+    "exit": 1,
+    "location": "second page load, before lowered preparation collected any samples",
+    "observation": "All joints missing and panel says click camera start; first recovered training/one fresh rep completed before reload. No frame evidence; underlying camera-start cause not established.",
+    "next": "One unchanged rerun, no source/config/test timeout change."
+  }
+}

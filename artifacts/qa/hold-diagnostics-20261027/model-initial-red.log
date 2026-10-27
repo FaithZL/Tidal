@@ -1,0 +1,147 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyDiagnostics.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyDiagnostics.test.ts (9 tests | 9 failed) 11ms
+   × diagnostics begin with six named missing joints and no invented sample or failure data 2ms
+   × all six quality summaries explain the current frame even when the stream rejects its first bad joint 0ms
+   × sample summaries use observed frames and ticks mark stale quality without filling sampling time 1ms
+   × last reset preserves the lost completed stage across later empty bad frames and sequences new resets 2ms
+   × manual reset keeps original reset semantics and only records a causal event after progress 0ms
+   × a temporary recovery is not misreported as a full reset, but its expiration is 1ms
+   × unstable-window rejection records the discarded sample set and survives blank frames and new candidates 0ms
+   × diagnostics preserve the existing six-dimensional noise rule and expose why a green pose fails its full window 4ms
+   × diagnostic reads are copied, keep no coordinates and cannot advance preparation 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > diagnostics begin with six named missing joints and no invented sample or failure data
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:13:47
+     11|
+     12| test('diagnostics begin with six named missing joints and no invented …
+     13|   const p = new UpperBodyPreparation(), d = p.getDiagnostics();
+       |                                               ^
+     14|   expect(d).toMatchObject({ sampleCount: 0, observedMs: 0, lastReset: …
+     15|   expect(d.joints).toEqual([
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > all six quality summaries explain the current frame even when the stream rejects its first bad joint
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:28:12
+     26|       : index === 14 ? { ...point, y: NaN } : index === 15 ? { ...poin…
+     27|   p.accept(frame, 50);
+     28|   expect(p.getDiagnostics().joints).toEqual([
+       |            ^
+     29|     { index: 11, label: '左肩', confidence: .59, state: 'low-confidence'…
+     30|     { index: 13, label: '左肘', confidence: .99, state: 'out-of-frame' }…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > sample summaries use observed frames and ticks mark stale quality without filling sampling time
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:38:12
+     36| test('sample summaries use observed frames and ticks mark stale qualit…
+     37|   const p = new UpperBodyPreparation(); sample(p, 'lowered', 0, 500);
+     38|   expect(p.getDiagnostics()).toMatchObject({ sampleCount: 6, observedM…
+       |            ^
+     39|   p.tick(800); expect(p.getDiagnostics().joints.every(j => j.state ===…
+     40|   expect(p.getDiagnostics()).toMatchObject({ sampleCount: 6, observedM…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > last reset preserves the lost completed stage across later empty bad frames and sequences new resets
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:48:12
+     46|   const p = new UpperBodyPreparation(); const time = holdStep(p), bad …
+     47|   bad.landmarks = bad.landmarks.map((point, i) => i === 16 ? { ...poin…
+     48|   expect(p.getDiagnostics().lastReset).toEqual({ sequence: 1, fromStep…
+       |            ^
+     49|   const out = upperFrame(time + 100); out.landmarks = out.landmarks.ma…
+     50|   expect(p.getDiagnostics().lastReset).toEqual({ sequence: 1, fromStep…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > manual reset keeps original reset semantics and only records a causal event after progress
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:57:61
+     55|
+     56| test('manual reset keeps original reset semantics and only records a c…
+     57|   const p = new UpperBodyPreparation(); p.reset(); expect(p.getDiagnos…
+       |                                                             ^
+     58|   sample(p, 'lowered', 0); p.reset();
+     59|   expect(p.getDiagnostics().lastReset).toEqual({ sequence: 1, fromStep…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > a temporary recovery is not misreported as a full reset, but its expiration is
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:66:59
+     64|   const p = new UpperBodyPreparation(undefined, 3000); let time = samp…
+     65|   const lastValid = time - 100, bad = upperFrame(time); bad.landmarks …
+     66|   expect(p.getSnapshot().recovering).toBe(true); expect(p.getDiagnosti…
+       |                                                           ^
+     67|   p.tick(lastValid + 3001);
+     68|   expect(p.getDiagnostics().lastReset).toEqual({ sequence: 1, fromStep…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > unstable-window rejection records the discarded sample set and survives blank frames and new candidates
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:74:22
+     72|   const p = new UpperBodyPreparation(); p.accept(upperFrame(0), 0);
+     73|   const moved = upperFrame(100); moved.landmarks = moved.landmarks.map…
+     74|   const rejected = p.getDiagnostics().lastSampleRejection!;
+       |                      ^
+     75|   expect(rejected).toMatchObject({ step: 'lowered', reason: 'unstable'…
+     76|   expect(rejected.radius).toBeGreaterThan(.15); expect(p.getDiagnostic…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > diagnostics preserve the existing six-dimensional noise rule and expose why a green pose fails its full window
+AssertionError: expected { step: 'lowered', progress: +0, …(4) } to match object { step: 'hold', …(2) }
+(3 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "progress": 0,
+-   "reason": "hold-not-separable",
+-   "step": "hold",
++   "reason": "not-lowered",
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:99:27
+     97|     const time = start + i * 120; p.accept(vectorFrame(time, y, i % 2 …
+     98|   }
+     99|   expect(p.getSnapshot()).toMatchObject({ step: 'hold', reason: 'hold-…
+       |                           ^
+    100|   const d = p.getDiagnostics(), rejected = d.lastSampleRejection!;
+    101|   expect(d).toMatchObject({ sampleCount: 0, observedMs: 0 });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+ FAIL  tests/unit/upperBodyDiagnostics.test.ts > diagnostic reads are copied, keep no coordinates and cannot advance preparation
+TypeError: p.getDiagnostics is not a function
+ ❯ tests/unit/upperBodyDiagnostics.test.ts:113:48
+    111| test('diagnostic reads are copied, keep no coordinates and cannot adva…
+    112|   const p = new UpperBodyPreparation(), time = holdStep(p); p.accept(u…
+    113|   const snapshot = p.getSnapshot(), before = p.getDiagnostics();
+       |                                                ^
+    114|   for (let i = 0; i < 20; i++) {
+    115|     const copy = p.getDiagnostics(); copy.joints[0].state = 'invalid';…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  9 failed (9)
+   Start at  00:58:35
+   Duration  125ms (transform 51%, tests 28%, import 17%, worker 4%)
+

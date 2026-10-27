@@ -1,0 +1,15 @@
+{
+  "input": "Fake video and authored landmarks through actual recognizers; not physical camera",
+  "levels": [
+    5,
+    1
+  ],
+  "resources": {
+    "tracks": [
+      "0d5b0a1b-b863-452e-a3ea-f5d4188810d6"
+    ],
+    "workers": 1,
+    "max": 1
+  },
+  "result": "15 chop,15 load,carry completion; setting interval not credited"
+}

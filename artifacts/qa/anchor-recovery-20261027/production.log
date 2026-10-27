@@ -1,0 +1,50 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(locator).toHaveText(expected) failed
+
+Locator:  locator('#statusTag')
+Expected: "训练中"
+Received: "倒计时"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveText" locator('#statusTag') with timeout 5000ms
+  - waiting for locator('#statusTag')
+    14 × locator resolved to <span id="statusTag" class="subtag">倒计时</span>
+       - unexpected value "倒计时"
+
+    at captureRawStack (/Users/zero/work/ai_ws/Tidal/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/Users/zero/work/ai_ws/Tidal/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toHaveText (/Users/zero/work/ai_ws/Tidal/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at /Users/zero/work/ai_ws/Tidal/artifacts/qa/anchor-recovery-20261027/capture-production.mjs:16:704 {
+  matcherResult: {
+    name: 'toHaveText',
+    expected: '训练中',
+    message: 'expect(locator).toHaveText(expected) failed\n' +
+      '\n' +
+      "Locator:  locator('#statusTag')\n" +
+      'Expected: "训练中"\n' +
+      'Received: "倒计时"\n' +
+      'Timeout:  5000ms\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toHaveText" locator('#statusTag') with timeout 5000ms\n` +
+      "  - waiting for locator('#statusTag')\n" +
+      '    14 × locator resolved to <span id="statusTag" class="subtag">倒计时</span>\n' +
+      '       - unexpected value "倒计时"\n',
+    pass: false,
+    actual: '倒计时',
+    log: [
+      `  - Expect "toHaveText" locator('#statusTag') with timeout 5000ms`,
+      "  - waiting for locator('#statusTag')",
+      '    14 × locator resolved to <span id="statusTag" class="subtag">倒计时</span>',
+      '       - unexpected value "倒计时"'
+    ],
+    timeout: 5000,
+    ariaSnapshot: '- text: 倒计时'
+  }
+}
+
+Node.js v24.14.0

@@ -1,0 +1,7 @@
+{
+  "export class UpperBodyStream": true,
+  "private poseIssue(": true,
+  "private holdIssue(": true,
+  "getProfile():": true,
+  "getFeedback():": true
+}

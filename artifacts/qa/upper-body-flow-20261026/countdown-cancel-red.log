@@ -1,0 +1,61 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/upper-body-flow.spec.ts -g stopping during the automatic start countdown --output artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results
+
+[WebServer] (node:16316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:16404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:16405) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 10:33:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:33:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 10:33:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 10:33:04 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/upper-body-flow.spec.ts:27:1 › stopping during the automatic start countdown clears its pending message and never starts later (14.0s)
+
+
+  1) tests/e2e/upper-body-flow.spec.ts:27:1 › stopping during the automatic start countdown clears its pending message and never starts later 
+
+    Error: expect(locator).not.toContainText(expected) failed
+
+    Locator: locator('#upperBodyCue')
+    Expected substring: not "秒后"
+    Received string: "准备完成，3 秒后进入训练。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "not toContainText" locator('#upperBodyCue') with timeout 7000ms
+      - waiting for locator('#upperBodyCue')
+        18 × locator resolved to <p id="upperBodyCue">准备完成，3 秒后进入训练。</p>
+           - unexpected value "准备完成，3 秒后进入训练。"
+
+
+      26 |
+      27 | test('stopping during the automatic start countdown clears its pending message and never starts later',async({page})=>{
+    > 28 |  await enter(page);await prepare(page);await expect(page.locator('#upperBodyCue')).toContainText('秒后');await page.locator('#setupAnimationStop').click();await expect(page.locator('#upperBodyCue')).not.toContainText('秒后');await page.waitForTimeout(3200);await expect(page.locator('#app')).toHaveAttribute('data-phase','setup');await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                                                                                          ^
+      29 | });
+      30 |
+      31 | test('an existing user pause is never owned by automatic preparation',async({page})=>{
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/upper-body-flow.spec.ts:28:202
+
+    Error Context: artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results/upper-body-flow-stopping-d-2abed-sage-and-never-starts-later/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results/upper-body-flow-stopping-d-2abed-sage-and-never-starts-later/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results/upper-body-flow-stopping-d-2abed-sage-and-never-starts-later/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/upper-body-flow.spec.ts:27:1 › stopping during the automatic start countdown clears its pending message and never starts later 

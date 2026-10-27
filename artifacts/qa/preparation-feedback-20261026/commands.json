@@ -1,0 +1,143 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-feedback-20261026/red-results"
+    ],
+    "log": "e2e-red.log",
+    "startedUTC": "2026-10-26T15:31:25.281523+00:00",
+    "finishedUTC": "2026-10-26T15:31:48.868373+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/setupPanelFeedback.test.ts"
+    ],
+    "log": "diagnostic-red.log",
+    "startedUTC": "2026-10-26T15:35:25.501698+00:00",
+    "finishedUTC": "2026-10-26T15:35:25.840575+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint"
+    ],
+    "log": "static-final.log",
+    "startedUTC": "2026-10-26T15:35:35.779393+00:00",
+    "finishedUTC": "2026-10-26T15:35:41.457098+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-26T15:35:35.785155+00:00",
+    "finishedUTC": "2026-10-26T15:35:41.683709+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-feedback-20261026/final-results"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T15:37:31.804225+00:00",
+    "finishedUTC": "2026-10-26T15:39:57.089125+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "-g",
+      "single invalid active frame",
+      "--output",
+      "artifacts/qa/preparation-feedback-20261026/reprepare-red-results"
+    ],
+    "log": "reprepare-reason-red.log",
+    "startedUTC": "2026-10-26T15:42:54.523699+00:00",
+    "finishedUTC": "2026-10-26T15:43:14.923955+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-26T15:44:10.348421+00:00",
+    "finishedUTC": "2026-10-26T15:44:14.784132+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-26T15:44:10.348421+00:00",
+    "finishedUTC": "2026-10-26T15:44:16.005712+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-feedback-20261026/release-results"
+    ],
+    "log": "e2e-release.log",
+    "startedUTC": "2026-10-26T15:45:13.393332+00:00",
+    "finishedUTC": "2026-10-26T15:45:28.339485+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-release.log",
+    "startedUTC": "2026-10-26T15:46:24.602730+00:00",
+    "finishedUTC": "2026-10-26T15:46:25.886107+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/preparation-feedback-20261026/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T15:46:42.646689+00:00",
+    "finishedUTC": "2026-10-26T15:46:45.915496+00:00",
+    "exitCode": 0
+  }
+]

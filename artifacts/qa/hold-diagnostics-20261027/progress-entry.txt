@@ -1,0 +1,26 @@
+## 最新追加：准备页失焦清零路径与前举阻塞诊断（2026-10-27）
+
+用户反馈“双臂前举、稍屈肘”反复采集，并再次回到“放下双手”。按systematic-debugging先读实际浏览器文字：第1步、六点不够清晰、摄像头仍推理中，但没有观察到该次重置瞬间，不能由当前低置信度提示倒推唯一根因。源码与新增合成E2E确认另一路径：SetupPanel对window.blur无条件reset，切聊天窗口即可把2/3清成0/3，后续坏帧又覆盖当前原因；从默认自动演示进入准备时领域phase可能仍active，需同时看cameraPreparation。保留main/HEAD13a7113和此前所有未提交工作，未stage/commit/push/部署。
+
+最小修复仅在页面仍可见、处于未完成的上半身准备（raised/hold）时，visible blur保留已完成checkpoint；摄像头若仍有有效新帧可继续按原样本规则观察，取消自动开始、清训练输入且保留visibility/user等暂停。适配器reset和onSuspend两层同时豁免，避免后者再次清空；真正活动训练、完整profile、全身方案、hidden、超3秒无效、硬机位/尺寸/时序问题及停止/换方案仍严格清理。没有focus自动恢复/补计。失效回0/3时不再保留过时的“保留准备进度”文案。
+
+新增只读内存诊断：当前六个肩肘腕的可用性/置信度；最近一次真正丢失已完成步骤的重置原因、完成数及序号；本步样本数/已观察时长、最近不稳定/采满持姿被拒绝摘要，展开查看当前逐臂与已采两姿态的区分门槛。后续空白第1步坏帧不覆盖先前重置来源；reset可传原因标签但原getSnapshot.reason和清理语义保持。没有新增保存影像、坐标、姿态序列、console或上传。只读浏览器也未截图真人。
+
+另外已用人工几何复现两条独立前举门槛问题：准备要求与raised和lowered均区分，而活动carry只需与lowered区分；准备全局6维噪声半径用于逐臂3维门槛，可能出现当前绿而采满窗口失败。本轮保留这两条原判定以先核对真人触发的具体原因，不猜测放松。Stream、poseIssue/holdIssue/getProfile/getFeedback逐字节一致，.6/200/300ms、1200ms/12样本、原识别/计数/领域保护不改，见predicate-preservation.json。
+
+证据artifacts/qa/hold-diagnostics-20261027，root命令见commands.json，模型/绘制接线分别见model-commands.json、setup-commands.json、setup-suspend-commands.json。新增诊断11项真实RED→GREEN、旧64保留，75/75；Setup新增9项真实RED→GREEN、原24保留，33/33。诊断入口2项先RED缺节点，接入2/2；visible blur两个入口均真实RED hold→lowered后修复。首次组合GREEN为3/4：新demo入口测试误把已有3/15写成0/15，按进入摄像头准备后成果作精确守恒基线修正新夹具，旧断言/超时/重试未动，证据和说明保留。一次接线期间typecheck exit2因UI先于model接口落盘，最终验证另记，不冒充通过。
+
+| 验证 | 本轮真实结果 |
+|---|---|
+| 最终全unit | **66文件、673/673、exit0**，unit-final.log；原653项保留，新增模型11+Setup9 |
+| 类型/lint/diff | static-release.log exit0；build内strict类型再次通过 |
+| 相关E2E | 首轮**20/20、4.0分钟、exit0**，含新诊断5+原准备反馈3/恢复2/上半身7/全身标定3；审查文案P2补RED后最终诊断文件**8/8、1.0分钟、exit0**，共23个不同场景分轮通过，非全量verify |
+| build | exit0，index-dFjgcxzA.js/browser-D3iUgFSA.js；原500KB提示保留，FBX不支持map警告仍仅为已知提示；素材/依赖未变未重装 |
+| 正常4176生产构建 | 两张桌面/390px准备面板PNG，fake video+人工六点；visible blur保留2/3、低质量明确右腕、超时清0/3显示最近真实原因、readiness禁用/成果0；0页面/控制台/HTTP错误或外源，无横向溢出，production.log/production.json。非真人准确率证据 |
+| 独立只读审查 | 两位reviewer，P2过时保留文案已先RED再修复，无剩余P1/P2，review.json |
+
+2,284份既有QA先备份；4份旧测试重生成文件转存本轮regression，原路径全部按SHA恢复，见qa-restoration.json。原PROGRESS正文按字节保留；未修改此前无关文档/识别源/素材/许可/锁文件/.gitattributes/.gitignore，未reset/clean。临时4176预览检查后关闭，原5173开发服务保留。
+
+
+本轮不声称真人前举问题全部解决，当前已修复确定的visible blur清零路径；实际特定关节/门槛仍待用户开启镜头后核对。原真实手机/硬件GPU/约60fps/最终美术/prototype与素材公开许可待验保留，未全量verify。预览http://127.0.0.1:5173/?art=npr-sample，刷新后重启摄像头；若回0/3查看“最近重新准备”，若卡2/3展开“查看采集状态”。
+

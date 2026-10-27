@@ -1,0 +1,14 @@
+{
+  "scope": "Only SetupPanel drawing mode and setupPanelFeedback unit tests; no browser, HTML, CSS, recognizer, new E2E or other application edits",
+  "commands": [
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "upper-drawing-red.log", "exitCode": 1, "result": "10 failed / 13 passed: upper drawing mode API absent; old 12 cases unchanged" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "upper-drawing-semantic-red.log", "exitCode": 1, "result": "10 failed / 13 passed; six finite upper points with unavailable legs produced unavailable instead of matched/adjust" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "upper-drawing-green.log", "exitCode": 0, "result": "23/23 passed: unchanged original 12 plus 11 upper-mode cases" },
+    { "command": "npx eslint src/ui/setupPanel.ts", "log": "upper-drawing-lint.log", "exitCode": 0, "result": "No diagnostics" },
+    { "command": "npm run typecheck", "log": "upper-drawing-typecheck.log", "exitCode": 0, "result": "TypeScript strict check passed" },
+    { "command": "git diff --check -- src/ui/setupPanel.ts", "log": "upper-drawing-diff-check.log", "exitCode": 0, "result": "No diagnostics" }
+  ],
+  "behavior": "setUpperBodyEnabled defaults false. Explicit upper mode validates and draws only observed indices 11-16, each finite with confidence at least .6; lower-body NaNs are ignored. Full mode retains the 33-point finite-value guard, even with a non-null upper-looking feedback object. A mode transition clears old colors; camera/Worker/calibration lifecycle is unchanged.",
+  "integration": "Call setUpperBodyEnabled(currentModeIsUpper) immediately after constructing SetupPanel and before the first frame after each explicit mode change. Repeating the same setting is a no-op.",
+  "limits": "Canvas-operation adapter with authored landmarks; not browser rasterization, physical-camera or model-accuracy verification. No E2E, camera request, commit or push in this subtask."
+}

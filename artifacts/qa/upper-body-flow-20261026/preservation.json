@@ -1,0 +1,20 @@
+{
+  "branch": "main",
+  "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "originalProgressReconstructedMatches": true,
+  "priorRecognitionFilesUnchanged": {
+    "src/config/recognitionTolerance.ts": true,
+    "src/pose/recognitionFeedback.ts": true,
+    "src/ui/recognitionPreference.ts": true,
+    "web/recognition-controls.css": true,
+    "tests/e2e/recognition-controls.spec.ts": true,
+    "tests/unit/recognitionPreference.test.ts": true,
+    "tests/unit/recognitionTolerance.test.ts": true,
+    "tests/unit/cameraTolerance.test.ts": true,
+    "tests/unit/recognitionFeedback.test.ts": true
+  },
+  "protectedTrackedChanges": [],
+  "historicalQA": "2131 originalSHA restored;7 regenerated copies under thisQA/regression",
+  "stagedDiff": "",
+  "operations": "No stage/commit/push/deploy/install/clone/reset/clean or real camera request. Original5173 kept;temporary4176 stopped."
+}

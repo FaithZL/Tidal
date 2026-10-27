@@ -1,0 +1,14 @@
+{
+  "scope": "Feedback pure function, recognizer observation hooks and focused unit tests only",
+  "input": "Authored synthetic 33-point poses and real personal-calibration/recognizer code; not a physical camera or model-accuracy test",
+  "commands": [
+    { "command": "npm run test:unit -- tests/unit/recognitionFeedback.test.ts", "log": "feedback-hooks-red.log", "exitCode": 1, "result": "3 failed assertions: getFeedback absent" },
+    { "command": "npm run test:unit -- tests/unit/recognitionFeedback.test.ts", "log": "feedback-hooks-green.log", "exitCode": 0, "result": "3/3 passed for initial unknown feedback" },
+    { "command": "npm run test:unit -- tests/unit/recognitionFeedback.test.ts", "log": "feedback-semantic-red.log", "exitCode": 1, "result": "22 failed / 6 passed with neutral-only scaffold; missing component/phase/config/lifecycle semantics" },
+    { "command": "npm run test:unit -- tests/unit/recognitionFeedback.test.ts", "log": "feedback-semantic-green-first.log", "exitCode": 0, "result": "28/28 passed after semantic implementation" },
+    { "command": "npm run test:unit -- tests/unit/recognitionFeedback.test.ts tests/unit/chopRecognizer.test.ts tests/unit/loadRecognizer.test.ts tests/unit/carryRecognizer.test.ts", "log": "feedback-focused-green.log", "exitCode": 0, "result": "4 files, 67/67 passed: 34 feedback tests plus 33 existing recognizer regressions" },
+    { "command": "npx eslint src/pose/recognitionFeedback.ts src/pose/recognizers/types.ts src/pose/recognizers/repRecognizer.ts src/pose/recognizers/chopRecognizer.ts src/pose/recognizers/loadRecognizer.ts src/pose/recognizers/carryRecognizer.ts", "log": "feedback-lint.log", "exitCode": 0, "result": "No diagnostics" },
+    { "command": "git diff --check -- src/pose/recognizers/types.ts src/pose/recognizers/repRecognizer.ts src/pose/recognizers/chopRecognizer.ts src/pose/recognizers/loadRecognizer.ts src/pose/recognizers/carryRecognizer.ts", "log": "feedback-diff-check.log", "exitCode": 0, "result": "No diagnostics" }
+  ],
+  "limits": "No browser, camera permission, real-pose capture, E2E, install, commit, push or deployment by this subtask. Full integrated verification is owned by the parent task. Green/red compares the observed current task/step with personal calibration; gray means unjudged or moving, never a clinical/safety score."
+}

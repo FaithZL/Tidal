@@ -1,0 +1,175 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (30 tests | 6 failed) 17ms
+   × suspension forwards window-blur while retaining its calibration reset and feedback clearing 4ms
+   × suspension forwards page-hidden while retaining its calibration reset and feedback clearing 1ms
+   × suspension forwards page-visible while retaining its calibration reset and feedback clearing 1ms
+   × stopping forwards undefined without dropping the close flag 0ms
+   × stopping forwards source-dispose without dropping the close flag 0ms
+   × camera startup labels its initial stop as restart before an explicit fake-device failure 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension forwards window-blur while retaining its calibration reset and feedback clearing
+AssertionError: expected [ { close: undefined, …(1) } ] to deeply equal [ { close: false, …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "close": false,
+-     "reason": "window-blur",
++     "close": undefined,
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:152:31
+    150|   Object.defineProperty(document, 'hidden', { configurable: true, valu…
+    151|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    152|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+       |                               ^
+    153|   expect(f.preview.dataset.feedback).toBe('unavailable');expect(f.fill…
+    154| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension forwards page-hidden while retaining its calibration reset and feedback clearing
+AssertionError: expected [ { close: undefined, …(1) } ] to deeply equal [ { close: false, …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "close": false,
+-     "reason": "page-hidden",
++     "close": undefined,
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:152:31
+    150|   Object.defineProperty(document, 'hidden', { configurable: true, valu…
+    151|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    152|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+       |                               ^
+    153|   expect(f.preview.dataset.feedback).toBe('unavailable');expect(f.fill…
+    154| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension forwards page-visible while retaining its calibration reset and feedback clearing
+AssertionError: expected [ { close: undefined, …(1) } ] to deeply equal [ { close: false, …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "close": false,
+-     "reason": "page-visible",
++     "close": undefined,
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:152:31
+    150|   Object.defineProperty(document, 'hidden', { configurable: true, valu…
+    151|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    152|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+       |                               ^
+    153|   expect(f.preview.dataset.feedback).toBe('unavailable');expect(f.fill…
+    154| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > stopping forwards undefined without dropping the close flag
+AssertionError: expected [ { close: true, reason: undefined } ] to deeply equal [ { close: true, …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+      "close": true,
+-     "reason": "camera-stop",
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:158:31
+    156| test.each([undefined, 'source-dispose'] as const)('stopping forwards %…
+    157|   const f = fixture();await f.panel.stop(reason);
+    158|   expect(f.calibrationResets).toEqual([{ close: true, reason: reason ?…
+       |                               ^
+    159| });
+    160|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > stopping forwards source-dispose without dropping the close flag
+AssertionError: expected [ { close: true, reason: undefined } ] to deeply equal [ { close: true, …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+      "close": true,
+-     "reason": "source-dispose",
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:158:31
+    156| test.each([undefined, 'source-dispose'] as const)('stopping forwards %…
+    157|   const f = fixture();await f.panel.stop(reason);
+    158|   expect(f.calibrationResets).toEqual([{ close: true, reason: reason ?…
+       |                               ^
+    159| });
+    160|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > camera startup labels its initial stop as restart before an explicit fake-device failure
+AssertionError: expected [ …(2) ] to deeply equal [ { close: true, …(1) }, …(1) ]
+
+- Expected
++ Received
+
+  [
+    {
+      "close": true,
+-     "reason": "camera-restart",
++     "reason": undefined,
+    },
+    {
+      "close": true,
+-     "reason": "camera-stop",
++     "reason": undefined,
+    },
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:164:31
+    162|   vi.stubGlobal('navigator', { mediaDevices: { getUserMedia: async () …
+    163|   const f = fixture();await f.panel.start();
+    164|   expect(f.calibrationResets).toEqual([{ close: true, reason: 'camera-…
+       |                               ^
+    165| });
+    166|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 24 passed (30)
+   Start at  00:57:55
+   Duration  156ms (transform 49%, tests 26%, import 21%, worker 4%)
+

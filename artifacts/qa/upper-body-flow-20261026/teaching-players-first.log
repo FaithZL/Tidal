@@ -1,0 +1,31 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTeaching.test.ts tests/unit/exerciseTutorialModel.test.ts tests/unit/movementGuideClock.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTeaching.test.ts (13 tests | 1 failed) 11ms
+   × the visible upper-body guide keeps legs fixed and obeys authoritative pause without writing outcomes 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > the visible upper-body guide keeps legs fixed and obeys authoritative pause without writing outcomes
+TypeError: Cannot read properties of undefined (reading 'nowMs')
+ ❯ createSessionController src/domain/sessionController.ts:18:26
+     16|
+     17| export function createSessionController(config: Readonly<DemoConfig>, …
+     18|   let lastTickMs = clock.nowMs();
+       |                          ^
+     19|   const listeners = new Set<(s: Readonly<SessionSnapshot>) => void>();
+     20|   const effects = new Set<(e: GameEffect) => void>();
+ ❯ tests/unit/upperBodyTeaching.test.ts:128:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 41 passed (42)
+   Start at  22:24:56
+   Duration  507ms (tests 89%, transform 7%, import 4%, worker 1%)
+

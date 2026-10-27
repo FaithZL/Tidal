@@ -1,0 +1,6 @@
+{
+  "baseHead": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "fetchedOriginMain": "e382bf633eeed7e325b0197603c916baf51f850b",
+  "scope": "All current modified/new code, docs, tests and non-raw QA belong to the continuous camera recognition work; local raw traces preserved.",
+  "noDeployment": true
+}

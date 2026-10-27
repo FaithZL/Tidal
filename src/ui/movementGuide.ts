@@ -1,6 +1,6 @@
 import type {SessionSnapshot} from '../domain/types.js';
 import type {TutorialJoint} from './exerciseTutorialModel.js';
-import {tutorialLessons} from './exerciseTutorialModel.js';
+import {tutorialLessons,upperBodyTutorialLessons} from './exerciseTutorialModel.js';
 import {MovementGuideClock} from './movementGuideClock.js';
 import {setAttribute,setProperty} from './domUpdates.js';
 
@@ -29,6 +29,8 @@ export class MovementGuide {
  private lastTime:number|null=null;
  private disposed=false;
  private poseKey='';
+ private upperBody=false;
+ private get lessons(){return this.upperBody?upperBodyTutorialLessons:tutorialLessons;}
 
  constructor(private readonly root:HTMLElement){
   this.svg=root.querySelector('svg')!;
@@ -56,6 +58,14 @@ export class MovementGuide {
   },{signal:this.events.signal});
  }
 
+ setUpperBodyEnabled(enabled:boolean):void{
+  if(this.disposed||this.upperBody===enabled)return;
+  this.upperBody=enabled;this.clock.setUpperBodyEnabled(enabled);this.lastTime=null;this.poseKey='';
+  setProperty(this.root.dataset,'program',enabled?'upper-body':'full-body');
+  setProperty(this.taskLabel,'textContent',this.lessons[this.clock.frame.task].title);
+  if(!this.root.hidden)this.paint();
+ }
+
  sync(s:Readonly<SessionSnapshot>,enabled:boolean):void{
   if(this.disposed)return;
   const visible=enabled&&s.task!==null&&['countdown','active','rest'].includes(s.phase);
@@ -64,8 +74,8 @@ export class MovementGuide {
   if(context!==this.context){this.context=context;this.clock.reset(s.task??'chop');this.lastTime=null;this.poseKey='';}
   const playing=visible&&!s.pauseReasons.length;
   if(playing!==this.playing){this.playing=playing;this.lastTime=null;}
-  setProperty(this.taskLabel,'textContent',`${s.phase==='rest'?'下一项 · ':''}${tutorialLessons[s.task??'chop'].title}`);
-  setProperty(this.note,'textContent',s.pauseReasons.length?'示范已暂停':this.reduced.matches?'关键姿态 · 详细步骤见动作教学':'动作示意 · 按个人标定范围跟做');
+  setProperty(this.taskLabel,'textContent',`${s.phase==='rest'?'下一项 · ':''}${this.lessons[s.task??'chop'].title}`);
+  setProperty(this.note,'textContent',s.pauseReasons.length?'示范已暂停':this.reduced.matches?'关键姿态 · 详细步骤见动作教学':this.upperBody?'上半身示意 · 坐着可做':'动作示意 · 按个人标定范围跟做');
   if(visible)this.paint();
  }
 
@@ -89,7 +99,7 @@ export class MovementGuide {
   }
   for(const [joint,dot] of this.joints){setAttribute(dot,'cx',x(joint));setAttribute(dot,'cy',y(joint));}
   setAttribute(this.head,'cx',x('head'));setAttribute(this.head,'cy',y('head'));
-  setAttribute(this.svg,'aria-label',`${tutorialLessons[frame.task].title}标准动作骨骼示范`);
+  setAttribute(this.svg,'aria-label',`${this.lessons[frame.task].title}标准动作骨骼示范`);
  }
 
  dispose():void{if(this.disposed)return;this.disposed=true;this.events.abort();this.root.hidden=true;this.svg.replaceChildren();this.joints.clear();this.bones.length=0;}

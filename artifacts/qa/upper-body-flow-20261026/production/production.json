@@ -1,0 +1,157 @@
+{
+  "result": "pass",
+  "input": "Normal built production UI; explicit camera request denied by local test stub; no landmarks/controller/clock mutation",
+  "media": "Generated farm/UI PNGs only; no physical camera, recording or saved real pose data",
+  "limits": "This capture checks the initial large preparation cue, declared three-pose instructions, teaching steps and legacy manual UI. Actual automatic raised/hold progression and counting are covered separately by authored-landmark E2E, not by this permission-denied capture.",
+  "browser": "156.0.8078.4",
+  "screenshots": [
+    {
+      "file": "upper-body-desktop.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    },
+    {
+      "file": "upper-body-teaching.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    },
+    {
+      "file": "full-body-manual-desktop.png",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      }
+    },
+    {
+      "file": "upper-body-mobile.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "denied-mobile-bottom.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "name": "desktop-upper-preparation",
+      "selector": "#upperBodyPreparation",
+      "width": 1366,
+      "overflow": false,
+      "bounds": {
+        "x": 488,
+        "y": 469.859375,
+        "width": 390,
+        "height": 250.984375,
+        "top": 469.859375,
+        "right": 878,
+        "bottom": 720.84375,
+        "left": 488
+      }
+    },
+    {
+      "name": "mobile-mode-choice",
+      "selector": "#cameraExerciseMode",
+      "width": 390,
+      "overflow": false,
+      "bounds": {
+        "x": 38,
+        "y": 311.421875,
+        "width": 314,
+        "height": 40,
+        "top": 311.421875,
+        "right": 352,
+        "bottom": 351.421875,
+        "left": 38
+      }
+    },
+    {
+      "name": "mobile-upper-preparation",
+      "selector": "#upperBodyPreparation",
+      "width": 390,
+      "overflow": false,
+      "bounds": {
+        "x": 38,
+        "y": 497.421875,
+        "width": 314,
+        "height": 295.171875,
+        "top": 497.421875,
+        "right": 352,
+        "bottom": 792.59375,
+        "left": 38
+      }
+    },
+    {
+      "name": "mobile-manual-start-fallback",
+      "selector": "#beginCamera",
+      "width": 390,
+      "overflow": false,
+      "bounds": {
+        "x": 38,
+        "y": 678.1875,
+        "width": 314,
+        "height": 40,
+        "top": 678.1875,
+        "right": 352,
+        "bottom": 718.1875,
+        "left": 38
+      }
+    }
+  ],
+  "observations": {
+    "beforePreparation": {
+      "chop": "0/15",
+      "load": "0/15",
+      "carry": "0.0/60s",
+      "inventory": "0/0/0"
+    },
+    "defaultMode": "upper-body",
+    "initialPreparation": {
+      "step": "放下双手",
+      "cue": "坐稳或站稳，双手放在肩膀下方，保持片刻。",
+      "note": "砍树 / 装车：双手放下 → 举起 → 放下。拉车：双臂前举保持。只识别上半身，不测器械重量。"
+    },
+    "teaching": [
+      {
+        "title": "双手放下",
+        "cue": "坐稳或站稳，双手放下到本人准备时的低位，让双肩、双肘和双手腕留在画面内。"
+      },
+      {
+        "title": "双手向上举起",
+        "cue": "双手一起举到本人准备时的舒适高度；可以在肩上或头侧，不要伸出画面。"
+      },
+      {
+        "title": "放下完成复位",
+        "cue": "将双手放回刚才的低位，稳定复位后完成一次。"
+      }
+    ],
+    "legacyFullBody": {
+      "step": "standing",
+      "button": "采集自然站立 · 2秒",
+      "sideSelectorVisible": true
+    },
+    "modeRoundTripPermissionCalls": 0,
+    "permissionError": "摄像头权限被拒绝，请在浏览器允许视频权限后重试",
+    "afterUI": {
+      "chop": "0/15",
+      "load": "0/15",
+      "carry": "0.0/60s",
+      "inventory": "0/0/0"
+    },
+    "permissionCalls": 1
+  },
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": [],
+  "failure": null
+}

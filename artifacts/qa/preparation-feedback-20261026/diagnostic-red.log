@@ -1,0 +1,34 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (24 tests | 1 failed) 9ms
+   × invalid preparation frame preserves its specific diagnostic when feedback is already unavailable 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > invalid preparation frame preserves its specific diagnostic when feedback is already unavailable
+AssertionError: expected '暂无法判断' to be '肩、肘或手腕不够清晰' // Object.is equality
+
+Expected: "肩、肘或手腕不够清晰"
+Received: "暂无法判断"
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:41:85
+     39| test('invalid preparation frame preserves its specific diagnostic when…
+     40|  const f=fixture(null,'肩、肘或手腕不够清晰');f.panel.setUpperBodyEnabled(true);…
+     41|  expect(f.preview.dataset.feedback).toBe('unavailable');expect(f.label…
+       |                                                                                     ^
+     42| });
+     43|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 23 passed (24)
+   Start at  23:35:25
+   Duration  87ms (transform 48%, tests 27%, import 20%, worker 5%)
+

@@ -1,0 +1,61 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-diagnostics.spec.ts -g later timeout
+
+[WebServer] (node:29682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29702) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:29791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:29792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:09:26 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:09:26 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:09:26 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:09:26 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state (15.8s)
+
+
+  1) tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 
+
+    Error: expect(locator).not.toContainText(expected) failed
+
+    Locator: locator('#upperBodySuspendNotice')
+    Expected substring: not "保留准备进度"
+    Received string: "窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "not toContainText" locator('#upperBodySuspendNotice') with timeout 7000ms
+      - waiting for locator('#upperBodySuspendNotice')
+        18 × locator resolved to <p role="status" class="upper-body-suspend" id="upperBodySuspendNotice">窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。</p>
+           - unexpected value "窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。"
+
+
+      45 |
+      46 | test('a later timeout replaces the visible-blur preservation notice with the real reset state',async({page})=>{
+    > 47 |  await thirdStep(page);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');await page.evaluate(()=>{window.upperFixture.low=true;});await page.waitForTimeout(3300);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodySuspendNotice')).not.toContainText('保留准备进度');await expect(page.locator('#upperBodySuspendNotice')).toContainText('自动开始已取消');await expect(page.locator('#upperBodyLastReset')).toContainText('有效数据中断超过3秒');
+         |                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+      48 | });
+      49 | test('actual active training still invalidates its profile and pauses on visible blur',async({page})=>{
+      50 |  await thirdStep(page);await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});const before=await page.locator('#chopValue').textContent();await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#upperBodyLastReset')).toContainText('3/3 → 0/3');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText(before!);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:47:405
+
+    Error Context: test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/preparation-diagnostics.spec.ts:46:1 › a later timeout replaces the visible-blur preservation notice with the real reset state 

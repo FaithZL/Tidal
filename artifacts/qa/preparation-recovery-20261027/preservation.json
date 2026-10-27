@@ -1,0 +1,23 @@
+{
+  "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "branch": "main",
+  "originalProgressReconstructedMatches": true,
+  "unchangedStreamAndPredicates": {
+    "UpperBodyStreamUnchanged": true,
+    "private poseIssue(": true,
+    "private holdIssue(": true,
+    "getProfile()": true,
+    "getFeedback()": true
+  },
+  "unchangedExistingTestsBrowserAndDrawing": {
+    "tests/unit/upperBody.test.ts": true,
+    "tests/unit/setupPanelFeedback.test.ts": true,
+    "tests/e2e/preparation-feedback.spec.ts": true,
+    "src/browser.ts": true,
+    "src/ui/setupPanel.ts": true
+  },
+  "protectedTrackedChanges": [],
+  "stagedDiff": "",
+  "history": "2249 originalSHA restored;2 regenerated copies in thisQA/regression",
+  "operations": "No stage/commit/push/deploy/install/reset/clean; no real video/image/pose sequence saved."
+}

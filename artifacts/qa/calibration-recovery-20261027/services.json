@@ -1,0 +1,36 @@
+{
+  "localPreviewRuns": 2,
+  "previewCommand": [
+    "npm",
+    "run",
+    "preview",
+    "--",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "4176",
+    "--strictPort"
+  ],
+  "previewCaptures": [
+    {
+      "log": "production.log",
+      "exitCode": 0
+    },
+    {
+      "log": "production-release.log",
+      "exitCode": 0
+    }
+  ],
+  "previewStops": [
+    {
+      "method": "intentional Ctrl-C",
+      "exitCode": 1
+    },
+    {
+      "method": "intentional Ctrl-C",
+      "exitCode": 1
+    }
+  ],
+  "devPreview": "http://127.0.0.1:5173/?art=npr-sample",
+  "devKeptRunning": true
+}

@@ -1,0 +1,35 @@
+## 最新追加：完成标定与实时追踪解耦，完整丢点恢复链修复（2026-10-27）
+
+用户在上轮后继续反馈“准备完成，之后又回到了放下双手，能不能一次修好”。本轮立即只读当前真实页面AX文字，最近重新准备明确为“关节出框 · 3/3 → 0/3”，同时Worker约15Hz正常推理。该记录确认本次实际清零来源；没有截图/录影真人或保存关节坐标/轨迹。上一轮只修visible blur，不足以处理completed的质量失效。本轮用systematic-debugging和writing-plans先核对三层耦合并记录计划docs/superpowers/plans/2026-10-27-calibration-recovery.md，当前main/HEAD13a7113及此前未提交工作保留，不stage/commit/push/部署。
+
+根因：准备模型的软恢复只覆盖raised/hold，complete出框即invalidate丢三个模板；CameraActionSource正常地清识别器/半动作后，browser又统一require重新标定。实际Worker valid=false还包括暂时无人，却也被当作硬元数据错误。不能只给complete加3秒，否则等待超过3秒仍会重新归零。
+
+修复选择：完成模板与live readiness分离，上半身Panel显式使用retainCompleted，旧strict默认/全身及未完成3秒策略保持。完成后出框/低置信/缺点/退化/断档/过期/合法无人体，保留本次摄像头会话内3/3模板，立即令getProfile与反馈不可用、清当前恢复样本；没有完成模板的3秒期限。返回原anchor后，任意可见上半身姿态都须全新稳定1200ms和至少12有效样本重验证，窗口不能拼接，原三个模板不漂移。合法无人体与非法时钟/id/尺寸分开；真正乱序/未来/元数据/尺寸/anchor变化或显式stop/restart、换源/方案/会话/reset仍清模板。
+
+browser保留CameraActionSource/SourceManager/Domain严格协议，不改识别阈值：soft失效清活动输入和半动作，ready=false，实际active/countdown仅暂停自身tracking；rest沿现有cameraReady门禁阻止下任务，不以pauseReasons含tracking作为恢复条件。恢复令牌绑定session/epoch，fresh后重新apply原模板→ready=true→仅resume自身tracking，新epoch/完整复位后才可提交计数，持姿不补空档。初次自动开始许可可跨soft丢点保留，但3秒准备cue重计；user/visibility/source-error等暂停不被自动解除。completed blur/hidden保存模板、撤live、取消自动开局并保持visibility；fresh后手动继续，显式setup Start仅释放visibility，仍保留user/动画停止。
+
+界面在soft丢点时保留游戏/PiP和“标定已保存3/3，当前不计次/不计时”状态，不强制回三步模态；准备页显示“标定已保存”、新观察进度与具体原因。停帧无后续frame也保留原因；Source已知时钟过期消息规范为stale展示，不改Source原严格行为。普通tracking提示不再误要求手动，visibility仍要求手动。
+
+TDD证据artifacts/qa/calibration-recovery-20261027/：root commands.json，模型model-commands.json，browser browser-commands.json。新模型26项先RED后101/101（含旧75）GREEN；首GREEN100/101仅新测试使用不支持的toBeFalse matcher，同义改toBe(false)后通过，记录保留。两项完整入口RED均真实complete→lowered，接通后新增10项E2E首轮10/10（3.4分钟），含初次准备cue/无人体、active半次清除与epoch、完整rest/15+15/carry中断守恒、visibility真实继续与stop。独立审查补2个真实边界：setup显式开始仍留visibility、clock无后续帧提示被泛化；均实际RED后最小修复，5项边界GREEN59.2秒。
+
+三个旧E2E场景按新契约更新：原complete-blur两例保留暂停/禁用readiness/不自动开始/零成果，改为3/3仍存且live=false；单帧active无后续frame保留具体原因/全灰/禁开始/零成果，改为游戏叠层而非强制重标定模态，并加保存3/3。原case不删，旧模型strict全部断言保留，不改超时/重试/门槛；改变的正是用户要修正的清标定行为，见updated-contract-tests.json及原样快照diff。不能把这三个过时清零断言伪称“原样保留”。
+
+| 验证 | 本轮真实结果 |
+|---|---|
+| 最终全unit | **67文件、699/699、exit0**，unit-release.log；旧673项原断言不改，新26项覆盖完成模板恢复/硬错误/水位/样本不拼接 |
+| 类型/lint/diff | static-final.log、lint-release.log exit0；最终build内strict类型再次通过 |
+| E2E最终相关整轮 | **34/35、exit1、7.9分钟**，e2e-final.log；新12+原诊断8/反馈3/恢复2/上半身7/全身标定3。1项失败在最初视频初始化、0推理帧，尚未进入目标anchor/stop场景；没有把整轮写成exit0 |
+| 原样复跑及最后UI检查 | 失败项原样**1/1、exit0、8.9秒**，anchor-original-recheck.log；无超时/重试/断言改动。35个不同场景分轮覆盖通过；底层初始化悬挂原因未证实，关闭阶段“无法读取”不证明硬件被占用，见initialization-first-failure.json。最后只读派生UI区分tracking自动恢复与手动继续后，active半次/停止动画/visibility真实继续**3/3、exit0、44.4秒**，tracking-prompt-check.log |
+| build | 最终exit0，index-CSJrfSsP.js/browser-xHhfN2yT.js；原500KB提示保留，FBX非支持map警告仍属原提示，未升级依赖/改资源 |
+| 正常4176生产构建 | 最终3张桌面/390px与活动游戏PNG：保存3/3超过3秒、禁用无效readiness、恢复初次自动开局、活动半次不补算、重新做完整循环只计1次、无横向溢出；0页面/控制台/HTTP错误或外源。production-release.log、production/production.json。Fake video+人工六点、非真人准确率证据；首轮图另存production-before-prompt |
+| 独立只读审查 | 模型/Panel/完整browser恢复token和派生UI复核，无剩余P1/P2；setup显式Start与停帧原因两边界已真实RED→GREEN，review.json |
+
+生产截图中原通用“点击继续”会误导tracking自动恢复，最终仅对上半身且令牌拥有tracking、暂停理由仅tracking的状态，显示“等待追踪/重新入镜后自动继续”，按钮标“暂停”（明确点击可增加user暂停），其他manual/visibility/source-error保持原手动继续；纯派生文案不改状态处理器。最终3项功能复跑和生产视图核对均通过。
+
+2,348份历史QA先备份；4份重生成旧文件转存本轮regression后按原SHA恢复，全部一致，见qa-restoration.json。原PROGRESS旧正文按字节保留。临时4176两轮预览均在检查后Ctrl-C关闭（预期终止exit1），原5173开发服务保留。未stage/commit/push/部署，未把本轮初始化失败或合成结果写成真机通过。
+
+
+原Source/SetupPanel源码与Stream、poseIssue/holdIssue逐字节一致；.6/200/300ms、1200ms/12样本、原正负动作/seq/epoch/计数/持姿保护保持，见fixed-guards-preserved.json。未改素材/许可/锁文件/.gitattributes/.gitignore、依赖或公共worker源码，未重装/克隆/reset/clean。
+
+限制：软件故障注入与合成六点不能替代真人/MediaPipe准确率。用户本机后续真实重试尚待确认；六点不清晰时仍暂停识别，但已完成标定不再随soft丢点清零。原手机/硬件GPU/约60fps/最终美术/prototype/用户FBX公开再分发许可待验保留，未全量verify。此前前举raised分离/噪声门槛问题本轮未改，当前用户已经能完成三步，避免混入新范围。预览http://127.0.0.1:5173/?art=npr-sample，刷新后重启一次摄像头；同机位短暂/长时间丢点后重新入镜保持约1.2秒恢复，关闭相机或重置后需要重新准备。
+

@@ -1,0 +1,180 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBody.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBody.test.ts (22 tests | 22 failed) 7ms
+   × upper-body observation accepts only six usable points and uses shoulder-width coordinates 2ms
+   × normalization preserves image aspect ratio, anatomical sides and confidence validity 0ms
+   × stream rejects stale and cannot filter an invalid arm into validity 0ms
+   × stream rejects future and cannot filter an invalid arm into validity 0ms
+   × stream rejects duplicate and cannot filter an invalid arm into validity 0ms
+   × stream rejects gap and cannot filter an invalid arm into validity 0ms
+   × stream rejects resize and cannot filter an invalid arm into validity 0ms
+   × stream rejects moved and cannot filter an invalid arm into validity 0ms
+   × stream rejects scale and cannot filter an invalid arm into validity 0ms
+   × stream rejects missing and cannot filter an invalid arm into validity 0ms
+   × stream rejects degenerate and cannot filter an invalid arm into validity 0ms
+   × a reference rejects slow retreat and movement despite locally normalized poses staying identical 0ms
+   × automatic preparation collects three distinct stable references using real samples and copies its profile 1ms
+   × a repeated pose cannot pass the next step, including raised held as carry posture 1ms
+   × lowered and raised preparation require both arms, shoulder height and comfortable configured travel 0ms
+   × tick cannot collect samples or fill unobserved time and sparse samples cannot finish preparation 0ms
+   × preparation invalidates all completed evidence on low 0ms
+   × preparation invalidates all completed evidence on gap 0ms
+   × preparation invalidates all completed evidence on duplicate 0ms
+   × preparation invalidates all completed evidence on stale 0ms
+   × preparation invalidates all completed evidence on future 0ms
+   × preparation invalidates all completed evidence on resize 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 22 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBody.test.ts > upper-body observation accepts only six usable points and uses shoulder-width coordinates
+AssertionError: expected null not to be null
+ ❯ tests/unit/upperBody.test.ts:21:22
+     19| test('upper-body observation accepts only six usable points and uses s…
+     20|   const stream = new UpperBodyStream(), sample = stream.read(frame(50)…
+     21|   expect(sample).not.toBeNull(); expect(sample!.raw.scalePx).toBeClose…
+       |                      ^
+     22|   expect(sample!.raw.left).toMatchObject({ x: 0 }); expect(sample!.raw…
+     23|   expect(sample!.raw.right.y).toBeCloseTo(140 / 180); expect(sample!.r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > normalization preserves image aspect ratio, anatomical sides and confidence validity
+TypeError: Cannot read properties of null (reading 'raw')
+ ❯ tests/unit/upperBody.test.ts:30:12
+     28|   const original = frame(50), resized = { ...original, width: 1280, la…
+     29|   const a = new UpperBodyStream().read(original, 50)!, b = new UpperBo…
+     30|   expect(b.raw.left).toEqual(a.raw.left); expect(b.raw.right).toEqual(…
+       |            ^
+     31|   for (const bad of [.59, -1, 2, NaN]) {
+     32|     const invalid = frame(50); invalid.landmarks = invalid.landmarks.m…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > stream rejects stale and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects future and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects duplicate and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects gap and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects resize and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects moved and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects scale and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects missing and cannot filter an invalid arm into validity
+ FAIL  tests/unit/upperBody.test.ts > stream rejects degenerate and cannot filter an invalid arm into validity
+AssertionError: expected null not to be null
+ ❯ tests/unit/upperBody.test.ts:38:80
+     36|
+     37| test.each(['stale', 'future', 'duplicate', 'gap', 'resize', 'moved', '…
+     38|   const stream = new UpperBodyStream(); expect(stream.read(frame(50), …
+       |                                                                                ^
+     39|   let next = frame(100), now = 100;
+     40|   if (fault === 'stale') now = 401;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > a reference rejects slow retreat and movement despite locally normalized poses staying identical
+TypeError: Cannot read properties of null (reading 'raw')
+ ❯ tests/unit/upperBody.test.ts:53:56
+     51|
+     52| test('a reference rejects slow retreat and movement despite locally no…
+     53|   const first = new UpperBodyStream().read(frame(0), 0)!.raw;
+       |                                                        ^
+     54|   const reference = { width: first.width, height: first.height, center…
+     55|   const stream = new UpperBodyStream(undefined, reference); reference.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > automatic preparation collects three distinct stable references using real samples and copies its profile
+AssertionError: expected 'lowered' to be 'raised' // Object.is equality
+
+Expected: "raised"
+Received: "lowered"
+
+ ❯ tests/unit/upperBody.test.ts:67:42
+     65| test('automatic preparation collects three distinct stable references …
+     66|   const preparation = new UpperBodyPreparation(); let time = observe(p…
+     67|   expect(preparation.getSnapshot().step).toBe('raised'); expect(prepar…
+       |                                          ^
+     68|   time = observe(preparation, 'raised', time); expect(preparation.getS…
+     69|   observe(preparation, 'hold', time); expect(preparation.getSnapshot()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > a repeated pose cannot pass the next step, including raised held as carry posture
+AssertionError: expected 'lowered' to be 'raised' // Object.is equality
+
+Expected: "raised"
+Received: "lowered"
+
+ ❯ tests/unit/upperBody.test.ts:76:42
+     74| test('a repeated pose cannot pass the next step, including raised held…
+     75|   const preparation = new UpperBodyPreparation(); let time = observe(p…
+     76|   expect(preparation.getSnapshot().step).toBe('raised');
+       |                                          ^
+     77|   time = observe(preparation, 'raised', time, 4000); expect(preparatio…
+     78|   observe(preparation, 'hold', time); expect(preparation.getProfile())…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > lowered and raised preparation require both arms, shoulder height and comfortable configured travel
+AssertionError: expected 'lowered' to be 'raised' // Object.is equality
+
+Expected: "raised"
+Received: "lowered"
+
+ ❯ tests/unit/upperBody.test.ts:93:42
+     91|     preparation.accept(oneArm, t);
+     92|   }
+     93|   expect(preparation.getSnapshot().step).toBe('raised'); time += 1600;
+       |                                          ^
+     94|   observe(preparation, 'raised', time); expect(preparation.getSnapshot…
+     95| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > tick cannot collect samples or fill unobserved time and sparse samples cannot finish preparation
+AssertionError: expected 'lowered' to be 'raised' // Object.is equality
+
+Expected: "raised"
+Received: "lowered"
+
+ ❯ tests/unit/upperBody.test.ts:103:99
+    101|   let time = observe(preparation, 'lowered', 400, 1200, 200);
+    102|   expect(preparation.getSnapshot().step).toBe('lowered');
+    103|   time = observe(preparation, 'lowered', time, 1200, 200); expect(prep…
+       |                                                                                                   ^
+    104|   preparation.reset(); observe(preparation, 'lowered', 0, 500, 25); ex…
+    105| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/22]⎯
+
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on low
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on gap
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on duplicate
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on stale
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on future
+ FAIL  tests/unit/upperBody.test.ts > preparation invalidates all completed evidence on resize
+AssertionError: expected 'lowered' to be 'raised' // Object.is equality
+
+Expected: "raised"
+Received: "lowered"
+
+ ❯ tests/unit/upperBody.test.ts:109:42
+    107| test.each(['low', 'gap', 'duplicate', 'stale', 'future', 'resize'] as …
+    108|   const preparation = new UpperBodyPreparation(); const time = observe…
+    109|   expect(preparation.getSnapshot().step).toBe('raised'); let next = fr…
+       |                                          ^
+    110|   if (fault === 'low') next.landmarks = next.landmarks.map((p, i) => i…
+    111|   if (fault === 'gap') { next = frame(time + 201, 'raised'); now = nex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/22]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  22 failed (22)
+   Start at  22:22:35
+   Duration  107ms (transform 50%, tests 27%, import 18%, worker 5%)
+

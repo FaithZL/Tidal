@@ -1,0 +1,11 @@
+{
+  "scope": "SetupPanel onSuspend optional reason only, with three added callback-propagation tests; reset/clear behavior and prior assertions unchanged",
+  "commands": [
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "setup-suspend-events-red.log", "exitCode": 1, "result": "3 new cases failed because onSuspend received undefined; 30 previous cases passed" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "setup-suspend-events-green.log", "exitCode": 0, "result": "33/33 passed" },
+    { "command": "npx eslint src/ui/setupPanel.ts", "log": "setup-suspend-events-lint.log", "exitCode": 0, "result": "No diagnostics" },
+    { "command": "npm run typecheck", "log": "setup-suspend-events-typecheck.log", "exitCode": 0, "result": "TypeScript strict check passed" }
+  ],
+  "behavior": "onSuspend(reason?: string) receives the same window-blur, page-hidden or page-visible reason passed to calibration.reset(false, reason). Existing clear/reset sequencing remains intact; root owns any scoped skip policy.",
+  "limits": "No browser/HTML/UpperPanel edits, E2E, actual camera access, commit or push."
+}

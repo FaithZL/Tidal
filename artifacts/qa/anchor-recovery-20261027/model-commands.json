@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyAnchorRecovery.test.ts"
+    ],
+    "started_at": "2026-10-27T01:03:54.686038+00:00",
+    "exit_code": 1,
+    "log": "model-red.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyAnchorRecovery.test.ts",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts"
+    ],
+    "started_at": "2026-10-27T01:05:21.534385+00:00",
+    "exit_code": 0,
+    "log": "model-green.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyAnchorRecovery.test.ts"
+    ],
+    "started_at": "2026-10-27T01:05:58.939982+00:00",
+    "exit_code": 0,
+    "log": "model-boundaries.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "started_at": "2026-10-27T01:05:59.317799+00:00",
+    "exit_code": 0,
+    "log": "model-typecheck.log"
+  },
+  {
+    "command": [
+      "npx",
+      "eslint",
+      "src/pose/upperBody.ts"
+    ],
+    "started_at": "2026-10-27T01:06:00.595479+00:00",
+    "exit_code": 0,
+    "log": "model-lint.log"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "started_at": "2026-10-27T01:06:01.453196+00:00",
+    "exit_code": 0,
+    "log": "model-whitespace.log"
+  }
+]

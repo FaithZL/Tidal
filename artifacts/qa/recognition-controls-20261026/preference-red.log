@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionPreference.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/recognitionPreference.test.ts (2 tests | 2 failed) 3ms
+   × valid saved leniency is restored, invalid and unavailable storage safely uses standard 3ms
+   × saving writes only the validated leniency key and handles a failed write 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/recognitionPreference.test.ts > valid saved leniency is restored, invalid and unavailable storage safely uses standard
+AssertionError: expected 3 to be 5 // Object.is equality
+
+- Expected
++ Received
+
+- 5
++ 3
+
+ ❯ tests/unit/recognitionPreference.test.ts:5:54
+      3|
+      4| test('valid saved leniency is restored, invalid and unavailable storag…
+      5|  expect(readRecognitionLeniency({getItem:()=> '5'})).toBe(5);
+       |                                                      ^
+      6|  for(const value of [null,'','0','6','1.5','NaN','Infinity','{}','not-…
+      7|  expect(readRecognitionLeniency({getItem(){throw new Error('blocked');…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/unit/recognitionPreference.test.ts > saving writes only the validated leniency key and handles a failed write
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/recognitionPreference.test.ts:11:85
+      9| test('saving writes only the validated leniency key and handles a fail…
+     10|  const writes:[string,string][]=[];
+     11|  expect(saveRecognitionLeniency(1,{setItem(key,value){writes.push([key…
+       |                                                                                     ^
+     12|  expect(writes).toEqual([[recognitionPreferenceKey,'1']]);
+     13|  for(const value of [0,6,2.5,Number.NaN])expect(saveRecognitionLenienc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  21:02:01
+   Duration  73ms (transform 54%, import 21%, tests 18%, worker 7%)
+

@@ -1,0 +1,268 @@
+--- before/src/browser.ts
++++ after/src/browser.ts
+@@ -48,11 +48,20 @@
+ const upperBodyPanel=new UpperBodyPreparationPanel($('upperBodyPreparation'));
+ let upperBodyMode=true,cameraEntryOwnsPause=false,cameraStartGeneration=0,cameraAutoReadyAt:number|null=null;
+ let cameraAutoStart:{sessionId:string;ownsUserPause:boolean}|null=null;
++let cameraTrackingRecovery:{sessionId:string;sourceEpoch:number;returnToTraining:boolean;resumeTracking:boolean}|null=null;
++let upperCalibrationWasSaved=false;
+ const cameraPreparationPanel={
+  activate(){if(upperBodyMode){upperBodyPanel.activate();$('upperBodyPreparation').scrollIntoView({block:'center'});}else calibrationPanel.activate();},
+  accept(frame:Parameters<CalibrationPanel['accept']>[0]){if(upperBodyMode)upperBodyPanel.accept(frame);else calibrationPanel.accept(frame);},
+  tick(nowMs:number){if(upperBodyMode){upperBodyPanel.tick(nowMs);if(usingUpperBodyPreparation())updateCameraFeedback();}else calibrationPanel.tick(nowMs);},
+- reset(close=false,reason='manual-reset'){if(keepVisiblePreparation(reason))return;calibrationPanel.reset(close);upperBodyPanel.reset(close,reason);},
++ reset(close=false,reason='manual-reset'){
++  if(!close&&upperBodyMode&&upperBodyPanel.hasSavedProfile()&&['window-blur','page-hidden','page-visible'].includes(reason)){
++    upperBodyPanel.suspendTracking(reason);return;
++  }
++  if(keepVisiblePreparation(reason))return;
++  clearCameraTrackingRecovery();upperCalibrationWasSaved=false;
++  calibrationPanel.reset(close);upperBodyPanel.reset(close,reason);
++ },
+  dispose(){calibrationPanel.dispose();upperBodyPanel.dispose();},
+ };
+ const preview = new SyntheticPreview([
+@@ -69,13 +78,22 @@
+     onFrame: frame => {
+       if(renderUnavailable)return;
+       updateCameraButton();
+-      if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!hasCameraProfile())requireCameraPreparation('跟踪或标定已失效，请重新准备','tracking',true);
++      monitorUpperBodyTracking();
++      if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!cameraTrackingRecovery&&!hasCameraProfile())handleCameraTrackingLoss('跟踪或标定已失效，请重新准备',true);
+       cameraInput.accept(frame);
+       updateCameraFeedback();
+     },
+     onError: message => requireCameraPreparation(message,'source-error'),
+-    onSuspend: reason => {const keep=keepVisiblePreparation(reason);cancelCameraAutoStart();cameraInput.clearProfile();if(keep)upperBodyPanel.setSuspendNotice('窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。');else if(current.inputMode==='camera'&&running(current))requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');},
+-    onStop: () => {cameraAutoStart=null;cameraAutoReadyAt=null;cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
++    onSuspend: reason => {
++      const keep=keepVisiblePreparation(reason),saved=canRecoverUpperBodyTracking();
++      cancelCameraAutoStart();cameraInput.clearProfile();
++      if(saved){
++        beginCameraTrackingRecovery('页面失焦或进入后台；动作模板已保存，请恢复追踪后手动继续。');
++        controller.command({kind:'pause',reason:'visibility'});
++      }else if(keep)upperBodyPanel.setSuspendNotice('窗口失焦，保留准备进度；自动开始已取消，完成后请手动开始或继续。');
++      else if(current.inputMode==='camera'&&running(current))requireCameraPreparation('页面失焦或进入后台，请重新标定','visibility');
++    },
++    onStop: () => {clearCameraTrackingRecovery();upperCalibrationWasSaved=false;cameraAutoStart=null;cameraAutoReadyAt=null;cameraInput.clearProfile();updateCameraButton();if(current.inputMode==='camera'&&running(current)&&!cameraPreparation)requireCameraPreparation('摄像头已停止，请重新准备','source-error');},
+   });
+ const gamePreview=new GamePreview($('cameraPreview'),$<HTMLVideoElement>('cameraVideo'),$('setupPreviewHost'),$('gamePreviewHost'),message=>requireCameraPreparation(message,'source-error'));
+ cameraPanel.setUpperBodyEnabled(upperBodyMode);
+@@ -151,7 +169,7 @@
+ function updateCameraFeedback():void{
+   const preparing=usingUpperBodyPreparation(),feedback=preparing?upperBodyPanel.getFeedback():cameraInput.getFeedback();
+   cameraPanel.setFeedback(feedback);
+-  if(preparing&&!feedback)setProperty($('cameraFeedbackStatus'),'textContent',$('upperBodyReason').textContent);
++  if(preparing&&!feedback||canRecoverUpperBodyTracking()&&!hasCameraProfile())setProperty($('cameraFeedbackStatus'),'textContent',$('upperBodyReason').textContent);
+ }
+ function keepVisiblePreparation(reason?:string):boolean{
+   return reason==='window-blur'&&!document.hidden&&upperBodyMode&&usingUpperBodyPreparation()&&upperBodyPanel.hasIncompleteCheckpoint();
+@@ -161,9 +179,75 @@
+   else{const profile=calibrationPanel.getProfile();if(!profile)return false;cameraInput.setProfile(profile);}
+   return true;
+ }
++/** A saved personal template is separate from fresh observations and never authorizes input by itself. */
++function canRecoverUpperBodyTracking():boolean{
++  return upperBodyMode&&current.inputMode==='camera'&&upperBodyPanel.hasSavedProfile();
++}
++function setCameraTrackingStatus(message:string):void{
++  setProperty($('cameraTrackingStatus'),'textContent',message);
++  setProperty($('cameraTrackingStatus'),'hidden',!message);
++}
++function clearCameraTrackingRecovery():void{
++  cameraTrackingRecovery=null;setCameraTrackingStatus('');
++}
++function beginCameraTrackingRecovery(message:string,trackingWasPaused=current.pauseReasons.includes('tracking')):void{
++  if(!canRecoverUpperBodyTracking())return;
++  cameraAutoReadyAt=null;
++  if(!cameraTrackingRecovery){
++    const returnToTraining=running(current)&&!cameraPreparation;
++    cameraTrackingRecovery={sessionId:current.sessionId,sourceEpoch:current.sourceEpoch,returnToTraining,
++      resumeTracking:returnToTraining&&!trackingWasPaused};
++  }
++  cameraInput.clearProfile();cameraPanel.setFeedback(null);
++  displayError=message;
++  setCameraTrackingStatus(`${message} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`);
++  controller.command({kind:'camera-readiness',ready:false});
++  if(cameraTrackingRecovery.returnToTraining)controller.command({kind:'pause',reason:'tracking'});
++  updateCameraButton();updateCameraFeedback();
++}
++function handleCameraTrackingLoss(message:string,preparationAlreadyInvalid=false,trackingWasPaused=current.pauseReasons.includes('tracking')):void{
++  if(canRecoverUpperBodyTracking()){
++    // A loss reported by the active source must also invalidate the readiness observation window.
++    if(upperBodyPanel.getProfile())upperBodyPanel.suspendTracking(message==='关键点已过期，请重新标定'?'stale':message);
++    beginCameraTrackingRecovery(message,trackingWasPaused);
++  }else requireCameraPreparation(message,'tracking',preparationAlreadyInvalid);
++}
++function monitorUpperBodyTracking():void{
++  if(!upperBodyMode||current.inputMode!=='camera')return;
++  const saved=upperBodyPanel.hasSavedProfile();
++  if(!saved){
++    if(upperCalibrationWasSaved||cameraTrackingRecovery){
++      upperCalibrationWasSaved=false;
++      requireCameraPreparation('机位或标定条件已变化，请重新准备','tracking',true);
++    }
++    return;
++  }
++  upperCalibrationWasSaved=true;
++  if(!upperBodyPanel.getProfile()){
++    const reason=$('upperBodyReason').textContent?.trim()||'上半身追踪暂时中断。';
++    if(!cameraTrackingRecovery)beginCameraTrackingRecovery(reason);
++    else setCameraTrackingStatus(`${reason} 已保存3/3；当前动作不计次、持姿不计时，请回到镜头内保持稳定，无需重做三个姿态。`);
++    return;
++  }
++  const recovery=cameraTrackingRecovery;
++  if(!recovery)return;
++  if(recovery.sessionId!==current.sessionId||recovery.sourceEpoch!==current.sourceEpoch){clearCameraTrackingRecovery();return;}
++  try{
++    if(!applyCameraProfile())return;
++    cameraTrackingRecovery=null;
++    if(recovery.returnToTraining)cameraPreparation=false;
++    displayError='';
++    controller.command({kind:'camera-readiness',ready:true});
++    if(recovery.resumeTracking)controller.command({kind:'resume',reason:'tracking'});
++    setCameraTrackingStatus(current.pauseReasons.length?'追踪已恢复，动作模板已保存；当前仍暂停，请手动开始或继续。':'追踪已恢复，动作模板已保存。');
++    updateCameraButton();
++  }catch(error){requireCameraPreparation(error instanceof Error?error.message:String(error),'source-error');}
++}
+ function requireCameraPreparation(message:string,reason:'tracking'|'source-error'|'visibility'='tracking',preparationAlreadyInvalid=false):void{
+   if(renderUnavailable)return;
++  clearCameraTrackingRecovery();upperCalibrationWasSaved=false;
+   cancelCameraAutoStart();cameraEntryOwnsPause=false;displayError=message;cameraInput.clearProfile();cameraPanel.setFeedback(null);
++  if(current.inputMode==='camera'&&!running(current)&&upperBodyMode&&upperBodyPanel.hasSavedProfile())cameraPreparationPanel.reset(false,reason);
+   if(current.inputMode==='camera'&&running(current)){
+     cameraPreparation=true;if(!upperBodyMode||!preparationAlreadyInvalid)cameraPreparationPanel.reset(false,reason);
+     controller.command({kind:'camera-readiness',ready:false});controller.command({kind:'pause',reason});
+@@ -180,8 +264,9 @@
+   try {
+     await sourceManager.switchTo(context ? s.inputMode==='camera'?cameraInput:demoEnabled?autoInput:input : null,context,e=>{
+       if(renderUnavailable)return;
++      const trackingWasPaused=current.pauseReasons.includes('tracking');
+       controller.accept(e);
+-      if(e.kind==='tracking'&&e.status!=='ready'&&s.inputMode==='camera')requireCameraPreparation(e.message??'跟踪丢失，请重新准备');
++      if(e.kind==='tracking'&&e.status!=='ready'&&s.inputMode==='camera')handleCameraTrackingLoss(e.message??'跟踪暂时中断',false,trackingWasPaused);
+     });
+   }catch(error){
+     requireCameraPreparation(error instanceof Error?error.message:String(error),'source-error');
+@@ -189,6 +274,7 @@
+ }
+ function switchKeyboard():void{
+   if(renderUnavailable)return;
++  clearCameraTrackingRecovery();upperCalibrationWasSaved=false;
+   cancelCameraAutoStart();cameraEntryOwnsPause=false;
+   stopHold();if(running(current))pauseForUser();
+   cameraPreparation=false;displayError='';controller.command({kind:'switch-source',mode:'keyboard'});
+@@ -208,6 +294,7 @@
+ }
+ function openCameraPreparation():void{
+   if(renderUnavailable||current.phase==='results')return;
++  clearCameraTrackingRecovery();
+   const ownsPause=running(current)&&!current.pauseReasons.includes('user')&&!animationsStopped;
+   stopHold();if(running(current))pauseForUser();
+   setDemo(false);
+@@ -229,6 +316,7 @@
+ }
+ function applyRecognitionLeniency(level:number):void{
+   if(!isRecognitionLeniency(level)||level===recognitionLeniency)return;
++  clearCameraTrackingRecovery();
+   cancelCameraAutoStart();
+   stopHold();if(running(current))pauseForUser();
+   if(current.inputMode==='camera')controller.command({kind:'switch-source',mode:'camera'});
+@@ -247,6 +335,7 @@
+   }
+   current = s;
+   const upperCamera=upperBodyMode&&s.inputMode==='camera';
++  const trackingOnly=upperCamera&&!!cameraTrackingRecovery?.resumeTracking&&s.pauseReasons.length>0&&s.pauseReasons.every(reason=>reason==='tracking');
+   tutorial.setUpperBodyEnabled(upperCamera);movementGuide.setUpperBodyEnabled(upperCamera);
+   setProperty($('app').dataset,'cameraExercise',upperBodyMode?'upper-body':'full-body');
+   setProperty($('upperBodyPreparation'),'hidden',!upperBodyMode);
+@@ -328,7 +417,7 @@
+   setProperty($('resultsModal'),'hidden',phase !== 'results');
+   game.setInteractionEnabled($('tutorialModal').hidden&&$('setupModal').hidden&&$('resultsModal').hidden&&$('exitModal').hidden&&!renderUnavailable);
+   setProperty($('pauseBtn'),'hidden',!(['countdown', 'active', 'rest'] as string[]).includes(phase));
+-  setProperty($('pauseBtn'),'textContent',s.pauseReasons.length ? '继续' : '暂停');
++  setProperty($('pauseBtn'),'textContent',trackingOnly?'暂停':s.pauseReasons.length?'继续':'暂停');
+   const status = s.pauseReasons.length ? '已暂停' : phase === 'home' ? '未开始'
+     : phase === 'setup' ? '设备准备' : phase === 'active' ? '训练中'
+     : phase === 'countdown' ? '倒计时' : phase === 'rest' ? '休息时间' : '已完成';
+@@ -339,6 +428,7 @@
+   setProperty(action,'textContent',s.inputMode==='camera'&&running(s)?'由摄像头姿态控制':demoEnabled&&phase!=='home'?'自动模拟已开启':phase === 'home' && planDismissed ? '查看今日计划' : s.task === 'carry' ? '按住拉车' : s.task === 'chop' ? '🪓 模拟一次挥砍' : s.task === 'load' ? '🪵 模拟一次装车' : '等待任务开始');
+   setProperty($('actionPrompt'),'textContent',renderUnavailable?'3D画面不可用，请重新加载页面。':phase === 'countdown' ? `即将开始：${niceTask(s.task)}`
+     : phase === 'rest' ? `休息 ${Math.ceil(s.remainingMs/1000)} 秒 · 下一个任务：${niceTask(s.task)}`
++    : trackingOnly ? '标定已保存，重新入镜并保持稳定后自动继续。'
+     : s.pauseReasons.length ? '当前已暂停，按继续按钮恢复。'
+     : demoEnabled ? '自动演示中，可随时暂停或关闭无摄像头测试。'
+     : usable && s.task ? instructions[s.task] : '准备开始今天的劳作。');
+@@ -354,6 +444,7 @@
+   setClass(countdown,'compact',phase === 'rest' || s.pauseReasons.length > 0);
+   setProperty(countdown,'hidden',phase !== 'rest' && phase !== 'countdown' && !s.pauseReasons.length);
+   if(renderUnavailable)setProperty(countdown,'innerHTML','画面不可用<small>请重新加载页面</small>');
++  else if(trackingOnly)setProperty(countdown,'innerHTML','等待追踪<small>重新入镜后自动继续</small>');
+   else if(s.pauseReasons.length) setProperty(countdown,'innerHTML','已暂停<small>点击继续后恢复</small>');
+   else if(phase === 'rest') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}s<small>休息 · ${s.task === 'load' ? '归拢木材' : '固定货物'}</small>`);
+   else if(phase === 'countdown') setProperty(countdown,'innerHTML',`${Math.ceil(s.remainingMs/1000)}<small>做好准备，即将开始</small>`);
+@@ -390,12 +481,13 @@
+     movementPhase=names[e.phase];
+   }
+   if (e.kind === 'session-reset') {
++    clearCameraTrackingRecovery();upperCalibrationWasSaved=false;
+     cancelCameraAutoStart();cameraEntryOwnsPause=false;
+     cameraPreparation=false;displayError='';cameraInput.clearProfile();sourceManager.resetHistory();
+     demoEnabled = preferredDemo;demoUsed = false;preview.setEnabled(demoEnabled);void autoInput.stop();
+     planDismissed = false; $('exitModal').hidden = true; void cameraPanel.stop();
+   }
+-  if(e.kind==='rewards-granted'){cameraPreparation=false;void cameraPanel.stop();}
++  if(e.kind==='rewards-granted'){clearCameraTrackingRecovery();upperCalibrationWasSaved=false;cameraPreparation=false;void cameraPanel.stop();}
+ });
+ function doAction(): void {
+   if (!active(current) || demoEnabled) return;
+@@ -417,6 +509,7 @@
+ for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>('[data-leniency]')))button.addEventListener('click',()=>applyRecognitionLeniency(Number(button.dataset.leniency)));
+ for (const id of ['demoToggle', 'setupDemoToggle']) $(id).addEventListener('click', () => setDemo(!demoEnabled));
+ $('cameraExerciseMode').addEventListener('change',()=>{
++  clearCameraTrackingRecovery();upperCalibrationWasSaved=false;
+   cancelCameraAutoStart();cameraEntryOwnsPause=false;if(running(current))pauseForUser();
+   upperBodyMode=$<HTMLSelectElement>('cameraExerciseMode').value==='upper-body';cameraInput.clearProfile();cameraPreparationPanel.reset(true,'exercise-mode-changed');
+   cameraPanel.setUpperBodyEnabled(upperBodyMode);
+@@ -424,7 +517,7 @@
+   void cameraPanel.stop();panel(controller.getSnapshot());
+ });
+ $('cameraStart').addEventListener('click',async()=>{
+-  if(renderUnavailable)return;const ownsUserPause=cameraEntryOwnsPause;
++  if(renderUnavailable)return;clearCameraTrackingRecovery();upperCalibrationWasSaved=false;const ownsUserPause=cameraEntryOwnsPause;
+   setDemo(false);controller.command({kind:'switch-source',mode:'camera'});
+   const generation=++cameraStartGeneration,sessionId=current.sessionId;await cameraPanel.start();
+   if(generation===cameraStartGeneration&&upperBodyMode&&current.sessionId===sessionId&&$<HTMLVideoElement>('cameraVideo').srcObject&&!animationsStopped){cameraAutoStart={sessionId,ownsUserPause};cameraAutoReadyAt=null;}
+@@ -438,14 +531,18 @@
+ $('recalibrate').addEventListener('click',()=>requireCameraPreparation('请重新采集标定'));
+ function beginCameraTraining(automatic=false):void{
+   if(renderUnavailable)return;
++  const manualSetupStart=!automatic&&current.phase==='setup'&&!document.hidden;
+   const permit=cameraAutoStart;
+   if(automatic&&(!permit||permit.sessionId!==current.sessionId||current.inputMode!=='camera'||animationsStopped||tutorial.isOpen||document.hidden||current.pauseReasons.some(reason=>reason!=='user'||!permit.ownsUserPause)))return;
+   if(!hasCameraProfile())return;
+   try{
+-    if(!applyCameraProfile())return;cancelCameraAutoStart();cameraEntryOwnsPause=false;cameraPreparation=false;displayError='';
++    if(!applyCameraProfile())return;clearCameraTrackingRecovery();cancelCameraAutoStart();cameraEntryOwnsPause=false;cameraPreparation=false;displayError='';
+     controller.command({kind:'switch-source',mode:'camera'});
+     controller.command({kind:'camera-readiness',ready:true});
+-    if(current.phase==='setup')controller.command({kind:'setup-ready',calibrated:{chop:true,load:true,carry:true}});
++    if(current.phase==='setup'){
++      controller.command({kind:'setup-ready',calibrated:{chop:true,load:true,carry:true}});
++      if(manualSetupStart)controller.command({kind:'resume',reason:'visibility'});
++    }
+     else{controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});}
+     if(automatic&&permit?.ownsUserPause)controller.command({kind:'resume',reason:'user'});
+   }catch(error){displayError=`标定不可用：${error instanceof Error?error.message:String(error)}。请重做标定或切换键盘。`;$('cameraStatus').textContent=displayError;}
+@@ -513,8 +610,9 @@
+ function animate(now:number):void {
+   if(renderUnavailable){requestAnimationFrame(animate);return;}
+   // Readiness can expire without another frame, including during rest/countdown.
+-  if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!hasCameraProfile()){
+-    requireCameraPreparation('关键点或标定已失效，请重新准备','tracking',true);
++  monitorUpperBodyTracking();
++  if(current.inputMode==='camera'&&running(current)&&!cameraPreparation&&!cameraTrackingRecovery&&!hasCameraProfile()){
++    handleCameraTrackingLoss('关键点或标定已失效，请重新准备',true);
+   }
+   controller.tick(now);
+   cameraInput.tick(now);

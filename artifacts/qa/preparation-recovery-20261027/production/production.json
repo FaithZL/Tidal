@@ -1,0 +1,17 @@
+{
+  "input": "Normal production build; fake video and six authored landmarks, not physical camera accuracy",
+  "result": "pass",
+  "screenshots": [
+    "step-two-preserved-synthetic.png",
+    "step-three-preserved-mobile-synthetic.png"
+  ],
+  "shortLossRetainsCompletedSteps": true,
+  "longLossRestarts": true,
+  "readinessWhileLost": false,
+  "trainingReps": 0,
+  "mobileOverflow": false,
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

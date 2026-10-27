@@ -1,0 +1,22 @@
+{
+  "scope": ["src/config/recognitionTolerance.ts", "src/input/cameraActionSource.ts", "tests/unit/recognitionTolerance.test.ts", "tests/unit/cameraTolerance.test.ts"],
+  "commands": [
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts", "log": "tolerance-red.log", "exitCode": 1, "result": "Semantic RED against no-op tolerance scaffold and original source: 7 failed, 5 passed; reduced-range chop expected 1 rep, observed 0."},
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts", "log": "tolerance-green-first.log", "exitCode": 0, "result": "12/12 passed after minimal factory/source implementation."},
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts tests/unit/chopRecognizer.test.ts tests/unit/loadRecognizer.test.ts tests/unit/carryRecognizer.test.ts tests/unit/cameraActionSource.test.ts tests/unit/calibrationSession.test.ts", "log": "tolerance-regression.log", "exitCode": 0, "result": "76/76 passed, existing negative assertions unchanged."},
+    {"command": "npm run test:unit", "log": "tolerance-unit-all.log", "exitCode": 0, "result": "470/470 passed at this intermediate workspace snapshot."},
+    {"command": "npm run lint", "log": "tolerance-lint.log", "exitCode": 1, "result": "Concurrent feedback scaffold had one unused _input parameter; no tolerance-source lint error."},
+    {"command": "npm run typecheck", "log": "tolerance-typecheck.log", "exitCode": 0, "result": "Passed after Recognizer.getFeedback interface appeared."},
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts", "log": "tolerance-boundaries.log", "exitCode": 1, "result": "19 passed, 1 Carry fixture failed: 40% landmark interpolation is .4359 of feature-center distance, beyond loose enter .43. Geometry inspected independently; production rules unchanged."},
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts", "log": "tolerance-boundaries-final.log", "exitCode": 0, "result": "20/20 passed using 36% landmark interpolation (.394 feature-center distance), preserving the same standard-reject/loose-accept/release-immediate assertions."},
+    {"command": "npm run test:unit -- tests/unit/cameraTolerance.test.ts", "log": "tolerance-feedback-green.log", "exitCode": 0, "result": "7/7 passed including real observed feedback exposure and synchronous clearing."},
+    {"command": "npm run typecheck", "log": "tolerance-typecheck-final.log", "exitCode": 0, "result": "Passed with feedback implementation present."},
+    {"command": "npm run lint", "log": "tolerance-lint-final.log", "exitCode": 1, "result": "Concurrent root recognitionPreference scaffold had three unused parameters; no tolerance-source lint errors."},
+    {"command": "npm run test:unit", "log": "tolerance-unit-final.log", "exitCode": 1, "result": "498 passed, 2 root recognitionPreference scaffold tests failed (saved 5 read as 3; save returned false). All tolerance/feedback tests passed. Root will run final integrated verification after its implementation."},
+    {"command": "npm run test:unit -- tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts tests/unit/chopRecognizer.test.ts tests/unit/loadRecognizer.test.ts tests/unit/carryRecognizer.test.ts tests/unit/cameraActionSource.test.ts tests/unit/calibrationSession.test.ts tests/unit/recognitionFeedback.test.ts", "log": "tolerance-regression-final.log", "exitCode": 0, "result": "107/107 passed across 8 related files, including the final 21 tolerance/source cases."},
+    {"command": "./node_modules/.bin/eslint src/config/recognitionTolerance.ts src/input/cameraActionSource.ts", "log": "tolerance-scope-lint.log", "exitCode": 0, "result": "Passed."},
+    {"command": "git diff --check", "exitCode": 0, "result": "Passed after final scope tests."}
+  ],
+  "notRun": ["E2E", "camera access", "install", "commit", "push", "asset synchronization", "build"],
+  "limitations": "All pose input here is synthetic. These results do not establish real-person accuracy, camera latency, clinical form correctness or medical safety. No edits to calibration or domain state. Existing QA outputs were not regenerated."
+}

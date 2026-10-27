@@ -1,0 +1,6 @@
+{
+  "preview": "npm run preview -- --host 127.0.0.1 --port 4176 --strictPort",
+  "previewStopped": "Ctrl-C after verification; observed process exit130 (expected termination, not test failure)",
+  "development": "Existing 5173 kept; browser AX read succeeded; camera not automatically requested",
+  "developmentHttpStatus": 200
+}

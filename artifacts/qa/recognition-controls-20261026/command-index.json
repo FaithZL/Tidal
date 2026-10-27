@@ -1,0 +1,15 @@
+{
+  "root": "commands.json",
+  "tolerance": "tolerance-commands.json",
+  "feedback": "feedback-commands.json",
+  "drawing": "feedback-drawing-commands.json",
+  "preservation": "preservation.json",
+  "historicalQA": "qa-restoration.json",
+  "review": "review.json",
+  "intermediateFailures": [
+    "first-run-analysis.json",
+    "regression-analysis.json"
+  ],
+  "production": "production/production.json",
+  "scope": "No full verify or physical camera acceptance claimed"
+}

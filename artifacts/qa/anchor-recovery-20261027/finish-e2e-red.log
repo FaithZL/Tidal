@@ -1,0 +1,100 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-finish.spec.ts
+
+[WebServer] (node:40153) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:40265) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:12:02 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:12:02 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:12:02 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:12:02 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-finish.spec.ts:12:1 › completion offers a direct exit from preparation and keeps the same live camera for a real recognized rep (13.9s)
+(node:40318) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:12:17 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:12:17 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:12:17 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:12:17 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/preparation-finish.spec.ts:22:1 › the finish shortcut cannot bypass lost tracking or an explicit animation stop (13.7s)
+
+
+  1) tests/e2e/preparation-finish.spec.ts:12:1 › completion offers a direct exit from preparation and keeps the same live camera for a real recognized rep 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#finishUpperPreparation')
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#finishUpperPreparation') with timeout 7000ms
+      - waiting for locator('#finishUpperPreparation')
+
+
+      11 | }
+      12 | test('completion offers a direct exit from preparation and keeps the same live camera for a real recognized rep',async({page})=>{
+    > 13 |  await savedAfterBlur(page);await expect(page.locator('#finishUpperPreparation')).toBeVisible();await expect(page.locator('#finishUpperPreparation')).toBeEnabled();
+         |                                                                                   ^
+      14 |  await expect(page.locator('#upperBodyCue')).toContainText('已保存');await expect(page.locator('#upperBodyCue')).toContainText('摄像头');
+      15 |  await page.locator('#finishUpperPreparation').click();await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#statusTag')).toHaveText('训练中');
+      16 |  expect(await page.evaluate(()=>window.upperFixture.tracks.length)).toBe(1);expect(await page.evaluate(()=>window.upperFixture.tracks[0].readyState)).toBe('live');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-finish.spec.ts:13:83
+
+    Error Context: test-results/preparation-finish-complet-667df-a-for-a-real-recognized-rep/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-finish-complet-667df-a-for-a-real-recognized-rep/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-finish-complet-667df-a-for-a-real-recognized-rep/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/preparation-finish.spec.ts:22:1 › the finish shortcut cannot bypass lost tracking or an explicit animation stop 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#finishUpperPreparation')
+    Expected: visible
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#finishUpperPreparation') with timeout 7000ms
+      - waiting for locator('#finishUpperPreparation')
+
+
+      22 | test('the finish shortcut cannot bypass lost tracking or an explicit animation stop',async({page})=>{
+      23 |  await savedAfterBlur(page);await page.evaluate(()=>{window.upperFixture.moved=true;});
+    > 24 |  await expect(page.locator('#finishUpperPreparation')).toBeVisible();await expect(page.locator('#finishUpperPreparation')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                        ^
+      25 |  await page.locator('#setupAnimationStop').click();await page.evaluate(()=>{window.upperFixture.moved=false;});await expect(page.locator('#finishUpperPreparation')).toBeEnabled({timeout:6000});
+      26 |  await page.locator('#finishUpperPreparation').click();await expect(page.locator('#setupModal')).toBeHidden();await page.waitForTimeout(700);
+      27 |  await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#animationStop')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-finish.spec.ts:24:56
+
+    Error Context: test-results/preparation-finish-the-fin-4b8c6--an-explicit-animation-stop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-finish-the-fin-4b8c6--an-explicit-animation-stop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-finish-the-fin-4b8c6--an-explicit-animation-stop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/preparation-finish.spec.ts:12:1 › completion offers a direct exit from preparation and keeps the same live camera for a real recognized rep 
+    tests/e2e/preparation-finish.spec.ts:22:1 › the finish shortcut cannot bypass lost tracking or an explicit animation stop 

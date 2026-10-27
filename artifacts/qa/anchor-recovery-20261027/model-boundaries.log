@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyAnchorRecovery.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  1 passed (1)
+      Tests  19 passed (19)
+   Start at  09:05:59
+   Duration  108ms (tests 53%, transform 30%, import 14%, worker 3%)
+

@@ -1,0 +1,225 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/source-lifecycle.spec.ts tests/e2e/calibration.spec.ts tests/e2e/camera-errors.spec.ts tests/e2e/default-demo.spec.ts tests/e2e/animation-stop.spec.ts tests/e2e/recognition-controls.spec.ts --grep-invert camera entry pauses|real recognizer feedback|changing tolerance|a stalled camera clears|wide tolerance --output artifacts/qa/recognition-controls-20261026/regression-results
+
+[WebServer] (node:9948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:10016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:10037) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 26 tests using 1 worker
+
+(node:10038) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:20:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:37 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘   1 tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes (8.9s)
+(node:10133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:20:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:47 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   2 tests/e2e/animation-stop.spec.ts:23:1 › stopping in teaching preserves a selected pose and cannot be bypassed by local playback or replay (3.5s)
+[WebServer] 9:20:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:50 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   3 tests/e2e/animation-stop.spec.ts:37:1 › stopping before assets prevents hidden autoplay and preserves the saved preference (3.0s)
+[WebServer] 9:20:53 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:53 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:53 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:53 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   4 tests/e2e/animation-stop.spec.ts:52:1 › continue preserves an existing user pause and a visibility pause (2.0s)
+[WebServer] 9:20:55 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:55 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:55 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:55 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   5 tests/e2e/animation-stop.spec.ts:60:1 › opening teaching or exit after stop transfers the user pause and never resumes training behind a dialog (2.2s)
+[WebServer] 9:20:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:20:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:20:58 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✓   6 tests/e2e/animation-stop.spec.ts:70:1 › camera monitoring continues during animation stop and loss still requires preparation (15.2s)
+(node:10330) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 tests/e2e/calibration.spec.ts:39:1 › calibration requires camera points and automatic demo cannot pretend to calibrate (2.9s)
+  ✓   8 tests/e2e/calibration.spec.ts:46:1 › synthetic Worker fixture traverses real UI calibration, then invalidation clears readiness without counting (15.9s)
+  ✓   9 tests/e2e/calibration.spec.ts:63:1 › leaving setup, changing source or hiding the page cancels calibration sampling (6.1s)
+(node:10531) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 tests/e2e/camera-errors.spec.ts:11:1 › denied permission is explicit and does not silently start keyboard (2.7s)
+  ✓  11 tests/e2e/camera-errors.spec.ts:22:1 › missing model is visible and closes the video tracks (2.4s)
+  ✓  12 tests/e2e/camera-errors.spec.ts:30:1 › local Worker model performs inference on synthetic camera; reset releases capture (2.6s)
+  ✓  13 tests/e2e/camera-errors.spec.ts:44:1 › immediate cancel never opens a late camera and retry remains possible (2.7s)
+  ✓  14 tests/e2e/camera-errors.spec.ts:57:3 › camera NotFoundError has an actionable device error (2.2s)
+  ✓  15 tests/e2e/camera-errors.spec.ts:57:3 › camera NotReadableError has an actionable device error (2.2s)
+  ✓  16 tests/e2e/camera-errors.spec.ts:57:3 › camera NotSupportedError has an actionable device error (2.2s)
+(node:10650) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 tests/e2e/default-demo.spec.ts:5:1 › fresh visits and reloads automatically show the explicit demo without requesting a camera (11.4s)
+  ✓  18 tests/e2e/default-demo.spec.ts:24:1 › turning simulation off survives reload, and explicitly enabling it survives the next reload (7.8s)
+  ✓  19 tests/e2e/default-demo.spec.ts:34:1 › choosing real camera opts out of autoplay even when the device fails and the page reloads (5.3s)
+  ✓  20 tests/e2e/default-demo.spec.ts:44:1 › blocked browser storage still allows autoplay and a session-local off switch without errors (5.1s)
+[WebServer] 9:22:25 PM [vite] (client) [Unhandled rejection] Error: User house loading cancelled
+[WebServer]  > UserHouseMount.dispose src/game/world/userHouseMount.ts:22:14
+[WebServer]     20 |    if(this.closed)return;this.closed=true;
+[WebServer]     21 |    if(this.model){this.model.root.removeFromParent();this.model.dispose();this.model=null;}
+[WebServer]     22 |    this.cancel(new Error('User house loading cancelled'));
+[WebServer]        |                ^
+[WebServer]     23 |   }
+[WebServer]     24 |  }
+[WebServer]  > FarmWorld.destroy src/game/world/FarmWorld.ts:215:72
+[WebServer]  > new FarmWorld src/game/world/FarmWorld.ts:122:21
+[WebServer]  > createGame src/game/createGame.ts:7:13
+[WebServer]  > src/browser.ts:51:13
+[WebServer] 
+  ✓  21 tests/e2e/default-demo.spec.ts:53:1 › a renderer initialization failure keeps default autoplay at home with no hidden progression (905ms)
+(node:10875) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:22:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:22:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:22:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:22:27 PM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  22 tests/e2e/recognition-controls.spec.ts:22:1 › leniency is bounded, saved independently and accessible on a narrow preparation screen (1.0m)
+(node:10968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  23 tests/e2e/source-lifecycle.spec.ts:6:1 › camera start stays disabled without calibration and simulation cannot enable it (786ms)
+  ✓  24 tests/e2e/source-lifecycle.spec.ts:10:1 › synthetic camera pipeline completes the farm through real recognizers and releases resources (1.3m)
+  ✓  25 tests/e2e/source-lifecycle.spec.ts:30:1 › tracking loss pauses, clears readiness and allows explicit keyboard fallback with honest mixed results (21.2s)
+  ✓  26 tests/e2e/source-lifecycle.spec.ts:41:1 › a stalled camera during rest cannot start the next active task without preparation (46.9s)
+
+
+  1) tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#worldCanvas')
+    Expected: "chop-down"
+    Received: "ready"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#worldCanvas') with timeout 7000ms
+      - waiting for locator('#worldCanvas')
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-action="ready" data-world-logs="0" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="work" data-motion-revision="22" data-effects="impact,impact" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-camera="1.415,3.525,11.331" aria-label="可旋转…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-world-logs="0" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="work" data-motion-revision="24" data-action="chop-return" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-camera="1.415,3.525,11.331" aria-label="可旋转三维农场。地面0、车上0、到家0。" data…>…</div>
+        - unexpected value "chop-return"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-world-logs="0" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="work" data-motion-revision="27" data-action="chop-return" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-camera="1.415,3.525,11.331" aria-label="可旋转三维农场。地面0、车上0、到家0。" data…>…</div>
+        - unexpected value "chop-return"
+        - locator resolved to <div role="img" data-fallen="0" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-world-logs="0" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/0/0" data-player-mode="work" data-motion-revision="33" data-action="chop-return" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-camera="1.415,3.525,11.331" aria-label="可旋转三维农场。地面0、车上0、到家0。" data…>…</div>
+        - unexpected value "chop-return"
+        - locator resolved to <div role="img" data-fallen="1" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-world-logs="5" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="5/0/0" data-player-mode="work" data-motion-revision="40" data-action="chop-return" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-camera="0.675,3.525,10.345" aria-label="可旋转三维农场。地面5、车上0、到家0。" data…>…</div>
+        - unexpected value "chop-return"
+        - locator resolved to <div role="img" data-fallen="2" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="8" data-assets="ready" data-world-logs="10" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="10/0/0" data-player-mode="work" data-motion-revision="72" data-action="chop-return" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-camera="0.108,3.525,6.550" data-cart-position="3.000,0.000" aria-label="可旋转三维农场。地面10、车上0、到家0。" da…>…</div>
+        - unexpected value "chop-return"
+        - locator resolved to <div role="img" data-fallen="3" id="worldCanvas" data-npc="gather" data-rope="0.000" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="15/0/0" data-player-mode="walk" data-effects="tree,tree" data-motion-revision="107" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="3.000,0.000" data-hand="1.9542,0.8715,0.4687" data-camera="4…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-assets="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-action="stand-up" data-inventory="14/1/0" data-player-mode="work" data-motion-revision="142" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-effects="tree,impact,log" data-camera="4.377,3.314,9.389" data-cart-position="0.000,0.000" aria-lab…>…</div>
+        - unexpected value "stand-up"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-assets="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="9/6/0" data-player-mode="work" data-action="squat-down" data-motion-revision="172" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-camera="4.070,3.314,9.258" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面9、车上6、到家0。" data…>…</div>
+        - unexpected value "squat-down"
+        - locator resolved to <div role="img" data-fallen="3" data-npc="idle" id="worldCanvas" data-rope="0.000" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="4/11/0" data-player-mode="work" data-motion-revision="202" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-camera="4.070,3.314,9.258" data-cart-position="0.000,0.000" aria-label="可旋转三维农场。地面4、车上11、到家0。" data-ha…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="3" id="worldCanvas" data-npc="secure" data-rope="0.580" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/15/0" data-player-mode="idle" data-motion-revision="227" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-effects="log,log,log,log" data-cart-position="0.000,0.000" data-camera="6.679,3.735,10.813" data-han…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/15/0" data-player-mode="pull" data-motion-revision="247" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="6.188,0.000" data-hand="7.2377,1.0400,0.0000" data-camera="9.349,3.735…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/15/0" data-player-mode="pull" data-motion-revision="267" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="21.557,0.000" data-hand="22.6069,1.0400,0.0000" data-camera="23.176,3.…>…</div>
+        - unexpected value "ready"
+        - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-npc="guide" data-rope="1.000" data-particles="0" data-assets="ready" data-action="ready" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/15/0" data-player-mode="pull" data-motion-revision="287" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-cart-position="36.942,0.000" data-hand="37.9915,1.0400,0.0000" data-camera="38.924,3.…>…</div>
+        4 × unexpected value "ready"
+          - locator resolved to <div role="img" data-fallen="3" data-effects="" id="worldCanvas" data-rope="1.000" data-particles="0" data-assets="ready" data-action="ready" data-npc="celebrate" data-world-logs="15" data-render-scale="1" data-house="user-fbx" data-castle="user-fbx" data-inventory="0/0/15" data-motion-revision="292" data-player-mode="celebrate" data-renderer="Three.js r186" data-castle-triangles="60000" data-art="tidal-npr-sample-v2" data-camera="47.765,3.525,9.981" data-cart-position="40.000,0.000" aria-label="可旋…>…</div>
+        - unexpected value "ready"
+
+
+      11 | test('one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes',async({page})=>{
+      12 |  await enter(page);await expect(page.locator('#statusTag')).toHaveText('训练中');
+    > 13 |  await expect(page.locator('#worldCanvas')).toHaveAttribute('data-action','chop-down');
+         |                                             ^
+      14 |  await expect(page.locator('#animationStop')).toBeVisible();await page.locator('#animationStop').click();await expect(page.locator('#animationStop')).toHaveText('继续播放');
+      15 |  await expect(page.locator('#statusTag')).toHaveText('已暂停');await expect(page.locator('#animationStop')).toHaveAttribute('aria-pressed','true');
+      16 |  const frozen=await observe(page);await page.waitForTimeout(450);expect(await observe(page)).toEqual(frozen);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/animation-stop.spec.ts:13:45
+
+    Error Context: artifacts/qa/recognition-controls-20261026/regression-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/recognition-controls-20261026/regression-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/recognition-controls-20261026/regression-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/recognition-controls.spec.ts:22:1 › leniency is bounded, saved independently and accessible on a narrow preparation screen 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Browser logs:
+
+    <launching> /Users/zero/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --use-fake-device-for-media-stream --use-fake-ui-for-media-stream --user-data-dir=/var/folders/gm/zr6wg2cn0s131km1843yb1lw0000gn/T/playwright_chromiumdev_profile-PpTtyT --remote-debugging-pipe --no-startup-window
+    <launched> pid=10878
+    [pid=10878][err] [10892:2245728:1026/212226.646639:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245783:1026/212226.646825:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245728:1026/212226.649025:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245783:1026/212226.649710:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245728:1026/212226.649817:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245783:1026/212226.649874:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245728:1026/212226.649964:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245783:1026/212226.650002:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245728:1026/212226.650093:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878][err] [10892:2245783:1026/212226.650129:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670
+    [pid=10878] <gracefully close start>
+    [pid=10878][err] [10878:2245723:1026/212327.024268:ERROR:base/process/process_mac.cc:45] task_policy_set TASK_CATEGORY_POLICY: (os/kern) invalid argument (4)
+    [pid=10878][err] [10878:2245723:1026/212327.024288:ERROR:base/process/process_mac.cc:90] task_policy_set TASK_SUPPRESSION_POLICY: (os/kern) invalid argument (4)
+    Call log:
+      - waiting for locator('[data-leniency="5"]')
+        - locator resolved to <button type="button" data-leniency="5" aria-pressed="false">宽松</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        111 × waiting for element to be visible, enabled and stable
+            - element is not visible
+          - retrying click action
+            - waiting 500ms
+        - waiting for element to be visible, enabled and stable
+
+
+      23 |  await page.addInitScript(()=>{if(!sessionStorage.getItem('recognition-fixture-invalid')){localStorage.setItem('tidal.recognition.leniency.v1','invalid');sessionStorage.setItem('recognition-fixture-invalid','true');}});await enter(page);await page.locator('#cameraMode').click();
+      24 |  await expect(page.locator('#recognitionLeniency')).toHaveValue('3');await expect(page.locator('#recognitionLeniencyValue')).toContainText('标准');
+    > 25 |  await page.locator('[data-leniency="5"]').click();await expect(page.locator('#recognitionLeniency')).toHaveValue('5');expect(await page.evaluate(()=>localStorage.getItem('tidal.recognition.leniency.v1'))).toBe('5');
+         |                                            ^
+      26 |  await page.locator('[data-leniency="1"]').click();await expect(page.locator('#recognitionLeniency')).toHaveValue('1');
+      27 |  await page.locator('#recognitionLeniency').focus();await page.keyboard.press('ArrowRight');await expect(page.locator('#recognitionLeniency')).toHaveValue('2');
+      28 |  await page.reload();await page.locator('#cameraMode').click();await expect(page.locator('#recognitionLeniency')).toHaveValue('2');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/recognition-controls.spec.ts:25:44
+
+    Error Context: artifacts/qa/recognition-controls-20261026/regression-results/recognition-controls-lenie-96821-a-narrow-preparation-screen/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/recognition-controls-20261026/regression-results/recognition-controls-lenie-96821-a-narrow-preparation-screen/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/recognition-controls-20261026/regression-results/recognition-controls-lenie-96821-a-narrow-preparation-screen/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/animation-stop.spec.ts:11:1 › one click freezes the active world, teaching skeleton and outcomes, and explicit continue resumes 
+    tests/e2e/recognition-controls.spec.ts:22:1 › leniency is bounded, saved independently and accessible on a narrow preparation screen 
+  24 passed (5.3m)

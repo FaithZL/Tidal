@@ -1,0 +1,21 @@
+{
+  "index.html": "acbede07f456450737fa3d8c38a84168389029c089e6bcfd6cf87562141e4388",
+  "src/pose/upperBody.ts": "f2990e7a23b1fdba8b2c2d4d4b11a3a80f23375cfa1abc0cc2b3110081d8f2f0",
+  "src/ui/upperBodyPreparationPanel.ts": "4592674d486484005eb87b760f3e9e636bb7fe45bb70831da84d813cb691875f",
+  "tests/unit/upperBodyRecovery.test.ts": "4f7702501168a5e9ab039e6c65dcd86895fcf1e3bee33039081c6bfa2c2e1832",
+  "tests/e2e/preparation-recovery.spec.ts": "a91f50ecfa60c34a98f168fca85efebff3ab66d093e2d1fb1bb5fa06add0ad09",
+  "dist/index.html": "bdc51941bec3912861f5c0608d4ef85e75c2d0de65afdb23703d7456eb31aea1",
+  "dist/mediapipe/wasm/vision_wasm_nosimd_internal.js": "9f8fc960e363f0fb2f42f7937b97ae9cf9a5630490f71031fa90caa9bb121938",
+  "dist/mediapipe/wasm/vision_wasm_internal.js": "6f6b86509cf9e163ea1cfec7edc8cf53732699c04781e4c21c557c1ba402310e",
+  "dist/worker/pose.js": "d54efe5a92f535a77393dac25446e7ce16a59af5c415b298809f4e7d8c009bd5",
+  "dist/assets/OrbitControls-BWIrCJhk.js": "684becaf827448292752392eb7f03f52724e02cbe060a108160f9fac1fe90789",
+  "dist/assets/browser-CFRtsBhJ.js": "17b1828a01a37a3b051fd73e72ee57b15f8924f296985e64ac238314607845ac",
+  "dist/assets/index-BWmxB3wi.css": "a6a490f091575c9f38f8923a41972f255971a6483abb1b0f53c65b08f634e46d",
+  "dist/assets/userCharacterMotion-DUytOKfo.js": "faa02f7f374ff1c3a1654eb79fc1a01a741520e31f2a2187d5577218e32610fc",
+  "dist/assets/nprMaterials-D_gzCDo6.js": "b192565b39e76bf46cdde718d840b411e6a18cc878ae3becea01025917a77585",
+  "dist/assets/userModelSample-Cf2w0Ewi.js": "3fdd1206bc236f215a944964b173861d359018a9ba805d9d0ee82425379fbee4",
+  "dist/assets/character-sample-B7C_ML0E.css": "81f2f88d79b494bc1dd5bd5f2494fe8d4d7b5372dc4d045988c08ea22d395dcc",
+  "dist/assets/index-CjhpROlM.js": "07d162ce948ec42c16121474458afe4c8c08264382499f11ca67e921f1d2966a",
+  "dist/assets/character-sample-CePOScfc.js": "07bfe392b27a06dbb884517114911aeb0b46ff28ae5fdf864ac7d0b512ff0cbe",
+  "dist/assets/characterSample-YFcqW6No.js": "cb3b44b9e50612400ca435f0b08d6187cda6985c4b45d34454c28e8ac467bba9"
+}

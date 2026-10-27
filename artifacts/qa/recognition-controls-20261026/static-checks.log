@@ -1,0 +1,22 @@
+Command: npm run typecheck && npm run lint && npm run assets:verify
+Exit code: 0
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+> tidal-farm-motion-demo@0.1.0 assets:verify
+> node scripts/verify-assets.mjs
+
+Verified model and 4 MediaPipe 0.10.32 runtime files
+Verified 2 original farm SVG assets (tidal-farm-v1)
+Verified Three.js 0.186.1 and its local MIT license
+Verified original generated NPR atlas (1536×1024, local sample only)
+Verified original generated RGBA leaf cutout (1254×1254)
+Verified 9 local CC0 character prototype files and retained licenses
+Verified 3 user-supplied static FBX originals (source permission recorded separately; not CC0)
+Verified generated castle materials and 2048x2048 local UV color atlas (original FBX unchanged)
+

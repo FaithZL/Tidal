@@ -1,0 +1,12 @@
+{
+  "scope": "SetupPanel feedback rendering only, plus focused canvas-operation tests",
+  "commands": [
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "feedback-drawing-red.log", "exitCode": 1, "result": "8/8 failed: setFeedback was absent" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "feedback-drawing-green-first.log", "exitCode": 0, "result": "8/8 passed after rendering integration" },
+    { "command": "npm run test:unit -- tests/unit/setupPanelFeedback.test.ts", "log": "feedback-drawing-green.log", "exitCode": 0, "result": "12/12 passed including loss without another frame and invalid video dimensions" },
+    { "command": "npx eslint src/ui/setupPanel.ts", "log": "feedback-drawing-lint.log", "exitCode": 0, "result": "No diagnostics" },
+    { "command": "npm run typecheck", "log": "feedback-drawing-typecheck.log", "exitCode": 0, "result": "TypeScript strict check passed" },
+    { "command": "git diff --check -- src/ui/setupPanel.ts", "log": "feedback-drawing-diff-check.log", "exitCode": 0, "result": "No diagnostics" }
+  ],
+  "limits": "Tests record actual SetupPanel canvas operations with a lightweight DOM/canvas adapter and authored landmarks. No browser rasterization, E2E, camera access, installation, commit, push or deployment in this subtask."
+}

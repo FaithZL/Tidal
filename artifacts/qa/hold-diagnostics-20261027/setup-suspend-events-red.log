@@ -1,0 +1,83 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (33 tests | 3 failed) 13ms
+   × suspension event callback receives window-blur for the same reset 3ms
+   × suspension event callback receives page-hidden for the same reset 0ms
+   × suspension event callback receives page-visible for the same reset 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension event callback receives window-blur for the same reset
+AssertionError: expected [ undefined ] to deeply equal [ 'window-blur' ]
+
+- Expected
++ Received
+
+  [
+-   "window-blur",
++   undefined,
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:175:25
+    173|   const f = fixture();Object.defineProperty(document, 'hidden', { conf…
+    174|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    175|   expect(f.suspensions).toEqual([reason]);
+       |                         ^
+    176|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+    177| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension event callback receives page-hidden for the same reset
+AssertionError: expected [ undefined ] to deeply equal [ 'page-hidden' ]
+
+- Expected
++ Received
+
+  [
+-   "page-hidden",
++   undefined,
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:175:25
+    173|   const f = fixture();Object.defineProperty(document, 'hidden', { conf…
+    174|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    175|   expect(f.suspensions).toEqual([reason]);
+       |                         ^
+    176|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+    177| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > suspension event callback receives page-visible for the same reset
+AssertionError: expected [ undefined ] to deeply equal [ 'page-visible' ]
+
+- Expected
++ Received
+
+  [
+-   "page-visible",
++   undefined,
+  ]
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:175:25
+    173|   const f = fixture();Object.defineProperty(document, 'hidden', { conf…
+    174|   (eventType === 'blur' ? f.windowEvents : f.documentEvents).dispatchE…
+    175|   expect(f.suspensions).toEqual([reason]);
+       |                         ^
+    176|   expect(f.calibrationResets).toEqual([{ close: false, reason }]);
+    177| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 30 passed (33)
+   Start at  01:02:14
+   Duration  124ms (transform 48%, tests 26%, import 20%, worker 5%)
+

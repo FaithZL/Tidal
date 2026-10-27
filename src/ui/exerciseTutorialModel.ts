@@ -164,6 +164,48 @@ export const tutorialLessons: Record<TaskKind, TutorialLesson> = {
   },
 };
 
+const upperHold = pose({
+  leftElbow: { x: .29, y: .4 }, rightElbow: { x: .71, y: .4 },
+  leftWrist: { x: .4, y: .42 }, rightWrist: { x: .6, y: .42 },
+});
+function upperRaiseLesson(id: 'chop' | 'load', title: string): TutorialLesson {
+  return {
+    id, title,
+    summary: '上半身举手循环：双手放下 → 举到舒适的肩上或头侧 → 放下。可以坐着完成；完整复位后才计一次。',
+    steps: [
+      { title: '双手放下', cue: '坐稳或站稳，双手放下到本人准备时的低位，让双肩、双肘和双手腕留在画面内。',
+        tips: ['只识别上半身；腿部保持舒适，不需要下蹲。', '固定机位，身体保持稳定，先从自己的放下姿态开始。'],
+        durationMs: 1200, points: neutral, highlight: arms },
+      { title: '双手向上举起', cue: '双手一起举到本人准备时的舒适高度；可以在肩上或头侧，不要伸出画面。',
+        tips: ['两只手都需达到自己的举手位置。', '只举起一只手或停在半路，都不能完成一个完整循环。'],
+        durationMs: 1800, points: loadPress, highlight: arms },
+      { title: '放下完成复位', cue: '将双手放回刚才的低位，稳定复位后完成一次。',
+        tips: ['举起后仍需放下；停在高位不会重复计数。', '暂停或跟踪失效后，重新从放下姿态开始，不能接续旧半次动作。'],
+        durationMs: 1800, points: neutral, highlight: arms },
+    ],
+  };
+}
+/** Original diagrams for the explicit seated/standing upper-body input program. */
+export const upperBodyTutorialLessons: Record<TaskKind, TutorialLesson> = {
+  chop: upperRaiseLesson('chop', '砍树 · 上半身举手'),
+  load: upperRaiseLesson('load', '装车 · 上半身举手'),
+  carry: {
+    id: 'carry', title: '拉车 · 上半身持姿',
+    summary: '上半身持姿：双臂前举至本人准备时的位置并稳定保持。可以坐着完成；只需双肩、双肘和双手腕可见。',
+    steps: [
+      { title: '双臂向前举起', cue: '将双臂摆到自己准备时的前举持姿，保持舒适，双手留在画面内。',
+        tips: ['持姿应与双手放下、向上举手的姿态有可见区别。', '上半身示意不代表真实负重或器械持握。'],
+        durationMs: 1400, points: upperHold, highlight: arms },
+      { title: '双臂稳定保持', cue: '双臂稳定保持在已准备的前举范围，识别确认后开始累计有效时间。',
+        tips: ['只需上半身入镜，腿部保持舒适，不需要下蹲。', '两只手都需保持在自己的持姿范围；放下或失效时不会计时。'],
+        durationMs: 2600, points: upperHold, highlight: arms },
+      { title: '放下停止', cue: '将双手放回低位，拉车和有效计时随之停止。',
+        tips: ['暂停、放下或失去跟踪时不累计持姿时间。', '重新持姿后只计新观察到的有效样本，中断期间不补算。'],
+        durationMs: 1800, points: neutral, highlight: arms },
+    ],
+  },
+};
+
 export class TutorialClock {
   private task: TaskKind;
   private stepIndex = 0;
@@ -171,10 +213,17 @@ export class TutorialClock {
   private playing = false;
   private speed: TutorialSpeed = 1;
   private selected = false;
+  private upperBody = false;
 
   constructor(task: TaskKind = 'chop') { this.task = task; }
 
-  private get lesson(): TutorialLesson { return tutorialLessons[this.task]; }
+  private get lesson(): TutorialLesson { return (this.upperBody ? upperBodyTutorialLessons : tutorialLessons)[this.task]; }
+
+  setUpperBodyEnabled(enabled: boolean): void {
+    if (this.upperBody === enabled) return;
+    this.upperBody = enabled;
+    this.stepIndex = 0;this.stepElapsedMs = 0;this.selected = false;
+  }
 
   get frame(): TutorialFrame {
     const steps = this.lesson.steps, step = steps[this.stepIndex];

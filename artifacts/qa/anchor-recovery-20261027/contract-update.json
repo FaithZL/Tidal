@@ -1,0 +1,6 @@
+{
+  "changedContract": "Only completed retainCompleted mode: person-moved now revokes live readiness but retains the immutable original reference and templates. No new anchor adoption.",
+  "unit": "moved/scale cases formerly asserted deleting retained templates; now assert saved 3/3 and not ready. New strict/incomplete cases retain old invalidation assertions. All other hard failures unchanged.",
+  "e2e": "One existing combined moved/stop case now asserts retained complete + not ready after movement; original explicit-stop 0/3 and no-count assertions retained. New end-to-end cases prove sustained mismatched position cannot start or count, fresh return clears half-rep and manual stop ownership is retained.",
+  "unchanged": "Confidence, time, stability, anchor thresholds, retries and timeouts; Source/Domain/browser behavior."
+}

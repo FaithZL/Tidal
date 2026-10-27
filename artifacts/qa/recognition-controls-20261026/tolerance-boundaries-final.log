@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionTolerance.test.ts tests/unit/cameraTolerance.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  21:01:50
+   Duration  106ms (tests 47%, transform 33%, import 17%, worker 3%)
+

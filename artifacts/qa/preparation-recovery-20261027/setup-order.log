@@ -1,0 +1,3 @@
+Command: python3 /tmp/tidal-preparation-recovery-20261027/run.py e2e-red.log npm run test:e2e -- tests/e2e/preparation-recovery.spec.ts --output artifacts/qa/preparation-recovery-20261027/red-results
+Exit: 2
+The QA backup script was still running and had not created run.py yet. No test was executed in this attempt. After backup completed, the identical test command ran and produced e2e-red.log.

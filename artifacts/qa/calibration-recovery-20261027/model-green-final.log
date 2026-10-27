@@ -1,0 +1,13 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyCompletedRecovery.test.ts tests/unit/upperBody.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBodyDiagnostics.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+
+ Test Files  4 passed (4)
+      Tests  101 passed (101)
+   Start at  01:33:23
+   Duration  152ms (tests 54%, transform 25%, import 18%, worker 3%)
+

@@ -4,6 +4,7 @@ import type { CalibrationStep, CalibrationExample } from '../calibrationSession.
 import type { RecognitionProfile, RecognitionEvent, Recognizer } from './types.js';
 import { FeatureStream } from './featureStream.js';
 import { recognitionConfig, type RecognitionConfig } from '../../config/recognitionConfig.js';
+import { assessRecognitionFeedback, type RecognitionFeedback } from '../recognitionFeedback.js';
 export abstract class RepRecognizer implements Recognizer {
   protected readonly profile: RecognitionProfile;
   private readonly stream: FeatureStream;
@@ -13,6 +14,8 @@ export abstract class RepRecognizer implements Recognizer {
   protected reason: string | null = null;
   private readonly candidates = new Map<string,number>();
   protected events: RecognitionEvent[] = [];
+  protected abstract readonly feedbackTask: 'chop' | 'load';
+  private latestFeatures: PoseFeatures | null = null;
   constructor(profile: RecognitionProfile, protected readonly config: RecognitionConfig = recognitionConfig) {
     this.profile = structuredClone(profile);this.stream = new FeatureStream(this.profile.calibration, config);
   }
@@ -23,6 +26,7 @@ export abstract class RepRecognizer implements Recognizer {
   }
   update(frame: PoseFrame, nowMs = frame.capturedAtMs): readonly RecognitionEvent[] {
     this.events = [];const f = this.stream.read(frame, nowMs);
+    this.latestFeatures = f;
     if (!f) { this.clearCycle();this.reason = this.stream.reason;return [{kind:'tracking',status:'lost',message:this.reason ?? 'invalid-pose'}]; }
     this.reason = null;this.events.push({kind:'tracking',status:'ready'});this.advance(f,frame.capturedAtMs);return this.events;
   }
@@ -38,6 +42,11 @@ export abstract class RepRecognizer implements Recognizer {
     this.clearCycle();this.reason = 'cycle-timeout';return true;
   }
   protected clearCycle(): void { this.phase='unready';this.cycleStart=null;this.candidates.clear(); }
-  reset(): void { this.clearCycle();this.stream.reset();this.reason=null; }
+  reset(): void { this.clearCycle();this.stream.reset();this.reason=null;this.latestFeatures=null;this.events=[]; }
   getDebug() { return {phase:this.phase,reason:this.reason}; }
+  getFeedback(): RecognitionFeedback | null {
+    return this.latestFeatures ? assessRecognitionFeedback({ task: this.feedbackTask, phase: this.phase,
+      features: this.latestFeatures, profile: this.profile, config: this.config,
+      completed: this.events.some(event => event.kind === 'rep-completed') }) : null;
+  }
 }

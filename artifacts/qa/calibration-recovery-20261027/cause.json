@@ -1,0 +1,14 @@
+{
+  "observedLiveUI": {
+    "event": "After user completed preparation, the UI retained last reset: 关节出框 · 3/3 → 0/3",
+    "inference": "Worker remained running at approximately15Hz",
+    "capture": "Read-only accessibility text; no screenshot, raw landmarks, video or pose history saved"
+  },
+  "confirmedChain": [
+    "Completed preparation handled recoverable tracking loss by invalidating learned pose templates",
+    "CameraActionSource correctly discarded its active recognizer on lost tracking, but browser then also reset all calibration",
+    "Legal valid=false/no-person frames were classified as a hard metadata fault"
+  ],
+  "newContract": "Completed personal templates stay in memory in the current camera/session across soft quality loss and visibility suspension; live readiness is false. Fresh stable1200ms/12 samples at original anchor restore readiness. Only tracking interruption may auto-resume; user/visibility/source-error pauses remain. Explicit camera/source/session changes or hard metadata/anchor faults still clear.",
+  "sourceAndDomain": "Keep existing strict active recognizer resets, input sequencing and time guards."
+}

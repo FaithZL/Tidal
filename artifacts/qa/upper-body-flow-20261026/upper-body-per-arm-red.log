@@ -1,0 +1,36 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBody.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBody.test.ts (27 tests | 2 failed) 13ms
+   × hold preparation requires each arm to differ from its lowered reference 3ms
+   × hold preparation requires each arm to differ from its raised reference 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBody.test.ts > hold preparation requires each arm to differ from its lowered reference
+ FAIL  tests/unit/upperBody.test.ts > hold preparation requires each arm to differ from its raised reference
+AssertionError: expected 'complete' to be 'hold' // Object.is equality
+
+Expected: "hold"
+Received: "complete"
+
+ ❯ tests/unit/upperBody.test.ts:107:42
+    105|     preparation.accept(mixed, t);
+    106|   }
+    107|   expect(preparation.getSnapshot().step).toBe('hold'); expect(preparat…
+       |                                          ^
+    108|   observe(preparation, 'hold', time + 1600); expect(preparation.getPro…
+    109| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 25 passed (27)
+   Start at  22:26:41
+   Duration  86ms (transform 40%, tests 39%, import 17%, worker 4%)
+

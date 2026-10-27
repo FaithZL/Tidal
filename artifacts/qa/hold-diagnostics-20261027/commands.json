@@ -1,0 +1,155 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts"
+    ],
+    "log": "diagnostics-e2e-red.log",
+    "startedUTC": "2026-10-26T16:57:30.863300+00:00",
+    "finishedUTC": "2026-10-26T16:58:02.410722+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts"
+    ],
+    "log": "diagnostics-e2e-green.log",
+    "startedUTC": "2026-10-26T17:00:57.849632+00:00",
+    "finishedUTC": "2026-10-26T17:01:10.840521+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "-g",
+      "visible blur"
+    ],
+    "log": "visible-blur-e2e-red.log",
+    "startedUTC": "2026-10-26T17:02:15.895656+00:00",
+    "finishedUTC": "2026-10-26T17:02:45.591804+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts"
+    ],
+    "log": "diagnostics-and-blur-e2e-green.log",
+    "startedUTC": "2026-10-26T17:03:00.492720+00:00",
+    "finishedUTC": "2026-10-26T17:03:41.016793+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-26T17:04:04.306403+00:00",
+    "finishedUTC": "2026-10-26T17:04:09.665030+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint && git diff --check"
+    ],
+    "log": "static-final.log",
+    "startedUTC": "2026-10-26T17:04:21.330133+00:00",
+    "finishedUTC": "2026-10-26T17:04:23.765905+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "tests/e2e/calibration.spec.ts"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T17:04:38.773996+00:00",
+    "finishedUTC": "2026-10-26T17:08:37.620087+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "-g",
+      "later timeout"
+    ],
+    "log": "stale-notice-red.log",
+    "startedUTC": "2026-10-26T17:09:22.953569+00:00",
+    "finishedUTC": "2026-10-26T17:09:42.256838+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint && git diff --check"
+    ],
+    "log": "static-release.log",
+    "startedUTC": "2026-10-26T17:10:43.704735+00:00",
+    "finishedUTC": "2026-10-26T17:10:47.688529+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-diagnostics.spec.ts"
+    ],
+    "log": "e2e-review-final.log",
+    "startedUTC": "2026-10-26T17:10:05.643735+00:00",
+    "finishedUTC": "2026-10-26T17:11:08.594111+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-26T17:11:18.012887+00:00",
+    "finishedUTC": "2026-10-26T17:11:20.261867+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/hold-diagnostics-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T17:11:35.454603+00:00",
+    "finishedUTC": "2026-10-26T17:11:43.894314+00:00",
+    "exitCode": 0
+  }
+]

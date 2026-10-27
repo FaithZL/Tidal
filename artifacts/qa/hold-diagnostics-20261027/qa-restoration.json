@@ -1,0 +1,10 @@
+{
+  "baselineCount": 2284,
+  "regeneratedArchivedAndRestored": [
+    "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+    "artifacts/qa/preparation-feedback-20261026/preparation-partial-synthetic.png",
+    "artifacts/qa/preparation-recovery-20261027/recovering-synthetic.png",
+    "artifacts/qa/t06/calibrated-synthetic.png"
+  ],
+  "mismatches": []
+}

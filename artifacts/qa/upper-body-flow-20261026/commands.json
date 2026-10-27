@@ -1,0 +1,124 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "-g",
+      "upper body is the default",
+      "--output",
+      "artifacts/qa/upper-body-flow-20261026/entry-red-results"
+    ],
+    "log": "entry-red.log",
+    "startedUTC": "2026-10-26T14:23:41.925141+00:00",
+    "finishedUTC": "2026-10-26T14:23:53.519430+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "integrated-types.log",
+    "startedUTC": "2026-10-26T14:27:01.736643+00:00",
+    "finishedUTC": "2026-10-26T14:27:02.729864+00:00",
+    "exitCode": 2
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "--output",
+      "artifacts/qa/upper-body-flow-20261026/first-results"
+    ],
+    "log": "e2e-first.log",
+    "startedUTC": "2026-10-26T14:28:37.673128+00:00",
+    "finishedUTC": "2026-10-26T14:30:38.083704+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "-g",
+      "stopping during the automatic start countdown",
+      "--output",
+      "artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results"
+    ],
+    "log": "countdown-cancel-red.log",
+    "startedUTC": "2026-10-26T14:33:02.712580+00:00",
+    "finishedUTC": "2026-10-26T14:33:18.870195+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint && npm run assets:verify"
+    ],
+    "log": "static-final.log",
+    "startedUTC": "2026-10-26T14:36:39.362185+00:00",
+    "finishedUTC": "2026-10-26T14:36:45.944503+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-26T14:36:39.359228+00:00",
+    "finishedUTC": "2026-10-26T14:36:46.021723+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "tests/e2e/source-lifecycle.spec.ts",
+      "tests/e2e/recognition-controls.spec.ts",
+      "tests/e2e/calibration.spec.ts",
+      "tests/e2e/exercise-tutorial.spec.ts",
+      "--output",
+      "artifacts/qa/upper-body-flow-20261026/final-results"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T14:37:34.287422+00:00",
+    "finishedUTC": "2026-10-26T14:46:20.630252+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-26T14:47:44.217376+00:00",
+    "finishedUTC": "2026-10-26T14:47:46.201575+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/upper-body-flow-20261026/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T14:48:58.066638+00:00",
+    "finishedUTC": "2026-10-26T14:49:05.538355+00:00",
+    "exitCode": 0
+  }
+]

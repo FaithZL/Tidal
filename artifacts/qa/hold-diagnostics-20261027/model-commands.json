@@ -1,0 +1,17 @@
+{
+  "scope": ["src/pose/upperBody.ts", "tests/unit/upperBodyDiagnostics.test.ts"],
+  "commands": [
+    {"command": "npm run test:unit -- tests/unit/upperBodyDiagnostics.test.ts", "log": "model-initial-red.log", "exitCode": 1, "result": "9 failures. Eight reached missing getDiagnostics; the mathematical noise fixture first tripped its running-prefix stability gate because alternating extrema began without center observations. Production unchanged."},
+    {"command": "npm run test:unit -- tests/unit/upperBodyDiagnostics.test.ts", "log": "model-red.log", "exitCode": 1, "result": "9/9 semantic failures for missing diagnostics after adding two initial center observations to the synthetic noise fixture. The full window still has R6=.12 and correctly hits the existing hold-noise rejection."},
+    {"command": "npm run test:unit -- tests/unit/upperBodyDiagnostics.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBody.test.ts", "log": "model-green-first.log", "exitCode": 0, "result": "73/73 passed: new diagnostics plus all 64 existing strict/recovery preparation tests."},
+    {"command": "npm run typecheck", "log": "model-typecheck.log", "exitCode": 0, "result": "Passed with integrated UI method references."},
+    {"command": "./node_modules/.bin/eslint src/pose/upperBody.ts", "log": "model-lint.log", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run test:unit -- tests/unit/upperBodyDiagnostics.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBody.test.ts", "log": "model-green-final.log", "exitCode": 0, "result": "73/73 passed after strengthening reset/rejection copy-isolation assertions."},
+    {"command": "npm run test:unit -- tests/unit/upperBodyDiagnostics.test.ts tests/unit/upperBodyRecovery.test.ts tests/unit/upperBody.test.ts", "log": "model-regression-final.log", "exitCode": 0, "result": "75/75 passed, including explicit discrimination between immediate raised-center rejection and a completed profile subsequently lost to low confidence."},
+    {"command": "git diff --check", "exitCode": 0, "result": "Passed."}
+  ],
+  "diagnostics": "Only the current six joint quality scalars, most recent causal completed-reference reset, and most recent rejected sampling-window summary are retained. A read-only hold summary is calculated from existing current raw features with radius=0, while lastSampleRejection records the actual final-window radius and first failing comparison limit. No additional coordinates, image, pose sequence, console output or runtime file writing were added.",
+  "unchangedRules": "Sampling, stability, reference separation (including the raised comparison and current six-dimensional noise rule), recovery deadline, confidence and timing gates are unchanged. reset(reason) affects only diagnostic labeling; original reset snapshot semantics remain unchanged.",
+  "notRun": ["full unit suite (root coordinates concurrent E2E)", "E2E", "camera", "install", "build", "commit", "push"],
+  "limitations": "Synthetic software diagnostics do not identify the historical cause of the user's physical-camera reset; that requires observing the new in-memory causal summaries."
+}

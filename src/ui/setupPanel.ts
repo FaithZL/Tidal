@@ -2,9 +2,14 @@ import { CameraService } from '../pose/cameraService.js';
 import { PoseWorkerClient } from '../pose/poseWorkerClient.js';
 import type { PoseFrame } from '../pose/types.js';
 import type { CalibrationPanel } from './calibrationPanel.js';
+import type { RecognitionFeedback } from '../pose/recognitionFeedback.js';
 
 const links = [[11, 12], [11, 13], [13, 15], [12, 14], [14, 16], [11, 23], [12, 24], [23, 24], [23, 25], [25, 27], [24, 26], [26, 28]];
-interface SetupEvents { onFrame?:(frame:PoseFrame)=>void; onError?:(message:string)=>void; onSuspend?:()=>void; onStop?:()=>void }
+const upperBodyIndices = new Set([11, 12, 13, 14, 15, 16]);
+const upperBodyLinks = links.filter(([a, b]) => upperBodyIndices.has(a) && upperBodyIndices.has(b));
+const feedbackColors = { matched: '#77e3a0', adjust: '#ff6b69', moving: '#9baeb4', unavailable: '#9baeb4' };
+interface SetupEvents { onFrame?:(frame:PoseFrame)=>void; onError?:(message:string)=>void; onSuspend?:(reason?:string)=>void; onStop?:()=>void }
+type SetupCalibration = Pick<CalibrationPanel,'activate'|'accept'|'tick'|'dispose'> & { reset(close?: boolean, reason?: string): void };
 export class SetupPanel {
   private readonly camera: CameraService;
   private readonly client = new PoseWorkerClient();
@@ -17,16 +22,35 @@ export class SetupPanel {
   private sampleStart = 0;
   private timings: number[] = [];
   private trackEvents: AbortController | null = null;
-  private readonly suspendCalibration = (): void => { this.calibration.reset();this.events.onSuspend?.(); };
+  private feedback: RecognitionFeedback | null = null;
+  private upperBodyEnabled = false;
+  private readonly suspendCalibration = (event: Event): void => {
+    const reason = event.type === 'blur' ? 'window-blur' : document.hidden ? 'page-hidden' : 'page-visible';
+    this.setFeedback(null);this.calibration.reset(false, reason);this.events.onSuspend?.(reason);
+  };
   constructor(video: HTMLVideoElement, private readonly overlay: HTMLCanvasElement,
     private readonly status: HTMLElement, private readonly metrics: HTMLElement, private readonly frames: HTMLElement,
-    private readonly startButton: HTMLButtonElement, private readonly calibration: CalibrationPanel,private readonly events:SetupEvents={}) {
+    private readonly startButton: HTMLButtonElement, private readonly calibration: SetupCalibration,private readonly events:SetupEvents={}) {
     this.camera = new CameraService(video);
     document.addEventListener('visibilitychange', this.suspendCalibration);
     window.addEventListener('blur', this.suspendCalibration);
+    this.setFeedback(null);
+  }
+  setUpperBodyEnabled(enabled: boolean): void {
+    if (this.upperBodyEnabled === enabled) return;
+    this.upperBodyEnabled = enabled;this.setFeedback(null);
+  }
+  setFeedback(feedback: RecognitionFeedback | null): void {
+    this.feedback = feedback ? { ...feedback, joints: { ...feedback.joints } } : null;
+    const state = feedback?.status ?? 'unavailable';
+    if (this.overlay.parentElement) this.overlay.parentElement.dataset.feedback = state;
+    const label = document.getElementById('cameraFeedbackStatus');
+    if (label) { label.textContent = feedback?.message ?? '暂无法判断';label.style.color = feedbackColors[state]; }
+    // Loss may be detected by the source clock without another camera frame.
+    if (!feedback) this.overlay.getContext('2d')?.clearRect(0, 0, this.overlay.width, this.overlay.height);
   }
   async start(): Promise<void> {
-    const stopping = this.stop();
+    const stopping = this.stop('camera-restart');
     const epoch = this.epoch;
     await stopping;
     if (epoch !== this.epoch) return;
@@ -75,6 +99,17 @@ export class SetupPanel {
   private draw(frame: PoseFrame): void {
     this.calibration.accept(frame);
     this.events.onFrame?.(frame);
+    const indices = this.upperBodyEnabled ? [...upperBodyIndices] : Array.from({ length: frame.landmarks.length }, (_, index) => index);
+    const valid = frame.valid && Number.isSafeInteger(frame.frameId) && frame.frameId >= 0 &&
+      Number.isFinite(frame.capturedAtMs) && frame.capturedAtMs >= 0 &&
+      [frame.width, frame.height].every(value => Number.isFinite(value) && value > 0) && (this.upperBodyEnabled || frame.landmarks.length === 33) &&
+      indices.every(index => {
+        const point = frame.landmarks[index];
+        return point && [point.x, point.y, point.z].every(Number.isFinite) &&
+          [point.visibility, point.presence].every(value => value === undefined || Number.isFinite(value) && value >= 0 && value <= 1) &&
+          (!this.upperBodyEnabled || (point.visibility ?? 0) >= .6 && (point.presence ?? 1) >= .6);
+      });
+    if (!valid && this.feedback) this.setFeedback(null);
     this.frames.textContent = String(++this.frameCount);
     this.timings.push(frame.inferenceMs); if (this.timings.length > 120) this.timings.shift();
     const times = [...this.timings].sort((a, b) => a - b);
@@ -82,26 +117,35 @@ export class SetupPanel {
     const p95 = times[Math.floor((times.length - 1) * .95)];
     const hz = this.frameCount * 1000 / Math.max(1, performance.now() - this.sampleStart);
     this.metrics.textContent = `${frame.width}×${frame.height} · ${frame.landmarks.length} 个关键点 · ${hz.toFixed(1)} Hz · 推理 p50/p95 ${p50.toFixed(0)}/${p95.toFixed(0)}ms · 样本年龄 ${(performance.now() - frame.capturedAtMs).toFixed(0)}ms · ${frame.valid ? '人体关键点可用' : '未检测到人体'}`;
+    if (![frame.width, frame.height].every(value => Number.isFinite(value) && value > 0)) return;
     this.overlay.width = frame.width; this.overlay.height = frame.height;
     const ctx = this.overlay.getContext('2d'); if (!ctx) return;
     ctx.clearRect(0, 0, frame.width, frame.height);
-    ctx.strokeStyle = '#93ffb4'; ctx.fillStyle = '#ffe59b'; ctx.lineWidth = 3;
-    const visible = (i: number) => (frame.landmarks[i]?.visibility ?? 0) >= .6;
-    for (const [a, b] of links) {
+    ctx.lineWidth = 3;
+    const visible = (i: number) => {
+      const point = frame.landmarks[i];
+      return (!this.upperBodyEnabled || upperBodyIndices.has(i)) && point &&
+        (this.upperBodyEnabled ? [point.x, point.y, point.z] : [point.x, point.y]).every(Number.isFinite) &&
+        (point.visibility ?? 0) >= .6 && (!this.upperBodyEnabled || (point.presence ?? 1) >= .6);
+    };
+    const joint = (index: number) => this.feedback?.joints[index];
+    for (const [a, b] of this.upperBodyEnabled ? upperBodyLinks : links) {
       if (!visible(a) || !visible(b)) continue;
       const p = frame.landmarks[a], q = frame.landmarks[b];
+      const first = joint(a), second = joint(b);
+      ctx.strokeStyle = feedbackColors[first === 'adjust' || second === 'adjust' ? 'adjust' : first === 'matched' && second === 'matched' ? 'matched' : 'unavailable'];
       ctx.beginPath(); ctx.moveTo(p.x * frame.width, p.y * frame.height); ctx.lineTo(q.x * frame.width, q.y * frame.height); ctx.stroke();
     }
-    frame.landmarks.forEach((p, i) => { if (visible(i)) { ctx.beginPath(); ctx.arc(p.x * frame.width, p.y * frame.height, 4, 0, Math.PI * 2); ctx.fill(); } });
+    frame.landmarks.forEach((p, i) => { if (visible(i)) { ctx.fillStyle = feedbackColors[joint(i) ?? 'unavailable'];ctx.beginPath(); ctx.arc(p.x * frame.width, p.y * frame.height, 4, 0, Math.PI * 2); ctx.fill(); } });
   }
-  async stop(): Promise<void> {
+  async stop(reason = 'camera-stop'): Promise<void> {
     this.epoch++; clearInterval(this.timer); clearTimeout(this.slowTimer); clearTimeout(this.timeout);
     this.trackEvents?.abort(); this.trackEvents = null;
     this.camera.stop(); this.lastVideoTime = -1; this.frameCount = 0; this.timings = [];
-    this.calibration.reset(true);
+    this.calibration.reset(true, reason);
     this.events.onStop?.();
+    this.setFeedback(null);
     this.frames.textContent = '0'; this.metrics.textContent = '';
-    this.overlay.getContext('2d')?.clearRect(0, 0, this.overlay.width, this.overlay.height);
     this.startButton.disabled = false;
     this.status.textContent = '摄像头已关闭；点击开始诊断才请求视频权限';
     await this.client.stop();

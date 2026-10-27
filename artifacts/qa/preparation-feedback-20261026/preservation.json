@@ -1,0 +1,18 @@
+{
+  "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "branch": "main",
+  "originalProgressReconstructedMatches": true,
+  "unchangedInputRecognitionDomainAndOriginalE2E": {
+    "src/input/cameraActionSource.ts": true,
+    "src/pose/recognizers/upperBodyRecognizer.ts": true,
+    "src/config/recognitionConfig.ts": true,
+    "src/config/recognitionTolerance.ts": true,
+    "src/pose/calibrationSession.ts": true,
+    "src/domain/sessionController.ts": true,
+    "tests/e2e/upper-body-flow.spec.ts": true
+  },
+  "protectedTrackedChanges": [],
+  "stagedDiff": "",
+  "history": "2209 original QA SHA restored; see qa-restoration.json",
+  "operations": "No stage/commit/push/deploy/install/reset/clean. Read-only live browser text only; production PNGs use authored synthetic landmarks and fake video, no real recordings."
+}

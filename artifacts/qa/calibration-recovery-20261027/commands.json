@@ -1,0 +1,198 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "-g",
+      "saved completed"
+    ],
+    "log": "completed-e2e-red.log",
+    "startedUTC": "2026-10-26T17:32:19.646170+00:00",
+    "finishedUTC": "2026-10-26T17:32:51.591693+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-full.log",
+    "startedUTC": "2026-10-26T17:37:14.782377+00:00",
+    "finishedUTC": "2026-10-26T17:37:22.096816+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts"
+    ],
+    "log": "completed-e2e-green.log",
+    "startedUTC": "2026-10-26T17:37:55.917979+00:00",
+    "finishedUTC": "2026-10-26T17:41:18.436613+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "-g",
+      "visibility interrupts|paused video|completed profile still|actual active training|single invalid active"
+    ],
+    "log": "edge-and-contract-red.log",
+    "startedUTC": "2026-10-26T17:42:20.803276+00:00",
+    "finishedUTC": "2026-10-26T17:43:58.182072+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "-g",
+      "visibility interrupts|paused video|completed visibility loss|actual active training|single invalid active"
+    ],
+    "log": "edge-and-contract-green.log",
+    "startedUTC": "2026-10-26T17:44:58.056337+00:00",
+    "finishedUTC": "2026-10-26T17:45:57.768731+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint && git diff --check"
+    ],
+    "log": "static-final.log",
+    "startedUTC": "2026-10-26T17:47:41.286867+00:00",
+    "finishedUTC": "2026-10-26T17:47:43.613470+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "tests/e2e/preparation-diagnostics.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "tests/e2e/calibration.spec.ts"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T17:47:40.149233+00:00",
+    "finishedUTC": "2026-10-26T17:55:33.093772+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "-g",
+      "a real anchor change"
+    ],
+    "log": "anchor-original-recheck.log",
+    "startedUTC": "2026-10-26T17:57:20.583418+00:00",
+    "finishedUTC": "2026-10-26T17:57:29.803881+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-release.log",
+    "startedUTC": "2026-10-26T17:58:51.491524+00:00",
+    "finishedUTC": "2026-10-26T17:58:56.148978+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build.log",
+    "startedUTC": "2026-10-26T17:59:10.761617+00:00",
+    "finishedUTC": "2026-10-26T17:59:12.647886+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/calibration-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T17:59:49.354559+00:00",
+    "finishedUTC": "2026-10-26T18:00:16.989876+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/completed-recovery.spec.ts",
+      "-g",
+      "active loss drops|tracking recovery cannot|active visibility recovery"
+    ],
+    "log": "tracking-prompt-check.log",
+    "startedUTC": "2026-10-26T18:02:31.051176+00:00",
+    "finishedUTC": "2026-10-26T18:03:15.878522+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "log": "lint-release.log",
+    "startedUTC": "2026-10-26T18:03:46.212529+00:00",
+    "finishedUTC": "2026-10-26T18:03:47.530990+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-release.log",
+    "startedUTC": "2026-10-26T18:03:46.214879+00:00",
+    "finishedUTC": "2026-10-26T18:03:48.052034+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/calibration-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production-release.log",
+    "startedUTC": "2026-10-26T18:04:42.784843+00:00",
+    "finishedUTC": "2026-10-26T18:05:11.595044+00:00",
+    "exitCode": 0
+  }
+]

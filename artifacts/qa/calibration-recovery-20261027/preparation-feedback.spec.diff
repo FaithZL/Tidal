@@ -1,0 +1,13 @@
+--- before/tests/e2e/preparation-feedback.spec.ts
++++ after/tests/e2e/preparation-feedback.spec.ts
+@@ -17,8 +17,8 @@
+  await page.evaluate(()=>{window.upperFixture.low=false;});await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','adjust');await page.evaluate(()=>{window.upperFixture.stalled=true;});await expect(page.locator('#upperBodyReason')).toContainText('没有新数据');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','unavailable');await expect.poll(async()=>(await palette(page)).green+(await palette(page)).red).toBe(0);await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+ });
+ 
+-test('a single invalid active frame retains its reason when returning to preparation without later frames',async({page})=>{
++test('a single invalid active frame retains its reason and saved calibration without later frames',async({page})=>{
+  await setup(page);await page.evaluate(()=>{window.upperFixture.pose='lowered';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await page.evaluate(()=>{window.upperFixture.pose='raised';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});
+  await page.evaluate(()=>{const frames=document.getElementById('cameraFrames')!;const observer=new MutationObserver(()=>{window.upperFixture.stalled=true;observer.disconnect();});observer.observe(frames,{childList:true});window.upperFixture.low=true;});
+- await expect(page.locator('#setupModal')).toBeVisible();await expect(page.locator('#upperBodyReason')).toContainText('不够清晰');await expect(page.locator('#cameraFeedbackStatus')).toContainText('不够清晰');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','unavailable');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
++ await expect(page.locator('#setupModal')).toBeHidden();await expect(page.locator('#cameraTrackingStatus')).toContainText('不够清晰');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#upperBodyReason')).toContainText('不够清晰');await expect(page.locator('#cameraFeedbackStatus')).toContainText('不够清晰');await expect(page.locator('#cameraPreview')).toHaveAttribute('data-feedback','unavailable');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+ });

@@ -1,0 +1,19 @@
+{
+  "why": "User now requires completed calibration not to be deleted by temporary tracking or visibility loss. Safety guards must remain, but obsolete reset/modal expectations must follow the corrected behavior.",
+  "cases": [
+    {
+      "file": "tests/e2e/preparation-diagnostics.spec.ts",
+      "count": 2,
+      "changed": "completed3/3 remains instead of clearing to0; live ready=false; visibility still pauses; no auto-start or count assertions kept and strengthened"
+    },
+    {
+      "file": "tests/e2e/preparation-feedback.spec.ts",
+      "count": 1,
+      "changed": "tracking overlay on game replaces mandatory three-step modal; specific cause/gray feedback/readiness disabled/0count unchanged, plus saved3/3 required"
+    }
+  ],
+  "originalCasesPreserved": true,
+  "originalModelStrictAssertionsUnchanged": true,
+  "timeoutsRetriesThresholdsUnchanged": true,
+  "redEvidence": "edge-and-contract-red.log"
+}

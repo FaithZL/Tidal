@@ -1,0 +1,21 @@
+{
+  "reviewer": "independent anchor_browser_review agent, read-only",
+  "result": "No remaining P1/P2 findings",
+  "checked": [
+    "Header validation precedence and replay watermarks",
+    "Sustained original-reference mismatch cannot collect recovery samples or become ready",
+    "Only full fresh original-reference window restores live readiness",
+    "Template/reference/radii never relearned",
+    "Strict defaults/incomplete/metadata/dimension protections preserved",
+    "Existing browser pause and source-epoch handoff sufficient"
+  ],
+  "completionReview": {
+    "result": "No remaining P1/P2 after owned-pause fix",
+    "findingAndResolution": "Existing manual camera-start retained the preparation-owned user pause. Reproduced with demo-entry(false) RED and preexisting-pause(true) PASS; now explicit completion releases only cameraEntryOwnsPause when not animation-stopped/tutorial/hidden. Original automatic conditions unchanged.",
+    "checked": [
+      "Finish button hidden before saved calibration and disabled when live readiness unavailable",
+      "Click reuses beginCameraTraining; no cameraPanel.stop or switchKeyboard",
+      "Existing explicit user/visibility/animation pauses not broadly cleared"
+    ]
+  }
+}

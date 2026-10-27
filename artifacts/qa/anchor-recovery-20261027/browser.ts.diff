@@ -1,0 +1,44 @@
+--- before/src/browser.ts
++++ src/browser.ts
+@@ -162,7 +162,10 @@
+   if(!stopped)startDefaultDemo();
+ }
+ function updateCameraButton():void {
+-  setProperty($<HTMLButtonElement>('beginCamera'),'disabled',renderUnavailable||!hasCameraProfile());
++  const disabled=renderUnavailable||!hasCameraProfile();
++  setProperty($<HTMLButtonElement>('beginCamera'),'disabled',disabled);
++  setProperty($<HTMLButtonElement>('finishUpperPreparation'),'disabled',disabled);
++  setProperty($('finishUpperPreparation'),'hidden',!upperBodyMode||!upperBodyPanel.hasSavedProfile());
+ }
+ function hasCameraProfile():boolean{return upperBodyMode?upperBodyPanel.getProfile()!==null:calibrationPanel.getProfile()!==null;}
+ function usingUpperBodyPreparation():boolean{return upperBodyMode&&current.inputMode==='camera'&&(current.phase==='setup'||cameraPreparation);}
+@@ -302,7 +305,7 @@
+   else controller.command({kind:'switch-source',mode:'camera'});
+   cameraPreparation=running(current);
+   cameraEntryOwnsPause=ownsPause;
+-  recognitionSettingMessage=cameraPreparation?'训练已暂停。设置完成后返回训练，再点击继续。':'';
++  recognitionSettingMessage=cameraPreparation?(ownsPause?'训练已暂停。准备完成后点击“结束准备，进入训练”即可继续。':'准备完成后可返回训练；保留你原有的暂停。'):'';
+   restoreCameraProfile();panel(controller.getSnapshot());
+ }
+ function restoreCameraProfile():void{
+@@ -533,6 +536,7 @@
+   if(renderUnavailable)return;
+   const manualSetupStart=!automatic&&current.phase==='setup'&&!document.hidden;
+   const permit=cameraAutoStart;
++  const resumePreparationPause=!automatic&&cameraEntryOwnsPause&&!animationsStopped&&!tutorial.isOpen&&!document.hidden;
+   if(automatic&&(!permit||permit.sessionId!==current.sessionId||current.inputMode!=='camera'||animationsStopped||tutorial.isOpen||document.hidden||current.pauseReasons.some(reason=>reason!=='user'||!permit.ownsUserPause)))return;
+   if(!hasCameraProfile())return;
+   try{
+@@ -544,10 +548,10 @@
+       if(manualSetupStart)controller.command({kind:'resume',reason:'visibility'});
+     }
+     else{controller.command({kind:'resume',reason:'tracking'});controller.command({kind:'resume',reason:'source-error'});}
+-    if(automatic&&permit?.ownsUserPause)controller.command({kind:'resume',reason:'user'});
++    if(automatic&&permit?.ownsUserPause||resumePreparationPause)controller.command({kind:'resume',reason:'user'});
+   }catch(error){displayError=`标定不可用：${error instanceof Error?error.message:String(error)}。请重做标定或切换键盘。`;$('cameraStatus').textContent=displayError;}
+ }
+-$('beginCamera').addEventListener('click',()=>beginCameraTraining());
++for(const id of ['beginCamera','finishUpperPreparation'])$(id).addEventListener('click',()=>beginCameraTraining());
+ $('resetBtn').addEventListener('click', () => {stopHold();controller.command({kind:'reset'});});
+ for(const button of animationStopButtons)button.addEventListener('click',()=>setAnimationsStopped(!animationsStopped));
+ $('resultsHome').addEventListener('click',()=>{stopHold();controller.command({kind:'reset'});});

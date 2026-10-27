@@ -1,0 +1,7 @@
+{
+  "rootCause": "Setup/preparation has no active CameraActionSource recognizer, so its feedback was null despite valid preparation samples. Generic !available branch hid actual rejection reasons.",
+  "independentReview": "Initial preparation, timer invalidation, drawing guard and activity feedback selection reviewed. Found first invalid active frame reason lost via redundant preparation reset; reproducedRED and fixed by preserving already-invalid upper preparation on automatic profile-loss checks.",
+  "remainingKnownP1P2": [],
+  "verification": "630 allunit, main9E2E and final3E2E; production3PNG/0errors; no threshold/counting changes",
+  "realCameraLimitation": "Read-only live UI showed waiting upper-body points, not the actual per-joint cause. User must retry after hot reload; no physical accuracy claim."
+}

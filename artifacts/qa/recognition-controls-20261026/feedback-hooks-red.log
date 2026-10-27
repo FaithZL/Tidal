@@ -1,0 +1,494 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/recognitionFeedback.test.ts (3 tests | 3 failed) 5ms
+   × recognizers expose unknown feedback before valid observations: class ChopRecognizer extends RepRecognizer {
+	raisedY;
+	travel;
+	constructor(profile, config = __vite_ssr_import_1__.recognitionConfig) {
+		super(profile, config);
+		this.raisedY = this.example("chop-raised").wrist.y;
+		this.travel = this.example("chop-down").wrist.y - this.raisedY;
+		if (this.travel < config.minChopTravelTorso) throw new Error("Chop calibration is not separable");
+	}
+	advance(f, time) {
+		if (this.expired(time, this.config.chopMaxCycleMs)) return;
+		const q = (f.sides[this.profile.calibration.primarySide].wrist.y - this.raisedY) / this.travel;
+		const up = q <= this.config.repReturnRatio, down = q >= this.config.repEnterRatio;
+		if (this.phase === "unready") {
+			if (this.confirm("ready", up, time)) {
+				this.repId++;
+				this.phase = "ready";
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "ready",
+					progress: 0
+				});
+			}
+		} else if (this.phase === "ready") {
+			if (this.confirm("down", down, time)) {
+				this.phase = "chop-down";
+				this.cycleStart = time;
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "chop-down",
+					progress: .5
+				}, {
+					kind: "impact",
+					task: "chop",
+					repId: this.repId
+				});
+			}
+		} else {
+			if (this.phase === "chop-down" && !down) {
+				this.phase = "chop-return";
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "chop-return",
+					progress: 1
+				});
+			};
+			if (this.confirm("return", up, time)) {
+				if (time - this.cycleStart >= this.config.chopMinCycleMs) this.events.push({
+					kind: "rep-completed",
+					task: "chop",
+					repId: this.repId
+				});
+				this.clearCycle();
+			}
+		}
+	}
+} 4ms
+   × recognizers expose unknown feedback before valid observations: class LoadRecognizer extends RepRecognizer {
+	stand;
+	kneeTravel;
+	hipTravel;
+	pressTravel;
+	constructor(profile, config = __vite_ssr_import_1__.recognitionConfig) {
+		super(profile, config);
+		this.stand = this.example("load-stand");
+		const squat = this.example("load-squat");
+		this.example("load-return");
+		this.kneeTravel = this.stand.kneeDeg - squat.kneeDeg;
+		this.hipTravel = this.stand.hipHeight - squat.hipHeight;
+		this.pressTravel = this.stand.wrist.y - this.example("load-press").wrist.y;
+		if ((0,__vite_ssr_import_2__.loadSquatIssue)(this.stand, squat, config) || this.pressTravel < config.minPressTravelTorso) throw new Error("Load calibration is not separable");
+	}
+	transition(phase, progress) {
+		this.phase = phase;
+		this.events.push({
+			kind: "phase",
+			task: "load",
+			repId: this.repId,
+			phase,
+			progress
+		});
+	}
+	advance(f, time) {
+		if (this.expired(time, this.config.loadMaxCycleMs)) return;
+		const s = f.sides[this.profile.calibration.primarySide], c = this.config;
+		const flex = (this.stand.kneeDeg - s.kneeDeg) / this.kneeTravel, hip = (this.stand.hipHeight - f.hipHeight) / this.hipTravel;
+		const upright = flex <= c.repReturnRatio && hip <= c.repReturnRatio;
+		const rest = Math.hypot(s.wrist.x - this.stand.wrist.x, s.wrist.y - this.stand.wrist.y) <= c.returnWristTolerance;
+		const overhead = (this.stand.wrist.y - s.wrist.y) / this.pressTravel >= c.repEnterRatio;
+		if (this.phase === "unready") {
+			if (this.confirm("ready", upright && rest, time)) {
+				this.repId++;
+				this.transition("ready", 0);
+			}
+		} else if (this.phase === "ready") {
+			if (this.confirm("squat", flex >= c.repEnterRatio && hip >= c.repEnterRatio, time)) {
+				this.cycleStart = time;
+				this.transition("squat-down", .25);
+			}
+		} else if (this.phase === "squat-down") {
+			const pressConfirmed = this.confirm("press", upright && overhead, time);
+			if (!this.confirm("stand", upright, time)) return;
+			this.transition("stand-up", .5);
+			// Overhead may already be true: retain legal order without a chest-height pause.
+			if (pressConfirmed) {
+				this.transition("press-up", .75);
+				this.events.push({
+					kind: "impact",
+					task: "load",
+					repId: this.repId
+				});
+			}
+		} else if (this.phase === "stand-up") {
+			if (this.confirm("press", upright && overhead, time)) {
+				this.transition("press-up", .75);
+				this.events.push({
+					kind: "impact",
+					task: "load",
+					repId: this.repId
+				});
+			}
+		} else {
+			if (this.phase === "press-up" && upright && rest) this.transition("load-return", 1);
+			if (this.confirm("return", upright && rest, time)) {
+				if (time - this.cycleStart >= c.loadMinCycleMs) this.events.push({
+					kind: "rep-completed",
+					task: "load",
+					repId: this.repId
+				});
+				this.clearCycle();
+			}
+		}
+	}
+} 1ms
+   × recognizers expose unknown feedback before valid observations: class CarryRecognizer {
+	config;
+	profile;
+	stream;
+	hold;
+	release;
+	separation;
+	candidate = null;
+	holding = false;
+	reason = null;
+	constructor(profile, config = __vite_ssr_import_2__.recognitionConfig) {
+		this.config = config;
+		this.profile = structuredClone(profile);
+		this.stream = new __vite_ssr_import_1__.FeatureStream(this.profile.calibration, config);
+		const hold = this.profile.examples["carry-hold"], release = this.profile.examples["carry-release"];
+		if (!hold || !release) throw new Error("Missing Carry calibration");
+		this.hold = vector(hold);
+		this.release = vector(release);
+		this.separation = rms(this.hold, this.release);
+		const limit = Math.max(config.minPoseSeparation, config.minCarrySeparation / Math.sqrt(5), config.carryNoiseMultiplier * (hold.radius + release.radius) / Math.sqrt(5));
+		if (![
+			...this.hold,
+			...this.release,
+			hold.radius,
+			release.radius
+		].every(Number.isFinite) || hold.radius < 0 || release.radius < 0 || this.separation <= limit) throw new Error("Carry calibration is not separable");
+	}
+	distances(f) {
+		const s = f.sides[this.profile.calibration.primarySide];
+		const v = vector({
+			...s,
+			hipHeight: f.hipHeight,
+			radius: 0
+		});
+		return {
+			hold: rms(v, this.hold),
+			release: rms(v, this.release)
+		};
+	}
+	update(frame, nowMs = frame.capturedAtMs) {
+		const f = this.stream.read(frame, nowMs);
+		if (!f) {
+			this.holding = false;
+			this.candidate = null;
+			this.reason = this.stream.reason;
+			return [{
+				kind: "hold-sample",
+				task: "carry",
+				holding: false,
+				valid: false
+			}, {
+				kind: "tracking",
+				status: "lost",
+				message: this.reason ?? "invalid-pose"
+			}];
+		};
+		const smooth = this.distances(f), raw = this.distances((0,__vite_ssr_import_0__.extractFeatures)(frame, this.profile.calibration, this.config));
+		const inside = (d, ratio) => d.hold <= ratio * this.separation && d.hold < d.release;
+		if (this.holding) {
+			if (!inside(raw, this.config.holdExitRatio) || !inside(smooth, this.config.holdExitRatio)) {
+				this.holding = false;
+				this.candidate = null;
+			}
+		} else if (inside(raw, this.config.holdEnterRatio) && inside(smooth, this.config.holdEnterRatio)) {
+			this.candidate ??= frame.capturedAtMs;
+			if (frame.capturedAtMs - this.candidate >= this.config.holdConfirmMs) this.holding = true;
+		} else this.candidate = null;
+		this.reason = null;
+		return [{
+			kind: "tracking",
+			status: "ready"
+		}, {
+			kind: "hold-sample",
+			task: "carry",
+			holding: this.holding,
+			valid: true
+		}];
+	}
+	reset() {
+		this.stream.reset();
+		this.holding = false;
+		this.candidate = null;
+		this.reason = null;
+	}
+	getDebug() {
+		return {
+			phase: this.holding ? "holding" : this.candidate === null ? "released" : "confirming",
+			reason: this.reason
+		};
+	}
+} 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > recognizers expose unknown feedback before valid observations: class ChopRecognizer extends RepRecognizer {
+	raisedY;
+	travel;
+	constructor(profile, config = __vite_ssr_import_1__.recognitionConfig) {
+		super(profile, config);
+		this.raisedY = this.example("chop-raised").wrist.y;
+		this.travel = this.example("chop-down").wrist.y - this.raisedY;
+		if (this.travel < config.minChopTravelTorso) throw new Error("Chop calibration is not separable");
+	}
+	advance(f, time) {
+		if (this.expired(time, this.config.chopMaxCycleMs)) return;
+		const q = (f.sides[this.profile.calibration.primarySide].wrist.y - this.raisedY) / this.travel;
+		const up = q <= this.config.repReturnRatio, down = q >= this.config.repEnterRatio;
+		if (this.phase === "unready") {
+			if (this.confirm("ready", up, time)) {
+				this.repId++;
+				this.phase = "ready";
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "ready",
+					progress: 0
+				});
+			}
+		} else if (this.phase === "ready") {
+			if (this.confirm("down", down, time)) {
+				this.phase = "chop-down";
+				this.cycleStart = time;
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "chop-down",
+					progress: .5
+				}, {
+					kind: "impact",
+					task: "chop",
+					repId: this.repId
+				});
+			}
+		} else {
+			if (this.phase === "chop-down" && !down) {
+				this.phase = "chop-return";
+				this.events.push({
+					kind: "phase",
+					task: "chop",
+					repId: this.repId,
+					phase: "chop-return",
+					progress: 1
+				});
+			};
+			if (this.confirm("return", up, time)) {
+				if (time - this.cycleStart >= this.config.chopMinCycleMs) this.events.push({
+					kind: "rep-completed",
+					task: "chop",
+					repId: this.repId
+				});
+				this.clearCycle();
+			}
+		}
+	}
+}
+ FAIL  tests/unit/recognitionFeedback.test.ts > recognizers expose unknown feedback before valid observations: class LoadRecognizer extends RepRecognizer {
+	stand;
+	kneeTravel;
+	hipTravel;
+	pressTravel;
+	constructor(profile, config = __vite_ssr_import_1__.recognitionConfig) {
+		super(profile, config);
+		this.stand = this.example("load-stand");
+		const squat = this.example("load-squat");
+		this.example("load-return");
+		this.kneeTravel = this.stand.kneeDeg - squat.kneeDeg;
+		this.hipTravel = this.stand.hipHeight - squat.hipHeight;
+		this.pressTravel = this.stand.wrist.y - this.example("load-press").wrist.y;
+		if ((0,__vite_ssr_import_2__.loadSquatIssue)(this.stand, squat, config) || this.pressTravel < config.minPressTravelTorso) throw new Error("Load calibration is not separable");
+	}
+	transition(phase, progress) {
+		this.phase = phase;
+		this.events.push({
+			kind: "phase",
+			task: "load",
+			repId: this.repId,
+			phase,
+			progress
+		});
+	}
+	advance(f, time) {
+		if (this.expired(time, this.config.loadMaxCycleMs)) return;
+		const s = f.sides[this.profile.calibration.primarySide], c = this.config;
+		const flex = (this.stand.kneeDeg - s.kneeDeg) / this.kneeTravel, hip = (this.stand.hipHeight - f.hipHeight) / this.hipTravel;
+		const upright = flex <= c.repReturnRatio && hip <= c.repReturnRatio;
+		const rest = Math.hypot(s.wrist.x - this.stand.wrist.x, s.wrist.y - this.stand.wrist.y) <= c.returnWristTolerance;
+		const overhead = (this.stand.wrist.y - s.wrist.y) / this.pressTravel >= c.repEnterRatio;
+		if (this.phase === "unready") {
+			if (this.confirm("ready", upright && rest, time)) {
+				this.repId++;
+				this.transition("ready", 0);
+			}
+		} else if (this.phase === "ready") {
+			if (this.confirm("squat", flex >= c.repEnterRatio && hip >= c.repEnterRatio, time)) {
+				this.cycleStart = time;
+				this.transition("squat-down", .25);
+			}
+		} else if (this.phase === "squat-down") {
+			const pressConfirmed = this.confirm("press", upright && overhead, time);
+			if (!this.confirm("stand", upright, time)) return;
+			this.transition("stand-up", .5);
+			// Overhead may already be true: retain legal order without a chest-height pause.
+			if (pressConfirmed) {
+				this.transition("press-up", .75);
+				this.events.push({
+					kind: "impact",
+					task: "load",
+					repId: this.repId
+				});
+			}
+		} else if (this.phase === "stand-up") {
+			if (this.confirm("press", upright && overhead, time)) {
+				this.transition("press-up", .75);
+				this.events.push({
+					kind: "impact",
+					task: "load",
+					repId: this.repId
+				});
+			}
+		} else {
+			if (this.phase === "press-up" && upright && rest) this.transition("load-return", 1);
+			if (this.confirm("return", upright && rest, time)) {
+				if (time - this.cycleStart >= c.loadMinCycleMs) this.events.push({
+					kind: "rep-completed",
+					task: "load",
+					repId: this.repId
+				});
+				this.clearCycle();
+			}
+		}
+	}
+}
+ FAIL  tests/unit/recognitionFeedback.test.ts > recognizers expose unknown feedback before valid observations: class CarryRecognizer {
+	config;
+	profile;
+	stream;
+	hold;
+	release;
+	separation;
+	candidate = null;
+	holding = false;
+	reason = null;
+	constructor(profile, config = __vite_ssr_import_2__.recognitionConfig) {
+		this.config = config;
+		this.profile = structuredClone(profile);
+		this.stream = new __vite_ssr_import_1__.FeatureStream(this.profile.calibration, config);
+		const hold = this.profile.examples["carry-hold"], release = this.profile.examples["carry-release"];
+		if (!hold || !release) throw new Error("Missing Carry calibration");
+		this.hold = vector(hold);
+		this.release = vector(release);
+		this.separation = rms(this.hold, this.release);
+		const limit = Math.max(config.minPoseSeparation, config.minCarrySeparation / Math.sqrt(5), config.carryNoiseMultiplier * (hold.radius + release.radius) / Math.sqrt(5));
+		if (![
+			...this.hold,
+			...this.release,
+			hold.radius,
+			release.radius
+		].every(Number.isFinite) || hold.radius < 0 || release.radius < 0 || this.separation <= limit) throw new Error("Carry calibration is not separable");
+	}
+	distances(f) {
+		const s = f.sides[this.profile.calibration.primarySide];
+		const v = vector({
+			...s,
+			hipHeight: f.hipHeight,
+			radius: 0
+		});
+		return {
+			hold: rms(v, this.hold),
+			release: rms(v, this.release)
+		};
+	}
+	update(frame, nowMs = frame.capturedAtMs) {
+		const f = this.stream.read(frame, nowMs);
+		if (!f) {
+			this.holding = false;
+			this.candidate = null;
+			this.reason = this.stream.reason;
+			return [{
+				kind: "hold-sample",
+				task: "carry",
+				holding: false,
+				valid: false
+			}, {
+				kind: "tracking",
+				status: "lost",
+				message: this.reason ?? "invalid-pose"
+			}];
+		};
+		const smooth = this.distances(f), raw = this.distances((0,__vite_ssr_import_0__.extractFeatures)(frame, this.profile.calibration, this.config));
+		const inside = (d, ratio) => d.hold <= ratio * this.separation && d.hold < d.release;
+		if (this.holding) {
+			if (!inside(raw, this.config.holdExitRatio) || !inside(smooth, this.config.holdExitRatio)) {
+				this.holding = false;
+				this.candidate = null;
+			}
+		} else if (inside(raw, this.config.holdEnterRatio) && inside(smooth, this.config.holdEnterRatio)) {
+			this.candidate ??= frame.capturedAtMs;
+			if (frame.capturedAtMs - this.candidate >= this.config.holdConfirmMs) this.holding = true;
+		} else this.candidate = null;
+		this.reason = null;
+		return [{
+			kind: "tracking",
+			status: "ready"
+		}, {
+			kind: "hold-sample",
+			task: "carry",
+			holding: this.holding,
+			valid: true
+		}];
+	}
+	reset() {
+		this.stream.reset();
+		this.holding = false;
+		this.candidate = null;
+		this.reason = null;
+	}
+	getDebug() {
+		return {
+			phase: this.holding ? "holding" : this.candidate === null ? "released" : "confirming",
+			reason: this.reason
+		};
+	}
+}
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:10:39
+      8|   const recognizer = new Recognizer(syntheticProfile());
+      9|   const feedback = recognizer as unknown as { getFeedback?: () => unkn…
+     10|   expect(typeof feedback.getFeedback).toBe('function');
+       |                                       ^
+     11|   expect(feedback.getFeedback?.()).toBeNull();
+     12| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  20:58:33
+   Duration  78ms (transform 48%, import 26%, tests 20%, worker 5%)
+

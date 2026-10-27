@@ -1,0 +1,30 @@
+{
+  "temporaryPreview": {
+    "command": [
+      "npm",
+      "run",
+      "preview",
+      "--",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "4176",
+      "--strictPort"
+    ],
+    "started": true,
+    "productionCaptureExitCode": 0,
+    "stoppedBy": "intentional Ctrl-C after verification",
+    "terminationExitCode": 1
+  },
+  "existingDevService": {
+    "url": "http://127.0.0.1:5173/?art=npr-sample",
+    "lastHTTP": 200,
+    "keptRunning": true
+  },
+  "finalChecks": {
+    "git diff --check": 0,
+    "gitIndex": "empty",
+    "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5"
+  },
+  "manualValidation": "User-specific forward-hold/reset event not yet reproduced live after this patch; no physical-camera success claim."
+}

@@ -1,5 +1,5 @@
 import type { TaskKind } from '../domain/types.js';
-import { tutorialLessons, type TutorialPoint, type TutorialJoint } from './exerciseTutorialModel.js';
+import { tutorialLessons, upperBodyTutorialLessons, type TutorialPoint, type TutorialJoint } from './exerciseTutorialModel.js';
 
 export interface MovementGuideFrame {
   task: TaskKind;
@@ -19,16 +19,25 @@ const cycleSteps: Readonly<Record<TaskKind, readonly number[]>> = {
 // This clock only animates a demonstration; it never submits exercise input.
 export class MovementGuideClock {
   private elapsedMs = 0;
+  private upperBody = false;
 
   constructor(private task: TaskKind = 'chop') {}
 
+  private get lessons() { return this.upperBody ? upperBodyTutorialLessons : tutorialLessons; }
+  private get cycle(): readonly number[] { return this.upperBody && this.task !== 'carry' ? [0, 1, 2] : cycleSteps[this.task]; }
+
+  setUpperBodyEnabled(enabled: boolean): void {
+    if (this.upperBody === enabled) return;
+    this.upperBody = enabled;this.elapsedMs = 0;
+  }
+
   private get totalMs(): number {
-    const steps = tutorialLessons[this.task].steps;
-    return cycleSteps[this.task].reduce((sum, index) => sum + steps[index].durationMs, 0);
+    const steps = this.lessons[this.task].steps;
+    return this.cycle.reduce((sum, index) => sum + steps[index].durationMs, 0);
   }
 
   get frame(): MovementGuideFrame {
-    const steps = tutorialLessons[this.task].steps, cycle = cycleSteps[this.task];
+    const steps = this.lessons[this.task].steps, cycle = this.cycle;
     let cycleIndex = 0, stepElapsedMs = this.elapsedMs;
     while (stepElapsedMs >= steps[cycle[cycleIndex]].durationMs) {
       stepElapsedMs -= steps[cycle[cycleIndex]].durationMs;

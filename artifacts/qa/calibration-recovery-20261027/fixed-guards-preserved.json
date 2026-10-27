@@ -1,0 +1,7 @@
+{
+  "src/input/cameraActionSource.ts": true,
+  "src/ui/setupPanel.ts": true,
+  "export class UpperBodyStream": true,
+  "private poseIssue(": true,
+  "private holdIssue(": true
+}

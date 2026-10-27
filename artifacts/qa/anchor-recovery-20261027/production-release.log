@@ -1,0 +1,58 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(locator).toHaveAttribute(expected) failed
+
+Locator:  locator('#upperBodyPreparation')
+Expected: "raised"
+Received: "lowered"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 5000ms
+  - waiting for locator('#upperBodyPreparation')
+    14 × locator resolved to <section data-ready="false" data-step="lowered" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>
+       - unexpected value "lowered"
+
+    at captureRawStack (/Users/zero/work/ai_ws/Tidal/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/Users/zero/work/ai_ws/Tidal/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toHaveAttribute (/Users/zero/work/ai_ws/Tidal/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at /Users/zero/work/ai_ws/Tidal/artifacts/qa/anchor-recovery-20261027/capture-production.mjs:15:159 {
+  matcherResult: {
+    name: 'toHaveAttribute',
+    expected: 'raised',
+    message: 'expect(locator).toHaveAttribute(expected) failed\n' +
+      '\n' +
+      "Locator:  locator('#upperBodyPreparation')\n" +
+      'Expected: "raised"\n' +
+      'Received: "lowered"\n' +
+      'Timeout:  5000ms\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 5000ms\n` +
+      "  - waiting for locator('#upperBodyPreparation')\n" +
+      '    14 × locator resolved to <section data-ready="false" data-step="lowered" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>\n' +
+      '       - unexpected value "lowered"\n',
+    pass: false,
+    actual: 'lowered',
+    log: [
+      `  - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 5000ms`,
+      "  - waiting for locator('#upperBodyPreparation')",
+      '    14 × locator resolved to <section data-ready="false" data-step="lowered" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" data-revalidating="false" class="upper-body-preparation">…</section>',
+      '       - unexpected value "lowered"'
+    ],
+    timeout: 5000,
+    ariaSnapshot: '- region "上半身自动准备":\n' +
+      '  - text: 无需点击采集 已完成 0/3\n' +
+      '  - heading "放下双手" [level=3]\n' +
+      '  - paragraph: 坐稳或站稳，双手停在肩下、胸腹前，手腕留在画面内，保持片刻。\n' +
+      '  - progressbar "当前上半身姿态采集进度"\n' +
+      '  - status: 点击开启摄像头后，按提示自动采集，无需点击每一步。\n' +
+      '  - text: 左肩：未检测到 · 右肩：未检测到 · 左肘：未检测到 · 右肘：未检测到 · 左手腕：未检测到 · 右手腕：未检测到\n' +
+      '  - group: 查看采集状态\n' +
+      '  - text: 砍树 / 装车：双手放下 → 举起 → 放下。拉车：双臂前举保持。只识别上半身，不测器械重量。'
+  }
+}
+
+Node.js v24.14.0

@@ -1,0 +1,24 @@
+{
+  "scope": "Read-only integrated review by recognition_tolerance_audit; no remaining P1/P2 findings after cleanup",
+  "confirmed": [
+    "Settings pause via pauseForUser, invalidate sourceEpoch and partial recognizers, retain completed domain outcomes",
+    "Existing valid calibration is revalidated without track or Worker restart",
+    "Runtime leniency changes exactly five tolerance fields; fixed quality, timing and order gates remain",
+    "Feedback evaluates measured primary-side fields/current task and phase, Carry raw+smooth and nearest-center gates; transitions and unassessed side neutral"
+  ],
+  "fixedFinding": {
+    "issue": "Clock-based tracking loss without a new frame could retain old green/red overlay",
+    "resolution": "requireCameraPreparation and syncSource context revocation synchronously call SetupPanel.setFeedback(null); API clears pixels immediately",
+    "coverage": "setupPanelFeedback no-new-frame unit case and stalled-camera E2E"
+  },
+  "coverageRecommendation": "Actual pointer drag across render refreshes added and passed in e2e-final.log",
+  "withdrawnFinding": "Plan notification obstruction: reviewer initially assumed old backdrop; current root index uses notification-wrap so no defect",
+  "startupGate": {
+    "issue": "Initial HTML cameraMode button was enabled before application/render readiness; an early click could be consumed while renderUnavailable still rejected entry, leaving setup hidden.",
+    "evidence": "regression-results/recognition-controls-lenie-96821-a-narrow-preparation-screen trace, action snapshot at1-trace.trace:27; initial hidden DOM value assertions did not prove modal opened.",
+    "red": "camera-entry-gate-red.log: blocked browser module leaves cameraMode enabled; actual toBeDisabled assertion failed.",
+    "fix": "Initial cameraMode markup disabled, then existing panel enables it only on render readiness; preferences E2E explicitly asserts modal visible.",
+    "verification": "e2e-final.log: gated initialization and full strengthened preferences test including real pointer drag/persistence/mobile passed"
+  },
+  "finalReadOnlyReview": "After final markup disabled gate and synchronous feedback clearing: no remaining P1/P2; pause ownership, calibration and timing unchanged. Reviewer ran no tests or mutations."
+}

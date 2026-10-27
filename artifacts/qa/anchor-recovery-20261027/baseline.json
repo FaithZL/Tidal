@@ -1,0 +1,13 @@
+{
+  "head": "13a7113dad77ee531e07dd263ecc48bf2b8ee5a5",
+  "qaCount": 2420,
+  "sourceBefore": {
+    "src/pose/upperBody.ts": "ebaa15b76dccf00cb43113b0fa7cd0ce7bddc3a99778af3ff9e83398df412512",
+    "src/ui/upperBodyPreparationPanel.ts": "fc09f9d5d27a2c82cde58c810de37aab0dae6f1f1dc16e6dcfe01bf42e3d7f21",
+    "src/browser.ts": "4a7664be2c18ecec1d6bceb62d3efa0be011330f9dae3039a80ebf8a3f3c686b",
+    "tests/unit/upperBodyCompletedRecovery.test.ts": "4fa659b450232c397e8a6bb33161ac7468375d2f794b1fb3ea44f41fad299fb8",
+    "tests/e2e/completed-recovery.spec.ts": "abd87433a320c775afdbb115587d9c608982fae037193ee616a6cd9c63cd514a",
+    "docs/PROGRESS.md": "4a5dcbadb13e6101f888d94e24d2ad1ffff049d68e7f5b85304c9342295ba34e",
+    "index.html": "97b506e99e3c4d34047c2d6495eaf7c836c773c2dcec064fbc6a6f5469bf7afd"
+  }
+}

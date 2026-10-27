@@ -1,0 +1,7 @@
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+src/browser.ts(63,19): error TS2339: Property 'setFeedback' does not exist on type 'SetupPanel'.
+src/browser.ts(238,23): error TS2488: Type 'NodeListOf<HTMLButtonElement>' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/browser.ts(371,21): error TS2488: Type 'NodeListOf<HTMLButtonElement>' must have a '[Symbol.iterator]()' method that returns an iterator.

@@ -5,6 +5,7 @@ import { RepRecognizer } from './repRecognizer.js';
 import { recognitionConfig, type RecognitionConfig } from '../../config/recognitionConfig.js';
 import { loadSquatIssue } from '../loadCalibrationValidation.js';
 export class LoadRecognizer extends RepRecognizer {
+  protected readonly feedbackTask = 'load' as const;
   private readonly stand;
   private readonly kneeTravel: number;
   private readonly hipTravel: number;

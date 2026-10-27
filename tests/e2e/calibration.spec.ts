@@ -28,7 +28,7 @@ async function fixtureCamera(page: Page) {
     }
     window.Worker = FixtureWorker as unknown as typeof Worker;
   }, poses);
-  await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await page.locator('#cameraStart').click();
+  await page.goto('/?e2e=1');await page.locator('#acceptPlan').click();await page.locator('#cameraExerciseMode').selectOption('full-body');await page.locator('#cameraStart').click();
   await expect(page.locator('#cameraStatus')).toContainText('推理中');await expect(page.locator('#calibrationCapture')).toBeEnabled();
 }
 async function capture(page: Page, pose: SyntheticPose, next: string) {

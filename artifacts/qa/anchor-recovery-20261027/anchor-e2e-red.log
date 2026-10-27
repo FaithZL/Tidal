@@ -1,0 +1,104 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/anchor-recovery.spec.ts
+
+[WebServer] (node:38857) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:38877) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:38941) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:38966) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:38967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:03:25 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:03:25 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:03:25 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:03:25 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/anchor-recovery.spec.ts:11:1 › completed preparation keeps 3/3 after a position change but starts only after returning to the original position (13.9s)
+(node:39019) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:03:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:03:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 9:03:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 9:03:40 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/anchor-recovery.spec.ts:20:1 › active position change cannot count or carry a half rep across recovery (18.3s)
+
+
+  1) tests/e2e/anchor-recovery.spec.ts:11:1 › completed preparation keeps 3/3 after a position change but starts only after returning to the original position 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#upperBodyCue')
+    Expected substring: "原位置"
+    Received string:    "坐稳或站稳，双手停在肩下、胸腹前，手腕留在画面内，保持片刻。"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#upperBodyCue') with timeout 7000ms
+      - waiting for locator('#upperBodyCue')
+        18 × locator resolved to <p id="upperBodyCue">坐稳或站稳，双手停在肩下、胸腹前，手腕留在画面内，保持片刻。</p>
+           - unexpected value "坐稳或站稳，双手停在肩下、胸腹前，手腕留在画面内，保持片刻。"
+
+
+      12 |  await prepare(page);await page.evaluate(()=>{window.upperFixture.moved=true;});
+      13 |  await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-ready','false');
+    > 14 |  await expect(page.locator('#upperBodyReason')).toContainText('位置');await expect(page.locator('#upperBodyCue')).toContainText('原位置');
+         |                                                                                                                 ^
+      15 |  await page.waitForTimeout(3400);await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#beginCamera')).toBeDisabled();
+      16 |  await expect(page.locator('#app')).toHaveAttribute('data-phase','setup');await expect(page.locator('#chopValue')).toHaveText('0/15');
+      17 |  await page.evaluate(()=>{window.upperFixture.moved=false;});await page.waitForTimeout(500);await expect(page.locator('#beginCamera')).toBeDisabled();
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/anchor-recovery.spec.ts:14:113
+
+    Error Context: test-results/anchor-recovery-completed--6bfc6-ng-to-the-original-position/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/anchor-recovery-completed--6bfc6-ng-to-the-original-position/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/anchor-recovery-completed--6bfc6-ng-to-the-original-position/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/anchor-recovery.spec.ts:20:1 › active position change cannot count or carry a half rep across recovery 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#upperBodyStepCount')
+    Expected substring: "3/3"
+    Received string:    "已完成 0/3"
+    Timeout: 7000ms
+
+    Call log:
+      - Expect "toContainText" locator('#upperBodyStepCount') with timeout 7000ms
+      - waiting for locator('#upperBodyStepCount')
+        18 × locator resolved to <b id="upperBodyStepCount">已完成 0/3</b>
+           - unexpected value "已完成 0/3"
+
+
+      24 |  const before=(await page.locator('#inputDebug').textContent())!.match(/epoch (\d+)/)![1];
+      25 |  await page.evaluate(()=>{window.upperFixture.moved=true;});await expect(page.locator('#statusTag')).not.toHaveText('训练中');
+    > 26 |  await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#setupModal')).toBeHidden();
+         |                                                    ^
+      27 |  await expect(page.locator('#cameraTrackingStatus')).toContainText('位置');await page.waitForTimeout(3400);await expect(page.locator('#chopValue')).toHaveText('0/15');
+      28 |  await page.evaluate(()=>{window.upperFixture.moved=false;});await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:6000});
+      29 |  await expect(page.locator('#inputDebug')).not.toContainText(`epoch ${before} ·`);
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/anchor-recovery.spec.ts:26:52
+
+    Error Context: test-results/anchor-recovery-active-pos-13e2d--a-half-rep-across-recovery/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/anchor-recovery-active-pos-13e2d--a-half-rep-across-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/anchor-recovery-active-pos-13e2d--a-half-rep-across-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/anchor-recovery.spec.ts:11:1 › completed preparation keeps 3/3 after a position change but starts only after returning to the original position 
+    tests/e2e/anchor-recovery.spec.ts:20:1 › active position change cannot count or carry a half rep across recovery 

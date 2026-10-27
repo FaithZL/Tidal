@@ -1,0 +1,103 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-recovery-20261027/red-results"
+    ],
+    "log": "e2e-red.log",
+    "startedUTC": "2026-10-26T16:10:59.537305+00:00",
+    "finishedUTC": "2026-10-26T16:11:26.420706+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "types-first.log",
+    "startedUTC": "2026-10-26T16:15:53.738349+00:00",
+    "finishedUTC": "2026-10-26T16:15:55.280831+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-recovery-20261027/first-results"
+    ],
+    "log": "e2e-first.log",
+    "startedUTC": "2026-10-26T16:16:18.844954+00:00",
+    "finishedUTC": "2026-10-26T16:16:38.881194+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "sh",
+      "-c",
+      "npm run typecheck && npm run lint"
+    ],
+    "log": "static-final.log",
+    "startedUTC": "2026-10-26T16:18:48.388522+00:00",
+    "finishedUTC": "2026-10-26T16:18:54.110644+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit"
+    ],
+    "log": "unit-final.log",
+    "startedUTC": "2026-10-26T16:18:48.387064+00:00",
+    "finishedUTC": "2026-10-26T16:18:54.520489+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e",
+      "--",
+      "tests/e2e/preparation-recovery.spec.ts",
+      "tests/e2e/preparation-feedback.spec.ts",
+      "tests/e2e/upper-body-flow.spec.ts",
+      "--output",
+      "artifacts/qa/preparation-recovery-20261027/final-results"
+    ],
+    "log": "e2e-final.log",
+    "startedUTC": "2026-10-26T16:20:32.295388+00:00",
+    "finishedUTC": "2026-10-26T16:23:26.769059+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "log": "build-final.log",
+    "startedUTC": "2026-10-26T16:26:31.157384+00:00",
+    "finishedUTC": "2026-10-26T16:26:33.206904+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "node",
+      "artifacts/qa/preparation-recovery-20261027/capture-production.mjs"
+    ],
+    "log": "production.log",
+    "startedUTC": "2026-10-26T16:28:36.710511+00:00",
+    "finishedUTC": "2026-10-26T16:28:45.419272+00:00",
+    "exitCode": 0
+  }
+]

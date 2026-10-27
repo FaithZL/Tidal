@@ -1,0 +1,12 @@
+{
+  "baselineFiles": 2209,
+  "regeneratedAndRestored": [
+    {
+      "path": "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/preparation-feedback-20261026/regression/upper-body-flow-20261026/upper-body-synthetic.png"
+    }
+  ],
+  "mismatches": [],
+  "newFilesOutsideCurrentQA": [],
+  "result": "pass"
+}

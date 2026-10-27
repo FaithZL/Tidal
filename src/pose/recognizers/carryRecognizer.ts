@@ -4,6 +4,7 @@ import type { CalibrationExample } from '../calibrationSession.js';
 import { extractFeatures, type PoseFeatures } from '../features.js';
 import { FeatureStream } from './featureStream.js';
 import { recognitionConfig, type RecognitionConfig } from '../../config/recognitionConfig.js';
+import { assessRecognitionFeedback, type RecognitionFeedback } from '../recognitionFeedback.js';
 const vector=(e:CalibrationExample)=>[e.wrist.x,e.wrist.y,e.elbowDeg/180,e.kneeDeg/180,e.hipHeight];
 const rms=(a:readonly number[],b:readonly number[])=>Math.hypot(...a.map((v,i)=>v-b[i]))/Math.sqrt(a.length);
 export class CarryRecognizer implements Recognizer {
@@ -15,6 +16,8 @@ export class CarryRecognizer implements Recognizer {
   private candidate:number|null=null;
   private holding=false;
   private reason:string|null=null;
+  private latestFeatures:PoseFeatures|null=null;
+  private latestRawFeatures:PoseFeatures|null=null;
   constructor(profile:RecognitionProfile,private readonly config:RecognitionConfig=recognitionConfig){
     this.profile=structuredClone(profile);this.stream=new FeatureStream(this.profile.calibration,config);
     const hold=this.profile.examples['carry-hold'],release=this.profile.examples['carry-release'];
@@ -29,9 +32,11 @@ export class CarryRecognizer implements Recognizer {
   }
   update(frame:PoseFrame,nowMs=frame.capturedAtMs):readonly RecognitionEvent[]{
     const f=this.stream.read(frame,nowMs);
+    this.latestFeatures=f;this.latestRawFeatures=null;
     if(!f){this.holding=false;this.candidate=null;this.reason=this.stream.reason;return [
       {kind:'hold-sample',task:'carry',holding:false,valid:false},{kind:'tracking',status:'lost',message:this.reason??'invalid-pose'}];}
-    const smooth=this.distances(f),raw=this.distances(extractFeatures(frame,this.profile.calibration,this.config)!);
+    this.latestRawFeatures=extractFeatures(frame,this.profile.calibration,this.config)!;
+    const smooth=this.distances(f),raw=this.distances(this.latestRawFeatures);
     const inside=(d:typeof smooth,ratio:number)=>d.hold<=ratio*this.separation&&d.hold<d.release;
     if(this.holding){
       if(!inside(raw,this.config.holdExitRatio)||!inside(smooth,this.config.holdExitRatio)){this.holding=false;this.candidate=null;}
@@ -41,6 +46,10 @@ export class CarryRecognizer implements Recognizer {
     }else this.candidate=null;
     this.reason=null;return [{kind:'tracking',status:'ready'},{kind:'hold-sample',task:'carry',holding:this.holding,valid:true}];
   }
-  reset():void{this.stream.reset();this.holding=false;this.candidate=null;this.reason=null;}
+  reset():void{this.stream.reset();this.holding=false;this.candidate=null;this.reason=null;this.latestFeatures=null;this.latestRawFeatures=null;}
   getDebug(){return {phase:this.holding?'holding':this.candidate===null?'released':'confirming',reason:this.reason};}
+  getFeedback():RecognitionFeedback|null{return this.latestFeatures&&this.latestRawFeatures?assessRecognitionFeedback({
+    task:'carry',phase:this.getDebug().phase,features:this.latestFeatures,rawFeatures:this.latestRawFeatures,
+    profile:this.profile,config:this.config,
+  }):null;}
 }

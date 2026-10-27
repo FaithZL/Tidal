@@ -1,0 +1,16 @@
+{
+  "baselineFiles": 2249,
+  "regeneratedAndRestored": [
+    {
+      "path": "artifacts/qa/upper-body-flow-20261026/upper-body-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/preparation-recovery-20261027/regression/upper-body-flow-20261026/upper-body-synthetic.png"
+    },
+    {
+      "path": "artifacts/qa/preparation-feedback-20261026/preparation-partial-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/preparation-recovery-20261027/regression/preparation-feedback-20261026/preparation-partial-synthetic.png"
+    }
+  ],
+  "mismatches": [],
+  "newFilesOutsideCurrentQA": [],
+  "result": "pass"
+}

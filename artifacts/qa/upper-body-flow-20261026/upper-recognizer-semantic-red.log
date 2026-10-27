@@ -1,0 +1,340 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyRecognizer.test.ts tests/unit/upperCameraSource.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts (32 tests | 28 failed) 14ms
+   × chop emits the original legal phases, one impact and one count after both arms return 4ms
+   × load emits the original legal phases, one impact and one count after both arms return 1ms
+   × level 1 requires both arms to cross its current range gates 0ms
+   × level 2 requires both arms to cross its current range gates 0ms
+   × level 3 requires both arms to cross its current range gates 0ms
+   × level 4 requires both arms to cross its current range gates 0ms
+   × level 5 requires both arms to cross its current range gates 0ms
+   × level 1 rejects any low-quality shoulder/elbow/wrist without judging invisible legs 0ms
+   × level 2 rejects any low-quality shoulder/elbow/wrist without judging invisible legs 0ms
+   × level 3 rejects any low-quality shoulder/elbow/wrist without judging invisible legs 0ms
+   × level 4 rejects any low-quality shoulder/elbow/wrist without judging invisible legs 0ms
+   × level 5 rejects any low-quality shoulder/elbow/wrist without judging invisible legs 0ms
+   × gap cannot bridge an upper-body half loop 1ms
+   × stale cannot bridge an upper-body half loop 0ms
+   × future cannot bridge an upper-body half loop 0ms
+   × duplicate cannot bridge an upper-body half loop 0ms
+   × minimum cycle time is retained even when samples are valid and phase confirmation is quick 0ms
+   × Carry requires continuous confirmation, releases immediately and uses only new observations on return 1ms
+   × Carry does not let smooth history conceal an immediately released or invalid arm 0ms
+   × feedback marks only observed shoulder/elbow/wrist targets and reads cannot create counts 0ms
+   × invalid upper calibration non-finite is rejected before training 0ms
+   × invalid upper calibration left-travel is rejected before training 0ms
+   × invalid upper calibration right-travel is rejected before training 0ms
+   × invalid upper calibration identical-hold is rejected before training 0ms
+   × invalid upper calibration width is rejected before training 0ms
+   × invalid upper calibration height is rejected before training 0ms
+   × invalid upper calibration center is rejected before training 0ms
+   × invalid upper calibration scale is rejected before training 0ms
+ ❯ tests/unit/upperCameraSource.test.ts (6 tests | 5 failed) 10ms
+   × upper-body camera events preserve session context and domain inventory through all three tasks 3ms
+   × profile choices are explicit and mutually exclusive, with no upper fallback in full-body mode 3ms
+   × changing runtime config synchronously drops upper half-input and requires a fresh validated profile 1ms
+   × upper profile is copied, source stops block late frames, and ticks clear readiness 0ms
+   × explicit clearing removes both profile choices and cannot silently restart either mode 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 33 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > chop emits the original legal phases, one impact and one count after both arms return
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > load emits the original legal phases, one impact and one count after both arms return
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:24:36
+     22| test.each(['chop', 'load'] as const)('%s emits the original legal phas…
+     23|   const r = replay(task);r.pose('lowered');r.pose('raised', 1200);expe…
+     24|   r.pose('lowered');expect(r.reps).toHaveLength(1);
+       |                                    ^
+     25|   const phases = r.events.filter(event => event.kind === 'phase').map(…
+     26|   expect(phases.slice(0, task === 'chop' ? 3 : 5)).toEqual(task === 'c…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 1 requires both arms to cross its current range gates
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 2 requires both arms to cross its current range gates
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 3 requires both arms to cross its current range gates
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 4 requires both arms to cross its current range gates
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 5 requires both arms to cross its current range gates
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:50:20
+     48|   for (const task of ['chop', 'load'] as const) {
+     49|     const r = replay(task, level);r.pose('lowered');r.progress(config.…
+     50|     expect(r.reps).toHaveLength(1);
+       |                    ^
+     51|     const partial = replay(task, level);partial.pose('lowered');partia…
+     52|     expect(partial.reps).toHaveLength(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 1 rejects any low-quality shoulder/elbow/wrist without judging invisible legs
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 2 rejects any low-quality shoulder/elbow/wrist without judging invisible legs
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 3 rejects any low-quality shoulder/elbow/wrist without judging invisible legs
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 4 rejects any low-quality shoulder/elbow/wrist without judging invisible legs
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > level 5 rejects any low-quality shoulder/elbow/wrist without judging invisible legs
+AssertionError: expected null not to be null
+ ❯ tests/unit/upperBodyRecognizer.test.ts:61:44
+     59|   for (const index of [11, 12, 13, 14, 15, 16]) {
+     60|     const r = replay('chop', level);r.pose('lowered');r.pose('raised',…
+     61|     expect(r.recognizer.getFeedback()).not.toBeNull();
+       |                                            ^
+     62|     const events = r.recognizer.update(replacePoint(upperFrame(r.time …
+     63|     expect(events).toContainEqual(expect.objectContaining({ kind: 'tra…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > gap cannot bridge an upper-body half loop
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > stale cannot bridge an upper-body half loop
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > future cannot bridge an upper-body half loop
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > duplicate cannot bridge an upper-body half loop
+AssertionError: expected [] to deep equally contain ObjectContaining{…}
+
+- Expected:
+ObjectContaining {
+  "kind": "tracking",
+  "status": "lost",
+}
+
++ Received:
+[]
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:80:61
+     78|   if (fault === 'timeout') { for (let elapsed = 50; elapsed <= 6500; e…
+     79|   const events = r.recognizer.update(upperFrame(time, 'lowered'), now);
+     80|   if (!['reset', 'timeout'].includes(fault)) expect(events).toContainE…
+       |                                                             ^
+     81|   expect(events.filter(event => event.kind === 'rep-completed')).toHav…
+     82|   for (let elapsed = 50; elapsed < 600; elapsed += 50) expect(r.recogn…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > minimum cycle time is retained even when samples are valid and phase confirmation is quick
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:91:59
+     89|     for (const [time, pose] of [[0, 'lowered'], [10, 'lowered'], [20, …
+     90|       events.push(...r.update(upperFrame(time, pose)));
+     91|     expect(events.some(event => event.kind === 'impact')).toBe(true);
+       |                                                           ^
+     92|     expect(events.some(event => event.kind === 'rep-completed')).toBe(…
+     93|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > Carry requires continuous confirmation, releases immediately and uses only new observations on return
+AssertionError: expected undefined to match object { kind: 'hold-sample', …(2) }
+
+- Expected:
+{
+  "holding": false,
+  "kind": "hold-sample",
+  "valid": true,
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:97:73
+     95|
+     96| test('Carry requires continuous confirmation, releases immediately and…
+     97|   const r = replay('carry');r.pose('hold', 500);expect(r.events.at(-1)…
+       |                                                                         ^
+     98|   r.pose('hold', 100);expect(r.events.at(-1)).toMatchObject({ holding:…
+     99|   r.pose('lowered', 50);expect(r.events.at(-1)).toMatchObject({ holdin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > Carry does not let smooth history conceal an immediately released or invalid arm
+AssertionError: expected undefined to match object { kind: 'hold-sample', …(2) }
+
+- Expected:
+{
+  "holding": false,
+  "kind": "hold-sample",
+  "valid": true,
+}
+
++ Received:
+undefined
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:109:46
+    107|   const released = upperFrame(r.time + 50, 'hold'), lower = upperFrame…
+    108|   const oneArm = { ...released, landmarks: released.landmarks.map((poi…
+    109|   expect(r.recognizer.update(oneArm).at(-1)).toMatchObject({ kind: 'ho…
+       |                                              ^
+    110|   expect(r.recognizer.getFeedback()?.joints[15]).toBe('adjust');
+    111|   expect(r.recognizer.update(replacePoint(upperFrame(r.time + 100, 'ho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > feedback marks only observed shoulder/elbow/wrist targets and reads cannot create counts
+AssertionError: expected undefined to be 'adjust' // Object.is equality
+
+- Expected:
+"adjust"
+
++ Received:
+undefined
+
+ ❯ tests/unit/upperBodyRecognizer.test.ts:117:46
+    115| test('feedback marks only observed shoulder/elbow/wrist targets and re…
+    116|   const r = replay();expect(r.recognizer.getFeedback()).toBeNull();r.p…
+    117|   expect(r.recognizer.getFeedback()?.status).toBe('adjust');
+       |                                              ^
+    118|   r.pose('lowered');r.progress(1, 0, 1200);
+    119|   const f = r.recognizer.getFeedback()!;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/33]⎯
+
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration non-finite is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration left-travel is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration right-travel is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration identical-hold is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration width is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration height is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration center is rejected before training
+ FAIL  tests/unit/upperBodyRecognizer.test.ts > invalid upper calibration scale is rejected before training
+AssertionError: expected [Function] to throw an error
+ ❯ tests/unit/upperBodyRecognizer.test.ts:136:52
+    134|   if (fault === 'center') p.reference.center.x = NaN;
+    135|   if (fault === 'scale') p.reference.scalePx = 0;
+    136|   expect(() => new UpperBodyRecognizer(p, 'chop')).toThrow();
+       |                                                    ^
+    137| });
+    138|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/33]⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > upper-body camera events preserve session context and domain inventory through all three tasks
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/upperCameraSource.test.ts:39:91
+     37|     await source.start(ctx, event => { events.push(event);h.controller…
+     38|     pose('lowered', 600);pose('raised', 1200);pose('lowered', 600);
+     39|     expect(events.filter(event => event.kind === 'rep-completed' && ev…
+       |                                                                                           ^
+     40|     expect(events.filter(event => event.taskRunId === ctx.taskRunId).e…
+     41|     await source.stop();h.tick(1);h.tick(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/33]⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > profile choices are explicit and mutually exclusive, with no upper fallback in full-body mode
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/upperCameraSource.test.ts:57:68
+     55|   h.source.setUpperBodyProfile(upperProfile());await h.source.start({ …
+     56|   h.pose('lowered');h.pose('raised', 1200);h.pose('lowered');
+     57|   expect(h.events.filter(event => event.kind === 'rep-completed')).toH…
+       |                                                                    ^
+     58| });
+     59|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/33]⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > changing runtime config synchronously drops upper half-input and requires a fresh validated profile
+AssertionError: expected [] to deeply equal [ ObjectContaining {"sourceEpoch": 2} ]
+
+- Expected
++ Received
+
+- [
+-   ObjectContaining {
+-     "sourceEpoch": 2,
+-   },
+- ]
++ []
+
+ ❯ tests/unit/upperCameraSource.test.ts:68:68
+     66|   h.pose('lowered');expect(h.events.filter(event => event.kind === 're…
+     67|   h.pose('raised', 1200);h.pose('lowered');
+     68|   expect(h.events.filter(event => event.kind === 'rep-completed')).toE…
+       |                                                                    ^
+     69| });
+     70|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/33]⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > upper profile is copied, source stops block late frames, and ticks clear readiness
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/unit/upperCameraSource.test.ts:74:68
+     72|   const h = sourceHarness(), p = upperProfile();h.source.setUpperBodyP…
+     73|   await h.source.start(context, event => h.events.push(event));h.pose(…
+     74|   expect(h.events.filter(event => event.kind === 'rep-completed')).toH…
+       |                                                                    ^
+     75|   await h.source.stop();const count = h.events.length;h.pose('lowered'…
+     76|   await h.source.start({ ...context, taskRunId: 'next', sourceEpoch: 2…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/33]⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > explicit clearing removes both profile choices and cannot silently restart either mode
+AssertionError: expected [] to deep equally contain ObjectContaining{…}
+
+- Expected:
+ObjectContaining {
+  "kind": "tracking",
+  "status": "lost",
+}
+
++ Received:
+[]
+
+ ❯ tests/unit/upperCameraSource.test.ts:89:56
+     87|   }
+     88|   const h = sourceHarness();h.source.setUpperBodyProfile(upperProfile(…
+     89|   h.source.accept(syntheticFrame(50));expect(h.events).toContainEqual(…
+       |                                                        ^
+     90| });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/33]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  33 failed | 5 passed (38)
+   Start at  22:24:38
+   Duration  150ms (transform 48%, tests 29%, import 19%, worker 4%)
+

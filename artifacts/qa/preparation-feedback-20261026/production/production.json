@@ -1,0 +1,15 @@
+{
+  "input": "Normal production build; fake video and authored six-point fixture, not physical camera or MediaPipe accuracy",
+  "screenshots": [
+    "preparation-red-green-synthetic.png",
+    "preparation-target-synthetic.png",
+    "quality-reason-synthetic.png"
+  ],
+  "qualityMessage": "肩、肘或手腕不够清晰，请让六个关节保持可见",
+  "staleMessage": "视频没有新数据，请保持镜头有效",
+  "result": "pass",
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

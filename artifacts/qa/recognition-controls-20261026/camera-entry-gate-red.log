@@ -1,0 +1,57 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/recognition-controls.spec.ts -g camera entry is gated --output artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results
+
+[WebServer] (node:12015) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:12035) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:12083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:12103) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:12112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/recognition-controls.spec.ts:13:1 › camera entry is gated while its application handlers are still loading (7.3s)
+
+
+  1) tests/e2e/recognition-controls.spec.ts:13:1 › camera entry is gated while its application handlers are still loading 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#cameraMode')
+    Expected: disabled
+    Received: enabled
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#cameraMode') with timeout 7000ms
+      - waiting for locator('#cameraMode')
+        18 × locator resolved to <button id="cameraMode" class="secondary">摄像头识别</button>
+           - unexpected value "enabled"
+
+
+      13 | test('camera entry is gated while its application handlers are still loading',async({page})=>{
+      14 |  let release!:()=>void;const pending=new Promise<void>(resolve=>{release=resolve;});await page.route('**/src/browser.ts*',async route=>{await pending;await route.continue();});
+    > 15 |  try{await enter(page);await expect(page.locator('#cameraMode')).toBeDisabled();}finally{release();}
+         |                                                                  ^
+      16 |  await expect(page.locator('#cameraMode')).toBeEnabled();await page.locator('#cameraMode').click();await expect(page.locator('#setupModal')).toBeVisible();
+      17 | });
+      18 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/recognition-controls.spec.ts:15:66
+
+    Error Context: artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results/recognition-controls-camer-a43f2--handlers-are-still-loading/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results/recognition-controls-camer-a43f2--handlers-are-still-loading/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results/recognition-controls-camer-a43f2--handlers-are-still-loading/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/recognition-controls.spec.ts:13:1 › camera entry is gated while its application handlers are still loading 

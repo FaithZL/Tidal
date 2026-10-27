@@ -1,0 +1,22 @@
+{
+  "input": "Normal production build without e2e mode; fake video and authored six landmarks, not physical-camera accuracy",
+  "result": "pass",
+  "completionExitKeepsCamera": true,
+  "screenshots": [
+    "saved-calibration-waiting-synthetic.png",
+    "saved-calibration-mobile-synthetic.png",
+    "active-tracking-paused-synthetic.png",
+    "preparation-complete-synthetic.png",
+    "preparation-complete-mobile-synthetic.png"
+  ],
+  "templateSurvivesPositionMismatch": true,
+  "wrongPositionReadinessBlocked": true,
+  "automaticInitialStartRecovers": true,
+  "activeHalfRepDiscarded": true,
+  "trackingRecoveredToOneFreshRep": true,
+  "mobileOverflow": false,
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

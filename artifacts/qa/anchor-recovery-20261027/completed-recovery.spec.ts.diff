@@ -1,0 +1,13 @@
+--- before/tests/e2e/completed-recovery.spec.ts
++++ tests/e2e/completed-recovery.spec.ts
+@@ -18,8 +18,8 @@
+ test('visibility interrupts completed calibration without discarding it or authorizing automatic resume',async({page})=>{
+  await prepare(page);await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await expect(page.locator('#beginCamera')).toBeDisabled();await page.waitForTimeout(3300);await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await expect(page.locator('#beginCamera')).toBeEnabled({timeout:6000});await page.waitForTimeout(3400);await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#chopValue')).toHaveText('0/15');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await page.locator('#beginCamera').click();await expect(page.locator('#statusTag')).toHaveText('训练中');await expect(page.locator('#chopValue')).toHaveText('0/15');
+ });
+-test('a real anchor change or explicit camera stop still clears completed calibration',async({page})=>{
+- await prepare(page);await page.evaluate(()=>{window.upperFixture.moved=true;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodyLastReset')).toContainText('身体或机位变化');await expect(page.locator('#beginCamera')).toBeDisabled();await page.locator('#cameraStop').click();await expect(page.locator('#upperBodyStepCount')).toContainText('0/3');await expect(page.locator('#chopValue')).toHaveText('0/15');
++test('a position mismatch blocks readiness while only explicit camera stop clears completed calibration',async({page})=>{
++ await prepare(page);await page.evaluate(()=>{window.upperFixture.moved=true;});await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await expect(page.locator('#upperBodyReason')).toContainText('位置');await page.locator('#cameraStop').click();await expect(page.locator('#upperBodyStepCount')).toContainText('0/3');await expect(page.locator('#chopValue')).toHaveText('0/15');
+ });
+ 
+ test('initial countdown is restarted safely after lost tracking without forgetting calibration',async({page})=>{

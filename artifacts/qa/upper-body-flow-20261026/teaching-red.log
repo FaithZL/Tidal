@@ -1,0 +1,170 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyTeaching.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyTeaching.test.ts (11 tests | 11 failed) 5ms
+   × upper-body lessons use visible shoulders, elbows and wrists while all lower-body points stay neutral 2ms
+   × chop upper-body demonstration raises both arms and fully returns without a squat 0ms
+   × load upper-body demonstration raises both arms and fully returns without a squat 0ms
+   × upper-body carry holds both arms in front and lowers them to demonstrate stopping 0ms
+   × switching tutorial programs preserves task, pause and speed while resetting the old lesson position 1ms
+   × upper-body tutorial selection and long gaps retain the existing local playback guards 0ms
+   × upper-body guide cycles chop down, up and return with stationary legs 0ms
+   × upper-body guide cycles load down, up and return with stationary legs 0ms
+   × upper-body guide keeps the carry target stable and switching back restores the original full-body cycle 0ms
+   × both visual players expose the upper-body program without introducing a new session writer 0ms
+   × the SVG accessible description uses the active upper-body cue instead of the old squat instructions 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body lessons use visible shoulders, elbows and wrists while all lower-body points stay neutral
+AssertionError: upper-body lessons must be available without replacing original lessons: expected undefined to be defined
+ ❯ upper tests/unit/upperBodyTeaching.test.ts:13:92
+     11| const upper=()=>{
+     12|  const lessons=(model as unknown as {upperBodyTutorialLessons?:Record<…
+     13|  expect(lessons,'upper-body lessons must be available without replacin…
+       |                                                                                            ^
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+ ❯ tests/unit/upperBodyTeaching.test.ts:22:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > chop upper-body demonstration raises both arms and fully returns without a squat
+ FAIL  tests/unit/upperBodyTeaching.test.ts > load upper-body demonstration raises both arms and fully returns without a squat
+AssertionError: upper-body lessons must be available without replacing original lessons: expected undefined to be defined
+ ❯ upper tests/unit/upperBodyTeaching.test.ts:13:92
+     11| const upper=()=>{
+     12|  const lessons=(model as unknown as {upperBodyTutorialLessons?:Record<…
+     13|  expect(lessons,'upper-body lessons must be available without replacin…
+       |                                                                                            ^
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+ ❯ tests/unit/upperBodyTeaching.test.ts:35:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body carry holds both arms in front and lowers them to demonstrate stopping
+AssertionError: upper-body lessons must be available without replacing original lessons: expected undefined to be defined
+ ❯ upper tests/unit/upperBodyTeaching.test.ts:13:92
+     11| const upper=()=>{
+     12|  const lessons=(model as unknown as {upperBodyTutorialLessons?:Record<…
+     13|  expect(lessons,'upper-body lessons must be available without replacin…
+       |                                                                                            ^
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+ ❯ tests/unit/upperBodyTeaching.test.ts:42:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > switching tutorial programs preserves task, pause and speed while resetting the old lesson position
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ setUpper tests/unit/upperBodyTeaching.test.ts:16:113
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+     16|  const player=clock as {setUpperBodyEnabled?:(enabled:boolean)=>void};…
+       |                                                                                                                 ^
+     17| };
+     18| function advance(clock:{advance(delta:number):void},time:number){while…
+ ❯ tests/unit/upperBodyTeaching.test.ts:49:2
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body tutorial selection and long gaps retain the existing local playback guards
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ setUpper tests/unit/upperBodyTeaching.test.ts:16:113
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+     16|  const player=clock as {setUpperBodyEnabled?:(enabled:boolean)=>void};…
+       |                                                                                                                 ^
+     17| };
+     18| function advance(clock:{advance(delta:number):void},time:number){while…
+ ❯ tests/unit/upperBodyTeaching.test.ts:56:46
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body guide cycles chop down, up and return with stationary legs
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body guide cycles load down, up and return with stationary legs
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ setUpper tests/unit/upperBodyTeaching.test.ts:16:113
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+     16|  const player=clock as {setUpperBodyEnabled?:(enabled:boolean)=>void};…
+       |                                                                                                                 ^
+     17| };
+     18| function advance(clock:{advance(delta:number):void},time:number){while…
+ ❯ tests/unit/upperBodyTeaching.test.ts:62:43
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > upper-body guide keeps the carry target stable and switching back restores the original full-body cycle
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ setUpper tests/unit/upperBodyTeaching.test.ts:16:113
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+     16|  const player=clock as {setUpperBodyEnabled?:(enabled:boolean)=>void};…
+       |                                                                                                                 ^
+     17| };
+     18| function advance(clock:{advance(delta:number):void},time:number){while…
+ ❯ tests/unit/upperBodyTeaching.test.ts:70:46
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > both visual players expose the upper-body program without introducing a new session writer
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ tests/unit/upperBodyTeaching.test.ts:76:116
+     74|
+     75| test('both visual players expose the upper-body program without introd…
+     76|  expect(typeof (ExerciseTutorialPanel.prototype as unknown as {setUppe…
+       |                                                                                                                    ^
+     77|  expect(typeof (MovementGuide.prototype as unknown as {setUpperBodyEna…
+     78| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  tests/unit/upperBodyTeaching.test.ts > the SVG accessible description uses the active upper-body cue instead of the old squat instructions
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ setUpper tests/unit/upperBodyTeaching.test.ts:16:113
+     14| };
+     15| const setUpper=(clock:unknown,value:boolean)=>{
+     16|  const player=clock as {setUpperBodyEnabled?:(enabled:boolean)=>void};…
+       |                                                                                                                 ^
+     17| };
+     18| function advance(clock:{advance(delta:number):void},time:number){while…
+ ❯ tests/unit/upperBodyTeaching.test.ts:90:131
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed (11)
+   Start at  22:22:08
+   Duration  100ms (transform 66%, import 17%, tests 14%, worker 3%)
+

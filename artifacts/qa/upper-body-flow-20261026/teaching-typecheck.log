@@ -1,0 +1,7 @@
+
+> tidal-farm-motion-demo@0.1.0 typecheck
+> tsc --noEmit
+
+src/pose/recognizers/upperBodyRecognizer.ts(9,32): error TS6138: Property 'profile' is declared but its value is never read.
+src/pose/recognizers/upperBodyRecognizer.ts(9,76): error TS6138: Property 'task' is declared but its value is never read.
+src/pose/recognizers/upperBodyRecognizer.ts(10,22): error TS6138: Property 'config' is declared but its value is never read.

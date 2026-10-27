@@ -1,0 +1,18 @@
+{
+  "firstIntegratedRun": {
+    "result": "3 passed,2 failed; retained original logs/traces",
+    "deniedReload": "Test initScript rewrote automatic=true on every reload, overwriting saved user preference. Fixture now initializes once per sessionStorage marker; production preference code unchanged.",
+    "flowReset": {
+      "trace": "new-e2e-first-results/recognition-controls-wide--f71a7-nges-never-fill-paused-time/trace.zip",
+      "evidence": [
+        "1-trace.trace:2192 at Shanghai 21:15:05.783:8/15",
+        "1-trace.network:94 at 21:15:05.813 second document request in same main frame",
+        "1-trace.trace:2197 at 21:15:05.851 Vite connecting again;2199 at 21:15:05.856:0/15",
+        "HTML only diff is entry.ts?t=1793020505789; browser.ts fetched with same stamp; source save mtime21:15:05.762",
+        "Only initial goto in test; no mid-run click or reload."
+      ],
+      "conclusion": "A source save during active test caused Vite full-page reload and new session; subsequent run held application source stable. Trace does not capture exact WebSocket trigger message."
+    }
+  },
+  "recheck": "new-e2e-recheck.log: all6passed; unchanged flow/count assertions. Added stalled-camera case and stronger pause ownership/readiness/persistence assertions."
+}

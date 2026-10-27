@@ -1,5 +1,5 @@
 import type {TaskKind} from '../domain/types.js';
-import {TutorialClock,tutorialLessons} from './exerciseTutorialModel.js';
+import {TutorialClock,tutorialLessons,upperBodyTutorialLessons} from './exerciseTutorialModel.js';
 import {TutorialFigure} from './tutorialFigure.js';
 
 interface TutorialHooks{onOpen():void;onClose():HTMLElement|undefined}
@@ -8,6 +8,7 @@ export class ExerciseTutorialPanel{
  private readonly clock=new TutorialClock();private readonly figure:TutorialFigure;
  private readonly events=new AbortController();private readonly background=new Map<HTMLElement,boolean>();
  private origin?:HTMLElement;private request=0;private lastTime:number|null=null;private lastStep='';private lastFrame='';private suspended=false;private disposed=false;
+ private upperBody=false;
  constructor(private readonly root:HTMLElement,private readonly hooks:TutorialHooks){
   this.figure=new TutorialFigure(this.node<SVGSVGElement>('tutorialFigure'));
   const options={signal:this.events.signal};
@@ -33,6 +34,13 @@ export class ExerciseTutorialPanel{
   document.addEventListener('visibilitychange',()=>{this.lastTime=null;},options);
  }
  get isOpen():boolean{return !this.root.hidden;}
+ private get lessons(){return this.upperBody?upperBodyTutorialLessons:tutorialLessons;}
+ setUpperBodyEnabled(enabled:boolean):void{
+  if(this.disposed||this.upperBody===enabled)return;
+  this.upperBody=enabled;this.clock.setUpperBodyEnabled(enabled);this.lastTime=null;this.lastStep='';this.lastFrame='';
+  this.root.dataset.program=enabled?'upper-body':'full-body';
+  if(this.isOpen)this.populateLesson();
+ }
  setSuspended(suspended:boolean):void{
   if(this.disposed||typeof suspended!=='boolean'||this.suspended===suspended)return;
   this.suspended=suspended;this.lastTime=null;if(this.isOpen)this.render();
@@ -56,7 +64,10 @@ export class ExerciseTutorialPanel{
  private setTask(task:TaskKind):void{
   this.clock.setTask(task);if(matchMedia('(prefers-reduced-motion: reduce)').matches)this.clock.selectStep(0);
   this.lastTime=null;this.lastStep='';this.lastFrame='';
-  const lesson=tutorialLessons[task];this.node('tutorialSummary').textContent=lesson.summary;
+  this.populateLesson();
+ }
+ private populateLesson():void{
+  const task=this.clock.frame.task,lesson=this.lessons[task];this.node('tutorialSummary').textContent=lesson.summary;
   const steps=lesson.steps.map((step,index)=>{const item=document.createElement('li'),button=document.createElement('button');button.type='button';button.dataset.step=String(index);button.textContent=step.title;item.append(button);return item;});
   this.node('tutorialStepList').replaceChildren(...steps);
   for(const button of Array.from(this.root.querySelectorAll<HTMLButtonElement>('#tutorialTabs button')))button.setAttribute('aria-pressed',String(button.dataset.task===task));
@@ -72,7 +83,7 @@ export class ExerciseTutorialPanel{
  private render():void{
   const frame=this.clock.frame,playing=frame.playing&&!this.suspended,key=`${frame.task}/${frame.stepIndex}/${frame.stepProgress}/${frame.elapsedMs}/${frame.playing}/${frame.speed}/${this.suspended}`;
   if(key===this.lastFrame)return;this.lastFrame=key;
-  const lesson=tutorialLessons[frame.task],step=lesson.steps[frame.stepIndex],stepKey=`${frame.task}/${frame.stepIndex}`;
+  const lesson=this.lessons[frame.task],step=lesson.steps[frame.stepIndex],stepKey=`${frame.task}/${frame.stepIndex}`;
   this.root.dataset.task=frame.task;this.root.dataset.timeMs=frame.elapsedMs.toFixed(2);this.root.dataset.playing=String(playing);
   this.root.dataset.speed=String(frame.speed);this.root.dataset.step=String(frame.stepIndex);
   this.node<HTMLButtonElement>('tutorialPlay').textContent=playing?'暂停示范':'播放示范';
@@ -85,7 +96,7 @@ export class ExerciseTutorialPanel{
    this.node('tutorialTips').replaceChildren(...step.tips.map(tip=>{const item=document.createElement('li');item.textContent=tip;return item;}));
    for(const button of Array.from(this.root.querySelectorAll<HTMLButtonElement>('#tutorialStepList button'))){if(Number(button.dataset.step)===frame.stepIndex)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');}
   }
-  this.figure.draw(frame);
+  this.figure.draw(frame,lesson);
  }
  private keydown(event:KeyboardEvent):void{
   if(event.key==='Escape'){event.preventDefault();event.stopPropagation();this.close();return;}

@@ -1,0 +1,167 @@
+{
+  "policy": "Original raw Playwright traces retained locally at these exact paths; not included in Git. Logs, error contexts, screenshots and reports are committed.",
+  "count": 32,
+  "totalBytes": 1032022694,
+  "files": [
+    {
+      "path": "artifacts/qa/anchor-recovery-20261027/finish-owned-pause-failures/preparation-finish-manual--9851b--existing-user-pause-false-/trace.zip",
+      "bytes": 33439779,
+      "sha256": "8ef7c0621a7420e6113f7caa745e8749f31a73f3eb160bf80e59dd01929b98c3"
+    },
+    {
+      "path": "artifacts/qa/anchor-recovery-20261027/finish-red-failures/preparation-finish-complet-667df-a-for-a-real-recognized-rep/trace.zip",
+      "bytes": 29340608,
+      "sha256": "b01109a5d3cab4a6195ea1c6e456dafa779125e3f2dbfdc2d51d2d8a44903e65"
+    },
+    {
+      "path": "artifacts/qa/anchor-recovery-20261027/finish-red-failures/preparation-finish-the-fin-4b8c6--an-explicit-animation-stop/trace.zip",
+      "bytes": 29384984,
+      "sha256": "f37810607dfc552b8fbfa84c83825667317733f12057964ed4cb67aa000fdc90"
+    },
+    {
+      "path": "artifacts/qa/anchor-recovery-20261027/e2e-red-failures/anchor-recovery-completed--6bfc6-ng-to-the-original-position/trace.zip",
+      "bytes": 29539951,
+      "sha256": "79c9b2a6524208af07d259cad4769e3c884b8f7e2c6accc72e3c3681ad7b99d9"
+    },
+    {
+      "path": "artifacts/qa/anchor-recovery-20261027/e2e-red-failures/anchor-recovery-active-pos-13e2d--a-half-rep-across-recovery/trace.zip",
+      "bytes": 37088604,
+      "sha256": "e22c5302e2de3fbf3423fa1f2a8fe1b82212cfc3bbf3f6879ab479ee999926f3"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/e2e-final-first-failures/completed-recovery-a-real--3eca5-lears-completed-calibration/trace.zip",
+      "bytes": 27305762,
+      "sha256": "f8d3fbd260adc5d8d18e8b288328550e7ddea6e6ce127ede07995e932c5d438d"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/edge-and-contract-red-failures/completed-recovery-visibil-437a0-uthorizing-automatic-resume/trace.zip",
+      "bytes": 34441034,
+      "sha256": "528e66fd3994958cffff23aef12ceeec4de0ab525d149934cd489603cd97935a"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/edge-and-contract-red-failures/completed-recovery-a-pause-3c6af-ever-triggers-recalibration/trace.zip",
+      "bytes": 31663841,
+      "sha256": "ca705a79e2611e894f7c52b44fc934834de1f8f702a6dc1217485aff290f6c28"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/edge-and-contract-red-failures/preparation-diagnostics-ac-5df08--and-pauses-on-visible-blur/trace.zip",
+      "bytes": 34178084,
+      "sha256": "659a6a0b58eab19e970c7c1f8d3f166a714fa89b3cc4f01901d7fc3385757b61"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/edge-and-contract-red-failures/preparation-diagnostics-a--ea206-not-silently-start-or-count/trace.zip",
+      "bytes": 29609265,
+      "sha256": "7374ce7481455f52c6bb21ce1922f283cc9f4b76e0c860268c763616ddd64f6a"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/edge-and-contract-red-failures/preparation-feedback-a-sin-30144-ration-without-later-frames/trace.zip",
+      "bytes": 33655866,
+      "sha256": "fb284e36329fafdb798acee5a2d3992c0b04cfb24e6f2b6a4b292bfd71dccaa8"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/e2e-red-failures/completed-recovery-saved-c-6decd--authorized-automatic-start/trace.zip",
+      "bytes": 29209253,
+      "sha256": "a79254539160b2211fdd9f4ce4d1e41c75e5b831dc39aac22fc73b5d2babd176"
+    },
+    {
+      "path": "artifacts/qa/calibration-recovery-20261027/e2e-red-failures/completed-recovery-saved-c-f8182--authorized-automatic-start/trace.zip",
+      "bytes": 28992146,
+      "sha256": "cfd97af78e77bfbef3e5899e29c076e517e37e66c421a669d43133e9bc406693"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/green-fixture-assumption-failure/preparation-diagnostics-vi-2ab26-automatic-start-demo-entry-/trace.zip",
+      "bytes": 30525427,
+      "sha256": "16e2f0beda7976a207906bcf95bdf005f809ceeffbce4268c950e8976db117c5"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/stale-notice-red-failure/preparation-diagnostics-a--d1ead-e-with-the-real-reset-state/trace.zip",
+      "bytes": 29166261,
+      "sha256": "f41fc460646ca9b48892947afa66f7a2707f3c7903a3deb91577fe0d9b60caf8"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/visible-blur-red-failures/preparation-diagnostics-vi-852ff-omatic-start-initial-setup-/trace.zip",
+      "bytes": 28667567,
+      "sha256": "3c91acd5e127ca8fe482ffa8d027cb5b2fcfab896416616ffa1ff3c712d34529"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/visible-blur-red-failures/preparation-diagnostics-vi-2ab26-automatic-start-demo-entry-/trace.zip",
+      "bytes": 29663199,
+      "sha256": "080d210750c959f458ad24ead8bd44017e964a3f4750d6bfc54ef256ac016723"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/e2e-red-failures/preparation-diagnostics-re-6ace2-and-names-the-current-joint/trace.zip",
+      "bytes": 28658880,
+      "sha256": "8947fca50ecc422b93bfa3e2e8399b480dc18811bc9f30c8ea3b5edb2f81249a"
+    },
+    {
+      "path": "artifacts/qa/hold-diagnostics-20261027/e2e-red-failures/preparation-diagnostics-ex-06081-ing-preparation-or-counting/trace.zip",
+      "bytes": 28819362,
+      "sha256": "d186b089d59d9397967064cfa3189a035deb6ab8f048f7fa3fd567254481015f"
+    },
+    {
+      "path": "artifacts/qa/preparation-feedback-20261026/reprepare-red-results/preparation-feedback-a-sin-30144-ration-without-later-frames/trace.zip",
+      "bytes": 30287974,
+      "sha256": "8a29feb1887085793df575baf16543a2e053c67f0641cc5fa3333631678551db"
+    },
+    {
+      "path": "artifacts/qa/preparation-feedback-20261026/red-results/preparation-feedback-lower-6695b-red-arm-red-before-training/trace.zip",
+      "bytes": 29829062,
+      "sha256": "fdc8d6216e93fdd0e7e73ba089088fc0c5ce89933edf2604bb517fe208fbdb09"
+    },
+    {
+      "path": "artifacts/qa/preparation-feedback-20261026/red-results/preparation-feedback-prepa-a7ac0-olors-without-another-frame/trace.zip",
+      "bytes": 29831995,
+      "sha256": "bf16d7d396bd2ec20e1c80c3607f3557173f8de8fc7564856c9ef2264f3af883"
+    },
+    {
+      "path": "artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-brief-cfff5-starting-completed-evidence/trace.zip",
+      "bytes": 28065867,
+      "sha256": "06feb9a7781f18363a5c19775de84c059112f087504fd17dcc6e69f357cde511"
+    },
+    {
+      "path": "artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-susta-e3586--preparation-into-readiness/trace.zip",
+      "bytes": 28012381,
+      "sha256": "23d3ac9c1e8db76f15288c86e5dd157e8bfa427cd5b432c34316b0c60aff6ac2"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/regression-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip",
+      "bytes": 32326181,
+      "sha256": "f58c04d5ecc8de663bf0caf29474fcbe1d2d9717c08e6b01cb1877d6b4348ee1"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/regression-results/recognition-controls-lenie-96821-a-narrow-preparation-screen/trace.zip",
+      "bytes": 27190095,
+      "sha256": "b8018830c8f0b9845638976b18e092fd2122be60dce8c2cee6fc1799187fd562"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/new-e2e-first-results/recognition-controls-camer-2df34-enied-camera-stays-explicit/trace.zip",
+      "bytes": 30474162,
+      "sha256": "6bbc6f297d4c31d26b8e1d52a4b161fcd993e8c918e0f5c2601abf47367e11c9"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/new-e2e-first-results/recognition-controls-wide--f71a7-nges-never-fill-paused-time/trace.zip",
+      "bytes": 123496622,
+      "sha256": "b87397d1d503de13907cda250aace11a6ec1393561283fe23f36ec4fb708f96c"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/camera-entry-gate-red-results/recognition-controls-camer-a43f2--handlers-are-still-loading/trace.zip",
+      "bytes": 41434,
+      "sha256": "af59b961831ce82312dca248b0c3012ff7408fe8190883863b0f004af6d7a1ef"
+    },
+    {
+      "path": "artifacts/qa/recognition-controls-20261026/entry-red-results/recognition-controls-camer-2df34-enied-camera-stays-explicit/trace.zip",
+      "bytes": 32365480,
+      "sha256": "9c31cd2b106de3ac140b42ae70153536e2ba95369eed54ac579c36d01ee368d6"
+    },
+    {
+      "path": "artifacts/qa/upper-body-flow-20261026/countdown-cancel-red-results/upper-body-flow-stopping-d-2abed-sage-and-never-starts-later/trace.zip",
+      "bytes": 29557500,
+      "sha256": "e8a888273078b44a2339a7db49793394043c75c455d19e46aa7eda70114326db"
+    },
+    {
+      "path": "artifacts/qa/upper-body-flow-20261026/entry-red-results/upper-body-flow-upper-body-4e0ef-ithout-capture-start-clicks/trace.zip",
+      "bytes": 27194068,
+      "sha256": "f285b377f41f40ee7cc0bd0919337dfc04a330f0398c85da0a2701a23f55421e"
+    }
+  ]
+}

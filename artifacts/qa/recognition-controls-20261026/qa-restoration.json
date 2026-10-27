@@ -1,0 +1,20 @@
+{
+  "baselineFiles": 2048,
+  "regeneratedAndRestored": [
+    {
+      "path": "artifacts/qa/default-demo/automatic-start.png",
+      "regeneratedCopy": "artifacts/qa/recognition-controls-20261026/regression/default-demo/automatic-start.png"
+    },
+    {
+      "path": "artifacts/qa/t09/synthetic-camera-results.png",
+      "regeneratedCopy": "artifacts/qa/recognition-controls-20261026/regression/t09/synthetic-camera-results.png"
+    },
+    {
+      "path": "artifacts/qa/t06/calibrated-synthetic.png",
+      "regeneratedCopy": "artifacts/qa/recognition-controls-20261026/regression/t06/calibrated-synthetic.png"
+    }
+  ],
+  "mismatches": [],
+  "newFilesOutsideCurrentQA": [],
+  "result": "pass"
+}

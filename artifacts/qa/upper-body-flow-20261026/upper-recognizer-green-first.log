@@ -1,0 +1,51 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyRecognizer.test.ts tests/unit/upperCameraSource.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperCameraSource.test.ts (6 tests | 1 failed) 14ms
+   × explicit clearing removes both profile choices and cannot silently restart either mode 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperCameraSource.test.ts > explicit clearing removes both profile choices and cannot silently restart either mode
+AssertionError: expected [ { sessionId: 'session', …(7) } ] to deep equally contain ObjectContaining{…}
+
+- Expected:
+ObjectContaining {
+  "kind": "tracking",
+  "status": "lost",
+}
+
++ Received:
+[
+  {
+    "capturedAtMs": 50,
+    "kind": "tracking",
+    "seq": 1,
+    "sessionId": "session",
+    "sourceEpoch": 1,
+    "status": "ready",
+    "task": "chop",
+    "taskRunId": "chop",
+  },
+]
+
+ ❯ tests/unit/upperCameraSource.test.ts:89:56
+     87|   }
+     88|   const h = sourceHarness();h.source.setUpperBodyProfile(upperProfile(…
+     89|   h.source.accept(syntheticFrame(50));expect(h.events).toContainEqual(…
+       |                                                        ^
+     90| });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 37 passed (38)
+   Start at  22:27:03
+   Duration  123ms (tests 54%, transform 29%, import 15%, worker 2%)
+

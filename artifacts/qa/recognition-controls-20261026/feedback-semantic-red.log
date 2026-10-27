@@ -1,0 +1,281 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/recognitionFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/recognitionFeedback.test.ts (28 tests | 22 failed) 12ms
+   × chop compares only the measured primary arm with the required starting step 3ms
+   × chop accepts observed endpoints but requires returning after the down phase 1ms
+   × left-primary calibration colors the left arm without borrowing right-side data 0ms
+   × load before its squat flags an early press on the primary arm only 0ms
+   × load squat localizes missing knee or hip evidence (1,0) 0ms
+   × load squat localizes missing knee or hip evidence (0,1) 0ms
+   × load permits matched endpoints and neutral transitions while standing back up 0ms
+   × load press identifies a missing arm target without blaming the upright knee or hips 0ms
+   × load return accepts the top or restored endpoint but rejects leaving the legs bent 0ms
+   × feedback reads the actual current leniency configuration at level 1 0ms
+   × feedback reads the actual current leniency configuration at level 2 0ms
+   × feedback reads the actual current leniency configuration at level 3 0ms
+   × feedback reads the actual current leniency configuration at level 4 0ms
+   × feedback reads the actual current leniency configuration at level 5 0ms
+   × carry feedback uses raw and smooth hold gates and the nearest personal center 0ms
+   × carry localizes a dominant arm deviation without coloring the opposite limb 0ms
+   × carry localizes a dominant knee deviation without coloring the opposite limb 0ms
+   × carry localizes a dominant hip deviation without coloring the opposite limb 0ms
+   × chop drops judgments immediately after invalid data or reset 0ms
+   × load drops judgments immediately after invalid data or reset 0ms
+   × carry drops judgments immediately after invalid data or reset 0ms
+   × completed feedback is green for one observation and repeated reads cannot produce events or counts 2ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 22 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > chop compares only the measured primary arm with the required starting step
+AssertionError: expected { status: 'moving', …(2) } to match object { status: 'matched', joints: { …(3) } }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "joints": {
+-     "12": "matched",
+-     "14": "matched",
+-     "16": "matched",
+-   },
+-   "status": "matched",
++   "joints": {},
++   "status": "moving",
+  }
+
+ ❯ tests/unit/recognitionFeedback.test.ts:52:57
+     50|
+     51| test('chop compares only the measured primary arm with the required st…
+     52|   expect(assess('chop', 'unready', features('raised'))).toMatchObject(…
+       |                                                         ^
+     53|   const wrong = assess('chop', 'unready', features('down'));
+     54|   expect(wrong.status).toBe('adjust');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > chop accepts observed endpoints but requires returning after the down phase
+AssertionError: expected 'moving' to be 'matched' // Object.is equality
+
+Expected: "matched"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:65:60
+     63|
+     64| test('chop accepts observed endpoints but requires returning after the…
+     65|   expect(assess('chop', 'ready', features('down')).status).toBe('match…
+       |                                                            ^
+     66|   expect(assess('chop', 'chop-down', features('down')).status).toBe('m…
+     67|   expect(assess('chop', 'chop-return', features('raised')).status).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > left-primary calibration colors the left arm without borrowing right-side data
+AssertionError: expected {} to deeply equal { '11': 'matched', …(2) }
+
+- Expected
++ Received
+
+- {
+-   "11": "matched",
+-   "13": "matched",
+-   "15": "matched",
+- }
++ {}
+
+ ❯ tests/unit/recognitionFeedback.test.ts:74:63
+     72|   const p = structuredClone(profile);p.calibration = { ...p.calibratio…
+     73|   const f = features('raised');f.sides.left!.wrist = { ...p.examples['…
+     74|   expect(assess('chop', 'unready', f, { profile: p }).joints).toEqual(…
+       |                                                               ^
+     75| });
+     76|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > load before its squat flags an early press on the primary arm only
+AssertionError: expected 'moving' to be 'adjust' // Object.is equality
+
+Expected: "adjust"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:79:27
+     77| test('load before its squat flags an early press on the primary arm on…
+     78|   const feedback = assess('load', 'ready', load(0, 0, 1));
+     79|   expect(feedback.status).toBe('adjust');
+       |                           ^
+     80|   expect(feedback.joints).toMatchObject({ 12: 'adjust', 14: 'adjust', …
+     81|   expect(feedback.joints[25]).toBeUndefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > load squat localizes missing knee or hip evidence (1,0)
+ FAIL  tests/unit/recognitionFeedback.test.ts > load squat localizes missing knee or hip evidence (0,1)
+AssertionError: expected 'moving' to be 'adjust' // Object.is equality
+
+Expected: "adjust"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:89:27
+     87| ] as const)('load squat localizes missing knee or hip evidence (%s,%s)…
+     88|   const feedback = assess('load', 'ready', load(flex, hip));
+     89|   expect(feedback.status).toBe('adjust');expect(feedback.joints).toMat…
+       |                           ^
+     90| });
+     91|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > load permits matched endpoints and neutral transitions while standing back up
+AssertionError: expected 'moving' to be 'matched' // Object.is equality
+
+Expected: "matched"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:93:54
+     91|
+     92| test('load permits matched endpoints and neutral transitions while sta…
+     93|   expect(assess('load', 'ready', load(0, 0)).status).toBe('matched');
+       |                                                      ^
+     94|   expect(assess('load', 'ready', load(1, 1)).status).toBe('matched');
+     95|   expect(assess('load', 'squat-down', load(.5, .5))).toMatchObject({ s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > load press identifies a missing arm target without blaming the upright knee or hips
+AssertionError: expected 'moving' to be 'adjust' // Object.is equality
+
+Expected: "adjust"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:101:27
+     99| test('load press identifies a missing arm target without blaming the u…
+    100|   const feedback = assess('load', 'stand-up', load(0, 0));
+    101|   expect(feedback.status).toBe('adjust');
+       |                           ^
+    102|   expect(feedback.joints).toMatchObject({ 12: 'adjust', 14: 'adjust', …
+    103|   expect(assess('load', 'stand-up', load(0, 0, .5)).status).toBe('movi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > load return accepts the top or restored endpoint but rejects leaving the legs bent
+AssertionError: expected 'moving' to be 'matched' // Object.is equality
+
+Expected: "matched"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:108:60
+    106|
+    107| test('load return accepts the top or restored endpoint but rejects lea…
+    108|   expect(assess('load', 'press-up', load(0, 0, 1)).status).toBe('match…
+       |                                                            ^
+    109|   expect(assess('load', 'press-up', load(0, 0)).status).toBe('matched'…
+    110|   const feedback = assess('load', 'press-up', load(1, 1, 1));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > feedback reads the actual current leniency configuration at level 1
+ FAIL  tests/unit/recognitionFeedback.test.ts > feedback reads the actual current leniency configuration at level 2
+ FAIL  tests/unit/recognitionFeedback.test.ts > feedback reads the actual current leniency configuration at level 3
+ FAIL  tests/unit/recognitionFeedback.test.ts > feedback reads the actual current leniency configuration at level 4
+ FAIL  tests/unit/recognitionFeedback.test.ts > feedback reads the actual current leniency configuration at level 5
+AssertionError: expected 'moving' to be 'matched' // Object.is equality
+
+Expected: "matched"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:116:89
+    114| test.each([1, 2, 3, 4, 5])('feedback reads the actual current leniency…
+    115|   const config = createLeniencyConfig(level);
+    116|   expect(assess('chop', 'ready', chop(config.repEnterRatio + .001), { …
+       |                                                                                         ^
+    117|   expect(assess('chop', 'ready', chop(config.repEnterRatio - .001), { …
+    118|   expect(assess('load', 'ready', load(config.repEnterRatio + .001, con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > carry feedback uses raw and smooth hold gates and the nearest personal center
+AssertionError: expected 'moving' to be 'matched' // Object.is equality
+
+Expected: "matched"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:125:58
+    123|
+    124| test('carry feedback uses raw and smooth hold gates and the nearest pe…
+    125|   expect(assess('carry', 'confirming', carry(0)).status).toBe('matched…
+       |                                                          ^
+    126|   expect(assess('carry', 'holding', carry(.45)).status).toBe('matched'…
+    127|   expect(assess('carry', 'released', carry(.45))).toMatchObject({ stat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > carry localizes a dominant arm deviation without coloring the opposite limb
+ FAIL  tests/unit/recognitionFeedback.test.ts > carry localizes a dominant knee deviation without coloring the opposite limb
+ FAIL  tests/unit/recognitionFeedback.test.ts > carry localizes a dominant hip deviation without coloring the opposite limb
+AssertionError: expected 'moving' to be 'adjust' // Object.is equality
+
+Expected: "adjust"
+Received: "moving"
+
+ ❯ tests/unit/recognitionFeedback.test.ts:139:27
+    137|   if (part === 'hip') f.hipHeight += 2;
+    138|   const feedback = assess('carry', 'holding', f);
+    139|   expect(feedback.status).toBe('adjust');
+       |                           ^
+    140|   expect(feedback.joints).toMatchObject({
+    141|     12: part === 'arm' ? 'adjust' : 'matched',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > chop drops judgments immediately after invalid data or reset
+ FAIL  tests/unit/recognitionFeedback.test.ts > load drops judgments immediately after invalid data or reset
+ FAIL  tests/unit/recognitionFeedback.test.ts > carry drops judgments immediately after invalid data or reset
+AssertionError: expected null not to be null
+ ❯ tests/unit/recognitionFeedback.test.ts:153:102
+    151| test.each([['chop', ChopRecognizer, 'raised'], ['load', LoadRecognizer…
+    152|   '%s drops judgments immediately after invalid data or reset', (_task…
+    153|     const r = new Recognizer(profile);r.update(syntheticFrame(50, pose…
+       |                                                                                                      ^
+    154|     r.update(replacePoint(syntheticFrame(100, pose), 16, { visibility:…
+    155|     r.update(syntheticFrame(150, pose));expect(r.getFeedback()).not.to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/22]⎯
+
+ FAIL  tests/unit/recognitionFeedback.test.ts > completed feedback is green for one observation and repeated reads cannot produce events or counts
+AssertionError: expected null to match object { status: 'matched', joints: { …(3) } }
+
+- Expected:
+{
+  "joints": {
+    "12": "matched",
+    "14": "matched",
+    "16": "matched",
+  },
+  "status": "matched",
+}
+
++ Received:
+null
+
+ ❯ tests/unit/recognitionFeedback.test.ts:170:52
+    168|       expect(events).toEqual(expectedEvents);expect(JSON.stringify(fra…
+    169|       if (events.some(event => event.kind === 'rep-completed')) {
+    170|         completed++;expect(observed.getFeedback()).toMatchObject({ sta…
+       |                                                    ^
+    171|       }
+    172|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/22]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  22 failed | 6 passed (28)
+   Start at  21:00:27
+   Duration  128ms (transform 48%, tests 27%, import 21%, worker 4%)
+

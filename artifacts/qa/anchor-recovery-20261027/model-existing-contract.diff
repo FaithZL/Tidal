@@ -1,0 +1,25 @@
+--- before/tests/unit/upperBodyCompletedRecovery.test.ts
++++ tests/unit/upperBodyCompletedRecovery.test.ts
+@@ -83,8 +83,8 @@
+   sample(p, 'raised', time + 200); expect(p.getProfile()).toEqual(saved);
+ });
+ 
+-test.each(['duplicate', 'late-duplicate', 'future', 'invalid-clock', 'invalid-time', 'invalid-id', 'resized', 'height', 'moved', 'scale', 'absent-resized', 'absent-future'] as const)('hard %s fault still clears retained complete targets and cannot revive them', fault => {
+-  const { p, time } = completed(); p.suspendTracking('tracking');
++test.each(['duplicate', 'late-duplicate', 'future', 'invalid-clock', 'invalid-time', 'invalid-id', 'resized', 'height', 'moved', 'scale', 'absent-resized', 'absent-future'] as const)('%s fault removes live readiness and only recoverable anchor movement retains complete targets', fault => {
++  const { p, time, saved } = completed(); p.suspendTracking('tracking');
+   let frame = upperFrame(time), now = time;
+   if (fault === 'duplicate' || fault === 'late-duplicate') { frame = upperFrame(time - 100); now = fault === 'late-duplicate' ? time + 20_000 : time; }
+   if (fault === 'future' || fault === 'absent-future') frame.capturedAtMs += 51;
+@@ -97,6 +97,11 @@
+   if (fault === 'scale') frame.landmarks = frame.landmarks.map((p, i) => i >= 11 && i <= 16 ? { ...p, x: .5 + (p.x - .5) * 1.6 } : p);
+   if (fault.startsWith('absent-')) frame = { ...frame, valid: false, landmarks: [] };
+   p.accept(frame, now);
++  if (fault === 'moved' || fault === 'scale') {
++    expect(p.getSnapshot()).toMatchObject({ step: 'complete', ready: false, revalidating: true, completedSteps: 3, progress: 0 });
++    expect(p.getSavedProfile()).toEqual(saved); expect(p.getProfile()).toBeNull(); expect(p.getFeedback()).toBeNull();
++    return;
++  }
+   expect(p.getSnapshot()).toMatchObject({ step: 'lowered', ready: false, revalidating: false, completedSteps: 0 });
+   expect(p.getSavedProfile()).toBeNull(); expect(p.getProfile()).toBeNull(); expect(p.getFeedback()).toBeNull();
+ });

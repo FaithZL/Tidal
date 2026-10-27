@@ -1,0 +1,100 @@
+--- upperBody-before.ts
++++ src/pose/upperBody.ts
+@@ -94,16 +94,27 @@
+   private progress = 0;
+   private reason: string | null = null;
+   private latest: UpperBodyFeatures | null = null;
+-  constructor(private readonly config: RecognitionConfig = recognitionConfig) { this.stream = new UpperBodyStream(config); }
++  private recoveryDeadline: number | null = null;
++  private lastHeader: { time: number; id: number } | null = null;
++  constructor(private readonly config: RecognitionConfig = recognitionConfig, private readonly recoveryWindowMs = 0) {
++    if (!Number.isFinite(recoveryWindowMs) || recoveryWindowMs < 0 || recoveryWindowMs > 3000) throw new RangeError('Invalid preparation recovery window');
++    this.stream = new UpperBodyStream(config);
++  }
+   accept(frame: PoseFrame, nowMs: number): void {
++    if (this.recoveryWindowMs > 0) {
++      if (this.expireRecovery(nowMs)) return;
++      const hardIssue = this.recoveryHeaderIssue(frame, nowMs);
++      if (hardIssue) { this.invalidate(hardIssue);return; }
++      this.lastHeader = { time: frame.capturedAtMs, id: frame.frameId };
++    }
+     const observed = this.stream.read(frame, nowMs);
+-    if (!observed) { this.invalidate(this.stream.reason);return; }
++    if (!observed) { this.rejectObservation(this.stream.reason, nowMs);return; }
+     const f = observed.raw;
+     if (this.reference) {
+       const issue = referenceIssue(f, this.reference, this.config);
+       if (issue) { this.invalidate(issue);return; }
+     }
+-    this.latest = f;this.available = true;
++    this.recoveryDeadline = null;this.latest = f;this.available = true;
+     if (this.step === 'complete') return;
+     const issue = this.poseIssue(f);
+     if (issue) { this.samples = [];this.progress = 0;this.reason = issue;return; }
+@@ -142,15 +153,49 @@
+         this.config.carryNoiseMultiplier * (radius + this.radii[step]!) / Math.sqrt(3));
+     })) ? 'hold-not-separable' : null;
+   }
++  /** Recovery cannot hide hard header or reference faults behind a stale/gap classification. */
++  private recoveryHeaderIssue(frame: PoseFrame, nowMs: number): string | null {
++    if (!Number.isFinite(nowMs) || nowMs < 0 || !Number.isFinite(frame.capturedAtMs) || frame.capturedAtMs < 0 ||
++      !Number.isSafeInteger(frame.frameId) || frame.frameId < 0 || !frame.valid ||
++      ![frame.width, frame.height].every(value => Number.isFinite(value) && value > 0)) return 'invalid-data';
++    if (frame.capturedAtMs - nowMs > this.config.futureToleranceMs) return 'future';
++    if (this.lastHeader && (frame.capturedAtMs <= this.lastHeader.time || frame.frameId <= this.lastHeader.id)) return 'out-of-order';
++    if (!this.reference) return null;
++    if (frame.width !== this.reference.width || frame.height !== this.reference.height) return 'resized';
++    const left = frame.landmarks[11], right = frame.landmarks[12];
++    if (left && right && [left.x, left.y, right.x, right.y].every(Number.isFinite) &&
++      landmarkConfidence(left) >= this.config.minConfidence && landmarkConfidence(right) >= this.config.minConfidence) {
++      const a = { x: left.x * frame.width, y: left.y * frame.height }, b = { x: right.x * frame.width, y: right.y * frame.height };
++      const center = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, scale = distance(a, b);
++      if (distance(center, this.reference.center) / this.reference.scalePx > this.config.centerJumpTorso ||
++        Math.max(scale / this.reference.scalePx, this.reference.scalePx / scale) > this.config.maxScaleRatio) return 'person-moved';
++    }
++    return null;
++  }
++  private rejectObservation(reason: string | null, nowMs: number): void {
++    const recoverable = ['low-confidence', 'out-of-frame', 'missing-points', 'degenerate-arm', 'gap', 'stale'];
++    if (this.recoveryWindowMs <= 0 || !this.reference || this.step !== 'raised' && this.step !== 'hold' ||
++      !reason || !recoverable.includes(reason)) { this.invalidate(reason);return; }
++    const deadline = this.recoveryDeadline ?? (this.latest ? this.latest.capturedAtMs + this.recoveryWindowMs : null);
++    if (deadline === null || nowMs > deadline) { this.invalidate('recovery-timeout');return; }
++    this.recoveryDeadline = deadline;this.samples = [];this.progress = 0;this.available = false;this.latest = null;this.reason = reason;
++  }
++  private expireRecovery(nowMs: number): boolean {
++    if (this.recoveryDeadline === null || !Number.isFinite(nowMs) || nowMs <= this.recoveryDeadline) return false;
++    this.invalidate('recovery-timeout');return true;
++  }
+   tick(nowMs: number): void {
+     if (!Number.isFinite(nowMs) || nowMs < 0) { this.invalidate('invalid-data');this.stream.reset(); }
+-    else if (this.latest && nowMs - this.latest.capturedAtMs > this.config.trackingMaxAgeMs) { this.invalidate('stale');this.stream.reset(); }
++    else if (this.expireRecovery(nowMs)) this.stream.reset();
++    else if (this.latest && nowMs - this.latest.capturedAtMs > this.config.trackingMaxAgeMs) {
++      this.rejectObservation('stale', nowMs);if (this.recoveryDeadline === null) this.stream.reset();
++    }
+   }
+   private invalidate(reason: string | null): void {
+     this.step = 'lowered';this.samples = [];this.examples = {};this.radii = {};this.reference = null;
+-    this.available = false;this.progress = 0;this.reason = reason;this.latest = null;
+-  }
+-  reset(): void { this.invalidate(null);this.stream.reset(); }
++    this.available = false;this.progress = 0;this.reason = reason;this.latest = null;this.recoveryDeadline = null;
++  }
++  reset(): void { this.invalidate(null);this.stream.reset();this.lastHeader = null; }
+   getProfile(): UpperBodyProfile | null {
+     return this.step === 'complete' && this.reference ? structuredClone({ lowered: this.examples.lowered!, raised: this.examples.raised!, hold: this.examples.hold!, reference: this.reference }) : null;
+   }
+@@ -177,7 +222,8 @@
+     const target = this.step === 'lowered' ? '双手放下' : this.step === 'raised' ? '双手举起' : '双臂前举';
+     return { status: matched ? 'matched' : 'adjust', message: matched ? `${target}匹配，保持片刻` : `请调整到${target}姿态`, joints };
+   }
+-  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null } {
+-    return { step: this.step, progress: this.progress, available: this.available, reason: this.reason };
+-  }
+-}
++  getSnapshot(): { step: PreparationStep; progress: number; available: boolean; reason: string | null; recovering: boolean; completedSteps: 0 | 1 | 2 | 3 } {
++    return { step: this.step, progress: this.progress, available: this.available, reason: this.reason,
++      recovering: this.recoveryDeadline !== null, completedSteps: this.step === 'lowered' ? 0 : this.step === 'raised' ? 1 : this.step === 'hold' ? 2 : 3 };
++  }
++}

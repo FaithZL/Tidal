@@ -1,0 +1,23 @@
+{
+  "reviewers": [
+    "upper_body_teaching",
+    "recognition_tolerance_audit"
+  ],
+  "status": "No remaining P1/P2 found in independent read-only review",
+  "resolved": [
+    {
+      "priority": "P2",
+      "issue": "Preserved-checkpoint notice survived later timeout reset and contradicted 0/3",
+      "evidence": "stale-notice-red.log exit1; e2e-review-final.log exit0",
+      "fix": "When completedSteps becomes0, replace preservation notice permanently with canceled-auto-start/reprepare text."
+    }
+  ],
+  "boundaries": [
+    "initial setup and paused automatic-demo preparation entry both preserve incomplete upper checkpoints on visible blur",
+    "auto start canceled; no focus resume; training input cleared; all pause reasons retained",
+    "hidden, complete, truly active, full-body still reset",
+    "no count, timing, inventory, reward or threshold changes",
+    "current joint quality and latest causal summaries only; no added pose/image persistence"
+  ],
+  "testsNotRunByReviewers": true
+}

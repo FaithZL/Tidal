@@ -1,0 +1,12 @@
+{
+  "root": "commands.json",
+  "observationsPreparation": "upper-body-commands.json",
+  "recognizerSource": "upper-recognizer-commands.json",
+  "teaching": "teaching-commands.json",
+  "drawing": "upper-drawing-commands.json",
+  "review": "review.json",
+  "production": "production/production.json",
+  "history": "qa-restoration.json",
+  "preservation": "preservation.json",
+  "scope": "615unit/32selectedE2E/static/assets/build/normalproductionUI; no fullverify or physical accuracy acceptance"
+}

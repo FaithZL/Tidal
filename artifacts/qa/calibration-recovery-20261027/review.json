@@ -1,0 +1,25 @@
+{
+  "independentReviewer": "calibration_recovery_review",
+  "result": "No remaining P1/P2 found in final read-only review",
+  "fixed": [
+    {
+      "issue": "Explicit Start after setup visibility recovery left visibility paused and required a second click",
+      "evidence": "edge-and-contract-red.log -> edge-and-contract-green.log",
+      "fix": "Only visible explicit setup Start after successful setup-ready resumes visibility; automatic/user/animation-stop unchanged"
+    },
+    {
+      "issue": "Clock-only stale feedback could be overwritten by generic unavailable without a later frame",
+      "evidence": "Same RED/GREEN logs",
+      "fix": "Normalize known stale reason and copy current cause after all source/readiness/pause cleanup"
+    }
+  ],
+  "boundaries": [
+    "rest readiness blocks task advance even without tracking in pauseReasons",
+    "resume new source only with verified fresh observations and matching token session/epoch",
+    "tracking ownership never clears user/visibility/source-error",
+    "soft and no-person preserve template; metadata/anchor/camera/session resets clear",
+    "existing safety negatives preserved with updated saved-template UI contract"
+  ],
+  "reviewerRanTests": false,
+  "finalDerivedUIPrompt": "Independent reviewer confirmed trackingOnly requires own token and solely tracking pause; manual/visibility/source-error/animation stop keep manual Continue. No handler or state-flow changes."
+}

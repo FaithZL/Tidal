@@ -1,0 +1,32 @@
+{
+  "scope": "Diagnose repeated hold and full preparation reset; no claim of a physical-camera root cause yet.",
+  "sources": [
+    "UpperBodyPreparation.holdIssue",
+    "SetupPanel.suspendCalibration",
+    "browser.onSuspend"
+  ],
+  "reproducedPaths": [
+    {
+      "cause": "window.blur",
+      "effect": "Unconditional reset from incomplete hold to lowered, completed checkpoints cleared; subsequent frame reason can hide causal event."
+    },
+    {
+      "cause": "hold separation gate",
+      "effect": "Requires hold different from raised in addition to lowered, while active carry only compares hold versus lowered. This can reject shoulder-height forward pose."
+    },
+    {
+      "cause": "noise dimension",
+      "effect": "Prep global six-dimensional radius is used in per-arm three-dimensional distance gate; potential green instantaneous feedback with final-window rejection."
+    }
+  ],
+  "productionBehaviorChanged": true,
+  "next": "Add current joint quality and latest reset/sample rejection summaries in memory; read live UI during one user retry before choosing the production behavior fix.",
+  "privacy": "No real camera images, coordinates or pose sequences saved. Synthetic fixtures only in QA.",
+  "temporaryIntegrationCheck": {
+    "command": "npm run typecheck",
+    "exitCode": 2,
+    "reason": "UI saved before model collaborator added reset(reason)/getDiagnostics interface; final check required."
+  },
+  "productionChange": "Only visible blur during incomplete upper-body preparation retains checkpoints; automatic start is canceled, current training input is cleared, and pause ownership remains unchanged. Real hidden, completed/active/fullbody state or invalid tracking still resets.",
+  "physicalCause": "Not established for the user event; awaiting current on-page diagnostics during retry."
+}

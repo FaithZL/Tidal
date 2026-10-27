@@ -3,6 +3,7 @@ import type { PoseFeatures } from '../features.js';
 import { RepRecognizer } from './repRecognizer.js';
 import { recognitionConfig, type RecognitionConfig } from '../../config/recognitionConfig.js';
 export class ChopRecognizer extends RepRecognizer {
+  protected readonly feedbackTask = 'chop' as const;
   private readonly raisedY: number;
   private readonly travel: number;
   constructor(profile: RecognitionProfile, config: RecognitionConfig = recognitionConfig) {

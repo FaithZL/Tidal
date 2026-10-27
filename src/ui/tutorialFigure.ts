@@ -1,5 +1,5 @@
 import { tutorialLessons } from './exerciseTutorialModel.js';
-import type { TutorialFrame, TutorialJoint, TutorialPoint } from './exerciseTutorialModel.js';
+import type { TutorialFrame, TutorialJoint, TutorialPoint, TutorialLesson } from './exerciseTutorialModel.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const palette = {
@@ -159,9 +159,8 @@ export class TutorialFigure {
     this.root.append(legend);
   }
 
-  draw(frame: TutorialFrame): void {
+  draw(frame: TutorialFrame, lesson: TutorialLesson = tutorialLessons[frame.task]): void {
     if (this.disposed) return;
-    const lesson = tutorialLessons[frame.task];
     const step = lesson.steps[frame.stepIndex];
     this.title.textContent = `${lesson.title}：${step.title}，人体动作示意`;
     this.description.textContent = `原创人体示意，展示本应用的动作阶段，不计训练成果。${step.cue} 金色双圈与较大的关节点表示本步关注：${frame.highlight.map(joint => jointNames[joint]).join('、')}。`;

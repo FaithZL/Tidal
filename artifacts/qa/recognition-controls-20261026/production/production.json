@@ -1,0 +1,32 @@
+{
+  "input": "Normal production UI; no controller/clock mutation; explicit permission button denied by test stub",
+  "media": "Generated farm/UI PNGs; no real camera, recording or pose trajectories",
+  "browser": "156.0.8078.4",
+  "screenshots": [
+    "settings-desktop.png",
+    "denied-explicit.png",
+    "settings-mobile.png",
+    "settings-mobile-bottom.png"
+  ],
+  "layout": {
+    "width": 390,
+    "overflow": false,
+    "range": {
+      "x": 51,
+      "y": 552.421875,
+      "width": 288,
+      "height": 16,
+      "top": 552.421875,
+      "right": 339,
+      "bottom": 568.421875,
+      "left": 51
+    }
+  },
+  "defaultLevel": 3,
+  "persistedLevel": 5,
+  "permissionCalls": 1,
+  "errors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "external": []
+}

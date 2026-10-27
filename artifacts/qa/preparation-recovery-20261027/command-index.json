@@ -1,0 +1,10 @@
+{
+  "root": "commands.json",
+  "model": "model-commands.json",
+  "setupOrderFailure": "setup-order.log",
+  "review": "review.json",
+  "production": "production/production.json",
+  "history": "qa-restoration.json",
+  "preservation": "preservation.json",
+  "scope": "653unit/12selectedE2E/type/lint/build/2normalproductionUI; no fullverify or physical camera accuracy acceptance"
+}

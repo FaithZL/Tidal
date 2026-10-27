@@ -1,0 +1,138 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyAnchorRecovery.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts (19 tests | 11 failed) 23ms
+   × completed translation suspends live tracking while retaining the immutable original calibration 7ms
+   × completed larger suspends live tracking while retaining the immutable original calibration 1ms
+   × completed smaller suspends live tracking while retaining the immutable original calibration 1ms
+   × returning from translation requires a wholly fresh stable window at the original anchor 1ms
+   × returning from larger requires a wholly fresh stable window at the original anchor 1ms
+   × returning from smaller requires a wholly fresh stable window at the original anchor 1ms
+   × leaving the original anchor again discards partial recovery samples instead of joining windows 1ms
+   × a rejected moved frame advances metadata watermarks against duplicate replay 1ms
+   × a rejected moved frame advances metadata watermarks against same-id replay 1ms
+   × a rejected moved frame advances metadata watermarks against same-time replay 1ms
+   × a sudden movement between two positions inside the original anchor also suspends without deleting calibration 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > completed translation suspends live tracking while retaining the immutable original calibration
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > completed larger suspends live tracking while retaining the immutable original calibration
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > completed smaller suspends live tracking while retaining the immutable original calibration
+AssertionError: expected { step: 'lowered', progress: +0, …(6) } to match object { step: 'complete', …(6) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "available": false,
+-   "completedSteps": 3,
++   "completedSteps": 0,
+    "progress": 0,
+    "ready": false,
+    "reason": "person-moved",
+-   "revalidating": true,
+-   "step": "complete",
++   "revalidating": false,
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts:29:29
+     27|   for (let offset = 0; offset <= 5000; offset += 100) {
+     28|     p.accept(moved(time + offset, kind), time + offset);
+     29|     expect(p.getSnapshot()).toMatchObject({ step: 'complete', complete…
+       |                             ^
+     30|       revalidating: true, progress: 0, reason: 'person-moved' });
+     31|     expect(p.getDiagnostics()).toMatchObject({ sampleCount: 0, observe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > returning from translation requires a wholly fresh stable window at the original anchor
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > returning from larger requires a wholly fresh stable window at the original anchor
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > returning from smaller requires a wholly fresh stable window at the original anchor
+AssertionError: expected { sampleCount: +0, …(5) } to match object { sampleCount: 12, observedMs: 1100 }
+(8 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "observedMs": 1100,
+-   "sampleCount": 12,
++   "observedMs": 0,
++   "sampleCount": 0,
+  }
+
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts:40:30
+     38|   const { p, time, saved } = completed(); p.accept(moved(time, kind), …
+     39|   const start = time + 100; sample(p, 'hold', start, 1100);
+     40|   expect(p.getDiagnostics()).toMatchObject({ sampleCount: 12, observed…
+       |                              ^
+     41|   expect(p.getSnapshot()).toMatchObject({ step: 'complete', ready: fal…
+     42|   expect(p.getSavedProfile()).toEqual(saved); expect(p.getProfile()).t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > leaving the original anchor again discards partial recovery samples instead of joining windows
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts:50:85
+     48| test('leaving the original anchor again discards partial recovery samp…
+     49|   const { p, time, saved } = completed(); p.accept(moved(time), time);
+     50|   const next = sample(p, 'hold', time + 100, 600); expect(p.getSnapsho…
+       |                                                                                     ^
+     51|   p.accept(moved(next), next); expect(p.getDiagnostics()).toMatchObjec…
+     52|   const start = next + 100; sample(p, 'hold', start, 600); expect(p.ge…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > a rejected moved frame advances metadata watermarks against duplicate replay
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > a rejected moved frame advances metadata watermarks against same-id replay
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > a rejected moved frame advances metadata watermarks against same-time replay
+AssertionError: expected null not to be null
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts:58:35
+     56| test.each(['duplicate', 'same-id', 'same-time'] as const)('a rejected …
+     57|   const { p, time } = completed(); const original = moved(time); p.acc…
+     58|   expect(p.getSavedProfile()).not.toBeNull();
+       |                                   ^
+     59|   const replay = upperFrame(time + 100, 'hold');
+     60|   if (fault !== 'same-time') replay.frameId = original.frameId;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  tests/unit/upperBodyAnchorRecovery.test.ts > a sudden movement between two positions inside the original anchor also suspends without deleting calibration
+AssertionError: expected { step: 'lowered', progress: +0, …(6) } to match object { Object (step, ready, ...) }
+(4 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "ready": false,
+    "reason": "person-moved",
+-   "revalidating": true,
+-   "step": "complete",
++   "revalidating": false,
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyAnchorRecovery.test.ts:77:27
+     75|   p.accept(shifted(time, -1), time); expect(p.getSnapshot().ready).toB…
+     76|   p.accept(shifted(time + 100, 1), time + 100);
+     77|   expect(p.getSnapshot()).toMatchObject({ step: 'complete', ready: fal…
+       |                           ^
+     78|   expect(p.getSavedProfile()).toEqual(saved); expect(p.getDiagnostics(…
+     79|   sample(p, 'hold', time + 200); expect(p.getProfile()).toEqual(saved);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed | 8 passed (19)
+   Start at  09:03:54
+   Duration  146ms (tests 44%, transform 34%, import 17%, worker 5%)
+

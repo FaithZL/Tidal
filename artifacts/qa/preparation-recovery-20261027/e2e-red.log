@@ -1,0 +1,105 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-recovery.spec.ts --output artifacts/qa/preparation-recovery-20261027/red-results
+
+[WebServer] (node:24531) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24551) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24599) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24619) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:24620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:11:03 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:11:03 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:11:03 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:11:03 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-recovery.spec.ts:9:1 › brief loss at step two pauses sampling and resumes the same step without restarting completed evidence (11.3s)
+(node:24685) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:11:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:11:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 12:11:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 12:11:15 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/preparation-recovery.spec.ts:15:1 › sustained loss clears the checkpoint and cannot turn partial preparation into readiness (10.7s)
+
+
+  1) tests/e2e/preparation-recovery.spec.ts:9:1 › brief loss at step two pauses sampling and resumes the same step without restarting completed evidence 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "raised"
+    Received: "lowered"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        18 × locator resolved to <section data-step="lowered" aria-label="上半身自动准备" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+           - unexpected value "lowered"
+
+
+       8 |
+       9 | test('brief loss at step two pauses sampling and resumes the same step without restarting completed evidence',async({page})=>{
+    > 10 |  await start(page);await page.evaluate(()=>{window.upperFixture.low=true;});await expect(page.locator('#upperBodyReason')).toContainText('不够清晰');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await expect(page.locator('#upperBodyStepCount')).toContainText('1/3');await expect(page.locator('#upperBodyReason')).toContainText('保留');await expect(page.locator('#beginCamera')).toBeDisabled();
+         |                                                                                                                                                                                                      ^
+      11 |  await mkdir(output,{recursive:true});await page.screenshot({path:`${output}/recovering-synthetic.png`});await page.waitForTimeout(400);await page.evaluate(()=>{window.upperFixture.low=false;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','raised');await pose(page,'raised');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');
+      12 |  await page.evaluate(()=>{window.upperFixture.low=true;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-recovering','true');await expect(page.locator('#upperBodyStepCount')).toContainText('2/3');await page.waitForTimeout(300);await page.evaluate(()=>{window.upperFixture.low=false;});await pose(page,'hold');await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');await expect(page.locator('#statusTag')).toHaveText('训练中',{timeout:10000});await expect(page.locator('#chopValue')).toHaveText('0/15');
+      13 | });
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-recovery.spec.ts:10:198
+
+    Error Context: artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-brief-cfff5-starting-completed-evidence/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-brief-cfff5-starting-completed-evidence/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-brief-cfff5-starting-completed-evidence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/preparation-recovery.spec.ts:15:1 › sustained loss clears the checkpoint and cannot turn partial preparation into readiness 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "true"
+    Received: ""
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        - locator resolved to <section data-step="raised" aria-label="上半身自动准备" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+        17 × unexpected value "null"
+           - locator resolved to <section data-step="lowered" aria-label="上半身自动准备" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+        - unexpected value "null"
+
+
+      14 |
+      15 | test('sustained loss clears the checkpoint and cannot turn partial preparation into readiness',async({page})=>{
+    > 16 |  await start(page);await page.evaluate(()=>{window.upperFixture.low=true;});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-recovering','true');await page.waitForTimeout(3300);await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','lowered');await expect(page.locator('#upperBodyStepCount')).toContainText('0/3');await expect(page.locator('#beginCamera')).toBeDisabled();await expect(page.locator('#chopValue')).toHaveText('0/15');
+         |                                                                                                                                 ^
+      17 | });
+      18 |
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-recovery.spec.ts:16:129
+
+    Error Context: artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-susta-e3586--preparation-into-readiness/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-susta-e3586--preparation-into-readiness/trace.zip
+    Usage:
+
+        npx playwright show-trace artifacts/qa/preparation-recovery-20261027/red-results/preparation-recovery-susta-e3586--preparation-into-readiness/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/preparation-recovery.spec.ts:9:1 › brief loss at step two pauses sampling and resumes the same step without restarting completed evidence 
+    tests/e2e/preparation-recovery.spec.ts:15:1 › sustained loss clears the checkpoint and cannot turn partial preparation into readiness 

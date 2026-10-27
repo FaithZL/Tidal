@@ -1,0 +1,1 @@
+First GREEN attempt: 100/101 passed; the remaining new test used unsupported Chai toBeFalse matcher. Replaced that newly added matcher with toBe(false), preserving the same assertion meaning. No existing tests or production behavior changed for this correction.

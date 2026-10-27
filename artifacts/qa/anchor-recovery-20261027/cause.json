@@ -1,0 +1,20 @@
+{
+  "observation": "Read-only live accessibility text; no real images/video/landmarks saved",
+  "initial": {
+    "step": "lowered",
+    "completed": "0/3",
+    "progress": 0,
+    "reason": "low-confidence",
+    "shoulders": "100%/100%",
+    "elbows": "42%/40%",
+    "wrists": "3%/5%",
+    "fps": 15.1
+  },
+  "subsequent": {
+    "lastReset": "身体或机位变化 · 3/3 → 0/3",
+    "currentIssue": "肘部出框/手腕低置信度"
+  },
+  "interpretation": "person-moved is an estimated shoulder reference mismatch, not proof of actual camera/person movement; this is a separate path from soft joint tracking loss. Initial quality gating is not evidence of progress computation failure.",
+  "scope": "Retain completed templates on position/scale mismatch, deny readiness until fresh original-anchor validation. Never reanchor automatically.",
+  "userConfirmation": "用户将双手抬至胸前偏下、肘部可见后回复“开始走了”；不据此声称完整真实训练通过。"
+}

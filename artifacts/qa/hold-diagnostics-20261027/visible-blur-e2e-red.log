@@ -1,0 +1,104 @@
+
+> tidal-farm-motion-demo@0.1.0 test:e2e
+> playwright test tests/e2e/preparation-diagnostics.spec.ts -g visible blur
+
+[WebServer] (node:28472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28553) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:28577) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:28580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:02:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:02:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:02:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:02:19 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  1 tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (initial setup) (12.2s)
+(node:28637) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:02:32 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:02:32 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+[WebServer] 1:02:33 AM [vite] (client) [console.warn] THREE.FBXLoader: ShininessExponent map is not supported in three.js, skipping texture.
+[WebServer] 1:02:33 AM [vite] (client) [console.warn] THREE.FBXLoader: ReflectionFactor map is not supported in three.js, skipping texture.
+  ✘  2 tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (demo entry) (12.7s)
+
+
+  1) tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (initial setup) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "hold"
+    Received: "lowered"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        18 × locator resolved to <section data-step="lowered" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+           - unexpected value "lowered"
+
+
+      31 |  }else await thirdStep(page);
+      32 |  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+    > 33 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await expect(page.locator('#upperBodyStepCount')).toContainText('2/3');
+         |                                                      ^
+      34 |  await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');
+      35 |  await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+      36 |  await page.waitForTimeout(3600);await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:33:54
+
+    Error Context: test-results/preparation-diagnostics-vi-852ff-omatic-start-initial-setup-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-vi-852ff-omatic-start-initial-setup-/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-vi-852ff-omatic-start-initial-setup-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (demo entry) 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('#upperBodyPreparation')
+    Expected: "hold"
+    Received: "lowered"
+    Timeout:  7000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('#upperBodyPreparation') with timeout 7000ms
+      - waiting for locator('#upperBodyPreparation')
+        18 × locator resolved to <section data-step="lowered" aria-label="上半身自动准备" data-recovering="false" id="upperBodyPreparation" class="upper-body-preparation">…</section>
+           - unexpected value "lowered"
+
+
+      31 |  }else await thirdStep(page);
+      32 |  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+    > 33 |  await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','hold');await expect(page.locator('#upperBodyStepCount')).toContainText('2/3');
+         |                                                      ^
+      34 |  await expect(page.locator('#upperBodySuspendNotice')).toContainText('保留准备进度');
+      35 |  await page.evaluate(()=>{window.upperFixture.pose='hold';});await expect(page.locator('#upperBodyPreparation')).toHaveAttribute('data-step','complete');
+      36 |  await page.waitForTimeout(3600);await expect(page.locator('#statusTag')).not.toHaveText('训练中');await expect(page.locator('#upperBodyStepCount')).toContainText('3/3');await expect(page.locator('#chopValue')).toHaveText('0/15');
+        at /Users/zero/work/ai_ws/Tidal/tests/e2e/preparation-diagnostics.spec.ts:33:54
+
+    Error Context: test-results/preparation-diagnostics-vi-2ab26-automatic-start-demo-entry-/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/preparation-diagnostics-vi-2ab26-automatic-start-demo-entry-/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/preparation-diagnostics-vi-2ab26-automatic-start-demo-entry-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (initial setup) 
+    tests/e2e/preparation-diagnostics.spec.ts:28:36 › visible blur keeps incomplete preparation checkpoints but cancels automatic start (demo entry) 

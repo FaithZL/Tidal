@@ -1,0 +1,104 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/setupPanelFeedback.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/setupPanelFeedback.test.ts (8 tests | 8 failed) 5ms
+   × feedback paints measured joints and uses both endpoints for each skeleton edge 3ms
+   × neutral feedback and unavailable judgments never paint red or green 1ms
+   × invalid input cannot retain or introduce colored judgments 0ms
+   × non-finite input cannot retain or introduce colored judgments 0ms
+   × stop immediately clears the feedback marker and colored drawing 0ms
+   × blur immediately clears the feedback marker and colored drawing 0ms
+   × visibility immediately clears the feedback marker and colored drawing 0ms
+   × feedback does not bypass the existing visibility threshold for a joint or its edges 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > feedback paints measured joints and uses both endpoints for each skeleton edge
+AssertionError: expected 'undefined' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "undefined"
+
+ ❯ tests/unit/setupPanelFeedback.test.ts:40:38
+     38| test('feedback paints measured joints and uses both endpoints for each…
+     39|   const f = fixture({ status: 'adjust', message: '主手回到上肩位置', joints: {…
+     40|   expect(typeof f.panel.setFeedback).toBe('function');
+       |                                      ^
+     41|   const frame = syntheticFrame(50, 'raised');f.draw(frame);
+     42|   expect(f.preview.dataset.feedback).toBe('adjust');expect(f.label.tex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > neutral feedback and unavailable judgments never paint red or green
+TypeError: panel.setFeedback is not a function
+ ❯ Object.onFrame tests/unit/setupPanelFeedback.test.ts:31:25
+     29|     element() as HTMLElement, element() as HTMLElement, element() as H…
+     30|     { disabled: false } as HTMLButtonElement, calibration as unknown a…
+     31|     { onFrame() { panel.setFeedback(feedback); } });
+       |                         ^
+     32|   const draw = (frame = syntheticFrame(50, 'raised')) => (panel as unk…
+     33|   const point = (frame: PoseFrame, index: number) => [frame.landmarks[…
+ ❯ SetupPanel.draw src/ui/setupPanel.ts:77:17
+ ❯ Object.draw tests/unit/setupPanelFeedback.test.ts:32:113
+ ❯ tests/unit/setupPanelFeedback.test.ts:52:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > invalid input cannot retain or introduce colored judgments
+ FAIL  tests/unit/setupPanelFeedback.test.ts > non-finite input cannot retain or introduce colored judgments
+TypeError: panel.setFeedback is not a function
+ ❯ Object.onFrame tests/unit/setupPanelFeedback.test.ts:31:25
+     29|     element() as HTMLElement, element() as HTMLElement, element() as H…
+     30|     { disabled: false } as HTMLButtonElement, calibration as unknown a…
+     31|     { onFrame() { panel.setFeedback(feedback); } });
+       |                         ^
+     32|   const draw = (frame = syntheticFrame(50, 'raised')) => (panel as unk…
+     33|   const point = (frame: PoseFrame, index: number) => [frame.landmarks[…
+ ❯ SetupPanel.draw src/ui/setupPanel.ts:77:17
+ ❯ Object.draw tests/unit/setupPanelFeedback.test.ts:32:113
+ ❯ tests/unit/setupPanelFeedback.test.ts:61:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > stop immediately clears the feedback marker and colored drawing
+ FAIL  tests/unit/setupPanelFeedback.test.ts > blur immediately clears the feedback marker and colored drawing
+ FAIL  tests/unit/setupPanelFeedback.test.ts > visibility immediately clears the feedback marker and colored drawing
+TypeError: panel.setFeedback is not a function
+ ❯ Object.onFrame tests/unit/setupPanelFeedback.test.ts:31:25
+     29|     element() as HTMLElement, element() as HTMLElement, element() as H…
+     30|     { disabled: false } as HTMLButtonElement, calibration as unknown a…
+     31|     { onFrame() { panel.setFeedback(feedback); } });
+       |                         ^
+     32|   const draw = (frame = syntheticFrame(50, 'raised')) => (panel as unk…
+     33|   const point = (frame: PoseFrame, index: number) => [frame.landmarks[…
+ ❯ SetupPanel.draw src/ui/setupPanel.ts:77:17
+ ❯ Object.draw tests/unit/setupPanelFeedback.test.ts:32:113
+ ❯ tests/unit/setupPanelFeedback.test.ts:70:92
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/unit/setupPanelFeedback.test.ts > feedback does not bypass the existing visibility threshold for a joint or its edges
+TypeError: panel.setFeedback is not a function
+ ❯ Object.onFrame tests/unit/setupPanelFeedback.test.ts:31:25
+     29|     element() as HTMLElement, element() as HTMLElement, element() as H…
+     30|     { disabled: false } as HTMLButtonElement, calibration as unknown a…
+     31|     { onFrame() { panel.setFeedback(feedback); } });
+       |                         ^
+     32|   const draw = (frame = syntheticFrame(50, 'raised')) => (panel as unk…
+     33|   const point = (frame: PoseFrame, index: number) => [frame.landmarks[…
+ ❯ SetupPanel.draw src/ui/setupPanel.ts:77:17
+ ❯ Object.draw tests/unit/setupPanelFeedback.test.ts:32:113
+ ❯ tests/unit/setupPanelFeedback.test.ts:81:87
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  21:12:16
+   Duration  85ms (transform 58%, import 20%, tests 18%, worker 5%)
+

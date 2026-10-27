@@ -1,0 +1,17 @@
+{
+  "suite": "e2e-regression.log:26 tests,24pass2fail; full original test files unchanged",
+  "animationStop": {
+    "trace": "regression-results/animation-stop-one-click-f-f412b-d-explicit-continue-resumes/trace.zip",
+    "sourceSHA256": "7381f2d45d824b5e1017d1c76562f80f431b576a7095194e2af42e34158355ae",
+    "evidence": [
+      "Test file SHA same in trace, worktree and HEAD; original assertions untouched",
+      "Screenshots at2932.831ms and~3002ms show 下挥 · 击中树干",
+      "DOM polling from2876.153ms to2985.430ms records chop-return both ends; only6DOM snapshots, no directdata-action=chop-down snapshot",
+      "AutoDemo/Keyboard/controller/world unchanged;accelerated.085 speed has nominal down→return17ms window",
+      "Failure occurred before first stop click"
+    ],
+    "limit": "Evidence supports polling missed a transient phase, does not prove physical device performance cause or that data-action was observed as down. Original targeted rerun pending.",
+    "rerun": "e2e-final.log: original one click freezes test passed unchanged (alongside7 new tests). Original failure and trace retained; no timing/config/assertion changes."
+  },
+  "preferences": "Startup readiness race, fixed via disabled initial button; see review.json. Pointer dragging had not yet executed at failure."
+}

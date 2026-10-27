@@ -1,0 +1,22 @@
+{
+  "test": "a real anchor change or explicit camera stop still clears completed calibration",
+  "initialSuite": "34/35 passed; this case failed waiting for initial lowered->raised before target anchor/stop actions",
+  "traceObservations": [
+    {
+      "timestamp": 88820.296,
+      "cameraStatus": "正在请求摄像头权限（仅视频）…",
+      "frames": 0
+    },
+    {
+      "timestamp": 95824.259,
+      "event": "7s lowered->raised assertion failed"
+    },
+    {
+      "timestamp": 95827.657,
+      "event": "During teardown the camera error said occupied/unreadable; preparation inactive and0frames"
+    }
+  ],
+  "conclusion": "No video frames were delivered in this initialization attempt. The lower-level reason for pending getUserMedia was not established; teardown error is not proof of actual hardware occupancy or application tracking failure.",
+  "unchangedRecheck": "anchor-original-recheck.log",
+  "timeoutsAssertionsUnchanged": true
+}

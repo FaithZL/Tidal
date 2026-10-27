@@ -1,0 +1,12 @@
+
+> tidal-farm-motion-demo@0.1.0 lint
+> eslint src
+
+
+/Users/zero/work/ai_ws/Tidal/src/ui/recognitionPreference.ts
+  2:41  error  '_storage' is defined but never used  @typescript-eslint/no-unused-vars
+  3:41  error  '_level' is defined but never used    @typescript-eslint/no-unused-vars
+  3:55  error  '_storage' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 3 problems (3 errors, 0 warnings)
+

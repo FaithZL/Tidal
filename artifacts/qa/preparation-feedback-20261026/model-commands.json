@@ -1,0 +1,14 @@
+{
+  "scope": ["src/pose/upperBody.ts", "tests/unit/upperBody.test.ts"],
+  "commands": [
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "model-red.log", "exitCode": 1, "result": "14 new tests failed because UpperBodyPreparation.getFeedback was missing; all 27 existing tests passed. Production implementation was held until the root entry-point E2E RED finished."},
+    {"command": "npm run test:unit -- tests/unit/upperBody.test.ts", "log": "model-green.log", "exitCode": 0, "result": "41/41 passed: current-step per-arm lowered/raised/hold gates, stored noise separation, invalid/reset null, neutral completion, pure repeated reads and copy isolation."},
+    {"command": "./node_modules/.bin/eslint src/pose/upperBody.ts", "log": "model-lint.log", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run typecheck", "log": "model-typecheck.log", "exitCode": 0, "result": "Passed."},
+    {"command": "git diff --check", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run test:unit", "log": "model-unit-all.log", "exitCode": 0, "result": "64 files, 629/629 tests passed at the integrated workspace snapshot."}
+  ],
+  "implementation": "Added only a type import and read-only getFeedback on the preparation model. It consumes the existing latest valid raw observation and stored references/radii; does not modify accept, poseIssue, holdIssue, sampling durations/thresholds, state transitions or events; creates no new pose sequence.",
+  "notRun": ["E2E", "camera", "install", "build", "commit", "push"],
+  "limitations": "All model test input is synthetic. Pose matching colors are preparation guidance, not exercise completion, real-camera accuracy or medical-form validation. UI and browser wiring are owned by the root task."
+}

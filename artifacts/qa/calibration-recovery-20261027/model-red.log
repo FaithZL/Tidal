@@ -1,0 +1,201 @@
+
+> tidal-farm-motion-demo@0.1.0 test:unit
+> vitest run tests/unit/upperBodyCompletedRecovery.test.ts
+
+
+ RUN  v5.0.4 /Users/zero/work/ai_ws/Tidal
+
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts (26 tests | 26 failed) 50ms
+   × completed low-confidence loss retains the exact template but immediately removes readiness and feedback 8ms
+   × completed out-of-frame loss retains the exact template but immediately removes readiness and feedback 2ms
+   × completed missing-points loss retains the exact template but immediately removes readiness and feedback 5ms
+   × completed degenerate-arm loss retains the exact template but immediately removes readiness and feedback 1ms
+   × completed gap loss retains the exact template but immediately removes readiness and feedback 2ms
+   × completed stale loss retains the exact template but immediately removes readiness and feedback 1ms
+   × completed no-person loss retains the exact template but immediately removes readiness and feedback 3ms
+   × revalidation accepts any stable upper-body pose with twelve fresh samples and never relearns its saved targets 1ms
+   × repeated absence never expires complete targets, and returning after a gap still requires a full fresh window 1ms
+   × a lost frame clears the entire partial revalidation window instead of joining the two halves 2ms
+   × revalidation requires both duration and sample count and getters cannot make it ready 3ms
+   × unstable recovery poses keep the template unavailable until a new stable window succeeds 2ms
+   × hard duplicate fault still clears retained complete targets and cannot revive them 3ms
+   × hard late-duplicate fault still clears retained complete targets and cannot revive them 1ms
+   × hard future fault still clears retained complete targets and cannot revive them 1ms
+   × hard invalid-clock fault still clears retained complete targets and cannot revive them 2ms
+   × hard invalid-time fault still clears retained complete targets and cannot revive them 2ms
+   × hard invalid-id fault still clears retained complete targets and cannot revive them 2ms
+   × hard resized fault still clears retained complete targets and cannot revive them 1ms
+   × hard height fault still clears retained complete targets and cannot revive them 1ms
+   × hard moved fault still clears retained complete targets and cannot revive them 1ms
+   × hard scale fault still clears retained complete targets and cannot revive them 1ms
+   × hard absent-resized fault still clears retained complete targets and cannot revive them 1ms
+   × hard absent-future fault still clears retained complete targets and cannot revive them 1ms
+   × explicit reset always clears retained targets, while suspension preserves only opted-in completed templates 1ms
+   × complete-template retention works without enabling incomplete-step recovery or weakening strict defaults 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 26 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed low-confidence loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed out-of-frame loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed missing-points loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed degenerate-arm loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed gap loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed stale loss retains the exact template but immediately removes readiness and feedback
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > completed no-person loss retains the exact template but immediately removes readiness and feedback
+AssertionError: expected { step: 'lowered', progress: +0, …(4) } to match object { step: 'complete', …(6) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "available": false,
+-   "completedSteps": 3,
++   "completedSteps": 0,
+    "progress": 0,
+-   "ready": false,
+    "recovering": false,
+-   "revalidating": true,
+-   "step": "complete",
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:31:27
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > revalidation accepts any stable upper-body pose with twelve fresh samples and never relearns its saved targets
+AssertionError: expected { Object (step, progress, ...) } to match object { step: 'complete', …(3) }
+(4 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "available": false,
+-   "ready": false,
+-   "revalidating": true,
+-   "step": "complete",
++   "available": true,
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:41:27
+     39|   const { p, time, saved } = completed(), broken = bad(time, 'out-of-f…
+     40|   let next = sample(p, 'lowered', time + 100, 600);
+     41|   expect(p.getSnapshot()).toMatchObject({ step: 'complete', available:…
+       |                           ^
+     42|   expect(p.getSnapshot().progress).toBeGreaterThan(0); expect(p.getPro…
+     43|   next = sample(p, 'lowered', next, 600);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > repeated absence never expires complete targets, and returning after a gap still requires a full fresh window
+AssertionError: expected { step: 'lowered', progress: +0, …(4) } to match object { Object (step, ready, ...) }
+(5 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "ready": false,
+-   "revalidating": true,
+-   "step": "complete",
++   "step": "lowered",
+  }
+
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:54:29
+     52|   for (const at of [time, time + 100, time + 3100, time + 60_000]) {
+     53|     const broken = bad(at, 'no-person'); p.accept(broken.frame, broken…
+     54|     expect(p.getSnapshot()).toMatchObject({ step: 'complete', ready: f…
+       |                             ^
+     55|   }
+     56|   const start = time + 60_100; sample(p, 'lowered', start, 600); expec…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > a lost frame clears the entire partial revalidation window instead of joining the two halves
+TypeError: p.suspendTracking is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:61:45
+     59|
+     60| test('a lost frame clears the entire partial revalidation window inste…
+     61|   const { p, time, saved } = completed(); p.suspendTracking('window-bl…
+       |                                             ^
+     62|   sample(p, 'lowered', time, 600); const broken = bad(time + 700, 'low…
+     63|   expect(p.getDiagnostics()).toMatchObject({ sampleCount: 0, observedM…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > revalidation requires both duration and sample count and getters cannot make it ready
+TypeError: p.suspendTracking is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:69:45
+     67|
+     68| test('revalidation requires both duration and sample count and getters…
+     69|   const { p, time, saved } = completed(); p.suspendTracking('page-hidd…
+       |                                             ^
+     70|   for (let i = 0; i < 7; i++) p.accept(upperFrame(time + i * 200), tim…
+     71|   expect(p.getDiagnostics()).toMatchObject({ sampleCount: 7, observedM…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > unstable recovery poses keep the template unavailable until a new stable window succeeds
+TypeError: p.suspendTracking is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:79:45
+     77|
+     78| test('unstable recovery poses keep the template unavailable until a ne…
+     79|   const { p, time, saved } = completed(); p.suspendTracking('tracking'…
+       |                                             ^
+     80|   p.accept(upperFrame(time + 100, 'raised'), time + 100);
+     81|   expect(p.getSnapshot()).toMatchObject({ step: 'complete', ready: fal…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard duplicate fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard late-duplicate fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard future fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard invalid-clock fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard invalid-time fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard invalid-id fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard resized fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard height fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard moved fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard scale fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard absent-resized fault still clears retained complete targets and cannot revive them
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > hard absent-future fault still clears retained complete targets and cannot revive them
+TypeError: p.suspendTracking is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:87:38
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > explicit reset always clears retained targets, while suspension preserves only opted-in completed templates
+TypeError: p.suspendTracking is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:106:47
+    104| test('explicit reset always clears retained targets, while suspension …
+    105|   for (const retain of [false, true]) {
+    106|     const { p, saved } = completed(retain); p.suspendTracking('window-…
+       |                                               ^
+    107|     expect(p.getSavedProfile()).toEqual(retain ? saved : null); expect…
+    108|     p.reset('camera-stop'); expect(p.getSavedProfile()).toBeNull(); ex…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/26]⎯
+
+ FAIL  tests/unit/upperBodyCompletedRecovery.test.ts > complete-template retention works without enabling incomplete-step recovery or weakening strict defaults
+TypeError: p.getSavedProfile is not a function
+ ❯ tests/unit/upperBodyCompletedRecovery.test.ts:116:12
+    114| test('complete-template retention works without enabling incomplete-st…
+    115|   const { p, time, saved } = completed(true, 0), broken = bad(time, 'l…
+    116|   expect(p.getSavedProfile()).toEqual(saved); expect(p.getProfile()).t…
+       |            ^
+    117|   const incomplete = new UpperBodyPreparation(undefined, 0, true); con…
+    118|   expect(incomplete.getSnapshot()).toMatchObject({ step: 'lowered', co…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/26]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  26 failed (26)
+   Start at  01:32:19
+   Duration  235ms (tests 59%, transform 26%, import 11%, worker 4%)
+

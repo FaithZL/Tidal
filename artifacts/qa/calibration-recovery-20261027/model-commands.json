@@ -1,0 +1,69 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyCompletedRecovery.test.ts"
+    ],
+    "log": "model-red.log",
+    "startedUTC": "2026-10-26T17:32:19.254899+00:00",
+    "finishedUTC": "2026-10-26T17:32:19.821406+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts"
+    ],
+    "log": "model-green-first.log",
+    "startedUTC": "2026-10-26T17:32:51.946090+00:00",
+    "finishedUTC": "2026-10-26T17:32:52.795704+00:00",
+    "exitCode": 1
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "test:unit",
+      "--",
+      "tests/unit/upperBodyCompletedRecovery.test.ts",
+      "tests/unit/upperBody.test.ts",
+      "tests/unit/upperBodyRecovery.test.ts",
+      "tests/unit/upperBodyDiagnostics.test.ts"
+    ],
+    "log": "model-green-final.log",
+    "startedUTC": "2026-10-26T17:33:23.068506+00:00",
+    "finishedUTC": "2026-10-26T17:33:23.471799+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npx",
+      "eslint",
+      "src/pose/upperBody.ts"
+    ],
+    "log": "model-lint.log",
+    "startedUTC": "2026-10-26T17:33:23.511213+00:00",
+    "finishedUTC": "2026-10-26T17:33:24.399243+00:00",
+    "exitCode": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "log": "model-typecheck.log",
+    "startedUTC": "2026-10-26T17:33:24.435572+00:00",
+    "finishedUTC": "2026-10-26T17:33:25.858060+00:00",
+    "exitCode": 0
+  }
+]

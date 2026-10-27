@@ -1,0 +1,14 @@
+{
+  "scope": ["src/pose/upperBody.ts", "tests/unit/upperBodyRecovery.test.ts"],
+  "commands": [
+    {"command": "npm run test:unit -- tests/unit/upperBodyRecovery.test.ts", "log": "model-red.log", "exitCode": 1, "result": "23/23 semantic failures against the strict implementation: a short interruption discarded completed steps and recovery metadata was absent."},
+    {"command": "npm run test:unit -- tests/unit/upperBodyRecovery.test.ts tests/unit/upperBody.test.ts", "log": "model-green-first.log", "exitCode": 0, "result": "64/64 passed: 23 new opt-in recovery cases and all 41 original strict preparation/feedback assertions unchanged."},
+    {"command": "./node_modules/.bin/eslint src/pose/upperBody.ts", "log": "model-lint.log", "exitCode": 0, "result": "Passed."},
+    {"command": "npm run typecheck", "log": "model-typecheck.log", "exitCode": 0, "result": "Passed."},
+    {"command": "git diff --check", "exitCode": 0, "result": "Passed."}
+  ],
+  "behavior": "UpperBodyPreparation accepts a bounded optional second recoveryWindowMs argument (default 0, maximum 3000). Only incomplete raised/hold preparation with an existing reference can retain completed examples/radii/reference on whitelisted short observation loss. The first deadline is last valid capturedAtMs plus the configured window; repeated bad frames and ticks cannot extend it. Current samples/progress/available/latest/feedback are cleared immediately. Returning samples must pass original stream guards and fixed anchor checks, then collect the current step from a new full window. Complete profiles, explicit resets and hard faults remain strict.",
+  "hardFaultChecks": "Opt-in preparation independently checks header time/order/dimensions and reliable shoulder anchor changes so stale/gap/arm-quality classifications cannot mask a simultaneous hard fault. UpperBodyStream and RecognitionConfig were not changed. Soft stale tick does not reset stream ordering history.",
+  "notRun": ["full unit suite (root requested avoiding concurrent verification)", "E2E", "camera", "install", "build", "commit", "push"],
+  "limitations": "Synthetic frames establish preparation-state behavior only. They do not establish physical-camera recognition accuracy. UI integration and full regression are owned by the root task."
+}
